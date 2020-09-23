@@ -173,13 +173,22 @@ public class CommerceShippingFixedOptionClayTable
 			HttpServletRequest httpServletRequest, Filter filter)
 		throws PortalException {
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 		long commerceShippingMethodId = ParamUtil.getLong(
 			httpServletRequest, "commerceShippingMethodId");
 
+		CommerceShippingMethod commerceShippingMethod =
+			_commerceShippingMethodLocalService.getCommerceShippingMethod(
+				commerceShippingMethodId);
+
 		List<CommerceShippingFixedOption> commerceShippingFixedOptions =
 			_commerceShippingFixedOptionService.getCommerceShippingFixedOptions(
-				commerceShippingMethodId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				null);
+				themeDisplay.getCompanyId(),
+				commerceShippingMethod.getGroupId(), commerceShippingMethodId,
+				null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		return commerceShippingFixedOptions.size();
 	}
