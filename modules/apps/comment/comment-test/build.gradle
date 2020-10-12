@@ -14,5 +14,5 @@ dependencies {
 	testIntegrationCompile project(":apps:portal-configuration:portal-configuration-test-util")
 	testIntegrationCompile project(":apps:portal:portal-notifications-test-util")
 	testIntegrationCompile project(":apps:static:osgi:osgi-util")
-	testIntegrationCompile project(":test:arquillian-extension-junit-bridge")
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.19"
 }

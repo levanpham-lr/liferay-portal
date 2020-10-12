@@ -20,5 +20,5 @@ dependencies {
 	testIntegrationCompile project(":dxp:apps:portal-workflow:portal-workflow-metrics-api")
 	testIntegrationCompile project(":dxp:apps:portal-workflow:portal-workflow-metrics-rest-api")
 	testIntegrationCompile project(":dxp:apps:portal-workflow:portal-workflow-metrics-rest-client")
-	testIntegrationCompile project(":test:arquillian-extension-junit-bridge")
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.19"
 }

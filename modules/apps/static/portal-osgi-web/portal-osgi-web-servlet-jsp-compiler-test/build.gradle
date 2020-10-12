@@ -8,5 +8,5 @@ dependencies {
 	testIntegrationCompile group: "org.ow2.asm", name: "asm", version: "7.0"
 	testIntegrationCompile project(":apps:layout:layout-test-util")
 	testIntegrationCompile project(":core:petra:petra-string")
-	testIntegrationCompile project(":test:arquillian-extension-junit-bridge")
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.19"
 }

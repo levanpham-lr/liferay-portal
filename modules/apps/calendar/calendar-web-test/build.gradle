@@ -2,5 +2,5 @@ dependencies {
 	testIntegrationCompile project(":apps:calendar:calendar-api")
 	testIntegrationCompile project(":apps:calendar:calendar-test-util")
 	testIntegrationCompile project(":apps:social:social-activity-test-util")
-	testIntegrationCompile project(":test:arquillian-extension-junit-bridge")
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.19"
 }

@@ -8,7 +8,7 @@ dependencies {
 	testIntegrationCompile project(":apps:xstream:xstream-configurator-api")
 	testIntegrationCompile project(":core:petra:petra-io")
 	testIntegrationCompile project(":core:registry-api")
-	testIntegrationCompile project(":test:arquillian-extension-junit-bridge")
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.19"
 	testIntegrationCompile project(":test:external-data-source-test")
 	testIntegrationCompile project(":test:external-data-source-test-api")
 	testIntegrationCompile project(":test:external-data-source-test-service")

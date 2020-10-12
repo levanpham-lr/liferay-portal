@@ -4,5 +4,5 @@ dependencies {
 	testIntegrationCompile project(":apps:item-selector:item-selector-api")
 	testIntegrationCompile project(":apps:item-selector:item-selector-criteria-api")
 	testIntegrationCompile project(":apps:item-selector:item-selector-taglib")
-	testIntegrationCompile project(":test:arquillian-extension-junit-bridge")
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.19"
 }

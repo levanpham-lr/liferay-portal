@@ -10,7 +10,7 @@ dependencies {
 	testIntegrationCompile group: "commons-io", name: "commons-io", version: "2.5"
 	testIntegrationCompile project(":apps:portal-reports-engine:portal-reports-engine-api")
 	testIntegrationCompile project(":dxp:apps:portal-reports-engine-console:portal-reports-engine-console-jasper")
-	testIntegrationCompile project(":test:arquillian-extension-junit-bridge")
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.19"
 }
 
 processTestIntegrationResources {
