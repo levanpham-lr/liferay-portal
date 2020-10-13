@@ -230,13 +230,13 @@ public class ApplicationsMenuMVCResourceCommand extends BaseMVCResourceCommand {
 
 		JSONArray recentSitesJSONArray = JSONFactoryUtil.createJSONArray();
 
-		boolean applicationMenu = _isApplicationMenuApp(themeDisplay);
+		boolean applicationMenuApp = _isApplicationMenuApp(themeDisplay);
 
 		for (Group group : groups) {
 			recentSitesJSONArray.put(
 				JSONUtil.put(
 					"current",
-					!applicationMenu &&
+					!applicationMenuApp &&
 					(group.getGroupId() == themeDisplay.getScopeGroupId())
 				).put(
 					"key", group.getGroupKey()
