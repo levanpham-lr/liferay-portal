@@ -890,6 +890,48 @@ definition {
 		AssertElementPresent(locator1 = "MultiFactorAuthentication#TOTP_FIELD");
 	}
 
+	@description = "This is a use case for LPS-118204"
+	@priority = "4"
+	test VerifyUIchangesInMFA {
+		PortalSettings.gotoConfiguration(
+			configurationCategory = "Multi-Factor Authentication",
+			configurationName = "Multi-Factor Authentication and Email One-Time Password Configuration",
+			configurationScope = "Virtual Instance Scope");
+
+		MultiFactorAuthentication.configureOTP(enableOTP = "true");
+
+		PortalSettings.gotoConfiguration(
+			configurationCategory = "Multi-Factor Authentication",
+			configurationName = "Time-Based One-Time Password Configuration",
+			configurationScope = "Virtual Instance Scope");
+
+		MultiFactorAuthentication.configureTOTP(enableTOTP = "true");
+
+		Navigator.openURL();
+
+		UserBar.gotoDropdownItem(dropdownItem = "Account Settings");
+
+		Navigator.gotoNavUnderline(navUnderline = "Multi-Factor Authentication");
+
+		MultiFactorAuthentication.getTOTP();
+
+		AssertTextEquals(
+			locator1 = "MultiFactorAuthentication#TOTP_REMOVE_DESCRIPTION",
+			value1 = "You can only have one time-based one-time password configured for your account. Remove your existing time-based one-time password to generate a new time-based one-time password.");
+
+		SignOut.signOut();
+
+		SignIn.signIn(userEmailAddress = "test@liferay.com");
+
+		AssertClick(
+			locator1 = "MultiFactorAuthentication#MFA_CHECKER_LINK",
+			value1 = "Use Email One-Time Password.");
+
+		AssertTextEquals(
+			locator1 = "MultiFactorAuthentication#MFA_CHECKER_LINK",
+			value1 = "Use Time-Based One-Time Password.");
+	}
+
 	@description = "This is a use case for LPS-89360"
 	@priority = "4"
 	test ViewOrderOfOTPVerifier {
