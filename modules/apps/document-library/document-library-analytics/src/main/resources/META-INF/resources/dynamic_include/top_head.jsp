@@ -67,6 +67,7 @@
 	Liferay.once('destroyPortlet', function () {
 		document.body.removeEventListener('click', handleDownloadClick);
 	});
+
 	Liferay.once('portletReady', function () {
 		document.body.addEventListener('click', handleDownloadClick);
 	});
