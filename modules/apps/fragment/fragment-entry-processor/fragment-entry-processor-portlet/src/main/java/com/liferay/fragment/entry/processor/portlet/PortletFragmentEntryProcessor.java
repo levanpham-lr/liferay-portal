@@ -387,18 +387,18 @@ public class PortletFragmentEntryProcessor implements FragmentEntryProcessor {
 			return StringPool.BLANK;
 		}
 
+		HttpServletRequest httpServletRequest =
+			fragmentEntryProcessorContext.getHttpServletRequest();
+
+		httpServletRequest.setAttribute(
+			FragmentWebKeys.FRAGMENT_ENTRY_LINK, fragmentEntryLink);
+
 		String instanceId = jsonObject.getString("instanceId");
 
 		PortletPreferences portletPreferences =
 			PortletPreferencesFactoryUtil.getPortletPreferences(
 				fragmentEntryProcessorContext.getHttpServletRequest(),
 				PortletIdCodec.encode(portletId, instanceId));
-
-		HttpServletRequest httpServletRequest =
-			fragmentEntryProcessorContext.getHttpServletRequest();
-
-		httpServletRequest.setAttribute(
-			FragmentWebKeys.FRAGMENT_ENTRY_LINK, fragmentEntryLink);
 
 		return _fragmentPortletRenderer.renderPortlet(
 			httpServletRequest,
