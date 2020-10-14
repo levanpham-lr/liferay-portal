@@ -199,7 +199,8 @@ definition {
 
 		AssertElementPresent(
 			key_text = "Remove Configured Time-Based One-Time Password",
-			locator1 = "Button#ANY");
+			locator1 = "Button#ANY",
+			value1 = "Remove Configured Time-Based One-Time Password");
 	}
 
 	macro sendOTPEmailPG {
