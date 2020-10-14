@@ -4,22 +4,6 @@ definition {
 		Click(locator1 = "AppBuilderWorkflow#NEW_STEP_BUTTON");
 	}
 
-	macro clickSaveButton {
-		Button.click(button = "Save");
-	}
-
-	macro clickSaveButtonFromSaveAppModal{
-		Click(
-			key_buttonName = "Save",
-			locator1 = "AppBuilderWorkflow#SAVE_APP_MODAL_BUTTON");
-	}
-
-	macro assertEntryAppVersion {
-		AssertElementNotPresent(
-			key_versionNumber = "${versionNumber}",
-			locator1 = "AppBuilderWorkflow#ENTRY_APP_VERSION");
-	}
-
 	macro addWorkflowAppName {
 		Type(
 			locator1 = "AppBuilderWorkflow#WORKFLOW_APP_NAME_FIELD",
@@ -45,6 +29,12 @@ definition {
 
 	macro assertButtonPresent {
 		Button.viewPresent(button = "${buttonName}");
+	}
+
+	macro assertEntryAppVersion {
+		AssertElementNotPresent(
+			key_versionNumber = "${versionNumber}",
+			locator1 = "AppBuilderWorkflow#ENTRY_APP_VERSION");
 	}
 
 	macro assertFieldDisabled {
@@ -115,6 +105,16 @@ definition {
 		Click(locator1 = "AppBuilderWorkflow#SELECT_TABLE_VIEW_BUTTON");
 	}
 
+	macro clickSaveButton {
+		Button.click(button = "Save");
+	}
+
+	macro clickSaveButtonFromSaveAppModal {
+		Click(
+			key_buttonName = "Save",
+			locator1 = "AppBuilderWorkflow#SAVE_APP_MODAL_BUTTON");
+	}
+
 	macro clickStepConfigurationBackButton {
 		Click(locator1 = "AppBuilderWorkflow#STEP_CONFIGURATION_BACK_BUTTON");
 	}
@@ -132,6 +132,11 @@ definition {
 			locator1 = "AppBuilderWorkflow#STEP_CARD_KEBAB_MENU");
 
 		MenuItem.clickNoError(menuItem = "Delete Step");
+	}
+
+	macro saveNewVersionedApp {
+		AppBuilderWorkflow.clickSaveButton();
+		AppBuilderWorkflow.clickSaveButtonFromSaveAppModal();
 	}
 
 	macro selectActionsCard {
@@ -282,11 +287,6 @@ definition {
 		while (IsElementNotPresent(key_text = "${buttonName}", locator1 = "Button#ANY")) {
 			Pause(locator1 = "1000");
 		}
-	}
-
-	macro saveNewVersionedApp {
-		AppBuilderWorkflow.clickSaveButton();
-		AppBuilderWorkflow.clickSaveButtonFromSaveAppModal();
 	}
 
 }
