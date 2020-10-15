@@ -511,17 +511,16 @@ public class DataRecordResourceImpl
 
 		String ddmFormFieldType = ddmFormField.getType();
 
-		String suffix = "String";
-
 		if (StringUtil.equals(ddmFormFieldType, DDMFormFieldType.DECIMAL) ||
 			StringUtil.equals(ddmFormFieldType, DDMFormFieldType.INTEGER) ||
 			StringUtil.equals(ddmFormFieldType, DDMFormFieldType.NUMBER) ||
 			StringUtil.equals(ddmFormFieldType, DDMFormFieldType.NUMERIC)) {
 
-			suffix = "Number";
+			sb.append("Number");
 		}
-
-		sb.append(suffix);
+		else {
+			sb.append("String");
+		}
 
 		return Field.getSortableFieldName(sb.toString());
 	}
