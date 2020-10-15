@@ -193,13 +193,13 @@ public class AddPortletMVCActionCommand
 			actionRequest.getPortletMode(), actionRequest.getPreferences(),
 			themeDisplay.getPlid());
 
+		httpServletRequest.setAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST, liferayRenderRequest);
+
 		LiferayRenderResponse liferayRenderResponse =
 			RenderResponseFactory.create(
 				_portal.getHttpServletResponse(actionResponse),
 				liferayRenderRequest);
-
-		httpServletRequest.setAttribute(
-			JavaConstants.JAVAX_PORTLET_REQUEST, liferayRenderRequest);
 
 		httpServletRequest.setAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE, liferayRenderResponse);
