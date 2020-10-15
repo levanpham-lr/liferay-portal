@@ -354,19 +354,16 @@
 	<td>//td[contains(@class,'text-left')]//p[text()='${key_roleTitle}']/parent::td/following-sibling::td//input[@name='ADD_DATA_RECORD']</td>
 	<td></td>
 </tr>
-
 <tr>
 	<td>CONFIGURATION_PERMISSIONS_DELETE_ENTRY</td>
 	<td>//td[contains(@class,'text-left')]//p[text()='${key_roleTitle}']/parent::td/following-sibling::td//input[@name='DELETE_DATA_RECORD']</td>
 	<td></td>
 </tr>
-
 <tr>
 	<td>CONFIGURATION_PERMISSIONS_UPDATE_ENTRY</td>
 	<td>//td[contains(@class,'text-left')]//p[text()='${key_roleTitle}']/parent::td/following-sibling::td//input[@name='UPDATE_DATA_RECORD']</td>
 	<td></td>
 </tr>
-
 <tr>
 	<td>CONFIGURATION_PERMISSIONS_VIEW_ENTRY</td>
 	<td>//td[contains(@class,'text-left')]//p[text()='${key_roleTitle}']/parent::td/following-sibling::td//input[@name='VIEW_DATA_RECORD']</td>
@@ -374,6 +371,7 @@
 </tr>
 
 <!-- NAVBAR -->
+
 <tr>
 	<td>NAVBAR</td>
 	<td>//div[contains(@class,'navbar-collapse')]</td>
@@ -387,8 +385,6 @@
 	<td>//*[contains(.,'(Table View)')]//thead//tr//th[contains(text(),'${key_fieldLabel}')]</td>
 	<td></td>
 </tr>
-
-
 </tbody>
 </table>
 </body>
