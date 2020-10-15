@@ -113,6 +113,11 @@
 	<td>//input[contains(@id,"sharedSecret")]</td>
 	<td></td>
 </tr>
+<tr>
+	<td>TOTP_VERIFY_FIELD</td>
+	<td>//input[contains(@id,"mfaTimeBasedOTP")]</td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>
