@@ -36,8 +36,8 @@ public class UpgradeStyleBookEntry extends UpgradeProcess {
 	protected void upgradeSchema() throws Exception {
 		alter(
 			StyleBookEntryTable.class,
-			new AlterTableAddColumn("modifiedDate", "DATE null"),
-			new AlterTableAddColumn("uuid_", "VARCHAR(75) null"));
+			new AlterTableAddColumn("uuid_", "VARCHAR(75) null"),
+			new AlterTableAddColumn("modifiedDate", "DATE null"));
 
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
 			try (PreparedStatement ps1 = connection.prepareStatement(
