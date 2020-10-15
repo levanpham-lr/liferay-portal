@@ -1020,4 +1020,104 @@ definition {
 			userName = "Test Test");
 	}
 
+	@description = "This is a use case for LPS-86515"
+	@priority = "5"
+	test ViewResourceActionsOfTOTPVerificationAttempts {
+		property test.name.skip.portal.instance = "MultiFactorAuthentication#ViewResourceActionsOfTOTPVerificationAttempts";
+
+		ApplicationsMenu.gotoPortlet(
+			category = "System",
+			panel = "Control Panel",
+			portlet = "Virtual Instances");
+
+		PortalInstances.addCP(
+			mailDomain = "www.able.com",
+			virtualHost = "www.able.com",
+			webId = "www.able.com");
+
+		PortalInstances.viewCP(virtualHost = "www.able.com");
+
+		User.firstLoginPG(
+			password = "test",
+			userEmailAddress = "test@www.able.com",
+			virtualHostsURL = "http://www.able.com:8080");
+
+		PortalSettings.gotoConfiguration(
+			configurationCategory = "Multi-Factor Authentication",
+			configurationName = "Multi-Factor Authentication and Email One-Time Password Configuration",
+			configurationScope = "Virtual Instance Scope");
+
+		MultiFactorAuthentication.configureOTP(enableOTP = "true");
+
+		PortalSettings.gotoConfiguration(
+			configurationCategory = "Multi-Factor Authentication",
+			configurationName = "Time-Based One-Time Password Configuration",
+			configurationScope = "Virtual Instance Scope");
+
+		MultiFactorAuthentication.configureTOTP(enableTOTP = "true");
+
+		SignOut.signOutOfSpecificURL(url = "http://www.able.com:8080");
+
+		SignIn.signInSpecificURL(
+			url = "http://www.able.com:8080/",
+			userEmailAddress = "test@www.able.com");
+
+		MultiFactorAuthentication.sendOTPEmailPG();
+		
+		MultiFactorAuthentication.verifyOTP(
+			portalURL = "http://www.able.com:8080",
+			recipient = "test test",
+			specificURL = "http://www.able.com:8080",
+			userEmailAddress = "test@www.able.com",
+			userPassword = "test");
+
+		UserBar.gotoDropdownItem(dropdownItem = "Account Settings");
+
+		Navigator.gotoNavUnderline(navUnderline = "Multi-Factor Authentication");
+
+		var secretKey = selenium.getAttribute("//input[contains(@id,'sharedSecret')]@value");
+
+		MultiFactorAuthentication.getTOTP();
+
+		SignOut.signOutOfSpecificURL(url = "http://www.able.com:8080");
+
+		SignIn.signInSpecificURL(
+			url = "http://www.able.com:8080/",
+			userEmailAddress = "test@www.able.com");
+
+		Type(
+			locator1 = "MultiFactorAuthentication#TOTP_VERIFY_FIELD",
+			value1 = "111111");
+
+		Button.click(button = "Submit");
+
+		AssertElementPresent(locator1 = "MultiFactorAuthentication#EMAIL_OTP_VERIFY_FAILED_MESSAGE");
+
+		MultiFactorAuthentication.getTOTP(secretKeyUnchanged = "${secretKey}");
+		
+		ApplicationsMenu.gotoPortlet(
+			category = "Security",
+			panel = "Control Panel",
+			portlet = "Audit");
+
+		Audit.searchViaKeywords(
+			resourceName = "TimeBasedOTPBrowserSetupMFAChecker",
+			searchTerm = "MFA_TIMEBASED_OTP_VERIFICATION_SUCCESS",
+			userName = "Test Test");
+
+		Audit.searchViaKeywords(
+			resourceName = "TimeBasedOTPBrowserSetupMFAChecker",
+			searchTerm = "MFA_TIMEBASED_OTP_VERIFICATION_FAILURE",
+			userName = "Test Test");
+
+		Audit.searchViaKeywords(
+			resourceName = "TimeBasedOTPBrowserSetupMFAChecker",
+			searchTerm = "MFA_TIMEBASED_OTP_NOT_VERIFIED",
+			userName = "Test Test");
+
+		Audit.searchViaKeywords(
+			resourceName = "EmailOTPBrowserMFACheckerr",
+			searchTerm = "MFA_EMAIL_OTP_NOT_VERIFIED",
+			userName = "Test Test");
+	}
 }
