@@ -355,7 +355,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				false, false);
 		}
 
-		// All users should be able to view all system roles as default
+		// All users should be able to view all system roles by default
 
 		Role userRole = getRole(companyId, RoleConstants.USER);
 
