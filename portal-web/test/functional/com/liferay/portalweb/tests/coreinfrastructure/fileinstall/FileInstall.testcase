@@ -151,7 +151,7 @@ definition {
 	test UninstallWarOffline {
 		property test.name.skip.portal.instance = "FileInstall#UninstallWarOffline";
 
-		FileInstall.deployFileOnServer(liferayDependencyJars = "test-theme.jar");
+		FileInstall.deployFileOnServer(liferayDependencyJars = "test-theme.war");
 
 		GogoShell.openGogoShellAdmin();
 
