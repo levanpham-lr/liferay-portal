@@ -82,12 +82,11 @@ public class DataRecordResourceTest extends BaseDataRecordResourceTestCase {
 					DataDefinitionTestUtil.read("data-definition.json")),
 				testGroup.getGroupId());
 
-		DataRecordCollectionResource.Builder
-			dataRecordCollectionResourceBuilder =
-				DataRecordCollectionResource.builder();
+		DataRecordCollectionResource.Builder builder =
+			DataRecordCollectionResource.builder();
 
 		DataRecordCollectionResource dataRecordCollectionResource =
-			dataRecordCollectionResourceBuilder.authentication(
+			builder.authentication(
 				"test@liferay.com", "test"
 			).locale(
 				LocaleUtil.getDefault()
@@ -198,13 +197,15 @@ public class DataRecordResourceTest extends BaseDataRecordResourceTestCase {
 
 		// Retrieve data records according to fixed filters
 
-		DataListViewResource.Builder builder = DataListViewResource.builder();
+		DataListViewResource.Builder dataListViewResourceBuilder =
+			DataListViewResource.builder();
 
-		DataListViewResource dataListViewResource = builder.authentication(
-			"test@liferay.com", "test"
-		).locale(
-			LocaleUtil.getDefault()
-		).build();
+		DataListViewResource dataListViewResource =
+			dataListViewResourceBuilder.authentication(
+				"test@liferay.com", "test"
+			).locale(
+				LocaleUtil.getDefault()
+			).build();
 
 		Long dataRecordCollectionId =
 			testGetDataRecordCollectionDataRecordsPage_getDataRecordCollectionId();
@@ -274,12 +275,11 @@ public class DataRecordResourceTest extends BaseDataRecordResourceTestCase {
 
 		_dataDefinitionId = dataDefinition.getId();
 
-		DataRecordCollectionResource.Builder
-			dataRecordCollectionResourceBuilder =
-				DataRecordCollectionResource.builder();
+		DataRecordCollectionResource.Builder builder =
+			DataRecordCollectionResource.builder();
 
 		DataRecordCollectionResource dataRecordCollectionResource =
-			dataRecordCollectionResourceBuilder.authentication(
+			builder.authentication(
 				"test@liferay.com", "test"
 			).locale(
 				LocaleUtil.getDefault()
