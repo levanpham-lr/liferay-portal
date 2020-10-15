@@ -34,8 +34,8 @@ public class DepotEntryGroupRelTable {
 		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
 		{"modifiedDate", Types.TIMESTAMP},
 		{"ddmStructuresAvailable", Types.BOOLEAN},
-		{"depotEntryId", Types.BIGINT}, {"lastPublishDate", Types.TIMESTAMP},
-		{"searchable", Types.BOOLEAN}, {"toGroupId", Types.BIGINT}
+		{"depotEntryId", Types.BIGINT}, {"searchable", Types.BOOLEAN},
+		{"toGroupId", Types.BIGINT}, {"lastPublishDate", Types.TIMESTAMP}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -64,15 +64,15 @@ TABLE_COLUMNS_MAP.put("ddmStructuresAvailable", Types.BOOLEAN);
 
 TABLE_COLUMNS_MAP.put("depotEntryId", Types.BIGINT);
 
-TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
-
 TABLE_COLUMNS_MAP.put("searchable", Types.BOOLEAN);
 
 TABLE_COLUMNS_MAP.put("toGroupId", Types.BIGINT);
 
+TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
+
 }
 	public static final String TABLE_SQL_CREATE =
-"create table DepotEntryGroupRel (mvccVersion LONG default 0 not null,uuid_ VARCHAR(75) null,depotEntryGroupRelId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,ddmStructuresAvailable BOOLEAN,depotEntryId LONG,lastPublishDate DATE null,searchable BOOLEAN,toGroupId LONG)";
+"create table DepotEntryGroupRel (mvccVersion LONG default 0 not null,uuid_ VARCHAR(75) null,depotEntryGroupRelId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,ddmStructuresAvailable BOOLEAN,depotEntryId LONG,searchable BOOLEAN,toGroupId LONG,lastPublishDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table DepotEntryGroupRel";
 
