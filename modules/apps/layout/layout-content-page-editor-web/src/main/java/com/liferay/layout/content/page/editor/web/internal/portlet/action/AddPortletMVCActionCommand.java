@@ -179,10 +179,10 @@ public class AddPortletMVCActionCommand
 		JSONObject jsonObject = addFragmentEntryLinkToLayoutData(
 			actionRequest, fragmentEntryLink.getFragmentEntryLinkId());
 
-		Portlet portlet = _portletLocalService.getPortletById(portletId);
-
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			actionRequest);
+
+		Portlet portlet = _portletLocalService.getPortletById(portletId);
 
 		InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
 			portlet, httpServletRequest.getServletContext());
