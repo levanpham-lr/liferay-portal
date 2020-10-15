@@ -194,7 +194,7 @@ definition {
 
 			Button.click(button = "Submit");
 
-			AssertElementPresent(locator1 = "UserBar#USER_AVATAR_IMAGE");	
+			AssertElementPresent(locator1 = "UserBar#USER_AVATAR_IMAGE");
 		}
 		else {
 		VerifyElementPresent(locator1 = "MultiFactorAuthentication#TOTP_FIELD");

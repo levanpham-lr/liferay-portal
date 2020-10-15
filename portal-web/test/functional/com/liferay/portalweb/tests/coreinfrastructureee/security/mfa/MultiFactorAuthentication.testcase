@@ -193,6 +193,75 @@ definition {
 			userPassword = "test");
 	}
 
+	@description = "This is a use case for LPS-86515"
+	@priority = "5"
+	test CheckOrderOfMFAVerifier {
+		property test.name.skip.portal.instance = "MultiFactorAuthentication#CheckOrderOfMFAVerifier";
+
+		ApplicationsMenu.gotoPortlet(
+			category = "System",
+			panel = "Control Panel",
+			portlet = "Virtual Instances");
+
+		PortalInstances.addCP(
+			mailDomain = "www.able.com",
+			virtualHost = "www.able.com",
+			webId = "www.able.com");
+
+		PortalInstances.viewCP(virtualHost = "www.able.com");
+
+		User.firstLoginPG(
+			password = "test",
+			userEmailAddress = "test@www.able.com",
+			virtualHostsURL = "http://www.able.com:8080");
+
+		PortalSettings.gotoConfiguration(
+			configurationCategory = "Multi-Factor Authentication",
+			configurationName = "Multi-Factor Authentication and Email One-Time Password Configuration",
+			configurationScope = "Virtual Instance Scope");
+
+		MultiFactorAuthentication.configureOTP(enableOTP = "true");
+
+		Type(
+			key_fieldName = "service.ranking",
+			locator1 = "MultiFactorAuthentication#EMAIL_OTP_CONFIG_FIELD",
+			value1 = "100");
+
+		PortletEntry.update();
+
+		PortalSettings.gotoConfiguration(
+			configurationCategory = "Multi-Factor Authentication",
+			configurationName = "Time-Based One-Time Password Configuration",
+			configurationScope = "Virtual Instance Scope");
+
+		MultiFactorAuthentication.configureTOTP(enableTOTP = "true");
+
+		Type(
+			key_fieldName = "service.ranking",
+			locator1 = "MultiFactorAuthentication#EMAIL_OTP_CONFIG_FIELD",
+			value1 = "10");
+
+		PortletEntry.update();
+
+		Navigator.openSpecificURL(url = "http://www.able.com:8080");
+
+		UserBar.gotoDropdownItem(dropdownItem = "Account Settings");
+
+		Navigator.gotoNavUnderline(navUnderline = "Multi-Factor Authentication");
+
+		MultiFactorAuthentication.getTOTP();
+
+		SignOut.signOutOfSpecificURL(url = "http://www.able.com:8080");
+
+		SignIn.signInSpecificURL(
+			url = "http://www.able.com:8080/",
+			userEmailAddress = "test@www.able.com");
+
+		AssertElementPresent(locator1 = "MultiFactorAuthentication#EMAIL_OTP_VERIFY_FIELD");
+
+		AssertElementNotPresent(locator1 = "MultiFactorAuthentication#TOTP_FIELD");
+	}
+
 	@description = "This is a use case for LPS-112805"
 	@priority = "5"
 	test DisabledBasicAuthenticationOnInstanceLevel {
@@ -1120,4 +1189,5 @@ definition {
 			searchTerm = "MFA_EMAIL_OTP_NOT_VERIFIED",
 			userName = "Test Test");
 	}
+
 }
