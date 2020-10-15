@@ -348,7 +348,8 @@
  	<td></td>
 </tr>
 
-<!--CONFIGURATION_PERMISSIONS-->
+<!-- CONFIGURATION_PERMISSIONS -->
+
 <tr>
 	<td>CONFIGURATION_PERMISSIONS_ADD_ENTRY</td>
 	<td>//td[contains(@class,'text-left')]//p[text()='${key_roleTitle}']/parent::td/following-sibling::td//input[@name='ADD_DATA_RECORD']</td>
