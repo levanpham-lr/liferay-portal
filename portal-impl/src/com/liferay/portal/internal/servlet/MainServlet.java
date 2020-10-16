@@ -154,6 +154,7 @@ public class MainServlet extends HttpServlet {
 			unregister();
 		_servletContextServiceRegistration.unregister();
 		_systemCheckModuleServiceLifecycleServiceRegistration.unregister();
+
 		_licenseInstallModuleServiceLifecycleServiceRegistration.unregister();
 
 		PortalLifecycleUtil.flushDestroys();
