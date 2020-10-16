@@ -93,6 +93,7 @@ describe('Options', () => {
 		const {container} = render(
 			<OptionsWithProvider
 				name="options"
+				showKeyword={true}
 				spritemap={spritemap}
 				value={optionsValue}
 			/>
@@ -132,6 +133,7 @@ describe('Options', () => {
 			<OptionsWithProvider
 				keywordReadOnly={true}
 				name="options"
+				showKeyword={true}
 				spritemap={spritemap}
 				value={{
 					[themeDisplay.getLanguageId()]: [
@@ -164,6 +166,7 @@ describe('Options', () => {
 				keywordReadOnly={false}
 				name="options"
 				onChange={jest.fn()}
+				showKeyword={true}
 				spritemap={spritemap}
 				value={{
 					[themeDisplay.getLanguageId()]: [
@@ -197,6 +200,7 @@ describe('Options', () => {
 			<OptionsWithProvider
 				name="options"
 				onChange={jest.fn()}
+				showKeyword={true}
 				spritemap={spritemap}
 				value={{
 					[themeDisplay.getLanguageId()]: [
@@ -271,6 +275,7 @@ describe('Options', () => {
 			<OptionsWithProvider
 				name="options"
 				onChange={jest.fn()}
+				showKeyword={true}
 				spritemap={spritemap}
 				value={{
 					[themeDisplay.getLanguageId()]: [
@@ -303,6 +308,7 @@ describe('Options', () => {
 			<OptionsWithProvider
 				name="options"
 				onChange={jest.fn()}
+				showKeyword={true}
 				spritemap={spritemap}
 				value={{
 					[themeDisplay.getLanguageId()]: [
@@ -341,6 +347,7 @@ describe('Options', () => {
 			<OptionsWithProvider
 				name="options"
 				onChange={jest.fn()}
+				showKeyword={true}
 				spritemap={spritemap}
 				value={{
 					[themeDisplay.getLanguageId()]: [
@@ -381,6 +388,7 @@ describe('Options', () => {
 				editingLanguageId="pt_BR"
 				name="options"
 				onChange={jest.fn()}
+				showKeyword={true}
 				spritemap={spritemap}
 				value={{
 					[themeDisplay.getLanguageId()]: [
@@ -423,6 +431,7 @@ describe('Options', () => {
 			<OptionsWithProvider
 				name="options"
 				onChange={jest.fn()}
+				showKeyword={true}
 				spritemap={spritemap}
 				value={{
 					[themeDisplay.getLanguageId()]: [
@@ -461,6 +470,7 @@ describe('Options', () => {
 			<OptionsWithProvider
 				name="options"
 				onChange={jest.fn()}
+				showKeyword={true}
 				spritemap={spritemap}
 				value={{
 					[themeDisplay.getLanguageId()]: [
@@ -499,6 +509,7 @@ describe('Options', () => {
 			<OptionsWithProvider
 				name="options"
 				onChange={jest.fn()}
+				showKeyword={true}
 				spritemap={spritemap}
 				value={{
 					[themeDisplay.getLanguageId()]: [
