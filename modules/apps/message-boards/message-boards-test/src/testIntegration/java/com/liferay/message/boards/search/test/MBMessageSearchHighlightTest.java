@@ -95,7 +95,6 @@ public class MBMessageSearchHighlightTest {
 		Assert.assertEquals(
 			"this message is an <liferay-hl>example</liferay-hl>",
 			document.get(_getLocalizedSnippetFieldName(Field.CONTENT)));
-
 		Assert.assertEquals(
 			"some <liferay-hl>example</liferay-hl> message",
 			document.get(_getLocalizedSnippetFieldName(Field.TITLE)));
