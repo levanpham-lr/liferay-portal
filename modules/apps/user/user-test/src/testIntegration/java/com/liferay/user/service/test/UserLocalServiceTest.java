@@ -308,7 +308,7 @@ public class UserLocalServiceTest {
 	@Test
 	public void testSearchCounts() throws Exception {
 
-		// LPS-119805 Compatibility with Oracle database
+		// LPS-119805
 
 		_userLocalService.searchCounts(
 			TestPropsValues.getCompanyId(), WorkflowConstants.STATUS_APPROVED,
