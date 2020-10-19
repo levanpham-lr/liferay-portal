@@ -57,7 +57,7 @@ public class AssetEntryDocumentContributor
 			return;
 		}
 
-		AssetEntry assetEntry;
+		AssetEntry assetEntry = null;
 
 		Date displayDate = new Date();
 
