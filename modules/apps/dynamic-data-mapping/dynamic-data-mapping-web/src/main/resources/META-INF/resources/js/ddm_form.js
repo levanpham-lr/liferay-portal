@@ -1079,17 +1079,9 @@ AUI.add(
 
 					var siblings = instance.getRepeatedSiblings();
 
-					var parentField = siblings[0];
-
 					container
 						.one('.lfr-ddm-repeatable-delete-button')
-						.toggle(
-							siblings.length > 1 &&
-								siblings.includes(instance) &&
-								!parentField
-									.get('container')
-									.compareTo(container)
-						);
+						.toggle(siblings.length > 1);
 				},
 
 				syncValueUI() {
