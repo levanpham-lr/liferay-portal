@@ -363,16 +363,16 @@ public class DLFileEntryTypeLocalServiceImpl
 	}
 
 	@Override
-	public DLFileEntryType fetchFileEntryType(long fileEntryTypeId) {
-		return dlFileEntryTypePersistence.fetchByPrimaryKey(fileEntryTypeId);
-	}
-
-	@Override
 	public DLFileEntryType fetchDataDefinitionFileEntryType(
 		long groupId, long dataDefinitionId) {
 
 		return dlFileEntryTypePersistence.fetchByG_DDI(
 			groupId, dataDefinitionId);
+	}
+
+	@Override
+	public DLFileEntryType fetchFileEntryType(long fileEntryTypeId) {
+		return dlFileEntryTypePersistence.fetchByPrimaryKey(fileEntryTypeId);
 	}
 
 	@Override
