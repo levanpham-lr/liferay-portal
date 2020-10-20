@@ -12,7 +12,7 @@
  *
  */
 
-package com.liferay.osb.saml.saas.internal.util;
+package com.liferay.osb.saml.internal.util;
 
 import com.liferay.portal.kernel.security.SecureRandom;
 import com.liferay.portal.kernel.util.Base64;

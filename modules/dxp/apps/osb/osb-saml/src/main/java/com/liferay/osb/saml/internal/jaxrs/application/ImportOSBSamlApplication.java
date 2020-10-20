@@ -12,12 +12,12 @@
  *
  */
 
-package com.liferay.osb.saml.saas.internal.jaxrs.application;
+package com.liferay.osb.saml.internal.jaxrs.application;
 
 import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.expando.kernel.model.ExpandoBridge;
-import com.liferay.osb.saml.saas.internal.configuration.SamlSaasConfiguration;
-import com.liferay.osb.saml.saas.internal.util.SymmetricEncryptor;
+import com.liferay.osb.saml.internal.configuration.OSBSamlConfiguration;
+import com.liferay.osb.saml.internal.util.SymmetricEncryptor;
 import com.liferay.petra.reflect.ReflectionUtil;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -77,12 +77,12 @@ import org.osgi.service.component.annotations.Reference;
 	configurationPolicy = ConfigurationPolicy.OPTIONAL,
 	property = {
 		"liferay.auth.verifier=false", "liferay.oauth2=false",
-		"osgi.jaxrs.application.base=/saml-saas-import",
-		"osgi.jaxrs.name=Liferay.Saas.SamlImport.Application"
+		"osgi.jaxrs.application.base=/osb-saml-import",
+		"osgi.jaxrs.name=Liferay.OSB.SamlImport.Application"
 	},
 	service = Application.class
 )
-public class ImportSamlSaasApplication extends Application {
+public class ImportOSBSamlApplication extends Application {
 
 	@Override
 	public Set<Object> getSingletons() {
@@ -96,12 +96,12 @@ public class ImportSamlSaasApplication extends Application {
 		String data, @Context HttpServletRequest httpServletRequest) {
 
 		try {
-			SamlSaasConfiguration samlSaasConfiguration =
+			OSBSamlConfiguration osbSamlConfiguration =
 				ConfigurationProviderUtil.getCompanyConfiguration(
-					SamlSaasConfiguration.class,
+					OSBSamlConfiguration.class,
 					_portal.getCompanyId(httpServletRequest));
 
-			if (!samlSaasConfiguration.productionEnvironment()) {
+			if (!osbSamlConfiguration.productionEnvironment()) {
 				_log.error(
 					"Instance must be configured as a SAML SaaS production " +
 						"environment to receive configuration data imports");
@@ -109,7 +109,7 @@ public class ImportSamlSaasApplication extends Application {
 				throw new WebApplicationException(Response.Status.NOT_FOUND);
 			}
 
-			if (Validator.isBlank(samlSaasConfiguration.preSharedKey())) {
+			if (Validator.isBlank(osbSamlConfiguration.preSharedKey())) {
 				_log.error(
 					"Instance must be configured with a preshared key to " +
 						"decrypt configuration data imports");
@@ -119,7 +119,7 @@ public class ImportSamlSaasApplication extends Application {
 
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 				SymmetricEncryptor.decryptData(
-					samlSaasConfiguration.preSharedKey(), data));
+					osbSamlConfiguration.preSharedKey(), data));
 
 			_updateSamlProviderConfiguration(
 				(JSONObject)jsonObject.get("samlProviderConfiguration"));
@@ -337,7 +337,7 @@ public class ImportSamlSaasApplication extends Application {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		ImportSamlSaasApplication.class);
+		ImportOSBSamlApplication.class);
 
 	private static final TransactionConfig _transactionConfig;
 

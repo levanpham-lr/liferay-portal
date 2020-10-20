@@ -12,9 +12,9 @@
  *
  */
 
-package com.liferay.osb.saml.saas.internal.portlet.filter;
+package com.liferay.osb.saml.internal.portlet.filter;
 
-import com.liferay.osb.saml.saas.internal.configuration.SamlSaasConfiguration;
+import com.liferay.osb.saml.internal.configuration.OSBSamlConfiguration;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
@@ -87,15 +87,15 @@ public class SamlAdminRenderFilter implements RenderFilter {
 		}
 
 		try {
-			SamlSaasConfiguration samlSaasConfiguration =
+			OSBSamlConfiguration osbSamlConfiguration =
 				ConfigurationProviderUtil.getCompanyConfiguration(
-					SamlSaasConfiguration.class,
+					OSBSamlConfiguration.class,
 					_portal.getCompanyId(renderRequest));
 
-			if (samlSaasConfiguration.productionEnvironment() ||
-				Validator.isBlank(samlSaasConfiguration.preSharedKey()) ||
+			if (osbSamlConfiguration.productionEnvironment() ||
+				Validator.isBlank(osbSamlConfiguration.preSharedKey()) ||
 				Validator.isBlank(
-					samlSaasConfiguration.targetInstanceImportURL())) {
+					osbSamlConfiguration.targetInstanceImportURL())) {
 
 				return;
 			}
@@ -171,7 +171,7 @@ public class SamlAdminRenderFilter implements RenderFilter {
 
 	private ServiceRegistration<?> _serviceRegistration;
 
-	@Reference(target = "(osgi.web.symbolicname=com.liferay.osb.saml.saas)")
+	@Reference(target = "(osgi.web.symbolicname=com.liferay.osb.saml)")
 	private ServletContext _servletContext;
 
 }

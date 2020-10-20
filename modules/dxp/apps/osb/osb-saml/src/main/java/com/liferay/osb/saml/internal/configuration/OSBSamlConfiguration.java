@@ -12,7 +12,7 @@
  *
  */
 
-package com.liferay.osb.saml.saas.internal.configuration;
+package com.liferay.osb.saml.internal.configuration;
 
 import aQute.bnd.annotation.metatype.Meta;
 
@@ -24,8 +24,10 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 @ExtendedObjectClassDefinition(
 	generateUI = false, scope = ExtendedObjectClassDefinition.Scope.COMPANY
 )
-@Meta.OCD(id = "com.liferay.osb.saml.saas.configuration.SamlSaasConfiguration")
-public interface SamlSaasConfiguration {
+@Meta.OCD(
+	id = "com.liferay.osb.saml.internal.configuration.OSBSamlConfiguration"
+)
+public interface OSBSamlConfiguration {
 
 	@Meta.AD(
 		deflt = "false", id = "saml.saas.production.environment",

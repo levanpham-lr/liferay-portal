@@ -12,9 +12,9 @@
  *
  */
 
-package com.liferay.osb.saml.saas.internal.settings.definition;
+package com.liferay.osb.saml.internal.settings.definition;
 
-import com.liferay.osb.saml.saas.internal.configuration.SamlSaasConfiguration;
+import com.liferay.osb.saml.internal.configuration.OSBSamlConfiguration;
 import com.liferay.portal.kernel.settings.definition.ConfigurationBeanDeclaration;
 
 import org.osgi.service.component.annotations.Component;
@@ -23,12 +23,12 @@ import org.osgi.service.component.annotations.Component;
  * @author Marta Medio
  */
 @Component(service = ConfigurationBeanDeclaration.class)
-public class SaasConfigurationBeanDeclaration
+public class OSBSamlConfigurationBeanDeclaration
 	implements ConfigurationBeanDeclaration {
 
 	@Override
 	public Class<?> getConfigurationBeanClass() {
-		return SamlSaasConfiguration.class;
+		return OSBSamlConfiguration.class;
 	}
 
 }

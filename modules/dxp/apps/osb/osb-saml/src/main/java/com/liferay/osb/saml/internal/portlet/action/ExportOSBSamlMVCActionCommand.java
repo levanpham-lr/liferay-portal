@@ -12,11 +12,11 @@
  *
  */
 
-package com.liferay.osb.saml.saas.internal.portlet.action;
+package com.liferay.osb.saml.internal.portlet.action;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
-import com.liferay.osb.saml.saas.internal.configuration.SamlSaasConfiguration;
-import com.liferay.osb.saml.saas.internal.util.SymmetricEncryptor;
+import com.liferay.osb.saml.internal.configuration.OSBSamlConfiguration;
+import com.liferay.osb.saml.internal.util.SymmetricEncryptor;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -79,7 +79,7 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = MVCActionCommand.class
 )
-public class ExportSamlSaasMVCActionCommand extends BaseMVCActionCommand {
+public class ExportOSBSamlMVCActionCommand extends BaseMVCActionCommand {
 
 	@Activate
 	protected void activate(Map<String, Object> properties) {
@@ -94,14 +94,13 @@ public class ExportSamlSaasMVCActionCommand extends BaseMVCActionCommand {
 
 		long companyId = _portal.getCompanyId(actionRequest);
 
-		SamlSaasConfiguration samlSaasConfiguration =
+		OSBSamlConfiguration osbSamlConfiguration =
 			ConfigurationProviderUtil.getCompanyConfiguration(
-				SamlSaasConfiguration.class, companyId);
+				OSBSamlConfiguration.class, companyId);
 
-		if (samlSaasConfiguration.productionEnvironment() ||
-			Validator.isBlank(samlSaasConfiguration.preSharedKey()) ||
-			Validator.isBlank(
-				samlSaasConfiguration.targetInstanceImportURL())) {
+		if (osbSamlConfiguration.productionEnvironment() ||
+			Validator.isBlank(osbSamlConfiguration.preSharedKey()) ||
+			Validator.isBlank(osbSamlConfiguration.targetInstanceImportURL())) {
 
 			return;
 		}
@@ -111,14 +110,14 @@ public class ExportSamlSaasMVCActionCommand extends BaseMVCActionCommand {
 
 			WebTarget webTarget = client.target(
 				UriBuilder.fromUri(
-					samlSaasConfiguration.targetInstanceImportURL()));
+					osbSamlConfiguration.targetInstanceImportURL()));
 
 			String json = webTarget.request(
 				MediaType.APPLICATION_JSON
 			).post(
 				Entity.entity(
 					_getEncryptedJSONPayload(
-						companyId, samlSaasConfiguration.preSharedKey()),
+						companyId, osbSamlConfiguration.preSharedKey()),
 					MediaType.TEXT_PLAIN),
 				String.class
 			);
@@ -306,7 +305,7 @@ public class ExportSamlSaasMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		ExportSamlSaasMVCActionCommand.class);
+		ExportOSBSamlMVCActionCommand.class);
 
 	@Reference
 	private ClientBuilder _clientBuilder;
