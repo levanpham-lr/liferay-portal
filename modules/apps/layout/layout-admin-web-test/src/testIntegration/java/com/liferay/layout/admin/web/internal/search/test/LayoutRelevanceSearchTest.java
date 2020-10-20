@@ -70,7 +70,7 @@ public class LayoutRelevanceSearchTest {
 
 		ServiceContextThreadLocal.pushServiceContext(_serviceContext);
 
-		_createLayouts();
+		_addLayouts();
 	}
 
 	@After
@@ -85,16 +85,16 @@ public class LayoutRelevanceSearchTest {
 			new String[] {LayoutConstants.TYPE_CONTENT}, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, new LayoutRelevanceComparator());
 
+		Assert.assertNotNull(fooSearchLayouts);
+		Assert.assertEquals(
+			fooSearchLayouts.toString(), 2, fooSearchLayouts.size());
+
 		List<Layout> barSearchLayouts = _layoutLocalService.getLayouts(
 			_group.getGroupId(), false, "bar",
 			new String[] {LayoutConstants.TYPE_CONTENT}, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, new LayoutRelevanceComparator());
 
-		Assert.assertNotNull(fooSearchLayouts);
 		Assert.assertNotNull(barSearchLayouts);
-
-		Assert.assertEquals(
-			fooSearchLayouts.toString(), 2, fooSearchLayouts.size());
 		Assert.assertEquals(
 			barSearchLayouts.toString(), 2, barSearchLayouts.size());
 
@@ -102,13 +102,17 @@ public class LayoutRelevanceSearchTest {
 		Assert.assertEquals(fooSearchLayouts.get(1), barSearchLayouts.get(0));
 	}
 
-	private void _createLayouts() throws Exception {
+	private void _addLayouts() throws Exception {
+		Indexer<Layout> indexer = IndexerRegistryUtil.getIndexer(Layout.class);
+
 		Layout layout1 = _layoutLocalService.addLayout(
 			TestPropsValues.getUserId(), _group.getGroupId(), false,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "foo foo foo bar",
 			RandomTestUtil.randomString(), StringPool.BLANK,
 			LayoutConstants.TYPE_CONTENT, false, StringPool.BLANK,
 			_serviceContext);
+
+		indexer.reindex(layout1);
 
 		Layout layout2 = _layoutLocalService.addLayout(
 			TestPropsValues.getUserId(), _group.getGroupId(), false,
@@ -117,9 +121,6 @@ public class LayoutRelevanceSearchTest {
 			LayoutConstants.TYPE_CONTENT, false, StringPool.BLANK,
 			_serviceContext);
 
-		Indexer<Layout> indexer = IndexerRegistryUtil.getIndexer(Layout.class);
-
-		indexer.reindex(layout1);
 		indexer.reindex(layout2);
 	}
 
