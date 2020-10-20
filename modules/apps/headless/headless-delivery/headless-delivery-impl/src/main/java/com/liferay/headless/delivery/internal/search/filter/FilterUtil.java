@@ -57,7 +57,8 @@ public class FilterUtil {
 
 		return StringBundler.concat(
 			DDMIndexer.DDM_FIELD_PREFIX, ddmStructureField.getIndexType(),
-			DDMIndexer.DDM_FIELD_SEPARATOR, ddmStructureField.getStructureId(),
+			DDMIndexer.DDM_FIELD_SEPARATOR,
+			ddmStructureField.getDDMStructureId(),
 			DDMIndexer.DDM_FIELD_SEPARATOR, ddmStructureField.getName(),
 			StringPool.UNDERLINE, ddmStructureField.getLocale());
 	}

@@ -31,8 +31,13 @@ public class DDMStructureField {
 			ddmStructureParts[3], StringPool.UNDERLINE);
 
 		return new DDMStructureField(
-			ddmStructureParts[1], ddmFieldParts[1] + "_" + ddmFieldParts[2],
-			ddmFieldParts[0], ddmStructureParts[2], ddmFieldParts[3]);
+			ddmStructureParts[2], ddmStructureParts[1],
+			ddmFieldParts[1] + "_" + ddmFieldParts[2], ddmFieldParts[0],
+			ddmFieldParts[3]);
+	}
+
+	public String getDDMStructureId() {
+		return _ddmSructureId;
 	}
 
 	public String getIndexType() {
@@ -47,29 +52,25 @@ public class DDMStructureField {
 		return _name;
 	}
 
-	public String getStructureId() {
-		return _structureId;
-	}
-
 	public String getType() {
 		return _type;
 	}
 
 	private DDMStructureField(
-		String indexType, String locale, String name, String structureId,
+		String ddmStructureId, String indexType, String locale, String name,
 		String type) {
 
+		_ddmSructureId = ddmStructureId;
 		_indexType = indexType;
 		_locale = locale;
 		_name = name;
-		_structureId = structureId;
 		_type = type;
 	}
 
+	private final String _ddmSructureId;
 	private final String _indexType;
 	private final String _locale;
 	private final String _name;
-	private final String _structureId;
 	private final String _type;
 
 }
