@@ -31,7 +31,6 @@ public class DDMFormFieldOptionsTestUtil {
 		ddmFormFieldOptions.addOptionLabel("value 1", LocaleUtil.US, "Label 1");
 		ddmFormFieldOptions.addOptionLabel("value 2", LocaleUtil.US, "Label 2");
 		ddmFormFieldOptions.addOptionLabel("value 3", LocaleUtil.US, "Label 3");
-
 		ddmFormFieldOptions.addOptionReference("value 1", "Reference 1");
 		ddmFormFieldOptions.addOptionReference("value 2", "Reference 2");
 		ddmFormFieldOptions.addOptionReference("value 3", "Reference 3");

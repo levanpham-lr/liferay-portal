@@ -291,7 +291,6 @@ public class DDMFormFieldTemplateContextFactory {
 			option.put("label", localizedValue.getString(_locale));
 
 			option.put("reference", optionsReferences.get(entry.getKey()));
-
 			option.put("value", entry.getKey());
 
 			list.add(option);

@@ -199,7 +199,6 @@ public class JSONObjectToDDMFormFieldTransformer {
 			String value = jsonObject.getString("value");
 
 			ddmFormFieldOptions.addOption(value);
-
 			ddmFormFieldOptions.addOptionReference(
 				value, jsonObject.getString("reference"));
 

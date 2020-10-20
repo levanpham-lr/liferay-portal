@@ -93,7 +93,6 @@ public class DDMFormFieldOptionsFactoryImpl
 			ddmFormFieldOptions.addOptionLabel(
 				option.get("value"), ddmFormFieldRenderingContext.getLocale(),
 				option.get("label"));
-
 			ddmFormFieldOptions.addOptionReference(
 				option.get("value"), option.get("reference"));
 		}
