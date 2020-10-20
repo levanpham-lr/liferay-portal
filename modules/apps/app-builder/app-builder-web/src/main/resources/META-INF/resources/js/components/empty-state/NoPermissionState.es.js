@@ -22,7 +22,7 @@ export default ({
 }) => (
 	<ClayEmptyState
 		description={description}
-		imgSrc={`${themeDisplay.getPathThemeImages()}/app_builder/illustration-locker.svg`}
+		imgSrc={`${themeDisplay.getPathThemeImages()}/app_builder/illustration_locker.svg`}
 		title={title}
 	>
 		{children}
