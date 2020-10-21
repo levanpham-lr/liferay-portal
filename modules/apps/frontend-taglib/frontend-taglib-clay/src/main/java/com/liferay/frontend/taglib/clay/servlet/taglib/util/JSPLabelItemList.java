@@ -28,6 +28,8 @@ public class JSPLabelItemList extends LabelItemList {
 		httpServletRequest = (HttpServletRequest)pageContext.getRequest();
 		renderResponse = (RenderResponse)pageContext.findAttribute(
 			"renderResponse");
+
+		request = httpServletRequest;
 	}
 
 	protected HttpServletRequest httpServletRequest;

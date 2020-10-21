@@ -28,6 +28,8 @@ public class JSPViewTypeItemList extends ViewTypeItemList {
 		httpServletRequest = (HttpServletRequest)pageContext.getRequest();
 		renderResponse = (RenderResponse)pageContext.findAttribute(
 			"renderResponse");
+
+		request = httpServletRequest;
 	}
 
 	protected HttpServletRequest httpServletRequest;

@@ -32,6 +32,8 @@ public class JSPNavigationItemList extends NavigationItemList {
 		renderResponse = (RenderResponse)pageContext.findAttribute(
 			"renderResponse");
 		themeDisplay = (ThemeDisplay)pageContext.findAttribute("themeDisplay");
+
+		request = httpServletRequest;
 	}
 
 	protected String currentURL;
