@@ -90,7 +90,7 @@ public class UpgradeDDMStructureTest {
 
 		_upgradeDDMStructure.upgrade();
 
-		ddmForm = _getDDMFormAfterUpgrade(ddmFormInstance);
+		ddmForm = _getUpgradedDDMForm(ddmFormInstance);
 
 		List<DDMFormField> ddmFormFields = ddmForm.getDDMFormFields();
 
@@ -118,7 +118,7 @@ public class UpgradeDDMStructureTest {
 
 		_upgradeDDMStructure.upgrade();
 
-		ddmForm = _getDDMFormAfterUpgrade(ddmFormInstance);
+		ddmForm = _getUpgradedDDMForm(ddmFormInstance);
 
 		ddmFormFields = ddmForm.getDDMFormFields();
 
@@ -164,7 +164,7 @@ public class UpgradeDDMStructureTest {
 
 		_upgradeDDMStructure.upgrade();
 
-		ddmForm = _getDDMFormAfterUpgrade(ddmFormInstance);
+		ddmForm = _getUpgradedDDMForm(ddmFormInstance);
 
 		List<DDMFormField> ddmFormFields = ddmForm.getDDMFormFields();
 
@@ -196,7 +196,7 @@ public class UpgradeDDMStructureTest {
 
 		_upgradeDDMStructure.upgrade();
 
-		ddmForm = _getDDMFormAfterUpgrade(ddmFormInstance);
+		ddmForm = _getUpgradedDDMForm(ddmFormInstance);
 
 		List<DDMFormField> ddmFormFields = ddmForm.getDDMFormFields();
 
@@ -246,7 +246,7 @@ public class UpgradeDDMStructureTest {
 				ddmFormFieldOptions.getOptionReference(optionValue)));
 	}
 
-	private DDMForm _getDDMFormAfterUpgrade(DDMFormInstance ddmFormInstance)
+	private DDMForm _getUpgradedDDMForm(DDMFormInstance ddmFormInstance)
 		throws Exception {
 
 		EntityCacheUtil.clearCache();
