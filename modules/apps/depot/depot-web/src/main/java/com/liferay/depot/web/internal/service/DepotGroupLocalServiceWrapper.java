@@ -68,11 +68,11 @@ public class DepotGroupLocalServiceWrapper extends GroupServiceWrapper {
 				DepotPortletKeys.DEPOT_ADMIN);
 
 			controlPanelFullURL = _http.addParameter(
-				controlPanelFullURL, namespace + "depotEntryId",
-				String.valueOf(depotEntry.getDepotEntryId()));
-			controlPanelFullURL = _http.addParameter(
 				controlPanelFullURL, namespace + "mvcRenderCommandName",
 				"/depot/view_depot_dashboard");
+			controlPanelFullURL = _http.addParameter(
+				controlPanelFullURL, namespace + "depotEntryId",
+				String.valueOf(depotEntry.getDepotEntryId()));
 
 			return controlPanelFullURL;
 		}
