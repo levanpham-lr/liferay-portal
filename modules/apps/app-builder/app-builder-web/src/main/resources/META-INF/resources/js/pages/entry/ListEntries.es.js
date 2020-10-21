@@ -26,7 +26,7 @@ import {getLocalizedUserPreferenceValue} from '../../utils/lang.es';
 import NoPermissionEntry from './NoPermissionEntry.es';
 import {buildEntries, navigateToEditPage} from './utils.es';
 
-export default ({history}) => {
+export default function ListEntries({history}) {
 	const actions = useEntriesActions();
 	const permissions = usePermissions();
 	const {
@@ -121,4 +121,4 @@ export default ({history}) => {
 			</ListView>
 		</Loading>
 	);
-};
+}
