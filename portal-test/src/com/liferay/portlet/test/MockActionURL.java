@@ -21,6 +21,7 @@ import javax.portlet.MutableActionParameters;
 
 /**
  * @author David Arques
+ * @see    com.liferay.portlet.internal.ActionURLImpl
  */
 public class MockActionURL extends MockLiferayPortletURL implements ActionURL {
 
