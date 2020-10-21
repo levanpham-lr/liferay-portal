@@ -855,32 +855,38 @@ This change was made to unify references to the icon sprite map.
 
 ---------------------------------------
 
-### Replaced portal properties: buffered.increment.enabled and view.count.enabled
+### Replaced portal properties: view.count.enabled and buffered.increment.enabled 
 - **Date:** 2020-Oct-01
 - **JIRA Ticket:** [LPS-120626](https://issues.liferay.com/browse/LPS-120626) and [LPS-121145](https://issues.liferay.com/browse/LPS-121145)
 
 #### What changed?
 
-The portal property: `buffered.increment.enabled` has been replaced by the `enabled` property in the View Count OSGI Configuration.
+Enabling and disabling view counts globally and specifically for entities has been removed from portal properties and is now configured as system settings. View counts can be configured in the UI at *System Settings* &rarr; *Infrastructure* &rarr; *View Count* or using a configuration file named `com.liferay.view.count.configuration.ViewCountConfiguration.config`.
 
-The usage of the portal property: `buffered.increment.enabled` to override settings for a specific asset, such as `buffered.increment.enabled[AssetEntry]`, has been replaced by the `Disabled Class Name` property in the View Count OSGI Configuration.
+Here are the portal property changes:
 
-The portal property: `view.count.enabled` has been replaced by the `enabled` property in the View Count OSGI Configuration.
+The `buffered.increment.enabled` portal property has been removed. Enabling and disabling view counts globally is now done using the `enabled` property on the View Count page.
+
+Disabling view count behavior for a specific entity is no longer done in portal properties, for example, by setting `view.count.enabled[SomeEntity]=false` in 7.3 or `buffered.increment.enabled[SomeEntity]=false` in 7.2, but is now done by adding the entity class name to the `Disabled Class Name` value list on the View Count page.
 
 #### Who is affected?
 
-This affects anyone who has set the portal property: `buffered.increment.enabled` to `false`.
+This affects anyone who has the portal property setting `view.count.enabled=false` or `buffered.increment.enabled=false`.
 
-This affects anyone who has used the portal property: `buffered.increment.enabled` to override settings for a specific asset, such as `buffered.increment.enabled[AssetEntry]`, and has set the value to `false`.
-
-This affects anyone who has set the portal property: `view.count.enabled` to `false`.
+This affects anyone who has disabled view counts for some entity (e.g., `SomeEntity`) using portal property settings `view.count.enabled[SomeEntity]=false` in early 7.3 versions or `buffered.increment.enabled[SomeEntity]=false` in 7.2 portal.
 
 #### How should I update my code?
 
-The `enabled` property and `Disabled Class Name` property for the View Count OSGI Configuration can be found in *System Settings* &rarr; *Infrastructure* &rarr; *View Count*.
+Remove `view.count.enabled` or `buffered.increment.enabled` portal properties and entity-specific properties such as `view.count.enabled[SomeEntity]=false` or `buffered.increment.enabled[SomeEntity]=false`.
+
+Configure view count behavior in System Settings or using a configuration file:
+
+In *System Settings* &rarr; *Infrastructure* &rarr; *View Count*, set `enabled` to `false` to disable view counts globally, or set `enabled` to `true` to enable view counts globally and disable view counts for specific entities by adding the entity class names to the  `Disabled Class Name` value list.
+
+To use a configuration file, configure view counts in System Settings, save the settings, and export them to a `com.liferay.view.count.configuration.ViewCountConfiguration.config` file. Then deploy the configuration by placing the file in your `[Liferay Home]/osgi/configs` folder.
 
 #### Why was this change made?
 
-This change was made to allow users to better manage and configure the View Count behavior.
+This change was made to facilitate managing view count behavior.
 
 ---------------------------------------
