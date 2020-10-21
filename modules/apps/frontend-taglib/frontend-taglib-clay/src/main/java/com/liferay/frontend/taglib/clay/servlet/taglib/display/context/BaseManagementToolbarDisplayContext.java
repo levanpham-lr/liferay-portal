@@ -50,9 +50,9 @@ public class BaseManagementToolbarDisplayContext
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		this.liferayPortletRequest = liferayPortletRequest;
-		this.liferayPortletResponse = liferayPortletResponse;
 		this.httpServletRequest = httpServletRequest;
+		this.liferayPortletResponse = liferayPortletResponse;
+		this.liferayPortletRequest = liferayPortletRequest;
 
 		currentURLObj = PortletURLUtil.getCurrent(
 			liferayPortletRequest, liferayPortletResponse);

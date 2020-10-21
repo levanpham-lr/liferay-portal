@@ -25,9 +25,9 @@ import javax.servlet.jsp.PageContext;
 public class JSPDropdownItemList extends DropdownItemList {
 
 	public JSPDropdownItemList(PageContext pageContext) {
+		httpServletRequest = (HttpServletRequest)pageContext.getRequest();
 		renderResponse = (RenderResponse)pageContext.findAttribute(
 			"renderResponse");
-		httpServletRequest = (HttpServletRequest)pageContext.getRequest();
 	}
 
 	protected HttpServletRequest httpServletRequest;
