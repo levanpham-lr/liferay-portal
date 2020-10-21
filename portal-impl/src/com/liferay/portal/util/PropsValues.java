@@ -961,6 +961,10 @@ public class PropsValues {
 	public static boolean DL_STORE_ANTIVIRUS_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.DL_STORE_ANTIVIRUS_ENABLED));
 
+	/**
+	 * @deprecated As of Athanasius (7.3.x), with no direct replacement
+	 */
+	@Deprecated
 	public static final String DL_STORE_ANTIVIRUS_IMPL = PropsUtil.get(
 		PropsKeys.DL_STORE_ANTIVIRUS_IMPL);
 
