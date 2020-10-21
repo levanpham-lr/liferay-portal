@@ -109,6 +109,7 @@ definition {
 	}
 
 	test AddAndEditOAuthSAPEntries {
+		property custom.properties = "json.service.serialize.throwable=true";
 		property test.name.skip.portal.instance = "OAuth2#AddAndEditOAuthSAPEntries";
 
 		ApplicationsMenu.gotoPortlet(
@@ -170,7 +171,7 @@ definition {
 
 		var portalVersionOutput = JSONCurlUtil.post("${portalVersionCurl}");
 
-		if (!(contains("${portalVersionOutput}", "{}"))) {
+		if (!(contains("${portalVersionOutput}", "Access denied to com.liferay.portal.kernel.service.PortalService#getVersion"))) {
 			fail("Access denied message was not returned");
 		}
 
