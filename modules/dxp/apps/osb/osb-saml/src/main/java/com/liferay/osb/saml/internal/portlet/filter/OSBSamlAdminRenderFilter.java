@@ -61,7 +61,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = "javax.portlet.name=" + SamlPortletKeys.SAML_ADMIN, service = {}
 )
-public class SamlAdminRenderFilter implements RenderFilter {
+public class OSBSamlAdminRenderFilter implements RenderFilter {
 
 	@Override
 	public void destroy() {
@@ -158,7 +158,7 @@ public class SamlAdminRenderFilter implements RenderFilter {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		SamlAdminRenderFilter.class);
+		OSBSamlAdminRenderFilter.class);
 
 	@Reference(name = "KeyStoreManager")
 	private ServiceReference<KeyStoreManager> _keyStoreManagerServiceReference;
