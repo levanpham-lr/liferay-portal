@@ -21,11 +21,12 @@ import {Loading} from '../../components/loading/Loading.es';
 import useDataListView from '../../hooks/useDataListView.es';
 import useEntriesActions from '../../hooks/useEntriesActions.es';
 import usePermissions from '../../hooks/usePermissions.es';
+import useQuery from '../../hooks/useQuery.es';
 import {getLocalizedUserPreferenceValue} from '../../utils/lang.es';
 import NoPermissionEntry from './NoPermissionEntry.es';
 import {buildEntries, navigateToEditPage} from './utils.es';
 
-export default function ListEntries() {
+export default ({history}) => {
 	const actions = useEntriesActions();
 	const permissions = usePermissions();
 	const {
@@ -53,12 +54,23 @@ export default function ListEntries() {
 		),
 	}));
 
-	const onClickEditButton = () => {
+	const onClickEditPage = () => {
 		navigateToEditPage(basePortletURL, {
 			backURL: window.location.href,
 			languageId: userLanguageId,
 		});
 	};
+
+	const [query] = useQuery(
+		history,
+		{
+			keywords: '',
+			page: 1,
+			pageSize: 20,
+			sort: '',
+		},
+		appId
+	);
 
 	if (!permissions.view) {
 		return <NoPermissionEntry />;
@@ -73,7 +85,7 @@ export default function ListEntries() {
 					permissions.add && (
 						<Button
 							className="nav-btn nav-btn-monospaced"
-							onClick={onClickEditButton}
+							onClick={onClickEditPage}
 							symbol="plus"
 							tooltip={Liferay.Language.get('new-entry')}
 						/>
@@ -86,7 +98,7 @@ export default function ListEntries() {
 						permissions.add && (
 							<Button
 								displayType="secondary"
-								onClick={onClickEditButton}
+								onClick={onClickEditPage}
 							>
 								{Liferay.Language.get('new-entry')}
 							</Button>
@@ -104,9 +116,9 @@ export default function ListEntries() {
 					dataDefinition,
 					fieldNames,
 					permissions,
-					scope: appId,
+					query,
 				})}
 			</ListView>
 		</Loading>
 	);
-}
+};
