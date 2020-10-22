@@ -45,9 +45,8 @@ page import="com.liferay.portal.util.RepositoryUtil" %>
 <%@ page import="java.util.Collections" %>
 
 <%
-DLRequestHelper dlRequestHelper = (DLRequestHelper)request.getAttribute(DLRequestHelper.class.getName());
-
 DLConfiguration dlConfiguration = ConfigurationProviderUtil.getSystemConfiguration(DLConfiguration.class);
+DLRequestHelper dlRequestHelper = (DLRequestHelper)request.getAttribute(DLRequestHelper.class.getName());
 %>
 
 <%@ include file="/document_library/init-ext.jsp" %>

@@ -88,9 +88,9 @@ if (fileEntry != null) {
 	pending = fileVersion.isPending();
 }
 
-DLPortletInstanceSettings dlPortletInstanceSettings = dlRequestHelper.getDLPortletInstanceSettings();
-
 boolean saveAsDraft = false;
+
+DLPortletInstanceSettings dlPortletInstanceSettings = dlRequestHelper.getDLPortletInstanceSettings();
 
 if ((checkedOut || pending) && !dlPortletInstanceSettings.isEnableFileEntryDrafts()) {
 	saveAsDraft = true;

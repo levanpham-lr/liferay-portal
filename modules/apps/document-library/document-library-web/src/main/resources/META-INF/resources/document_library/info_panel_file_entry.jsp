@@ -22,7 +22,6 @@ FileVersion fileVersion = (FileVersion)request.getAttribute("info_panel.jsp-file
 boolean hideActions = GetterUtil.getBoolean(request.getAttribute("info_panel_file_entry.jsp-hideActions"));
 
 DLPortletInstanceSettings dlPortletInstanceSettings = dlRequestHelper.getDLPortletInstanceSettings();
-
 DLViewFileVersionDisplayContext dlViewFileVersionDisplayContext = dlDisplayContextProvider.getDLViewFileVersionDisplayContext(request, response, fileVersion);
 
 long assetClassPK = DLAssetHelperUtil.getAssetClassPK(fileEntry, fileVersion);
