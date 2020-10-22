@@ -27,3 +27,8 @@
 # Bundle Version 4.0.10
 #
 538b5bfce83da0188476b0a7c8a0f09d75bc934a^..9b64a9e0bef51143cd64355bdb982c5dca10c5da=LPS-116495
+
+#
+# Bundle Version 4.0.11
+#
+9b64a9e0bef51143cd64355bdb982c5dca10c5da^..40cadd0075e0f7d83570d5134b16b9c97953946a=LPS-122403 LRQA-51488
