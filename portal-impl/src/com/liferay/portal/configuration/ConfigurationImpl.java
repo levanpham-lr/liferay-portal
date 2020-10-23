@@ -49,9 +49,6 @@ import org.apache.commons.configuration.MapConfiguration;
 public class ConfigurationImpl
 	implements com.liferay.portal.kernel.configuration.Configuration {
 
-	public static final String CONFIGURATION_IMPL_QUIET =
-		"configuration.impl.quiet";
-
 	public ConfigurationImpl(
 		ClassLoader classLoader, String name, long companyId, String webId) {
 
@@ -325,7 +322,7 @@ public class ConfigurationImpl
 
 	protected void printSources(long companyId, String webId) {
 		if (GetterUtil.getBoolean(
-				System.getProperty(CONFIGURATION_IMPL_QUIET))) {
+				System.getProperty("configuration.impl.quiet"))) {
 
 			return;
 		}

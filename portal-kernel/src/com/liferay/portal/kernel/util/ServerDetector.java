@@ -54,8 +54,6 @@ public class ServerDetector {
 	@Deprecated
 	public static final String RESIN_ID = "resin";
 
-	public static final String SERVER_DETECTOR_QUIET = "server.detector.quiet";
-
 	public static final String SYSTEM_PROPERTY_KEY_SERVER_DETECTOR_SERVER_ID =
 		"server.detector.server.id";
 
@@ -275,7 +273,8 @@ public class ServerDetector {
 	static {
 		_serverType = _detectServerType();
 
-		if (!GetterUtil.getBoolean(System.getProperty(SERVER_DETECTOR_QUIET)) &&
+		if (!GetterUtil.getBoolean(
+				System.getProperty("server.detector.quiet")) &&
 			(System.getProperty("external-properties") == null)) {
 
 			if (_log.isInfoEnabled()) {
