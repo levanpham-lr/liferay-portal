@@ -181,7 +181,7 @@ public class SegmentsEntryRoleContributorTest {
 	}
 
 	@Test
-	public void testHasPermissionWhenUserInOrganizationSegment()
+	public void testHasPermissionWhenUserInOrganizationSegmentEntry()
 		throws Exception {
 
 		PermissionChecker permissionChecker =
