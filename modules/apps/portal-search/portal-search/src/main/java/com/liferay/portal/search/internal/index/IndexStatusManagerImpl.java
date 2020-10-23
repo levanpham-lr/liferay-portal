@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.IndexStatusManagerThreadLocal;
 import com.liferay.portal.search.configuration.IndexStatusManagerConfiguration;
 import com.liferay.portal.search.index.IndexStatusManager;
-import com.liferay.portal.search.internal.index.configuration.IndexStatusManagerInternalConfiguration;
 
 import java.util.Collections;
 import java.util.Map;
@@ -39,7 +38,7 @@ import org.osgi.service.component.annotations.Modified;
 @Component(
 	configurationPid = {
 		"com.liferay.portal.search.configuration.IndexStatusManagerConfiguration",
-		"com.liferay.portal.search.internal.index.configuration.IndexStatusManagerInternalConfiguration"
+		"com.liferay.portal.search.internal.index.IndexStatusManagerInternalConfiguration"
 	},
 	immediate = true, service = IndexStatusManager.class
 )
