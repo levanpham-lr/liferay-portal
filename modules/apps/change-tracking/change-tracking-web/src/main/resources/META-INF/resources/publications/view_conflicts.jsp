@@ -20,7 +20,6 @@
 ViewConflictsDisplayContext viewConflictsDisplayContext = (ViewConflictsDisplayContext)request.getAttribute(CTWebKeys.VIEW_CONFLICTS_DISPLAY_CONTEXT);
 
 CTCollection ctCollection = viewConflictsDisplayContext.getCtCollection();
-
 boolean resolved = !viewConflictsDisplayContext.hasUnresolvedConflicts();
 
 boolean schedule = ParamUtil.getBoolean(request, "schedule");
