@@ -58,23 +58,23 @@ public class UpgradeAssetDisplayPrivateLayout extends UpgradeProcess {
 	}
 
 	private String _getFriendlyURL(
-			PreparedStatement ps, long groupId, String friendlyURL,
-			long ctCollectionId)
+			PreparedStatement ps, long ctCollectionId, long groupId,
+			String friendlyURL)
 		throws SQLException {
 
 		String initialFriendlyURL = friendlyURL;
 
-		ps.setLong(1, groupId);
-		ps.setBoolean(2, false);
-		ps.setString(3, friendlyURL);
-		ps.setLong(4, ctCollectionId);
+		ps.setLong(1, ctCollectionId);
+		ps.setLong(2, groupId);
+		ps.setBoolean(3, false);
+		ps.setString(4, friendlyURL);
 
 		for (int i = 1;; i++) {
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
 					friendlyURL = initialFriendlyURL + StringPool.DASH + i;
 
-					ps.setString(3, friendlyURL);
+					ps.setString(4, friendlyURL);
 				}
 				else {
 					break;
@@ -87,14 +87,14 @@ public class UpgradeAssetDisplayPrivateLayout extends UpgradeProcess {
 
 	private void _upgradeAssetDisplayLayouts() throws Exception {
 		try (PreparedStatement ps1 = connection.prepareStatement(
-				"select groupId, friendlyURL, plid, ctCollectionId from " +
+				"select ctCollectionId, groupId, friendlyURL, plid from " +
 					"Layout where privateLayout = ? and type_ = ?");
 			PreparedStatement ps2 = connection.prepareStatement(
-				"select plid from Layout where groupId = ? and privateLayout " +
-					"= ? and friendlyURL = ? and ctCollectionId = ?");
+				"select plid from Layout where ctCollectionId = ? and " +
+					"groupId = ? and privateLayout = ? and friendlyURL = ?");
 			PreparedStatement ps3 = AutoBatchPreparedStatementUtil.autoBatch(
 				connection.prepareStatement(
-					"update Layout set layoutId = ?, privateLayout = ?, " +
+					"update Layout set privateLayout = ?, layoutId = ?, " +
 						"friendlyURL = ? where plid = ?"));
 			PreparedStatement ps4 = AutoBatchPreparedStatementUtil.autoBatch(
 				connection.prepareStatement(
@@ -106,29 +106,29 @@ public class UpgradeAssetDisplayPrivateLayout extends UpgradeProcess {
 
 			try (ResultSet rs = ps1.executeQuery()) {
 				while (rs.next()) {
+					long ctCollectionId = rs.getLong("ctCollectionId");
 					long groupId = rs.getLong("groupId");
 					String friendlyURL = rs.getString("friendlyURL");
 					long plid = rs.getLong("plid");
-					long ctCollectionId = rs.getLong("ctCollectionId");
 
 					_addResources(groupId, plid);
 
 					String newFriendlyURL = _getFriendlyURL(
-						ps2, groupId, friendlyURL, ctCollectionId);
+						ps2, ctCollectionId, groupId, friendlyURL);
 
 					if (!newFriendlyURL.equals(friendlyURL)) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								StringBundler.concat(
-									"FriendlyURL for plid ", plid,
-									" in groupId ", groupId, " changed from ",
+									"Friendly URL for PLID ", plid,
+									" in group ", groupId, " changed from ",
 									friendlyURL, " to ", newFriendlyURL));
 						}
 					}
 
+					ps3.setBoolean(1, false);
 					ps3.setLong(
-						1, _layoutLocalService.getNextLayoutId(groupId, false));
-					ps3.setBoolean(2, false);
+						2, _layoutLocalService.getNextLayoutId(groupId, false));
 					ps3.setString(3, newFriendlyURL);
 					ps3.setLong(4, plid);
 
