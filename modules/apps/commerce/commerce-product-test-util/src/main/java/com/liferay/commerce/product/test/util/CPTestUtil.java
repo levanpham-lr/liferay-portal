@@ -687,26 +687,6 @@ public class CPTestUtil {
 		return bigDecimal.stripTrailingZeros();
 	}
 
-	private static void _addCommercePriceEntry(CPInstance cpInstance)
-		throws PortalException {
-
-		CommercePriceList commercePriceList =
-			CommercePriceListLocalServiceUtil.fetchCatalogBaseCommercePriceList(
-				cpInstance.getGroupId());
-
-		if (commercePriceList == null) {
-			return;
-		}
-
-		CPDefinition cpDefinition = cpInstance.getCPDefinition();
-
-		CommercePriceEntryLocalServiceUtil.addCommercePriceEntry(
-			cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid(),
-			commercePriceList.getCommercePriceListId(), StringPool.BLANK,
-			cpInstance.getPrice(), null,
-			ServiceContextTestUtil.getServiceContext(cpInstance.getGroupId()));
-	}
-
 	private static void _addCatalogBaseCommercePriceList(
 			long groupId, String currencyCode, String type,
 			ServiceContext serviceContext)
@@ -726,6 +706,26 @@ public class CPTestUtil {
 				commerceCurrency.getCommerceCurrencyId(), type,
 				RandomTestUtil.randomString(), serviceContext);
 		}
+	}
+
+	private static void _addCommercePriceEntry(CPInstance cpInstance)
+		throws PortalException {
+
+		CommercePriceList commercePriceList =
+			CommercePriceListLocalServiceUtil.fetchCatalogBaseCommercePriceList(
+				cpInstance.getGroupId());
+
+		if (commercePriceList == null) {
+			return;
+		}
+
+		CPDefinition cpDefinition = cpInstance.getCPDefinition();
+
+		CommercePriceEntryLocalServiceUtil.addCommercePriceEntry(
+			cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid(),
+			commercePriceList.getCommercePriceListId(), StringPool.BLANK,
+			cpInstance.getPrice(), null,
+			ServiceContextTestUtil.getServiceContext(cpInstance.getGroupId()));
 	}
 
 	private static CPDefinition _addCPDefinition(
