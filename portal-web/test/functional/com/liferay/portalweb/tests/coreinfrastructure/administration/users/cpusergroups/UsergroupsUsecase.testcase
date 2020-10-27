@@ -270,6 +270,14 @@ definition {
 	test UserGroupSiteTemplates {
 		property test.name.skip.portal.instance = "UsergroupsUsecase#UserGroupSiteTemplates";
 
+		SiteTemplates.addCP(
+			disableChanges = "true",
+			siteTemplateName = "Site Template Name");
+
+		SiteTemplates.addSitePageViaSiteTemplateCP(
+			pageName = "Wiki Page Name",
+			siteTemplateName = "Site Template Name");
+
 		ApplicationsMenu.gotoPortlet(
 			category = "Configuration",
 			panel = "Control Panel",
@@ -315,7 +323,7 @@ definition {
 
 		UserGroup.addSiteCP(
 			userGroupName = "UG UserGroup Name",
-			userGroupSite = "Community Site");
+			userGroupSite = "Site Template Name");
 
 		UserBar.gotoDropdownItem(dropdownItem = "My Profile");
 
@@ -331,7 +339,7 @@ definition {
 
 		AssertTextPresent(
 			locator1 = "Home#PAGE_3",
-			value1 = "Wiki");
+			value1 = "Wiki Page Name");
 
 		UserBar.gotoDropdownItem(dropdownItem = "My Dashboard");
 
@@ -348,7 +356,7 @@ definition {
 		if (IsElementPresent(locator1 = "Home#PAGE_3")) {
 			AssertTextNotEquals(
 				locator1 = "Home#PAGE_3",
-				value1 = "Wiki");
+				value1 = "Wiki Page Name");
 		}
 
 		User.logoutPG();
@@ -374,7 +382,7 @@ definition {
 		if (IsElementPresent(locator1 = "Home#PAGE_3")) {
 			AssertTextNotEquals(
 				locator1 = "Home#PAGE_3",
-				value1 = "Wiki");
+				value1 = "Wiki Page Name");
 		}
 
 		UserBar.gotoDropdownItem(dropdownItem = "My Dashboard");
@@ -392,7 +400,7 @@ definition {
 		if (IsElementPresent(locator1 = "Home#PAGE_3")) {
 			AssertTextNotEquals(
 				locator1 = "Home#PAGE_3",
-				value1 = "Wiki");
+				value1 = "Wiki Page Name");
 		}
 
 		User.logoutPG();
@@ -430,7 +438,7 @@ definition {
 
 		AssertTextPresent(
 			locator1 = "Home#PAGE_3",
-			value1 = "Wiki");
+			value1 = "Wiki Page Name");
 
 		UserBar.gotoDropdownItem(dropdownItem = "My Dashboard");
 
@@ -447,7 +455,7 @@ definition {
 		if (IsElementPresent(locator1 = "Home#PAGE_3")) {
 			AssertTextNotEquals(
 				locator1 = "Home#PAGE_3",
-				value1 = "Wiki");
+				value1 = "Wiki Page Name");
 		}
 
 		User.logoutPG();
