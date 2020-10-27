@@ -143,16 +143,16 @@ public class LayoutSEOEntryStagedModelDataHandler
 			LayoutSEOEntry layoutSEOEntry)
 		throws Exception {
 
-		LayoutSEOEntry existingLayoutSEOEntry =
-			fetchStagedModelByUuidAndGroupId(
-				layoutSEOEntry.getUuid(), layoutSEOEntry.getGroupId());
-
 		Map<Long, Long> fileEntryIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				FileEntry.class);
 
 		long openGraphImageFileEntryId = MapUtil.getLong(
 			fileEntryIds, layoutSEOEntry.getOpenGraphImageFileEntryId(), 0);
+
+		LayoutSEOEntry existingLayoutSEOEntry =
+			fetchStagedModelByUuidAndGroupId(
+				layoutSEOEntry.getUuid(), layoutSEOEntry.getGroupId());
 
 		if (existingLayoutSEOEntry == null) {
 			Map<Long, Layout> newPrimaryKeysMap =
