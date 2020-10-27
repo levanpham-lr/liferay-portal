@@ -1,6 +1,6 @@
 {
 	"dependencies": {
-		"@clayui/css": "3.18.2",
+		"@clayui/css": "3.19.0",
 		"intersection-observer": "0.11.0"
 	},
 	"name": "frontend-compatibility-ie",
