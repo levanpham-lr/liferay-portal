@@ -38,7 +38,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	property = {
 		"javax.portlet.name=" + PollsPortletKeys.POLLS_DISPLAY,
-		"mvc.command.name=/polls/view_action"
+		"mvc.command.name=/polls_display/view"
 	},
 	service = MVCRenderCommand.class
 )
