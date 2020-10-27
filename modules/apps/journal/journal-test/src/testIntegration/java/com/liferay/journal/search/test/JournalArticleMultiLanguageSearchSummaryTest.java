@@ -112,9 +112,9 @@ public class JournalArticleMultiLanguageSearchSummaryTest {
 	public void tearDown() {
 		_journalArticleSearchFixture.tearDown();
 
-		PermissionThreadLocal.setPermissionChecker(_permissionChecker);
-
 		_userSearchFixture.tearDown();
+
+		PermissionThreadLocal.setPermissionChecker(_permissionChecker);
 	}
 
 	@Test
