@@ -361,7 +361,7 @@ public class CPTestUtil {
 		CPInstance cpInstance = CPInstanceLocalServiceUtil.getCPInstance(
 			cpDefinition.getCPDefinitionId(), CPInstanceConstants.DEFAULT_SKU);
 
-		_addBasePriceEntry(cpInstance);
+		_addCommercePriceEntry(cpInstance);
 
 		return cpInstance;
 	}
@@ -376,7 +376,7 @@ public class CPTestUtil {
 		CPInstance cpInstance = CPInstanceLocalServiceUtil.getCPInstance(
 			cpDefinition.getCPDefinitionId(), CPInstanceConstants.DEFAULT_SKU);
 
-		_addBasePriceEntry(cpInstance);
+		_addCommercePriceEntry(cpInstance);
 
 		return cpInstance;
 	}
@@ -402,7 +402,7 @@ public class CPTestUtil {
 
 		cpInstance = CPInstanceLocalServiceUtil.updateCPInstance(cpInstance);
 
-		_addBasePriceEntry(cpInstance);
+		_addCommercePriceEntry(cpInstance);
 
 		return cpInstance;
 	}
@@ -418,7 +418,7 @@ public class CPTestUtil {
 
 		cpInstance = CPInstanceLocalServiceUtil.updateCPInstance(cpInstance);
 
-		_addBasePriceEntry(cpInstance);
+		_addCommercePriceEntry(cpInstance);
 
 		return cpInstance;
 	}
@@ -451,7 +451,7 @@ public class CPTestUtil {
 		CPInstance cpInstance = CPInstanceLocalServiceUtil.getCPInstance(
 			cpDefinition.getCPDefinitionId(), sku);
 
-		_addBasePriceEntry(cpInstance);
+		_addCommercePriceEntry(cpInstance);
 
 		return cpInstance;
 	}
@@ -471,7 +471,7 @@ public class CPTestUtil {
 
 		cpInstance.setPrice(price);
 
-		_addBasePriceEntry(cpInstance);
+		_addCommercePriceEntry(cpInstance);
 
 		return cpInstance;
 	}
@@ -503,7 +503,7 @@ public class CPTestUtil {
 
 		cpInstance.setStatus(WorkflowConstants.STATUS_APPROVED);
 
-		_addBasePriceEntry(cpInstance);
+		_addCommercePriceEntry(cpInstance);
 
 		return CPInstanceLocalServiceUtil.updateCPInstance(cpInstance);
 	}
@@ -687,7 +687,7 @@ public class CPTestUtil {
 		return bigDecimal.stripTrailingZeros();
 	}
 
-	private static void _addBasePriceEntry(CPInstance cpInstance)
+	private static void _addCommercePriceEntry(CPInstance cpInstance)
 		throws PortalException {
 
 		CommercePriceList commercePriceList =
@@ -707,7 +707,7 @@ public class CPTestUtil {
 			ServiceContextTestUtil.getServiceContext(cpInstance.getGroupId()));
 	}
 
-	private static void _addBasePriceList(
+	private static void _addCatalogBaseCommercePriceList(
 			long groupId, String currencyCode, String type,
 			ServiceContext serviceContext)
 		throws PortalException {
@@ -757,12 +757,12 @@ public class CPTestUtil {
 
 		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
 
-		_addBasePriceList(
+		_addCatalogBaseCommercePriceList(
 			commerceCatalog.getGroupId(),
 			commerceCatalog.getCommerceCurrencyCode(),
 			CommercePriceListConstants.TYPE_PRICE_LIST, serviceContext);
 
-		_addBasePriceList(
+		_addCatalogBaseCommercePriceList(
 			commerceCatalog.getGroupId(),
 			commerceCatalog.getCommerceCurrencyCode(),
 			CommercePriceListConstants.TYPE_PROMOTION, serviceContext);
@@ -885,12 +885,12 @@ public class CPTestUtil {
 
 		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
 
-		_addBasePriceList(
+		_addCatalogBaseCommercePriceList(
 			commerceCatalog.getGroupId(),
 			commerceCatalog.getCommerceCurrencyCode(),
 			CommercePriceListConstants.TYPE_PRICE_LIST, serviceContext);
 
-		_addBasePriceList(
+		_addCatalogBaseCommercePriceList(
 			commerceCatalog.getGroupId(),
 			commerceCatalog.getCommerceCurrencyCode(),
 			CommercePriceListConstants.TYPE_PROMOTION, serviceContext);
