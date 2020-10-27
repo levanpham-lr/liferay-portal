@@ -177,8 +177,8 @@ public class PortletRegistryImpl implements PortletRegistry {
 
 			try {
 				PortletJSONUtil.populatePortletJSONObject(
-					httpServletRequest, StringPool.BLANK, portlet, jsonObject,
-					allPortlets);
+					httpServletRequest, StringPool.BLANK, portlet, allPortlets,
+					jsonObject);
 
 				PortletJSONUtil.writeHeaderPaths(
 					httpServletResponse, jsonObject);
