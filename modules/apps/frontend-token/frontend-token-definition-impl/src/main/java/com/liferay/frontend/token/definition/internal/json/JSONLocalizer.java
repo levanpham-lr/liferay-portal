@@ -37,6 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Iván Zaera
+ * @review
  */
 public class JSONLocalizer {
 
