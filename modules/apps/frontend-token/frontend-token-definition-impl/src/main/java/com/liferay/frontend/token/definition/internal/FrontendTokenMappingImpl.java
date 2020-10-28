@@ -38,7 +38,6 @@ public class FrontendTokenMappingImpl implements FrontendTokenMapping {
 			jsonObject);
 
 		_type = jsonObject.getString("type");
-
 		_value = jsonObject.getString("value");
 	}
 
