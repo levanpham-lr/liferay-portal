@@ -970,7 +970,6 @@ definition {
 			userEmailAddress = "test@liferay.com");*/
 	}
 
-	@ignore
 	@priority = "4"
 	test RolesSitesPermissionsInheritance {
 		property custom.properties = "jsonws.web.service.paths.excludes=";

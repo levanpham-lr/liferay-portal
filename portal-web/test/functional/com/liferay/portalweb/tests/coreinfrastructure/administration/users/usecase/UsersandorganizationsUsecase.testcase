@@ -1612,7 +1612,6 @@ definition {
 		AssetCategorization.viewVocabulary(vocabularyName = "Vocabulary Name 1");
 	}
 
-	@ignore
 	@priority = "4"
 	test ViewContentInCustomOrganizationTypeSite {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
