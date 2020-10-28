@@ -94,7 +94,6 @@ public class LayoutClassedModelUsageStagedModelDataHandler
 		element.addAttribute(
 			"layout-classed-model-class-name",
 			_portal.getClassName(layoutClassedModelUsage.getClassNameId()));
-
 		element.addAttribute(
 			"layout-classed-model-container-class-name",
 			_portal.getClassName(layoutClassedModelUsage.getContainerType()));
