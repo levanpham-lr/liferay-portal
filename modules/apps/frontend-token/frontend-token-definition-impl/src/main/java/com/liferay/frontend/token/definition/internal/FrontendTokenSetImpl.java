@@ -39,7 +39,7 @@ public class FrontendTokenSetImpl implements FrontendTokenSet {
 		FrontendTokenDefinitionImpl frontendTokenDefinitionImpl =
 			frontendTokenCategoryImpl.getFrontendTokenDefinition();
 
-		_jsonLocalizer = frontendTokenDefinitionImpl.createCachedJSONTranslator(
+		_jsonLocalizer = frontendTokenDefinitionImpl.createJSONLocalizer(
 			jsonObject);
 
 		JSONArray frontendTokensJSONArray = jsonObject.getJSONArray(

@@ -34,7 +34,7 @@ public class FrontendTokenMappingImpl implements FrontendTokenMapping {
 		FrontendTokenDefinitionImpl frontendTokenDefinitionImpl =
 			frontendTokenImpl.getFrontendTokenDefinition();
 
-		_jsonLocalizer = frontendTokenDefinitionImpl.createCachedJSONTranslator(
+		_jsonLocalizer = frontendTokenDefinitionImpl.createJSONLocalizer(
 			jsonObject);
 
 		_type = jsonObject.getString("type");

@@ -42,7 +42,7 @@ public class FrontendTokenDefinitionImpl implements FrontendTokenDefinition {
 		_resourceBundleLoader = resourceBundleLoader;
 		_themeId = themeId;
 
-		_jsonLocalizer = createCachedJSONTranslator(jsonObject);
+		_jsonLocalizer = createJSONLocalizer(jsonObject);
 		JSONArray frontendTokenCategoriesJSONArray = jsonObject.getJSONArray(
 			"frontendTokenCategories");
 		if (frontendTokenCategoriesJSONArray == null) {
@@ -95,7 +95,7 @@ public class FrontendTokenDefinitionImpl implements FrontendTokenDefinition {
 		return _themeId;
 	}
 
-	protected JSONLocalizer createCachedJSONTranslator(JSONObject jsonObject) {
+	protected JSONLocalizer createJSONLocalizer(JSONObject jsonObject) {
 		return new JSONLocalizer(
 			_jsonFactory.looseSerializeDeep(jsonObject), _jsonFactory,
 			_resourceBundleLoader, _themeId);

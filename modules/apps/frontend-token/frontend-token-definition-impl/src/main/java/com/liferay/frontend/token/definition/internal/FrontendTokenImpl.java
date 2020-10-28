@@ -40,7 +40,7 @@ public class FrontendTokenImpl implements FrontendToken {
 		FrontendTokenDefinitionImpl frontendTokenDefinitionImpl =
 			frontendTokenSetImpl.getFrontendTokenDefinition();
 
-		_jsonLocalizer = frontendTokenDefinitionImpl.createCachedJSONTranslator(
+		_jsonLocalizer = frontendTokenDefinitionImpl.createJSONLocalizer(
 			jsonObject);
 
 		_type = Type.parse(jsonObject.getString("type"));

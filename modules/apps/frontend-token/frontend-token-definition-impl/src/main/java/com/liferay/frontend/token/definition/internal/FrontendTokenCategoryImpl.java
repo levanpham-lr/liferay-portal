@@ -37,7 +37,7 @@ public class FrontendTokenCategoryImpl implements FrontendTokenCategory {
 
 		_frontendTokenDefinitionImpl = frontendTokenDefinitionImpl;
 
-		_jsonLocalizer = frontendTokenDefinitionImpl.createCachedJSONTranslator(
+		_jsonLocalizer = frontendTokenDefinitionImpl.createJSONLocalizer(
 			jsonObject);
 
 		JSONArray frontendTokenSetsJSONArray = jsonObject.getJSONArray(
