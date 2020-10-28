@@ -131,10 +131,10 @@ public class JSONLocalizer {
 					JSONArray jsonArray = (JSONArray)object;
 
 					for (int i = 0; i < jsonArray.length(); i++) {
-						Object childObject = jsonArray.get(i);
+						Object currentObject = jsonArray.get(i);
 
-						if (childObject instanceof JSONObject) {
-							_localize((JSONObject)childObject, locale);
+						if (currentObject instanceof JSONObject) {
+							_localize((JSONObject)currentObject, locale);
 						}
 					}
 				}
