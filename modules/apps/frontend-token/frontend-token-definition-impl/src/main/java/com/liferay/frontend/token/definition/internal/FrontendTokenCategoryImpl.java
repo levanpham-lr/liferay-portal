@@ -51,12 +51,12 @@ public class FrontendTokenCategoryImpl implements FrontendTokenCategory {
 			FrontendTokenSet frontendTokenSet = new FrontendTokenSetImpl(
 				this, frontendTokenSetsJSONArray.getJSONObject(i));
 
-			_frontendTokenSets.add(frontendTokenSet);
+			_frontendTokenMappings.addAll(
+				frontendTokenSet.getFrontendTokenMappings());
 
 			_frontendTokens.addAll(frontendTokenSet.getFrontendTokens());
 
-			_frontendTokenMappings.addAll(
-				frontendTokenSet.getFrontendTokenMappings());
+			_frontendTokenSets.add(frontendTokenSet);
 		}
 	}
 

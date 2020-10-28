@@ -56,13 +56,13 @@ public class FrontendTokenDefinitionImpl implements FrontendTokenDefinition {
 
 			_frontendTokenCategories.add(frontendTokenCategory);
 
-			_frontendTokenSets.addAll(
-				frontendTokenCategory.getFrontendTokenSets());
+			_frontendTokenMappings.addAll(
+				frontendTokenCategory.getFrontendTokenMappings());
 
 			_frontendTokens.addAll(frontendTokenCategory.getFrontendTokens());
 
-			_frontendTokenMappings.addAll(
-				frontendTokenCategory.getFrontendTokenMappings());
+			_frontendTokenSets.addAll(
+				frontendTokenCategory.getFrontendTokenSets());
 		}
 	}
 
