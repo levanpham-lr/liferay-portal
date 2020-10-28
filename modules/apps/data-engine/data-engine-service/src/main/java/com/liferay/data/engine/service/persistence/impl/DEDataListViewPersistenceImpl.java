@@ -3326,10 +3326,10 @@ public class DEDataListViewPersistenceImpl
 		return finderPath;
 	}
 
-	private ServiceRegistration<ArgumentsResolver>
-		_argumentsResolverServiceRegistration;
 	private Set<ServiceRegistration<FinderPath>> _serviceRegistrations =
 		new HashSet<>();
+	private ServiceRegistration<ArgumentsResolver>
+		_argumentsResolverServiceRegistration;
 
 	private static class DEDataListViewModelArgumentsResolver
 		implements ArgumentsResolver {
