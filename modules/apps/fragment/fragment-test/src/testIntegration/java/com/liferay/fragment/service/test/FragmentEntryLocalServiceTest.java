@@ -820,7 +820,6 @@ public class FragmentEntryLocalServiceTest {
 
 			Assert.assertEquals(
 				fragmentEntries1.toString(), 1, fragmentEntries1.size());
-
 			Assert.assertEquals(fragmentEntry1, fragmentEntries1.get(0));
 
 			FragmentCollection fragmentCollection =
@@ -837,7 +836,6 @@ public class FragmentEntryLocalServiceTest {
 
 			Assert.assertEquals(
 				fragmentEntries2.toString(), 1, fragmentEntries2.size());
-
 			Assert.assertEquals(fragmentEntry2, fragmentEntries2.get(0));
 		}
 		finally {
