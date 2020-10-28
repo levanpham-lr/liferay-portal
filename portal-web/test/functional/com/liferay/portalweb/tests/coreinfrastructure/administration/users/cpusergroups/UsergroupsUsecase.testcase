@@ -265,7 +265,6 @@ definition {
 			userScreenName = "test");
 	}
 
-	@ignore
 	@priority = "4"
 	test UserGroupSiteTemplates {
 		property custom.properties = "jsonws.web.service.paths.excludes=";
