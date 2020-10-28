@@ -23,11 +23,6 @@ import java.util.Objects;
  */
 public interface FrontendToken {
 
-	/**
-	 * Get the default token value
-	 *
-	 * @see Type for a list of valid token values
-	 */
 	public <T> T getDefaultValue();
 
 	public Collection<FrontendTokenMapping> getFrontendTokenMappings();
