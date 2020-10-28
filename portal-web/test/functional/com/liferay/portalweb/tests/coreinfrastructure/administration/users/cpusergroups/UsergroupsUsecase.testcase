@@ -321,8 +321,6 @@ definition {
 
 		UserBar.gotoDropdownItem(dropdownItem = "My Profile");
 
-		var key_pageName = "Home";
-
 		AssertTextPresent(
 			locator1 = "Home#PAGE_1",
 			value1 = "My Profile");
@@ -360,8 +358,6 @@ definition {
 			userEmailAddress = "userea@liferay.com");
 
 		UserBar.gotoDropdownItem(dropdownItem = "My Profile");
-
-		var key_pageName = "Home";
 
 		AssertTextPresent(
 			locator1 = "Home#PAGE_1",
@@ -419,8 +415,6 @@ definition {
 			userEmailAddress = "userea@liferay.com");
 
 		UserBar.gotoDropdownItem(dropdownItem = "My Profile");
-
-		var key_pageName = "Home";
 
 		AssertTextPresent(
 			locator1 = "Home#PAGE_1",
