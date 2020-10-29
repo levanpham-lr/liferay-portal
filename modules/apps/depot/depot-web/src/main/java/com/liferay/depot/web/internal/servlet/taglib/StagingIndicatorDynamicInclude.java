@@ -216,7 +216,6 @@ public class StagingIndicatorDynamicInclude extends BaseDynamicInclude {
 			httpServletRequest, PortletKeys.EXPORT_IMPORT,
 			PortletRequest.RENDER_PHASE);
 
-		liferayPortletURL.setWindowState(LiferayWindowState.POP_UP);
 		liferayPortletURL.setParameter(
 			"mvcRenderCommandName", "publishLayoutsSimple");
 
@@ -254,6 +253,8 @@ public class StagingIndicatorDynamicInclude extends BaseDynamicInclude {
 
 		liferayPortletURL.setParameter(
 			"targetGroupId", String.valueOf(liveGroup.getGroupId()));
+
+		liferayPortletURL.setWindowState(LiferayWindowState.POP_UP);
 
 		return liferayPortletURL.toString();
 	}
