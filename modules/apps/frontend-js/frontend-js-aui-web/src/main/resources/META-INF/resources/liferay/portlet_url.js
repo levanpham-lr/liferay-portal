@@ -305,9 +305,8 @@ AUI.add(
 
 			RESOURCE_PHASE: '2',
 
-			// Note: these are constructor functions so
-			// must not use concise method syntax. See:
-			// https://issues.liferay.com/browse/COMMERCE-5035
+			// These are constructor functions and so must not use the concise
+			// method syntax. See COMMERCE-5035.
 
 			createActionURL: function createActionURL() {
 				return new PortletURL(PortletURL.ACTION_PHASE);
