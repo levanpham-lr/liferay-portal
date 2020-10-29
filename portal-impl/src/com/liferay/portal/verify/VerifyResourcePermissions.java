@@ -204,7 +204,7 @@ public class VerifyResourcePermissions extends VerifyProcess {
 				_log.info(
 					StringBundler.concat(
 						"Processed ", _cur, " of ", _total,
-						" resource permissions for company = ", _companyId,
+						" resource permissions for company ", _companyId,
 						" and model ", _modelName));
 			}
 
