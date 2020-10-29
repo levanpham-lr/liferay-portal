@@ -19,7 +19,8 @@
 			"apps/*/*",
 			"apps/*/*/*",
 			"dxp/apps/*/*",
-			"dxp/apps/*/*/*"
+			"dxp/apps/*/*/*",
+			"dxp/apps/osb/*/*/*"
 		]
 	}
 }
