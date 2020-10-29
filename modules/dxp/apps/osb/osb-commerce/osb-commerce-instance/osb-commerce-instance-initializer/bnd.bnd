@@ -1,0 +1,4 @@
+Bundle-Name: Liferay OSB Commerce Instance Initializer
+Bundle-SymbolicName: com.liferay.osb.commerce.instance.initializer
+Bundle-Version: 1.0.0
+Web-ContextPath: /osb-commerce-instance-initializer

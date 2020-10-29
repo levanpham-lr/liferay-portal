@@ -1,0 +1,5 @@
+Bundle-Name: Liferay OSB Commerce Provisioning Theme Implementation
+Bundle-SymbolicName: com.liferay.osb.commerce.provisioning.theme.impl
+Bundle-Version: 1.0.0
+Liferay-JS-Submodules-Bridge: osb-commerce-provisioning-theme-impl
+Web-ContextPath: /osb-commerce-provisioning-theme-impl

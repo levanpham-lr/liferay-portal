@@ -1,0 +1,8 @@
+apiDir: "../headless-osb-commerce-instance-api/src/main/java"
+apiPackagePath: "com.liferay.headless.osb.commerce.instance"
+application:
+    baseURI: "/headless-osb-commerce-instance"
+    className: "HeadlessOSBCommerceInstanceApplication"
+    name: "Liferay.Headless.OSB.Commerce.Instance"
+author: "Ivica Cardic"
+clientDir: "../../../osb-commerce-provisioning/headless/headless-osb-commerce-instance-client/src/main/java"

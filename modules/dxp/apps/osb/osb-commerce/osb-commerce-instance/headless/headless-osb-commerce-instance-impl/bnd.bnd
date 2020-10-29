@@ -1,0 +1,3 @@
+Bundle-Name: Liferay Headless OSB Commerce Instance Implementation
+Bundle-SymbolicName: com.liferay.headless.osb.commerce.instance.impl
+Bundle-Version: 1.0.0
