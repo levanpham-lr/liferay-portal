@@ -9,7 +9,7 @@
 		"distName": "osb-commerce-provisioning-theme",
 		"rubySass": false,
 		"templateLanguage": "ftl",
-		"version": "7.2"
+		"version": "7.3"
 	},
 	"main": "package.json",
 	"name": "osb-commerce-provisioning-theme",
