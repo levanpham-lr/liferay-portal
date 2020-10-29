@@ -37,7 +37,7 @@ function CartSummary() {
 	const {
 		subtotalFormatted,
 		totalDiscountValueFormatted,
-		totalFormatted
+		totalFormatted,
 	} = summary;
 
 	return (
@@ -73,7 +73,7 @@ function CartSummary() {
 						<span className="input-group-item input-group-item-shrink">
 							<button
 								className="btn btn-secondary"
-								onClick={e => {
+								onClick={(e) => {
 									e.preventDefault();
 								}}
 								type="button"

@@ -21,7 +21,7 @@ function ActivePlan({
 	recurrence,
 	spritemap,
 	startDate,
-	switchBillingURL
+	switchBillingURL,
 }) {
 	return (
 		<div className={'col-12 osb-commerce-active-plan py-5'}>
@@ -94,7 +94,7 @@ ActivePlan.propTypes = {
 	planPrice: PropTypes.string,
 	spritemap: PropTypes.string,
 	startDate: PropTypes.string,
-	switchBillingLink: PropTypes.string
+	switchBillingLink: PropTypes.string,
 };
 
 export default ActivePlan;

@@ -18,7 +18,7 @@ function CardListRenderer({
 	commerceAccountId = GUEST_ID,
 	cpEntries,
 	checkoutURL,
-	portletNamespace
+	portletNamespace,
 }) {
 	return (
 		<div className={'align-items-center d-flex'}>

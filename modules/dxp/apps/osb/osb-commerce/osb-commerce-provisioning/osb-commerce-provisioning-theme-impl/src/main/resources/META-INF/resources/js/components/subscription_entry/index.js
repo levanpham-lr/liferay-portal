@@ -18,7 +18,7 @@ function SubscriptionEntry({
 	features,
 	name,
 	productImageURL: imageURL,
-	spritemap
+	spritemap,
 }) {
 	return (
 		<div className={'subscription-entry'}>
@@ -69,8 +69,8 @@ SubscriptionEntry.defaultProps = {
 		'This is an amazing feature',
 		'This is an amazing feature with a super long text',
 		'This is yet another cool feature',
-		'And much more. No, really. I mean it.'
-	]
+		'And much more. No, really. I mean it.',
+	],
 };
 
 SubscriptionEntry.propTypes = {
@@ -79,7 +79,7 @@ SubscriptionEntry.propTypes = {
 	name: PropTypes.string,
 	productImageURL: PropTypes.string,
 	skuId: PropTypes.string,
-	spritemap: PropTypes.string
+	spritemap: PropTypes.string,
 };
 
 export default SubscriptionEntry;

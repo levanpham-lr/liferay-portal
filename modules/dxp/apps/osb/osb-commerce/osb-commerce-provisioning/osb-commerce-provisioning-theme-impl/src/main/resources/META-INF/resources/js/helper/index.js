@@ -30,7 +30,7 @@ export function addToOrder(commerceAccountId, productId, options = '[]') {
 
 	return fetch(ADD_TO_ORDER_ENDPOINT, {body: formData, method: 'POST'})
 		.then(({ok}) => (ok ? Promise.resolve() : Promise.reject()))
-		.catch(error => {
+		.catch((error) => {
 			console.error(error);
 		});
 }

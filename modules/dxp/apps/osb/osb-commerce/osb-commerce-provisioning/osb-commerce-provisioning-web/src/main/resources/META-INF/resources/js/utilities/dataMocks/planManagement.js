@@ -18,7 +18,7 @@ const planManagementMock = {
 		planPrice: '20.000',
 		recurrence: 'year',
 		startDate: new Date().toDateString(),
-		switchBillingURL: 'http://someUrl.com'
+		switchBillingURL: 'http://someUrl.com',
 	},
 
 	planFeatures: {
@@ -28,36 +28,36 @@ const planManagementMock = {
 					'This is an amazing description of the above Cool Feature',
 				id: `feature-${Math.floor(Math.random() * Math.floor(1000))}`,
 				name: 'Some Cool Feature',
-				toggleURL: 'http://someToggleURL.com'
+				toggleURL: 'http://someToggleURL.com',
 			},
 			{
 				description:
 					'This is an amazing description of the above Cool Feature',
 				id: `feature-${Math.floor(Math.random() * Math.floor(1000))}`,
 				name: 'Some Cool Feature',
-				toggleURL: 'http://someToggleURL.com'
+				toggleURL: 'http://someToggleURL.com',
 			},
 			{
 				description:
 					'This is an amazing description of the above Cool Feature',
 				id: `feature-${Math.floor(Math.random() * Math.floor(1000))}`,
 				name: 'Some Cool Feature',
-				toggleURL: 'http://someToggleURL.com'
+				toggleURL: 'http://someToggleURL.com',
 			},
 			{
 				description:
 					'This is an amazing description of the above Cool Feature',
 				id: `feature-${Math.floor(Math.random() * Math.floor(1000))}`,
 				name: 'Some Cool Feature',
-				toggleURL: 'http://someToggleURL.com'
+				toggleURL: 'http://someToggleURL.com',
 			},
 			{
 				description:
 					'This is an amazing description of the above Cool Feature',
 				id: `feature-${Math.floor(Math.random() * Math.floor(1000))}`,
 				name: 'Some Cool Feature',
-				toggleURL: 'http://someToggleURL.com'
-			}
+				toggleURL: 'http://someToggleURL.com',
+			},
 		],
 		inactiveFeatures: [
 			{
@@ -65,33 +65,33 @@ const planManagementMock = {
 					'This is an amazing description of the above Cool Feature',
 				id: `feature-${Math.floor(Math.random() * Math.floor(1000))}`,
 				name: 'Some Cool Feature',
-				toggleURL: 'http://someToggleURL.com'
+				toggleURL: 'http://someToggleURL.com',
 			},
 			{
 				description:
 					'This is an amazing description of the above Cool Feature',
 				id: `feature-${Math.floor(Math.random() * Math.floor(1000))}`,
 				name: 'Some Cool Feature',
-				toggleURL: 'http://someToggleURL.com'
+				toggleURL: 'http://someToggleURL.com',
 			},
 			{
 				description:
 					'This is an amazing description of the above Cool Feature',
 				id: `feature-${Math.floor(Math.random() * Math.floor(1000))}`,
 				name: 'Some Cool Feature',
-				toggleURL: 'http://someToggleURL.com'
+				toggleURL: 'http://someToggleURL.com',
 			},
 			{
 				description:
 					'This is an amazing description of the above Cool Feature',
 				id: `feature-${Math.floor(Math.random() * Math.floor(1000))}`,
 				name: 'Some Cool Feature',
-				toggleURL: 'http://someToggleURL.com'
-			}
-		]
+				toggleURL: 'http://someToggleURL.com',
+			},
+		],
 	},
 
-	spritemap: ''
+	spritemap: '',
 };
 
 export default planManagementMock;

@@ -82,19 +82,19 @@ String userFirstName = ParamUtil.getString(request, "userFirstName");
 </portlet:renderURL>
 
 <aui:script use="aui-base">
-	setTimeout(function() {
+	setTimeout(function () {
 		function callOnTimeOut() {
 			var resourceURL = '<%= portalInstanceStatusResourceURL %>';
 
 			fetch(resourceURL, {
 				credentials: 'include',
 				headers: new Headers({'x-csrf-token': Liferay.authToken}),
-				method: 'post'
+				method: 'post',
 			})
-				.then(function(res) {
+				.then(function (res) {
 					return res.json();
 				})
-				.then(function(payload) {
+				.then(function (payload) {
 					if (payload.status === 0) {
 						window.location = '<%= portalInstanceInitializedURL %>';
 					}
@@ -105,7 +105,7 @@ String userFirstName = ParamUtil.getString(request, "userFirstName");
 						).show();
 					}
 					else {
-						setTimeout(function() {
+						setTimeout(function () {
 							callOnTimeOut();
 						}, 5000);
 					}

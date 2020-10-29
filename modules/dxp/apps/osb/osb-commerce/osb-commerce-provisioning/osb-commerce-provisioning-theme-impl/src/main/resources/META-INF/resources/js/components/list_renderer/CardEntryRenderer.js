@@ -46,7 +46,7 @@ function CardEntryRenderer({
 		const cardEntryElement = cardEntryRef.current,
 			onHover = () =>
 				Liferay.fire(`${namespace}_${PRODUCT_HIGHLIGHT}`, {
-					id: productId
+					id: productId,
 				}),
 			onOut = () =>
 				Liferay.fire(`${namespace}_${PRODUCT_HIGHLIGHT}`, {id: ''});
