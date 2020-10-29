@@ -151,9 +151,9 @@ public abstract class BaseClientImpl implements Client {
 	}
 
 	protected String getBasicAuthorizationHeader(
-		String password, String username) {
+		String password, String userName) {
 
-		String authorization = username + ":" + password;
+		String authorization = userName + ":" + password;
 
 		String encodedAuthorization = Base64.encode(
 			authorization.getBytes(StandardCharsets.ISO_8859_1));

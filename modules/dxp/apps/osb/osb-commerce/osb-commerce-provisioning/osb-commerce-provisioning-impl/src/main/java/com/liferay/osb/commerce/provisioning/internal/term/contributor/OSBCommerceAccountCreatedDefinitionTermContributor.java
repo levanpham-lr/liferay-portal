@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.CompanyLocalService;
+import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -123,14 +124,11 @@ public class OSBCommerceAccountCreatedDefinitionTermContributor
 		"[%PROVISIONING_SITE_URL%]";
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
-		new HashMap<String, String>() {
-			{
-				put(_ACCOUNT_NAME, "account-name-definition-term");
-				put(
-					_PROVISIONING_SITE_URL,
-					"provisioning-site-url-definition-term");
-			}
-		};
+		HashMapBuilder.put(
+			_ACCOUNT_NAME, "account-name-definition-term"
+		).put(
+			_PROVISIONING_SITE_URL, "provisioning-site-url-definition-term"
+		).build();
 
 	@Reference
 	private CompanyLocalService _companyLocalService;

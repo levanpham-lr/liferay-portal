@@ -170,11 +170,11 @@ public class OSBCommerceProvisioningSiteInitializer implements SiteInitializer {
 			ServiceContext serviceContext)
 		throws Exception {
 
-		Enumeration<URL> urls = _bundle.findEntries(
+		Enumeration<URL> urlEnumeration = _bundle.findEntries(
 			_PATH + "images", StringPool.STAR, false);
 
-		while (urls.hasMoreElements()) {
-			URL url = urls.nextElement();
+		while (urlEnumeration.hasMoreElements()) {
+			URL url = urlEnumeration.nextElement();
 
 			byte[] bytes = null;
 
@@ -194,7 +194,7 @@ public class OSBCommerceProvisioningSiteInitializer implements SiteInitializer {
 
 	private FragmentCollection _addFragmentCollection(
 			ServiceContext serviceContext)
-		throws PortalException {
+		throws Exception {
 
 		return _fragmentCollectionLocalService.addFragmentCollection(
 			serviceContext.getUserId(), serviceContext.getScopeGroupId(),
@@ -311,7 +311,7 @@ public class OSBCommerceProvisioningSiteInitializer implements SiteInitializer {
 
 	private LayoutPageTemplateCollection _addLayoutPageTemplateCollection(
 			ServiceContext serviceContext)
-		throws PortalException {
+		throws Exception {
 
 		return _layoutPageTemplateCollectionLocalService.
 			addLayoutPageTemplateCollection(

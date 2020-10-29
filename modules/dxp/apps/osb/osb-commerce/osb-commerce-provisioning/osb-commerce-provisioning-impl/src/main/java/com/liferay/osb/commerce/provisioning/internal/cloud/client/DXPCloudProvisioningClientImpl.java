@@ -35,24 +35,24 @@ public class DXPCloudProvisioningClientImpl
 	extends BaseClientImpl implements DXPCloudProvisioningClient {
 
 	public DXPCloudProvisioningClientImpl(
-		String dxpCloudAPIURL, String password, String username) {
+		String dxpCloudAPIURL, String password, String userName) {
 
 		_dxpCloudAPIURL = dxpCloudAPIURL;
 		_password = password;
-		_username = username;
+		_userName = userName;
 	}
 
 	@Override
 	public void deletePortalInstance(String portalInstanceId) {
 		executeDelete(
-			getBasicAuthorizationHeader(_password, _username),
+			getBasicAuthorizationHeader(_password, _userName),
 			_getProvisioningPortalInstancesURI(portalInstanceId));
 	}
 
 	@Override
 	public PortalInstance getPortalInstance(String portalInstanceId) {
 		return executeGet(
-			getBasicAuthorizationHeader(_password, _username),
+			getBasicAuthorizationHeader(_password, _userName),
 			_getProvisioningPortalInstancesURI(portalInstanceId),
 			PortalInstance.class);
 	}
@@ -60,7 +60,7 @@ public class DXPCloudProvisioningClientImpl
 	@Override
 	public List<PortalInstance> getPortalInstances() {
 		return executeGet(
-			getBasicAuthorizationHeader(_password, _username),
+			getBasicAuthorizationHeader(_password, _userName),
 			new TypeReference<List<PortalInstance>>() {
 			},
 			_getProvisioningPortalInstancesURI());
@@ -79,7 +79,7 @@ public class DXPCloudProvisioningClientImpl
 			URI uri = uriBuilder.build();
 
 			return executePost(
-				getBasicAuthorizationHeader(_password, _username),
+				getBasicAuthorizationHeader(_password, _userName),
 				HashMapBuilder.put(
 					"domain", domain
 				).build(),
@@ -95,7 +95,7 @@ public class DXPCloudProvisioningClientImpl
 		String domain, String portalInstanceId) {
 
 		return executeUpdate(
-			getBasicAuthorizationHeader(_password, _username),
+			getBasicAuthorizationHeader(_password, _userName),
 			HashMapBuilder.put(
 				"domain", domain
 			).build(),
@@ -118,6 +118,6 @@ public class DXPCloudProvisioningClientImpl
 
 	private final String _dxpCloudAPIURL;
 	private final String _password;
-	private final String _username;
+	private final String _userName;
 
 }

@@ -62,12 +62,12 @@ public class OSBCommerceThemeHttpHelper {
 			return false;
 		}
 
-		UnicodeProperties subscriptionTypeSettingsProperties =
+		UnicodeProperties subscriptionTypeSettingsUnicodeProperties =
 			commerceSubscriptionEntry.getSubscriptionTypeSettingsProperties();
 
 		OSBCommercePortalInstanceStatus portalInstanceStatus =
 			OSBCommercePortalInstanceStatus.parse(
-				subscriptionTypeSettingsProperties.get(
+				subscriptionTypeSettingsUnicodeProperties.get(
 					OSBCommercePortalInstanceConstants.PORTAL_INSTANCE_STATUS));
 
 		if ((OSBCommercePortalInstanceStatus.ACTIVE == portalInstanceStatus) ||

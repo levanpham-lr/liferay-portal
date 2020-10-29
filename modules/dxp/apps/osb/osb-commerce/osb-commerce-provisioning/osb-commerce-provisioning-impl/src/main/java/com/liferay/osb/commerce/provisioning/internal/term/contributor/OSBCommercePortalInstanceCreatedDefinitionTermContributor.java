@@ -22,6 +22,7 @@ import com.liferay.osb.commerce.provisioning.constants.OSBCommercePortalInstance
 import com.liferay.osb.commerce.provisioning.util.OSBCommercePortalInstance;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
@@ -78,12 +79,12 @@ public class OSBCommercePortalInstanceCreatedDefinitionTermContributor
 			CommerceSubscriptionEntry commerceSubscriptionEntry =
 				(CommerceSubscriptionEntry)object;
 
-			UnicodeProperties subscriptionTypeSettingsProperties =
+			UnicodeProperties subscriptionTypeSettingsUnicodeProperties =
 				commerceSubscriptionEntry.
 					getSubscriptionTypeSettingsProperties();
 
 			return _osbCommercePortalInstance.getPortalInstanceURL(
-				subscriptionTypeSettingsProperties.get(
+				subscriptionTypeSettingsUnicodeProperties.get(
 					OSBCommercePortalInstanceConstants.
 						PORTAL_INSTANCE_VIRTUAL_HOSTNAME));
 		}
@@ -109,13 +110,9 @@ public class OSBCommercePortalInstanceCreatedDefinitionTermContributor
 		"[%PORTAL_INSTANCE_URL%]";
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
-		new HashMap<String, String>() {
-			{
-				put(
-					_PORTAL_INSTANCE_URL,
-					"portal-instance-url-definition-term");
-			}
-		};
+		HashMapBuilder.put(
+			_PORTAL_INSTANCE_URL, "portal-instance-url-definition-term"
+		).build();
 
 	@Reference
 	private OSBCommercePortalInstance _osbCommercePortalInstance;

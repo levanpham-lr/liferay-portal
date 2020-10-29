@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -155,16 +156,12 @@ public class OSBCommercePortalInstanceCreatedRecipientDefinitionTermContributor
 		"[%PORTAL_INSTANCE_CREATOR%]";
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
-		new HashMap<String, String>() {
-			{
-				put(
-					_ACCOUNT_ROLE_ADMINISTRATOR,
-					"account-role-administrator-definition-term");
-				put(
-					_PORTAL_INSTANCE_CREATOR,
-					"portal-instance-creator-definition-term");
-			}
-		};
+		HashMapBuilder.put(
+			_ACCOUNT_ROLE_ADMINISTRATOR,
+			"account-role-administrator-definition-term"
+		).put(
+			_PORTAL_INSTANCE_CREATOR, "portal-instance-creator-definition-term"
+		).build();
 
 	@Reference
 	private CommerceAccountUserRelLocalService

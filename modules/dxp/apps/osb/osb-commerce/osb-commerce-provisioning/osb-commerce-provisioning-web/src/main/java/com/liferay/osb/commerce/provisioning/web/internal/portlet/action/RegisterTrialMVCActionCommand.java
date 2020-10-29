@@ -60,8 +60,6 @@ import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 
-import java.io.IOException;
-
 import java.math.BigDecimal;
 
 import java.util.concurrent.Callable;
@@ -316,7 +314,7 @@ public class RegisterTrialMVCActionCommand extends BaseMVCActionCommand {
 	private void _sendRedirect(
 			ActionResponse actionResponse, long commerceOrderItemId,
 			String name)
-		throws IOException {
+		throws Exception {
 
 		String userFirstName = name.split(" ")[0];
 

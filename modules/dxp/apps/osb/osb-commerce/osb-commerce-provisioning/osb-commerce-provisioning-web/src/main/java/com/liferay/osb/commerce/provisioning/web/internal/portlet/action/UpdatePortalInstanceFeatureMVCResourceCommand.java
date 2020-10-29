@@ -56,18 +56,18 @@ public class UpdatePortalInstanceFeatureMVCResourceCommand
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
 			_getCommerceSubscriptionEntry(commerceSubscriptionEntryId);
 
-		UnicodeProperties properties =
+		UnicodeProperties unicodeProperties =
 			commerceSubscriptionEntry.getSubscriptionTypeSettingsProperties();
 
 		if (active) {
-			properties.put(featureName, String.valueOf(featureName));
+			unicodeProperties.put(featureName, String.valueOf(featureName));
 		}
 		else {
-			properties.remove(featureName);
+			unicodeProperties.remove(featureName);
 		}
 
 		commerceSubscriptionEntry.setSubscriptionTypeSettingsProperties(
-			properties);
+			unicodeProperties);
 
 		_commerceSubscriptionEntryLocalService.updateCommerceSubscriptionEntry(
 			commerceSubscriptionEntry);

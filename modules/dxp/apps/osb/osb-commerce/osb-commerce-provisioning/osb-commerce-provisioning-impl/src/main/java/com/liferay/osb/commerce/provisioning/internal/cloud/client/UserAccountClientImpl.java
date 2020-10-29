@@ -33,7 +33,7 @@ public class UserAccountClientImpl
 		String osbCommerceInstanceOAuthClientSecret,
 		String osbCommerceInstancePassword, int osbCommerceInstancePort,
 		String osbCommerceInstanceProtocol,
-		String osbCommerceInstanceUsername) {
+		String osbCommerceInstanceUserName) {
 
 		_osbCommerceInstanceDomainName = osbCommerceInstanceDomainName;
 		_osbCommerceInstanceOauthClientId = osbCommerceInstanceOauthClientId;
@@ -42,7 +42,7 @@ public class UserAccountClientImpl
 		_osbCommerceInstancePassword = osbCommerceInstancePassword;
 		_osbCommerceInstancePort = osbCommerceInstancePort;
 		_osbCommerceInstanceProtocol = osbCommerceInstanceProtocol;
-		_osbCommerceInstanceUsername = osbCommerceInstanceUsername;
+		_osbCommerceInstanceUserName = osbCommerceInstanceUserName;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class UserAccountClientImpl
 
 		if (Validator.isNull(_osbCommerceInstanceOauthClientId)) {
 			authorizationHeader = getBasicAuthorizationHeader(
-				_osbCommerceInstancePassword, _osbCommerceInstanceUsername);
+				_osbCommerceInstancePassword, _osbCommerceInstanceUserName);
 		}
 		else {
 			authorizationHeader = getBearerAuthorizationHeader(
@@ -92,6 +92,6 @@ public class UserAccountClientImpl
 	private final String _osbCommerceInstancePassword;
 	private final int _osbCommerceInstancePort;
 	private final String _osbCommerceInstanceProtocol;
-	private final String _osbCommerceInstanceUsername;
+	private final String _osbCommerceInstanceUserName;
 
 }

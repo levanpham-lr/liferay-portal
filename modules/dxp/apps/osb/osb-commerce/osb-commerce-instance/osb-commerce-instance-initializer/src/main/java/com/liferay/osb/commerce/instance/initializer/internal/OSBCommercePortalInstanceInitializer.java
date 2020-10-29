@@ -47,13 +47,12 @@ import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.site.initializer.SiteInitializer;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
@@ -153,18 +152,12 @@ public class OSBCommercePortalInstanceInitializer
 	}
 
 	private long _addOSBCommerceSiteGroup(long companyId) throws Exception {
-		Map<Locale, String> nameMap = new HashMap<>();
-
-		nameMap.put(LocaleUtil.getDefault(), "OSB Commerce");
-
-		Map<Locale, String> descriptionMap = new HashMap<>();
-
-		descriptionMap.put(LocaleUtil.getDefault(), StringPool.BLANK);
-
 		Group group = _groupLocalService.addGroup(
 			_getDefaultUserId(companyId),
-			GroupConstants.DEFAULT_PARENT_GROUP_ID, null, 0, 0, nameMap,
-			descriptionMap, GroupConstants.TYPE_SITE_OPEN, true,
+			GroupConstants.DEFAULT_PARENT_GROUP_ID, null, 0, 0,
+			Collections.singletonMap(LocaleUtil.getDefault(), "OSB Commerce"),
+			Collections.singletonMap(LocaleUtil.getDefault(), StringPool.BLANK),
+			GroupConstants.TYPE_SITE_OPEN, true,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, true, true,
 			_getDefaultServiceContext(companyId));
 
@@ -227,42 +220,38 @@ public class OSBCommercePortalInstanceInitializer
 		"OSB Commerce Administrator";
 
 	private static final Map<String, String[]> _actionIdMap =
-		new HashMap<String, String[]>() {
-			{
-				put(
-					CPPortletKeys.COMMERCE_INVENTORY,
-					new String[] {ActionKeys.ACCESS_IN_CONTROL_PANEL});
-				put(
-					PortletKeys.PORTAL,
-					new String[] {
-						CommerceAccountActionKeys.ADD_ACCOUNT,
-						CommerceAccountActionKeys.ADD_ACCOUNT_GROUP,
-						CPActionKeys.ADD_COMMERCE_CATALOG,
-						CPActionKeys.ADD_COMMERCE_CHANNEL,
-						CommerceDiscountActionKeys.ADD_COMMERCE_DISCOUNT,
-						CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION,
-						CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION_CATEGORY,
-						CPActionKeys.ADD_COMMERCE_PRODUCT_SPECIFICATION_OPTION,
-						CommerceInventoryActionKeys.ADD_WAREHOUSE,
-						CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS,
-						CommerceAccountActionKeys.MANAGE_AVAILABLE_ACCOUNTS,
-						CommerceActionKeys.
-							MANAGE_COMMERCE_AVAILABILITY_ESTIMATES,
-						CommerceActionKeys.MANAGE_COMMERCE_COUNTRIES,
-						CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES,
-						CommerceActionKeys.MANAGE_COMMERCE_ORDER_PRICES,
-						CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS,
-						CPActionKeys.MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES,
-						CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS,
-						CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS,
-						CommerceInventoryActionKeys.MANAGE_INVENTORY,
-						CommerceAccountActionKeys.VIEW_COMMERCE_ACCOUNT_GROUPS,
-						"VIEW_COMMERCE_CATALOGS", "VIEW_COMMERCE_CHANNELS",
-						ActionKeys.VIEW_CONTROL_PANEL,
-						CommerceDiscountActionKeys.VIEW_COMMERCE_DISCOUNTS
-					});
+		HashMapBuilder.put(
+			CPPortletKeys.COMMERCE_INVENTORY,
+			new String[] {ActionKeys.ACCESS_IN_CONTROL_PANEL}
+		).put(
+			PortletKeys.PORTAL,
+			new String[] {
+				CommerceAccountActionKeys.ADD_ACCOUNT,
+				CommerceAccountActionKeys.ADD_ACCOUNT_GROUP,
+				CPActionKeys.ADD_COMMERCE_CATALOG,
+				CPActionKeys.ADD_COMMERCE_CHANNEL,
+				CommerceDiscountActionKeys.ADD_COMMERCE_DISCOUNT,
+				CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION,
+				CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION_CATEGORY,
+				CPActionKeys.ADD_COMMERCE_PRODUCT_SPECIFICATION_OPTION,
+				CommerceInventoryActionKeys.ADD_WAREHOUSE,
+				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS,
+				CommerceAccountActionKeys.MANAGE_AVAILABLE_ACCOUNTS,
+				CommerceActionKeys.MANAGE_COMMERCE_AVAILABILITY_ESTIMATES,
+				CommerceActionKeys.MANAGE_COMMERCE_COUNTRIES,
+				CommerceCurrencyActionKeys.MANAGE_COMMERCE_CURRENCIES,
+				CommerceActionKeys.MANAGE_COMMERCE_ORDER_PRICES,
+				CPActionKeys.MANAGE_COMMERCE_PRODUCT_MEASUREMENT_UNITS,
+				CPActionKeys.MANAGE_COMMERCE_PRODUCT_TAX_CATEGORIES,
+				CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS,
+				CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS,
+				CommerceInventoryActionKeys.MANAGE_INVENTORY,
+				CommerceAccountActionKeys.VIEW_COMMERCE_ACCOUNT_GROUPS,
+				"VIEW_COMMERCE_CATALOGS", "VIEW_COMMERCE_CHANNELS",
+				ActionKeys.VIEW_CONTROL_PANEL,
+				CommerceDiscountActionKeys.VIEW_COMMERCE_DISCOUNTS
 			}
-		};
+		).build();
 
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;

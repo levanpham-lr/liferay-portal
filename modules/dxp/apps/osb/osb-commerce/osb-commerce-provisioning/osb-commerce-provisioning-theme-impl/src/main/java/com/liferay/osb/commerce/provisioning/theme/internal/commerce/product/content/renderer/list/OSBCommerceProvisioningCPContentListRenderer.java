@@ -137,11 +137,13 @@ public class OSBCommerceProvisioningCPContentListRenderer
 	}
 
 	private Map<String, Object> _getCPEntryMap(
-			CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
+			CPCatalogEntry cpCatalogEntry,
+			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		List<CPSku> cpSkus = cpCatalogEntry.getCPSkus();
 

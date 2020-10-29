@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.util.Portal;
 import java.text.Format;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,12 +65,11 @@ public class PlanManagementDisplayContext {
 	public Map<String, Object> getPlanManagementData(ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		return new HashMap<String, Object>() {
-			{
-				put("activePlan", _getActivePlanData(themeDisplay));
-				put("spritemap", _getSpritemap(themeDisplay));
-			}
-		};
+		return HashMapBuilder.<String, Object>put(
+			"activePlan", _getActivePlanData(themeDisplay)
+		).put(
+			"spritemap", _getSpritemap(themeDisplay)
+		).build();
 	}
 
 	private Map<String, Object> _getActivePlanData(ThemeDisplay themeDisplay)
@@ -91,8 +89,6 @@ public class PlanManagementDisplayContext {
 			_commerceOrderItemLocalService.getCommerceOrderItem(
 				commerceSubscriptionEntry.getCommerceOrderItemId());
 
-		CommerceMoney commerceMoney = commerceOrderItem.getFinalPriceMoney();
-
 		return HashMapBuilder.<String, Object>put(
 			"cancelPlanURL",
 			_getCancelSubscriptionURL(commerceSubscriptionEntry)
@@ -102,7 +98,13 @@ public class PlanManagementDisplayContext {
 		).put(
 			"planName", commerceOrderItem.getName(themeDisplay.getLocale())
 		).put(
-			"planPrice", commerceMoney.format(themeDisplay.getLocale())
+			"planPrice",
+			() -> {
+				CommerceMoney commerceMoney =
+					commerceOrderItem.getFinalPriceMoney();
+
+				return commerceMoney.format(themeDisplay.getLocale());
+			}
 		).put(
 			"recurrence", commerceSubscriptionEntry.getSubscriptionType()
 		).put(

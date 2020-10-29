@@ -34,7 +34,6 @@ import com.liferay.osb.commerce.provisioning.internal.cloud.client.UserAccountCl
 import com.liferay.osb.commerce.provisioning.internal.cloud.client.UserAccountClientFactory;
 import com.liferay.osb.commerce.provisioning.internal.cloud.client.dto.PortalInstance;
 import com.liferay.petra.string.CharPool;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.GroupLocalService;
@@ -122,9 +121,7 @@ public class OSBCommerceProvisioning {
 		_userAccountClient.destroy();
 	}
 
-	private long _getCommerceChannelGroupId(long companyId)
-		throws PortalException {
-
+	private long _getCommerceChannelGroupId(long companyId) throws Exception {
 		Group osbCommerceProvisioningSiteGroup =
 			_groupLocalService.getFriendlyURLGroup(
 				companyId,
@@ -172,7 +169,7 @@ public class OSBCommerceProvisioning {
 			commerceSubscriptionEntry);
 	}
 
-	private UserAccount _toUserAccount(User user) throws PortalException {
+	private UserAccount _toUserAccount(User user) throws Exception {
 		return new UserAccount() {
 			{
 				birthDate = user.getBirthday();
@@ -195,16 +192,16 @@ public class OSBCommerceProvisioning {
 	private CommerceSubscriptionEntry _updateSubscriptionTypeSettingsProperties(
 		CommerceSubscriptionEntry commerceSubscriptionEntry, String... values) {
 
-		UnicodeProperties subscriptionTypeSettingsProperties =
+		UnicodeProperties subscriptionTypeSettingsUnicodeProperties =
 			commerceSubscriptionEntry.getSubscriptionTypeSettingsProperties();
 
 		for (int i = 0; i < values.length; i += 2) {
-			subscriptionTypeSettingsProperties.setProperty(
+			subscriptionTypeSettingsUnicodeProperties.setProperty(
 				values[i], values[i + 1]);
 		}
 
 		commerceSubscriptionEntry.setSubscriptionTypeSettingsProperties(
-			subscriptionTypeSettingsProperties);
+			subscriptionTypeSettingsUnicodeProperties);
 
 		return _commerceSubscriptionEntryLocalService.
 			updateCommerceSubscriptionEntry(commerceSubscriptionEntry);

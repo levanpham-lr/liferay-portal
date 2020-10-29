@@ -22,6 +22,7 @@ import com.liferay.osb.commerce.provisioning.constants.OSBCommerceNotificationCo
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.ArrayList;
@@ -105,10 +106,8 @@ public class OSBCommerceAccountCreatedRecipientDefinitionTermContributor
 	private static final String _ACCOUNT_CREATOR = "[%ACCOUNT_CREATOR%]";
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
-		new HashMap<String, String>() {
-			{
-				put(_ACCOUNT_CREATOR, "account-creator-definition-term");
-			}
-		};
+		HashMapBuilder.put(
+			_ACCOUNT_CREATOR, "account-creator-definition-term"
+		).build();
 
 }
