@@ -92,8 +92,6 @@ if (fileEntry == null) {
 else {
 	dlEditFileEntryDisplayContext = dlDisplayContextProvider.getDLEditFileEntryDisplayContext(request, response, fileEntry);
 }
-
-String defaultLanguageId = LocaleUtil.toLanguageId(LocaleUtil.getSiteDefault());
 %>
 
 <portlet:actionURL name="/document_library/upload_multiple_file_entries" var="uploadMultipleFileEntriesURL" />
@@ -133,6 +131,11 @@ String defaultLanguageId = LocaleUtil.toLanguageId(LocaleUtil.getSiteDefault());
 					title="document-type"
 				>
 					<aui:input name="fileEntryTypeId" type="hidden" value="<%= (fileEntryTypeId > 0) ? fileEntryTypeId : 0 %>" />
+
+					<%
+					String defaultLanguageId = LocaleUtil.toLanguageId(LocaleUtil.getSiteDefault());
+					%>
+
 					<aui:input name="defaultLanguageId" type="hidden" value="<%= defaultLanguageId %>" />
 
 					<div class="document-type-selector" id="<portlet:namespace />documentTypeSelector">
