@@ -12,7 +12,7 @@
  *
  */
 
-package com.liferay.osb.commerce.provisioning.theme.internal.theme.contributor;
+package com.liferay.osb.commerce.provisioning.theme.internal.theme.contributor.template;
 
 import com.liferay.osb.commerce.provisioning.theme.internal.helper.OSBCommerceThemeHttpHelper;
 import com.liferay.portal.kernel.template.TemplateContextContributor;
