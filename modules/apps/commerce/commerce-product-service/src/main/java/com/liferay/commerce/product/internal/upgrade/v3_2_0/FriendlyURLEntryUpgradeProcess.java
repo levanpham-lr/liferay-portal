@@ -54,7 +54,7 @@ public class FriendlyURLEntryUpgradeProcess extends UpgradeProcess {
 
 		try (PreparedStatement ps1 = connection.prepareStatement(
 				StringBundler.concat(
-					"select * from FriendlyURLEntry where classNameId in(",
+					"select * from FriendlyURLEntry where classNameId in (",
 					String.valueOf(assetCategoryClassNameId), ",",
 					String.valueOf(cProductClassNameId), ")"));
 			PreparedStatement ps2 =
