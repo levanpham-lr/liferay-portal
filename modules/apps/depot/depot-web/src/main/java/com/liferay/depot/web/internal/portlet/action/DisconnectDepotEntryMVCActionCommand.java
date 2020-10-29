@@ -14,16 +14,12 @@
 
 package com.liferay.depot.web.internal.portlet.action;
 
-import com.liferay.depot.exception.DepotEntryGroupRelStagedGroupException;
 import com.liferay.depot.service.DepotEntryGroupRelService;
 import com.liferay.depot.web.internal.constants.DepotPortletKeys;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
-import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
-
-import java.io.IOException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -38,41 +34,19 @@ import org.osgi.service.component.annotations.Reference;
 	property = {
 		"javax.portlet.name=" + DepotPortletKeys.DEPOT_ADMIN,
 		"javax.portlet.name=" + DepotPortletKeys.DEPOT_SETTINGS,
-		"mvc.command.name=/depot/connect_site"
+		"mvc.command.name=/depot/disconnect_depot_entry"
 	},
 	service = MVCActionCommand.class
 )
-public class ConnectSiteMVCActionCommand extends BaseMVCActionCommand {
+public class DisconnectDepotEntryMVCActionCommand extends BaseMVCActionCommand {
 
 	@Override
 	protected void doProcessAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws IOException, PortalException {
+		throws PortalException {
 
-		long depotEntryId = ParamUtil.getLong(actionRequest, "depotEntryId");
-		long toGroupId = ParamUtil.getLong(actionRequest, "toGroupId");
-
-		try {
-			_depotEntryGroupRelService.addDepotEntryGroupRel(
-				depotEntryId, toGroupId);
-		}
-		catch (Exception exception) {
-			Throwable throwable = exception.getCause();
-
-			if (throwable instanceof DepotEntryGroupRelStagedGroupException) {
-				SessionErrors.add(
-					actionRequest, DepotEntryGroupRelStagedGroupException.class,
-					throwable);
-
-				hideDefaultErrorMessage(actionRequest);
-
-				actionResponse.sendRedirect(
-					ParamUtil.getString(actionRequest, "redirect"));
-			}
-			else {
-				throw exception;
-			}
-		}
+		_depotEntryGroupRelService.deleteDepotEntryGroupRel(
+			ParamUtil.getLong(actionRequest, "depotEntryGroupRelId"));
 	}
 
 	@Reference
