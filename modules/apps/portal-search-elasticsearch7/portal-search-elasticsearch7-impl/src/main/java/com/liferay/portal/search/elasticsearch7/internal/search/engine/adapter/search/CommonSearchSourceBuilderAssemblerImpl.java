@@ -133,8 +133,7 @@ public class CommonSearchSourceBuilderAssemblerImpl
 		QueryBuilder queryBuilder, List<ComplexQueryPart> complexQueryParts) {
 
 		List<ComplexQueryPart> additiveComplexQueryParts = new ArrayList<>();
-
-		List<ComplexQueryPart> noneAdditiveComplexQueryParts =
+		List<ComplexQueryPart> nonadditiveComplexQueryParts =
 			new ArrayList<>();
 
 		for (ComplexQueryPart complexQueryPart : complexQueryParts) {
@@ -142,12 +141,12 @@ public class CommonSearchSourceBuilderAssemblerImpl
 				additiveComplexQueryParts.add(complexQueryPart);
 			}
 			else {
-				noneAdditiveComplexQueryParts.add(complexQueryPart);
+				nonadditiveComplexQueryParts.add(complexQueryPart);
 			}
 		}
 
 		QueryBuilder queryBuilder1 = combine(
-			translate(noneAdditiveComplexQueryParts), queryBuilder,
+			translate(nonadditiveComplexQueryParts), queryBuilder,
 			BoolQueryBuilder::must);
 
 		return combine(
