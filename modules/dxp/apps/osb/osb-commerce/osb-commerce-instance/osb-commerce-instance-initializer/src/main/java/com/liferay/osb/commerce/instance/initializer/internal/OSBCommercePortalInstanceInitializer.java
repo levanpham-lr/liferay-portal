@@ -22,9 +22,10 @@ import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.discount.constants.CommerceDiscountActionKeys;
 import com.liferay.commerce.inventory.constants.CommerceInventoryActionKeys;
 import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolver;
 import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolverThreadLocal;
+import com.liferay.osb.commerce.instance.initializer.internal.constants.OSBCommerceInstanceInitializerConstants;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.instances.exception.InitializationException;
 import com.liferay.portal.instances.initializer.PortalInstanceInitializer;
@@ -88,10 +89,18 @@ public class OSBCommercePortalInstanceInitializer
 			_addOSBCommerceAdministratorRole(company.getCompanyId());
 
 			long osbCommerceSiteGroupId = _addOSBCommerceSiteGroup(
-				company.getCompanyId());
+				company.getCompanyId(), "OSB Commerce Instance Admin");
 
 			_initializeOSBCommerceSite(
-				osbCommerceSiteGroupId,
+				osbCommerceSiteGroupId, _adminSiteInitializer, null,
+				_getDefaultUserId(company.getCompanyId()));
+
+			osbCommerceSiteGroupId = _addOSBCommerceSiteGroup(
+				company.getCompanyId(), "OSB Commerce Instance Storefront");
+
+			_initializeOSBCommerceSite(
+				osbCommerceSiteGroupId, _storefrontSiteInitializer,
+				_storefrontSiteInitializerDependencyResolver,
 				_getDefaultUserId(company.getCompanyId()));
 		}
 		catch (Exception exception) {
@@ -151,11 +160,13 @@ public class OSBCommercePortalInstanceInitializer
 		_commerceCurrencyLocalService.importDefaultValues(serviceContext);
 	}
 
-	private long _addOSBCommerceSiteGroup(long companyId) throws Exception {
+	private long _addOSBCommerceSiteGroup(long companyId, String name)
+		throws Exception {
+
 		Group group = _groupLocalService.addGroup(
 			_getDefaultUserId(companyId),
 			GroupConstants.DEFAULT_PARENT_GROUP_ID, null, 0, 0,
-			Collections.singletonMap(LocaleUtil.getDefault(), "OSB Commerce"),
+			Collections.singletonMap(LocaleUtil.getDefault(), name),
 			Collections.singletonMap(LocaleUtil.getDefault(), StringPool.BLANK),
 			GroupConstants.TYPE_SITE_OPEN, true,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, true, true,
@@ -189,7 +200,9 @@ public class OSBCommercePortalInstanceInitializer
 	}
 
 	private void _initializeOSBCommerceSite(
-			long osbCommerceSiteGroupId, long userId)
+			long osbCommerceSiteGroupId, SiteInitializer siteInitializer,
+			SiteInitializerDependencyResolver siteInitializerDependencyResolver,
+			long userId)
 		throws Exception {
 
 		PermissionChecker permissionChecker =
@@ -203,12 +216,14 @@ public class OSBCommercePortalInstanceInitializer
 
 		PrincipalThreadLocal.setName(userId);
 
-		SiteInitializerDependencyResolverThreadLocal.
-			setSiteInitializerDependencyResolver(
-				_siteInitializerDependencyResolver);
+		if (siteInitializerDependencyResolver != null) {
+			SiteInitializerDependencyResolverThreadLocal.
+				setSiteInitializerDependencyResolver(
+					_storefrontSiteInitializerDependencyResolver);
+		}
 
 		try {
-			_siteInitializer.initialize(osbCommerceSiteGroupId);
+			siteInitializer.initialize(osbCommerceSiteGroupId);
 		}
 		finally {
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
@@ -217,12 +232,12 @@ public class OSBCommercePortalInstanceInitializer
 	}
 
 	private static final String _OSB_COMMERCE_ADMINISTRATOR_ROLE_NAME =
-		"OSB Commerce Administrator";
+		OSBCommerceInstanceInitializerConstants.OSB_COMMERCE_ADMINISTRATOR_ROLE;
 
 	private static final Map<String, String[]> _actionIdMap =
 		HashMapBuilder.put(
-			CPPortletKeys.COMMERCE_INVENTORY,
-			new String[] {ActionKeys.ACCESS_IN_CONTROL_PANEL}
+			CommerceCatalog.class.getName(),
+			new String[] {ActionKeys.DELETE, ActionKeys.UPDATE, ActionKeys.VIEW}
 		).put(
 			PortletKeys.PORTAL,
 			new String[] {
@@ -253,6 +268,11 @@ public class OSBCommercePortalInstanceInitializer
 			}
 		).build();
 
+	@Reference(
+		target = "(site.initializer.key=osb-commerce-instance-admin-initializer)"
+	)
+	private SiteInitializer _adminSiteInitializer;
+
 	@Reference
 	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
 
@@ -269,11 +289,11 @@ public class OSBCommercePortalInstanceInitializer
 	private RoleLocalService _roleLocalService;
 
 	@Reference(target = "(site.initializer.key=minium-initializer)")
-	private SiteInitializer _siteInitializer;
+	private SiteInitializer _storefrontSiteInitializer;
 
 	@Reference(target = "(site.initializer.key=minium-initializer)")
 	private SiteInitializerDependencyResolver
-		_siteInitializerDependencyResolver;
+		_storefrontSiteInitializerDependencyResolver;
 
 	@Reference
 	private UserLocalService _userLocalService;

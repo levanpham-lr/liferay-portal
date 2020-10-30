@@ -19,6 +19,7 @@ import com.liferay.oauth2.provider.constants.OAuth2ProviderActionKeys;
 import com.liferay.oauth2.provider.model.OAuth2Application;
 import com.liferay.oauth2.provider.service.OAuth2ApplicationLocalService;
 import com.liferay.oauth2.provider.util.OAuth2SecureRandomGenerator;
+import com.liferay.osb.commerce.instance.initializer.internal.constants.OSBCommerceInstanceInitializerConstants;
 import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
 import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.model.Company;
@@ -85,7 +86,9 @@ public class OSBCommercePortalInstanceLifecycleListener
 		throws Exception {
 
 		Role role = _roleLocalService.fetchRole(
-			oAuth2Application.getCompanyId(), "OSB Commerce Administrator");
+			oAuth2Application.getCompanyId(),
+			OSBCommerceInstanceInitializerConstants.
+				OSB_COMMERCE_ADMINISTRATOR_ROLE);
 
 		if (role == null) {
 			return;

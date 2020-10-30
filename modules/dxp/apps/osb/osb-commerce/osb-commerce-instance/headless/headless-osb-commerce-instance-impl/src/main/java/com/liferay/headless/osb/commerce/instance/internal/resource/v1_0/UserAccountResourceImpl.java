@@ -87,7 +87,13 @@ public class UserAccountResourceImpl extends BaseUserAccountResourceImpl {
 			company.getCompanyId(), RoleConstants.SITE_OWNER);
 
 		Group group = _groupLocalService.getFriendlyURLGroup(
-			company.getCompanyId(), "/osb-commerce");
+			company.getCompanyId(), "/osb-commerce-instance-admin");
+
+		_userGroupRoleService.addUserGroupRoles(
+			userId, group.getGroupId(), new long[] {role.getRoleId()});
+
+		group = _groupLocalService.getFriendlyURLGroup(
+			company.getCompanyId(), "/osb-commerce-instance-storefront");
 
 		_userGroupRoleService.addUserGroupRoles(
 			userId, group.getGroupId(), new long[] {role.getRoleId()});
