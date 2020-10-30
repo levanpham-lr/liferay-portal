@@ -851,7 +851,7 @@ public class RenderLayoutStructureDisplayContext {
 		StyleBookEntry styleBookEntry = null;
 
 		boolean styleBookEntryPreview = ParamUtil.getBoolean(
-			_httpServletRequest, "stylebook_entry_preview");
+			_httpServletRequest, "styleBookEntryPreview");
 
 		if (!styleBookEntryPreview) {
 			styleBookEntry = DefaultStyleBookEntryUtil.getDefaultStyleBookEntry(

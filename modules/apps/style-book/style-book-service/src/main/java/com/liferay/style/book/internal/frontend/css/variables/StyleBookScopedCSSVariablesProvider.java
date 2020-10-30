@@ -118,7 +118,7 @@ public class StyleBookScopedCSSVariablesProvider
 		Layout layout = themeDisplay.getLayout();
 
 		boolean styleBookEntryPreview = ParamUtil.getBoolean(
-			httpServletRequest, "stylebook_entry_preview");
+			httpServletRequest, "styleBookEntryPreview");
 
 		if (group.isControlPanel() || layout.isTypeControlPanel() ||
 			styleBookEntryPreview) {
