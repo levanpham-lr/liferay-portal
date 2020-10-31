@@ -17,4 +17,5 @@ dependencies {
 	compileOnly project(":core:petra:petra-function")
 	compileOnly project(":core:petra:petra-string")
 	compileOnly project(":dxp:apps:osb:osb-commerce:osb-commerce-instance:headless:headless-osb-commerce-instance-api")
+	compileOnly project(":dxp:apps:osb:osb-commerce:osb-commerce-instance:osb-commerce-instance-api")
 }

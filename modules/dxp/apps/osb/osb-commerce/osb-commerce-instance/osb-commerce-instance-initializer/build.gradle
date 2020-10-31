@@ -18,4 +18,5 @@ dependencies {
 	compileOnly project(":apps:portal:portal-instance-lifecycle-api")
 	compileOnly project(":apps:site:site-api")
 	compileOnly project(":core:petra:petra-string")
+	compileOnly project(":dxp:apps:osb:osb-commerce:osb-commerce-instance:osb-commerce-instance-api")
 }
