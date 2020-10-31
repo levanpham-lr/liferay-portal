@@ -23,8 +23,6 @@ AssetRendererFactory<?> assetRendererFactory = assetRenderer.getAssetRendererFac
 
 AssetEntry assetEntry = assetRendererFactory.getAssetEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
 
-ViewSharedAssetsDisplayContext viewSharedAssetsDisplayContext = (ViewSharedAssetsDisplayContext)renderRequest.getAttribute(ViewSharedAssetsDisplayContext.class.getName());
-
 SharingEntry sharingEntry = (SharingEntry)renderRequest.getAttribute(SharingEntry.class.getName());
 
 String redirect = ParamUtil.getString(request, "redirect");
@@ -73,6 +71,11 @@ else {
 				</div>
 			</li>
 			<li class="tbar-item">
+
+				<%
+				ViewSharedAssetsDisplayContext viewSharedAssetsDisplayContext = (ViewSharedAssetsDisplayContext)renderRequest.getAttribute(ViewSharedAssetsDisplayContext.class.getName());
+				%>
+
 				<liferay-ui:menu
 					menu="<%= viewSharedAssetsDisplayContext.getSharingEntryMenu(sharingEntry) %>"
 				/>
