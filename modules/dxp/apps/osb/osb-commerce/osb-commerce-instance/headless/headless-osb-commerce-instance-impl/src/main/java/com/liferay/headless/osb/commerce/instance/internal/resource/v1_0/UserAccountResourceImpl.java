@@ -16,6 +16,7 @@ package com.liferay.headless.osb.commerce.instance.internal.resource.v1_0;
 
 import com.liferay.headless.osb.commerce.instance.dto.v1_0.UserAccount;
 import com.liferay.headless.osb.commerce.instance.resource.v1_0.UserAccountResource;
+import com.liferay.osb.commerce.instance.constants.OSBCommerceInstanceConstants;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Role;
@@ -87,13 +88,17 @@ public class UserAccountResourceImpl extends BaseUserAccountResourceImpl {
 			company.getCompanyId(), RoleConstants.SITE_OWNER);
 
 		Group group = _groupLocalService.getFriendlyURLGroup(
-			company.getCompanyId(), "/osb-commerce-instance-admin");
+			company.getCompanyId(),
+			OSBCommerceInstanceConstants.
+				FRIENDLY_URL_OSB_COMMERCE_INSTANCE_ADMIN);
 
 		_userGroupRoleService.addUserGroupRoles(
 			userId, group.getGroupId(), new long[] {role.getRoleId()});
 
 		group = _groupLocalService.getFriendlyURLGroup(
-			company.getCompanyId(), "/osb-commerce-instance-storefront");
+			company.getCompanyId(),
+			OSBCommerceInstanceConstants.
+				FRIENDLY_URL_OSB_COMMERCE_INSTANCE_STOREFRONT);
 
 		_userGroupRoleService.addUserGroupRoles(
 			userId, group.getGroupId(), new long[] {role.getRoleId()});

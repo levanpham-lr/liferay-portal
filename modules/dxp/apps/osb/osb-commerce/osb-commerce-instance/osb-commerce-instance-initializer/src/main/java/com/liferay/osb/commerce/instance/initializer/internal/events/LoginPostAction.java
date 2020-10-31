@@ -14,7 +14,7 @@
 
 package com.liferay.osb.commerce.instance.initializer.internal.events;
 
-import com.liferay.osb.commerce.instance.initializer.internal.constants.OSBCommerceInstanceInitializerConstants;
+import com.liferay.osb.commerce.instance.constants.OSBCommerceInstanceConstants;
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.LifecycleAction;
 import com.liferay.portal.kernel.log.Log;
@@ -59,8 +59,7 @@ public class LoginPostAction extends Action {
 
 			Role role = _roleLocalService.getRole(
 				company.getCompanyId(),
-				OSBCommerceInstanceInitializerConstants.
-					OSB_COMMERCE_ADMINISTRATOR_ROLE);
+				OSBCommerceInstanceConstants.ROLE_OSB_COMMERCE_ADMINISTRATOR);
 
 			if (_roleLocalService.hasUserRole(
 					user.getUserId(), role.getRoleId())) {
@@ -68,15 +67,15 @@ public class LoginPostAction extends Action {
 				httpServletResponse.sendRedirect(
 					PropsValues.
 						LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING +
-							OSBCommerceInstanceInitializerConstants.
-								OSB_COMMERCE_INSTANCE_ADMIN_FRIENDLY_URL);
+							OSBCommerceInstanceConstants.
+								FRIENDLY_URL_OSB_COMMERCE_INSTANCE_ADMIN);
 			}
 			else {
 				httpServletResponse.sendRedirect(
 					PropsValues.
 						LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING +
-							OSBCommerceInstanceInitializerConstants.
-								OSB_COMMERCE_INSTANCE_STOREFRONT_FRIENDLY_URL);
+							OSBCommerceInstanceConstants.
+								FRIENDLY_URL_OSB_COMMERCE_INSTANCE_STOREFRONT);
 			}
 		}
 		catch (Exception exception) {

@@ -25,7 +25,7 @@ import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolver;
 import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolverThreadLocal;
-import com.liferay.osb.commerce.instance.initializer.internal.constants.OSBCommerceInstanceInitializerConstants;
+import com.liferay.osb.commerce.instance.constants.OSBCommerceInstanceConstants;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.instances.exception.InitializationException;
 import com.liferay.portal.instances.initializer.PortalInstanceInitializer;
@@ -232,7 +232,7 @@ public class OSBCommercePortalInstanceInitializer
 	}
 
 	private static final String _OSB_COMMERCE_ADMINISTRATOR_ROLE_NAME =
-		OSBCommerceInstanceInitializerConstants.OSB_COMMERCE_ADMINISTRATOR_ROLE;
+		OSBCommerceInstanceConstants.ROLE_OSB_COMMERCE_ADMINISTRATOR;
 
 	private static final Map<String, String[]> _actionIdMap =
 		HashMapBuilder.put(
