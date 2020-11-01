@@ -164,6 +164,19 @@ public class CommerceShippingFixedOptionServiceImpl
 	}
 
 	@Override
+	public long getCommerceShippingFixedOptionsCount(
+			long companyId, long groupId, long commerceShippingMethodId,
+			String keywords)
+		throws PortalException {
+
+		_checkCommerceChannelPermissionByGroupId(groupId);
+
+		return commerceShippingFixedOptionLocalService.
+			getCommerceShippingFixedOptionsCount(
+				companyId, groupId, commerceShippingMethodId, keywords);
+	}
+
+	@Override
 	public CommerceShippingFixedOption updateCommerceShippingFixedOption(
 			long commerceShippingFixedOptionId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, BigDecimal amount,
