@@ -173,10 +173,6 @@ public class CommerceShippingFixedOptionClayTable
 			HttpServletRequest httpServletRequest, Filter filter)
 		throws PortalException {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		long commerceShippingMethodId = ParamUtil.getLong(
 			httpServletRequest, "commerceShippingMethodId");
 
@@ -186,7 +182,7 @@ public class CommerceShippingFixedOptionClayTable
 
 		List<CommerceShippingFixedOption> commerceShippingFixedOptions =
 			_commerceShippingFixedOptionService.getCommerceShippingFixedOptions(
-				themeDisplay.getCompanyId(),
+				commerceShippingMethod.getCompanyId(),
 				commerceShippingMethod.getGroupId(), commerceShippingMethodId,
 				null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
