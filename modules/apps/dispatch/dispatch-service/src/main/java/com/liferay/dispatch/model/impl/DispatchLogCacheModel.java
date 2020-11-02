@@ -37,17 +37,17 @@ public class DispatchLogCacheModel
 	implements CacheModel<DispatchLog>, Externalizable, MVCCModel {
 
 	@Override
-	public boolean equals(Object object) {
-		if (this == object) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
 		}
 
-		if (!(object instanceof DispatchLogCacheModel)) {
+		if (!(obj instanceof DispatchLogCacheModel)) {
 			return false;
 		}
 
 		DispatchLogCacheModel dispatchLogCacheModel =
-			(DispatchLogCacheModel)object;
+			(DispatchLogCacheModel)obj;
 
 		if ((dispatchLogId == dispatchLogCacheModel.dispatchLogId) &&
 			(mvccVersion == dispatchLogCacheModel.mvccVersion)) {
@@ -149,19 +149,8 @@ public class DispatchLogCacheModel
 			dispatchLogImpl.setEndDate(new Date(endDate));
 		}
 
-		if (error == null) {
-			dispatchLogImpl.setError("");
-		}
-		else {
-			dispatchLogImpl.setError(error);
-		}
-
-		if (output == null) {
-			dispatchLogImpl.setOutput("");
-		}
-		else {
-			dispatchLogImpl.setOutput(output);
-		}
+		dispatchLogImpl.setError(error);
+		dispatchLogImpl.setOutput(output);
 
 		if (startDate == Long.MIN_VALUE) {
 			dispatchLogImpl.setStartDate(null);

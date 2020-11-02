@@ -57,10 +57,8 @@ import java.rmi.RemoteException;
  *
  * @author Matija Petanjek
  * @see DispatchTriggerServiceHttp
- * @deprecated As of Athanasius (7.3.x), with no direct replacement
  * @generated
  */
-@Deprecated
 public class DispatchTriggerServiceSoap {
 
 	public static void deleteDispatchTrigger(long dispatchTriggerId)

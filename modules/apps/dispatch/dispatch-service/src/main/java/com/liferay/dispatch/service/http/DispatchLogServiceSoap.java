@@ -57,10 +57,8 @@ import java.rmi.RemoteException;
  *
  * @author Matija Petanjek
  * @see DispatchLogServiceHttp
- * @deprecated As of Athanasius (7.3.x), with no direct replacement
  * @generated
  */
-@Deprecated
 public class DispatchLogServiceSoap {
 
 	public static void deleteDispatchLog(long dispatchLogId)
