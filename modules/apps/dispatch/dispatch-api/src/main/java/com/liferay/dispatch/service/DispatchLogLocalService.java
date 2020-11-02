@@ -14,8 +14,9 @@
 
 package com.liferay.dispatch.service;
 
-import com.liferay.dispatch.executor.TaskStatus;
+import com.liferay.dispatch.executor.DispatchTaskStatus;
 import com.liferay.dispatch.model.DispatchLog;
+import com.liferay.petra.sql.dsl.query.DSLQuery;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
@@ -60,11 +61,15 @@ public interface DispatchLogLocalService
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link DispatchLogLocalServiceUtil} to access the dispatch log local service. Add custom service methods to <code>com.liferay.dispatch.service.impl.DispatchLogLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add custom service methods to <code>com.liferay.dispatch.service.impl.DispatchLogLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the dispatch log local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link DispatchLogLocalServiceUtil} if injection and service tracking are not available.
 	 */
 
 	/**
 	 * Adds the dispatch log to the database. Also notifies the appropriate model listeners.
+	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect DispatchLogLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
 	 *
 	 * @param dispatchLog the dispatch log
 	 * @return the dispatch log that was added
@@ -74,7 +79,8 @@ public interface DispatchLogLocalService
 
 	public DispatchLog addDispatchLog(
 			long userId, long dispatchTriggerId, Date endDate, String error,
-			String output, Date startDate, TaskStatus taskStatus)
+			String output, Date startDate,
+			DispatchTaskStatus dispatchTaskStatus)
 		throws PortalException;
 
 	/**
@@ -95,6 +101,10 @@ public interface DispatchLogLocalService
 	/**
 	 * Deletes the dispatch log from the database. Also notifies the appropriate model listeners.
 	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect DispatchLogLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
 	 * @param dispatchLog the dispatch log
 	 * @return the dispatch log that was removed
 	 */
@@ -103,6 +113,10 @@ public interface DispatchLogLocalService
 
 	/**
 	 * Deletes the dispatch log with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect DispatchLogLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
 	 *
 	 * @param dispatchLogId the primary key of the dispatch log
 	 * @return the dispatch log that was removed
@@ -120,6 +134,9 @@ public interface DispatchLogLocalService
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public <T> T dslQuery(DSLQuery dslQuery);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public DynamicQuery dynamicQuery();
@@ -257,6 +274,10 @@ public interface DispatchLogLocalService
 	/**
 	 * Updates the dispatch log in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect DispatchLogLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
 	 * @param dispatchLog the dispatch log
 	 * @return the dispatch log that was updated
 	 */
@@ -265,7 +286,7 @@ public interface DispatchLogLocalService
 
 	public DispatchLog updateDispatchLog(
 			long dispatchLogId, Date endDate, String error, String output,
-			TaskStatus taskStatus)
+			DispatchTaskStatus dispatchTaskStatus)
 		throws PortalException;
 
 }

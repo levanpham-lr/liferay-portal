@@ -36,6 +36,10 @@ public class DispatchLogLocalServiceWrapper
 	/**
 	 * Adds the dispatch log to the database. Also notifies the appropriate model listeners.
 	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect DispatchLogLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
 	 * @param dispatchLog the dispatch log
 	 * @return the dispatch log that was added
 	 */
@@ -50,12 +54,12 @@ public class DispatchLogLocalServiceWrapper
 	public com.liferay.dispatch.model.DispatchLog addDispatchLog(
 			long userId, long dispatchTriggerId, java.util.Date endDate,
 			String error, String output, java.util.Date startDate,
-			com.liferay.dispatch.executor.TaskStatus taskStatus)
+			com.liferay.dispatch.executor.DispatchTaskStatus dispatchTaskStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _dispatchLogLocalService.addDispatchLog(
 			userId, dispatchTriggerId, endDate, error, output, startDate,
-			taskStatus);
+			dispatchTaskStatus);
 	}
 
 	/**
@@ -85,6 +89,10 @@ public class DispatchLogLocalServiceWrapper
 	/**
 	 * Deletes the dispatch log from the database. Also notifies the appropriate model listeners.
 	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect DispatchLogLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
 	 * @param dispatchLog the dispatch log
 	 * @return the dispatch log that was removed
 	 */
@@ -97,6 +105,10 @@ public class DispatchLogLocalServiceWrapper
 
 	/**
 	 * Deletes the dispatch log with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect DispatchLogLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
 	 *
 	 * @param dispatchLogId the primary key of the dispatch log
 	 * @return the dispatch log that was removed
@@ -124,6 +136,11 @@ public class DispatchLogLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _dispatchLogLocalService.deletePersistedModel(persistedModel);
+	}
+
+	@Override
+	public <T> T dslQuery(com.liferay.petra.sql.dsl.query.DSLQuery dslQuery) {
+		return _dispatchLogLocalService.dslQuery(dslQuery);
 	}
 
 	@Override
@@ -325,6 +342,10 @@ public class DispatchLogLocalServiceWrapper
 	/**
 	 * Updates the dispatch log in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect DispatchLogLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
 	 * @param dispatchLog the dispatch log
 	 * @return the dispatch log that was updated
 	 */
@@ -338,11 +359,12 @@ public class DispatchLogLocalServiceWrapper
 	@Override
 	public com.liferay.dispatch.model.DispatchLog updateDispatchLog(
 			long dispatchLogId, java.util.Date endDate, String error,
-			String output, com.liferay.dispatch.executor.TaskStatus taskStatus)
+			String output,
+			com.liferay.dispatch.executor.DispatchTaskStatus dispatchTaskStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _dispatchLogLocalService.updateDispatchLog(
-			dispatchLogId, endDate, error, output, taskStatus);
+			dispatchLogId, endDate, error, output, dispatchTaskStatus);
 	}
 
 	@Override
