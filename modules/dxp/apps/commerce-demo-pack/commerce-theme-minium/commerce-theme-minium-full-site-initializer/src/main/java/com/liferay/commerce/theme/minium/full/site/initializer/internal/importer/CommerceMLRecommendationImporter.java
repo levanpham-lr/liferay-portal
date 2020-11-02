@@ -184,8 +184,8 @@ public class CommerceMLRecommendationImporter {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					String.format(
-						"Unable to fetch CPDefinition with external " +
-							"reference code: %s",
+						"Unable to fetch commerce product definition with " +
+							"external reference code: %s",
 						productExternalReferenceCode));
 			}
 
