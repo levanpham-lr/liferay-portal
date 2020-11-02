@@ -82,8 +82,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			commerceShippingFixedOptionLocalService.
 				getCommerceShippingFixedOption(commerceShippingFixedOptionId);
 
-		_checkCommerceChannel(
-			commerceShippingFixedOption.getGroupId());
+		_checkCommerceChannel(commerceShippingFixedOption.getGroupId());
 
 		commerceShippingFixedOptionLocalService.
 			deleteCommerceShippingFixedOption(commerceShippingFixedOption);
@@ -99,8 +98,7 @@ public class CommerceShippingFixedOptionServiceImpl
 				fetchCommerceShippingFixedOption(commerceShippingFixedOptionId);
 
 		if (commerceShippingFixedOption != null) {
-			_checkCommerceChannel(
-				commerceShippingFixedOption.getGroupId());
+			_checkCommerceChannel(commerceShippingFixedOption.getGroupId());
 		}
 
 		return commerceShippingFixedOption;
@@ -115,8 +113,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			_commerceShippingMethodService.getCommerceShippingMethod(
 				commerceShippingMethodId);
 
-		_checkCommerceChannel(
-			commerceShippingMethod.getGroupId());
+		_checkCommerceChannel(commerceShippingMethod.getGroupId());
 
 		return commerceShippingFixedOptionLocalService.
 			getCommerceShippingFixedOptions(
@@ -134,8 +131,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			_commerceShippingMethodService.getCommerceShippingMethod(
 				commerceShippingMethodId);
 
-		_checkCommerceChannel(
-			commerceShippingMethod.getGroupId());
+		_checkCommerceChannel(commerceShippingMethod.getGroupId());
 
 		return commerceShippingFixedOptionLocalService.
 			getCommerceShippingFixedOptions(
@@ -166,8 +162,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			_commerceShippingMethodService.getCommerceShippingMethod(
 				commerceShippingMethodId);
 
-		_checkCommerceChannel(
-			commerceShippingMethod.getGroupId());
+		_checkCommerceChannel(commerceShippingMethod.getGroupId());
 
 		return commerceShippingFixedOptionLocalService.
 			getCommerceShippingFixedOptionsCount(
@@ -198,8 +193,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			commerceShippingFixedOptionLocalService.
 				getCommerceShippingFixedOption(commerceShippingFixedOptionId);
 
-		_checkCommerceChannel(
-			commerceShippingFixedOption.getGroupId());
+		_checkCommerceChannel(commerceShippingFixedOption.getGroupId());
 
 		return commerceShippingFixedOptionLocalService.
 			updateCommerceShippingFixedOption(
@@ -207,9 +201,7 @@ public class CommerceShippingFixedOptionServiceImpl
 				priority);
 	}
 
-	private void _checkCommerceChannel(long groupId)
-		throws PortalException {
-
+	private void _checkCommerceChannel(long groupId) throws PortalException {
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.getCommerceChannelByGroupId(groupId);
 
