@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.dispatch.exception;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -27,12 +28,12 @@ public class DispatchLogStartDateException extends PortalException {
 		super(msg);
 	}
 
-	public DispatchLogStartDateException(String msg, Throwable cause) {
-		super(msg, cause);
+	public DispatchLogStartDateException(String msg, Throwable throwable) {
+		super(msg, throwable);
 	}
 
-	public DispatchLogStartDateException(Throwable cause) {
-		super(cause);
+	public DispatchLogStartDateException(Throwable throwable) {
+		super(throwable);
 	}
 
 }
