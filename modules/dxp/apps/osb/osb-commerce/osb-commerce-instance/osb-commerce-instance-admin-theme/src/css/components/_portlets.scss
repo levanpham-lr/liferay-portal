@@ -1,0 +1,47 @@
+.portlet {
+	.data-set-display-management-bar-wrapper {
+		border: 0;
+	}
+
+	.management-bar-light {
+		background-color: transparent;
+
+		.navbar-overlay {
+			background-color: transparent;
+			padding-left: 0;
+
+			form {
+				input,
+				.input-group-inset-item-after {
+					background-color: $gray-400;
+					border: 0;
+				}
+			}
+		}
+	}
+
+	.management-bar-default {
+		background-color: transparent;
+
+		.management-bar-header-right {
+			margin-right: 0;
+		}
+	}
+
+	.navigation-bar-light {
+		background-color: transparent;
+	}
+
+	.sidenav-container,
+	.container-fluid,
+	.container-fluid-1280 {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.table-list,
+	.table-style-fluid,
+	.table-style-stacked {
+		border: 0;
+	}
+}

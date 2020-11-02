@@ -1,0 +1,36 @@
+.left-menu-panel {
+	.left-menu {
+		background-color: #fff;
+		width: 320px;
+
+		.sidebar-body {
+			padding-right: 0;
+
+			.nav-pills {
+				> li {
+					&.active {
+						> a {
+							background-color: #eef2fa;
+							border-bottom-right-radius: 0;
+							border-top-right-radius: 0;
+							color: #0b63ce;
+							margin-right: -2px;
+						}
+					}
+
+					a {
+						color: #000;
+					}
+				}
+			}
+		}
+	}
+
+	.user-management {
+		border-top: 1px solid $gray-400;
+		bottom: 0;
+		padding: 1rem;
+		position: absolute;
+		width: 100%;
+	}
+}
