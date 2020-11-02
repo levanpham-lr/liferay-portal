@@ -47,7 +47,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			BigDecimal amount, double priority)
 		throws PortalException {
 
-		_checkCommerceChannelPermissionByGroupId(groupId);
+		_checkCommerceChannel(groupId);
 
 		return commerceShippingFixedOptionLocalService.
 			addCommerceShippingFixedOption(
@@ -82,7 +82,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			commerceShippingFixedOptionLocalService.
 				getCommerceShippingFixedOption(commerceShippingFixedOptionId);
 
-		_checkCommerceChannelPermissionByGroupId(
+		_checkCommerceChannel(
 			commerceShippingFixedOption.getGroupId());
 
 		commerceShippingFixedOptionLocalService.
@@ -99,7 +99,7 @@ public class CommerceShippingFixedOptionServiceImpl
 				fetchCommerceShippingFixedOption(commerceShippingFixedOptionId);
 
 		if (commerceShippingFixedOption != null) {
-			_checkCommerceChannelPermissionByGroupId(
+			_checkCommerceChannel(
 				commerceShippingFixedOption.getGroupId());
 		}
 
@@ -115,7 +115,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			_commerceShippingMethodService.getCommerceShippingMethod(
 				commerceShippingMethodId);
 
-		_checkCommerceChannelPermissionByGroupId(
+		_checkCommerceChannel(
 			commerceShippingMethod.getGroupId());
 
 		return commerceShippingFixedOptionLocalService.
@@ -134,7 +134,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			_commerceShippingMethodService.getCommerceShippingMethod(
 				commerceShippingMethodId);
 
-		_checkCommerceChannelPermissionByGroupId(
+		_checkCommerceChannel(
 			commerceShippingMethod.getGroupId());
 
 		return commerceShippingFixedOptionLocalService.
@@ -149,7 +149,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			String keywords, int start, int end)
 		throws PortalException {
 
-		_checkCommerceChannelPermissionByGroupId(groupId);
+		_checkCommerceChannel(groupId);
 
 		return commerceShippingFixedOptionLocalService.
 			getCommerceShippingFixedOptions(
@@ -166,7 +166,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			_commerceShippingMethodService.getCommerceShippingMethod(
 				commerceShippingMethodId);
 
-		_checkCommerceChannelPermissionByGroupId(
+		_checkCommerceChannel(
 			commerceShippingMethod.getGroupId());
 
 		return commerceShippingFixedOptionLocalService.
@@ -180,7 +180,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			String keywords)
 		throws PortalException {
 
-		_checkCommerceChannelPermissionByGroupId(groupId);
+		_checkCommerceChannel(groupId);
 
 		return commerceShippingFixedOptionLocalService.
 			getCommerceShippingFixedOptionsCount(
@@ -198,7 +198,7 @@ public class CommerceShippingFixedOptionServiceImpl
 			commerceShippingFixedOptionLocalService.
 				getCommerceShippingFixedOption(commerceShippingFixedOptionId);
 
-		_checkCommerceChannelPermissionByGroupId(
+		_checkCommerceChannel(
 			commerceShippingFixedOption.getGroupId());
 
 		return commerceShippingFixedOptionLocalService.
@@ -207,7 +207,7 @@ public class CommerceShippingFixedOptionServiceImpl
 				priority);
 	}
 
-	private void _checkCommerceChannelPermissionByGroupId(long groupId)
+	private void _checkCommerceChannel(long groupId)
 		throws PortalException {
 
 		CommerceChannel commerceChannel =
