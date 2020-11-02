@@ -14,7 +14,7 @@
 
 package com.liferay.dispatch.executor;
 
-import com.liferay.portal.kernel.backgroundtask.constants.BackgroundTaskConstants;
+import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
 
 /**
  * @author Igor Beslic
