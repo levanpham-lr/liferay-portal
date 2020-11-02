@@ -27,7 +27,6 @@
 	css/clay/**
 	node_modules/**
 	swfobject.js
-	xp_progress.js
 	yarn-*.js
 	zippableResources/**
 
