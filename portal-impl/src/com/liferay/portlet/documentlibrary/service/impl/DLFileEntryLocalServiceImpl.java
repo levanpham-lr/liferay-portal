@@ -1607,8 +1607,8 @@ public class DLFileEntryLocalServiceImpl
 		indexableActionableDynamicQuery.setPerformActionMethod(
 			(DLFileEntry dlFileEntry) -> {
 				dlFileEntry.setTreePath(treePath);
-
-				updateDLFileEntry(dlFileEntry);
+				
+				dlFileEntryLocalService.updateDLFileEntry(dlFileEntry);
 
 				if (!reindex) {
 					return;
