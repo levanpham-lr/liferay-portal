@@ -525,6 +525,7 @@ AUI.add(
 					var instance = this;
 
 					instance._simulationDeviceNode.remove();
+
 					BODY.append(instance._simulationDeviceNode);
 
 					var dialog = Liferay.Util.getWindow(instance._dialogId);
