@@ -855,7 +855,7 @@ This change was made to unify references to the icon sprite map.
 
 ---------------------------------------
 
-### Replaced portal properties: view.count.enabled and buffered.increment.enabled 
+### Replaced portal properties: view.count.enabled and buffered.increment.enabled
 - **Date:** 2020-Oct-01
 - **JIRA Ticket:** [LPS-120626](https://issues.liferay.com/browse/LPS-120626) and [LPS-121145](https://issues.liferay.com/browse/LPS-121145)
 
@@ -881,7 +881,7 @@ Remove `view.count.enabled` or `buffered.increment.enabled` portal properties an
 
 Configure view count behavior in System Settings or using a configuration file:
 
-In *System Settings* &rarr; *Infrastructure* &rarr; *View Count*, set `enabled` to `false` to disable view counts globally, or set `enabled` to `true` to enable view counts globally and disable view counts for specific entities by adding the entity class names to the  `Disabled Class Name` value list.
+In *System Settings* &rarr; *Infrastructure* &rarr; *View Count*, set `enabled` to `false` to disable view counts globally, or set `enabled` to `true` to enable view counts globally and disable view counts for specific entities by adding the entity class names to the `Disabled Class Name` value list.
 
 To use a configuration file, configure view counts in System Settings, save the settings, and export them to a `com.liferay.view.count.configuration.ViewCountConfiguration.config` file. Then deploy the configuration by placing the file in your `[Liferay Home]/osgi/configs` folder.
 
