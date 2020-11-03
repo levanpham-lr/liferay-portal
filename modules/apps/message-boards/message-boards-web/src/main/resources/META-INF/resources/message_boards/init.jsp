@@ -106,6 +106,7 @@ page import="com.liferay.message.boards.web.internal.display.MBCategoryDisplay" 
 page import="com.liferay.message.boards.web.internal.display.context.MBBannedUsersManagementToolbarDisplayContext" %><%@
 page import="com.liferay.message.boards.web.internal.display.context.MBDisplayContextProvider" %><%@
 page import="com.liferay.message.boards.web.internal.display.context.MBEntriesManagementToolbarDisplayContext" %><%@
+page import="com.liferay.message.boards.web.internal.display.context.MBViewStatisticsDisplayContext" %><%@
 page import="com.liferay.message.boards.web.internal.display.context.util.MBRequestHelper" %><%@
 page import="com.liferay.message.boards.web.internal.portlet.action.ActionUtil" %><%@
 page import="com.liferay.message.boards.web.internal.search.EntriesChecker" %><%@
