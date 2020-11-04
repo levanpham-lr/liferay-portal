@@ -24,8 +24,7 @@ import com.liferay.portal.kernel.repository.registry.BaseRepositoryDefiner;
 import com.liferay.portal.kernel.repository.registry.CapabilityRegistry;
 import com.liferay.portal.kernel.repository.registry.RepositoryDefiner;
 import com.liferay.portal.kernel.repository.registry.RepositoryFactoryRegistry;
-import com.liferay.portal.kernel.util.ResourceBundleLoader;
-import com.liferay.portal.kernel.util.ResourceBundleLoaderUtil;
+import com.liferay.portal.kernel.resource.bundle.ResourceBundleLoader;
 import com.liferay.sharepoint.soap.repository.constants.SharepointWSConstants;
 
 import org.osgi.service.component.annotations.Activate;
@@ -75,11 +74,6 @@ public class SharepointWSRepositoryDefiner extends BaseRepositoryDefiner {
 
 	@Activate
 	protected void activate() {
-		_resourceBundleLoader =
-			ResourceBundleLoaderUtil.
-				getResourceBundleLoaderByBundleSymbolicName(
-					"com.liferay.sharepoint.soap.repository");
-
 		RepositoryConfigurationBuilder repositoryConfigurationBuilder =
 			new RepositoryConfigurationBuilder(
 				_resourceBundleLoader,
@@ -106,6 +100,9 @@ public class SharepointWSRepositoryDefiner extends BaseRepositoryDefiner {
 	)
 	private RepositoryFactory _repositoryFactory;
 
+	@Reference(
+		target = "(bundle.symbolic.name=com.liferay.sharepoint.soap.repository)"
+	)
 	private ResourceBundleLoader _resourceBundleLoader;
 
 }
