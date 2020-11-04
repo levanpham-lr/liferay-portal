@@ -305,11 +305,11 @@ public class ChangeTrackingIndicatorDynamicInclude extends BaseDynamicInclude {
 		addURL.setParameter(
 			"mvcRenderCommandName", "/change_tracking/add_ct_collection");
 
-		PortletURL backURL = _portal.getControlPanelPortletURL(
+		PortletURL redirect = _portal.getControlPanelPortletURL(
 			httpServletRequest, themeDisplay.getScopeGroup(),
 			CTPortletKeys.PUBLICATIONS, 0, 0, PortletRequest.RENDER_PHASE);
 
-		addURL.setParameter("redirect", backURL.toString());
+		addURL.setParameter("redirect", redirect.toString());
 
 		jsonArray.put(
 			JSONUtil.put(
@@ -327,7 +327,6 @@ public class ChangeTrackingIndicatorDynamicInclude extends BaseDynamicInclude {
 
 			reviewURL.setParameter(
 				"mvcRenderCommandName", "/change_tracking/view_changes");
-			reviewURL.setParameter("backURL", backURL.toString());
 			reviewURL.setParameter(
 				"ctCollectionId", String.valueOf(ctCollectionId));
 
