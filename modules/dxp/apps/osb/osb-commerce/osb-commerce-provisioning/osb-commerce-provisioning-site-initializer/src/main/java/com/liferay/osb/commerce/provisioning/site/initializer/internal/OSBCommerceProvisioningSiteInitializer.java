@@ -574,20 +574,24 @@ public class OSBCommerceProvisioningSiteInitializer implements SiteInitializer {
 			false, serviceContext);
 
 		_addLayout(
-			fragmentCollection, layoutPageTemplateCollection, "Start Trial",
-			"start_trial", false, serviceContext);
+			fragmentCollection, layoutPageTemplateCollection,
+			"Trial Registration", "trial_registration", false, serviceContext);
 
 		_addLayout(
 			fragmentCollection, layoutPageTemplateCollection, "Settings",
-			"account_settings", true, serviceContext);
+			"settings", true, serviceContext);
 
 		_addLayout(
 			fragmentCollection, layoutPageTemplateCollection, "Plan Management",
 			"plan_management", true, serviceContext);
 
 		_addLayout(
-			fragmentCollection, layoutPageTemplateCollection,
-			"OSB Commerce Checkout", "checkout", true, serviceContext);
+			fragmentCollection, layoutPageTemplateCollection, "Billing",
+			"billing", true, serviceContext);
+
+		_addLayout(
+			fragmentCollection, layoutPageTemplateCollection, "Checkout",
+			"checkout", true, serviceContext);
 	}
 
 	private void _updateLogo(ServiceContext serviceContext) throws Exception {
