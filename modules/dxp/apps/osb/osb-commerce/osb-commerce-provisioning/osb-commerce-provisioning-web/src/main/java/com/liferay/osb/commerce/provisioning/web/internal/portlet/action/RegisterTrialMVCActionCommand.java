@@ -127,8 +127,9 @@ public class RegisterTrialMVCActionCommand extends BaseMVCActionCommand {
 
 				SessionErrors.add(actionRequest, throwable.getClass());
 			}
-
-			throw exception;
+			else {
+				throw exception;
+			}
 		}
 
 		_sendRedirect(actionResponse, commerceOrderItemId, name);
