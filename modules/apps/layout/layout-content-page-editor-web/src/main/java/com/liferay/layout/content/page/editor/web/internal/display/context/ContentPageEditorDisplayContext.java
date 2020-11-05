@@ -941,7 +941,8 @@ public class ContentPageEditorDisplayContext {
 				PortletRequest.ACTION_PHASE);
 
 			discardDraftURL.setParameter(
-				ActionRequest.ACTION_NAME, "/layout/discard_draft_layout");
+				ActionRequest.ACTION_NAME,
+				"/layout_admin/discard_draft_layout");
 			discardDraftURL.setParameter(
 				"redirect", themeDisplay.getURLCurrent());
 			discardDraftURL.setParameter(
@@ -955,7 +956,7 @@ public class ContentPageEditorDisplayContext {
 			PortletRequest.ACTION_PHASE);
 
 		deleteLayoutURL.setParameter(
-			ActionRequest.ACTION_NAME, "/layout/delete_layout");
+			ActionRequest.ACTION_NAME, "/layout_admin/delete_layout");
 
 		PortletURL redirectURL = PortalUtil.getControlPanelPortletURL(
 			httpServletRequest, LayoutAdminPortletKeys.GROUP_PAGES,
@@ -1653,7 +1654,7 @@ public class ContentPageEditorDisplayContext {
 			PortletRequest.RENDER_PHASE);
 
 		lookAndFeelURL.setParameter(
-			"mvcRenderCommandName", "/layout/edit_layout");
+			"mvcRenderCommandName", "/layout_admin/edit_layout");
 
 		lookAndFeelURL.setParameter(
 			"redirect",
