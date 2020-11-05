@@ -22,12 +22,19 @@ taglib uri="http://liferay.com/tld/react" prefix="react" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<%@ page import="com.liferay.commerce.model.CommerceCountry" %><%@
+<%@ page import="com.liferay.commerce.account.model.CommerceAccount" %><%@
+page import="com.liferay.commerce.model.CommerceAddress" %><%@
+page import="com.liferay.commerce.model.CommerceCountry" %><%@
+page import="com.liferay.osb.commerce.provisioning.web.internal.display.context.CommerceAccountDisplayContext" %><%@
 page import="com.liferay.osb.commerce.provisioning.web.internal.portlet.display.context.PlanManagementDisplayContext" %><%@
 page import="com.liferay.osb.commerce.provisioning.web.internal.portlet.display.context.TrialRegistrationDisplayContext" %><%@
 page import="com.liferay.portal.kernel.exception.UserEmailAddressException" %><%@
+page import="com.liferay.portal.kernel.exception.UserPasswordException" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
+page import="com.liferay.portal.kernel.model.User" %><%@
 page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
+page import="com.liferay.portal.kernel.util.PrefsPropsUtil" %><%@
+page import="com.liferay.portal.kernel.util.PropsKeys" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %>
 
 <%@ page import="java.util.List" %>
