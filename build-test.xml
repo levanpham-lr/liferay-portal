@@ -9227,8 +9227,6 @@ auto.deploy.dest.dir=C:/WINDOWS/system32/config/systemprofile/liferay/websphere-
 			test.retry.command.wait.time=${test.retry.command.wait.time}
 		</echo>
 
-		<propertycopy from="browser.firefox.bin.file[${browser.firefox.version}]" name="browser.firefox.bin.file" silent="true" />
-
 		<if>
 			<isset property="browser.chrome.bin.args" />
 			<then>
@@ -9248,6 +9246,8 @@ auto.deploy.dest.dir=C:/WINDOWS/system32/config/systemprofile/liferay/websphere-
 				</echo>
 			</then>
 		</if>
+
+		<propertycopy from="browser.firefox.bin.file[${browser.firefox.version}]" name="browser.firefox.bin.file" silent="true" />
 
 		<if>
 			<isset property="browser.firefox.bin.file" />
