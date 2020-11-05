@@ -39,9 +39,9 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"com.liferay.fragment.entry.processor.portlet.alias=start-trial",
+		"com.liferay.fragment.entry.processor.portlet.alias=osb-commerce-trial-registration",
 		"com.liferay.portlet.add-default-resource=true",
-		"com.liferay.portlet.css-class-wrapper=portlet-osb-commerce-start-trial",
+		"com.liferay.portlet.css-class-wrapper=portlet-osb-commerce-trial-registration",
 		"com.liferay.portlet.display-category=category.osb-commerce-provisioning",
 		"com.liferay.portlet.layout-cacheable=true",
 		"com.liferay.portlet.preferences-owned-by-group=true",

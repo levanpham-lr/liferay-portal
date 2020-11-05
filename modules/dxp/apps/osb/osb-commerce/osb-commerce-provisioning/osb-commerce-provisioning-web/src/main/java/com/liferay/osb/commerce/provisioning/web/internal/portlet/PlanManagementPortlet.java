@@ -40,7 +40,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"com.liferay.fragment.entry.processor.portlet.alias=plan-management",
+		"com.liferay.fragment.entry.processor.portlet.alias=osb-commerce-plan-management",
 		"com.liferay.portlet.add-default-resource=true",
 		"com.liferay.portlet.css-class-wrapper=portlet-osb-commerce-plan-management",
 		"com.liferay.portlet.display-category=category.osb-commerce-provisioning",
