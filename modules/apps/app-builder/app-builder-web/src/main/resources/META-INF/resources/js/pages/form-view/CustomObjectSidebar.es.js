@@ -71,7 +71,7 @@ const DropDown = () => {
 			return false;
 		}
 
-		//Remove Fields Group field from left sidebar
+		// Remove fields group field from left sidebar
 
 		if (name === 'fieldset' && !allowNestedFields) {
 			return false;
