@@ -92,7 +92,7 @@ public class MFAUserAccountSetupMVCActionCommand extends BaseMVCActionCommand {
 			throw new PrincipalException();
 		}
 
-		final long userId = themeDisplay.getUserId();
+		long userId = themeDisplay.getUserId();
 
 		if (ParamUtil.getBoolean(actionRequest, "mfaRemoveExistingSetup")) {
 			setupMFAChecker.removeExistingSetup(userId);
