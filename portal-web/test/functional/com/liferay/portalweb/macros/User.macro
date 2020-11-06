@@ -363,17 +363,6 @@ definition {
 		WaitForLiferayEvent.initializeLiferayEventLog();
 	}
 
-	macro addCreateAccountPG {
-		User.createAccount(
-			newPassword = "${newPassword}",
-			userEmailAddress = "${userEmailAddress}",
-			userFirstName = "${userFirstName}",
-			userLastName = "${userLastName}",
-			userScreenName = "${userScreenName}");
-
-		VerifyElementPresent(locator1 = "Message#SUCCESS");
-	}
-
 	macro addMultipleCP {
 		for (var userEmail : list "${usersEmailsList}") {
 			var userEmailAddress = "${userEmail}";
