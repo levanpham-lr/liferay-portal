@@ -80,7 +80,7 @@ function CardEntryRenderer({
 								() => {
 									const to =
 										TRIAL_SKU === sku
-											? `${Liferay.ThemeDisplay.getCanonicalURL()}/${START_TRIAL}`
+											? `${Liferay.ThemeDisplay.getCanonicalURL()}/trial-registration`
 											: checkoutURL;
 
 									navigate(to);

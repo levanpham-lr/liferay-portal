@@ -11,7 +11,7 @@
 	</button>
 
 	<div aria-expanded="false" class="collapse navbar-collapse" id="navigationCollapse">
-		<a class="btn btn-primary" href="${site_default_url}/start-trial" target="_blank">
+		<a class="btn btn-primary" href="${site_default_url}/trial-registration" target="_blank">
 			<@liferay.language key="start-trial" />
 		</a>
 	</div>
