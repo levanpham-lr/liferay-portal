@@ -371,9 +371,6 @@ public class OSBCommerceInstanceAdminSiteInitializer
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
 		User user = _userLocalService.getUser(PrincipalThreadLocal.getUserId());
 		Group group = _groupLocalService.getGroup(groupId);
 
