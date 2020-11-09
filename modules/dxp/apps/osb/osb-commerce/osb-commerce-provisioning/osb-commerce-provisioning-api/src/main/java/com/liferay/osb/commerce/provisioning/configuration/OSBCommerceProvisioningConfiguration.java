@@ -66,7 +66,7 @@ public interface OSBCommerceProvisioningConfiguration {
 	public String osbCommerceInstanceOAuthClientSecret();
 
 	@Meta.AD(
-		deflt = "443", name = "osb-commerce-instance-port", required = false
+		deflt = "8080", name = "osb-commerce-instance-port", required = false
 	)
 	public int osbCommerceInstancePort();
 
@@ -77,7 +77,7 @@ public interface OSBCommerceProvisioningConfiguration {
 	public String osbCommerceInstancePassword();
 
 	@Meta.AD(
-		deflt = "https", name = "osb-commerce-instance-protocol",
+		deflt = "http", name = "osb-commerce-instance-protocol",
 		required = false
 	)
 	public String osbCommerceInstanceProtocol();
