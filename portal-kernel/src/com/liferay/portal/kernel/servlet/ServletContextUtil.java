@@ -229,7 +229,7 @@ public class ServletContextUtil {
 
 		if (root) {
 			lastModifiedLong = (Long)servletContext.getAttribute(
-				_BUNDLE_RESOURCES_LAST_MODIFIED);
+				_LIFERAY_WAB_BUNDLE_RESOURCES_LAST_MODIFIED);
 
 			if (lastModifiedLong != null) {
 				return lastModifiedLong;
@@ -273,7 +273,8 @@ public class ServletContextUtil {
 		if (lastModifiedLong != null) {
 			if (root) {
 				servletContext.setAttribute(
-					_BUNDLE_RESOURCES_LAST_MODIFIED, lastModifiedLong);
+					_LIFERAY_WAB_BUNDLE_RESOURCES_LAST_MODIFIED,
+					lastModifiedLong);
 			}
 
 			return lastModifiedLong;
@@ -308,11 +309,11 @@ public class ServletContextUtil {
 		return lastModified;
 	}
 
-	private static final String _BUNDLE_RESOURCES_LAST_MODIFIED =
-		"BUNDLE_RESOURCES_LAST_MODIFIED";
-
 	private static final String _EXT_CLASS = ".class";
 
 	private static final String _EXT_JAR = ".jar";
+
+	private static final String _LIFERAY_WAB_BUNDLE_RESOURCES_LAST_MODIFIED =
+		"LIFERAY_WAB_BUNDLE_RESOURCES_LAST_MODIFIED";
 
 }

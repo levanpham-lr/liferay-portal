@@ -329,8 +329,9 @@ public class ModifiableServletContextAdapter
 	}
 
 	public Object getAttribute(String name) {
-		if (_BUNDLE_RESOURCES_LAST_MODIFIED.equals(name)) {
-			File file = _bundle.getDataFile(_BUNDLE_RESOURCES_LAST_MODIFIED);
+		if (_LIFERAY_WAB_BUNDLE_RESOURCES_LAST_MODIFIED.equals(name)) {
+			File file = _bundle.getDataFile(
+				_LIFERAY_WAB_BUNDLE_RESOURCES_LAST_MODIFIED);
 
 			if ((file != null) && file.exists()) {
 				try {
@@ -624,8 +625,9 @@ public class ModifiableServletContextAdapter
 	}
 
 	public void setAttribute(String name, Object value) {
-		if (_BUNDLE_RESOURCES_LAST_MODIFIED.equals(name)) {
-			File file = _bundle.getDataFile(_BUNDLE_RESOURCES_LAST_MODIFIED);
+		if (_LIFERAY_WAB_BUNDLE_RESOURCES_LAST_MODIFIED.equals(name)) {
+			File file = _bundle.getDataFile(
+				_LIFERAY_WAB_BUNDLE_RESOURCES_LAST_MODIFIED);
 
 			if (file != null) {
 				byte[] data = new byte[16];
@@ -721,12 +723,12 @@ public class ModifiableServletContextAdapter
 		return Collections.unmodifiableMap(methods);
 	}
 
-	private static final String _BUNDLE_RESOURCES_LAST_MODIFIED =
-		"BUNDLE_RESOURCES_LAST_MODIFIED";
-
 	private static final Class<?>[] _INTERFACES = new Class<?>[] {
 		ModifiableServletContext.class, ServletContext.class
 	};
+
+	private static final String _LIFERAY_WAB_BUNDLE_RESOURCES_LAST_MODIFIED =
+		"LIFERAY_WAB_BUNDLE_RESOURCES_LAST_MODIFIED";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		ModifiableServletContextAdapter.class);
