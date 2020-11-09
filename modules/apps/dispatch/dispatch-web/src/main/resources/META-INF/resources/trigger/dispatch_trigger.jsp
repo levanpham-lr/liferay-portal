@@ -83,7 +83,7 @@ if ((dispatchTrigger != null) && (dispatchTrigger.getEndDate() != null)) {
 							</aui:select>
 						</c:when>
 						<c:otherwise>
-							<aui:select disabled="<%= true %>" helpMessage="this-option-is-enabled-only-in-cluster-environment" label="task-execution-cluster-mode" name="taskClusterMode">
+							<aui:select disabled="<%= true %>" helpMessage="this-option-is-enabled-only-in-a-clustered-environment" label="task-execution-cluster-mode" name="taskClusterMode">
 								<aui:option label="<%= DispatchTaskClusterMode.NOT_APPLICABLE.getLabel() %>" />
 							</aui:select>
 						</c:otherwise>
