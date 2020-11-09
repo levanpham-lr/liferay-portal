@@ -348,6 +348,9 @@ public class ModifiableServletContextAdapter
 					file.delete();
 				}
 				catch (IOException ioException) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(ioException, ioException);
+					}
 				}
 
 				return null;
@@ -637,6 +640,9 @@ public class ModifiableServletContextAdapter
 						StandardOpenOption.WRITE);
 				}
 				catch (IOException ioException) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(ioException, ioException);
+					}
 				}
 			}
 
