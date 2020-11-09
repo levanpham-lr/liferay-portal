@@ -371,18 +371,21 @@ public class OSBCommerceInstanceAdminSiteInitializer
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		User user = _userLocalService.getUser(PrincipalThreadLocal.getUserId());
+		serviceContext.setAddGroupPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
 		Group group = _groupLocalService.getGroup(groupId);
+
+		serviceContext.setCompanyId(group.getCompanyId());
 
 		Locale locale = LocaleUtil.getSiteDefault();
 
 		serviceContext.setLanguageId(LanguageUtil.getLanguageId(locale));
 
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setCompanyId(group.getCompanyId());
-		serviceContext.setLanguageId(LanguageUtil.getLanguageId(locale));
 		serviceContext.setScopeGroupId(groupId);
+
+		User user = _userLocalService.getUser(PrincipalThreadLocal.getUserId());
+
 		serviceContext.setTimeZone(user.getTimeZone());
 		serviceContext.setUserId(user.getUserId());
 
