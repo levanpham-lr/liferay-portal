@@ -21,7 +21,16 @@ import com.liferay.portal.instances.service.PortalInstancesLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.RoleConstants;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.CompanyLocalService;
+import com.liferay.portal.kernel.service.RoleLocalService;
+import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.Portal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +42,17 @@ public class DXPCloudProvisioningClientMockImpl
 	implements DXPCloudProvisioningClient {
 
 	public DXPCloudProvisioningClientMockImpl(
-		CompanyLocalService companyLocalService,
+		CompanyLocalService companyLocalService, Portal portal,
 		PortalInstanceInitializerRegistry portalInstanceInitializerRegistry,
-		PortalInstancesLocalService portalInstancesLocalService) {
+		PortalInstancesLocalService portalInstancesLocalService,
+		RoleLocalService roleLocalService, UserLocalService userLocalService) {
 
 		_companyLocalService = companyLocalService;
+		_portal = portal;
 		_portalInstanceInitializerRegistry = portalInstanceInitializerRegistry;
 		_portalInstancesLocalService = portalInstancesLocalService;
+		_roleLocalService = roleLocalService;
+		_userLocalService = userLocalService;
 	}
 
 	@Override
@@ -93,15 +106,17 @@ public class DXPCloudProvisioningClientMockImpl
 	public PortalInstance postPortalInstance(
 		String domain, String portalInitializerKey) {
 
-		PortalInstanceInitializer portalInstanceInitializer =
-			_portalInstanceInitializerRegistry.getPortalInstanceInitializer(
-				portalInitializerKey);
-
 		String webId = _generateWebId();
 
 		String virtualHostname = _toVirtualHostname(webId);
 
 		try {
+			_addCompany(domain, webId, virtualHostname);
+
+			PortalInstanceInitializer portalInstanceInitializer =
+				_portalInstanceInitializerRegistry.getPortalInstanceInitializer(
+					portalInitializerKey);
+
 			portalInstanceInitializer.initialize(
 				webId, virtualHostname, domain);
 
@@ -131,8 +146,37 @@ public class DXPCloudProvisioningClientMockImpl
 		}
 	}
 
+	private void _addCompany(String mx, String webId, String virtualHostname)
+		throws PortalException {
+
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		PermissionThreadLocal.setPermissionChecker(
+			PermissionCheckerFactoryUtil.create(_getAdministratorUser()));
+
+		try {
+			_companyLocalService.addCompany(
+				webId, virtualHostname, mx, false, 0, true);
+		}
+		finally {
+			PermissionThreadLocal.setPermissionChecker(permissionChecker);
+		}
+	}
+
 	private String _generateWebId() {
 		return "commerce" + (_companyLocalService.getCompaniesCount() + 1);
+	}
+
+	private User _getAdministratorUser() throws PortalException {
+		Role role = _roleLocalService.getRole(
+			_portal.getDefaultCompanyId(), RoleConstants.ADMINISTRATOR);
+
+		for (User user : _userLocalService.getRoleUsers(role.getRoleId())) {
+			return user;
+		}
+
+		throw new IllegalStateException("Administrator user does not exist");
 	}
 
 	private PortalInstance _getPortalInstance(String webId)
@@ -158,8 +202,11 @@ public class DXPCloudProvisioningClientMockImpl
 	}
 
 	private final CompanyLocalService _companyLocalService;
+	private final Portal _portal;
 	private final PortalInstanceInitializerRegistry
 		_portalInstanceInitializerRegistry;
 	private final PortalInstancesLocalService _portalInstancesLocalService;
+	private final RoleLocalService _roleLocalService;
+	private final UserLocalService _userLocalService;
 
 }

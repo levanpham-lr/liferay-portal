@@ -20,6 +20,9 @@ import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.instances.initializer.PortalInstanceInitializerRegistry;
 import com.liferay.portal.instances.service.PortalInstancesLocalService;
 import com.liferay.portal.kernel.service.CompanyLocalService;
+import com.liferay.portal.kernel.service.RoleLocalService;
+import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.util.Portal;
 
 import java.util.Map;
 
@@ -41,8 +44,10 @@ public class DXPCloudClientClientFactory {
 				ApplicationProfile.DEVELOPMENT) {
 
 			return new DXPCloudProvisioningClientMockImpl(
-				_companyLocalService, _portalInstanceInitializerRegistry,
-				_portalInstancesLocalService);
+				_companyLocalService, _portal,
+				_portalInstanceInitializerRegistry,
+				_portalInstancesLocalService, _roleLocalService,
+				_userLocalService);
 		}
 
 		return new DXPCloudProvisioningClientImpl(
@@ -65,10 +70,19 @@ public class DXPCloudClientClientFactory {
 		_osbCommerceProvisioningConfiguration;
 
 	@Reference
+	private Portal _portal;
+
+	@Reference
 	private PortalInstanceInitializerRegistry
 		_portalInstanceInitializerRegistry;
 
 	@Reference
 	private PortalInstancesLocalService _portalInstancesLocalService;
+
+	@Reference
+	private RoleLocalService _roleLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
