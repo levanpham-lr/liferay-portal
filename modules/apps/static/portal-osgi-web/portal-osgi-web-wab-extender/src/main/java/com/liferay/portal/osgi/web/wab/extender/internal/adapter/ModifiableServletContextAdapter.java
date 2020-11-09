@@ -349,8 +349,8 @@ public class ModifiableServletContextAdapter
 					file.delete();
 				}
 				catch (IOException ioException) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(ioException, ioException);
+					if (_log.isDebugEnabled()) {
+						_log.debug(ioException, ioException);
 					}
 				}
 
@@ -642,8 +642,8 @@ public class ModifiableServletContextAdapter
 						StandardOpenOption.WRITE);
 				}
 				catch (IOException ioException) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(ioException, ioException);
+					if (_log.isDebugEnabled()) {
+						_log.debug(ioException, ioException);
 					}
 				}
 			}
