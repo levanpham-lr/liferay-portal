@@ -146,11 +146,11 @@ public class OSBCommerceInstanceAdminSiteInitializer
 			ServiceContext serviceContext)
 		throws Exception {
 
-		Enumeration<URL> urls = _bundle.findEntries(
+		Enumeration<URL> urlEnumeration = _bundle.findEntries(
 			_PATH + "images", StringPool.STAR, false);
 
-		while (urls.hasMoreElements()) {
-			URL url = urls.nextElement();
+		while (urlEnumeration.hasMoreElements()) {
+			URL url = urlEnumeration.nextElement();
 
 			byte[] bytes = null;
 
@@ -170,7 +170,7 @@ public class OSBCommerceInstanceAdminSiteInitializer
 
 	private FragmentCollection _addFragmentCollection(
 			ServiceContext serviceContext)
-		throws PortalException {
+		throws Exception {
 
 		return _fragmentCollectionLocalService.addFragmentCollection(
 			serviceContext.getUserId(), serviceContext.getScopeGroupId(),
