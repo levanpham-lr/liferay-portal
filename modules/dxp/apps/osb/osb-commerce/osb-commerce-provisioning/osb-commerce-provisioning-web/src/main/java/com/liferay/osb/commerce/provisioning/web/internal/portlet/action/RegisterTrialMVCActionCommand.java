@@ -126,6 +126,8 @@ public class RegisterTrialMVCActionCommand extends BaseMVCActionCommand {
 				hideDefaultErrorMessage(actionRequest);
 
 				SessionErrors.add(actionRequest, throwable.getClass());
+
+				return;
 			}
 			else {
 				throw exception;
