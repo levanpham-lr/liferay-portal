@@ -47,3 +47,8 @@ cd8300c6646d1cd99f9bcf0eafe0efc3a73c4b8c^..be2097bd3adca3371d4cab75b30d98ef287de
 # Bundle Version 3.0.14
 #
 be2097bd3adca3371d4cab75b30d98ef287debe3^..cd8bf0ef665074a0636cec69d8a7ac6c08f4dfec=COMMERCE-5030
+
+#
+# Bundle Version 3.0.15
+#
+cd8bf0ef665074a0636cec69d8a7ac6c08f4dfec^..46c100cd0fde6ba9ce3cdc2a6a47d9d4a70bcd3f=COMMERCE-5163
