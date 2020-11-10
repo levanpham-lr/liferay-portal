@@ -55,13 +55,10 @@ public class UpgradeLayoutAsset extends UpgradeProcess {
 
 				dynamicQuery.add(
 					typeProperty.ne(LayoutConstants.TYPE_ASSET_DISPLAY));
-
 				dynamicQuery.add(
 					typeProperty.ne(LayoutConstants.TYPE_COLLECTION));
-
 				dynamicQuery.add(typeProperty.ne(LayoutConstants.TYPE_CONTENT));
 			});
-
 		actionableDynamicQuery.setPerformActionMethod(
 			(Layout layout) -> _updateAsset(layout));
 
@@ -78,7 +75,6 @@ public class UpgradeLayoutAsset extends UpgradeProcess {
 
 		long[] assetCategoryIds = _assetCategoryLocalService.getCategoryIds(
 			Layout.class.getName(), layout.getPlid());
-
 		String[] assetTagNames = _assetTagLocalService.getTagNames(
 			Layout.class.getName(), layout.getPlid());
 
