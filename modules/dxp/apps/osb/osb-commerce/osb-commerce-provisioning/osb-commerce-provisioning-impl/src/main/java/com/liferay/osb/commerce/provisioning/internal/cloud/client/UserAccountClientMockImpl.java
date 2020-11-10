@@ -40,7 +40,8 @@ public class UserAccountClientMockImpl implements UserAccountClient {
 		UserAccountResource userAccountResource = builder.endpoint(
 			"localhost", 8080, "http"
 		).authentication(
-			PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + "@localhost",
+			PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + "@" +
+				PropsValues.COMPANY_DEFAULT_WEB_ID,
 			PropsValues.DEFAULT_ADMIN_PASSWORD
 		).build();
 
