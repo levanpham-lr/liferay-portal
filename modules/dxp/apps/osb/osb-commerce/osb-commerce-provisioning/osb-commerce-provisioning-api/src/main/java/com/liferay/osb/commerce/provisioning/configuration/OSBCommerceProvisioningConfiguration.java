@@ -48,44 +48,45 @@ public interface OSBCommerceProvisioningConfiguration {
 	public String dxpCloudAPIUsername();
 
 	@Meta.AD(
-		deflt = "localhost", name = "osb-commerce-instance-domain-name",
+		deflt = "localhost", name = "osb-commerce-portal-instance-domain-name",
 		required = false
 	)
-	public String osbCommerceInstanceDomainName();
+	public String osbCommercePortalInstanceDomainName();
 
 	@Meta.AD(
-		deflt = "", name = "osb-commerce-instance-oauth-client-id",
+		deflt = "", name = "osb-commerce-portal-instance-oauth-client-id",
 		required = false
 	)
-	public String osbCommerceInstanceOAuthClientId();
+	public String osbCommercePortalInstanceOAuthClientId();
 
 	@Meta.AD(
-		deflt = "", name = "osb-commerce-instance-oauth-client-secret",
+		deflt = "", name = "osb-commerce-portal-instance-oauth-client-secret",
 		required = false
 	)
-	public String osbCommerceInstanceOAuthClientSecret();
+	public String osbCommercePortalInstanceOAuthClientSecret();
 
 	@Meta.AD(
-		deflt = "8080", name = "osb-commerce-instance-port", required = false
-	)
-	public int osbCommerceInstancePort();
-
-	@Meta.AD(
-		deflt = "test", name = "osb-commerce-instance-password",
+		deflt = "8080", name = "osb-commerce-portal-instance-port",
 		required = false
 	)
-	public String osbCommerceInstancePassword();
+	public int osbCommercePortalInstancePort();
 
 	@Meta.AD(
-		deflt = "http", name = "osb-commerce-instance-protocol",
+		deflt = "test", name = "osb-commerce-portal-instance-password",
 		required = false
 	)
-	public String osbCommerceInstanceProtocol();
+	public String osbCommercePortalInstancePassword();
 
 	@Meta.AD(
-		deflt = "test@liferay.com", name = "osb-commerce-instance-username",
+		deflt = "http", name = "osb-commerce-portal-instance-protocol",
 		required = false
 	)
-	public String osbCommerceInstanceUsername();
+	public String osbCommercePortalInstanceProtocol();
+
+	@Meta.AD(
+		deflt = "test@liferay.com",
+		name = "osb-commerce-portal-instance-username", required = false
+	)
+	public String osbCommercePortalInstanceUsername();
 
 }

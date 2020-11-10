@@ -23,7 +23,6 @@ import com.liferay.osb.commerce.provisioning.util.OSBCommercePortalInstance;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
-import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 
 import java.util.ArrayList;
@@ -31,7 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -43,7 +41,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"commerce.definition.term.contributor.key=" + OSBCommercePortalInstanceCreatedDefinitionTermContributor.KEY,
-		"commerce.notification.type.key=" + OSBCommerceNotificationConstants.PORTAL_INSTANCE_CREATED
+		"commerce.notification.type.key=" + OSBCommerceNotificationConstants.OSB_COMMERCE_PORTAL_INSTANCE_CREATED
 	},
 	service = CommerceDefinitionTermContributor.class
 )
@@ -94,11 +92,8 @@ public class OSBCommercePortalInstanceCreatedDefinitionTermContributor
 
 	@Override
 	public String getLabel(String term, Locale locale) {
-		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass());
-
 		return LanguageUtil.get(
-			resourceBundle, _commerceOrderDefinitionTermsMap.get(term));
+			locale, _commerceOrderDefinitionTermsMap.get(term));
 	}
 
 	@Override
@@ -111,7 +106,7 @@ public class OSBCommercePortalInstanceCreatedDefinitionTermContributor
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(
-			_PORTAL_INSTANCE_URL, "portal-instance-url-definition-term"
+			_PORTAL_INSTANCE_URL, "osb-commerce-portal-instance-url"
 		).build();
 
 	@Reference

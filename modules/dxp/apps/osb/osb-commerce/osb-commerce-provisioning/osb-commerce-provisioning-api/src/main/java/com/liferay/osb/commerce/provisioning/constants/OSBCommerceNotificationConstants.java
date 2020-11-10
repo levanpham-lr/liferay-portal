@@ -19,9 +19,10 @@ package com.liferay.osb.commerce.provisioning.constants;
  */
 public class OSBCommerceNotificationConstants {
 
-	public static final String ACCOUNT_CREATED = "account-created";
+	public static final String OSB_COMMERCE_PORTAL_INSTANCE_CREATED =
+		"osb-commerce-portal-instance-created";
 
-	public static final String PORTAL_INSTANCE_CREATED =
-		"portal-instance-created";
+	public static final String OSB_COMMERCE_PROVISIONING_ACCOUNT_CREATED =
+		"osb-commerce-provisioning-account-created";
 
 }

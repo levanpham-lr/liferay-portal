@@ -18,10 +18,8 @@ import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.notification.type.CommerceNotificationType;
 import com.liferay.osb.commerce.provisioning.constants.OSBCommerceNotificationConstants;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -31,12 +29,12 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"commerce.notification.type.key=" + OSBCommerceNotificationConstants.PORTAL_INSTANCE_CREATED,
+		"commerce.notification.type.key=" + OSBCommerceNotificationConstants.OSB_COMMERCE_PORTAL_INSTANCE_CREATED,
 		"commerce.notification.type.order:Integer=310"
 	},
 	service = CommerceNotificationType.class
 )
-public class CommercePortalInstanceCreatedNotificationType
+public class OSBCommercePortalInstanceCreatedCommerceNotificationType
 	implements CommerceNotificationType {
 
 	@Override
@@ -62,17 +60,16 @@ public class CommercePortalInstanceCreatedNotificationType
 
 	@Override
 	public String getKey() {
-		return OSBCommerceNotificationConstants.PORTAL_INSTANCE_CREATED;
+		return OSBCommerceNotificationConstants.
+			OSB_COMMERCE_PORTAL_INSTANCE_CREATED;
 	}
 
 	@Override
 	public String getLabel(Locale locale) {
-		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass());
-
 		return LanguageUtil.get(
-			resourceBundle,
-			OSBCommerceNotificationConstants.PORTAL_INSTANCE_CREATED);
+			locale,
+			OSBCommerceNotificationConstants.
+				OSB_COMMERCE_PORTAL_INSTANCE_CREATED);
 	}
 
 }

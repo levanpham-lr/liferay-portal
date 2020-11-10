@@ -184,7 +184,9 @@ public class RegisterTrialMVCActionCommand extends BaseMVCActionCommand {
 
 		_commerceNotificationHelper.sendNotifications(
 			commerceChannelGroupId, user.getUserId(),
-			OSBCommerceNotificationConstants.ACCOUNT_CREATED, commerceAccount);
+			OSBCommerceNotificationConstants.
+				OSB_COMMERCE_PROVISIONING_ACCOUNT_CREATED,
+			commerceAccount);
 
 		return commerceOrderItemId;
 	}

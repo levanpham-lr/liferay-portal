@@ -23,14 +23,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.HashMapBuilder;
-import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -41,7 +39,7 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {
 		"commerce.definition.term.contributor.key=" + OSBCommerceAccountCreatedRecipientDefinitionTermContributor.KEY,
-		"commerce.notification.type.key=" + OSBCommerceNotificationConstants.ACCOUNT_CREATED
+		"commerce.notification.type.key=" + OSBCommerceNotificationConstants.OSB_COMMERCE_PROVISIONING_ACCOUNT_CREATED
 	},
 	service = CommerceDefinitionTermContributor.class
 )
@@ -91,11 +89,8 @@ public class OSBCommerceAccountCreatedRecipientDefinitionTermContributor
 
 	@Override
 	public String getLabel(String term, Locale locale) {
-		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass());
-
 		return LanguageUtil.get(
-			resourceBundle, _commerceOrderDefinitionTermsMap.get(term));
+			locale, _commerceOrderDefinitionTermsMap.get(term));
 	}
 
 	@Override
@@ -107,7 +102,7 @@ public class OSBCommerceAccountCreatedRecipientDefinitionTermContributor
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(
-			_ACCOUNT_CREATOR, "account-creator-definition-term"
+			_ACCOUNT_CREATOR, "osb-commerce-provisioning-account-creator"
 		).build();
 
 }

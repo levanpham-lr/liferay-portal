@@ -41,13 +41,14 @@ public class OSBCommercePortalInstanceImpl
 
 		sb.append(
 			_osbCommerceProvisioningConfiguration.
-				osbCommerceInstanceProtocol());
+				osbCommercePortalInstanceProtocol());
 		sb.append(StringPool.COLON);
 		sb.append(StringPool.DOUBLE_SLASH);
 		sb.append(portalInstanceVirtualHostname);
 		sb.append(StringPool.COLON);
 		sb.append(
-			_osbCommerceProvisioningConfiguration.osbCommerceInstancePort());
+			_osbCommerceProvisioningConfiguration.
+				osbCommercePortalInstancePort());
 
 		return sb.toString();
 	}

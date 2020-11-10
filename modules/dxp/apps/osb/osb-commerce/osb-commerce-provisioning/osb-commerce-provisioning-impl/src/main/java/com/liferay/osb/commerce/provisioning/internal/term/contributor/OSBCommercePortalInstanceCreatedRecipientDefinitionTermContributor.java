@@ -29,9 +29,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.service.RoleLocalService;
-import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.HashMapBuilder;
-import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 
 import java.util.ArrayList;
@@ -39,7 +37,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -51,7 +48,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"commerce.definition.term.contributor.key=" + OSBCommercePortalInstanceCreatedRecipientDefinitionTermContributor.KEY,
-		"commerce.notification.type.key=" + OSBCommerceNotificationConstants.PORTAL_INSTANCE_CREATED
+		"commerce.notification.type.key=" + OSBCommerceNotificationConstants.OSB_COMMERCE_PORTAL_INSTANCE_CREATED
 	},
 	service = CommerceDefinitionTermContributor.class
 )
@@ -102,7 +99,7 @@ public class OSBCommercePortalInstanceCreatedRecipientDefinitionTermContributor
 			return _getUserIds(commerceAccount, accountAdminRole);
 		}
 
-		if (term.equals(_PORTAL_INSTANCE_CREATOR)) {
+		if (term.equals(_INSTANCE_CREATOR)) {
 			return String.valueOf(commerceSubscriptionEntry.getUserId());
 		}
 
@@ -111,11 +108,8 @@ public class OSBCommercePortalInstanceCreatedRecipientDefinitionTermContributor
 
 	@Override
 	public String getLabel(String term, Locale locale) {
-		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass());
-
 		return LanguageUtil.get(
-			resourceBundle, _commerceOrderDefinitionTermsMap.get(term));
+			locale, _commerceOrderDefinitionTermsMap.get(term));
 	}
 
 	@Override
@@ -152,15 +146,14 @@ public class OSBCommercePortalInstanceCreatedRecipientDefinitionTermContributor
 	private static final String _ACCOUNT_ROLE_ADMINISTRATOR =
 		"[%ACCOUNT_ROLE_ADMINISTRATOR%]";
 
-	private static final String _PORTAL_INSTANCE_CREATOR =
-		"[%PORTAL_INSTANCE_CREATOR%]";
+	private static final String _INSTANCE_CREATOR = "[%INSTANCE_CREATOR%]";
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(
 			_ACCOUNT_ROLE_ADMINISTRATOR,
-			"account-role-administrator-definition-term"
+			"osb-commerce-portal-instance-account-role-administrator"
 		).put(
-			_PORTAL_INSTANCE_CREATOR, "portal-instance-creator-definition-term"
+			_INSTANCE_CREATOR, "osb-commerce-portal-instance-creator"
 		).build();
 
 	@Reference
@@ -172,8 +165,5 @@ public class OSBCommercePortalInstanceCreatedRecipientDefinitionTermContributor
 
 	@Reference
 	private RoleLocalService _roleLocalService;
-
-	@Reference
-	private UserLocalService _userLocalService;
 
 }

@@ -27,14 +27,12 @@ import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -46,7 +44,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"commerce.definition.term.contributor.key=" + OSBCommerceAccountCreatedDefinitionTermContributor.KEY,
-		"commerce.notification.type.key=" + OSBCommerceNotificationConstants.ACCOUNT_CREATED
+		"commerce.notification.type.key=" + OSBCommerceNotificationConstants.OSB_COMMERCE_PROVISIONING_ACCOUNT_CREATED
 	},
 	service = CommerceDefinitionTermContributor.class
 )
@@ -106,11 +104,8 @@ public class OSBCommerceAccountCreatedDefinitionTermContributor
 
 	@Override
 	public String getLabel(String term, Locale locale) {
-		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass());
-
 		return LanguageUtil.get(
-			resourceBundle, _commerceOrderDefinitionTermsMap.get(term));
+			locale, _commerceOrderDefinitionTermsMap.get(term));
 	}
 
 	@Override
@@ -125,9 +120,9 @@ public class OSBCommerceAccountCreatedDefinitionTermContributor
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(
-			_ACCOUNT_NAME, "account-name-definition-term"
+			_ACCOUNT_NAME, "osb-commerce-provisioning-account-name"
 		).put(
-			_PROVISIONING_SITE_URL, "provisioning-site-url-definition-term"
+			_PROVISIONING_SITE_URL, "osb-commerce-provisioning-site-url"
 		).build();
 
 	@Reference

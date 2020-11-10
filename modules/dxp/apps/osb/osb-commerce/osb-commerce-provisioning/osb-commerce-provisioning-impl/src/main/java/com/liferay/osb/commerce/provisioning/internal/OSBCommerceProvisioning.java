@@ -165,7 +165,8 @@ public class OSBCommerceProvisioning {
 			_getCommerceChannelGroupId(
 				commerceSubscriptionEntry.getCompanyId()),
 			user.getUserId(),
-			OSBCommerceNotificationConstants.PORTAL_INSTANCE_CREATED,
+			OSBCommerceNotificationConstants.
+				OSB_COMMERCE_PORTAL_INSTANCE_CREATED,
 			commerceSubscriptionEntry);
 	}
 
