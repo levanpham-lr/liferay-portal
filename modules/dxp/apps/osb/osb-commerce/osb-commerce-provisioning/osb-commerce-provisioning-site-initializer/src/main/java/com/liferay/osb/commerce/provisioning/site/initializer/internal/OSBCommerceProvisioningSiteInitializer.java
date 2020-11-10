@@ -474,10 +474,6 @@ public class OSBCommerceProvisioningSiteInitializer implements SiteInitializer {
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
-		User user = _userLocalService.getUser(PrincipalThreadLocal.getUserId());
-		Group group = _groupLocalService.getGroup(groupId);
 
 		Locale locale = LocaleUtil.getSiteDefault();
 
@@ -485,9 +481,16 @@ public class OSBCommerceProvisioningSiteInitializer implements SiteInitializer {
 
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+
+		Group group = _groupLocalService.getGroup(groupId);
+
 		serviceContext.setCompanyId(group.getCompanyId());
+
 		serviceContext.setLanguageId(LanguageUtil.getLanguageId(locale));
 		serviceContext.setScopeGroupId(groupId);
+
+		User user = _userLocalService.getUser(PrincipalThreadLocal.getUserId());
+
 		serviceContext.setTimeZone(user.getTimeZone());
 		serviceContext.setUserId(user.getUserId());
 
