@@ -22,3 +22,8 @@
 # Bundle Version 5.2.0
 #
 484cfff24251dbe9ddd6231199c66e766522a134^..b865e8ec89c5ab549de0907ce431dc55d9ae8bd7=COMMERCE-3592
+
+#
+# Bundle Version 5.3.0
+#
+b865e8ec89c5ab549de0907ce431dc55d9ae8bd7^..5dc1d5fd936a0d488605b519595323a2aa9ef5f3=COMMERCE-5163
