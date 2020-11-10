@@ -129,9 +129,8 @@ public class RegisterTrialMVCActionCommand extends BaseMVCActionCommand {
 
 				return;
 			}
-			else {
-				throw exception;
-			}
+
+			throw exception;
 		}
 
 		_sendRedirect(actionResponse, commerceOrderItemId, name);
