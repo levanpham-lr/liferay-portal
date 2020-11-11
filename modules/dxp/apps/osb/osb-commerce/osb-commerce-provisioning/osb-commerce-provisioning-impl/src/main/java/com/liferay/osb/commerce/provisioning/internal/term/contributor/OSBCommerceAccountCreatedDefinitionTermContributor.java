@@ -19,6 +19,7 @@ import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.constants.CommerceDefinitionTermConstants;
 import com.liferay.commerce.order.CommerceDefinitionTermContributor;
 import com.liferay.osb.commerce.provisioning.constants.OSBCommerceNotificationConstants;
+import com.liferay.osb.commerce.provisioning.constants.OSBCommerceProvisioningConstants;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Company;
@@ -90,6 +91,10 @@ public class OSBCommerceAccountCreatedDefinitionTermContributor
 		}
 
 		if (term.equals(_ACCOUNT_NAME)) {
+			return HtmlUtil.escape(commerceAccount.getName());
+		}
+
+		if (term.equals(_USER_NAME)) {
 			List<CommerceAccountUserRel> commerceAccountUserRels =
 				commerceAccount.getCommerceAccountUserRels();
 
@@ -98,7 +103,7 @@ public class OSBCommerceAccountCreatedDefinitionTermContributor
 
 			User user = commerceAccountUserRel.getUser();
 
-			return HtmlUtil.escape(user.getPasswordUnencrypted());
+			return HtmlUtil.escape(user.getFullName());
 		}
 
 		return term;
@@ -120,11 +125,15 @@ public class OSBCommerceAccountCreatedDefinitionTermContributor
 	private static final String _PROVISIONING_SITE_URL =
 		"[%PROVISIONING_SITE_URL%]";
 
+	private static final String _USER_NAME = "[%USER_NAME%]";
+
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(
 			_ACCOUNT_NAME, "osb-commerce-provisioning-account-name"
 		).put(
 			_PROVISIONING_SITE_URL, "osb-commerce-provisioning-site-url"
+		).put(
+			_USER_NAME, "osb-commerce-provisioning-site-user-name"
 		).build();
 
 	@Reference
