@@ -244,13 +244,13 @@ public class AssetListEntryExportImportContentProcessor
 				String.valueOf(_portal.getClassNameId(anyAssetTypeClassName)));
 		}
 
-		List<AssetRendererFactory<?>> assetRendererFactories =
-			AssetRendererFactoryRegistryUtil.getAssetRendererFactories(
-				portletDataContext.getCompanyId());
-
 		Map<Long, Long> ddmStructureIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				DDMStructure.class);
+
+		List<AssetRendererFactory<?>> assetRendererFactories =
+			AssetRendererFactoryRegistryUtil.getAssetRendererFactories(
+				portletDataContext.getCompanyId());
 
 		for (AssetRendererFactory<?> assetRendererFactory :
 				assetRendererFactories) {
