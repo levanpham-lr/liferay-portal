@@ -12,7 +12,7 @@
  *
  */
 
-package com.liferay.osb.commerce.provisioning.internal.events;
+package com.liferay.osb.commerce.provisioning.web.internal.events;
 
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
@@ -59,7 +59,7 @@ public class LoginPostAction extends Action {
 			Group group = _groupLocalService.fetchFriendlyURLGroup(
 				_portal.getDefaultCompanyId(),
 				OSBCommerceProvisioningConstants.
-					OSB_COMMERCE_PROVISIONING_FRIENDLY_URL);
+					FRIENDLY_URL_OSB_COMMERCE_PROVISIONING);
 
 			if (group == null) {
 				return;
@@ -83,7 +83,7 @@ public class LoginPostAction extends Action {
 					PropsValues.
 						LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING,
 					OSBCommerceProvisioningConstants.
-						OSB_COMMERCE_PROVISIONING_FRIENDLY_URL,
+						FRIENDLY_URL_OSB_COMMERCE_PROVISIONING,
 					OSBCommerceProvisioningConstants.
 						OSB_COMMERCE_CHECKOUT_URL));
 		}
@@ -105,7 +105,7 @@ public class LoginPostAction extends Action {
 			httpServletResponse.sendRedirect(
 				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING +
 					OSBCommerceProvisioningConstants.
-						OSB_COMMERCE_PROVISIONING_FRIENDLY_URL);
+						FRIENDLY_URL_OSB_COMMERCE_PROVISIONING);
 		}
 	}
 
