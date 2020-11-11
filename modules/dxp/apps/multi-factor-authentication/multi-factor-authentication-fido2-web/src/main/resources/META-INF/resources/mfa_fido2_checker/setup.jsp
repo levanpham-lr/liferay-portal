@@ -39,7 +39,7 @@ List<MFAFIDO2CredentialEntry> mfaIDO2CredentialEntries = MFAFIDO2CredentialEntry
 	<c:otherwise>
 		<liferay-ui:message key="you-have-registered-the-maximum-number-of-allowed-authenticators" />
 
-		<aui:input name="mfaRemoveExistingSetup" type="hidden" value="<%= true %>" />
+		<aui:input name="removeExistingSetup" type="hidden" value="<%= true %>" />
 
 		<button class="btn btn-danger" type="submit">
 			<liferay-ui:message key="remove-all-registered-fido2-authenticators" />
