@@ -126,7 +126,7 @@ public class OSBCommerceProvisioning {
 			_groupLocalService.getFriendlyURLGroup(
 				companyId,
 				OSBCommerceProvisioningConstants.
-					OSB_COMMERCE_PROVISIONING_FRIENDLY_URL);
+					FRIENDLY_URL_OSB_COMMERCE_PROVISIONING);
 
 		return _commerceChannelLocalService.
 			getCommerceChannelGroupIdBySiteGroupId(
