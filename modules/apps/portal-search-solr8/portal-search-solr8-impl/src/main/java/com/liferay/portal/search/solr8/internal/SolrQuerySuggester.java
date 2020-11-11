@@ -262,6 +262,10 @@ public class SolrQuerySuggester implements QuerySuggester {
 	protected long[] getGroupIdsForSuggestions(SearchContext searchContext) {
 		long[] groupIds = searchContext.getGroupIds();
 
+		if (!ArrayUtil.isEmpty(groupIds)) {
+			groupIds = ArrayUtil.remove(groupIds, -1L);
+		}
+
 		if (ArrayUtil.isEmpty(groupIds)) {
 			return new long[] {_GLOBAL_GROUP_ID};
 		}
