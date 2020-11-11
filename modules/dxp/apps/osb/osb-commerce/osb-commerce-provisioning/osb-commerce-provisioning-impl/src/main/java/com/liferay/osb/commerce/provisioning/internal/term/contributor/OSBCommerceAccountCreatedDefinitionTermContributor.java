@@ -83,11 +83,13 @@ public class OSBCommerceAccountCreatedDefinitionTermContributor
 			Company company = _companyLocalService.getCompany(
 				commerceAccount.getCompanyId());
 
-			return _portal.getPortalURL(
+			String portalURL = _portal.getPortalURL(
 				company.getVirtualHostname(),
-				_portal.getPortalServerPort(false), false) + "/group" +
-					OSBCommerceProvisioningConstants.
-						FRIENDLY_URL_OSB_COMMERCE_PROVISIONING;
+				_portal.getPortalServerPort(false), false);
+
+			return portalURL + "/group" +
+				OSBCommerceProvisioningConstants.
+					FRIENDLY_URL_OSB_COMMERCE_PROVISIONING;
 		}
 
 		if (term.equals(_ACCOUNT_NAME)) {

@@ -82,12 +82,15 @@ public class OSBCommercePortalInstanceCreatedDefinitionTermContributor
 				commerceSubscriptionEntry.
 					getSubscriptionTypeSettingsProperties();
 
-			return _osbCommercePortalInstance.getPortalInstanceURL(
-				subscriptionTypeSettingsUnicodeProperties.get(
-					OSBCommercePortalInstanceConstants.
-						PORTAL_INSTANCE_VIRTUAL_HOSTNAME)) + "/group" +
-							OSBCommerceProvisioningConstants.
-								FRIENDLY_URL_OSB_COMMERCE_INSTANCE_ADMIN;
+			String portalInstanceURL =
+				_osbCommercePortalInstance.getPortalInstanceURL(
+					subscriptionTypeSettingsUnicodeProperties.get(
+						OSBCommercePortalInstanceConstants.
+							PORTAL_INSTANCE_VIRTUAL_HOSTNAME));
+
+			return portalInstanceURL + "/group" +
+				OSBCommerceProvisioningConstants.
+					FRIENDLY_URL_OSB_COMMERCE_INSTANCE_ADMIN;
 		}
 
 		return term;
