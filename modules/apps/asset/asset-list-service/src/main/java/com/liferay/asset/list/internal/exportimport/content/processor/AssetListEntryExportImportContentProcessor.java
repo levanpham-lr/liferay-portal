@@ -340,10 +340,10 @@ public class AssetListEntryExportImportContentProcessor
 					continue;
 				}
 
-				Long oldId = Long.valueOf(parts[2]);
+				Long oldPrimaryKey = Long.valueOf(parts[2]);
 
 				parts[2] = String.valueOf(
-					ddmStructureIds.getOrDefault(oldId, oldId));
+					ddmStructureIds.getOrDefault(oldPrimaryKey, oldPrimaryKey));
 
 				unicodeProperties.setProperty(
 					key, StringUtil.merge(parts, StringPool.DOUBLE_UNDERLINE));
