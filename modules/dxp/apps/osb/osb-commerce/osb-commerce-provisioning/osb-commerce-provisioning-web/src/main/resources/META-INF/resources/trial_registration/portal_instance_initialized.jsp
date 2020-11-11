@@ -33,7 +33,7 @@ TrialRegistrationDisplayContext trialRegistrationDisplayContext = (TrialRegistra
 				<p><%= LanguageUtil.format(request, "welcome-message", "hello@liferay.com") %></p>
 				<p><%= LanguageUtil.get(request, "trial-period-expires-in-days") %></p>
 
-				<a class="btn btn-primary" href="<%= trialRegistrationDisplayContext.getPortalInstanceURL(commerceOrderItemId) %>/group/osb-commerce-instance-admin" role="button" target="_blank">
+				<a class="btn btn-primary" href="<%= trialRegistrationDisplayContext.getPortalInstanceURL(commerceOrderItemId) %>" role="button" target="_blank">
 					<%= LanguageUtil.get(request, "start-your-demo") %>
 				</a>
 			</div>

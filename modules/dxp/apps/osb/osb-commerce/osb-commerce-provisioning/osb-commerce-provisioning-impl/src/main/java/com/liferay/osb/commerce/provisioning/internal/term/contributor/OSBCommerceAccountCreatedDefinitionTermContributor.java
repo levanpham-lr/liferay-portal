@@ -84,7 +84,9 @@ public class OSBCommerceAccountCreatedDefinitionTermContributor
 
 			return _portal.getPortalURL(
 				company.getVirtualHostname(),
-				_portal.getPortalServerPort(false), false);
+				_portal.getPortalServerPort(false), false) + "/group" +
+					OSBCommerceProvisioningConstants.
+						FRIENDLY_URL_OSB_COMMERCE_PROVISIONING;
 		}
 
 		if (term.equals(_ACCOUNT_NAME)) {

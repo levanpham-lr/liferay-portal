@@ -19,6 +19,7 @@ import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.order.CommerceDefinitionTermContributor;
 import com.liferay.osb.commerce.provisioning.constants.OSBCommerceNotificationConstants;
 import com.liferay.osb.commerce.provisioning.constants.OSBCommercePortalInstanceConstants;
+import com.liferay.osb.commerce.provisioning.constants.OSBCommerceProvisioningConstants;
 import com.liferay.osb.commerce.provisioning.util.OSBCommercePortalInstance;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -84,7 +85,9 @@ public class OSBCommercePortalInstanceCreatedDefinitionTermContributor
 			return _osbCommercePortalInstance.getPortalInstanceURL(
 				subscriptionTypeSettingsUnicodeProperties.get(
 					OSBCommercePortalInstanceConstants.
-						PORTAL_INSTANCE_VIRTUAL_HOSTNAME));
+						PORTAL_INSTANCE_VIRTUAL_HOSTNAME)) + "/group" +
+							OSBCommerceProvisioningConstants.
+								FRIENDLY_URL_OSB_COMMERCE_INSTANCE_ADMIN;
 		}
 
 		return term;
