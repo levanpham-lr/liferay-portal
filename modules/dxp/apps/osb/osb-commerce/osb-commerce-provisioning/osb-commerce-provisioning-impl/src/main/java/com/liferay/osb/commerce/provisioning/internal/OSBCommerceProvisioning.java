@@ -184,7 +184,6 @@ public class OSBCommerceProvisioning {
 				male = user.isMale();
 				middleName = user.getMiddleName();
 				name = user.getFullName();
-				password = user.getPassword();
 				screenName = user.getScreenName();
 			}
 		};

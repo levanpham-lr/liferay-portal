@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Optional;
 
 import org.osgi.service.component.annotations.Component;
@@ -69,12 +68,8 @@ public class UserAccountResourceImpl extends BaseUserAccountResourceImpl {
 			_getBirthdayMonth(userAccount), _getBirthdayDay(userAccount),
 			_getBirthdayYear(userAccount), userAccount.getJobTitle(),
 			new long[0], new long[0], new long[] {role.getRoleId()},
-			new long[0], false,
+			new long[0], true,
 			ServiceContextFactory.getInstance(contextHttpServletRequest));
-
-		_userLocalService.updatePasswordManually(
-			user.getUserId(), userAccount.getPassword(), true, false,
-			new Date());
 
 		_addUserSiteOwnerGroupRole(company, user.getUserId());
 
