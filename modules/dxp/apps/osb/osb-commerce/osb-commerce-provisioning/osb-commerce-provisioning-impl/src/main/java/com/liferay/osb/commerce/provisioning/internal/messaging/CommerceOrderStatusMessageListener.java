@@ -40,7 +40,8 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 		long commerceOrderId = message.getLong("commerceOrderId");
 
 		try {
-			_osbCommerceProvisioningPortalInstanceInitializer.initializePortalInstance(commerceOrderId);
+			_osbCommerceProvisioningPortalInstanceInitializer.
+				initializePortalInstance(commerceOrderId);
 		}
 		catch (Exception exception) {
 			_log.error(exception, exception);
