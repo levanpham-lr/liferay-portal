@@ -2303,7 +2303,8 @@ definition {
 		}
 
 		if (isSet(webContentDate)) {
-			AssertTextEquals(
+			AssertAttributeValue(
+				attribute1 = "value",
 				key_fieldLabel = "Date",
 				locator1 = "WCEditWebContent#TEXT_INPUT_FIELD",
 				value1 = "${webContentDate}");
