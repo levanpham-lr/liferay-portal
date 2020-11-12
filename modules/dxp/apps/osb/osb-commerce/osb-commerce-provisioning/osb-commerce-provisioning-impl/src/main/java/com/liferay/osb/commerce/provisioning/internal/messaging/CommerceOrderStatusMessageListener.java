@@ -15,7 +15,7 @@
 package com.liferay.osb.commerce.provisioning.internal.messaging;
 
 import com.liferay.commerce.constants.CommerceDestinationNames;
-import com.liferay.osb.commerce.provisioning.internal.OSBCommerceProvisioning;
+import com.liferay.osb.commerce.provisioning.internal.OSBCommerceProvisioningPortalInstanceInitializer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -40,7 +40,7 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 		long commerceOrderId = message.getLong("commerceOrderId");
 
 		try {
-			_osbCommerceProvisioning.initializePortalInstance(commerceOrderId);
+			_osbCommerceProvisioningPortalInstanceInitializer.initializePortalInstance(commerceOrderId);
 		}
 		catch (Exception exception) {
 			_log.error(exception, exception);
@@ -51,6 +51,7 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 		CommerceOrderStatusMessageListener.class);
 
 	@Reference
-	private OSBCommerceProvisioning _osbCommerceProvisioning;
+	private OSBCommerceProvisioningPortalInstanceInitializer
+		_osbCommerceProvisioningPortalInstanceInitializer;
 
 }

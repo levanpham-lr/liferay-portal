@@ -46,8 +46,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Ivica Cardic
  */
-@Component(service = OSBCommerceProvisioning.class)
-public class OSBCommerceProvisioning {
+@Component(service = OSBCommerceProvisioningPortalInstanceInitializer.class)
+public class OSBCommerceProvisioningPortalInstanceInitializer {
 
 	@Transactional(
 		propagation = Propagation.REQUIRED, rollbackFor = Exception.class
