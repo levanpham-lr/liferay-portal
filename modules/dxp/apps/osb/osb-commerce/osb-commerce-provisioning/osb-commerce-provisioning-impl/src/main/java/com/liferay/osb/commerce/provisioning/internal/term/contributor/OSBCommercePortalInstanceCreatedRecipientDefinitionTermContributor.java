@@ -82,7 +82,7 @@ public class OSBCommercePortalInstanceCreatedRecipientDefinitionTermContributor
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
 			(CommerceSubscriptionEntry)object;
 
-		if (term.equals(_ACCOUNT_ROLE_ADMINISTRATOR)) {
+		if (term.equals("[$ACCOUNT_ROLE_ADMINISTRATOR$]")) {
 			CommerceOrderItem commerceOrderItem =
 				_commerceOrderItemLocalService.getCommerceOrderItem(
 					commerceSubscriptionEntry.getCommerceOrderItemId());
@@ -99,7 +99,7 @@ public class OSBCommercePortalInstanceCreatedRecipientDefinitionTermContributor
 			return _getUserIds(commerceAccount, accountAdminRole);
 		}
 
-		if (term.equals(_PORTAL_INSTANCE_CREATOR)) {
+		if (term.equals("[$PORTAL_INSTANCE_CREATOR$]")) {
 			return String.valueOf(commerceSubscriptionEntry.getUserId());
 		}
 
@@ -143,18 +143,13 @@ public class OSBCommercePortalInstanceCreatedRecipientDefinitionTermContributor
 		return resultsSB.toString();
 	}
 
-	private static final String _ACCOUNT_ROLE_ADMINISTRATOR =
-		"[$ACCOUNT_ROLE_ADMINISTRATOR$]";
-
-	private static final String _PORTAL_INSTANCE_CREATOR =
-		"[$PORTAL_INSTANCE_CREATOR$]";
-
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(
-			_ACCOUNT_ROLE_ADMINISTRATOR,
+			"[$ACCOUNT_ROLE_ADMINISTRATOR$]",
 			"osb-commerce-portal-instance-account-role-administrator"
 		).put(
-			_PORTAL_INSTANCE_CREATOR, "osb-commerce-portal-instance-creator"
+			"[$PORTAL_INSTANCE_CREATOR$]",
+			"osb-commerce-portal-instance-creator"
 		).build();
 
 	@Reference

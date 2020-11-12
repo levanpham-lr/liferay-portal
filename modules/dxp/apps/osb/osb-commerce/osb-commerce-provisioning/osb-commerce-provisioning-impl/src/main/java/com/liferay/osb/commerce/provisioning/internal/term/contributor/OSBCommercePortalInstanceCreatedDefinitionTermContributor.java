@@ -74,7 +74,7 @@ public class OSBCommercePortalInstanceCreatedDefinitionTermContributor
 			return term;
 		}
 
-		if (term.equals(_PORTAL_INSTANCE_URL)) {
+		if (term.equals("[$PORTAL_INSTANCE_URL$]")) {
 			CommerceSubscriptionEntry commerceSubscriptionEntry =
 				(CommerceSubscriptionEntry)object;
 
@@ -107,12 +107,9 @@ public class OSBCommercePortalInstanceCreatedDefinitionTermContributor
 		return new ArrayList<>(_commerceOrderDefinitionTermsMap.keySet());
 	}
 
-	private static final String _PORTAL_INSTANCE_URL =
-		"[$PORTAL_INSTANCE_URL$]";
-
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(
-			_PORTAL_INSTANCE_URL, "osb-commerce-portal-instance-url"
+			"[$PORTAL_INSTANCE_URL$]", "osb-commerce-portal-instance-url"
 		).build();
 
 	@Reference

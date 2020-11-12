@@ -79,7 +79,7 @@ public class OSBCommerceAccountCreatedDefinitionTermContributor
 
 		CommerceAccount commerceAccount = (CommerceAccount)object;
 
-		if (term.equals(_PROVISIONING_SITE_URL)) {
+		if (term.equals("[$PROVISIONING_SITE_URL$]")) {
 			Company company = _companyLocalService.getCompany(
 				commerceAccount.getCompanyId());
 
@@ -92,11 +92,11 @@ public class OSBCommerceAccountCreatedDefinitionTermContributor
 					FRIENDLY_URL_OSB_COMMERCE_PROVISIONING;
 		}
 
-		if (term.equals(_ACCOUNT_NAME)) {
+		if (term.equals("[$ACCOUNT_NAME$]")) {
 			return HtmlUtil.escape(commerceAccount.getName());
 		}
 
-		if (term.equals(_USER_NAME)) {
+		if (term.equals("[$USER_NAME$]")) {
 			List<CommerceAccountUserRel> commerceAccountUserRels =
 				commerceAccount.getCommerceAccountUserRels();
 
@@ -122,20 +122,13 @@ public class OSBCommerceAccountCreatedDefinitionTermContributor
 		return new ArrayList<>(_commerceOrderDefinitionTermsMap.keySet());
 	}
 
-	private static final String _ACCOUNT_NAME = "[$ACCOUNT_NAME$]";
-
-	private static final String _PROVISIONING_SITE_URL =
-		"[$PROVISIONING_SITE_URL$]";
-
-	private static final String _USER_NAME = "[$USER_NAME$]";
-
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(
-			_ACCOUNT_NAME, "osb-commerce-provisioning-account-name"
+			"[$ACCOUNT_NAME$]", "osb-commerce-provisioning-account-name"
 		).put(
-			_PROVISIONING_SITE_URL, "osb-commerce-provisioning-site-url"
+			"[$PROVISIONING_SITE_URL$]", "osb-commerce-provisioning-site-url"
 		).put(
-			_USER_NAME, "osb-commerce-provisioning-site-user-name"
+			"[$USER_NAME$]", "osb-commerce-provisioning-site-user-name"
 		).build();
 
 	@Reference
