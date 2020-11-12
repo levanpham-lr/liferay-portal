@@ -108,7 +108,7 @@ public class OSBCommercePortalInstanceCreatedDefinitionTermContributor
 	}
 
 	private static final String _PORTAL_INSTANCE_URL =
-		"[%PORTAL_INSTANCE_URL%]";
+		"[$PORTAL_INSTANCE_URL$]";
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(

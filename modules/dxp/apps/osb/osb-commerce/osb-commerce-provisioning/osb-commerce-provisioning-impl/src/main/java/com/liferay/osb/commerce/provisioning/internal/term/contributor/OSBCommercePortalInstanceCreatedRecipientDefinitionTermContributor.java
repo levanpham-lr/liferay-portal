@@ -144,10 +144,10 @@ public class OSBCommercePortalInstanceCreatedRecipientDefinitionTermContributor
 	}
 
 	private static final String _ACCOUNT_ROLE_ADMINISTRATOR =
-		"[%ACCOUNT_ROLE_ADMINISTRATOR%]";
+		"[$ACCOUNT_ROLE_ADMINISTRATOR$]";
 
 	private static final String _PORTAL_INSTANCE_CREATOR =
-		"[%PORTAL_INSTANCE_CREATOR%]";
+		"[$PORTAL_INSTANCE_CREATOR$]";
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(

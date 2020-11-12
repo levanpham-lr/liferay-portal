@@ -122,12 +122,12 @@ public class OSBCommerceAccountCreatedDefinitionTermContributor
 		return new ArrayList<>(_commerceOrderDefinitionTermsMap.keySet());
 	}
 
-	private static final String _ACCOUNT_NAME = "[%ACCOUNT_NAME%]";
+	private static final String _ACCOUNT_NAME = "[$ACCOUNT_NAME$]";
 
 	private static final String _PROVISIONING_SITE_URL =
-		"[%PROVISIONING_SITE_URL%]";
+		"[$PROVISIONING_SITE_URL$]";
 
-	private static final String _USER_NAME = "[%USER_NAME%]";
+	private static final String _USER_NAME = "[$USER_NAME$]";
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(

@@ -98,7 +98,7 @@ public class OSBCommerceAccountCreatedRecipientDefinitionTermContributor
 		return new ArrayList<>(_commerceOrderDefinitionTermsMap.keySet());
 	}
 
-	private static final String _ACCOUNT_CREATOR = "[%ACCOUNT_CREATOR%]";
+	private static final String _ACCOUNT_CREATOR = "[$ACCOUNT_CREATOR$]";
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(
