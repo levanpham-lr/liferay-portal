@@ -44,20 +44,21 @@ public class CTContainerRequestFilter implements ContainerRequestFilter {
 
 		InterceptorChain interceptorChain = message.getInterceptorChain();
 
-		interceptorChain.add(_CT_PRE_INVOKE_INTERCEPTOR);
-		interceptorChain.add(_CT_POST_INVOKE_INTERCEPTOR);
+		interceptorChain.add(_CT_PRE_INVOKE_PHASE_INTERCEPTOR);
+		interceptorChain.add(_CT_POST_INVOKE_PHASE_INTERCEPTOR);
 	}
 
 	private static final String _CT_COLLECTION_SAFE_CLOSABLE =
-		CTPreInvokeInterceptor.class.getName() + "#CT_COLLECTION_SAFE_CLOSABLE";
+		CTPreInvokePhaseInterceptor.class.getName() +
+			"#CT_COLLECTION_SAFE_CLOSABLE";
 
-	private static final CTPostInvokeInterceptor _CT_POST_INVOKE_INTERCEPTOR =
-		new CTPostInvokeInterceptor();
+	private static final CTPostInvokePhaseInterceptor
+		_CT_POST_INVOKE_PHASE_INTERCEPTOR = new CTPostInvokePhaseInterceptor();
 
-	private static final CTPreInvokeInterceptor _CT_PRE_INVOKE_INTERCEPTOR =
-		new CTPreInvokeInterceptor();
+	private static final CTPreInvokePhaseInterceptor
+		_CT_PRE_INVOKE_PHASE_INTERCEPTOR = new CTPreInvokePhaseInterceptor();
 
-	private static class CTPostInvokeInterceptor
+	private static class CTPostInvokePhaseInterceptor
 		extends AbstractPhaseInterceptor<Message> {
 
 		@Override
@@ -70,13 +71,13 @@ public class CTContainerRequestFilter implements ContainerRequestFilter {
 			}
 		}
 
-		private CTPostInvokeInterceptor() {
+		private CTPostInvokePhaseInterceptor() {
 			super(Phase.POST_INVOKE);
 		}
 
 	}
 
-	private static class CTPreInvokeInterceptor
+	private static class CTPreInvokePhaseInterceptor
 		extends AbstractPhaseInterceptor<Message> {
 
 		@Override
@@ -99,7 +100,7 @@ public class CTContainerRequestFilter implements ContainerRequestFilter {
 			}
 		}
 
-		private CTPreInvokeInterceptor() {
+		private CTPreInvokePhaseInterceptor() {
 			super(Phase.PRE_INVOKE);
 		}
 
