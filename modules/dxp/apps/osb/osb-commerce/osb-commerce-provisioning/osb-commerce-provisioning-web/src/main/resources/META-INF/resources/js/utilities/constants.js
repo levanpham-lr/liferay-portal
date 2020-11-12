@@ -9,12 +9,6 @@
  * distribution rights of the Software.
  */
 
-import * as MOCKS from './dataMocks/index';
-
-export function getDataMock(componentName) {
-	if (componentName in MOCKS) {
-		return MOCKS[componentName];
-	}
-
-	throw new Error(`No data mock was found for: "${componentName}"`);
-}
+export const String = {
+	BLANK: '',
+};

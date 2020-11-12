@@ -39,19 +39,19 @@ List<CommerceCountry> commerceCountries = commerceAccountDisplayContext.getComme
 
 		<div class="row">
 			<div class="col-lg-8">
-				<aui:input name="name" />
+				<aui:input label='<%= LanguageUtil.get(request, "name") %>' name="name" />
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-lg-8">
-				<aui:input name="email" />
+				<aui:input label='<%= LanguageUtil.get(request, "email") %>' name="email" />
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-lg-8">
-				<aui:input label="vat-number" name="taxId" />
+				<aui:input label='<%= LanguageUtil.get(request, "vat-number") %>' name="taxId" />
 			</div>
 		</div>
 
@@ -59,13 +59,13 @@ List<CommerceCountry> commerceCountries = commerceAccountDisplayContext.getComme
 
 		<div class="row">
 			<div class="col-lg-8">
-				<aui:input label="address" name="street1" />
+				<aui:input label='<%= LanguageUtil.get(request, "address") %>' name="street1" />
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-lg-4">
-				<aui:select label="country" name="commerceCountryId">
+				<aui:select label='<%= LanguageUtil.get(request, "country") %>' name="commerceCountryId">
 
 					<%
 					for (CommerceCountry commerceCountry : commerceCountries) {
@@ -83,17 +83,17 @@ List<CommerceCountry> commerceCountries = commerceAccountDisplayContext.getComme
 			</div>
 
 			<div class="col-lg-4">
-				<aui:input label="region" name="commerceRegionId" />
+				<aui:select disabled="<%= true %>" label='<%= LanguageUtil.get(request, "region") %>' name="commerceRegionId"></aui:select>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-lg-4">
-				<aui:input label="city" name="city" />
+				<aui:input label='<%= LanguageUtil.get(request, "city") %>' name="city" />
 			</div>
 
 			<div class="col-lg-4">
-				<aui:input label="zip" name="zip" />
+				<aui:input label='<%= LanguageUtil.get(request, "zip") %>' name="zip" />
 			</div>
 		</div>
 
@@ -102,3 +102,27 @@ List<CommerceCountry> commerceCountries = commerceAccountDisplayContext.getComme
 		</div>
 	</aui:form>
 </div>
+
+<aui:script require="osb-commerce-provisioning-web@1.0.0/js/utilities/index as Utils">
+	var commerceCountrySelect = document.querySelector(
+		'#<portlet:namespace />commerceCountryId'
+	);
+	var commerceRegionSelect = document.querySelector(
+		'#<portlet:namespace />commerceRegionId'
+	);
+
+	commerceCountrySelect.addEventListener('change', function (event) {
+		var commerceCountryId = event.currentTarget.value;
+
+		Utils.findCommerceRegions(commerceCountryId).then(function (regions) {
+			Utils.renderRegionOptions(
+				{
+					labelKey: 'name',
+					valueKey: 'commerceRegionId',
+				},
+				regions,
+				commerceRegionSelect
+			);
+		});
+	});
+</aui:script>

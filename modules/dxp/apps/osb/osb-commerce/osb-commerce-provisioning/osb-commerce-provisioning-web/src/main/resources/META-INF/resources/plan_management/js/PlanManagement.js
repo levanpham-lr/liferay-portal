@@ -11,7 +11,7 @@
 
 import React from 'react';
 
-import {getDataMock} from '../../js/utilities/mocks';
+import {getDataMock} from '../../js/utilities/index';
 import ActivePlan from './views/ActivePlan';
 
 function PlanManagement({mockData = false, ...props}) {
