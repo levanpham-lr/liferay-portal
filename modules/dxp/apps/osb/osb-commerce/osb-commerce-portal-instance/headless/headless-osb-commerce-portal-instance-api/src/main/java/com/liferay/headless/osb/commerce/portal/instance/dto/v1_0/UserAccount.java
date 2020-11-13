@@ -12,7 +12,7 @@
  *
  */
 
-package com.liferay.headless.osb.commerce.instance.dto.v1_0;
+package com.liferay.headless.osb.commerce.portal.instance.dto.v1_0;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -671,7 +671,7 @@ public class UserAccount implements Serializable {
 	}
 
 	@Schema(
-		defaultValue = "com.liferay.headless.osb.commerce.instance.dto.v1_0.UserAccount",
+		defaultValue = "com.liferay.headless.osb.commerce.portal.instance.dto.v1_0.UserAccount",
 		name = "x-class-name"
 	)
 	public String xClassName;

@@ -12,9 +12,9 @@
  *
  */
 
-package com.liferay.headless.osb.commerce.instance.resource.v1_0;
+package com.liferay.headless.osb.commerce.portal.instance.resource.v1_0;
 
-import com.liferay.headless.osb.commerce.instance.dto.v1_0.UserAccount;
+import com.liferay.headless.osb.commerce.portal.instance.dto.v1_0.UserAccount;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
@@ -34,7 +34,7 @@ import org.osgi.annotation.versioning.ProviderType;
 /**
  * To access this resource, run:
  *
- *     curl -u your@email.com:yourpassword -D - http://localhost:8080/o/headless-osb-commerce-instance/v1.0
+ *     curl -u your@email.com:yourpassword -D - http://localhost:8080/o/headless-osb-commerce-portal-instance/v1.0
  *
  * @author Ivica Cardic
  * @generated
