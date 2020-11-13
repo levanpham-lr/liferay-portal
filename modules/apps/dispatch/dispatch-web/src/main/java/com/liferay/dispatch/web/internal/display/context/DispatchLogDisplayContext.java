@@ -97,11 +97,10 @@ public class DispatchLogDisplayContext {
 		PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
 		String delta = ParamUtil.getString(
-			_dispatchRequestHelper.getRequest(),
-			SearchContainer.DEFAULT_DELTA_PARAM);
+			_dispatchRequestHelper.getRequest(), "delta");
 
 		if (Validator.isNotNull(delta)) {
-			portletURL.setParameter(SearchContainer.DEFAULT_DELTA_PARAM, delta);
+			portletURL.setParameter("delta", delta);
 		}
 
 		String deltaEntry = ParamUtil.getString(
