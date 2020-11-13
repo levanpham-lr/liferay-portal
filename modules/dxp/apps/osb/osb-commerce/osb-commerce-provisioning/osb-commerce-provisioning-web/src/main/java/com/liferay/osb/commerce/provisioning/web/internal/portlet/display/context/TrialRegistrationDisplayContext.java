@@ -65,7 +65,7 @@ public class TrialRegistrationDisplayContext {
 
 		return portalInstanceURL + "/group" +
 			OSBCommerceProvisioningConstants.
-				FRIENDLY_URL_OSB_COMMERCE_INSTANCE_ADMIN;
+				FRIENDLY_URL_OSB_COMMERCE_PORTAL_INSTANCE_ADMIN;
 	}
 
 	public int getTrialLengthInDays(long commerceOrderItemId) {

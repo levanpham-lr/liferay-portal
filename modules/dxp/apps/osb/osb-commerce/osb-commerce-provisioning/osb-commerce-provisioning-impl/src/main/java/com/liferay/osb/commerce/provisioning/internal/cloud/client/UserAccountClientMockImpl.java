@@ -14,8 +14,8 @@
 
 package com.liferay.osb.commerce.provisioning.internal.cloud.client;
 
-import com.liferay.headless.osb.commerce.instance.client.dto.v1_0.UserAccount;
-import com.liferay.headless.osb.commerce.instance.client.resource.v1_0.UserAccountResource;
+import com.liferay.headless.osb.commerce.portal.instance.client.dto.v1_0.UserAccount;
+import com.liferay.headless.osb.commerce.portal.instance.client.resource.v1_0.UserAccountResource;
 import com.liferay.portal.util.PropsValues;
 
 /**

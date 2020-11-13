@@ -17,6 +17,6 @@ dependencies {
 	compileOnly project(":apps:portal-instances:portal-instances-api")
 	compileOnly project(":apps:static:portal-configuration:portal-configuration-metatype-api")
 	compileOnly project(":core:petra:petra-string")
-	compileOnly project(":dxp:apps:osb:osb-commerce:osb-commerce-provisioning:headless:headless-osb-commerce-instance-client")
+	compileOnly project(":dxp:apps:osb:osb-commerce:osb-commerce-provisioning:headless:headless-osb-commerce-portal-instance-client")
 	compileOnly project(":dxp:apps:osb:osb-commerce:osb-commerce-provisioning:osb-commerce-provisioning-api")
 }

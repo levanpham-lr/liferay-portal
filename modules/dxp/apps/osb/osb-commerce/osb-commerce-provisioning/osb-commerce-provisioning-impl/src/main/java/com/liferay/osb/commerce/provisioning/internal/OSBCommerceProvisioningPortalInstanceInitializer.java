@@ -21,7 +21,7 @@ import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
-import com.liferay.headless.osb.commerce.instance.client.dto.v1_0.UserAccount;
+import com.liferay.headless.osb.commerce.portal.instance.client.dto.v1_0.UserAccount;
 import com.liferay.osb.commerce.provisioning.OSBCommercePortalInstanceStatus;
 import com.liferay.osb.commerce.provisioning.constants.OSBCommercePortalInstanceConstants;
 import com.liferay.osb.commerce.provisioning.internal.cloud.client.DXPCloudClientClientFactory;
