@@ -13,20 +13,6 @@ html,
 body {
 	overflow-x: hidden;
 	width: 100vw;
-
-	@media (min-width: 576px) {
-		.open {
-			.left-menu-panel {
-				margin-left: 320px;
-			}
-		}
-	}
-}
-
-.control-menu-container + #wrapper {
-	.left-menu-panel {
-		top: 60px;
-	}
 }
 
 #wrapper {
@@ -36,10 +22,6 @@ body {
 	@import 'components/portlets';
 	@import 'components/rep';
 	@import 'components/sign_in';
-
-	.left-menu-panel + .layout-content {
-		padding-left: 320px;
-	}
 
 	padding: 5rem 0 0;
 

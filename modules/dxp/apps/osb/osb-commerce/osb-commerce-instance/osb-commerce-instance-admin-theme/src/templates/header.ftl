@@ -12,7 +12,7 @@
 					</a>
 				</div>
 
-				<div class="col-4 text-right">
+				<div class="col-8 text-right">
 					<div class="d-md-inline-flex">
 						<#if show_header_search>
 							<#assign preferences = freeMarkerPortletPreferences.getPreferences({"portletSetupPortletDecoratorId": "barebone", "destination": "/search"}) />

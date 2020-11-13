@@ -19,35 +19,6 @@
 						&copy; ${the_year} ${languageUtil.get(locale, "all-rights-reserved")}
 					</span>
 				</div>
-
-				<div class="align-items-center col-md-6 d-flex justify-content-end osb-commerce-newsletter">
-					<div class="d-flex form-group mb-0">
-						<label class="align-self-center autofit-col mr-3" for="osb-commerce-newsletter-input">
-							${languageUtil.get(locale, "stay-up-to-date")}
-						</label>
-
-						<div class="input-group">
-							<div class="input-group-item input-group-prepend">
-								<input
-									class="form-control"
-									id="osb-commerce-newsletter-input"
-									placeholder="${languageUtil.get(locale, "your-email")}"
-									type="email"
-								/>
-							</div>
-
-							<span
-								class="align-self-center input-group-append input-group-item input-group-item-shrink"
-							>
-								<button class="btn btn-secondary" type="button">
-									<svg class="lexicon-icon">
-										<use href="${themeDisplay.getPathThemeImages()}/lexicon/icons.svg#angle-right" />
-									</svg>
-								</button>
-							</span>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
