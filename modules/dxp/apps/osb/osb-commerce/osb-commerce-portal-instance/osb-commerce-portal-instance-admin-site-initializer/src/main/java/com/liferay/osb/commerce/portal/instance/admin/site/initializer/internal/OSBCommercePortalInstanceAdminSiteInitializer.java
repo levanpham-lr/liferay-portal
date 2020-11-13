@@ -12,7 +12,7 @@
  *
  */
 
-package com.liferay.osb.commerce.instance.admin.site.initializer.internal;
+package com.liferay.osb.commerce.portal.instance.admin.site.initializer.internal;
 
 import com.liferay.fragment.constants.FragmentConstants;
 import com.liferay.fragment.constants.FragmentPortletKeys;
@@ -86,13 +86,14 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "site.initializer.key=" + OSBCommerceInstanceAdminSiteInitializer.KEY,
+	property = "site.initializer.key=" + OSBCommercePortalInstanceAdminSiteInitializer.KEY,
 	service = SiteInitializer.class
 )
-public class OSBCommerceInstanceAdminSiteInitializer
+public class OSBCommercePortalInstanceAdminSiteInitializer
 	implements SiteInitializer {
 
-	public static final String KEY = "osb-commerce-instance-admin-initializer";
+	public static final String KEY =
+		"osb-commerce-portal-instance-admin-initializer";
 
 	@Override
 	public String getDescription(Locale locale) {
@@ -453,16 +454,18 @@ public class OSBCommerceInstanceAdminSiteInitializer
 	}
 
 	private static final String _PATH =
-		"com/liferay/osb/commerce/instance/admin/site/initializer/internal" +
-			"/dependencies/";
+		"com/liferay/osb/commerce/portal/instance/admin/site/initializer" +
+			"/internal/dependencies/";
 
 	private static final String _THEME_ID =
-		"osbcommerceinstanceadmintheme_WAR_osbcommerceinstanceadmintheme";
+		"osbcommerceportalinstanceadmintheme_WAR_" +
+			"osbcommerceportalinstanceadmintheme";
 
-	private static final String _THEME_NAME = "OSB Commerce Instance Admin";
+	private static final String _THEME_NAME =
+		"OSB Commerce Portal Instance Admin";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		OSBCommerceInstanceAdminSiteInitializer.class);
+		OSBCommercePortalInstanceAdminSiteInitializer.class);
 
 	private Bundle _bundle;
 
@@ -496,7 +499,7 @@ public class OSBCommerceInstanceAdminSiteInitializer
 	private Portal _portal;
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.osb.commerce.instance.admin.site.initializer)"
+		target = "(osgi.web.symbolicname=com.liferay.osb.commerce.portal.instance.admin.site.initializer)"
 	)
 	private ServletContext _servletContext;
 
