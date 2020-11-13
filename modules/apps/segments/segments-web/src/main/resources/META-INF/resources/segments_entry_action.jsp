@@ -17,13 +17,12 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String eventName = (String)request.getAttribute("view.jsp-eventName");
+SegmentsDisplayContext segmentsDisplayContext = (SegmentsDisplayContext)request.getAttribute(SegmentsWebKeys.SEGMENTS_DISPLAY_CONTEXT);
 String[] excludedRoleNames = (String[])request.getAttribute(SegmentsWebKeys.EXCLUDED_ROLE_NAMES);
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+String eventName = (String)request.getAttribute("view.jsp-eventName");
 
 SegmentsEntry segmentsEntry = (SegmentsEntry)row.getObject();
-
-SegmentsDisplayContext segmentsDisplayContext = (SegmentsDisplayContext)request.getAttribute(SegmentsWebKeys.SEGMENTS_DISPLAY_CONTEXT);
 %>
 
 <liferay-ui:icon-menu
