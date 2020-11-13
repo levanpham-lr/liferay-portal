@@ -287,7 +287,7 @@ public class OSBCommerceInstanceAdminSiteInitializer
 
 	private LayoutPageTemplateCollection _addLayoutPageTemplateCollection(
 			ServiceContext serviceContext)
-		throws PortalException {
+		throws Exception {
 
 		return _layoutPageTemplateCollectionLocalService.
 			addLayoutPageTemplateCollection(
