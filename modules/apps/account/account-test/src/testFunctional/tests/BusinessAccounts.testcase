@@ -813,7 +813,7 @@ definition {
 
 		Accounts.deleteAccount(
 			accountName = "Delete Accounts Name 2 for Test",
-			deactivateType = "Delete Icon");
+			deleteType = "Delete Icon");
 
 		LexiconEntry.viewNoEntry(rowEntry = "Delete Accounts Name 2 for Test");
 
@@ -824,7 +824,7 @@ definition {
 
 		Accounts.deleteAccount(
 			accountName = "Delete Accounts Name 3 for Test",
-			deactivateType = "Management Toolbar");
+			deleteType = "Management Toolbar");
 
 		LexiconEntry.viewNoEntry(rowEntry = "Delete Accounts Name 3 for Test");
 
