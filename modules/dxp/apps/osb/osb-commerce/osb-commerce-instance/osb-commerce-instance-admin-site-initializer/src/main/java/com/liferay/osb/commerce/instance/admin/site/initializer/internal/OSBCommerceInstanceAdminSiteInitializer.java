@@ -285,6 +285,16 @@ public class OSBCommerceInstanceAdminSiteInitializer
 			});
 	}
 
+	private LayoutPageTemplateCollection _addLayoutPageTemplateCollection(
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return _layoutPageTemplateCollectionLocalService.
+			addLayoutPageTemplateCollection(
+				serviceContext.getUserId(), serviceContext.getScopeGroupId(),
+				_THEME_NAME, _THEME_NAME, serviceContext);
+	}
+
 	private LayoutPageTemplateEntry _addLayoutPageTemplateEntry(
 			long layoutPageTemplateCollectionId, String name, String path,
 			ServiceContext serviceContext)
@@ -401,6 +411,13 @@ public class OSBCommerceInstanceAdminSiteInitializer
 		_addFileEntries(
 			fragmentCollection.getFragmentCollectionId(),
 			fragmentCollection.getResourcesFolderId(), serviceContext);
+
+		LayoutPageTemplateCollection layoutPageTemplateCollection =
+			_addLayoutPageTemplateCollection(serviceContext);
+
+		_addLayout(
+			fragmentCollection, layoutPageTemplateCollection, "Dashboard",
+			"dashboard", true, serviceContext);
 	}
 
 	private void _updateLogo(ServiceContext serviceContext) throws Exception {
