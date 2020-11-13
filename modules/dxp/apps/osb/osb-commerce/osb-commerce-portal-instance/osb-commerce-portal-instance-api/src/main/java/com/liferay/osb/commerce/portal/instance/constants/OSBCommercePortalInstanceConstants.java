@@ -12,18 +12,19 @@
  *
  */
 
-package com.liferay.osb.commerce.instance.constants;
+package com.liferay.osb.commerce.portal.instance.constants;
 
 /**
  * @author Ivica Cardic
  */
-public class OSBCommerceInstanceConstants {
+public class OSBCommercePortalInstanceConstants {
 
-	public static final String FRIENDLY_URL_OSB_COMMERCE_INSTANCE_ADMIN =
-		"/osb-commerce-instance-admin";
+	public static final String FRIENDLY_URL_OSB_COMMERCE_PORTAL_INSTANCE_ADMIN =
+		"/osb-commerce-portal-instance-admin";
 
-	public static final String FRIENDLY_URL_OSB_COMMERCE_INSTANCE_STOREFRONT =
-		"/osb-commerce-instance-storefront";
+	public static final String
+		FRIENDLY_URL_OSB_COMMERCE_PORTAL_INSTANCE_STOREFRONT =
+			"/osb-commerce-portal-instance-storefront";
 
 	public static final String ROLE_OSB_COMMERCE_ADMINISTRATOR =
 		"OSB Commerce Administrator";
