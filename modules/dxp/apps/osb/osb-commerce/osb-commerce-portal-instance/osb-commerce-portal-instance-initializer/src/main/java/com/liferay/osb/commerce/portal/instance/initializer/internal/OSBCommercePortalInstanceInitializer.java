@@ -12,7 +12,7 @@
  *
  */
 
-package com.liferay.osb.commerce.instance.initializer.internal;
+package com.liferay.osb.commerce.portal.instance.initializer.internal;
 
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.constants.CommerceActionKeys;
@@ -25,7 +25,7 @@ import com.liferay.commerce.product.constants.CPActionKeys;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolver;
 import com.liferay.commerce.theme.minium.SiteInitializerDependencyResolverThreadLocal;
-import com.liferay.osb.commerce.instance.constants.OSBCommerceInstanceConstants;
+import com.liferay.osb.commerce.portal.instance.constants.OSBCommercePortalInstanceConstants;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.instances.exception.InitializationException;
 import com.liferay.portal.instances.initializer.PortalInstanceInitializer;
@@ -89,14 +89,15 @@ public class OSBCommercePortalInstanceInitializer
 			_addOSBCommerceAdministratorRole(company.getCompanyId());
 
 			long osbCommerceSiteGroupId = _addOSBCommerceSiteGroup(
-				company.getCompanyId(), "OSB Commerce Instance Admin");
+				company.getCompanyId(), "OSB Commerce Portal Instance Admin");
 
 			_initializeOSBCommerceSite(
 				osbCommerceSiteGroupId, _adminSiteInitializer, null,
 				_getDefaultUserId(company.getCompanyId()));
 
 			osbCommerceSiteGroupId = _addOSBCommerceSiteGroup(
-				company.getCompanyId(), "OSB Commerce Instance Storefront");
+				company.getCompanyId(),
+				"OSB Commerce Portal Instance Storefront");
 
 			_initializeOSBCommerceSite(
 				osbCommerceSiteGroupId, _storefrontSiteInitializer,
@@ -232,7 +233,7 @@ public class OSBCommercePortalInstanceInitializer
 	}
 
 	private static final String _OSB_COMMERCE_ADMINISTRATOR_ROLE_NAME =
-		OSBCommerceInstanceConstants.ROLE_OSB_COMMERCE_ADMINISTRATOR;
+		OSBCommercePortalInstanceConstants.ROLE_OSB_COMMERCE_ADMINISTRATOR;
 
 	private static final Map<String, String[]> _actionIdMap =
 		HashMapBuilder.put(
@@ -269,7 +270,7 @@ public class OSBCommercePortalInstanceInitializer
 		).build();
 
 	@Reference(
-		target = "(site.initializer.key=osb-commerce-instance-admin-initializer)"
+		target = "(site.initializer.key=osb-commerce-portal-instance-admin-initializer)"
 	)
 	private SiteInitializer _adminSiteInitializer;
 
