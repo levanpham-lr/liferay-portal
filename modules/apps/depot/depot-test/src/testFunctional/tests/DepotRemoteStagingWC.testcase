@@ -635,4 +635,5 @@ definition {
 			locator1 = "AP#ASSET_ABSTRACT_DETAIL_CONTENT",
 			value1 = "Depot web content with a category");
 	}
+
 }
