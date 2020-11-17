@@ -477,21 +477,6 @@
 </tr>
 <!--FRONTEND SPA INFRASTRUCTURE-->
 <tr>
-	<td>DISABLED_SPA_IE</td>
-	<td>xpath=(//input[contains(@type,'checkbox')]//following-sibling::span[contains(.,'Disable')])[1]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>DISABLED_SPA_IE11</td>
-	<td>//input[contains(@type,'checkbox')]//following-sibling::span[contains(.,'Disable SPA in Internet Explorer 11')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>UPDATE_BUTTON</td>
-	<td>//button[contains(@type,'submit')]//following-sibling::span[contains(.,'Update')]</td>
-	<td></td>
-</tr>
-<tr>
 	<td>USER_NOTIFICATION_TIMEOUT</td>
 	<td>//input[contains(@name,'userNotificationTimeout')]</td>
 	<td></td>
