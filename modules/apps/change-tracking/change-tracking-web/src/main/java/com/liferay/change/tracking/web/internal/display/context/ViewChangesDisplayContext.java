@@ -740,9 +740,9 @@ public class ViewChangesDisplayContext {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
 							StringBundler.concat(
-								"Missing model from production: ",
-								"{modelClassNameId=", modelClassNameId,
-								", classPK=", classPK, "}"));
+								"Missing model from production: {classPK=",
+								classPK, ", modelClassNameId=",
+								modelClassNameId, "}"));
 					}
 
 					continue;
@@ -810,9 +810,9 @@ public class ViewChangesDisplayContext {
 							StringBundler.concat(
 								"Missing model from ", _ctCollection.getName(),
 								": {ctCollectionId=",
-								_ctCollection.getCtCollectionId(),
-								", modelClassNameId=", modelClassNameId,
-								", classPK=", classPK, "}"));
+								_ctCollection.getCtCollectionId(), ", classPK=",
+								classPK, ", modelClassNameId=",
+								modelClassNameId, "}"));
 					}
 
 					continue;
