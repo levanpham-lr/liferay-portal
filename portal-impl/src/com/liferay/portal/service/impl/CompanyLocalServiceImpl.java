@@ -1256,7 +1256,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		User defaultUser = userLocalService.getDefaultUser(companyId);
 
-		String currentThreadPrincipalName = PrincipalThreadLocal.getName();
+		String name = PrincipalThreadLocal.getName();
 
 		try {
 			PrincipalThreadLocal.setName(defaultUser.getUserId());
@@ -1275,7 +1275,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			userActionableDynamicQuery.performActions();
 		}
 		finally {
-			PrincipalThreadLocal.setName(currentThreadPrincipalName);
+			PrincipalThreadLocal.setName(name);
 		}
 
 		userLocalService.deleteUser(defaultUser);
