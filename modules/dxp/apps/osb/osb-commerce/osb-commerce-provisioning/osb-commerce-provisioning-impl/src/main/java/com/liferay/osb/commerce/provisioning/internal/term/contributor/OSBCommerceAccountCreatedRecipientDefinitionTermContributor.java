@@ -70,7 +70,7 @@ public class OSBCommerceAccountCreatedRecipientDefinitionTermContributor
 			return term;
 		}
 
-		if (term.equals("[$ACCOUNT_CREATOR$]")) {
+		if (term.equals("[%ACCOUNT_CREATOR%]")) {
 			CommerceAccount commerceAccount = (CommerceAccount)object;
 
 			List<CommerceAccountUserRel> commerceAccountUserRels =
@@ -100,7 +100,7 @@ public class OSBCommerceAccountCreatedRecipientDefinitionTermContributor
 
 	private static final Map<String, String> _commerceOrderDefinitionTermsMap =
 		HashMapBuilder.put(
-			"[$ACCOUNT_CREATOR$]", "osb-commerce-provisioning-account-creator"
+			"[%ACCOUNT_CREATOR%]", "osb-commerce-provisioning-account-creator"
 		).build();
 
 }
