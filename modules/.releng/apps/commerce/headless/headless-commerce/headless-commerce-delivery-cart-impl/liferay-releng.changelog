@@ -52,3 +52,8 @@ be2097bd3adca3371d4cab75b30d98ef287debe3^..cd8bf0ef665074a0636cec69d8a7ac6c08f4d
 # Bundle Version 3.0.15
 #
 cd8bf0ef665074a0636cec69d8a7ac6c08f4dfec^..46c100cd0fde6ba9ce3cdc2a6a47d9d4a70bcd3f=COMMERCE-5163
+
+#
+# Bundle Version 3.0.16
+#
+46c100cd0fde6ba9ce3cdc2a6a47d9d4a70bcd3f^..c6511cf3b1d3093e619a5f53bd8551776c0323d4=COMMERCE-5187 LPS-123506
