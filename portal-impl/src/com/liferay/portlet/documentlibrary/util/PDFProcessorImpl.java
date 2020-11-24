@@ -655,8 +655,8 @@ public class PDFProcessorImpl
 			fileVersion.getFileEntryId(), fileVersion.getVersion());
 
 		File decryptedFile = null;
-		File thumbnailFile = null;
 		File[] previewFiles = null;
+		File thumbnailFile = null;
 
 		StopWatch stopWatch = new StopWatch();
 
