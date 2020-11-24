@@ -76,7 +76,7 @@ renderResponse.setTitle(role.getTitle(locale));
 <c:if test='<%= !SegmentsEntryDisplayContext.isRoleSegmentationEnabled() && tabs2.equals("segments") %>'>
 	<clay:stripe
 		elementClasses="assign-roles-segments-warning"
-		message="assigning-roles-by-segment-is-disabled-.to-enable-assign-roles-by-segment-go-to-system-settings-segments-segments-service"
+		message="assigning-roles-by-segment-is-disabled-.to-enable,-go-to-system-settings-segments-segments-service"
 		style="warning"
 		title="Warning"
 	/>
