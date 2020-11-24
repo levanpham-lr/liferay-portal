@@ -78,34 +78,24 @@ public class OSBCommercePortalInstanceInitializer
 	}
 
 	@Override
+	public void initialize(long companyId) throws InitializationException {
+		try {
+			_initialize(_companyLocalService.getCompany(companyId));
+		}
+		catch (PortalException portalException) {
+			throw new InitializationException(portalException);
+		}
+	}
+
+	@Override
 	public void initialize(String webId, String virtualHostname, String mx)
 		throws InitializationException {
 
 		try {
-			Company company = _companyLocalService.getCompanyByWebId(webId);
-
-			_addOSBCommerceCurrencyDefaultValues(company);
-
-			_addOSBCommerceAdministratorRole(company.getCompanyId());
-
-			long osbCommerceSiteGroupId = _addOSBCommerceSiteGroup(
-				company.getCompanyId(), "OSB Commerce Portal Instance Admin");
-
-			_initializeOSBCommerceSite(
-				osbCommerceSiteGroupId, _adminSiteInitializer, null,
-				_getDefaultUserId(company.getCompanyId()));
-
-			osbCommerceSiteGroupId = _addOSBCommerceSiteGroup(
-				company.getCompanyId(),
-				"OSB Commerce Portal Instance Storefront");
-
-			_initializeOSBCommerceSite(
-				osbCommerceSiteGroupId, _storefrontSiteInitializer,
-				_storefrontSiteInitializerDependencyResolver,
-				_getDefaultUserId(company.getCompanyId()));
+			_initialize(_companyLocalService.getCompanyByWebId(webId));
 		}
-		catch (Exception exception) {
-			throw new InitializationException(exception);
+		catch (PortalException portalException) {
+			throw new InitializationException(portalException);
 		}
 	}
 
@@ -198,6 +188,33 @@ public class OSBCommercePortalInstanceInitializer
 
 	private long _getDefaultUserId(long companyId) throws PortalException {
 		return _userLocalService.getDefaultUserId(companyId);
+	}
+
+	private void _initialize(Company company) throws InitializationException {
+		try {
+			_addOSBCommerceCurrencyDefaultValues(company);
+
+			_addOSBCommerceAdministratorRole(company.getCompanyId());
+
+			long osbCommerceSiteGroupId = _addOSBCommerceSiteGroup(
+				company.getCompanyId(), "OSB Commerce Portal Instance Admin");
+
+			_initializeOSBCommerceSite(
+				osbCommerceSiteGroupId, _adminSiteInitializer, null,
+				_getDefaultUserId(company.getCompanyId()));
+
+			osbCommerceSiteGroupId = _addOSBCommerceSiteGroup(
+				company.getCompanyId(),
+				"OSB Commerce Portal Instance Storefront");
+
+			_initializeOSBCommerceSite(
+				osbCommerceSiteGroupId, _storefrontSiteInitializer,
+				_storefrontSiteInitializerDependencyResolver,
+				_getDefaultUserId(company.getCompanyId()));
+		}
+		catch (Exception exception) {
+			throw new InitializationException(exception);
+		}
 	}
 
 	private void _initializeOSBCommerceSite(
