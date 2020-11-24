@@ -319,7 +319,7 @@ public class AudioProcessorImpl
 							StringBundler.concat(
 								"Unable to process ",
 								destinationFileVersion.getFileVersionId(), " ",
-								destinationFileVersion.getTitle(), "."));
+								destinationFileVersion.getTitle()));
 					}
 
 					if (_log.isDebugEnabled()) {
@@ -414,7 +414,7 @@ public class AudioProcessorImpl
 			_log.error(
 				StringBundler.concat(
 					"Unable to process ", fileVersion.getFileVersionId(), " ",
-					fileVersion.getTitle(), "."),
+					fileVersion.getTitle()),
 				exception);
 		}
 

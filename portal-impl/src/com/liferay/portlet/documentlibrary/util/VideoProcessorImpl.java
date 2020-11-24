@@ -386,7 +386,7 @@ public class VideoProcessorImpl
 				_log.error(
 					StringBundler.concat(
 						"Unable to process ", fileVersion.getFileVersionId(),
-						" ", fileVersion.getTitle(), "."),
+						" ", fileVersion.getTitle()),
 					exception);
 			}
 
@@ -556,7 +556,7 @@ public class VideoProcessorImpl
 				_log.warn(
 					StringBundler.concat(
 						"Unable to process ", fileVersion.getFileVersionId(),
-						" ", fileVersion.getTitle(), "."));
+						" ", fileVersion.getTitle()));
 			}
 
 			if (_log.isDebugEnabled()) {

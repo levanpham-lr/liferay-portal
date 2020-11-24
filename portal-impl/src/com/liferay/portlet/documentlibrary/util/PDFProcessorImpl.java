@@ -820,7 +820,7 @@ public class PDFProcessorImpl
 						StringBundler.concat(
 							"Unable to process ",
 							fileVersion.getFileVersionId(), " ",
-							fileVersion.getTitle(), "."));
+							fileVersion.getTitle()));
 				}
 
 				if (_log.isDebugEnabled()) {
