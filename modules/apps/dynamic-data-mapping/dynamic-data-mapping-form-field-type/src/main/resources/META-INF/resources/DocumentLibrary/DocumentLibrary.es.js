@@ -224,6 +224,7 @@ const Main = ({
 	fieldName,
 	fileEntryTitle,
 	fileEntryURL,
+	guestUploadURL,
 	id,
 	itemSelectorURL,
 	maximumRepetitions,
@@ -233,7 +234,6 @@ const Main = ({
 	onFocus,
 	placeholder,
 	readOnly,
-	uploadURL,
 	valid: initialValid,
 	value = '{}',
 	...otherProps
@@ -326,7 +326,7 @@ const Main = ({
 		};
 
 		axios
-			.post(uploadURL, convertToFormData(data), {
+			.post(guestUploadURL, convertToFormData(data), {
 				onUploadProgress: (event) => {
 					const progress = Math.round(
 						(event.loaded * 100) / event.total
