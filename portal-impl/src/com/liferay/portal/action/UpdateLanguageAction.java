@@ -122,9 +122,8 @@ public class UpdateLanguageAction implements Action {
 			layoutURL = redirect.substring(0, questionIndex);
 		}
 
-		int friendlyURLSeparatorIndex = -1;
-
 		String friendlyURLSeparator = StringPool.BLANK;
+		int friendlyURLSeparatorIndex = -1;
 
 		for (String urlSeparator :
 				FriendlyURLResolverRegistryUtil.getURLSeparators()) {
