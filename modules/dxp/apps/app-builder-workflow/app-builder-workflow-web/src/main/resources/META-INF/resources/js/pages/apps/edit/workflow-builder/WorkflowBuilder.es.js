@@ -45,6 +45,7 @@ export default function WorkflowBuilder() {
 					type: REMOVE_STEP_EMPTY_FORM_VIEWS,
 				});
 			}
+
 			dispatchConfig({stepIndex: index, type: UPDATE_STEP_INDEX});
 		}
 	};
