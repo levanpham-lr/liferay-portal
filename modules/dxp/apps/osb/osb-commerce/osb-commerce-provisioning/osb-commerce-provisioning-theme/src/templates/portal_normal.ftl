@@ -16,7 +16,7 @@
 		<@liferay_util["include"] page=body_top_include />
 		<@liferay.control_menu />
 
-		<div class="container-fluid" id="wrapper">
+		<div id="wrapper">
 			<#if show_header>
 				<#include "${full_templates_path}/header.ftl" />
 			</#if>
@@ -29,7 +29,7 @@
 					</div>
 
 					<div class="content-wrapper">
-						<main id="content" role="main">
+						<main class="${portal_content_css_class}" id="content" role="main">
 							<h2 class="sr-only" role="heading" aria-level="1">${the_title}</h2>
 
 							<#if selectable>

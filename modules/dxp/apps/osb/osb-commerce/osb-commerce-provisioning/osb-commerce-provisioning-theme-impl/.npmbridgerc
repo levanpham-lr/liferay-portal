@@ -4,7 +4,7 @@
 			"from": "(.*)\\.js$",
 			"to": "bridge/osb-commerce-provisioning-theme-impl/$1"
 		},
-		"file-globs": "**/*.js",
+		"file-globs": "**/*.js,!**/bridge",
 		"input": "build/node/packageRunBuild/resources",
 		"output": "build/node/packageRunBuild/resources/bridge/osb-commerce-provisioning-theme-impl",
 		"src-mod-name-mapper": {

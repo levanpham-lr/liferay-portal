@@ -9,4 +9,4 @@
  * distribution rights of the Software.
  */
 
-export * as OSBCommerceComponents from './components/index';
+export * as OSBCommerceComponents from './js/components/index';

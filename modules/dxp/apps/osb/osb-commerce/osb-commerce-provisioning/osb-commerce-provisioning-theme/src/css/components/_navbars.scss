@@ -20,7 +20,7 @@
 
 	$navbar-margin-left: calc(100vw / 2);
 
-	height: 70px;
+	height: $navbar-commerce-height;
 
 	@include media-breakpoint-down(xs) {
 		&-md {

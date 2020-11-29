@@ -14,7 +14,7 @@ import classnames from 'classnames';
 import {navigate} from 'frontend-js-web';
 import React, {createRef, useEffect, useState} from 'react';
 
-import {START_TRIAL, TRIAL_SKU, addToOrder} from '../../helper/index';
+import {TRIAL_SKU, addToOrder} from '../../helper/index';
 import SubscriptionEntry from '../subscription_entry/index';
 
 const PRODUCT_HIGHLIGHT = 'highlightProduct';
@@ -89,7 +89,7 @@ function CardEntryRenderer({
 						}}
 					>
 						{Liferay.Language.get(
-							TRIAL_SKU === sku ? START_TRIAL : 'subscribe'
+							TRIAL_SKU === sku ? 'start-trial' : 'subscribe'
 						)}
 					</ClayButton>
 				</div>

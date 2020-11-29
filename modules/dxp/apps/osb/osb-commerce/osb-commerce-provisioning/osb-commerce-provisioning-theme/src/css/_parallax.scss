@@ -7,11 +7,16 @@
 
 .parallax-container {
 	height: 100vh;
+	margin-top: -#{$navbar-commerce-height};
+
+	.has-control-menu & {
+		margin-top: calc(-1 * (#{$control-menu-height-desktop} + #{$navbar-commerce-height}));
+	}
 
 	.parallax {
 		height: 100%;
 		overflow-x: hidden;
-		overflow-y: scroll;
+		overflow-y: auto;
 		perspective: #{$base-parallax-perspective}px;
 		perspective-origin: 50% 0;
 		position: relative;
@@ -45,7 +50,11 @@
 		}
 
 		.content-wrapper {
+			display: flex;
+			flex-flow: column;
+			justify-content: space-between;
 			left: 0;
+			min-height: 100%;
 			position: absolute;
 			top: 0;
 			transform: translateZ(0);

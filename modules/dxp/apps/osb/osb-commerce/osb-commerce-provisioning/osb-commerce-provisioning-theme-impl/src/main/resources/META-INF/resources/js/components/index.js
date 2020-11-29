@@ -10,3 +10,4 @@
  */
 
 export {default as CartSummary} from './cart_summary/CartSummary';
+export {default as Header} from './header/Header';

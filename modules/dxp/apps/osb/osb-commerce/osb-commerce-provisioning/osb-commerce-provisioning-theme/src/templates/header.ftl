@@ -3,7 +3,7 @@
 		<div class="container user-personal-bar">
 			<div class="align-items-center autofit-row">
 				<div class="col-4">
-					<a class="${logo_css_class} align-items-center d-md-inline-flex d-sm-none d-none logo-md" href="${site_default_url}" title="<@liferay.language_format arguments="" key="go-to-x" />">
+					<a class="${logo_css_class} align-items-center d-md-inline-flex d-sm-none d-none logo-md" href="${site_default_public_url}" title="<@liferay.language_format arguments="" key="go-to-x" />">
 						<img alt="${logo_description}" class="mr-2" height="56" src="${site_logo}" />
 
 						<#if show_site_name>
@@ -45,7 +45,7 @@
 
 	<div class="navbar navbar-commerce navbar-commerce-xs navbar-expand-md navbar-light pb-3">
 		<div class="container">
-			<a class="${logo_css_class} align-items-center d-inline-flex d-md-none logo-xs" href="${site_default_url}" rel="nofollow">
+			<a class="${logo_css_class} align-items-center d-inline-flex d-md-none logo-xs" href="${site_default_public_url}" rel="nofollow">
 				<img alt="${logo_description}" class="mr-2" height="56" src="${site_logo}" />
 
 				<#if show_site_name>

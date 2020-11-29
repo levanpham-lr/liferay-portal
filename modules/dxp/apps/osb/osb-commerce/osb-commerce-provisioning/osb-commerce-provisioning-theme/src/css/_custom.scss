@@ -29,7 +29,7 @@ body {
 	@import 'portlet/plan_management';
 	@import 'portlet/trial_registration';
 
-	padding: 5rem 0 0;
+	padding: 0;
 
 	.btn-primary,
 	.btn-outline-primary,
@@ -51,6 +51,10 @@ body {
 
 	h1 {
 		font-size: 1.8rem;
+	}
+
+	main {
+		padding: 8rem 0 0 0;
 	}
 
 	#addAccountModal,
