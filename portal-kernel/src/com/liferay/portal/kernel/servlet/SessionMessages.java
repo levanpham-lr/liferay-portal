@@ -357,6 +357,19 @@ public class SessionMessages {
 		}
 	}
 
+	public static void remove(
+		HttpServletRequest httpServletRequest, Class<?> clazz) {
+
+		Map<String, Object> map = _getMap(
+			_getPortalSession(httpServletRequest), _CLASS_NAME, true);
+
+		if (map == null) {
+			return;
+		}
+
+		map.remove(clazz.getName());
+	}
+
 	public static int size(HttpServletRequest httpServletRequest) {
 		return size(_getPortalSession(httpServletRequest));
 	}
