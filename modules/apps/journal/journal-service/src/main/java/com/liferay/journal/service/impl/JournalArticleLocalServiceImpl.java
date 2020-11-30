@@ -7778,18 +7778,13 @@ public class JournalArticleLocalServiceImpl
 			cacheable);
 	}
 
-	protected int getArticleMaxVersionCount() {
-		try {
-			JournalServiceConfiguration journalServiceConfiguration =
-				configurationProvider.getCompanyConfiguration(
-					JournalServiceConfiguration.class,
-					CompanyThreadLocal.getCompanyId());
+	protected int getArticleMaxVersionCount() throws PortalException {
+		JournalServiceConfiguration journalServiceConfiguration =
+			configurationProvider.getCompanyConfiguration(
+				JournalServiceConfiguration.class,
+				CompanyThreadLocal.getCompanyId());
 
-			return journalServiceConfiguration.maxVersionCount();
-		}
-		catch (PortalException portalException) {
-			throw new RuntimeException(portalException);
-		}
+		return journalServiceConfiguration.maxVersionCount();
 	}
 
 	protected List<ObjectValuePair<Long, Integer>> getArticleVersionStatuses(
