@@ -216,6 +216,8 @@ AUI.add(
 
 				var container = instance.get('container');
 
+				var dataType = instance.get('dataType');
+
 				var templateResourceParameters = {
 					doAsGroupId: instance.get('doAsGroupId'),
 					fieldName: instance.get('name'),
@@ -231,6 +233,10 @@ AUI.add(
 					portletNamespace: instance.get('portletNamespace'),
 					readOnly: instance.get('readOnly'),
 				};
+
+				if (dataType && dataType === 'html') {
+					delete templateResourceParameters.doAsGroupId;
+				}
 
 				var templateResourceURL = Liferay.Util.PortletURL.createResourceURL(
 					themeDisplay.getLayoutURL(),
