@@ -471,7 +471,6 @@ public class LiferayVideoConverter extends LiferayConverter {
 		}
 
 		double heightRatio = _height / (double)inputIStreamCoder.getHeight();
-
 		double widthRatio = _width / (double)inputIStreamCoder.getWidth();
 
 		if ((heightRatio < _RATIO_THRESHOLD) ||
