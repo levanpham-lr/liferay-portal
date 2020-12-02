@@ -153,7 +153,7 @@ public class DocumentLibraryDDMFormFieldTemplateContextContributor
 		parameters.put(
 			"uploadURL",
 			getUploadURL(
-				folderId, ddmFormFieldRenderingContext, httpServletRequest));
+				ddmFormFieldRenderingContext, folderId, httpServletRequest));
 
 		String value = ddmFormFieldRenderingContext.getValue();
 
@@ -283,9 +283,8 @@ public class DocumentLibraryDDMFormFieldTemplateContextContributor
 	}
 
 	protected String getUploadURL(
-		long folderId,
 		DDMFormFieldRenderingContext ddmFormFieldRenderingContext,
-		HttpServletRequest httpServletRequest) {
+		long folderId, HttpServletRequest httpServletRequest) {
 
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(httpServletRequest);
