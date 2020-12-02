@@ -55,10 +55,10 @@ public class DDMFormUploadFileEntryHandler implements UploadFileEntryHandler {
 		try (InputStream inputStream = uploadPortletRequest.getFileAsStream(
 				"file")) {
 
-			long folderId = ParamUtil.getLong(uploadPortletRequest, "folderId");
 			long formInstanceId = ParamUtil.getLong(
 				uploadPortletRequest, "formInstanceId");
 			long groupId = ParamUtil.getLong(uploadPortletRequest, "groupId");
+			long folderId = ParamUtil.getLong(uploadPortletRequest, "folderId");
 
 			String fileName = uploadPortletRequest.getFileName("file");
 
