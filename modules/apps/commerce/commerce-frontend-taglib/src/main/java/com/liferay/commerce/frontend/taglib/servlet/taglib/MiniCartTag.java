@@ -179,33 +179,24 @@ public class MiniCartTag extends IncludeTag {
 	protected void setAttributes(HttpServletRequest httpServletRequest) {
 		httpServletRequest.setAttribute(
 			"liferay-commerce:cart:cartViews", _views);
-
 		httpServletRequest.setAttribute(
 			"liferay-commerce:cart:checkoutURL", _checkoutURL);
-
 		httpServletRequest.setAttribute(
 			"liferay-commerce:cart:displayDiscountLevels",
 			_isDisplayDiscountLevels());
-
 		httpServletRequest.setAttribute(
 			"liferay-commerce:cart:displayTotalItemsQuantity",
 			_displayTotalItemsQuantity);
-
 		httpServletRequest.setAttribute(
 			"liferay-commerce:cart:itemsQuantity", _itemsQuantity);
-
 		httpServletRequest.setAttribute(
 			"liferay-commerce:cart:labels", _labels);
-
 		httpServletRequest.setAttribute(
 			"liferay-commerce:cart:orderDetailURL", _orderDetailURL);
-
 		httpServletRequest.setAttribute(
 			"liferay-commerce:cart:orderId", _orderId);
-
 		httpServletRequest.setAttribute(
 			"liferay-commerce:cart:spritemap", _spritemap);
-
 		httpServletRequest.setAttribute(
 			"liferay-commerce:cart:toggleable", _toggleable);
 	}
