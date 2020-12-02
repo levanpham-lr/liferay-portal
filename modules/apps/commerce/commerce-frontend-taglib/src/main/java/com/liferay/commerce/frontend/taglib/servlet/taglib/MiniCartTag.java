@@ -64,7 +64,7 @@ public class MiniCartTag extends IncludeTag {
 			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
 			if (commerceOrder != null) {
-				_itemsQuantity = _getOrderItemsQuantity(commerceOrder, request);
+				_itemsQuantity = _getItemsQuantity(commerceOrder, request);
 				_orderId = commerceOrder.getCommerceOrderId();
 
 				PortletURL commerceCartPortletURL =
@@ -201,7 +201,7 @@ public class MiniCartTag extends IncludeTag {
 			"liferay-commerce:cart:toggleable", _toggleable);
 	}
 
-	private int _getOrderItemsQuantity(
+	private int _getItemsQuantity(
 			CommerceOrder commerceOrder, HttpServletRequest httpServletRequest)
 		throws PortalException {
 
