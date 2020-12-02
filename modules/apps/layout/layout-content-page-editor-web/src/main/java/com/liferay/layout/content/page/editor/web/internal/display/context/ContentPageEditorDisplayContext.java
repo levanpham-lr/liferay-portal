@@ -1712,12 +1712,10 @@ public class ContentPageEditorDisplayContext {
 	private JSONObject _getMasterLayoutJSONObject() {
 		Layout layout = themeDisplay.getLayout();
 
-		LayoutStructure masterLayoutStructure = _getMasterLayoutStructure();
-
 		return JSONUtil.put(
 			"masterLayoutData",
 			Optional.ofNullable(
-				masterLayoutStructure
+				_getMasterLayoutStructure()
 			).map(
 				LayoutStructure::toJSONObject
 			).orElse(
