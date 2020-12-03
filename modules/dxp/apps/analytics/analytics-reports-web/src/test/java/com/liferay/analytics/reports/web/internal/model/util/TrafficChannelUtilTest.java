@@ -104,7 +104,6 @@ public class TrafficChannelUtilTest {
 		Assert.assertEquals(
 			acquisitionChannel.getTrafficAmount(),
 			directTrafficChannelImpl.getTrafficAmount());
-
 		Assert.assertEquals(
 			acquisitionChannel.getTrafficShare(),
 			directTrafficChannelImpl.getTrafficShare(), 0);
@@ -145,11 +144,9 @@ public class TrafficChannelUtilTest {
 		Assert.assertEquals(
 			trafficSource.getCountrySearchKeywordsList(),
 			organicTrafficChannelImpl.getCountrySearchKeywordsList());
-
 		Assert.assertEquals(
 			acquisitionChannel.getTrafficAmount(),
 			organicTrafficChannelImpl.getTrafficAmount());
-
 		Assert.assertEquals(
 			acquisitionChannel.getTrafficShare(),
 			organicTrafficChannelImpl.getTrafficShare(), 0);
@@ -180,11 +177,9 @@ public class TrafficChannelUtilTest {
 		Assert.assertEquals(
 			trafficSource.getCountrySearchKeywordsList(),
 			paidTrafficChannelImpl.getCountrySearchKeywordsList());
-
 		Assert.assertEquals(
 			acquisitionChannel.getTrafficAmount(),
 			paidTrafficChannelImpl.getTrafficAmount());
-
 		Assert.assertEquals(
 			acquisitionChannel.getTrafficShare(),
 			paidTrafficChannelImpl.getTrafficShare(), 0);
@@ -203,7 +198,6 @@ public class TrafficChannelUtilTest {
 		Assert.assertEquals(
 			acquisitionChannel.getTrafficAmount(),
 			referralTrafficChannelImpl.getTrafficAmount());
-
 		Assert.assertEquals(
 			acquisitionChannel.getTrafficShare(),
 			referralTrafficChannelImpl.getTrafficShare(), 0);
@@ -222,7 +216,6 @@ public class TrafficChannelUtilTest {
 		Assert.assertEquals(
 			acquisitionChannel.getTrafficAmount(),
 			socialTrafficChannelImpl.getTrafficAmount());
-
 		Assert.assertEquals(
 			acquisitionChannel.getTrafficShare(),
 			socialTrafficChannelImpl.getTrafficShare(), 0);
