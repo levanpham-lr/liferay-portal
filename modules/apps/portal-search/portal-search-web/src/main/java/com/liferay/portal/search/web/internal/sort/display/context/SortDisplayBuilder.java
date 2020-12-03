@@ -62,12 +62,11 @@ public class SortDisplayBuilder {
 	public SortDisplayContext build() {
 		SortDisplayContext sortDisplayContext = new SortDisplayContext();
 
-		List<SortTermDisplayContext> sortTermDisplayContextList =
+		List<SortTermDisplayContext> sortTermDisplayContexts =
 			buildTermDisplayContexts();
 
 		sortDisplayContext.setAnySelected(
-			isAnySelected(sortTermDisplayContextList));
-
+			isAnySelected(sortTermDisplayContexts));
 		sortDisplayContext.setDisplayStyleGroupId(getDisplayStyleGroupId());
 		sortDisplayContext.setParameterName(_parameterName);
 		sortDisplayContext.setParameterValue(getParameterValue());
@@ -75,7 +74,7 @@ public class SortDisplayBuilder {
 		sortDisplayContext.setSortPortletInstanceConfiguration(
 			_sortPortletInstanceConfiguration);
 		sortDisplayContext.setSortTermDisplayContexts(
-			sortTermDisplayContextList);
+			sortTermDisplayContexts);
 
 		return sortDisplayContext;
 	}
@@ -168,10 +167,10 @@ public class SortDisplayBuilder {
 	}
 
 	protected boolean isAnySelected(
-		List<SortTermDisplayContext> sortTermDisplayContextList) {
+		List<SortTermDisplayContext> sortTermDisplayContexts) {
 
 		for (SortTermDisplayContext sortTermDisplayContext :
-				sortTermDisplayContextList) {
+				sortTermDisplayContexts) {
 
 			if (sortTermDisplayContext.isSelected()) {
 				return true;
