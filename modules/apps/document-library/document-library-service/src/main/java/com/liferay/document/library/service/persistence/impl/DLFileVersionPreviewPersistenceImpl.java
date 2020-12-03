@@ -2586,15 +2586,6 @@ public class DLFileVersionPreviewPersistenceImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		DLFileVersionPreviewPersistenceImpl.class);
 
-	static {
-		try {
-			Class.forName(DLPersistenceConstants.class.getName());
-		}
-		catch (ClassNotFoundException classNotFoundException) {
-			throw new ExceptionInInitializerError(classNotFoundException);
-		}
-	}
-
 	private FinderPath _createFinderPath(
 		String cacheName, String methodName, String[] params,
 		String[] columnNames, boolean baseModelResult) {

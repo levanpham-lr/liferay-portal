@@ -9571,15 +9571,6 @@ public class BackgroundTaskPersistenceImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		BackgroundTaskPersistenceImpl.class);
 
-	static {
-		try {
-			Class.forName(BackgroundTaskPersistenceConstants.class.getName());
-		}
-		catch (ClassNotFoundException classNotFoundException) {
-			throw new ExceptionInInitializerError(classNotFoundException);
-		}
-	}
-
 	private FinderPath _createFinderPath(
 		String cacheName, String methodName, String[] params,
 		String[] columnNames, boolean baseModelResult) {

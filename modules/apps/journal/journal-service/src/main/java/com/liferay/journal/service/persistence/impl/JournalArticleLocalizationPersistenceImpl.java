@@ -2520,15 +2520,6 @@ public class JournalArticleLocalizationPersistenceImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		JournalArticleLocalizationPersistenceImpl.class);
 
-	static {
-		try {
-			Class.forName(JournalPersistenceConstants.class.getName());
-		}
-		catch (ClassNotFoundException classNotFoundException) {
-			throw new ExceptionInInitializerError(classNotFoundException);
-		}
-	}
-
 	private FinderPath _createFinderPath(
 		String cacheName, String methodName, String[] params,
 		String[] columnNames, boolean baseModelResult) {

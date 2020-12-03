@@ -2795,15 +2795,6 @@ public class MBStatsUserPersistenceImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		MBStatsUserPersistenceImpl.class);
 
-	static {
-		try {
-			Class.forName(MBPersistenceConstants.class.getName());
-		}
-		catch (ClassNotFoundException classNotFoundException) {
-			throw new ExceptionInInitializerError(classNotFoundException);
-		}
-	}
-
 	private FinderPath _createFinderPath(
 		String cacheName, String methodName, String[] params,
 		String[] columnNames, boolean baseModelResult) {

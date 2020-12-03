@@ -2969,15 +2969,6 @@ public class SegmentsEntryRelPersistenceImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		SegmentsEntryRelPersistenceImpl.class);
 
-	static {
-		try {
-			Class.forName(SegmentsPersistenceConstants.class.getName());
-		}
-		catch (ClassNotFoundException classNotFoundException) {
-			throw new ExceptionInInitializerError(classNotFoundException);
-		}
-	}
-
 	private FinderPath _createFinderPath(
 		String cacheName, String methodName, String[] params,
 		String[] columnNames, boolean baseModelResult) {

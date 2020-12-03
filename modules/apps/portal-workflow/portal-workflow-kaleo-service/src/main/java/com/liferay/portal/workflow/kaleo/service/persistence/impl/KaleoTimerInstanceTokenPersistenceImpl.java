@@ -2748,15 +2748,6 @@ public class KaleoTimerInstanceTokenPersistenceImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		KaleoTimerInstanceTokenPersistenceImpl.class);
 
-	static {
-		try {
-			Class.forName(KaleoPersistenceConstants.class.getName());
-		}
-		catch (ClassNotFoundException classNotFoundException) {
-			throw new ExceptionInInitializerError(classNotFoundException);
-		}
-	}
-
 	private FinderPath _createFinderPath(
 		String cacheName, String methodName, String[] params,
 		String[] columnNames, boolean baseModelResult) {

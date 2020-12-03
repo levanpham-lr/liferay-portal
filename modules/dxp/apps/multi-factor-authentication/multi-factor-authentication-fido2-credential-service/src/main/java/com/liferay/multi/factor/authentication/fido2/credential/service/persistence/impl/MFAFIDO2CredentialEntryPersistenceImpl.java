@@ -2126,16 +2126,6 @@ public class MFAFIDO2CredentialEntryPersistenceImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		MFAFIDO2CredentialEntryPersistenceImpl.class);
 
-	static {
-		try {
-			Class.forName(
-				MFAFIDOTwoCredentialPersistenceConstants.class.getName());
-		}
-		catch (ClassNotFoundException classNotFoundException) {
-			throw new ExceptionInInitializerError(classNotFoundException);
-		}
-	}
-
 	private FinderPath _createFinderPath(
 		String cacheName, String methodName, String[] params,
 		String[] columnNames, boolean baseModelResult) {
