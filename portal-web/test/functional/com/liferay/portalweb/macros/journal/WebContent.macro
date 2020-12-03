@@ -2396,41 +2396,45 @@ definition {
 
 		if (isSet(webContentTextBox)) {
 			if (isSet(fieldName)) {
-				AssertTextEquals(
-					key_fieldName = "${fieldName}",
-					locator1 = "DDMField#TEXT_BOX",
-					value1 = "${webContentTextBox}");
+				var actual = selenium.getHtmlNodeText("//div[contains(@data-fieldname,'${fieldName}')]//textarea");
+
+				TestUtils.assertEquals(
+					actual = "${actual}",
+					expected = "${webContentTextBox}");
 			}
 			else if (isSet(webContentTextBoxFieldName)) {
-				AssertTextEquals(
-					key_fieldName = "${webContentTextBoxFieldName}",
-					locator1 = "DDMField#TEXT_BOX",
-					value1 = "${webContentTextBox}");
+				var actual = selenium.getHtmlNodeText("//div[contains(@data-fieldname,'${webContentTextBoxFieldName}')]//textarea");
+
+				TestUtils.assertEquals(
+					actual = "${actual}",
+					expected = "${webContentTextBox}");
 			}
 			else {
-				AssertTextEquals(
-					key_fieldName = "TextBox",
-					locator1 = "DDMField#TEXT_BOX",
-					value1 = "${webContentTextBox}");
+				var actual = selenium.getHtmlNodeText("//div[contains(@data-fieldname,'TextBox')]//textarea");
+
+				TestUtils.assertEquals(
+					actual = "${actual}",
+					expected = "${webContentTextBox}");
 			}
 		}
 
 		if (isSet(webContentTextBox2)) {
-			var key_fieldName = "${fieldName2}";
+			var actual = selenium.getHtmlNodeText("//div[contains(@data-fieldname,'${fieldName2}')]//textarea");
 
-			AssertTextEquals(
-				locator1 = "DDMField#TEXT_BOX",
-				value1 = "${webContentTextBox2}");
+			TestUtils.assertEquals(
+				actual = "${actual}",
+				expected = "${webContentTextBox2}");
 		}
 
 		if (isSet(webContentTextBoxList)) {
 			var count = "1";
 
 			for (var webContentTextBox : list "${webContentTextBoxList}") {
-				AssertTextEquals(
-					key_fieldName = "heading${count}",
-					locator1 = "DDMField#TEXT_BOX",
-					value1 = "${webContentTextBox}");
+				var actual = selenium.getHtmlNodeText("//div[contains(@data-fieldname,'heading${count}')]//textarea");
+
+				TestUtils.assertEquals(
+					actual = "${actual}",
+					expected = "${webContentTextBox}");
 
 				var count = ${count} + 1;
 			}
