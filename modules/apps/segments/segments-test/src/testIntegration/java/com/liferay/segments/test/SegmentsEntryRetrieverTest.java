@@ -88,10 +88,8 @@ public class SegmentsEntryRetrieverTest {
 
 		Assert.assertEquals(
 			Arrays.toString(segmentsEntryIds), 2, segmentsEntryIds.length);
-
 		Assert.assertEquals(
 			segmentsEntry.getSegmentsEntryId(), segmentsEntryIds[0]);
-
 		Assert.assertEquals(
 			SegmentsEntryConstants.ID_DEFAULT, segmentsEntryIds[1]);
 	}
@@ -111,9 +109,7 @@ public class SegmentsEntryRetrieverTest {
 
 		Assert.assertEquals(
 			Arrays.toString(segmentsEntryIds), 2, segmentsEntryIds.length);
-
 		Assert.assertEquals(1234567L, segmentsEntryIds[0]);
-
 		Assert.assertEquals(
 			SegmentsEntryConstants.ID_DEFAULT, segmentsEntryIds[1]);
 	}
@@ -125,7 +121,6 @@ public class SegmentsEntryRetrieverTest {
 
 		Assert.assertEquals(
 			Arrays.toString(segmentsEntryIds), 1, segmentsEntryIds.length);
-
 		Assert.assertEquals(
 			SegmentsEntryConstants.ID_DEFAULT, segmentsEntryIds[0]);
 	}
