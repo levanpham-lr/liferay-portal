@@ -118,8 +118,9 @@ List<SiteNavigationMenu> autoSiteNavigationMenus = layoutsAdminDisplayContext.ge
 </clay:container-fluid>
 
 <aui:script>
-	var form = document.<portlet:namespace />fm;
 	var addButton = document.getElementById('<portlet:namespace />addButton');
+
+	var form = document.<portlet:namespace />fm;
 
 	form.addEventListener('submit', function (event) {
 		event.preventDefault();
