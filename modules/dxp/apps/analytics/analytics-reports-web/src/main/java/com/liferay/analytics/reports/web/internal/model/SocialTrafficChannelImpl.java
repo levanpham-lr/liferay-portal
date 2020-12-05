@@ -36,6 +36,7 @@ public class SocialTrafficChannelImpl implements TrafficChannel {
 
 	public SocialTrafficChannelImpl(boolean error) {
 		_error = error;
+
 		_referringSocialMedia = Collections.emptyList();
 		_trafficAmount = 0;
 		_trafficShare = 0;
@@ -45,10 +46,11 @@ public class SocialTrafficChannelImpl implements TrafficChannel {
 		List<ReferringSocialMedia> referringSocialMedia, long trafficAmount,
 		double trafficShare) {
 
-		_error = false;
 		_referringSocialMedia = referringSocialMedia;
 		_trafficAmount = trafficAmount;
 		_trafficShare = trafficShare;
+
+		_error = false;
 	}
 
 	@Override
