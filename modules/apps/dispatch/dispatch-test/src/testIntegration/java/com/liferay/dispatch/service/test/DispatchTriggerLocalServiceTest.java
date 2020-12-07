@@ -243,14 +243,14 @@ public class DispatchTriggerLocalServiceTest {
 
 		Company company1 = CompanyTestUtil.addCompany();
 
-		Company company2 = CompanyTestUtil.addCompany();
-
 		User user1 = UserTestUtil.addUser(company1);
-
-		User user2 = UserTestUtil.addUser(company2);
 
 		DispatchTrigger dispatchTrigger1 = _addDispatchTrigger(
 			DispatchTriggerTestUtil.randomDispatchTrigger(user1, 1));
+
+		Company company2 = CompanyTestUtil.addCompany();
+
+		User user2 = UserTestUtil.addUser(company2);
 
 		DispatchTrigger dispatchTrigger2 = _addDispatchTrigger(
 			DispatchTriggerTestUtil.randomDispatchTrigger(user2, 1));
@@ -285,10 +285,10 @@ public class DispatchTriggerLocalServiceTest {
 		Assert.assertEquals(
 			expectedDispatchTrigger.getCronExpression(),
 			actualDispatchTrigger.getCronExpression());
+		Assert.assertNotNull(actualDispatchTrigger.getStartDate());
 		Assert.assertEquals(
 			expectedDispatchTrigger.getTaskClusterMode(),
 			actualDispatchTrigger.getTaskClusterMode());
-		Assert.assertNotNull(actualDispatchTrigger.getStartDate());
 	}
 
 	private void _basicAssertEquals(
