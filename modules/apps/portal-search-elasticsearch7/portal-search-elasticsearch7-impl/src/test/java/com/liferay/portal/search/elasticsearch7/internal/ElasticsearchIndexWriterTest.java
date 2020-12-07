@@ -87,10 +87,10 @@ public class ElasticsearchIndexWriterTest extends BaseIndexingTestCase {
 
 		_indexWriter.partiallyUpdateDocument(createSearchContext(), document);
 
-		assertOnlyOne(Field.TITLE, "change");
-		assertOnlyOne(Field.CONTENT, "example");
-
 		assertNone(Field.TITLE, "text");
+
+		assertOnlyOne(Field.CONTENT, "example");
+		assertOnlyOne(Field.TITLE, "change");
 	}
 
 	@Test
@@ -104,8 +104,8 @@ public class ElasticsearchIndexWriterTest extends BaseIndexingTestCase {
 
 		_indexWriter.partiallyUpdateDocument(createSearchContext(), document);
 
-		assertOnlyOne(Field.TITLE, "text");
 		assertOnlyOne(Field.CONTENT, "example");
+		assertOnlyOne(Field.TITLE, "text");
 	}
 
 	@Test
@@ -116,9 +116,9 @@ public class ElasticsearchIndexWriterTest extends BaseIndexingTestCase {
 
 		_indexWriter.updateDocument(createSearchContext(), document);
 
-		assertOnlyOne(Field.TITLE, "example");
-
 		assertNone(Field.TITLE, "text");
+
+		assertOnlyOne(Field.TITLE, "example");
 	}
 
 	@Test
@@ -130,9 +130,9 @@ public class ElasticsearchIndexWriterTest extends BaseIndexingTestCase {
 
 		_indexWriter.updateDocument(createSearchContext(), document);
 
-		assertOnlyOne(Field.TITLE, "text");
-
 		assertNone(Field.CONTENT, "example");
+
+		assertOnlyOne(Field.TITLE, "text");
 	}
 
 	protected Document addDocument(String fieldName, String fieldValue) {
