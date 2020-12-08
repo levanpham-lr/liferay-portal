@@ -127,7 +127,7 @@ public class DispatchLogDisplayContextTest {
 		}
 
 		Assert.assertEquals(
-			"Get dispatch log if HTTP servlet request misses dispatch log id",
+			"Get dispatch log if HTTP servlet request misses dispatch log ID",
 			NoSuchLogException.class, exceptionClass);
 
 		try {
@@ -142,7 +142,7 @@ public class DispatchLogDisplayContextTest {
 		}
 
 		Assert.assertEquals(
-			"Get execution time if HTTP servlet request misses dispatch log id",
+			"Get execution time if HTTP servlet request misses dispatch log ID",
 			NoSuchLogException.class, exceptionClass);
 
 		Assert.assertNull(
