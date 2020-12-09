@@ -85,4 +85,11 @@ public interface DocumentLibraryDDMFormFieldTypeSettings
 	)
 	public boolean allowGuestUsers();
 
+	@DDMFormField(
+		label = "%repeatable",
+		properties = {"showAsSwitcher=true", "showMaximumRepetitionsInfo=true"}
+	)
+	@Override
+	public boolean repeatable();
+
 }
