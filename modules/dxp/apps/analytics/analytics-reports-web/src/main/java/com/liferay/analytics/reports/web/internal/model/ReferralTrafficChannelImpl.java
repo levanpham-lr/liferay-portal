@@ -157,7 +157,9 @@ public class ReferralTrafficChannelImpl implements TrafficChannel {
 		Stream<ReferringURL> stream = _referringDomains.stream();
 
 		return JSONUtil.putAll(
-			stream.sorted(
+			stream.limit(
+				10
+			).sorted(
 				_getReferringURLComparator()
 			).map(
 				ReferringURL::toJSONObject
@@ -172,7 +174,9 @@ public class ReferralTrafficChannelImpl implements TrafficChannel {
 		Stream<ReferringURL> stream = _referringPages.stream();
 
 		return JSONUtil.putAll(
-			stream.sorted(
+			stream.limit(
+				10
+			).sorted(
 				_getReferringURLComparator()
 			).map(
 				ReferringURL::toJSONObject
