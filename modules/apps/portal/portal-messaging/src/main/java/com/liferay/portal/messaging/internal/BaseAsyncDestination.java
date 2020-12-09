@@ -233,6 +233,8 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 		if (_noticeableThreadPoolExecutor != null) {
 			_noticeableThreadPoolExecutor.setCorePoolSize(workersCoreSize);
 
+			// Invoke setMaximumPoolSize after setCorePoolSize. See LPS-124209.
+
 			_noticeableThreadPoolExecutor.setMaximumPoolSize(workersMaxSize);
 		}
 	}
