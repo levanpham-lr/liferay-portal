@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -156,7 +157,9 @@ public class ReferralTrafficChannelImpl implements TrafficChannel {
 		Stream<ReferringURL> stream = _referringDomains.stream();
 
 		return JSONUtil.putAll(
-			stream.map(
+			stream.sorted(
+				_getReferringURLComparator()
+			).map(
 				ReferringURL::toJSONObject
 			).toArray());
 	}
@@ -169,9 +172,18 @@ public class ReferralTrafficChannelImpl implements TrafficChannel {
 		Stream<ReferringURL> stream = _referringPages.stream();
 
 		return JSONUtil.putAll(
-			stream.map(
+			stream.sorted(
+				_getReferringURLComparator()
+			).map(
 				ReferringURL::toJSONObject
 			).toArray());
+	}
+
+	private Comparator<ReferringURL> _getReferringURLComparator() {
+		Comparator<ReferringURL> comparator = Comparator.comparingInt(
+			ReferringURL::getTrafficAmount);
+
+		return comparator.reversed();
 	}
 
 	private final boolean _error;
