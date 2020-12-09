@@ -228,7 +228,6 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 		}
 
 		_workersCoreSize = workersCoreSize;
-
 		_workersMaxSize = workersMaxSize;
 
 		if (_noticeableThreadPoolExecutor != null) {
