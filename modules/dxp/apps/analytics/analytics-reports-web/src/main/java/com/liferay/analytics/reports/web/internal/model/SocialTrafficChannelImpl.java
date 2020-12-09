@@ -59,7 +59,6 @@ public class SocialTrafficChannelImpl implements TrafficChannel {
 		).collect(
 			Collectors.toList()
 		);
-
 		_trafficAmount = trafficAmount;
 		_trafficShare = trafficShare;
 
