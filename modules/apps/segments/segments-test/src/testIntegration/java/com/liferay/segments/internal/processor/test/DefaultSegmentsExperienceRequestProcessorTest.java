@@ -90,7 +90,6 @@ public class DefaultSegmentsExperienceRequestProcessorTest {
 		Assert.assertEquals(
 			Arrays.toString(segmentsExperienceIds), 1,
 			segmentsExperienceIds.length);
-
 		Assert.assertEquals(
 			segmentsExperience.getSegmentsExperienceId(),
 			segmentsExperienceIds[0]);
@@ -160,7 +159,6 @@ public class DefaultSegmentsExperienceRequestProcessorTest {
 		Assert.assertEquals(
 			Arrays.toString(segmentsExperienceIds), 1,
 			segmentsExperienceIds.length);
-
 		Assert.assertEquals(
 			segmentsExperience.getSegmentsExperienceId(),
 			segmentsExperienceIds[0]);
