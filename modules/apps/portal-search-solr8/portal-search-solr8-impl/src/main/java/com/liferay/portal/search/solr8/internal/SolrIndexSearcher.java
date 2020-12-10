@@ -245,10 +245,9 @@ public class SolrIndexSearcher extends BaseIndexSearcher {
 
 		CountSearchRequest countSearchRequest = new CountSearchRequest();
 
-		SearchRequest searchRequest = _getSearchRequest(searchContext);
-
 		populateBaseSearchRequest(
-			countSearchRequest, searchRequest, searchContext, query);
+			countSearchRequest, _getSearchRequest(searchContext), searchContext,
+			query);
 
 		return countSearchRequest;
 	}

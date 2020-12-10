@@ -524,11 +524,10 @@ public class OSBCommerceProvisioningSiteInitializer implements SiteInitializer {
 
 		Group group = serviceContext.getScopeGroup();
 
-		JSONArray jsonArray = _getJSONArray("products.json");
-
 		return _cpDefinitionsImporter.importCPDefinitions(
-			jsonArray, group.getName(serviceContext.getLocale()),
-			catalogGroupId, commerceChannelId, new long[0],
+			_getJSONArray("products.json"),
+			group.getName(serviceContext.getLocale()), catalogGroupId,
+			commerceChannelId, new long[0],
 			OSBCommerceProvisioningSiteInitializer.class.getClassLoader(),
 			_PATH + "images/", serviceContext.getScopeGroupId(),
 			serviceContext.getUserId());
