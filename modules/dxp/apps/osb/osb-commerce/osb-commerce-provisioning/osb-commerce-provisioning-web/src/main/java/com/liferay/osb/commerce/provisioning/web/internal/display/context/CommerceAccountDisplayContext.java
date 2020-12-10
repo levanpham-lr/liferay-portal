@@ -46,13 +46,14 @@ public class CommerceAccountDisplayContext {
 
 		_commerceAccountService = commerceAccountService;
 		_commerceAddressService = commerceAddressService;
+		_commerceCountryService = commerceCountryService;
+		_userLocalService = userLocalService;
+
 		_commerceAccountRequestHelper = new CommerceAccountRequestHelper(
 			httpServletRequest);
 
 		_commerceContext = (CommerceContext)httpServletRequest.getAttribute(
 			CommerceWebKeys.COMMERCE_CONTEXT);
-		_commerceCountryService = commerceCountryService;
-		_userLocalService = userLocalService;
 	}
 
 	public CommerceAddress getBillingCommerceAddress() throws PortalException {

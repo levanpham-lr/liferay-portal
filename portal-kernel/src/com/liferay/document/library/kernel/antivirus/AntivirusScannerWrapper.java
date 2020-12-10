@@ -24,8 +24,9 @@ import java.io.File;
 public class AntivirusScannerWrapper implements AntivirusScanner {
 
 	public AntivirusScannerWrapper(AntivirusScanner antivirusScanner) {
-		_originalAntivirusScanner = antivirusScanner;
 		_antivirusScanner = antivirusScanner;
+
+		_originalAntivirusScanner = antivirusScanner;
 	}
 
 	@Override
