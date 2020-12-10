@@ -95,26 +95,23 @@ public class LanguageResourceImpl extends BaseLanguageResourceImpl {
 							return null;
 						}
 
-						Stream<Locale> availableLocalesStream =
-							availableLocales.stream();
+						Stream<Locale> stream = availableLocales.stream();
 
-						return availableLocalesStream.collect(
+						return stream.collect(
 							Collectors.toMap(
 								LocaleUtil::toBCP47LanguageId,
 								availableLocale -> locale.getDisplayCountry(
 									availableLocale)));
 					});
-
 				setName_i18n(
 					() -> {
 						if (!acceptAllLanguages) {
 							return null;
 						}
 
-						Stream<Locale> availableLocalesStream =
-							availableLocales.stream();
+						Stream<Locale> stream = availableLocales.stream();
 
-						return availableLocalesStream.collect(
+						return stream.collect(
 							Collectors.toMap(
 								LocaleUtil::toBCP47LanguageId,
 								availableLocale -> locale.getDisplayLanguage(
