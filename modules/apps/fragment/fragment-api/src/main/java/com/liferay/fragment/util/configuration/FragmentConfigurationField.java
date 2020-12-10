@@ -53,8 +53,6 @@ public class FragmentConfigurationField {
 		_dataType = dataType;
 		_defaultValue = defaultValue;
 		_type = type;
-
-		_localizable = false;
 	}
 
 	public String getDataType() {
