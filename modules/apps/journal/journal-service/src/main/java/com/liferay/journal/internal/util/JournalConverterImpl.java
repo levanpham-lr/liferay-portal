@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -1224,6 +1225,12 @@ public class JournalConverterImpl implements JournalConverter {
 
 	private String _getLinkToLayoutValue(
 		Locale defaultLocale, Element dynamicContentElement) {
+
+		String value = dynamicContentElement.getText();
+
+		if (JSONUtil.isValid(value)) {
+			return value;
+		}
 
 		String[] values = StringUtil.split(
 			dynamicContentElement.getText(), CharPool.AT);
