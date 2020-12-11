@@ -56,15 +56,15 @@ public class TalendArchiveParserUtilTest {
 
 		StringBundler sb = new StringBundler();
 
-		for (String classpathEntry : _CLASSPATH_ENTRIES) {
+		for (String classPathEntry : _CLASS_PATH_ENTRIES) {
 			sb.append(jobDirectory);
-			sb.append(classpathEntry);
+			sb.append(classPathEntry);
 			sb.append(File.pathSeparator);
 		}
 
-		String classpath = talendArchive.getClasspath();
+		String classPath = talendArchive.getClassPath();
 
-		Assert.assertTrue(classpath.startsWith(sb.toString()));
+		Assert.assertTrue(classPath.startsWith(sb.toString()));
 
 		Assert.assertEquals(
 			jobDirectory + _JOB_JAR_PATH, talendArchive.getJobJarPath());
@@ -74,7 +74,7 @@ public class TalendArchiveParserUtilTest {
 		Assert.assertTrue(jobMainClassFQN.endsWith(_JOB_NAME));
 	}
 
-	private static final String[] _CLASSPATH_ENTRIES = {
+	private static final String[] _CLASS_PATH_ENTRIES = {
 		"/lib/dom4j-1.6.1.jar", "/lib/log4j-1.2.17.jar", "/lib/routines.jar",
 		"/lib/talend_file_enhanced_20070724.jar"
 	};

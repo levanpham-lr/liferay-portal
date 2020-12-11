@@ -119,7 +119,7 @@ public class TalendProcess {
 
 			processConfigBuilder.setRuntimeClassPath(
 				StringBundler.concat(
-					_talendArchive.getClasspath(), File.pathSeparator,
+					_talendArchive.getClassPath(), File.pathSeparator,
 					_BUNDLE_FILE_PATH));
 
 			return processConfigBuilder.build();

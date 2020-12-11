@@ -26,8 +26,8 @@ import java.util.List;
  */
 public class TalendArchive {
 
-	public String getClasspath() {
-		return _classpath;
+	public String getClassPath() {
+		return _classPath;
 	}
 
 	public String getContextName() {
@@ -52,8 +52,8 @@ public class TalendArchive {
 			return new TalendArchive(this);
 		}
 
-		public Builder classpathEntries(List<String> classpathEntries) {
-			_classpathEntries = classpathEntries;
+		public Builder classPathEntries(List<String> classPathEntries) {
+			_classPathEntries = classPathEntries;
 
 			return this;
 		}
@@ -82,16 +82,16 @@ public class TalendArchive {
 			return this;
 		}
 
-		private String _buildClasspath() {
-			if (_classpathEntries == null) {
+		private String _buildClassPath() {
+			if (_classPathEntries == null) {
 				return StringPool.BLANK;
 			}
 
 			StringBundler sb = new StringBundler(
-				(_classpathEntries.size() * 2) + 1);
+				(_classPathEntries.size() * 2) + 1);
 
-			for (String classpathEntry : _classpathEntries) {
-				sb.append(classpathEntry);
+			for (String classPathEntry : _classPathEntries) {
+				sb.append(classPathEntry);
 				sb.append(File.pathSeparatorChar);
 			}
 
@@ -100,7 +100,7 @@ public class TalendArchive {
 			return sb.toString();
 		}
 
-		private List<String> _classpathEntries;
+		private List<String> _classPathEntries;
 		private String _contextName;
 		private String _jobDirectory;
 		private String _jobJarPath;
@@ -109,14 +109,14 @@ public class TalendArchive {
 	}
 
 	private TalendArchive(Builder builder) {
-		_classpath = builder._buildClasspath();
+		_classPath = builder._buildClassPath();
 		_contextName = builder._contextName;
 		_jobDirectory = builder._jobDirectory;
 		_jobJarPath = builder._jobJarPath;
 		_jobMainClassFQN = builder._jobMainClassFQN;
 	}
 
-	private final String _classpath;
+	private final String _classPath;
 	private final String _contextName;
 	private final String _jobDirectory;
 	private final String _jobJarPath;
