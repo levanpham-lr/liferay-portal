@@ -194,12 +194,10 @@ public class TalendArchiveParserUtil {
 		TalendArchive.Builder talendArchiveBuilder =
 			new TalendArchive.Builder();
 
-		talendArchiveBuilder.contextName(
-			(String)jobProperties.get("contextName"));
-
 		talendArchiveBuilder.classPathEntries(
 			_getJobLibEntries(jobDirectoryPath));
-
+		talendArchiveBuilder.contextName(
+			(String)jobProperties.get("contextName"));
 		talendArchiveBuilder.jobDirectory(jobDirectory.getAbsolutePath());
 
 		String jobName = (String)jobProperties.get("job");
