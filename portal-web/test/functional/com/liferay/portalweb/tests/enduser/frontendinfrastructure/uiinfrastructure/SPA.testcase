@@ -37,6 +37,7 @@ definition {
 	@priority = "5"
 	test CheckIE11DisableSPA {
 		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "SPA#CheckIE11DisableSPA";
 
 		ApplicationsMenu.gotoPortlet(
 			category = "Configuration",
