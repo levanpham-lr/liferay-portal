@@ -2381,21 +2381,21 @@ public class LayoutStagedModelDataHandler
 		return layout.getLayoutPrototypeUuid();
 	}
 
-	private boolean _isLayoutOutdated(Layout layout, Layout layoutPrototype) {
-		if ((layout == null) || (layoutPrototype == null)) {
+	private boolean _isLayoutOutdated(Layout existingLayout, Layout layout) {
+		if ((existingLayout == null) || (layout == null)) {
 			return true;
 		}
 
-		Date layoutModifiedDate = layout.getModifiedDate();
+		Date existingLayoutModifiedDate = existingLayout.getModifiedDate();
 
 		long lastMergeTime = GetterUtil.getLong(
-			layout.getTypeSettingsProperty(Sites.LAST_MERGE_TIME));
+			existingLayout.getTypeSettingsProperty(Sites.LAST_MERGE_TIME));
 
-		Date layoutPrototypeModifiedDate = layoutPrototype.getModifiedDate();
+		Date layoutModifiedDate = layout.getModifiedDate();
 
-		if ((layoutModifiedDate == null) ||
-			(layoutPrototypeModifiedDate == null) ||
-			(layoutPrototypeModifiedDate.getTime() > lastMergeTime)) {
+		if ((existingLayoutModifiedDate == null) ||
+			(layoutModifiedDate == null) ||
+			(layoutModifiedDate.getTime() > lastMergeTime)) {
 
 			return true;
 		}
