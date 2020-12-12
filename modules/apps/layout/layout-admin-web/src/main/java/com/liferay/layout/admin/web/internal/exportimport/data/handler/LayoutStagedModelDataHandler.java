@@ -2387,10 +2387,8 @@ public class LayoutStagedModelDataHandler
 		}
 
 		Date existingLayoutModifiedDate = existingLayout.getModifiedDate();
-
 		long lastMergeTime = GetterUtil.getLong(
 			existingLayout.getTypeSettingsProperty(Sites.LAST_MERGE_TIME));
-
 		Date layoutModifiedDate = layout.getModifiedDate();
 
 		if ((existingLayoutModifiedDate == null) ||
