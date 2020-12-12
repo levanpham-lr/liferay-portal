@@ -87,7 +87,6 @@ public class PermissionCheckerTest {
 				"/dependencies/resource-actions.xml");
 
 		_resourceActions.check(_PORTLET_RESOURCE_NAME);
-
 		_resourceActions.check(_NONSITE_PORTLET_RESOURCE_NAME);
 	}
 

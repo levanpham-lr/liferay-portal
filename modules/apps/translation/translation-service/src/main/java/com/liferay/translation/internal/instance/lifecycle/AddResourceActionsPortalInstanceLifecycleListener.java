@@ -39,6 +39,7 @@ public class AddResourceActionsPortalInstanceLifecycleListener
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {
+		Set<String> names = new HashSet<>();
 		String xml = StringUtil.read(
 			AddResourceActionsPortalInstanceLifecycleListener.class.
 				getClassLoader(),
@@ -46,8 +47,6 @@ public class AddResourceActionsPortalInstanceLifecycleListener
 				"/dependencies/resource-actions.xml.tpl");
 
 		String[] languageIds = ArrayUtil.sortedUnique(PropsValues.LOCALES);
-
-		Set<String> names = new HashSet<>();
 
 		for (int i = 0; i < languageIds.length; i++) {
 			_resourceActions.read(
