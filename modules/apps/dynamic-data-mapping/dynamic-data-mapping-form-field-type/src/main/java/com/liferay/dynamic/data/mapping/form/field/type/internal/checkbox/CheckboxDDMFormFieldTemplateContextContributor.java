@@ -105,11 +105,11 @@ public class CheckboxDDMFormFieldTemplateContextContributor
 			ConfigurationAdminPortletKeys.SYSTEM_SETTINGS);
 
 		portletURL.setParameter(
+			"mvcRenderCommandName", "/configuration_admin/edit_configuration");
+		portletURL.setParameter(
 			"factoryPid",
 			"com.liferay.dynamic.data.mapping.form.web.internal." +
 				"configuration.DDMFormWebConfiguration");
-		portletURL.setParameter(
-			"mvcRenderCommandName", "/configuration_admin/edit_configuration");
 
 		return portletURL.toString();
 	}
