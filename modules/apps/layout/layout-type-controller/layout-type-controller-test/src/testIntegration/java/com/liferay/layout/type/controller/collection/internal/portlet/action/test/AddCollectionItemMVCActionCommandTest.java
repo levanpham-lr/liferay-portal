@@ -147,7 +147,6 @@ public class AddCollectionItemMVCActionCommandTest {
 
 			Assert.assertEquals(
 				Arrays.toString(segmentsEntryIds), 2, segmentsEntryIds.length);
-
 			Assert.assertEquals(
 				segmentsEntry.getSegmentsEntryId(), segmentsEntryIds[0]);
 			Assert.assertEquals(
