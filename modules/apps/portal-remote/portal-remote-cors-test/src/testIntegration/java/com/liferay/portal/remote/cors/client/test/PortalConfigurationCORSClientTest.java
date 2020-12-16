@@ -61,7 +61,7 @@ public class PortalConfigurationCORSClientTest extends BaseCORSClientTestCase {
 
 	@Test
 	public void testCORSUsingBasicWithDefaultConfig() throws Exception {
-		assertJsonWSUrl("/user/get-current-user", HttpMethod.OPTIONS, true);
+		assertJsonWSUrl("/user/get-current-user", HttpMethod.OPTIONS, false);
 		assertJsonWSUrl("/user/get-current-user", HttpMethod.GET, false);
 	}
 
@@ -73,8 +73,9 @@ public class PortalConfigurationCORSClientTest extends BaseCORSClientTestCase {
 				true);
 
 		try {
-			assertJsonWSUrl("/user/get-current-user", HttpMethod.OPTIONS, true);
-			assertJsonWSUrl("/user/get-current-user", HttpMethod.GET, true);
+			assertJsonWSUrl(
+				"/user/get-current-user", HttpMethod.OPTIONS, false);
+			assertJsonWSUrl("/user/get-current-user", HttpMethod.GET, false);
 		}
 		finally {
 			ReflectionTestUtil.setFieldValue(
