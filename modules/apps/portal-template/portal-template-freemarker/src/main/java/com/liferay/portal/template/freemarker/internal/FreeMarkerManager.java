@@ -565,8 +565,8 @@ public class FreeMarkerManager extends BaseTemplateManager {
 
 			throw new IllegalStateException(
 				StringBundler.concat(
-					"Skip processing freemarker template ", templateId,
-					" as it had been timed out ",
+					"Skip processing FreeMarker template ", templateId,
+					" since it has timed out ",
 					_freeMarkerEngineConfiguration.
 						asyncRenderTimeoutThreshold(),
 					" times"));
@@ -606,7 +606,7 @@ public class FreeMarkerManager extends BaseTemplateManager {
 			timeoutCounter.incrementAndGet();
 
 			String errorMessage = StringBundler.concat(
-				"Freemarker template ", templateId, " processing timeout");
+				"FreeMarker template ", templateId, " processing timeout");
 
 			writer.write(errorMessage);
 
