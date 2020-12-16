@@ -228,9 +228,9 @@ public class RoleStagedModelDataHandler
 			role, StagedGroup.class);
 
 		for (Element groupElement : groupElements) {
+			String uuid = groupElement.attributeValue("uuid");
 			long companyId = GetterUtil.getLong(
 				groupElement.attributeValue("company-id"));
-			String uuid = groupElement.attributeValue("uuid");
 
 			Group group = _groupLocalService.fetchGroupByUuidAndCompanyId(
 				uuid, companyId);
