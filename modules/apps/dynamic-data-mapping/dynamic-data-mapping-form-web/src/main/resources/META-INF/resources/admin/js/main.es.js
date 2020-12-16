@@ -68,31 +68,23 @@ class Form extends Component {
 
 		this._eventHandler = new EventHandler();
 
-		const dependencies = [
-			this._createEditor('nameEditor').then((editor) => {
-				this._eventHandler.add(
-					dom.on(
-						editor.element.$,
-						'keydown',
-						this._handleNameEditorKeydown
-					),
-					dom.on(
-						editor.element.$,
-						'keyup',
-						this._handleNameEditorCopyAndPaste
-					),
-					dom.on(
-						editor.element.$,
-						'keypress',
-						this._handleNameEditorCopyAndPaste
-					)
-				);
+		const nameEditor = document.getElementById(`${namespace}nameEditor`);
 
-				return editor;
-			}),
-			this._createEditor('descriptionEditor'),
-			Liferay.componentReady('translationManager'),
-		];
+		nameEditor.addEventListener('keydown', this._handleNameEditorKeydown);
+		nameEditor.addEventListener(
+			'keyup',
+			this._handleNameEditorCopyAndPaste
+		);
+		nameEditor.addEventListener(
+			'keypress',
+			this._handleNameEditorCopyAndPaste
+		);
+
+		const descriptionEditor = document.getElementById(
+			`${namespace}descriptionEditor`
+		);
+
+		const dependencies = [Liferay.componentReady('translationManager')];
 
 		if (this.isFormBuilderView()) {
 			dependencies.push(this._getSettingsDDMForm());
@@ -101,12 +93,11 @@ class Form extends Component {
 		}
 
 		Promise.all(dependencies).then(
-			([
-				nameEditor,
-				descriptionEditor,
-				translationManager,
-				settingsDDMForm,
-			]) => {
+			([translationManager, settingsDDMForm]) => {
+				nameEditor.classList.remove('hidden');
+
+				descriptionEditor.classList.remove('hidden');
+
 				if (translationManager) {
 					this.props.defaultLanguageId = translationManager.get(
 						'defaultLocale'
@@ -302,6 +293,23 @@ class Form extends Component {
 				handle.detach()
 			);
 		}
+
+		const {namespace} = this.props;
+
+		const nameEditor = document.getElementById(`${namespace}nameEditor`);
+
+		nameEditor.removeEventListener(
+			'keydown',
+			this._handleNameEditorKeydown
+		);
+		nameEditor.removeEventListener(
+			'keyup',
+			this._handleNameEditorCopyAndPaste
+		);
+		nameEditor.removeEventListener(
+			'keypress',
+			this._handleNameEditorCopyAndPaste
+		);
 	}
 
 	hideAddButton() {
