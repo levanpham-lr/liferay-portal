@@ -178,6 +178,8 @@ public abstract class BaseWorkflowMetricsIndexer {
 			return;
 		}
 
+		BooleanQuery booleanQuery = queries.booleanQuery();
+
 		StringBundler sb = new StringBundler("");
 
 		fieldsMap.forEach(
@@ -219,8 +221,6 @@ public abstract class BaseWorkflowMetricsIndexer {
 
 				sb.append(";");
 			});
-
-		BooleanQuery booleanQuery = queries.booleanQuery();
 
 		UpdateByQueryDocumentRequest updateByQueryDocumentRequest =
 			new UpdateByQueryDocumentRequest(
