@@ -691,8 +691,8 @@ public class FreeMarkerManager extends BaseTemplateManager {
 		private static void _clearThreadLocals(Object threadLocals)
 			throws Exception {
 
-			_tableField.set(threadLocals, Array.newInstance(_ENTRY_CLASS, 0));
 			_sizeField.set(threadLocals, 0);
+			_tableField.set(threadLocals, Array.newInstance(_ENTRY_CLASS, 0));
 			_thresholdField.set(threadLocals, 0);
 		}
 
@@ -750,10 +750,10 @@ public class FreeMarkerManager extends BaseTemplateManager {
 					ThreadLocal.class, "createInheritedMap",
 					threadLocalMapClass);
 
-				_tableField = ReflectionUtil.getDeclaredField(
-					threadLocalMapClass, "table");
 				_sizeField = ReflectionUtil.getDeclaredField(
 					threadLocalMapClass, "size");
+				_tableField = ReflectionUtil.getDeclaredField(
+					threadLocalMapClass, "table");
 				_thresholdField = ReflectionUtil.getDeclaredField(
 					threadLocalMapClass, "threshold");
 
