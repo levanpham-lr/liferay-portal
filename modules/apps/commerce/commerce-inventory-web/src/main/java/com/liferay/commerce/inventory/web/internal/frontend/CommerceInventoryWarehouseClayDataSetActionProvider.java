@@ -15,6 +15,7 @@
 package com.liferay.commerce.inventory.web.internal.frontend;
 
 import com.liferay.commerce.inventory.constants.CommerceInventoryActionKeys;
+import com.liferay.commerce.inventory.web.internal.frontend.constants.CommerceInventoryDataSetConstants;
 import com.liferay.commerce.inventory.web.internal.model.Warehouse;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.frontend.taglib.clay.data.set.ClayDataSetActionProvider;
