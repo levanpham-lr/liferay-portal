@@ -421,12 +421,12 @@ public class DDMFormDisplayContext {
 		return _hasViewPermission;
 	}
 
-	public boolean isAutoRememberMe() {
-		String autoRememberMe = CookieKeys.getCookie(
+	public boolean isRememberMe() {
+		String rememberMe = CookieKeys.getCookie(
 			PortalUtil.getHttpServletRequest(_renderRequest),
 			CookieKeys.REMEMBER_ME);
 
-		if ((autoRememberMe != null) && autoRememberMe.equals("true")) {
+		if ((rememberMe != null) && rememberMe.equals("true")) {
 			return true;
 		}
 

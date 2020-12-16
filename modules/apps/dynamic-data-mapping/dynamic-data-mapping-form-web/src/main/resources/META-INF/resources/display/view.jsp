@@ -297,12 +297,12 @@ long formInstanceId = ddmFormDisplayContext.getFormInstanceId();
 						</c:choose>
 					}
 
-					<c:if test="<%= ddmFormDisplayContext.isAutoRememberMe() %>">
-						var autoRememberMe = true;
+					<c:if test="<%= ddmFormDisplayContext.isRememberMe() %>">
+						var rememberMe = true;
 					</c:if>
 
 					<portlet:namespace />sessionIntervalId = setInterval(function () {
-						if (Liferay.Session || autoRememberMe) {
+						if (Liferay.Session || rememberMe) {
 							clearInterval(<portlet:namespace />sessionIntervalId);
 
 							<portlet:namespace />form = Liferay.component(
