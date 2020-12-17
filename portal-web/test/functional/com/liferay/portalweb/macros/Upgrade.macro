@@ -1549,8 +1549,7 @@ definition {
 
 		User.viewContactInformation(
 			searchContainerType = "websitesSearchContainer",
-			url = "https://www.google.com/",
-			websiteType = "Other");
+			url = "https://www.google.com/");
 
 		User.viewContactInformation(skype = "orgusersnskype");
 
