@@ -748,17 +748,17 @@ public class AssetHelperImpl implements AssetHelper {
 	private int _getSortType(String fieldType) {
 		int sortType = Sort.STRING_TYPE;
 
-		if (fieldType.equals(Field.CREATE_DATE) ||
+		if (fieldType.equals(DDMFormFieldType.DATE) ||
+			fieldType.equals(Field.CREATE_DATE) ||
 			fieldType.equals(Field.EXPIRATION_DATE) ||
 			fieldType.equals(Field.PUBLISH_DATE) ||
-			fieldType.equals(DDMFormFieldType.DATE) ||
 			fieldType.equals("modifiedDate")) {
 
 			sortType = Sort.LONG_TYPE;
 		}
-		else if (fieldType.equals(Field.PRIORITY) ||
-				 fieldType.equals(DDMFormFieldType.DECIMAL) ||
-				 fieldType.equals(DDMFormFieldType.NUMBER)) {
+		else if (fieldType.equals(DDMFormFieldType.DECIMAL) ||
+				 fieldType.equals(DDMFormFieldType.NUMBER) ||
+				 fieldType.equals(Field.PRIORITY)) {
 
 			sortType = Sort.DOUBLE_TYPE;
 		}
