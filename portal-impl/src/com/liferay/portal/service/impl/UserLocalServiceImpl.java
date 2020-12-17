@@ -1014,7 +1014,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
-
 		screenName = getLogin(screenName);
 
 		if (PrefsPropsUtil.getBoolean(
