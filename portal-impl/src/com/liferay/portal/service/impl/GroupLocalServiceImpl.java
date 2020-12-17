@@ -258,7 +258,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			(groupPersistence.countByC_S(user.getCompanyId(), site) >=
 				PropsValues.DATA_LIMIT_MAX_SITE_COUNT)) {
 
-			throw new PortalException("Exceed maximum allowed sites");
+			throw new PortalException(
+				"Unable to exceed maximum number of allowed sites");
 		}
 
 		className = GetterUtil.getString(className);

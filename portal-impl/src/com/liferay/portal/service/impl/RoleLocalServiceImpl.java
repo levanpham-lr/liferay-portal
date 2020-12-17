@@ -133,7 +133,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			(rolePersistence.countByCompanyId(user.getCompanyId()) >=
 				PropsValues.DATA_LIMIT_MAX_ROLE_COUNT)) {
 
-			throw new PortalException("Exceed maximum allowed roles");
+			throw new PortalException(
+				"Unable to exceed maximum number of allowed roles");
 		}
 
 		className = GetterUtil.getString(className);

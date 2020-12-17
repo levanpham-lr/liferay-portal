@@ -57,7 +57,8 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 			(teamPersistence.countByCompanyId(user.getCompanyId()) >=
 				PropsValues.DATA_LIMIT_MAX_TEAM_COUNT)) {
 
-			throw new PortalException("Exceed maximum allowed teams");
+			throw new PortalException(
+				"Unable to exceed maximum number of allowed teams");
 		}
 
 		validate(0, groupId, name);

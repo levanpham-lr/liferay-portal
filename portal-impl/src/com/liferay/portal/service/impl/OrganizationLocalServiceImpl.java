@@ -250,7 +250,8 @@ public class OrganizationLocalServiceImpl
 			(organizationPersistence.countByCompanyId(user.getCompanyId()) >=
 				PropsValues.DATA_LIMIT_MAX_ORGANIZATION_COUNT)) {
 
-			throw new PortalException("Exceed maximum allowed organizations");
+			throw new PortalException(
+				"Unable to exceed maximum number of allowed organizations");
 		}
 
 		parentOrganizationId = getParentOrganizationId(

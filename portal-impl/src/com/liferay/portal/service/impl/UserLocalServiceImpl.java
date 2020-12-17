@@ -1009,7 +1009,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			(userPersistence.countByCompanyId(companyId) >=
 				PropsValues.DATA_LIMIT_MAX_USER_COUNT)) {
 
-			throw new PortalException("Exceed maximum allowed users");
+			throw new PortalException(
+				"Unable to exceed maximum number of allowed users");
 		}
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
