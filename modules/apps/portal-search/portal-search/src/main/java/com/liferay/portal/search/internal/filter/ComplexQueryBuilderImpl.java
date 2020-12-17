@@ -206,16 +206,16 @@ public class ComplexQueryBuilderImpl implements ComplexQueryBuilder {
 					value, SearchStringUtil.splitAndUnquote(field));
 			}
 
+			if (Objects.equals(type, "nested")) {
+				return _queries.nested(field, _queries.booleanQuery());
+			}
+
 			if (Objects.equals(type, "prefix")) {
 				if (Validator.isBlank(value)) {
 					return null;
 				}
 
 				return _queries.prefix(field, value);
-			}
-
-			if (Objects.equals(type, "nested")) {
-				return _queries.nested(field, _queries.booleanQuery());
 			}
 
 			if (Objects.equals(type, "query_string")) {
