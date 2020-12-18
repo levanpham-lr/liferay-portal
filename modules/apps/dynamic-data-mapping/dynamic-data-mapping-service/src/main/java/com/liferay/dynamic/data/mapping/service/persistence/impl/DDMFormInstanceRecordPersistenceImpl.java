@@ -4532,6 +4532,7 @@ public class DDMFormInstanceRecordPersistenceImpl
 		ctStrictColumnNames.add("formInstanceVersion");
 		ctStrictColumnNames.add("storageId");
 		ctStrictColumnNames.add("version");
+		ctStrictColumnNames.add("ipAddress");
 		ctStrictColumnNames.add("lastPublishDate");
 
 		_ctColumnNamesMap.put(
