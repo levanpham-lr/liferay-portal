@@ -210,7 +210,8 @@ public class EditCommerceAccountUserMVCActionCommand
 				CommerceAccountActionKeys.MANAGE_MEMBERS)) {
 
 			backPortletURL.setParameter(
-				"mvcRenderCommandName", "/commerce_account/view_commerce_account");
+				"mvcRenderCommandName",
+				"/commerce_account/view_commerce_account");
 
 			backPortletURL.setParameter(
 				"screenNavigationCategoryKey",
@@ -226,11 +227,13 @@ public class EditCommerceAccountUserMVCActionCommand
 
 		if (cmd.equals(_EDIT_ROLES)) {
 			portletURL.setParameter(
-				"mvcRenderCommandName", "viewCommerceAccountUser");
+				"mvcRenderCommandName",
+				"/commerce_account/view_commerce_account_user");
 		}
 		else {
 			portletURL.setParameter(
-				"mvcRenderCommandName", "/commerce_account/edit_commerce_account_user");
+				"mvcRenderCommandName",
+				"/commerce_account/edit_commerce_account_user");
 		}
 
 		portletURL.setParameter(
