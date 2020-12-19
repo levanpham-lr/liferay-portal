@@ -109,7 +109,7 @@ public class CommerceInventoryReplenishmentClayDataSetActionProvider
 
 		portletURL.setParameter(
 			ActionRequest.ACTION_NAME,
-			"editCommerceInventoryReplenishmentItem");
+			"/commerce_inventory/edit_commerce_inventory_replenishment_item");
 		portletURL.setParameter(Constants.CMD, Constants.DELETE);
 		portletURL.setParameter("redirect", redirect);
 		portletURL.setParameter(
@@ -134,7 +134,8 @@ public class CommerceInventoryReplenishmentClayDataSetActionProvider
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter(
-			"mvcRenderCommandName", "editCommerceInventoryReplenishmentItem");
+			"mvcRenderCommandName",
+			"/commerce_inventory/edit_commerce_inventory_replenishment_item");
 		portletURL.setParameter("redirect", themeDisplay.getURLCurrent());
 		portletURL.setParameter(
 			"commerceInventoryReplenishmentItemId",
