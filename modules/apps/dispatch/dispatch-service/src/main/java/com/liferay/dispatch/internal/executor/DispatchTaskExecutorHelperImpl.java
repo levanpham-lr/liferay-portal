@@ -66,23 +66,27 @@ public class DispatchTaskExecutorHelperImpl
 			dispatchTaskExecutor, properties, _dispatchTaskExecutorNames,
 			_dispatchTaskExecutors);
 
-		String type = (String)properties.get(_KEY_DISPATCH_TASK_EXECUTOR_TYPE);
+		String dispatchTaskExecutorType = (String)properties.get(
+			_KEY_DISPATCH_TASK_EXECUTOR_TYPE);
 
 		_dispatchTaskExecutorNames.put(
-			type, (String)properties.get(_KEY_DISPATCH_TASK_EXECUTOR_NAME));
+			dispatchTaskExecutorType,
+			(String)properties.get(_KEY_DISPATCH_TASK_EXECUTOR_NAME));
 
-		_dispatchTaskExecutors.put(type, dispatchTaskExecutor);
+		_dispatchTaskExecutors.put(
+			dispatchTaskExecutorType, dispatchTaskExecutor);
 	}
 
 	protected void removeDispatchTaskExecutor(
 		DispatchTaskExecutor dispatchTaskExecutor,
 		Map<String, Object> properties) {
 
-		String type = (String)properties.get(_KEY_DISPATCH_TASK_EXECUTOR_TYPE);
+		String dispatchTaskExecutorType = (String)properties.get(
+			_KEY_DISPATCH_TASK_EXECUTOR_TYPE);
 
-		_dispatchTaskExecutorNames.remove(type);
+		_dispatchTaskExecutorNames.remove(dispatchTaskExecutorType);
 
-		_dispatchTaskExecutors.remove(type);
+		_dispatchTaskExecutors.remove(dispatchTaskExecutorType);
 	}
 
 	private void _validateDispatchTaskExecutorProperties(
