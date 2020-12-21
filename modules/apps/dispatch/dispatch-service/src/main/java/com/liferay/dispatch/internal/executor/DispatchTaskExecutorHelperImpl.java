@@ -72,7 +72,6 @@ public class DispatchTaskExecutorHelperImpl
 		_dispatchTaskExecutorNames.put(
 			dispatchTaskExecutorType,
 			(String)properties.get(_KEY_DISPATCH_TASK_EXECUTOR_NAME));
-
 		_dispatchTaskExecutors.put(
 			dispatchTaskExecutorType, dispatchTaskExecutor);
 	}
@@ -85,7 +84,6 @@ public class DispatchTaskExecutorHelperImpl
 			_KEY_DISPATCH_TASK_EXECUTOR_TYPE);
 
 		_dispatchTaskExecutorNames.remove(dispatchTaskExecutorType);
-
 		_dispatchTaskExecutors.remove(dispatchTaskExecutorType);
 	}
 
@@ -107,8 +105,9 @@ public class DispatchTaskExecutorHelperImpl
 			_log.error(
 				StringBundler.concat(
 					_KEY_DISPATCH_TASK_EXECUTOR_TYPE, " property must have ",
-					"unique value. The same value found in ", clazz1.getName(),
-					" and ", clazz2.getName(), StringPool.PERIOD));
+					"unique value. The same value is found in ",
+					clazz1.getName(), " and ", clazz2.getName(),
+					StringPool.PERIOD));
 		}
 	}
 
