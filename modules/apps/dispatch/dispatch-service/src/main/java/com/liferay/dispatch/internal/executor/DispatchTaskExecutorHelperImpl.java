@@ -40,17 +40,17 @@ public class DispatchTaskExecutorHelperImpl
 
 	@Override
 	public DispatchTaskExecutor getDispatchTaskExecutor(String type) {
-		return _typeToDispatchTaskExecutorMap.get(type);
+		return _dispatchTaskExecutors.get(type);
 	}
 
 	@Override
 	public String getDispatchTaskExecutorName(String type) {
-		return _typeToNameMap.get(type);
+		return _dispatchTaskExecutorNames.get(type);
 	}
 
 	@Override
 	public Set<String> getDispatchTaskExecutorTypes() {
-		return _typeToNameMap.keySet();
+		return _dispatchTaskExecutorNames.keySet();
 	}
 
 	@Reference(
@@ -63,15 +63,15 @@ public class DispatchTaskExecutorHelperImpl
 		Map<String, Object> properties) {
 
 		_validateDispatchTaskExecutorProperties(
-			dispatchTaskExecutor, properties, _typeToNameMap,
-			_typeToDispatchTaskExecutorMap);
+			dispatchTaskExecutor, properties, _dispatchTaskExecutorNames,
+			_dispatchTaskExecutors);
 
 		String type = (String)properties.get(_KEY_DISPATCH_TASK_EXECUTOR_TYPE);
 
-		_typeToNameMap.put(
+		_dispatchTaskExecutorNames.put(
 			type, (String)properties.get(_KEY_DISPATCH_TASK_EXECUTOR_NAME));
 
-		_typeToDispatchTaskExecutorMap.put(type, dispatchTaskExecutor);
+		_dispatchTaskExecutors.put(type, dispatchTaskExecutor);
 	}
 
 	protected void removeDispatchTaskExecutor(
@@ -80,9 +80,9 @@ public class DispatchTaskExecutorHelperImpl
 
 		String type = (String)properties.get(_KEY_DISPATCH_TASK_EXECUTOR_TYPE);
 
-		_typeToNameMap.remove(type);
+		_dispatchTaskExecutorNames.remove(type);
 
-		_typeToDispatchTaskExecutorMap.remove(type);
+		_dispatchTaskExecutors.remove(type);
 	}
 
 	private void _validateDispatchTaskExecutorProperties(
@@ -117,8 +117,9 @@ public class DispatchTaskExecutorHelperImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		DispatchTaskExecutorHelperImpl.class);
 
-	private final Map<String, DispatchTaskExecutor>
-		_typeToDispatchTaskExecutorMap = new HashMap<>();
-	private final Map<String, String> _typeToNameMap = new HashMap<>();
+	private final Map<String, String> _dispatchTaskExecutorNames =
+		new HashMap<>();
+	private final Map<String, DispatchTaskExecutor> _dispatchTaskExecutors =
+		new HashMap<>();
 
 }
