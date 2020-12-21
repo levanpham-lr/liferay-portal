@@ -34,6 +34,14 @@ public class ConfigurationOverrideInstance {
 
 	public static final Object NULL_RESULT = new Object();
 
+	public static void clearConfigurationOverrideInstance(Class<?> clazz) {
+		clearConfigurationOverrideInstance(clazz.getName());
+	}
+
+	public static void clearConfigurationOverrideInstance(String className) {
+		_configurationOverrideInstances.remove(className);
+	}
+
 	public static ConfigurationOverrideInstance
 			getConfigurationOverrideInstance(
 				Class<?> clazz, TypedSettings typedSettings)
@@ -69,14 +77,6 @@ public class ConfigurationOverrideInstance {
 		}
 
 		return overriddenMethod.invoke(_configurationOverrideInstance);
-	}
-
-	protected static void clearConfigurationOverrideInstance(Class<?> clazz) {
-		clearConfigurationOverrideInstance(clazz.getName());
-	}
-
-	protected static void clearConfigurationOverrideInstance(String className) {
-		_configurationOverrideInstances.remove(className);
 	}
 
 	private static String _getKey(Class<?> clazz) {

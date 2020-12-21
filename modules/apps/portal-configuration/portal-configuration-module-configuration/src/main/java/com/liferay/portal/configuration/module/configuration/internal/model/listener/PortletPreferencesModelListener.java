@@ -12,11 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.configuration.module.configuration.internal;
+package com.liferay.portal.configuration.module.configuration.internal.model.listener;
 
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.configuration.module.configuration.internal.ConfigurationOverrideInstance;
 import com.liferay.portal.kernel.exception.ModelListenerException;
 import com.liferay.portal.kernel.model.BaseModelListener;
 import com.liferay.portal.kernel.model.ModelListener;
