@@ -328,6 +328,8 @@ public class DataLayoutResourceTest extends BaseDataLayoutResourceTestCase {
 						namespace = "myNamespace";
 						pathThemeImages = StringUtil.randomString();
 						readOnly = false;
+						scopeGroupId = testGroup.getGroupId();
+						siteGroupId = testGroup.getGroupId();
 					}
 				});
 
