@@ -258,8 +258,6 @@ definition {
 	macro addNewPriceListsEntry {
 		SelectFrame.selectFrameNoLoading(locator1 = "IFrame#MODAL_BODY");
 
-		Pause(locator1 = "3000");
-
 		Type(
 			locator1 = "TextInput#NAME",
 			value1 = "${priceListName}");
@@ -671,7 +669,12 @@ definition {
 				locator1 = "CommerceEntry#RADIO_BUTTON");
 		}
 
-		Button.clickPublish();
+		if (isSet(unpublish)) {
+			echo("Do not need to click Publish button");
+		}
+		else {
+			Button.clickPublish();
+		}
 	}
 
 	macro uploadCatalogEntrySingleImage {
