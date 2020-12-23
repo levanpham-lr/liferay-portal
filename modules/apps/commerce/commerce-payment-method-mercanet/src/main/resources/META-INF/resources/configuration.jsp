@@ -20,7 +20,7 @@
 MercanetGroupServiceConfiguration mercanetCommercePaymentEngineGroupServiceConfiguration = (MercanetGroupServiceConfiguration)request.getAttribute(MercanetGroupServiceConfiguration.class.getName());
 %>
 
-<portlet:actionURL name="editMercanetCommercePaymentMethodConfiguration" var="editCommercePaymentMethodActionURL" />
+<portlet:actionURL name="/commerce_payment_method_mercanet/edit_mercanet_commerce_payment_method_configuration" var="editCommercePaymentMethodActionURL" />
 
 <aui:form action="<%= editCommercePaymentMethodActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
