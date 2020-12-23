@@ -49,9 +49,7 @@ public class DDMFormUploadResponseHandler implements UploadResponseHandler {
 		JSONObject jsonObject = _defaultUploadResponseHandler.onFailure(
 			portletRequest, portalException);
 
-		JSONObject errorJSONObject = jsonObject.getJSONObject("error");
-
-		String errorMessage = errorJSONObject.getString("message");
+		String errorMessage = StringPool.BLANK;
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -77,14 +75,12 @@ public class DDMFormUploadResponseHandler implements UploadResponseHandler {
 		else if (portalException instanceof InvalidFileException) {
 			errorMessage = themeDisplay.translate("please-enter-a-valid-file");
 		}
+		else {
+			errorMessage = themeDisplay.translate(
+				"an-unexpected-error-occurred-while-uploading-your-file");
+		}
 
-		return jsonObject.put(
-			"error",
-			JSONUtil.put(
-				"errorType", errorJSONObject.getInt("errorType")
-			).put(
-				"message", errorMessage
-			));
+		return jsonObject.put("error", JSONUtil.put("message", errorMessage));
 	}
 
 	@Override
