@@ -184,7 +184,7 @@ public class DispatchTriggerLocalServiceTest {
 
 		DispatchTaskClusterMode dispatchTaskClusterMode =
 			DispatchTaskClusterMode.valueOf(
-				expectedDispatchTrigger.getTaskClusterMode());
+				expectedDispatchTrigger.getDispatchTaskClusterMode());
 
 		try {
 			dispatchTrigger =
@@ -192,11 +192,8 @@ public class DispatchTriggerLocalServiceTest {
 					dispatchTrigger.getDispatchTriggerId(),
 					expectedDispatchTrigger.isActive(),
 					expectedDispatchTrigger.getCronExpression(),
-					CronExpressionUtil.getMonth() + 1, 20,
-					CronExpressionUtil.getYear(), 23, 59, false, true,
-					CronExpressionUtil.getMonth() - 1, 1,
-					CronExpressionUtil.getYear(), 0, 0,
-					dispatchTaskClusterMode);
+					dispatchTaskClusterMode, 5, 5, 2024, 11, 11, false, true, 4,
+					4, 2024, 12, 0);
 
 			_basicAssertEquals(expectedDispatchTrigger, dispatchTrigger);
 
@@ -236,8 +233,8 @@ public class DispatchTriggerLocalServiceTest {
 		try {
 			_dispatchTriggerLocalService.updateDispatchTrigger(
 				dispatchTrigger1.getDispatchTriggerId(),
-				dispatchTrigger2.getName(),
-				dispatchTrigger1.getTaskSettingsUnicodeProperties());
+				dispatchTrigger1.getDispatchTaskSettingsUnicodeProperties(),
+				dispatchTrigger2.getName());
 		}
 		catch (Exception exception) {
 			exceptionClass = exception.getClass();
@@ -249,8 +246,9 @@ public class DispatchTriggerLocalServiceTest {
 
 		try {
 			_dispatchTriggerLocalService.updateDispatchTrigger(
-				dispatchTrigger1.getDispatchTriggerId(), null,
-				dispatchTrigger1.getTaskSettingsUnicodeProperties());
+				dispatchTrigger1.getDispatchTriggerId(),
+				dispatchTrigger1.getDispatchTaskSettingsUnicodeProperties(),
+				null);
 		}
 		catch (Exception exception) {
 			exceptionClass = exception.getClass();
@@ -283,8 +281,9 @@ public class DispatchTriggerLocalServiceTest {
 			dispatchTrigger1.getName(), dispatchTrigger2.getName());
 
 		dispatchTrigger2 = _dispatchTriggerLocalService.updateDispatchTrigger(
-			dispatchTrigger2.getDispatchTriggerId(), dispatchTrigger1.getName(),
-			dispatchTrigger1.getTaskSettingsUnicodeProperties());
+			dispatchTrigger2.getDispatchTriggerId(),
+			dispatchTrigger1.getDispatchTaskSettingsUnicodeProperties(),
+			dispatchTrigger1.getName());
 
 		Assert.assertEquals(
 			dispatchTrigger1.getName(), dispatchTrigger2.getName());
@@ -294,9 +293,10 @@ public class DispatchTriggerLocalServiceTest {
 		throws Exception {
 
 		return _dispatchTriggerLocalService.addDispatchTrigger(
-			dispatchTrigger.getUserId(), dispatchTrigger.getName(),
-			dispatchTrigger.isSystem(), dispatchTrigger.getTaskExecutorType(),
-			dispatchTrigger.getTaskSettingsUnicodeProperties());
+			dispatchTrigger.getUserId(),
+			dispatchTrigger.getDispatchTaskExecutorType(),
+			dispatchTrigger.getDispatchTaskSettingsUnicodeProperties(),
+			dispatchTrigger.getName(), dispatchTrigger.isSystem());
 	}
 
 	private void _advancedAssertEquals(
@@ -311,8 +311,8 @@ public class DispatchTriggerLocalServiceTest {
 			actualDispatchTrigger.getCronExpression());
 		Assert.assertNotNull(actualDispatchTrigger.getStartDate());
 		Assert.assertEquals(
-			expectedDispatchTrigger.getTaskClusterMode(),
-			actualDispatchTrigger.getTaskClusterMode());
+			expectedDispatchTrigger.getDispatchTaskClusterMode(),
+			actualDispatchTrigger.getDispatchTaskClusterMode());
 	}
 
 	private void _basicAssertEquals(
@@ -329,30 +329,31 @@ public class DispatchTriggerLocalServiceTest {
 			expectedDispatchTrigger.isSystem(),
 			actualDispatchTrigger.isSystem());
 		Assert.assertEquals(
-			expectedDispatchTrigger.getTaskExecutorType(),
-			actualDispatchTrigger.getTaskExecutorType());
+			expectedDispatchTrigger.getDispatchTaskExecutorType(),
+			actualDispatchTrigger.getDispatchTaskExecutorType());
 
-		UnicodeProperties actualTaskSettingsUnicodeProperties =
-			actualDispatchTrigger.getTaskSettingsUnicodeProperties();
+		UnicodeProperties actualDispatchTaskSettingsUnicodeProperties =
+			actualDispatchTrigger.getDispatchTaskSettingsUnicodeProperties();
 
-		UnicodeProperties expectedTaskSettingsUnicodeProperties =
-			expectedDispatchTrigger.getTaskSettingsUnicodeProperties();
+		UnicodeProperties expectedDispatchTaskSettingsUnicodeProperties =
+			expectedDispatchTrigger.getDispatchTaskSettingsUnicodeProperties();
 
-		if (expectedTaskSettingsUnicodeProperties == null) {
-			Assert.assertNull(actualTaskSettingsUnicodeProperties);
+		if (expectedDispatchTaskSettingsUnicodeProperties == null) {
+			Assert.assertNull(actualDispatchTaskSettingsUnicodeProperties);
 
 			return;
 		}
 
-		Assert.assertNotNull(actualTaskSettingsUnicodeProperties);
+		Assert.assertNotNull(actualDispatchTaskSettingsUnicodeProperties);
 
 		Assert.assertEquals(
-			expectedTaskSettingsUnicodeProperties.size(),
-			actualTaskSettingsUnicodeProperties.size());
+			expectedDispatchTaskSettingsUnicodeProperties.size(),
+			actualDispatchTaskSettingsUnicodeProperties.size());
 
-		actualTaskSettingsUnicodeProperties.forEach(
+		actualDispatchTaskSettingsUnicodeProperties.forEach(
 			(key, value) -> Assert.assertEquals(
-				expectedTaskSettingsUnicodeProperties.getProperty(key), value));
+				expectedDispatchTaskSettingsUnicodeProperties.getProperty(key),
+				value));
 	}
 
 	@Inject

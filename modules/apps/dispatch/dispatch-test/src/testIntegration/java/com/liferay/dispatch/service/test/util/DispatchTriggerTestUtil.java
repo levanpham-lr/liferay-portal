@@ -42,9 +42,9 @@ public class DispatchTriggerTestUtil {
 
 		return _randomDispatchTrigger(
 			RandomTestUtil.randomBoolean(), dispatchTrigger.getCompanyId(),
-			CronExpressionUtil.getCronExpression(), _randomTaskClusterMode(),
-			dispatchTrigger.getTaskExecutorType(),
-			dispatchTrigger.getTaskSettingsUnicodeProperties(),
+			_randomCronExpression(), _randomTaskClusterMode(),
+			dispatchTrigger.getDispatchTaskExecutorType(),
+			dispatchTrigger.getDispatchTaskSettingsUnicodeProperties(),
 			_randomName(nameSalt), dispatchTrigger.isSystem(),
 			dispatchTrigger.getUserId());
 	}
@@ -56,12 +56,16 @@ public class DispatchTriggerTestUtil {
 
 		return _randomDispatchTrigger(
 			RandomTestUtil.randomBoolean(), user.getCompanyId(),
-			CronExpressionUtil.getCronExpression(), 0,
-			RandomTestUtil.randomString(20),
+			_randomCronExpression(), 0, RandomTestUtil.randomString(20),
 			RandomTestUtil.randomUnicodeProperties(
 				RandomTestUtil.randomInt(10, 30), 32, 64),
 			_randomName(nameSalt), RandomTestUtil.randomBoolean(),
 			user.getUserId());
+	}
+
+	private static String _randomCronExpression() {
+		return String.format(
+			"0 0 0 ? %d/2 * 2077", RandomTestUtil.randomInt(1, 12));
 	}
 
 	private static DispatchTrigger _randomDispatchTrigger(
@@ -100,6 +104,28 @@ public class DispatchTriggerTestUtil {
 			@Override
 			public String getCronExpression() {
 				return _cronExpression;
+			}
+
+			@Override
+			public int getDispatchTaskClusterMode() {
+				return _taskClusterMode;
+			}
+
+			@Override
+			public String getDispatchTaskExecutorType() {
+				return _taskExecutorType;
+			}
+
+			@Override
+			public String getDispatchTaskSettings() {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public UnicodeProperties
+				getDispatchTaskSettingsUnicodeProperties() {
+
+				return _taskSettingsUnicodeProperties;
 			}
 
 			@Override
@@ -170,26 +196,6 @@ public class DispatchTriggerTestUtil {
 			@Override
 			public boolean getSystem() {
 				return _system;
-			}
-
-			@Override
-			public int getTaskClusterMode() {
-				return _taskClusterMode;
-			}
-
-			@Override
-			public String getTaskExecutorType() {
-				return _taskExecutorType;
-			}
-
-			@Override
-			public String getTaskSettings() {
-				throw new UnsupportedOperationException();
-			}
-
-			@Override
-			public UnicodeProperties getTaskSettingsUnicodeProperties() {
-				return _taskSettingsUnicodeProperties;
 			}
 
 			@Override
@@ -283,6 +289,28 @@ public class DispatchTriggerTestUtil {
 			}
 
 			@Override
+			public void setDispatchTaskClusterMode(int taskClusterMode) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public void setDispatchTaskExecutorType(String taskExecutorType) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public void setDispatchTaskSettings(String taskSettings) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public void setDispatchTaskSettingsUnicodeProperties(
+				UnicodeProperties dispatchTaskSettingsUnicodeProperties) {
+
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
 			public void setDispatchTriggerId(long dispatchTriggerId) {
 				throw new UnsupportedOperationException();
 			}
@@ -358,28 +386,6 @@ public class DispatchTriggerTestUtil {
 
 			@Override
 			public void setSystem(boolean system) {
-				throw new UnsupportedOperationException();
-			}
-
-			@Override
-			public void setTaskClusterMode(int taskClusterMode) {
-				throw new UnsupportedOperationException();
-			}
-
-			@Override
-			public void setTaskExecutorType(String taskExecutorType) {
-				throw new UnsupportedOperationException();
-			}
-
-			@Override
-			public void setTaskSettings(String taskSettings) {
-				throw new UnsupportedOperationException();
-			}
-
-			@Override
-			public void setTaskSettingsUnicodeProperties(
-				UnicodeProperties taskSettingsUnicodeProperties) {
-
 				throw new UnsupportedOperationException();
 			}
 
