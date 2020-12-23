@@ -59,13 +59,15 @@ public class TaxonomyCategoryExceptionMapper
 		if (assetCategoryException.getType() ==
 				AssetCategoryException.AT_LEAST_ONE_CATEGORY) {
 
-			errorMessage = "Select at least one category for " + vocabularyName;
+			errorMessage =
+				"Select at least one taxonomy category for " + vocabularyName;
 		}
 		else if (assetCategoryException.getType() ==
 					AssetCategoryException.TOO_MANY_CATEGORIES) {
 
 			errorMessage =
-				"Cannot select more than one category for " + vocabularyName;
+				"Unable to select more than one taxonomy category for " +
+					vocabularyName;
 		}
 
 		return new Problem(Response.Status.BAD_REQUEST, errorMessage);
