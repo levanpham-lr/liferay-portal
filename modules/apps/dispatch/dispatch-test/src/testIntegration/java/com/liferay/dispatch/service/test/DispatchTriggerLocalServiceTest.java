@@ -100,7 +100,7 @@ public class DispatchTriggerLocalServiceTest {
 	}
 
 	@Test
-	public void testFetchPreviousFireDateNull() throws Exception {
+	public void testFetchPreviousFireDate() throws Exception {
 		Company company = CompanyTestUtil.addCompany();
 
 		User user = UserTestUtil.addUser(company);
