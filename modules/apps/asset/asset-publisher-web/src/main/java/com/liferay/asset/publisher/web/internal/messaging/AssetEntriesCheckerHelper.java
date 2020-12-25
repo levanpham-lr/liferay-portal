@@ -161,6 +161,8 @@ public class AssetEntriesCheckerHelper {
 
 		_notifySubscribers(subscriptions, portletPreferences, newAssetEntries);
 
+		NotifiedAssetEntryThreadLocal.setNotifiedAssetEntryIdsModified(true);
+
 		try {
 			portletPreferences.setValues(
 				"notifiedAssetEntryIds",
@@ -168,16 +170,14 @@ public class AssetEntriesCheckerHelper {
 					ListUtil.toString(
 						assetEntries, AssetEntry.ENTRY_ID_ACCESSOR)));
 
-			NotifiedAssetEntryThreadLocal.setNotifiedAssetEntryIdsModified(
-				true);
-
 			portletPreferences.store();
-
-			NotifiedAssetEntryThreadLocal.setNotifiedAssetEntryIdsModified(
-				false);
 		}
 		catch (IOException | PortletException exception) {
 			throw new PortalException(exception);
+		}
+		finally {
+			NotifiedAssetEntryThreadLocal.setNotifiedAssetEntryIdsModified(
+				false);
 		}
 	}
 
