@@ -506,7 +506,7 @@ definition {
 
 		ItemSelector.gotoItemSelectorViaCKEditor();
 
-		ItemSelector.addImageFromURL(
+		ItemSelector.addFromURL(
 			imageSourceURL = "http://localhost:8080/webdav/guest/document_library/Document_2.jpg",
 			navTab = "URL");
 
