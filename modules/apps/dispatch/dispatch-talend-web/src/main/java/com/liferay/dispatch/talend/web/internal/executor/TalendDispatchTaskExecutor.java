@@ -74,7 +74,7 @@ public class TalendDispatchTaskExecutor extends BaseDispatchTaskExecutor {
 			dispatchTrigger, talendArchive);
 
 		if (_log.isTraceEnabled()) {
-			_log.trace("Execute talend process " + talendProcess.toString());
+			_log.trace("Execute Talend process " + talendProcess.toString());
 		}
 
 		try {
