@@ -51,15 +51,13 @@ public class TalendProcess {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(5);
 
-		sb.append(StringPool.OPEN_CURLY_BRACE);
-		sb.append("mainMethodArguments=");
+		sb.append("{mainMethodArguments=");
 		sb.append(_mainMethodArguments.toString());
-		sb.append(StringPool.COMMA_AND_SPACE);
-		sb.append("processConfig=");
+		sb.append(", processConfig=");
 		sb.append(_processConfig.toString());
-		sb.append(StringPool.CLOSE_CURLY_BRACE);
+		sb.append("}");
 
 		return sb.toString();
 	}
