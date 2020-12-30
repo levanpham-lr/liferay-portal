@@ -199,11 +199,6 @@ public class DispatchTriggerTestUtil {
 			}
 
 			@Override
-			public UnicodeProperties getTaskSettingsUnicodeProperties() {
-				throw new UnsupportedOperationException();
-			}
-
-			@Override
 			public long getUserId() {
 				return _userId;
 			}
@@ -395,18 +390,6 @@ public class DispatchTriggerTestUtil {
 
 			@Override
 			public void setSystem(boolean system) {
-				throw new UnsupportedOperationException();
-			}
-
-			@Override
-			public void setTaskSettings(String taskSettings) {
-				throw new UnsupportedOperationException();
-			}
-
-			@Override
-			public void setTaskSettingsUnicodeProperties(
-				UnicodeProperties taskSettingsUnicodeProperties) {
-
 				throw new UnsupportedOperationException();
 			}
 
