@@ -363,6 +363,8 @@ definition {
 	@description = "This ensures that a document using a custom document type from a depot can be published in the staging site when enabling remote staging."
 	@priority = "5"
 	test PublishDMWithDocumentType {
+		property test.name.skip.portal.instance = "DepotRemoteStagingDM#PublishDMWithDocumentType";
+
 		DepotNavigator.openDepotDocumentsAndMediaAdmin(depotName = "Test Depot Name");
 
 		DMNavigator.gotoDocumentType();
@@ -826,6 +828,8 @@ definition {
 	@description = "This ensures that a depot image cannot be found from the disconnected remote staging site."
 	@priority = "4"
 	test ViewImageFromDisconnectedSite {
+		property test.name.skip.portal.instance = "DepotRemoteStagingDM#ViewImageFromDisconnectedSite";
+
 		Navigator.gotoSitePage(
 			pageName = "Test Page",
 			siteName = "Site Name");
