@@ -137,6 +137,61 @@ public class FragmentEntryLinkExportImportContentProcessor
 		throws PortalException {
 	}
 
+	private void _replaceAllEditableExportContentReferences(
+			JSONObject editableValuesJSONObject,
+			boolean exportReferencedContent,
+			PortletDataContext portletDataContext, StagedModel stagedModel)
+		throws Exception {
+
+		if ((editableValuesJSONObject == null) ||
+			(editableValuesJSONObject.length() <= 0)) {
+
+			return;
+		}
+
+		_replaceMappedFieldExportContentReferences(
+			portletDataContext, stagedModel, editableValuesJSONObject,
+			exportReferencedContent);
+
+		Iterator<String> editableKeysIterator = editableValuesJSONObject.keys();
+
+		while (editableKeysIterator.hasNext()) {
+			String editableKey = editableKeysIterator.next();
+
+			JSONObject editableJSONObject =
+				editableValuesJSONObject.getJSONObject(editableKey);
+
+			_replaceAllEditableExportContentReferences(
+				editableJSONObject, exportReferencedContent, portletDataContext,
+				stagedModel);
+		}
+	}
+
+	private void _replaceAllEditableImportContentReferences(
+		JSONObject editableValuesJSONObject,
+		PortletDataContext portletDataContext) {
+
+		if ((editableValuesJSONObject == null) ||
+			(editableValuesJSONObject.length() <= 0)) {
+
+			return;
+		}
+
+		_replaceMappedFieldImportContentReferences(
+			portletDataContext, editableValuesJSONObject);
+
+		Iterator<String> editableKeysIterator = editableValuesJSONObject.keys();
+
+		while (editableKeysIterator.hasNext()) {
+			String editableKey = editableKeysIterator.next();
+
+			JSONObject editableJSONObject =
+				editableValuesJSONObject.getJSONObject(editableKey);
+
+			_replaceAllEditableImportContentReferences(
+				editableJSONObject, portletDataContext);
+		}
+	}
 
 	private void _replaceEditableExportContentReferences(
 			JSONObject editableValuesJSONObject,
@@ -148,25 +203,9 @@ public class FragmentEntryLinkExportImportContentProcessor
 			editableValuesJSONObject.getJSONObject(
 				_KEY_EDITABLE_FRAGMENT_ENTRY_PROCESSOR);
 
-		if ((editableProcessorJSONObject == null) ||
-			(editableProcessorJSONObject.length() <= 0)) {
-
-			return;
-		}
-
-		Iterator<String> editableKeysIterator =
-			editableProcessorJSONObject.keys();
-
-		while (editableKeysIterator.hasNext()) {
-			String editableKey = editableKeysIterator.next();
-
-			JSONObject editableJSONObject =
-				editableProcessorJSONObject.getJSONObject(editableKey);
-
-			_replaceMappedFieldExportContentReferences(
-				portletDataContext, stagedModel, editableJSONObject,
-				exportReferencedContent);
-		}
+		_replaceAllEditableExportContentReferences(
+			editableProcessorJSONObject, exportReferencedContent,
+			portletDataContext, stagedModel);
 	}
 
 	private void _replaceEditableImportContentReferences(
@@ -177,24 +216,8 @@ public class FragmentEntryLinkExportImportContentProcessor
 			editableValuesJSONObject.getJSONObject(
 				_KEY_EDITABLE_FRAGMENT_ENTRY_PROCESSOR);
 
-		if ((editableProcessorJSONObject == null) ||
-			(editableProcessorJSONObject.length() <= 0)) {
-
-			return;
-		}
-
-		Iterator<String> editableKeysIterator =
-			editableProcessorJSONObject.keys();
-
-		while (editableKeysIterator.hasNext()) {
-			String editableKey = editableKeysIterator.next();
-
-			JSONObject editableJSONObject =
-				editableProcessorJSONObject.getJSONObject(editableKey);
-
-			_replaceMappedFieldImportContentReferences(
-				portletDataContext, editableJSONObject);
-		}
+		_replaceAllEditableImportContentReferences(
+			editableProcessorJSONObject, portletDataContext);
 	}
 
 	private void _replaceMappedFieldExportContentReferences(
