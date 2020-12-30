@@ -67,15 +67,14 @@ public class DDMFormGuestUploadFieldUtil {
 				WorkflowConstants.STATUS_ANY, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null);
 
-		int count = 0;
-
-		for (DDMFormInstanceRecord ddmFormInstanceRecord :
-				ddmFormInstanceRecords) {
+		for (int i = 0; i < ddmFormInstanceRecords.size(); i++) {
+			DDMFormInstanceRecord ddmFormInstanceRecord =
+				ddmFormInstanceRecords.get(i);
 
 			if (Objects.equals(
 					ddmFormInstanceRecord.getIpAddress(),
 					httpServletRequest.getRemoteAddr()) &&
-				(++count == maximumSubmissionsForGuestUploadFields)) {
+				((i + 1) == maximumSubmissionsForGuestUploadFields)) {
 
 				return true;
 			}
