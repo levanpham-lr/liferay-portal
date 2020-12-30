@@ -24,13 +24,12 @@ exports[`ReactFieldBase does not render the add button when repeatable is true a
       </button>
     </div>
     <label
-      aria-labelledby="undefined_fieldDetails"
+      aria-describedby="undefined_fieldDetails"
       class="ddm-empty"
       tabindex="0"
     />
     <span
-      aria-hidden="false"
-      hidden=""
+      class="sr-only"
       id="undefined_fieldDetails"
     >
       Text
@@ -187,13 +186,12 @@ exports[`ReactFieldBase renders the add button when repeatable is true 1`] = `
       </button>
     </div>
     <label
-      aria-labelledby="undefined_fieldDetails"
+      aria-describedby="undefined_fieldDetails"
       class="ddm-empty"
       tabindex="0"
     />
     <span
-      aria-hidden="false"
-      hidden=""
+      class="sr-only"
       id="undefined_fieldDetails"
     >
       Text
