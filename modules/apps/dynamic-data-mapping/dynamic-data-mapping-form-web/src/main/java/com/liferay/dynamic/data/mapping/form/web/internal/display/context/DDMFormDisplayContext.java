@@ -188,19 +188,18 @@ public class DDMFormDisplayContext {
 			return StringPool.BLANK;
 		}
 
-		boolean requireCaptcha = isCaptchaRequired(ddmFormInstance);
-
-		DDMForm ddmForm = getDDMForm(ddmFormInstance, requireCaptcha);
-
-		Map<String, DDMFormField> ddmFormFieldsMap =
-			ddmForm.getDDMFormFieldsMap(true);
-
 		boolean maximumSubmissionLimitReached =
 			DDMFormGuestUploadFieldUtil.isMaximumSubmissionLimitReached(
 				ddmFormInstance,
 				PortalUtil.getHttpServletRequest(_renderRequest),
 				_ddmFormWebConfiguration.
 					maximumSubmissionsForGuestUploadFields());
+		boolean requireCaptcha = isCaptchaRequired(ddmFormInstance);
+
+		DDMForm ddmForm = getDDMForm(ddmFormInstance, requireCaptcha);
+
+		Map<String, DDMFormField> ddmFormFieldsMap =
+			ddmForm.getDDMFormFieldsMap(true);
 
 		for (DDMFormField ddmFormField : ddmFormFieldsMap.values()) {
 			if (Objects.equals(ddmFormField.getType(), "document_library")) {
