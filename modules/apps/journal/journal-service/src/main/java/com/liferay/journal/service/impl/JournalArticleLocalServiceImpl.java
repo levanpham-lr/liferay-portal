@@ -9104,6 +9104,22 @@ public class JournalArticleLocalServiceImpl
 			urlTitleMap.put(languageId, urlTitle);
 		}
 
+		for (Map.Entry<Locale, String> entry : friendlyURLMap.entrySet()) {
+			Locale key = entry.getKey();
+			String value = entry.getValue();
+
+			if (!urlTitleMap.containsKey(key) && Validator.isNotNull(value)) {
+				String urlTitle =
+					friendlyURLEntryLocalService.getUniqueUrlTitle(
+						groupId,
+						classNameLocalService.getClassNameId(
+							JournalArticle.class),
+						resourcePrimKey, value);
+
+				urlTitleMap.put(LocaleUtil.toLanguageId(key), urlTitle);
+			}
+		}
+
 		return urlTitleMap;
 	}
 
