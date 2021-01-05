@@ -52,6 +52,7 @@ let lastEditedPages = [];
 export default function fieldChange({
 	defaultLanguageId,
 	editingLanguageId,
+	groupId,
 	pages,
 	portletNamespace,
 	properties,
@@ -92,6 +93,7 @@ export default function fieldChange({
 				evaluate(fieldName, {
 					defaultLanguageId,
 					editingLanguageId,
+					groupId,
 					pages: editedPages,
 					portletNamespace,
 					rules,
