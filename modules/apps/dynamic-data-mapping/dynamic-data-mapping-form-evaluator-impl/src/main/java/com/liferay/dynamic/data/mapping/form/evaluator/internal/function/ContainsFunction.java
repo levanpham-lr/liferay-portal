@@ -65,9 +65,9 @@ public class ContainsFunction
 			return false;
 		}
 
-		Set<String> keySet = jsonObject2.keySet();
+		Set<String> keys = jsonObject2.keySet();
 
-		for (String key : keySet) {
+		for (String key : keys) {
 			String value = jsonObject1.getString(key);
 
 			if (value == null) {
