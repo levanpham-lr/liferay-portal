@@ -360,7 +360,7 @@ public class RestrictedLiferayObjectWrapperTest
 	protected void testWrap(ObjectWrapper objectWrapper) throws Exception {
 		super.testWrap(objectWrapper);
 
-		// Test 1, Local Service Object without proxy
+		// Local service object without proxy
 
 		assertTemplateModel(
 			"TestLocalServiceObject", stringModel -> stringModel.getAsString(),
@@ -368,7 +368,7 @@ public class RestrictedLiferayObjectWrapperTest
 				objectWrapper.wrap(
 					new TestLocalService("TestLocalServiceObject"))));
 
-		// Test 2, Local Service Object with proxy
+		// Local service object with proxy
 
 		assertTemplateModel(
 			"TestLocalServiceObject1", stringModel -> stringModel.getAsString(),
@@ -384,7 +384,7 @@ public class RestrictedLiferayObjectWrapperTest
 					_createAopProxy(
 						new TestLocalService("TestLocalServiceObject2")))));
 
-		// Test 3, Service Object
+		// Service object
 
 		assertTemplateModel(
 			"TestServiceObject", stringModel -> stringModel.getAsString(),
@@ -392,7 +392,7 @@ public class RestrictedLiferayObjectWrapperTest
 				objectWrapper.wrap(
 					_createAopProxy(new TestService("TestServiceObject")))));
 
-		// Test 4, system company id
+		// System company ID
 
 		assertTemplateModel(
 			"123", stringModel -> stringModel.getAsString(),
@@ -406,7 +406,7 @@ public class RestrictedLiferayObjectWrapperTest
 			try {
 				CompanyThreadLocal.setCompanyId(1L);
 
-				// Test 5, Base Model without companyId
+				// Base model without company ID
 
 				assertTemplateModel(
 					"123", stringModel -> stringModel.getAsString(),
@@ -423,14 +423,14 @@ public class RestrictedLiferayObjectWrapperTest
 
 							})));
 
-				// Test 6, Base Model with companyId
+				// Base model with company ID
 
 				assertTemplateModel(
 					"1", stringModel -> stringModel.getAsString(),
 					StringModel.class.cast(
 						objectWrapper.wrap(new TestBaseModel(1L))));
 
-				// Test 7, Base Model with wrong companyId
+				// Base model with wrong company ID
 
 				try {
 					objectWrapper.wrap(new TestBaseModel(123L));

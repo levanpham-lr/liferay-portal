@@ -56,32 +56,23 @@ public class ReadOnlyTransactionThreadLocal {
 					_strictReadOnlyTransactionThreadLocal.get();
 
 				if (transactionAttribute.isStrictReadOnly()) {
-
-					// Open strict readonly scope
-
 					if (!transactionAttribute.isReadOnly()) {
 						throw new IllegalStateException(
-							"Strict-readonly transaction is not readonly");
+							"Strict read only transaction is not writable");
 					}
 
 					strictReadOnlyDeque.push(Boolean.TRUE);
 				}
 				else if (strictReadOnlyDeque.peek() == Boolean.TRUE) {
-
-					// Under strict readonly scope
-
 					if (!transactionAttribute.isReadOnly()) {
 						throw new IllegalStateException(
-							"Denied non-readonly nested transaction under " +
-								"strict-readonly transaction");
+							"Nested strict read only transaction is not " +
+								"writable");
 					}
 
 					strictReadOnlyDeque.push(Boolean.TRUE);
 				}
 				else {
-
-					// Not under strict readonly scope
-
 					strictReadOnlyDeque.push(Boolean.FALSE);
 				}
 

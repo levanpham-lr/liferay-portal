@@ -158,7 +158,7 @@ public class ReadOnlyTransactionThreadLocalTest {
 	}
 
 	@Test
-	public void testStrictReadOnlyBadCombination() throws Throwable {
+	public void testStrictReadOnlyIsNotWritable() throws Throwable {
 		try {
 			_transactionExecutor.execute(
 				new TestTransactionAttributeAdapter(false, true),
@@ -168,26 +168,7 @@ public class ReadOnlyTransactionThreadLocalTest {
 		}
 		catch (IllegalStateException illegalStateException) {
 			Assert.assertEquals(
-				"Strict-readonly transaction is not readonly",
-				illegalStateException.getMessage());
-		}
-	}
-
-	@Test
-	public void testStrictReadOnlyNestedNotReadOnly() throws Throwable {
-		try {
-			_transactionExecutor.execute(
-				new TestTransactionAttributeAdapter(true, true),
-				() -> _transactionExecutor.execute(
-					new TestTransactionAttributeAdapter(false),
-					ReadOnlyTransactionThreadLocal::isReadOnly));
-
-			Assert.fail();
-		}
-		catch (IllegalStateException illegalStateException) {
-			Assert.assertEquals(
-				"Denied non-readonly nested transaction under " +
-					"strict-readonly transaction",
+				"Strict read only transaction is not writable",
 				illegalStateException.getMessage());
 		}
 	}
@@ -201,6 +182,26 @@ public class ReadOnlyTransactionThreadLocalTest {
 				ReadOnlyTransactionThreadLocal::isReadOnly));
 
 		Assert.assertTrue(readOnly);
+	}
+
+	@Test
+	public void testStrictReadOnlyNestedTransactionIsNotWritable()
+		throws Throwable {
+
+		try {
+			_transactionExecutor.execute(
+				new TestTransactionAttributeAdapter(true, true),
+				() -> _transactionExecutor.execute(
+					new TestTransactionAttributeAdapter(false),
+					ReadOnlyTransactionThreadLocal::isReadOnly));
+
+			Assert.fail();
+		}
+		catch (IllegalStateException illegalStateException) {
+			Assert.assertEquals(
+				"Nested strict read only transaction is not writable",
+				illegalStateException.getMessage());
+		}
 	}
 
 	@Test
