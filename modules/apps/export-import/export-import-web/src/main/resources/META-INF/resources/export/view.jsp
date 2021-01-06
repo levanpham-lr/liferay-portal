@@ -25,10 +25,6 @@ if (liveGroup == null) {
 }
 
 String displayStyle = ParamUtil.getString(request, "displayStyle");
-String navigation = ParamUtil.getString(request, "navigation", "all");
-
-String orderByCol = ParamUtil.getString(request, "orderByCol");
-String orderByType = ParamUtil.getString(request, "orderByType");
 
 if (Validator.isNotNull(displayStyle) && Validator.isNotNull(displayStyle)) {
 	portalPreferences.setValue(ExportImportPortletKeys.EXPORT, "displayStyle", displayStyle);
@@ -37,6 +33,11 @@ if (Validator.isNotNull(displayStyle) && Validator.isNotNull(displayStyle)) {
 else {
 	displayStyle = portalPreferences.getValue(ExportImportPortletKeys.EXPORT, "displayStyle", "descriptive");
 }
+
+String navigation = ParamUtil.getString(request, "navigation", "all");
+
+String orderByCol = ParamUtil.getString(request, "orderByCol");
+String orderByType = ParamUtil.getString(request, "orderByType");
 
 if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
 	portalPreferences.setValue(PortletKeys.BACKGROUND_TASK, "entries-order-by-col", orderByCol);

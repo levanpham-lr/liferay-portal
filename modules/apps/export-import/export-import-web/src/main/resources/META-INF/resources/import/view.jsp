@@ -19,11 +19,7 @@
 <%
 boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 
-String navigation = ParamUtil.getString(request, "navigation", "all");
-
 String displayStyle = ParamUtil.getString(request, "displayStyle");
-String orderByCol = ParamUtil.getString(request, "orderByCol");
-String orderByType = ParamUtil.getString(request, "orderByType");
 
 if (Validator.isNotNull(displayStyle) && Validator.isNotNull(displayStyle)) {
 	portalPreferences.setValue(ExportImportPortletKeys.IMPORT, "displayStyle", displayStyle);
@@ -32,6 +28,11 @@ if (Validator.isNotNull(displayStyle) && Validator.isNotNull(displayStyle)) {
 else {
 	displayStyle = portalPreferences.getValue(ExportImportPortletKeys.IMPORT, "displayStyle", "descriptive");
 }
+
+String navigation = ParamUtil.getString(request, "navigation", "all");
+
+String orderByCol = ParamUtil.getString(request, "orderByCol");
+String orderByType = ParamUtil.getString(request, "orderByType");
 
 if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
 	portalPreferences.setValue(PortletKeys.BACKGROUND_TASK, "entries-order-by-col", orderByCol);
