@@ -80,7 +80,6 @@ public class OrganizationResourceTest extends BaseOrganizationResourceTestCase {
 
 		Organization organization1 = testGetOrganizationsPage_addOrganization(
 			randomOrganization());
-
 		Organization organization2 = testGetOrganizationsPage_addOrganization(
 			randomOrganization());
 
