@@ -22,7 +22,7 @@ CommerceDiscountDisplayContext commerceDiscountDisplayContext = (CommerceDiscoun
 CommerceDiscount commerceDiscount = commerceDiscountDisplayContext.getCommerceDiscount();
 %>
 
-<portlet:actionURL name="editCommerceDiscountExternalReferenceCode" var="editCommerceDiscountExternalReferenceCodeURL" />
+<portlet:actionURL name="/commerce_discount/edit_commerce_discount_external_reference_code" var="editCommerceDiscountExternalReferenceCodeURL" />
 
 <commerce-ui:modal-content>
 	<aui:form action="<%= editCommerceDiscountExternalReferenceCodeURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
