@@ -166,6 +166,9 @@ public class EditDispatchTriggerMVCActionCommand extends BaseMVCActionCommand {
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 		String cronExpression = ParamUtil.getString(
 			actionRequest, "cronExpression");
+		DispatchTaskClusterMode dispatchTaskClusterMode =
+			DispatchTaskClusterMode.valueOf(
+				ParamUtil.getInteger(actionRequest, "dispatchTaskClusterMode"));
 		int endDateMonth = ParamUtil.getInteger(actionRequest, "endDateMonth");
 		int endDateDay = ParamUtil.getInteger(actionRequest, "endDateDay");
 		int endDateYear = ParamUtil.getInteger(actionRequest, "endDateYear");
@@ -199,10 +202,6 @@ public class EditDispatchTriggerMVCActionCommand extends BaseMVCActionCommand {
 		if (startDateAmPm == Calendar.PM) {
 			startDateHour += 12;
 		}
-
-		DispatchTaskClusterMode dispatchTaskClusterMode =
-			DispatchTaskClusterMode.valueOf(
-				ParamUtil.getInteger(actionRequest, "dispatchTaskClusterMode"));
 
 		_dispatchTriggerService.updateDispatchTrigger(
 			dispatchTriggerId, active, cronExpression, dispatchTaskClusterMode,
