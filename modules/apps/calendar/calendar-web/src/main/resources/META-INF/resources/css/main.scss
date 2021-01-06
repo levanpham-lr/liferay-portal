@@ -456,6 +456,8 @@
 
 .scheduler-base-controls {
 	width: 50%;
+	flex: 0 0 100%;
+	max-width: 100%;
 
 	.btn-group {
 		button {
@@ -478,6 +480,8 @@
 
 .scheduler-base-hd .scheduler-base-views {
 	align-items: start;
+	flex: 0 0 100%;
+	max-width: 100%;
 
 	button {
 		border-color: #cdced9;
