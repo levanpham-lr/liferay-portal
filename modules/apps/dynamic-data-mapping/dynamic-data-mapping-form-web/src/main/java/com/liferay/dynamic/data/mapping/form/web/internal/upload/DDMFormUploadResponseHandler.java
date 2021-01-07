@@ -18,6 +18,7 @@ import com.liferay.document.library.kernel.exception.FileExtensionException;
 import com.liferay.document.library.kernel.exception.FileNameException;
 import com.liferay.document.library.kernel.exception.FileSizeException;
 import com.liferay.document.library.kernel.exception.InvalidFileException;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
@@ -59,7 +60,8 @@ public class DDMFormUploadResponseHandler implements UploadResponseHandler {
 			errorMessage = themeDisplay.translate(
 				"please-enter-a-file-with-a-valid-extension-x",
 				StringUtil.merge(
-					_ddmFormUploadValidator.getGuestUploadFileExtensions()));
+					_ddmFormUploadValidator.getGuestUploadFileExtensions(),
+					StringPool.COMMA_AND_SPACE));
 		}
 		else if (portalException instanceof FileNameException) {
 			errorMessage = themeDisplay.translate(
