@@ -39,7 +39,7 @@ else {
 
 <%@ include file="/navbar_specifications.jspf" %>
 
-<portlet:actionURL name="editProductSpecificationOption" var="editProductSpecificationOptionActionURL" />
+<portlet:actionURL name="/cp_specification_options/edit_cp_specification_option" var="editProductSpecificationOptionActionURL" />
 
 <aui:form action="<%= editProductSpecificationOptionActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (cpSpecificationOption == null) ? Constants.ADD : Constants.UPDATE %>" />
