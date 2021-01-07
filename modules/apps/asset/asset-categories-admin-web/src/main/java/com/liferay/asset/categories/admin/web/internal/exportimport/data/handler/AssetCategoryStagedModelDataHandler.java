@@ -153,7 +153,7 @@ public class AssetCategoryStagedModelDataHandler
 				category.getCategoryId());
 
 		for (AssetCategoryProperty categoryProperty : categoryProperties) {
-			if (!_propertyExists(categoryElement, categoryProperty)) {
+			if (!_exists(categoryElement, categoryProperty)) {
 				Element propertyElement = categoryElement.addElement(
 					"property");
 
@@ -325,7 +325,7 @@ public class AssetCategoryStagedModelDataHandler
 		return titleMap;
 	}
 
-	private boolean _propertyExists(
+	private boolean _exists(
 		Element categoryElement, AssetCategoryProperty categoryProperty) {
 
 		String key = categoryProperty.getKey();
