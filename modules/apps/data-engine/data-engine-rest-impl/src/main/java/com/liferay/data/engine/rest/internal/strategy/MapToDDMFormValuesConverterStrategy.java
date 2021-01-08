@@ -52,21 +52,21 @@ public interface MapToDDMFormValuesConverterStrategy {
 
 		if (locale == null) {
 			for (Map.Entry<String, ?> entry : localizedValues.entrySet()) {
-				if (entry.getValue() instanceof Object[]) {
-					JSONArray jsonArray = JSONUtil.putAll(
-						(Object[])entry.getValue());
-
-					localizedValue.addString(
-						LocaleUtil.fromLanguageId(entry.getKey()),
-						jsonArray.toString());
-				}
-				else if (entry.getValue() instanceof Map) {
+				if (entry.getValue() instanceof Map) {
 					JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 						(Map)entry.getValue());
 
 					localizedValue.addString(
 						LocaleUtil.fromLanguageId(entry.getKey()),
 						jsonObject.toString());
+				}
+				else if (entry.getValue() instanceof Object[]) {
+					JSONArray jsonArray = JSONUtil.putAll(
+						(Object[])entry.getValue());
+
+					localizedValue.addString(
+						LocaleUtil.fromLanguageId(entry.getKey()),
+						jsonArray.toString());
 				}
 				else {
 					localizedValue.addString(
