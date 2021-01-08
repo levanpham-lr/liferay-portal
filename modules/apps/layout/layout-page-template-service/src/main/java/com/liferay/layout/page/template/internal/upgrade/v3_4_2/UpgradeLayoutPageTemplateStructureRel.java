@@ -23,7 +23,6 @@ import com.liferay.layout.util.structure.LayoutStructure;
 import com.liferay.layout.util.structure.LayoutStructureItem;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.jdbc.AutoBatchPreparedStatementUtil;
-import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONUtil;
@@ -150,7 +149,7 @@ public class UpgradeLayoutPageTemplateStructureRel extends UpgradeProcess {
 		}
 	}
 
-	private String _upgradeLayoutData(String data) throws JSONException {
+	private String _upgradeLayoutData(String data) throws Exception {
 		LayoutStructure layoutStructure = LayoutStructure.of(data);
 
 		List<LayoutStructureItem> layoutStructureItems =
