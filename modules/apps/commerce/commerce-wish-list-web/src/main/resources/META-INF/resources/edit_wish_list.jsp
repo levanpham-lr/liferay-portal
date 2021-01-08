@@ -22,7 +22,7 @@ CommerceWishListDisplayContext commerceWishListDisplayContext = (CommerceWishLis
 CommerceWishList commerceWishList = commerceWishListDisplayContext.getCommerceWishList();
 %>
 
-<portlet:actionURL name="editCommerceWishList" var="editCommerceWishListActionURL" />
+<portlet:actionURL name="/commerce_wish_list_content/edit_commerce_wish_list" var="editCommerceWishListActionURL" />
 
 <aui:form action="<%= editCommerceWishListActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceWishList == null) ? Constants.ADD : Constants.UPDATE %>" />
