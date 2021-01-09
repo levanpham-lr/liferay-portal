@@ -14,9 +14,8 @@
 
 (function () {
 	var adjustScrollTop = function () {
-		var controlMenu;
-		var controlMenuId;
-		var controlMenuScroll;
+		var controlMenuContainer;
+		var controlMenuContainerScroll;
 		var errorFieldLabel;
 		var labelScroll;
 
@@ -31,13 +30,15 @@
 		}
 
 		if (Liferay.ControlMenu) {
-			controlMenuId = Liferay.ControlMenu._namespace + 'ControlMenu';
-			controlMenu = document.getElementById(controlMenuId);
+			controlMenuContainer = document.querySelector(
+				".control-menu-container"
+			);
 
-			if (controlMenu) {
-				controlMenuScroll = controlMenu.offsetHeight || 0;
+			if (controlMenuContainer) {
+				controlMenuContainerScroll =
+					controlMenuContainer.offsetHeight || 0;
 
-				window.scrollBy(0, -controlMenuScroll);
+				window.scrollBy(0, -controlMenuContainerScroll);
 			}
 		}
 	};
