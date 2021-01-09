@@ -42,6 +42,8 @@
 		}
 	};
 
+	window.addEventListener("hashchange", adjustScrollTop);
+
 	var handleFormRegistered = function (event) {
 		if (event.form && event.form.formValidator) {
 			AUI().Do.after(
