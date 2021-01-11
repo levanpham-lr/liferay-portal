@@ -161,12 +161,6 @@ public class LayoutPageTemplateStructureStagedModelDataHandler
 			LayoutPageTemplateStructure layoutPageTemplateStructure)
 		throws Exception {
 
-		List<Element> layoutPageTemplateStructureRelElements =
-			portletDataContext.getReferenceDataElements(
-				layoutPageTemplateStructure,
-				LayoutPageTemplateStructureRel.class,
-				PortletDataContext.REFERENCE_TYPE_CHILD);
-
 		Map<Long, Long> layoutPageTemplateStructureIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				LayoutPageTemplateStructure.class);
@@ -179,6 +173,12 @@ public class LayoutPageTemplateStructureStagedModelDataHandler
 		_layoutPageTemplateStructureRelLocalService.
 			deleteLayoutPageTemplateStructureRels(
 				layoutPageTemplateStructureId);
+
+		List<Element> layoutPageTemplateStructureRelElements =
+			portletDataContext.getReferenceDataElements(
+				layoutPageTemplateStructure,
+				LayoutPageTemplateStructureRel.class,
+				PortletDataContext.REFERENCE_TYPE_CHILD);
 
 		for (Element layoutPageTemplateStructureRelElement :
 				layoutPageTemplateStructureRelElements) {
