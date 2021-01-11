@@ -14,8 +14,6 @@
 
 package com.liferay.osb.commerce.provisioning.web.internal.portlet.action;
 
-import static com.liferay.portal.kernel.security.permission.PermissionThreadLocal.getPermissionChecker;
-
 import com.liferay.osb.commerce.provisioning.web.internal.constants.OSBCommerceProvisioningPortletKeys;
 import com.liferay.portal.kernel.exception.ContactNameException;
 import com.liferay.portal.kernel.exception.UserEmailAddressException;
@@ -29,6 +27,7 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.session.AuthenticatedSessionManager;
 import com.liferay.portal.kernel.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -177,7 +176,8 @@ public class EditCommerceAccountUserMVCActionCommand
 		User user = _userLocalService.getUser(userId);
 
 		UserPermissionUtil.check(
-			getPermissionChecker(), userId, ActionKeys.UPDATE);
+			PermissionThreadLocal.getPermissionChecker(), userId,
+			ActionKeys.UPDATE);
 
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
