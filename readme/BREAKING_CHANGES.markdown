@@ -228,11 +228,15 @@ This feature has been deprecated since 7.1.
 
 The OSGi property `autoUpgrade` defined in `com.liferay.portal.upgrade.internal.configuration.ReleaseManagerConfiguration.config` was replaced with the portal property `upgrade.database.auto.run`.
 
-Unlike the old property, which only controlled the upgrade processes in modules, the new one also affects the Core upgrade processes. The default value is `false`, so upgrade processes won't run on startup or module deployment. You can execute module upgrade processes anytime via Gogo console.
+Unlike the old property, which only controlled the upgrade processes in modules, the new one also affects the Core upgrade processes. The default value is `false`, so upgrade processes won't run on startup or module deployment. You can execute module upgrade processes anytime via Gogo console or via upgrade tool when the server is down.
+
+This property is set to `true` in the `portal-developer.properties`
 
 #### Who is affected?
 
-This affects development environments where you don't want to run the upgrade when a new process is deployed. This property can't be set to `true` in production environments. In these cases, you must use the upgrade tool to execute minor and major schema version changes.
+This affects any environment where it is required to run upgrades automatically when a new process is deployed. This property is not recommended to be set to `true` in production environments. When needed, make a database and DL backup before starting up the server.
+
+When set to `false` (default value) the portal will not startup in case an upgrade is required (minor and major schema version changes which are only included in Liferay release upgrades, early GA upgrades and, excepcionally, in certain service packs, never in fix packs). Information regarding pending micro changes is printed on startup and you can always use the Gogo console and release notes to check it and decide to execute them or not.
 
 #### How should I update my code?
 
