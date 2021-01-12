@@ -91,8 +91,9 @@ public class PageEntityExtensionWriterInterceptorTest {
 		Page<JAXRSExtensionContextUtil.TestObject> page = Page.of(
 			Collections.singleton(testObject));
 
-		ArgumentCaptor<Page> argumentCaptor = ArgumentCaptor.forClass(
-			Page.class);
+		ArgumentCaptor<Page<ExtendedEntity>> argumentCaptor =
+			ArgumentCaptor.forClass(
+				(Class<Page<ExtendedEntity>>)(Class<?>)Page.class);
 
 		Mockito.when(
 			_writerInterceptorContext.getEntity()
