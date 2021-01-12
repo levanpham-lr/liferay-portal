@@ -31,7 +31,7 @@
 
 		if (Liferay.ControlMenu) {
 			controlMenuContainer = document.querySelector(
-				".control-menu-container"
+				'.control-menu-container'
 			);
 
 			if (controlMenuContainer) {
@@ -43,8 +43,8 @@
 		}
 	};
 
-	Liferay.once("initLayout", () => {
-		window.addEventListener("hashchange", adjustScrollTop);
+	Liferay.once('initLayout', () => {
+		window.addEventListener('hashchange', adjustScrollTop);
 	});
 
 	var handleFormRegistered = function (event) {
