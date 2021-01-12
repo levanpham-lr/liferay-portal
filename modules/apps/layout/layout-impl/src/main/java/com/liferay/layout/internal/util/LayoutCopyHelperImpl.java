@@ -61,6 +61,7 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portlet.exportimport.staging.StagingAdvicesThreadLocal;
 import com.liferay.segments.constants.SegmentsExperienceConstants;
 import com.liferay.segments.model.SegmentsExperience;
 import com.liferay.segments.service.SegmentsExperienceLocalService;
@@ -95,7 +96,12 @@ public class LayoutCopyHelperImpl implements LayoutCopyHelper {
 		ServiceContext currentServiceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
+		boolean stagingAdvicesThreadLocalEnabled =
+			StagingAdvicesThreadLocal.isEnabled();
+
 		try {
+			StagingAdvicesThreadLocal.setEnabled(false);
+
 			return TransactionInvokerUtil.invoke(_transactionConfig, callable);
 		}
 		catch (Throwable throwable) {
@@ -103,6 +109,9 @@ public class LayoutCopyHelperImpl implements LayoutCopyHelper {
 		}
 		finally {
 			ServiceContextThreadLocal.pushServiceContext(currentServiceContext);
+
+			StagingAdvicesThreadLocal.setEnabled(
+				stagingAdvicesThreadLocalEnabled);
 		}
 	}
 
