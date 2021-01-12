@@ -51,6 +51,16 @@
 </tr>
 <!--CORS-->
 <tr>
+	<td>CORS_ADD_RESPONSE_HEADERS</td>
+	<td>//div[@id='senna_surface1-screen_10']//div[4]//div[1]//div[1]//div[1]//button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CORS_ADDED_RESPONSE_HEADERS</td>
+	<td>//div[@id='senna_surface1-screen_10']//div[4]//div[1]//div[2]//div//textarea</td>
+	<td></td>
+</tr>
+<tr>
 	<td>CORS_CONFIGURATION</td>
 	<td>//textarea[contains(@name,'${key_configurationValue}')]</td>
 	<td></td>
@@ -61,8 +71,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td></td>
-	<td></td>
+	<td>CORS_DELETE_URL_PATTERN</td>
+	<td>//div[@class='active ddm-form-page lfr-ddm-form-page']/div[3]/div[1]/div[2]//button[contains(@aria-label,'trash')]</td>
 	<td></td>
 </tr>
 </tbody>
