@@ -43,7 +43,9 @@
 		}
 	};
 
-	window.addEventListener("hashchange", adjustScrollTop);
+	Liferay.once("initLayout", () => {
+		window.addEventListener("hashchange", adjustScrollTop);
+	});
 
 	var handleFormRegistered = function (event) {
 		if (event.form && event.form.formValidator) {
