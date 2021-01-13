@@ -21,6 +21,7 @@ import com.liferay.dispatch.exception.DuplicateDispatchTriggerException;
 import com.liferay.dispatch.executor.DispatchTaskClusterMode;
 import com.liferay.dispatch.model.DispatchTrigger;
 import com.liferay.dispatch.service.DispatchTriggerLocalService;
+import com.liferay.dispatch.service.test.util.CronExpressionUtil;
 import com.liferay.dispatch.service.test.util.DispatchTriggerTestUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.model.Company;
@@ -190,8 +191,11 @@ public class DispatchTriggerLocalServiceTest {
 				_dispatchTriggerLocalService.updateDispatchTrigger(
 					dispatchTrigger.getDispatchTriggerId(),
 					expectedDispatchTrigger.isActive(),
-					expectedDispatchTrigger.getCronExpression(), 5, 5, 2024, 11,
-					11, false, true, 4, 4, 2024, 12, 0,
+					expectedDispatchTrigger.getCronExpression(),
+					CronExpressionUtil.getMonth() + 1, 20,
+					CronExpressionUtil.getYear(), 23, 59, false, true,
+					CronExpressionUtil.getMonth() - 1, 1,
+					CronExpressionUtil.getYear(), 0, 0,
 					dispatchTaskClusterMode);
 
 			_basicAssertEquals(expectedDispatchTrigger, dispatchTrigger);
