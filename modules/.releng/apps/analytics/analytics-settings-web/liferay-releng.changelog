@@ -212,3 +212,8 @@ c9edefad2d787d1305499c0b4943779d233fe77c^..5f5288dd31f4fc2f3d70dba53cb368fcdf4dc
 # Bundle Version 4.0.47
 #
 e78f54007397dd75bbb4b1c0ab0f45e2ec54250b^..c093dfad9138a2e2bd1ea6c6aa5f3670f3fd7bb5=LPS-77699
+
+#
+# Bundle Version 4.0.48
+#
+c093dfad9138a2e2bd1ea6c6aa5f3670f3fd7bb5^..b25b4d085774ff4f1c9f9b25e7447c90b5f6b164=LPS-77699 LRAC-7202
