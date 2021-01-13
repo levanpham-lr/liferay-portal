@@ -66,6 +66,7 @@ long assetClassPK = DLAssetHelperUtil.getAssetClassPK(fileEntry, fileVersion);
 		cssClass="navbar-no-collapse"
 		names="<%= tabsNames %>"
 		refresh="<%= false %>"
+		param='<%= "tabs" + StringPool.UNDERLINE + fileEntry.getFileEntryId() %>'
 	>
 		<liferay-ui:section>
 
@@ -444,7 +445,7 @@ long assetClassPK = DLAssetHelperUtil.getAssetClassPK(fileEntry, fileVersion);
 									cssClass="metadata"
 									defaultState="closed"
 									extended="<%= true %>"
-									id='<%= "documentLibraryMetadataPanel" + StringPool.UNDERLINE + ddmStructure.getStructureId() %>'
+									id='<%= "documentLibraryMetadataPanel" + StringPool.UNDERLINE + fileEntry.getFileEntryId() %>'
 									markupView="lexicon"
 									persistState="<%= true %>"
 									title="<%= HtmlUtil.escape(ddmStructure.getName(locale)) %>"
@@ -514,7 +515,7 @@ long assetClassPK = DLAssetHelperUtil.getAssetClassPK(fileEntry, fileVersion);
 								collapsible="<%= true %>"
 								cssClass="lfr-asset-metadata"
 								defaultState="closed"
-								id='<%= "documentLibraryMetadataPanel" + StringPool.UNDERLINE + ddmStructure.getStructureId() %>'
+								id='<%= "documentLibraryMetadataPanel" + StringPool.UNDERLINE + fileEntry.getFileEntryId() %>'
 								markupView="lexicon"
 								persistState="<%= true %>"
 								title='<%= "metadata." + ddmStructure.getStructureKey() %>'
