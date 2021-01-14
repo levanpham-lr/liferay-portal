@@ -163,6 +163,7 @@ export interface Config {
 	};
 
 	singleSegmentsExperienceMode: boolean;
+	styleBookEnabled: boolean;
 	stylebookEntryId: string;
 	styleBooks: Array<{
 		imagePreviewURL: string;
