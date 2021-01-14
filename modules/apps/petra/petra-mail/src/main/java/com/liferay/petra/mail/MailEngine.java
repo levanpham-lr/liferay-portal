@@ -568,25 +568,27 @@ public class MailEngine {
 			int batchSize)
 		throws MailEngineException {
 
-		if ((_DATA_LIMIT_MAX_MAIL_PERIOD > 0) &&
-			(_DATA_LIMIT_MAX_MAIL_COUNT > 0)) {
+		if ((_DATA_LIMIT_MAX_MAIL_MESSAGE_PERIOD > 0) &&
+			(_DATA_LIMIT_MAX_MAIL_MESSAGE_COUNT > 0)) {
 
 			long currentTime = System.currentTimeMillis();
 
 			if (((currentTime - _lastResetTime.get()) / 1000) >
-					_DATA_LIMIT_MAX_MAIL_PERIOD) {
+					_DATA_LIMIT_MAX_MAIL_MESSAGE_PERIOD) {
 
-				_mailCounts.clear();
+				_mailMessageCounts.clear();
 
 				_lastResetTime.set(currentTime);
 			}
 
-			AtomicLong mailCount = _mailCounts.computeIfAbsent(
+			AtomicLong mailMessageCount = _mailMessageCounts.computeIfAbsent(
 				CompanyThreadLocal.getCompanyId(), id -> new AtomicLong());
 
-			if (mailCount.incrementAndGet() > _DATA_LIMIT_MAX_MAIL_COUNT) {
+			if (mailMessageCount.incrementAndGet() >
+					_DATA_LIMIT_MAX_MAIL_MESSAGE_COUNT) {
+
 				throw new MailEngineException(
-					"Unable to exceed maximum number of allowed mails");
+					"Unable to exceed maximum number of allowed mail messages");
 			}
 		}
 
@@ -679,11 +681,13 @@ public class MailEngine {
 
 	private static final int _BATCH_SIZE = 0;
 
-	private static final long _DATA_LIMIT_MAX_MAIL_COUNT = GetterUtil.getLong(
-		PropsUtil.get(PropsKeys.DATA_LIMIT_MAX_MAIL_COUNT));
+	private static final long _DATA_LIMIT_MAX_MAIL_MESSAGE_COUNT =
+		GetterUtil.getLong(
+			PropsUtil.get(PropsKeys.DATA_LIMIT_MAX_MAIL_MESSAGE_COUNT));
 
-	private static final long _DATA_LIMIT_MAX_MAIL_PERIOD = GetterUtil.getLong(
-		PropsUtil.get(PropsKeys.DATA_LIMIT_MAX_MAIL_PERIOD));
+	private static final long _DATA_LIMIT_MAX_MAIL_MESSAGE_PERIOD =
+		GetterUtil.getLong(
+			PropsUtil.get(PropsKeys.DATA_LIMIT_MAX_MAIL_MESSAGE_PERIOD));
 
 	private static final String _MULTIPART_TYPE_ALTERNATIVE = "alternative";
 
@@ -696,7 +700,7 @@ public class MailEngine {
 	private static final Log _log = LogFactoryUtil.getLog(MailEngine.class);
 
 	private static final AtomicLong _lastResetTime = new AtomicLong();
-	private static final Map<Long, AtomicLong> _mailCounts =
+	private static final Map<Long, AtomicLong> _mailMessageCounts =
 		new ConcurrentHashMap<>();
 
 }

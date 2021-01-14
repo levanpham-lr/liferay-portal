@@ -658,11 +658,11 @@ public interface PropsKeys {
 	public static final String CUSTOM_SQL_FUNCTION_ISNULL =
 		"custom.sql.function.isnull";
 
-	public static final String DATA_LIMIT_MAX_MAIL_COUNT =
-		"data.limit.max.mail.count";
+	public static final String DATA_LIMIT_MAX_MAIL_MESSAGE_COUNT =
+		"data.limit.max.mail.message.count";
 
-	public static final String DATA_LIMIT_MAX_MAIL_PERIOD =
-		"data.limit.max.mail.period";
+	public static final String DATA_LIMIT_MAX_MAIL_MESSAGE_PERIOD =
+		"data.limit.max.mail.message.period";
 
 	public static final String DATA_LIMIT_MAX_ORGANIZATION_COUNT =
 		"data.limit.max.organization.count";
