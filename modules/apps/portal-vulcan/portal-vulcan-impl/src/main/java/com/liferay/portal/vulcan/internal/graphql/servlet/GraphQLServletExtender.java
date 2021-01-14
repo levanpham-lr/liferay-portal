@@ -823,14 +823,13 @@ public class GraphQLServletExtender {
 
 		Object[] arguments = new Object[parameters.length];
 
-		Object instance = null;
-
-		GraphQLFieldDefinition graphQLFieldDefinition =
-			dataFetchingEnvironment.getFieldDefinition();
-
 		Class<?> declaringClass = method.getDeclaringClass();
 
 		Field field = _getThisField(declaringClass);
+
+		GraphQLFieldDefinition graphQLFieldDefinition =
+			dataFetchingEnvironment.getFieldDefinition();
+		Object instance = null;
 
 		if ((dataFetchingEnvironment.getRoot() ==
 				dataFetchingEnvironment.getSource()) ||
@@ -1233,7 +1232,6 @@ public class GraphQLServletExtender {
 			_collectObjectFields(
 				mutationBuilder, configurations, ServletData::getMutation,
 				processingElementsContainer, servletDatas);
-
 			_collectObjectFields(
 				graphQLObjectTypeBuilder, configurations, ServletData::getQuery,
 				processingElementsContainer, servletDatas);
@@ -1241,19 +1239,17 @@ public class GraphQLServletExtender {
 			_registerInterfaces(
 				processingElementsContainer, graphQLObjectTypeBuilder,
 				graphQLSchemaBuilder);
-
 			_registerNamespace(
 				configurations, ServletData::getQuery, graphQLObjectTypeBuilder,
 				graphQLSchemaBuilder, false, processingElementsContainer,
 				servletDatas);
-
 			_registerNamespace(
 				configurations, ServletData::getMutation, mutationBuilder,
 				graphQLSchemaBuilder, true, processingElementsContainer,
 				servletDatas);
 
-			graphQLSchemaBuilder.query(graphQLObjectTypeBuilder.build());
 			graphQLSchemaBuilder.mutation(mutationBuilder.build());
+			graphQLSchemaBuilder.query(graphQLObjectTypeBuilder.build());
 
 			GraphQLConfiguration.Builder graphQLConfigurationBuilder =
 				GraphQLConfiguration.with(graphQLSchemaBuilder.build());
@@ -1506,15 +1502,19 @@ public class GraphQLServletExtender {
 				continue;
 			}
 
+			GraphQLObjectType.Builder builder = new GraphQLObjectType.Builder();
+
 			String prefix = "";
 
 			if (mutation) {
 				prefix = "Mutation";
 			}
 
-			GraphQLObjectType.Builder builder =
-				new GraphQLObjectType.Builder().name(
-					prefix + StringUtil.upperCaseFirstLetter(graphQLNamespace));
+			builder.name(
+				prefix + StringUtil.upperCaseFirstLetter(graphQLNamespace));
+
+			GraphQLCodeRegistry.Builder graphQLCodeRegistryBuilder =
+				processingElementsContainer.getCodeRegistryBuilder();
 
 			Object query = function.apply(servletData);
 
@@ -1522,32 +1522,31 @@ public class GraphQLServletExtender {
 
 			Method[] methods = clazz.getMethods();
 
-			GraphQLCodeRegistry.Builder codeRegistryBuilder =
-				processingElementsContainer.getCodeRegistryBuilder();
-
 			for (Method method : methods) {
-				if (_isMethodEnabled(
+				if (!_isMethodEnabled(
 						configurations, method, servletData.getPath())) {
 
-					builder.field(
-						_graphQLFieldRetriever.getField(
-							clazz.getSimpleName(), method,
-							processingElementsContainer));
-
-					graphQLSchemaBuilder.codeRegistry(
-						codeRegistryBuilder.dataFetcher(
-							FieldCoordinates.coordinates(
-								graphQLNamespace, method.getName()),
-							new LiferayMethodDataFetcher(method)
-						).build());
+					continue;
 				}
+
+				builder.field(
+					_graphQLFieldRetriever.getField(
+						clazz.getSimpleName(), method,
+						processingElementsContainer));
+
+				graphQLSchemaBuilder.codeRegistry(
+					graphQLCodeRegistryBuilder.dataFetcher(
+						FieldCoordinates.coordinates(
+							graphQLNamespace, method.getName()),
+						new LiferayMethodDataFetcher(method)
+					).build());
 			}
 
-			GraphQLFieldDefinition.Builder newFieldDefinitionBuilder =
+			GraphQLFieldDefinition.Builder graphQLFieldDefinitionBuilder =
 				GraphQLFieldDefinition.newFieldDefinition();
 
 			graphQLObjectTypeBuilder.field(
-				newFieldDefinitionBuilder.name(
+				graphQLFieldDefinitionBuilder.name(
 					graphQLNamespace
 				).type(
 					builder.build()
@@ -1560,7 +1559,7 @@ public class GraphQLServletExtender {
 			}
 
 			graphQLSchemaBuilder.codeRegistry(
-				codeRegistryBuilder.dataFetcher(
+				graphQLCodeRegistryBuilder.dataFetcher(
 					FieldCoordinates.coordinates(parentField, graphQLNamespace),
 					(DataFetcher<Object>)environment -> new Object()
 				).build());
