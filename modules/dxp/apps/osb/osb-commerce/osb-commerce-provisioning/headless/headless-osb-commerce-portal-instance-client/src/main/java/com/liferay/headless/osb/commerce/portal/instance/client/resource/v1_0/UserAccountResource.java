@@ -166,8 +166,9 @@ public interface UserAccountResource {
 			httpInvoker.path(
 				_builder._scheme + "://" + _builder._host + ":" +
 					_builder._port +
-						"/o/headless-osb-commerce-portal-instance/v1.0/user-accounts/{portalInstanceId}",
-				portalInstanceId);
+						"/o/headless-osb-commerce-portal-instance/v1.0/user-accounts/{portalInstanceId}");
+
+			httpInvoker.path("portalInstanceId", portalInstanceId);
 
 			httpInvoker.userNameAndPassword(
 				_builder._login + ":" + _builder._password);
@@ -227,8 +228,9 @@ public interface UserAccountResource {
 			httpInvoker.path(
 				_builder._scheme + "://" + _builder._host + ":" +
 					_builder._port +
-						"/o/headless-osb-commerce-portal-instance/v1.0/user-accounts/{portalInstanceId}/batch",
-				portalInstanceId);
+						"/o/headless-osb-commerce-portal-instance/v1.0/user-accounts/{portalInstanceId}/batch");
+
+			httpInvoker.path("portalInstanceId", portalInstanceId);
 
 			httpInvoker.userNameAndPassword(
 				_builder._login + ":" + _builder._password);
