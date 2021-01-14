@@ -1561,7 +1561,7 @@ public class GraphQLServletExtender {
 			graphQLSchemaBuilder.codeRegistry(
 				graphQLCodeRegistryBuilder.dataFetcher(
 					FieldCoordinates.coordinates(parentField, graphQLNamespace),
-					(DataFetcher<Object>)environment -> new Object()
+					(DataFetcher<Object>)dataFetcher -> new Object()
 				).build());
 		}
 	}
