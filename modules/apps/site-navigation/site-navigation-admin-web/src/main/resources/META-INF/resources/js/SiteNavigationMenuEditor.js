@@ -170,11 +170,19 @@ class SiteNavigationMenuEditor extends State {
 				insertAtPosition(nearestMenuItem, sourceMenuItem, 0);
 			}
 			else {
-				let nearestMenuItemPosition = position.getRegion(nearestMenuItem);
+				let nearestMenuItemPosition = position.getRegion(
+					nearestMenuItem
+				);
 
-				while (placeholderMenuItem.offsetLeft < nearestMenuItemPosition.left && getParent(nearestMenuItem) !== this._container) {
-					nearestMenuItem = getParent(nearestMenuItem)
-					nearestMenuItemPosition = position.getRegion(nearestMenuItem);
+				while (
+					placeholderMenuItem.offsetLeft <
+						nearestMenuItemPosition.left &&
+					getParent(nearestMenuItem) !== this._container
+				) {
+					nearestMenuItem = getParent(nearestMenuItem);
+					nearestMenuItemPosition = position.getRegion(
+						nearestMenuItem
+					);
 				}
 
 				const nearestMenuItemParent = getParent(nearestMenuItem);
