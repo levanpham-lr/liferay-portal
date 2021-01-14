@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 /**
  * @author Jürgen Kappler
  */
-public class UpgradeUrlTitle extends UpgradeProcess {
+public class UpgradeJournalArticle extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
