@@ -34,7 +34,7 @@ else {
 
 <div class="card-horizontal main-content-card">
 	<div class="card-body">
-		<div id="<portlet:namespace />themeContainer">
+		<div id="<portlet:namespace />currentThemeContainer">
 			<liferay-util:include page="/look_and_feel_theme_details.jsp" servletContext="<%= application %>" />
 		</div>
 
@@ -49,7 +49,7 @@ else {
 
 	var selThemeId = '<%= selTheme.getThemeId() %>';
 
-	var themeContainer = A.one('#<portlet:namespace />themeContainer');
+	var themeContainer = A.one('#<portlet:namespace />currentThemeContainer');
 
 	<portlet:renderURL var="selectThemeURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 		<portlet:param name="mvcPath" value="/select_theme.jsp" />
