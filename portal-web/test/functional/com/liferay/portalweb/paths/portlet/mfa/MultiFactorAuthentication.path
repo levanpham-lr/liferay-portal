@@ -11,12 +11,12 @@
 <!--CUSTOM_MFA_VERIFICATION-->
 <tr>
 	<td>CUSTOM_MFA_TITLE</td>
-	<td>//h3[contains(.,'Please, write something for this MFA Sample')]</td>
+	<td>//h3[contains(.,'Write something for this MFA sample.')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>CUSTOM_MFA_DESCRIPTION</td>
-	<td>//label[contains(.,'Write something for this Sample')]</td>
+	<td>//label[contains(.,'MFA Sample')]</td>
 	<td></td>
 </tr>
 <tr>

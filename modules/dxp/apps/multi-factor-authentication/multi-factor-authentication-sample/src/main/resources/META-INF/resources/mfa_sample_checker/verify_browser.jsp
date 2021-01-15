@@ -17,7 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <h3>
-	<liferay-ui:message key="please-enter-something" />:
+	<liferay-ui:message key="write-something-for-this-mfa-sample" />
 </h3>
 
 <aui:input label="mfa-sample" name="mfaSample" showRequiredLabel="yes" />
