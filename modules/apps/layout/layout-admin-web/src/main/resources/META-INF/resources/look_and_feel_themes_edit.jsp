@@ -71,7 +71,7 @@ else {
 					});
 
 					Liferay.Util.fetch(
-						'<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="mvcPath" value="/look_and_feel_theme_details.jsp" /></portlet:renderURL>',
+						'<portlet:renderURL copyCurrentRenderParameters="<%= true %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="mvcPath" value="/look_and_feel_theme_details.jsp" /></portlet:renderURL>',
 						{
 							body: Liferay.Util.objectToFormData(data),
 							method: 'POST',
