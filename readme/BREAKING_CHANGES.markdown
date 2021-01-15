@@ -228,15 +228,15 @@ This feature has been deprecated since 7.1.
 
 The OSGi property `autoUpgrade` defined in `com.liferay.portal.upgrade.internal.configuration.ReleaseManagerConfiguration.config` was replaced with the portal property `upgrade.database.auto.run`.
 
-Unlike the old property, which only controlled the upgrade processes in modules, the new one also affects the Core upgrade processes. The default value is `false`, so upgrade processes won't run on startup or module deployment. You can execute module upgrade processes anytime via Gogo console or via upgrade tool when the server is down.
+Unlike the old property, which only controlled the upgrade processes in modules, the new one also affects the Core upgrade processes. The default value is `false`, so upgrade processes won't run on startup or module deployment. You can execute module upgrade processes anytime via the Gogo Shell console or via Database Upgrade Tool when the server is down.
 
 This property is set to `true` in the `portal-developer.properties`
 
 #### Who is affected?
 
-This affects any environment where it is required to run upgrades automatically when a new process is deployed. This property is not recommended to be set to `true` in production environments. When needed, make a database and DL backup before starting up the server.
+This change affects any environment where you're expecting to run upgrades automatically on server startup or on module deployment. Setting `upgrade.database.auto.run` to `true` is not recommended in production environments. If you must, however, upgrade on server startup, first back up your Liferay database and File Store (Document Library).
 
-When set to `false` (default value) the portal will not startup in case an upgrade is required (minor and major schema version changes which are only included in Liferay release upgrades, early GA upgrades and, excepcionally, in certain service packs, never in fix packs). Information regarding pending micro changes is printed on startup and you can always use the Gogo console and release notes to check it and decide to execute them or not.
+If you set `upgrade.database.auto.run` to `false` (default value) but database upgrade is required, Liferay prints information about the required upgrade and halts startup. Database upgrade is typically required by major/minor Liferay releases and may be required by early CE Portal GA releases and certain Service Packs (in exceptional cases)--Fix Packs never require database upgrade. On startup, Liferay prints information about any pending micro changes. You can always use the Gogo Shell console and release notes to check such changes and then decide whether to execute them.
 
 #### How should I update my code?
 
@@ -244,7 +244,7 @@ This change doesn't affect your code.
 
 #### Why was this change made?
 
-This change was made to unify the auto-upgrade feature between the Core and modules. The default value has also changed to avoid the execution of new upgrade processes on startup in production environments.
+This change was made to unify the auto-upgrade feature between the Core and modules. The default value was also changed to avoid executing new upgrade processes on startup in production environments.
 
 ---------------------------------------
 
