@@ -324,19 +324,19 @@ This change was made because the tag was primarily used internally.
 
 #### What changed?
 
-The `addAction` methods with signature `String, Class, GroupedModel, String, UriInfo` and `String, Class, Long, String, String, Long, UriInfo` were removed.
+The `addAction` methods with signatures `String, Class, GroupedModel, String, UriInfo` and `String, Class, Long, String, String, Long, UriInfo` were removed.
 
 #### Who is affected?
 
-This affects anyone using the addAction methods removed or with dependencies like `compileOnly group: "com.liferay", name: "com.liferay.portal.vulcan.api", version: "[1.0.0, 2.0.0)"`.
+This affects anyone using the removed `addAction` methods or anyone that has dependencies like `compileOnly group: "com.liferay", name: "com.liferay.portal.vulcan.api", version: "[1.0.0, 2.0.0)"`.
 
 #### How should I update my code?
 
-Use addAction methods with signature `String, Class, GroupedModel, String, Object, UriInfo` and `String, Class, Long, String, String, Object, Long, UriInfo`
+Use `addAction` methods with the signature `String, Class, GroupedModel, String, Object, UriInfo` or `String, Class, Long, String, String, Object, Long, UriInfo`.
 
 #### Why was this change made?
 
-This methods were removed as part of a clean up refactor.
+These methods were removed as part of a cleanup refactor.
 
 ---------------------------------------
 
