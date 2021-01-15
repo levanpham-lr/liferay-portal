@@ -17,7 +17,7 @@ Here are some of the types of changes documented in this file:
 * Deprecations or end of support: For example, warning that a certain
   feature or API will be dropped in an upcoming version.
 
-*This document has been reviewed through commit `4334fc6cc349`.*
+*This document has been reviewed through commit `ac8f7b9b47639`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -449,25 +449,25 @@ This feature has been deprecated.
 
 ---------------------------------------
 
-### ContentField value Property Name Has Changed to contentFieldValue
+### The ContentField value Property Name Was Changed to contentFieldValue
 - **Date:** 2020-Mar-18
 - **JIRA Ticket:** [LPS-106886](https://issues.liferay.com/browse/LPS-106886)
 
 #### What changed?
 
-The property name `value` inside ContentField schema in Headless Delivery API has changed to `contentFieldValue`
+In Headless Delivery API, the property name `value` inside the ContentField schema was changed to `contentFieldValue`.
 
 #### Who is affected?
 
-This affects REST clients depending in the ContentField `value` property name
+This affects REST clients depending in the ContentField `value` property name.
 
 #### How should I update my code?
 
-Change the property name to `contentFieldValue` in the REST client
+Change the property name to `contentFieldValue` in the REST client.
 
 #### Why was this change made?
 
-This change restore consistency with all value property names in the Headless APIs, called `{schemaName}+Value`
+This change restores consistency with all value property names in the Headless APIs, called `{schemaName}+Value`.
 
 ---------------------------------------
 
