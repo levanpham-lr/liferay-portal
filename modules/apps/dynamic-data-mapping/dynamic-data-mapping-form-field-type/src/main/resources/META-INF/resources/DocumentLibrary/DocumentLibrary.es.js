@@ -325,9 +325,39 @@ const Main = ({
 		document.getElementById('ddm-form-submit').disabled = disable;
 	};
 
+	const isExceededUploadRequestSizeLimit = (fileSize) => {
+		const uploadRequestSizeLimit =
+			Liferay.PropsValues.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE;
+
+		if (fileSize <= uploadRequestSizeLimit) {
+			return false;
+		}
+
+		const errorMessage = Liferay.Util.sub(
+			Liferay.Language.get(
+				'please-enter-a-file-with-a-valid-file-size-no-larger-than-x'
+			),
+			[Liferay.Util.formatStorage(uploadRequestSizeLimit)]
+		);
+
+		configureErrorMessage(errorMessage);
+
+		setCurrentValue(null);
+
+		onChange({}, '{}');
+
+		return true;
+	};
+
 	const handleUploadSelectButtonClicked = (event) => {
+		const file = event.target.files[0];
+
+		if (isExceededUploadRequestSizeLimit(file.size)) {
+			return;
+		}
+
 		const data = {
-			[`${portletNamespace}file`]: event.target.files[0],
+			[`${portletNamespace}file`]: file,
 		};
 
 		axios
@@ -363,6 +393,11 @@ const Main = ({
 
 					onChange(event, JSON.stringify(file));
 				}
+
+				setProgress(0);
+			})
+			.catch(() => {
+				disableSubmitButton(false);
 
 				setProgress(0);
 			});
