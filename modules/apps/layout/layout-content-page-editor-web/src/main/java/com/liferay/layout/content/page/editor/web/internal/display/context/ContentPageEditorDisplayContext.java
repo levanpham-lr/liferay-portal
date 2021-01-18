@@ -339,6 +339,10 @@ public class ContentPageEditorDisplayContext {
 				"duplicateItemURL",
 				getFragmentEntryActionURL("/content_layout/duplicate_item")
 			).put(
+				"duplicateSegmentsExperienceURL",
+				getFragmentEntryActionURL(
+					"/layout_content_page_editor/duplicate_segments_experience")
+			).put(
 				"editFragmentEntryLinkCommentURL",
 				getFragmentEntryActionURL(
 					"/content_layout/edit_fragment_entry_link_comment",
