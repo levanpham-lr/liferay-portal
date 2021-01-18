@@ -35,6 +35,7 @@ const ExperienceItem = ({
 	lockedDecreasePriority,
 	lockedIncreasePriority,
 	onDeleteExperience,
+	onDuplicateExperience,
 	onEditExperience,
 	onPriorityDecrease,
 	onPriorityIncrease,
@@ -72,6 +73,9 @@ const ExperienceItem = ({
 		if (confirmed) {
 			onDeleteExperience(experience.segmentsExperienceId);
 		}
+	};
+	const handleExperienceDuplicate = () => {
+		onDuplicateExperience(experience.segmentsExperienceId);
 	};
 	const handleExperimentNavigation = (event) => {
 		event.preventDefault();
@@ -163,6 +167,7 @@ const ExperienceItem = ({
 					editable={editable}
 					experience={experience}
 					handleExperienceDelete={handleExperienceDelete}
+					handleExperienceDuplicate={handleExperienceDuplicate}
 					handleExperienceEdit={handleExperienceEdit}
 					handleExperimentNavigation={handleExperimentNavigation}
 					handlePriorityDecrease={handlePriorityDecrease}
@@ -179,6 +184,7 @@ const ExperienceActions = ({
 	editable,
 	experience,
 	handleExperienceDelete,
+	handleExperienceDuplicate,
 	handleExperienceEdit,
 	handleExperimentNavigation,
 	handlePriorityDecrease,
@@ -243,6 +249,7 @@ const ExperienceActions = ({
 						className="component-action mx-1"
 						displayType="unstyled"
 						monospaced
+						onClick={handleExperienceDuplicate}
 						outline
 						symbol="copy"
 						title={Liferay.Language.get('duplicate-experience')}
@@ -323,6 +330,7 @@ ExperienceItem.propTypes = {
 	lockedDecreasePriority: PropTypes.bool.isRequired,
 	lockedIncreasePriority: PropTypes.bool.isRequired,
 	onDeleteExperience: PropTypes.func.isRequired,
+	onDuplicateExperience: PropTypes.func.isRequired,
 	onEditExperience: PropTypes.func.isRequired,
 	onPriorityDecrease: PropTypes.func.isRequired,
 	onPriorityIncrease: PropTypes.func.isRequired,
