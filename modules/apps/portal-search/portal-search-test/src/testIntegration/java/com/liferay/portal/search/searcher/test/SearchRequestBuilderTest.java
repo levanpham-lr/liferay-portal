@@ -345,14 +345,12 @@ public class SearchRequestBuilderTest {
 								setName("content");
 							}
 						});
-
 					setJournalArticleDescription(
 						new JournalArticleDescription() {
 							{
 								put(LocaleUtil.US, description);
 							}
 						});
-
 					setJournalArticleTitle(
 						new JournalArticleTitle() {
 							{
