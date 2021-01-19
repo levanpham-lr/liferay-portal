@@ -106,17 +106,17 @@ public class SegmentsExperienceLocalServiceTest {
 				ServiceContextTestUtil.getServiceContext(_group.getGroupId()));
 
 		Assert.assertEquals(
-			1,
-			_segmentsExperienceLocalService.getSegmentsExperiencesCount(
-				_group.getGroupId(), _classNameId, _classPK, active));
-
-		Assert.assertEquals(
 			segmentsEntry.getSegmentsEntryId(),
 			segmentsExperience.getSegmentsEntryId());
 		Assert.assertEquals(_classNameId, segmentsExperience.getClassNameId());
 		Assert.assertEquals(_classPK, segmentsExperience.getClassPK());
 		Assert.assertEquals(nameMap, segmentsExperience.getNameMap());
 		Assert.assertEquals(active, segmentsExperience.isActive());
+
+		Assert.assertEquals(
+			1,
+			_segmentsExperienceLocalService.getSegmentsExperiencesCount(
+				_group.getGroupId(), _classNameId, _classPK, active));
 	}
 
 	@Test
@@ -185,13 +185,13 @@ public class SegmentsExperienceLocalServiceTest {
 				ServiceContextTestUtil.getServiceContext(_group.getGroupId()));
 
 		Assert.assertEquals(
+			SegmentsExperienceConstants.PRIORITY_DEFAULT - 1,
+			segmentsExperience.getPriority());
+
+		Assert.assertEquals(
 			1,
 			_segmentsExperienceLocalService.getSegmentsExperiencesCount(
 				_group.getGroupId(), _classNameId, _classPK, active));
-
-		Assert.assertEquals(
-			SegmentsExperienceConstants.PRIORITY_DEFAULT - 1,
-			segmentsExperience.getPriority());
 	}
 
 	@Test
