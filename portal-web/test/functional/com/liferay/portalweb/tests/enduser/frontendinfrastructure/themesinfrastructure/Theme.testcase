@@ -170,6 +170,9 @@ definition {
 			themeName = "test-theme-7-3");
 	}
 
+	// Ignore test until LPS-126081 is resolved
+
+	@ignore = "true"
 	@priority = "5"
 	test PublishThemeFromStagedToLive {
 		property test.name.skip.portal.instance = "Theme#PublishThemeFromStagedToLive";
