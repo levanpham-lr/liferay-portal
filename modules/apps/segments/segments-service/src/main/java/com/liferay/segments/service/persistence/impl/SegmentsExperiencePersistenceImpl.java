@@ -6805,7 +6805,7 @@ public class SegmentsExperiencePersistenceImpl
 
 		if (useFinderCache && productionMode) {
 			list = (List<SegmentsExperience>)finderCache.getResult(
-				finderPath, finderArgs);
+				finderPath, finderArgs, this);
 
 			if ((list != null) && !list.isEmpty()) {
 				for (SegmentsExperience segmentsExperience : list) {
@@ -7639,7 +7639,7 @@ public class SegmentsExperiencePersistenceImpl
 
 			finderArgs = new Object[] {groupId, classNameId, classPK, priority};
 
-			count = (Long)finderCache.getResult(finderPath, finderArgs);
+			count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 		}
 
 		if (count == null) {
@@ -11696,7 +11696,7 @@ public class SegmentsExperiencePersistenceImpl
 			new String[] {"groupId", "classNameId", "classPK", "priority"},
 			false);
 
-		_finderPathWithPaginationFindByG_C_C_LtP = new FinderPath(
+		_finderPathWithPaginationFindByG_C_C_LtP = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_C_C_LtP",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
@@ -11707,7 +11707,7 @@ public class SegmentsExperiencePersistenceImpl
 			new String[] {"groupId", "classNameId", "classPK", "priority"},
 			true);
 
-		_finderPathWithPaginationCountByG_C_C_LtP = new FinderPath(
+		_finderPathWithPaginationCountByG_C_C_LtP = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByG_C_C_LtP",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
