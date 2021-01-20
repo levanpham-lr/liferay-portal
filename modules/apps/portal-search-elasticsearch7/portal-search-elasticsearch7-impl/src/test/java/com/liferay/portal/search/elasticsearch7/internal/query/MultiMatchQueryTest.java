@@ -65,8 +65,8 @@ public class MultiMatchQueryTest extends BaseIndexingTestCase {
 		MultiMatchQuery multiMatchQuery = queries.multiMatch(
 			"bravo alpha", "firstName", "lastName");
 
-		multiMatchQuery.setType(MultiMatchQuery.Type.CROSS_FIELDS);
 		multiMatchQuery.setOperator(Operator.AND);
+		multiMatchQuery.setType(MultiMatchQuery.Type.CROSS_FIELDS);
 
 		List<String> expected = Arrays.asList("userName2");
 
