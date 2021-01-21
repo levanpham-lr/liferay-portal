@@ -64,6 +64,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -133,6 +135,13 @@ public class AssetEntriesCheckerHelper {
 		if (assetEntries.isEmpty()) {
 			return;
 		}
+
+		Stream<AssetEntry> streamAssetEntries = assetEntries.stream();
+
+		assetEntries = streamAssetEntries.distinct(
+		).collect(
+			Collectors.toList()
+		);
 
 		long[] notifiedAssetEntryIds = GetterUtil.getLongValues(
 			portletPreferences.getValues("notifiedAssetEntryIds", null));
