@@ -111,10 +111,10 @@ public class CommerceCheckoutPortlet extends MVCPortlet {
 			CommerceOrder commerceOrder = getCommerceOrder(renderRequest);
 
 			if (commerceOrder != null) {
-				HttpServletResponse httpServletResponse =
-					_portal.getHttpServletResponse(renderResponse);
 				HttpServletRequest httpServletRequest =
 					_portal.getHttpServletRequest(renderRequest);
+				HttpServletResponse httpServletResponse =
+					_portal.getHttpServletResponse(renderResponse);
 
 				boolean continueAsGuest = GetterUtil.getBoolean(
 					CookieKeys.getCookie(
