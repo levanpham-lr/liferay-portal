@@ -43,8 +43,7 @@ exports[`ReactFieldBase renders the FieldBase with help text 1`] = `
       Type something!
     </span>
     <span
-      aria-hidden="false"
-      hidden=""
+      class="sr-only"
       id="undefined_fieldDetails"
     >
       Type something!
@@ -72,15 +71,14 @@ exports[`ReactFieldBase renders the FieldBase with label 1`] = `
     class="form-group hide"
   >
     <label
-      aria-labelledby="undefined_fieldDetails"
+      aria-describedby="undefined_fieldDetails"
       class="ddm-label"
       tabindex="0"
     >
       Text
     </label>
     <span
-      aria-hidden="false"
-      hidden=""
+      class="sr-only"
       id="undefined_fieldDetails"
     >
       Text
@@ -96,7 +94,7 @@ exports[`ReactFieldBase renders the FieldBase with required 1`] = `
     class="form-group hide"
   >
     <label
-      aria-labelledby="undefined_fieldDetails"
+      aria-describedby="undefined_fieldDetails"
       class="ddm-label"
       tabindex="0"
     >
@@ -114,8 +112,7 @@ exports[`ReactFieldBase renders the FieldBase with required 1`] = `
       </span>
     </label>
     <span
-      aria-hidden="false"
-      hidden=""
+      class="sr-only"
       id="undefined_fieldDetails"
     >
       undefined
