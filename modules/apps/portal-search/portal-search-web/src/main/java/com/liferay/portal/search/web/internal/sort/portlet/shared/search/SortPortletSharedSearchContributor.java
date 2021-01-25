@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.search.searcher.SearchRequestBuilder;
 import com.liferay.portal.search.sort.Sort;
 import com.liferay.portal.search.sort.SortBuilder;
@@ -118,35 +119,34 @@ public class SortPortletSharedSearchContributor
 		String[] fieldValues = portletSharedSearchSettings.getParameterValues(
 			parameterName);
 
-		if (ArrayUtil.isEmpty(fieldValues)) {
-			String portletId = portletSharedSearchSettings.getPortletId();
-			ThemeDisplay themeDisplay =
-				portletSharedSearchSettings.getThemeDisplay();
-
-			try {
-				PortletPreferences portletPreferences =
-					PortletPreferencesFactoryUtil.getExistingPortletSetup(
-						themeDisplay.getLayout(), portletId);
-
-				SortPortletPreferences sortPortletPreferences =
-					new SortPortletPreferencesImpl(
-						Optional.of(portletPreferences));
-
-				JSONArray fieldsJSONArray =
-					sortPortletPreferences.getFieldsJSONArray();
-
-				JSONObject jsonObject = fieldsJSONArray.getJSONObject(0);
-
-				String fieldValue = jsonObject.getString("field");
-
-				fieldValues = new String[] {fieldValue};
-			}
-			catch (PortalException portalException) {
-				throw new RuntimeException(portalException);
-			}
+		if (ArrayUtil.isNotEmpty(fieldValues)) {
+			return Arrays.asList(fieldValues);
 		}
 
-		return Arrays.asList(fieldValues);
+		String portletId = portletSharedSearchSettings.getPortletId();
+		ThemeDisplay themeDisplay =
+			portletSharedSearchSettings.getThemeDisplay();
+
+		try {
+			PortletPreferences portletPreferences =
+				PortletPreferencesFactoryUtil.getExistingPortletSetup(
+					themeDisplay.getLayout(), portletId);
+
+			SortPortletPreferences sortPortletPreferences =
+				new SortPortletPreferencesImpl(Optional.of(portletPreferences));
+
+			JSONArray fieldsJSONArray =
+				sortPortletPreferences.getFieldsJSONArray();
+
+			JSONObject jsonObject = fieldsJSONArray.getJSONObject(0);
+
+			String fieldValue = jsonObject.getString("field");
+
+			return ListUtil.fromArray(fieldValue);
+		}
+		catch (PortalException portalException) {
+			throw new RuntimeException(portalException);
+		}
 	}
 
 	@Reference
