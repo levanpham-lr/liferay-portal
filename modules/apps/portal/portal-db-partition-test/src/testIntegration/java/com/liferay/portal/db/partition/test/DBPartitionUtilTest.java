@@ -185,8 +185,7 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 		int viewsCount = _getViewsCount();
 		int tablesCount = _getTablesCount();
 
-		String fullTestTableName =
-			_getSchemaName(_COMPANY_ID) + StringPool.PERIOD + "test";
+		String fullTestTableName = _getSchemaName(_COMPANY_ID) + ".test";
 
 		try (Statement statement = _connection.createStatement()) {
 			_createAndPopulateTable("test");
