@@ -182,8 +182,8 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 	public void testRemoveDBPartitionRollback() throws Exception {
 		_addDBPartition();
 
-		int viewsCount = _getViewsCount();
 		int tablesCount = _getTablesCount();
+		int viewsCount = _getViewsCount();
 
 		String fullTestTableName = _getSchemaName(_COMPANY_ID) + ".test";
 
@@ -197,8 +197,8 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 				Assert.fail("Should throw an exception");
 			}
 			catch (Exception exception) {
-				Assert.assertEquals(viewsCount, _getViewsCount() - 1);
 				Assert.assertEquals(tablesCount, _getTablesCount());
+				Assert.assertEquals(viewsCount, _getViewsCount() - 1);
 			}
 		}
 		finally {
