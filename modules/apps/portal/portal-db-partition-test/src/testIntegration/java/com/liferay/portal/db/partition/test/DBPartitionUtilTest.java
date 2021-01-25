@@ -320,9 +320,9 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 				_getSchemaName(_COMPANY_ID) + StringPool.PERIOD + tableName;
 		}
 
-		try (PreparedStatement ps = _connection.prepareStatement(
+		try (PreparedStatement preparedStatement = _connection.prepareStatement(
 				"select count(1) from " + fullTableName + whereClause);
-			ResultSet resultSet = ps.executeQuery()) {
+			ResultSet resultSet = preparedStatement.executeQuery()) {
 
 			if (resultSet.next()) {
 				return resultSet.getInt(1);
