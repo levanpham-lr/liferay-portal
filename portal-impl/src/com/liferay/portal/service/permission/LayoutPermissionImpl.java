@@ -280,9 +280,9 @@ public class LayoutPermissionImpl
 			}
 		}
 
-		if ((layout.getClassPK() != 0) &&
-			(layout.getClassNameId() == PortalUtil.getClassNameId(
+		if ((layout.getClassNameId() == PortalUtil.getClassNameId(
 				Layout.class)) &&
+			(layout.getClassPK() != 0) &&
 			permissionChecker.hasPermission(
 				group, Layout.class.getName(), layout.getClassPK(), actionId)) {
 
