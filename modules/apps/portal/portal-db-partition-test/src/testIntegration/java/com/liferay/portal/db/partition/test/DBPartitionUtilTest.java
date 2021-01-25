@@ -179,7 +179,7 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 	}
 
 	@Test
-	public void testRollbackRemoveDBPartition() throws Exception {
+	public void testRemoveDBPartitionRollback() throws Exception {
 		_addDBPartition();
 
 		int viewsCount = _getViewsCount();
