@@ -160,28 +160,21 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 	public void testRemoveDBPartition() throws Exception {
 		_addDBPartition();
 
-		List<String> initialViewNames = _getObjectNames("VIEW");
+		List<String> viewNames = _getObjectNames("VIEW");
 
-		int initialViewsCount = initialViewNames.size();
+		Assert.assertNotEquals(0, viewNames.size());
 
-		Assert.assertNotEquals(0, initialViewsCount);
-
-		int initialTablesCount = _getTablesCount();
+		int tablesCount = _getTablesCount();
 
 		_removeDBPartition();
 
-		int finalTablesCount = _getTablesCount();
-		int finalViewsCount = _getViewsCount();
+		Assert.assertEquals(tablesCount + viewNames.size(), _getTablesCount());
+		Assert.assertEquals(0, _getViewsCount());
 
-		Assert.assertEquals(
-			initialTablesCount + initialViewsCount, finalTablesCount);
-
-		Assert.assertEquals(0, finalViewsCount);
-
-		for (String initialViewName : initialViewNames) {
+		for (String viewName : viewNames) {
 			Assert.assertEquals(
-				initialViewName + " count", _getCount(initialViewName, true),
-				_getCount(initialViewName, false));
+				viewName + " count", _getCount(viewName, true),
+				_getCount(viewName, false));
 		}
 	}
 
@@ -189,8 +182,8 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 	public void testRollbackRemoveDBPartition() throws Exception {
 		_addDBPartition();
 
-		int initialViewsCount = _getViewsCount();
-		int initialTablesCount = _getTablesCount();
+		int viewsCount = _getViewsCount();
+		int tablesCount = _getTablesCount();
 
 		String fullTestTableName =
 			_getSchemaName(_COMPANY_ID) + StringPool.PERIOD + "test";
@@ -205,8 +198,8 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 				Assert.fail("Should throw an exception");
 			}
 			catch (Exception exception) {
-				Assert.assertEquals(initialViewsCount, _getViewsCount() - 1);
-				Assert.assertEquals(initialTablesCount, _getTablesCount());
+				Assert.assertEquals(viewsCount, _getViewsCount() - 1);
+				Assert.assertEquals(tablesCount, _getTablesCount());
 			}
 		}
 		finally {
