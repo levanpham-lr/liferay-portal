@@ -162,21 +162,21 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 
 		List<String> initialViewNames = _getObjectNames("VIEW");
 
-		int initialViewCount = initialViewNames.size();
+		int initialViewsCount = initialViewNames.size();
 
-		Assert.assertNotEquals(0, initialViewCount);
+		Assert.assertNotEquals(0, initialViewsCount);
 
-		int initialTableCount = _getTablesCount();
+		int initialTablesCount = _getTablesCount();
 
 		_removeDBPartition();
 
-		int finalTableCount = _getTablesCount();
-		int finalViewCount = _getViewCount();
+		int finalTablesCount = _getTablesCount();
+		int finalViewsCount = _getViewsCount();
 
 		Assert.assertEquals(
-			initialTableCount + initialViewCount, finalTableCount);
+			initialTablesCount + initialViewsCount, finalTablesCount);
 
-		Assert.assertEquals(0, finalViewCount);
+		Assert.assertEquals(0, finalViewsCount);
 
 		for (String initialViewName : initialViewNames) {
 			Assert.assertEquals(
@@ -189,8 +189,8 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 	public void testRollbackRemoveDBPartition() throws Exception {
 		_addDBPartition();
 
-		int initialViewCount = _getViewCount();
-		int initialTableCount = _getTablesCount();
+		int initialViewsCount = _getViewsCount();
+		int initialTablesCount = _getTablesCount();
 
 		String fullTestTableName =
 			_getSchemaName(_COMPANY_ID) + StringPool.PERIOD + "test";
@@ -205,8 +205,8 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 				Assert.fail("Should throw an exception");
 			}
 			catch (Exception exception) {
-				Assert.assertEquals(initialViewCount, _getViewCount() - 1);
-				Assert.assertEquals(initialTableCount, _getTablesCount());
+				Assert.assertEquals(initialViewsCount, _getViewsCount() - 1);
+				Assert.assertEquals(initialTablesCount, _getTablesCount());
 			}
 		}
 		finally {
@@ -355,7 +355,7 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 		return tableNames.size();
 	}
 
-	private int _getViewCount() throws Exception {
+	private int _getViewsCount() throws Exception {
 		List<String> viewNames = _getObjectNames("VIEW");
 
 		return viewNames.size();
