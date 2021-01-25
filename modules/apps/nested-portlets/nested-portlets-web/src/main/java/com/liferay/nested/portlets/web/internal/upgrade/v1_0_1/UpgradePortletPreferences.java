@@ -26,8 +26,8 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		runSQL(
 			StringBundler.concat(
-				"update PortletPreferences set preferences = ",
-				"replace(preferences, '<value>1_2_1_columns</value>', ",
+				"update PortletPreferences set preferences = replace(",
+				"preferences, '<value>1_2_1_columns</value>', ",
 				"'<value>1_2_1_columns_i</value>')"));
 	}
 
