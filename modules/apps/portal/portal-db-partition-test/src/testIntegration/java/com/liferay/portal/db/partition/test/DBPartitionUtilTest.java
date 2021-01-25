@@ -299,6 +299,7 @@ public class DBPartitionUtilTest extends BaseDBPartitionTestCase {
 		try (Statement statement = _connection.createStatement()) {
 			statement.execute(
 				"create table " + tableName + "(test bigint primary key)");
+
 			statement.execute("insert into " + tableName + " values (1)");
 		}
 	}
