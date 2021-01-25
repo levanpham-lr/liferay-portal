@@ -82,11 +82,11 @@ public class DBPartitionUtil {
 
 					if (_isControlTable(dbInspector, tableName)) {
 						statement.executeUpdate(
-							_getCreateView(companyId, tableName));
+							_getCreateViewSQL(companyId, tableName));
 					}
 					else {
 						statement.executeUpdate(
-							_getCreateTable(companyId, tableName));
+							_getCreateTableSQL(companyId, tableName));
 					}
 				}
 			}
@@ -149,15 +149,15 @@ public class DBPartitionUtil {
 			}
 			catch (Exception exception2) {
 				throw new PortalException(
-					"Unable to rollback the removal of DB partition. Recover " +
-						"a backup of the database schema " +
-							_getSchemaName(companyId),
+					StringBundler.concat(
+						"Unable to rollback the removal of database ",
+						"partition. Recover a backup of the database schema ",
+						_getSchemaName(companyId), "."),
 					exception2);
 			}
 
 			throw new PortalException(
-				"DB partition removal rolled back successfully due to " +
-					exception1.getMessage(),
+				"Removal of database partition removal was rolled back",
 				exception1);
 		}
 
@@ -242,27 +242,27 @@ public class DBPartitionUtil {
 				whereClause));
 	}
 
-	private static String _getCreateTable(long companyId, String tableName) {
+	private static String _getCreateTableSQL(long companyId, String tableName) {
 		return StringBundler.concat(
 			"create table if not exists ", _getSchemaName(companyId),
 			StringPool.PERIOD, tableName, " like ", _defaultSchemaName,
 			StringPool.PERIOD, tableName);
 	}
 
-	private static String _getCreateView(long companyId, String viewName) {
+	private static String _getCreateViewSQL(long companyId, String viewName) {
 		return StringBundler.concat(
 			"create or replace view ", _getSchemaName(companyId),
 			StringPool.PERIOD, viewName, " as select * from ",
 			_defaultSchemaName, StringPool.PERIOD, viewName);
 	}
 
-	private static String _getDropTable(long companyId, String tableName) {
+	private static String _getDropTableSQL(long companyId, String tableName) {
 		return StringBundler.concat(
 			"drop table if exists ", _getSchemaName(companyId),
 			StringPool.PERIOD, tableName);
 	}
 
-	private static String _getDropView(long companyId, String viewName) {
+	private static String _getDropViewSQL(long companyId, String viewName) {
 		return StringBundler.concat(
 			"drop view if exists ", _getSchemaName(companyId),
 			StringPool.PERIOD, viewName);
@@ -291,9 +291,9 @@ public class DBPartitionUtil {
 			DBInspector dbInspector)
 		throws Exception {
 
-		statement.executeUpdate(_getDropView(companyId, tableName));
+		statement.executeUpdate(_getDropViewSQL(companyId, tableName));
 
-		statement.executeUpdate(_getCreateTable(companyId, tableName));
+		statement.executeUpdate(_getCreateTableSQL(companyId, tableName));
 
 		if (dbInspector.hasColumn(tableName, "companyId")) {
 			_moveCompanyData(
@@ -336,9 +336,9 @@ public class DBPartitionUtil {
 				_defaultSchemaName, statement);
 		}
 
-		statement.executeUpdate(_getDropTable(companyId, tableName));
+		statement.executeUpdate(_getDropTableSQL(companyId, tableName));
 
-		statement.executeUpdate(_getCreateView(companyId, tableName));
+		statement.executeUpdate(_getCreateViewSQL(companyId, tableName));
 	}
 
 	private static void _useSchema(Connection connection) throws SQLException {
