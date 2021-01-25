@@ -69,7 +69,7 @@ public class SynonymSetIndexReaderImpl implements SynonymSetIndexReader {
 
 		searchSearchRequest.setIndexNames(synonymSetIndexName.getIndexName());
 		searchSearchRequest.setPreferLocalCluster(false);
-		searchSearchRequest.setSize(_MAX_ELASTICSEARCH_SIZE);
+		searchSearchRequest.setSize(_SIZE);
 
 		SearchSearchResponse searchSearchResponse =
 			_searchEngineAdapter.execute(searchSearchRequest);
@@ -113,7 +113,7 @@ public class SynonymSetIndexReaderImpl implements SynonymSetIndexReader {
 		return Optional.empty();
 	}
 
-	private static final int _MAX_ELASTICSEARCH_SIZE = 10000;
+	private static final int _SIZE = 10000;
 
 	@Reference
 	private DocumentToSynonymSetTranslator _documentToSynonymSetTranslator;
