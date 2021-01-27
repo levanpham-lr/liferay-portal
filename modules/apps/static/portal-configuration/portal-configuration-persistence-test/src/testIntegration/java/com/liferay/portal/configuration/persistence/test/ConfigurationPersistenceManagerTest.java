@@ -58,7 +58,7 @@ public class ConfigurationPersistenceManagerTest {
 	@Test
 	public void testConfigurationOverride() throws IOException {
 
-		// Override non-exist configuration
+		// Override nonexisting configuration
 
 		String testPid = "testPid";
 
@@ -73,7 +73,7 @@ public class ConfigurationPersistenceManagerTest {
 		try (Closeable closeable = _reloadWithOverrideProperties(
 				testPid, overrideProperties)) {
 
-			// Initial populating
+			// Initial population
 
 			Dictionary<Object, Object> dictionary = _persistenceManager.load(
 				testPid);
@@ -123,14 +123,14 @@ public class ConfigurationPersistenceManagerTest {
 			_persistenceManager.delete(testPid);
 		}
 
-		// Override exist configuration
+		// Override existing configuration
 
-		Properties existProperties = new Properties();
+		Properties existingProperties = new Properties();
 
-		existProperties.put("a", "a");
-		existProperties.put("b", "b");
+		existingProperties.put("a", "a");
+		existingProperties.put("b", "b");
 
-		_persistenceManager.store(testPid, existProperties);
+		_persistenceManager.store(testPid, existingProperties);
 
 		Dictionary<Object, Object> dictionary = _persistenceManager.load(
 			testPid);
@@ -142,7 +142,7 @@ public class ConfigurationPersistenceManagerTest {
 		try (Closeable closeable = _reloadWithOverrideProperties(
 				testPid, overrideProperties)) {
 
-			// Initial populating
+			// Initial population
 
 			dictionary = _persistenceManager.load(testPid);
 
