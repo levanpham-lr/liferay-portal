@@ -21,7 +21,6 @@ import com.liferay.dispatch.exception.DuplicateDispatchTriggerException;
 import com.liferay.dispatch.executor.DispatchTaskClusterMode;
 import com.liferay.dispatch.model.DispatchTrigger;
 import com.liferay.dispatch.service.DispatchTriggerLocalService;
-import com.liferay.dispatch.service.test.util.CronExpressionUtil;
 import com.liferay.dispatch.service.test.util.DispatchTriggerTestUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.model.Company;
