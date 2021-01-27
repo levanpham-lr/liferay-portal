@@ -229,16 +229,16 @@ public class AssetEntriesCheckerHelper {
 			_assetPublisherHelper.getAssetEntryQuery(
 				portletPreferences, layout.getGroupId(), layout, null, null);
 
-		int start = 0;
 		int end = assetPublisherWebConfiguration.dynamicSubscriptionLimit();
+		int start = 0;
 
 		if (end == 0) {
-			start = QueryUtil.ALL_POS;
 			end = QueryUtil.ALL_POS;
+			start = QueryUtil.ALL_POS;
 		}
 
-		assetEntryQuery.setStart(start);
 		assetEntryQuery.setEnd(end);
+		assetEntryQuery.setStart(start);
 
 		try {
 			SearchContext searchContext = SearchContextFactory.getInstance(
