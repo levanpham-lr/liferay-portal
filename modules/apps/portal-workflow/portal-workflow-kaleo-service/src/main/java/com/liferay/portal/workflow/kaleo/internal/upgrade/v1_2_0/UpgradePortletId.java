@@ -25,8 +25,8 @@ public class UpgradePortletId extends BaseUpgradePortletId {
 	@Override
 	protected String[][] getRenamePortletIdsArray() {
 		return new String[][] {
-			{"158", WorkflowPortletKeys.USER_WORKFLOW},
-			{"151", WorkflowPortletKeys.SITE_ADMINISTRATION_WORKFLOW}
+			{"151", WorkflowPortletKeys.SITE_ADMINISTRATION_WORKFLOW},
+			{"158", WorkflowPortletKeys.USER_WORKFLOW}
 		};
 	}
 
