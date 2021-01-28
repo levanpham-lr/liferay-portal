@@ -66,7 +66,7 @@ public class MFAFIDO2CredentialUpgradeProcess extends UpgradeProcess {
 
 	private void _updateCredentialKey(
 			String credentialKey, int credentialKeyHash)
-		throws SQLException {
+		throws Exception {
 
 		try (PreparedStatement preparedStatement = connection.prepareStatement(
 				"update MFAFIDO2CredentialEntry set credentialKeyHash = ? " +
