@@ -62,7 +62,7 @@ public class DispatchTriggerDisplayContext {
 	}
 
 	public String getDispatchTaskExecutorName(
-		Locale locale, String dispatchTaskExecutorType) {
+		String dispatchTaskExecutorType, Locale locale) {
 
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 			locale, getClass());
