@@ -62,11 +62,9 @@ public class MFAFIDO2CredentialUpgradeProcess extends UpgradeProcess {
 	}
 
 	private ResultSet _getCredentialKeys() throws SQLException {
-		String sql =
+		PreparedStatement preparedStatement = connection.prepareStatement(
 			"select MFAFIDO2CredentialEntry.credentialKey from " +
-				"MFAFIDO2CredentialEntry";
-
-		PreparedStatement preparedStatement = connection.prepareStatement(sql);
+				"MFAFIDO2CredentialEntry");
 
 		return preparedStatement.executeQuery();
 	}
