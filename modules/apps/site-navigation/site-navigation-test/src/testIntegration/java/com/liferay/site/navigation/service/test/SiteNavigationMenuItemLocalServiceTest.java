@@ -165,21 +165,18 @@ public class SiteNavigationMenuItemLocalServiceTest {
 				_siteNavigationMenu.getSiteNavigationMenuId(), 0,
 				SiteNavigationMenuItemTypeConstants.LAYOUT, 0, StringPool.BLANK,
 				serviceContext);
-
 		SiteNavigationMenuItem siteNavigationMenuItem2 =
 			_siteNavigationMenuItemLocalService.addSiteNavigationMenuItem(
 				TestPropsValues.getUserId(), _group.getGroupId(),
 				_siteNavigationMenu.getSiteNavigationMenuId(), 0,
 				SiteNavigationMenuItemTypeConstants.LAYOUT, 1, StringPool.BLANK,
 				serviceContext);
-
 		SiteNavigationMenuItem siteNavigationMenuItem3 =
 			_siteNavigationMenuItemLocalService.addSiteNavigationMenuItem(
 				TestPropsValues.getUserId(), _group.getGroupId(),
 				_siteNavigationMenu.getSiteNavigationMenuId(), 0,
 				SiteNavigationMenuItemTypeConstants.LAYOUT, 2, StringPool.BLANK,
 				serviceContext);
-
 		SiteNavigationMenuItem siteNavigationMenuItem4 =
 			_siteNavigationMenuItemLocalService.addSiteNavigationMenuItem(
 				TestPropsValues.getUserId(), _group.getGroupId(),
@@ -194,7 +191,6 @@ public class SiteNavigationMenuItemLocalServiceTest {
 				siteNavigationMenuItem3.getSiteNavigationMenuItemId(),
 				SiteNavigationMenuItemTypeConstants.LAYOUT, 0, StringPool.BLANK,
 				serviceContext);
-
 		SiteNavigationMenuItem siteNavigationMenuItem3Child2 =
 			_siteNavigationMenuItemLocalService.addSiteNavigationMenuItem(
 				TestPropsValues.getUserId(), _group.getGroupId(),
@@ -202,7 +198,6 @@ public class SiteNavigationMenuItemLocalServiceTest {
 				siteNavigationMenuItem3.getSiteNavigationMenuItemId(),
 				SiteNavigationMenuItemTypeConstants.LAYOUT, 1, StringPool.BLANK,
 				serviceContext);
-
 		SiteNavigationMenuItem siteNavigationMenuItem3Child3 =
 			_siteNavigationMenuItemLocalService.addSiteNavigationMenuItem(
 				TestPropsValues.getUserId(), _group.getGroupId(),
@@ -210,7 +205,6 @@ public class SiteNavigationMenuItemLocalServiceTest {
 				siteNavigationMenuItem3.getSiteNavigationMenuItemId(),
 				SiteNavigationMenuItemTypeConstants.LAYOUT, 2, StringPool.BLANK,
 				serviceContext);
-
 		SiteNavigationMenuItem siteNavigationMenuItem3Child4 =
 			_siteNavigationMenuItemLocalService.addSiteNavigationMenuItem(
 				TestPropsValues.getUserId(), _group.getGroupId(),
@@ -226,7 +220,6 @@ public class SiteNavigationMenuItemLocalServiceTest {
 				siteNavigationMenuItem3Child2.getSiteNavigationMenuItemId(),
 				SiteNavigationMenuItemTypeConstants.LAYOUT, 0, StringPool.BLANK,
 				serviceContext);
-
 		SiteNavigationMenuItem siteNavigationMenuItem3Child2Child2 =
 			_siteNavigationMenuItemLocalService.addSiteNavigationMenuItem(
 				TestPropsValues.getUserId(), _group.getGroupId(),
@@ -234,7 +227,6 @@ public class SiteNavigationMenuItemLocalServiceTest {
 				siteNavigationMenuItem3Child2.getSiteNavigationMenuItemId(),
 				SiteNavigationMenuItemTypeConstants.LAYOUT, 1, StringPool.BLANK,
 				serviceContext);
-
 		SiteNavigationMenuItem siteNavigationMenuItem3Child2Child3 =
 			_siteNavigationMenuItemLocalService.addSiteNavigationMenuItem(
 				TestPropsValues.getUserId(), _group.getGroupId(),
