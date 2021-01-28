@@ -47,11 +47,10 @@ public class MFAFIDO2CredentialUpgradeProcess extends UpgradeProcess {
 
 	private void _generateCredentialKeyHash() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer();
-			ResultSet credentialKeysResultSet = _getCredentialKeys()) {
+			ResultSet resultSet = _getCredentialKeys()) {
 
-			while (credentialKeysResultSet.next()) {
-				String credentialKey = credentialKeysResultSet.getString(
-					"credentialKey");
+			while (resultSet.next()) {
+				String credentialKey = resultSet.getString("credentialKey");
 
 				if (Validator.isNull(credentialKey)) {
 					continue;
