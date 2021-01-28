@@ -41,11 +41,11 @@ public class MFAFIDO2CredentialUpgradeProcess extends UpgradeProcess {
 				MFAFIDO2CredentialEntryTable.class,
 				new AlterTableAddColumn("credentialKeyHash", "LONG"));
 
-			_generateCredentialKeyHash();
+			_updateCredentialKeys();
 		}
 	}
 
-	private void _generateCredentialKeyHash() throws Exception {
+	private void _updateCredentialKeys() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer();
 			ResultSet resultSet = _getCredentialKeys()) {
 
@@ -56,7 +56,7 @@ public class MFAFIDO2CredentialUpgradeProcess extends UpgradeProcess {
 					continue;
 				}
 
-				_updateCredentialKeys(credentialKey, credentialKey.hashCode());
+				_updateCredentialKey(credentialKey, credentialKey.hashCode());
 			}
 		}
 	}
@@ -69,7 +69,7 @@ public class MFAFIDO2CredentialUpgradeProcess extends UpgradeProcess {
 		return preparedStatement.executeQuery();
 	}
 
-	private void _updateCredentialKeys(
+	private void _updateCredentialKey(
 			String credentialKey, int credentialKeyHash)
 		throws SQLException {
 
