@@ -519,8 +519,13 @@ public class JournalArticleLocalServiceImpl
 			serviceContext.getAssetLinkEntryIds(),
 			serviceContext.getAssetPriority());
 
-		_setDefaultAssetDisplayPage(
-			userId, groupId, resourcePrimKey, ddmStructureKey, serviceContext);
+		if (!ExportImportThreadLocal.isImportInProcess() &&
+			!ExportImportThreadLocal.isStagingInProcess()) {
+
+			_setDefaultAssetDisplayPage(
+				userId, groupId, resourcePrimKey, ddmStructureKey,
+				serviceContext);
+		}
 
 		// Dynamic data mapping
 
