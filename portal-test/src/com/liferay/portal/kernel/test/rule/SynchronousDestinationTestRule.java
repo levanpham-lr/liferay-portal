@@ -151,6 +151,8 @@ public class SynchronousDestinationTestRule
 				"liferay/segments_entry_reindex");
 			Filter subscrpitionSenderFilter = _registerDestinationFilter(
 				DestinationNames.SUBSCRIPTION_SENDER);
+			Filter tensorflowModelDownloadFilter = _registerDestinationFilter(
+				"liferay/tensorflow_model_download");
 
 			boolean solrEnabled = _isSolrEnabled();
 
@@ -181,7 +183,7 @@ public class SynchronousDestinationTestRule
 					backgroundTaskStatusFilter, ddmStructureReindexFilter,
 					kaleoGraphWalkerFilter, mailFilter, pdfProcessorFilter,
 					rawMetaDataProcessorFilter, segmentsEntryReindexFilter,
-					subscrpitionSenderFilter);
+					subscrpitionSenderFilter, tensorflowModelDownloadFilter);
 			}
 
 			_destinations = ReflectionTestUtil.getFieldValue(
