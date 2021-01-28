@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author Marta Medio
@@ -45,6 +44,21 @@ public class MFAFIDO2CredentialUpgradeProcess extends UpgradeProcess {
 		}
 	}
 
+	private void _updateCredentialKey(
+			String credentialKey, int credentialKeyHash)
+		throws Exception {
+
+		try (PreparedStatement preparedStatement = connection.prepareStatement(
+				"update MFAFIDO2CredentialEntry set credentialKeyHash = ? " +
+					"where credentialKey = ?")) {
+
+			preparedStatement.setLong(1, credentialKeyHash);
+			preparedStatement.setString(2, credentialKey);
+
+			preparedStatement.execute();
+		}
+	}
+
 	private void _updateCredentialKeys() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer();
 			PreparedStatement preparedStatement = connection.prepareStatement(
@@ -61,21 +75,6 @@ public class MFAFIDO2CredentialUpgradeProcess extends UpgradeProcess {
 
 				_updateCredentialKey(credentialKey, credentialKey.hashCode());
 			}
-		}
-	}
-
-	private void _updateCredentialKey(
-			String credentialKey, int credentialKeyHash)
-		throws Exception {
-
-		try (PreparedStatement preparedStatement = connection.prepareStatement(
-				"update MFAFIDO2CredentialEntry set credentialKeyHash = ? " +
-					"where credentialKey = ?")) {
-
-			preparedStatement.setLong(1, credentialKeyHash);
-			preparedStatement.setString(2, credentialKey);
-
-			preparedStatement.execute();
 		}
 	}
 
