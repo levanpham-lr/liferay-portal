@@ -31,7 +31,9 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.taglib.servlet.PipingServletResponse;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -113,6 +115,8 @@ public class RenderContentLayoutDisplayContext {
 
 		_portlets = new ArrayList<>();
 
+		Set<String> uniquePortletNames = new HashSet<>();
+
 		List<PortletPreferences> portletPreferencesList =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
 				PortletKeys.PREFS_OWNER_ID_DEFAULT,
@@ -131,7 +135,9 @@ public class RenderContentLayoutDisplayContext {
 				continue;
 			}
 
-			_portlets.add(portlet);
+			if (uniquePortletNames.add(portlet.getPortletName())) {
+				_portlets.add(portlet);
+			}
 		}
 
 		return _portlets;
