@@ -47,7 +47,10 @@ public class MFAFIDO2CredentialUpgradeProcess extends UpgradeProcess {
 
 	private void _updateCredentialKeys() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer();
-			ResultSet resultSet = _getCredentialKeys()) {
+			PreparedStatement preparedStatement = connection.prepareStatement(
+				"select MFAFIDO2CredentialEntry.credentialKey from " +
+					"MFAFIDO2CredentialEntry");
+			ResultSet resultSet = preparedStatement.executeQuery()) {
 
 			while (resultSet.next()) {
 				String credentialKey = resultSet.getString("credentialKey");
@@ -59,14 +62,6 @@ public class MFAFIDO2CredentialUpgradeProcess extends UpgradeProcess {
 				_updateCredentialKey(credentialKey, credentialKey.hashCode());
 			}
 		}
-	}
-
-	private ResultSet _getCredentialKeys() throws SQLException {
-		PreparedStatement preparedStatement = connection.prepareStatement(
-			"select MFAFIDO2CredentialEntry.credentialKey from " +
-				"MFAFIDO2CredentialEntry");
-
-		return preparedStatement.executeQuery();
 	}
 
 	private void _updateCredentialKey(
