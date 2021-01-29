@@ -151,10 +151,13 @@ public abstract class BaseTemplateResourceCache
 		}
 
 		_multiVMPool.removePortalCache(_portalCacheName);
-		_singleVMPool.removePortalCache(_portalCacheName);
 
 		_multiVMPortalCache = null;
+
+		_singleVMPool.removePortalCache(_portalCacheName);
+
 		_singleVMPortalCache = null;
+
 		_templateResourcePortalCacheListener = null;
 	}
 

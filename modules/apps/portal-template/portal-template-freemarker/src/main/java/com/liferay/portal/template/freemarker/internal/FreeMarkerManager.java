@@ -523,12 +523,14 @@ public class FreeMarkerManager extends BaseTemplateManager {
 		if (_freeMarkerEngineConfiguration.asyncRenderTimeout() > 0) {
 			_noticeableExecutorService.shutdownNow();
 
+			_noticeableExecutorService = null;
+
 			_timeoutTemplateCounters.clear();
+
+			_timeoutTemplateCounters = null;
 
 			_serviceRegistration.unregister();
 
-			_noticeableExecutorService = null;
-			_timeoutTemplateCounters = null;
 			_serviceRegistration = null;
 		}
 
