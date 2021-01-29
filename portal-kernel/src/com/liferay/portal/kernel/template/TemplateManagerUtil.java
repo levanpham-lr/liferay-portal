@@ -208,7 +208,7 @@ public class TemplateManagerUtil {
 					String name = templateManager.getName();
 
 					_log.warn(
-						"unable to init " + name + " Template Manager ",
+						"Unable to init template manager " + name,
 						templateException);
 				}
 			}
