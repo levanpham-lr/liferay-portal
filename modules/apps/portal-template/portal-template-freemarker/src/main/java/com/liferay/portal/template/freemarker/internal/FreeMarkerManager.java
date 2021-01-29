@@ -525,13 +525,13 @@ public class FreeMarkerManager extends BaseTemplateManager {
 
 			_noticeableExecutorService = null;
 
-			_timeoutTemplateCounters.clear();
-
-			_timeoutTemplateCounters = null;
-
 			_serviceRegistration.unregister();
 
 			_serviceRegistration = null;
+
+			_timeoutTemplateCounters.clear();
+
+			_timeoutTemplateCounters = null;
 		}
 
 		_freeMarkerEngineConfiguration = ConfigurableUtil.createConfigurable(
@@ -658,6 +658,8 @@ public class FreeMarkerManager extends BaseTemplateManager {
 			return;
 		}
 
+		_noticeableExecutorService = _portalExecutorManager.getPortalExecutor(
+			FreeMarkerManager.class.getName());
 		_serviceRegistration = bundleContext.registerService(
 			PortalExecutorConfig.class,
 			new PortalExecutorConfig(
@@ -672,10 +674,6 @@ public class FreeMarkerManager extends BaseTemplateManager {
 				new ThreadPoolExecutor.AbortPolicy(),
 				new ThreadPoolHandlerAdapter()),
 			null);
-
-		_noticeableExecutorService = _portalExecutorManager.getPortalExecutor(
-			FreeMarkerManager.class.getName());
-
 		_timeoutTemplateCounters = new ConcurrentHashMap<>();
 	}
 
