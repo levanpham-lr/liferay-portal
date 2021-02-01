@@ -477,18 +477,17 @@ List<AssetRendererFactory<?>> classTypesAssetRendererFactories = (List<AssetRend
 		'<portlet:namespace />ddmStructureFieldValue'
 	);
 
-	if (
-		assetSelector &&
-		ddmStructureFieldNameInput &&
-		ddmStructureFieldValueInput
-	) {
-		assetSelector.addEventListener('change', function (event) {
+	assetSelector.addEventListener('change', function (event) {
+		if (ddmStructureFieldNameInput) {
 			ddmStructureFieldNameInput.value = '';
-			ddmStructureFieldValueInput.value = '';
+		}
 
-			<portlet:namespace />toggleSubclasses(true);
-		});
-	}
+		if (ddmStructureFieldValueInput) {
+			ddmStructureFieldValueInput.value = '';
+		}
+
+		<portlet:namespace />toggleSubclasses(true);
+	});
 
 	dom.delegate(
 		sourcePanel,
