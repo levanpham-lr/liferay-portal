@@ -1,6 +1,6 @@
 <footer>
 	<div class="osb-commerce-section-wrapper">
-		<div class="container site-map p-5"></div>
+		<div class="container p-5 site-map"></div>
 		<div class="container osb-commerce-copyright p-4">
 			<div class="align-items-center d-md-inline-flex d-none d-sm-none logo-md osb-commerce-copyright-company">
 				<span>

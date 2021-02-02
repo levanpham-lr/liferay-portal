@@ -24,7 +24,7 @@
 			<div class="parallax-container">
 				<div class="parallax">
 					<div class="bg-wrapper container">
-						<div class="bg back"></div>
+						<div class="back bg"></div>
 						<div class="bg front"></div>
 					</div>
 
