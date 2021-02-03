@@ -107,7 +107,19 @@ public class JournalHistoryDisplayContext {
 		}
 
 		_displayStyle = ParamUtil.getString(
-			_renderRequest, "displayStyle", "list");
+			_httpServletRequest, "displayStyle");
+
+		PortalPreferences portalPreferences =
+			PortletPreferencesFactoryUtil.getPortalPreferences(
+				_httpServletRequest);
+
+		if (Validator.isNull(_displayStyle)) {
+			_displayStyle = portalPreferences.getValue(
+				JournalPortletKeys.JOURNAL, "history-display-style", "list");
+		}
+
+		portalPreferences.setValue(
+			JournalPortletKeys.JOURNAL, "history-display-style", _displayStyle);
 
 		return _displayStyle;
 	}
