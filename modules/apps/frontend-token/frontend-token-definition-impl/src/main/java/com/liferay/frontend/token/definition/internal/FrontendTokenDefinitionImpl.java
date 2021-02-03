@@ -54,9 +54,8 @@ public class FrontendTokenDefinitionImpl implements FrontendTokenDefinition {
 		_resourceBundleLoader = resourceBundleLoader;
 		_themeId = themeId;
 
-		_jsonLocalizer = createJSONLocalizer(jsonObject);
-
 		_json = _jsonFactory.looseSerializeDeep(jsonObject);
+		_jsonLocalizer = createJSONLocalizer(jsonObject);
 
 		JSONArray frontendTokenCategoriesJSONArray = jsonObject.getJSONArray(
 			"frontendTokenCategories");
