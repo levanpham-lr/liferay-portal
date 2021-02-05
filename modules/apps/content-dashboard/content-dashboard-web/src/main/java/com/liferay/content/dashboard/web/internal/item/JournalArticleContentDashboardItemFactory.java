@@ -67,6 +67,12 @@ public class JournalArticleContentDashboardItemFactory
 				journalArticle.getResourcePrimKey());
 		}
 
+		if (assetEntry == null) {
+			throw new NoSuchModelException(
+				"Unable to find a asset entry for the journal article " +
+					journalArticle.getPrimaryKey());
+		}
+
 		Optional<ContentDashboardItemTypeFactory>
 			contentDashboardItemTypeFactoryOptional =
 				_contentDashboardItemTypeFactoryTracker.
