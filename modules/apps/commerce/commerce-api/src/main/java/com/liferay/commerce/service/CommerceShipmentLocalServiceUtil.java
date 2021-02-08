@@ -403,6 +403,13 @@ public class CommerceShipmentLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static com.liferay.commerce.model.CommerceShipment reprocessShipment(
+			long commerceShipmentId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().reprocessShipment(commerceShipmentId);
+	}
+
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult
 		<CommerceShipment> searchCommerceShipments(
 				com.liferay.portal.kernel.search.SearchContext searchContext)
