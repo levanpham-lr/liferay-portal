@@ -133,10 +133,9 @@ public class BlogsServiceUpgrade implements UpgradeStepRegistrator {
 
 				subscription.setClassName(
 					MBDiscussion.class.getName() + StringPool.UNDERLINE +
-					BlogsEntry.class.getName());
+						BlogsEntry.class.getName());
 
-				_subscriptionLocalService.updateSubscription(
-					subscription);
+				_subscriptionLocalService.updateSubscription(subscription);
 			}
 
 			return true;
