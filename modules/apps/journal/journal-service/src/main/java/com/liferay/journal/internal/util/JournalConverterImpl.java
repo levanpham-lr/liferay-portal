@@ -613,7 +613,7 @@ public class JournalConverterImpl implements JournalConverter {
 				defaultLocale, dynamicContentElement);
 		}
 
-		if (Objects.equals("link_to_layout", type)) {
+		if (Objects.equals(DDMFormFieldType.LINK_TO_PAGE, type)) {
 			return _getLinkToLayoutValue(defaultLocale, dynamicContentElement);
 		}
 
