@@ -54,7 +54,7 @@ public class JournalArticleContentDashboardItemFactory
 
 		AssetEntry assetEntry = null;
 
-		if (!journalArticle.isApproved() &&
+		if (!journalArticle.isApproved() && !journalArticle.isExpired() &&
 			(journalArticle.getVersion() !=
 				JournalArticleConstants.VERSION_DEFAULT)) {
 
