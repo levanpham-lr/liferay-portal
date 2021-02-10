@@ -79,7 +79,7 @@ public class SearchResultSummaryDisplayBuilderTest {
 		setUpGroupLocalService();
 		setUpHtmlUtil();
 		setUpLocaleThreadLocal();
-		setUpProps();
+		setUpPropsUtil();
 		setUpUser();
 		setUpUserLocalService();
 
@@ -529,7 +529,7 @@ public class SearchResultSummaryDisplayBuilderTest {
 		LocaleThreadLocal.setThemeDisplayLocale(LocaleUtil.US);
 	}
 
-	protected void setUpProps() {
+	protected void setUpPropsUtil() {
 		PropsTestUtil.setProps(Collections.emptyMap());
 	}
 
