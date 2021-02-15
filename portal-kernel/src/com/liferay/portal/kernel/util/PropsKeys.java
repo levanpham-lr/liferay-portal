@@ -658,6 +658,12 @@ public interface PropsKeys {
 	public static final String CUSTOM_SQL_FUNCTION_ISNULL =
 		"custom.sql.function.isnull";
 
+	public static final String DATA_LIMIT_MAX_JOURNAL_ARTICLE_COUNT =
+		"data.limit.max.journal.article.count";
+
+	public static final String DATA_LIMIT_MAX_JOURNAL_FOLDER_COUNT =
+		"data.limit.max.journal.folder.count";
+
 	public static final String DATA_LIMIT_MAX_MAIL_MESSAGE_COUNT =
 		"data.limit.max.mail.message.count";
 
