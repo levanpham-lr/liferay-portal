@@ -105,6 +105,8 @@ public class FieldSetDDMFormFieldTemplateContextContributor
 		).put(
 			"upgradedStructure",
 			GetterUtil.getBoolean(ddmFormField.getProperty("upgradedStructure"))
+		).put(
+			"visible", _isFieldSetVisible(nestedFields)
 		).build();
 	}
 
@@ -216,6 +218,22 @@ public class FieldSetDDMFormFieldTemplateContextContributor
 
 	@Reference
 	protected JSONFactory jsonFactory;
+
+	private boolean _isFieldSetVisible(List<Object> nestedFields) {
+		Stream<Object> visibleNestedFieldsStream = nestedFields.stream();
+
+		List<Object> visibleNestedFields = visibleNestedFieldsStream.filter(
+			this::isNestedFieldVisible
+		).collect(
+			Collectors.toList()
+		);
+
+		if (visibleNestedFields.isEmpty()) {
+			return false;
+		}
+
+		return true;
+	}
 
 	private boolean _needsLoadLayout(DDMFormField ddmFormField) {
 		if (Validator.isNotNull(ddmFormField.getProperty("ddmStructureId")) &&
