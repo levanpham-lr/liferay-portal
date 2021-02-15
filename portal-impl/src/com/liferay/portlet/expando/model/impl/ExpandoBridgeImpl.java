@@ -76,6 +76,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		boolean secure =
 			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT;
 
+		if (CopyLayoutThreadLocal.isCopyLayout()) {
+			secure = false;
+		}
+
 		if (ExportImportThreadLocal.isImportInProcess()) {
 			secure = false;
 		}
@@ -94,6 +98,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	public void addAttribute(String name, int type) throws PortalException {
 		boolean secure =
 			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT;
+
+		if (CopyLayoutThreadLocal.isCopyLayout()) {
+			secure = false;
+		}
 
 		if (ExportImportThreadLocal.isImportInProcess()) {
 			secure = false;
@@ -115,6 +123,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 		boolean secure =
 			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT;
+
+		if (CopyLayoutThreadLocal.isCopyLayout()) {
+			secure = false;
+		}
 
 		if (ExportImportThreadLocal.isImportInProcess()) {
 			secure = false;
@@ -192,6 +204,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		boolean secure =
 			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_READ_CHECK_BY_DEFAULT;
 
+		if (CopyLayoutThreadLocal.isCopyLayout()) {
+			secure = false;
+		}
+
 		if (ExportImportThreadLocal.isExportInProcess()) {
 			secure = false;
 		}
@@ -266,6 +282,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		boolean secure =
 			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_READ_CHECK_BY_DEFAULT;
 
+		if (CopyLayoutThreadLocal.isCopyLayout()) {
+			secure = false;
+		}
+
 		if (ExportImportThreadLocal.isExportInProcess()) {
 			secure = false;
 		}
@@ -289,6 +309,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	public Map<String, Serializable> getAttributes(Collection<String> names) {
 		boolean secure =
 			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_READ_CHECK_BY_DEFAULT;
+
+		if (CopyLayoutThreadLocal.isCopyLayout()) {
+			secure = false;
+		}
 
 		if (ExportImportThreadLocal.isExportInProcess()) {
 			secure = false;
@@ -472,6 +496,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 		boolean secure =
 			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT;
 
+		if (CopyLayoutThreadLocal.isCopyLayout()) {
+			secure = false;
+		}
+
 		if (ExportImportThreadLocal.isImportInProcess()) {
 			secure = false;
 		}
@@ -506,6 +534,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	public void setAttributes(Map<String, Serializable> attributes) {
 		boolean secure =
 			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT;
+
+		if (CopyLayoutThreadLocal.isCopyLayout()) {
+			secure = false;
+		}
 
 		if (ExportImportThreadLocal.isImportInProcess()) {
 			secure = false;
@@ -550,6 +582,10 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	public void setAttributes(ServiceContext serviceContext) {
 		boolean secure =
 			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT;
+
+		if (CopyLayoutThreadLocal.isCopyLayout()) {
+			secure = false;
+		}
 
 		if (ExportImportThreadLocal.isImportInProcess()) {
 			secure = false;
