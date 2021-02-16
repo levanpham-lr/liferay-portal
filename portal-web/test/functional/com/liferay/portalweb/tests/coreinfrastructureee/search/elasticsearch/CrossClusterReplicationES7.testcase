@@ -620,7 +620,7 @@ definition {
 			value1 = "LiferayElasticsearchCluster");
 
 		AssertTextEquals.assertPartialText(
-			key_connectionID = "ccr",
+			key_connectionID = "localcluster",
 			locator1 = "SearchAdmin#CLUSTER_NAME",
 			value1 = "LiferayElasticsearchClusterTwo");
 
@@ -646,7 +646,7 @@ definition {
 			value1 = "Search");
 
 		AssertTextEquals.assertPartialText(
-			key_connectionID = "ccr",
+			key_connectionID = "localcluster",
 			locator1 = "SearchAdmin#CLUSTER_NAME",
 			value1 = "LiferayElasticsearchClusterTwo");
 
@@ -693,7 +693,7 @@ definition {
 			value1 = "Connection refused");
 
 		AssertElementNotPresent(
-			key_connectionID = "ccr",
+			key_connectionID = "localcluster",
 			locator1 = "SearchAdmin#CLUSTER_NAME");
 
 		Navigator.openURL();
