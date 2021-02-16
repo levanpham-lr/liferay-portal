@@ -51,19 +51,19 @@ public class UpgradeDiscussionSubscriptionClassName extends UpgradeProcess {
 		ClassNameLocalService classNameLocalService,
 		SubscriptionLocalService subscriptionLocalService,
 		String oldSubscriptionClassName,
-		UnsafeFunction<String, Boolean, Exception> customFunction) {
+		UnsafeFunction<String, Boolean, Exception> unsafeFunction) {
 
 		_assetEntryLocalService = assetEntryLocalService;
 		_classNameLocalService = classNameLocalService;
 		_subscriptionLocalService = subscriptionLocalService;
 		_oldSubscriptionClassName = oldSubscriptionClassName;
 		_deletionMode = deletionMode;
-		_customFunction = customFunction;
+		_unsafeFunction = unsafeFunction;
 
 		this(
 			assetEntryLocalService, classNameLocalService,
 			subscriptionLocalService, oldSubscriptionClassName, null,
-			customFunction);
+			unsafeFunction);
 	}
 
 	/**
@@ -102,8 +102,8 @@ public class UpgradeDiscussionSubscriptionClassName extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		if (_customFunction != null) {
-			_customFunction.apply(_oldSubscriptionClassName);
+		if (_unsafeFunction != null) {
+			_unsafeFunction.apply(_oldSubscriptionClassName);
 		}
 		else if (_deletionMode == DeletionMode.ADD_NEW) {
 			_addSubscriptions();
@@ -121,14 +121,14 @@ public class UpgradeDiscussionSubscriptionClassName extends UpgradeProcess {
 		ClassNameLocalService classNameLocalService,
 		SubscriptionLocalService subscriptionLocalService,
 		String oldSubscriptionClassName, DeletionMode deletionMode,
-		UnsafeFunction<String, Boolean, Exception> customFunction) {
+		UnsafeFunction<String, Boolean, Exception> unsafeFunction) {
 
 		_assetEntryLocalService = assetEntryLocalService;
 		_classNameLocalService = classNameLocalService;
 		_subscriptionLocalService = subscriptionLocalService;
 		_oldSubscriptionClassName = oldSubscriptionClassName;
 		_deletionMode = deletionMode;
-		_customFunction = customFunction;
+		_unsafeFunction = unsafeFunction;
 	}
 
 	private void _addSubscriptions() throws Exception {
@@ -216,7 +216,7 @@ public class UpgradeDiscussionSubscriptionClassName extends UpgradeProcess {
 
 	private final AssetEntryLocalService _assetEntryLocalService;
 	private final ClassNameLocalService _classNameLocalService;
-	private final UnsafeFunction<String, Boolean, Exception> _customFunction;
+	private final UnsafeFunction<String, Boolean, Exception> _unsafeFunction;
 	private final DeletionMode _deletionMode;
 	private final String _oldSubscriptionClassName;
 	private final SubscriptionLocalService _subscriptionLocalService;
