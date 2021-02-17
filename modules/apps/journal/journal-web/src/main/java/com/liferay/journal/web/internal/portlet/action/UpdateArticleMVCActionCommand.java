@@ -442,12 +442,12 @@ public class UpdateArticleMVCActionCommand extends BaseMVCActionCommand {
 			}
 		}
 
-		String friendlyURLChangesMessage = _getFriendlyURLChangesMessage(
+		String friendlyURLChangedMessage = _getFriendlyURLChangedMessage(
 			actionRequest, friendlyURLMap, article.getFriendlyURLMap());
 
-		if (Validator.isNotNull(friendlyURLChangesMessage)) {
+		if (Validator.isNotNull(friendlyURLChangedMessage)) {
 			MultiSessionMessages.add(
-				actionRequest, "friendlyURLChanged", friendlyURLChangesMessage);
+				actionRequest, "friendlyURLChanged", friendlyURLChangedMessage);
 		}
 
 		sendEditArticleRedirect(actionRequest, article, oldUrlTitle);
@@ -577,19 +577,21 @@ public class UpdateArticleMVCActionCommand extends BaseMVCActionCommand {
 			portletResource, articleId, true);
 	}
 
-	private String _getFriendlyURLChangesMessage(
+	private String _getFriendlyURLChangedMessage(
 		ActionRequest actionRequest, Map<Locale, String> originalFriendlyURLMap,
-		Map<Locale, String> finalFriendlyURLMap) {
+		Map<Locale, String> currentFriendlyURLMap) {
 
 		List<String> messageList = new ArrayList<>();
 
 		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
 			actionRequest);
 
-		for (Map.Entry<Locale, String> entry : finalFriendlyURLMap.entrySet()) {
+		for (Map.Entry<Locale, String> entry :
+				currentFriendlyURLMap.entrySet()) {
+
 			Locale locale = entry.getKey();
 
-			String finalFriendlyURL = entry.getValue();
+			String currentFriendlyURL = entry.getValue();
 
 			String originalFriendlyURL = originalFriendlyURLMap.get(locale);
 
@@ -598,7 +600,7 @@ public class UpdateArticleMVCActionCommand extends BaseMVCActionCommand {
 					originalFriendlyURL);
 
 			if (!originalFriendlyURL.equals(StringPool.BLANK) &&
-				!finalFriendlyURL.equals(normalizedOriginalFriendlyURL)) {
+				!currentFriendlyURL.equals(normalizedOriginalFriendlyURL)) {
 
 				messageList.add(
 					LanguageUtil.format(
@@ -606,7 +608,7 @@ public class UpdateArticleMVCActionCommand extends BaseMVCActionCommand {
 						new Object[] {
 							"<strong>" + locale.getLanguage() + "</strong>",
 							"<strong>" + originalFriendlyURL + "</strong>",
-							"<strong>" + finalFriendlyURL + "</strong>"
+							"<strong>" + currentFriendlyURL + "</strong>"
 						}));
 			}
 		}
