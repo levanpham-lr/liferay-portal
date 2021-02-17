@@ -858,9 +858,6 @@ public class ContentDashboardAdminPortletTest {
 	}
 
 	@Test
-	}
-
-	@Test
 	public void testGetSearchContainerWithExpiredJournalArticle()
 		throws Exception {
 
@@ -931,6 +928,9 @@ public class ContentDashboardAdminPortletTest {
 			GroupTestUtil.deleteGroup(group);
 			_userLocalService.deleteUser(user);
 		}
+	}
+
+	@Test
 	public void testGetSearchContainerWithKeywords() throws Exception {
 		JournalArticle journalArticle = JournalTestUtil.addArticle(
 			_user.getUserId(), _group.getGroupId(), 0);
