@@ -135,7 +135,7 @@ renderResponse.setTitle((formInstance == null) ? LanguageUtil.get(request, "new-
 				<h1>
 					<liferay-editor:editor
 						autoCreate="<%= false %>"
-						contents="<%= HtmlUtil.escapeAttribute(ddmFormAdminDisplayContext.getFormName()) %>"
+						contents="<%= HtmlUtil.toInputSafe(ddmFormAdminDisplayContext.getFormName()) %>"
 						cssClass="ddm-form-name"
 						editorName="alloyeditor"
 						name="nameEditor"
@@ -147,7 +147,7 @@ renderResponse.setTitle((formInstance == null) ? LanguageUtil.get(request, "new-
 				<h5>
 					<liferay-editor:editor
 						autoCreate="<%= false %>"
-						contents="<%= HtmlUtil.escapeAttribute(ddmFormAdminDisplayContext.getFormDescription()) %>"
+						contents="<%= HtmlUtil.toInputSafe(ddmFormAdminDisplayContext.getFormDescription()) %>"
 						cssClass="ddm-form-description h5"
 						editorName="alloyeditor"
 						name="descriptionEditor"
