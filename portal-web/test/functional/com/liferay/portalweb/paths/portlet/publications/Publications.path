@@ -84,6 +84,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>LIST_PUBLISHED_STATUS</td>
+	<td>//a[contains(.,'${key_publicationsName}')]//following-sibling::div/span[contains(.,'Published')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>MANGE_PUBLICATIONS_PAGE_TITLE</td>
 	<td>//span[contains(@data-qa-id,'headerTitle')]</td>
 	<td></td>
@@ -111,11 +116,6 @@
 <tr>
 	<td>PUBLICATION_NAME_IN_DIFF</td>
 	<td>//td[contains(@class,'publications-diff-td') and contains(.,'${key_publicationsName}')]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>PUBLICATION_STATUS</td>
-	<td>//td[contains(.,'${key_publicationsName}')]//following-sibling::td/span/span[contains(.,'${key_publicationStatus}')]</td>
 	<td></td>
 </tr>
 <tr>

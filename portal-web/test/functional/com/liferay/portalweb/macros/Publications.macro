@@ -27,11 +27,12 @@ definition {
 			key_navBarTitle = "History",
 			locator1 = "Publications#MANGE_PUBLICATIONS_NAVBAR_TITLE");
 
+		LexiconEntry.changeDisplayStyle(displayStyle = "list");
+
 		var key_publicationsName = "${publicationsName}";
-		var key_publicationStatus = "Published";
 
 		AssertTextEquals(
-			locator1 = "Publications#PUBLICATION_STATUS",
+			locator1 = "Publications#LIST_PUBLISHED_STATUS",
 			value1 = "Published");
 	}
 
@@ -256,15 +257,16 @@ definition {
 			locator1 = "Publications#MANGE_PUBLICATIONS_NAVBAR_TITLE",
 			value1 = "History");
 
+		LexiconEntry.changeDisplayStyle(displayStyle = "list");
+
 		// Workaround LPS-115320
 
 		Refresh();
 
 		var key_publicationsName = "${publicationsName}";
-		var key_publicationStatus = "Published";
 
 		AssertTextEquals(
-			locator1 = "Publications#PUBLICATION_STATUS",
+			locator1 = "Publications#LIST_PUBLISHED_STATUS",
 			value1 = "Published");
 	}
 
