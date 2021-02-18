@@ -45,6 +45,14 @@
 
 	window.addEventListener('hashchange', adjustScrollTop);
 
+	var handlePageLoad = function () {
+		if (window.location.hash) {
+			adjustScrollTop();
+		}
+	};
+
+	window.addEventListener('load', handlePageLoad);
+
 	var handleFormRegistered = function (event) {
 		if (event.form && event.form.formValidator) {
 			AUI().Do.after(
