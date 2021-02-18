@@ -29,17 +29,14 @@
 			window.scrollBy(0, -labelScroll);
 		}
 
-		if (Liferay.ControlMenu) {
-			controlMenuContainer = document.querySelector(
-				'.control-menu-container'
-			);
+		controlMenuContainer = document.querySelector(
+			'.control-menu-container'
+		);
 
-			if (controlMenuContainer) {
-				controlMenuContainerScroll =
-					controlMenuContainer.offsetHeight || 0;
+		if (controlMenuContainer) {
+			controlMenuContainerScroll = controlMenuContainer.offsetHeight || 0;
 
-				window.scrollBy(0, -controlMenuContainerScroll);
-			}
+			window.scrollBy(0, -controlMenuContainerScroll);
 		}
 	};
 
