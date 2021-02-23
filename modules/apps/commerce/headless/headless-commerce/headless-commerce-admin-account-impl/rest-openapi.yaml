@@ -136,6 +136,28 @@ components:
                 customFields:
                     additionalProperties: true
                     type: object
+                dateCreated:
+                    description:
+                        The account's creation date.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                dateModified:
+                    description:
+                        The account's most recent modification date.
+                    format: date-time
+                    readOnly: true
+                    type: string
+                defaultBillingAccountAddressId:
+                    example: 10130
+                    format: int64
+                    minimum: 0
+                    type: integer
+                defaultShippingAccountAddressId:
+                    example: 10131
+                    format: int64
+                    minimum: 0
+                    type: integer
                 emailAddresses:
                     example:
                         - joe.1@commerce.com
