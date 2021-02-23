@@ -24,9 +24,8 @@ import com.liferay.comment.upgrade.UpgradeDiscussionSubscriptionClassName;
 import com.liferay.document.library.kernel.store.Store;
 import com.liferay.friendly.url.service.FriendlyURLEntryLocalService;
 import com.liferay.message.boards.model.MBDiscussion;
-import com.liferay.petra.function.UnsafeFunction;
+import com.liferay.petra.function.UnsafeBiFunction;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
 import com.liferay.portal.kernel.portletfilerepository.PortletFileRepository;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
@@ -72,7 +71,7 @@ public class BlogsServiceUpgrade implements UpgradeStepRegistrator {
 			new UpgradeDiscussionSubscriptionClassName(
 				_assetEntryLocalService, _classNameLocalService,
 				_subscriptionLocalService, BlogsEntry.class.getName(),
-				_getUpgradeDiscussionSubscriptionClassNameUnsafeFunction()));
+				_getUpgradeDiscussionSubscriptionClassNameUnsafeBiFunction()));
 
 		registry.register(
 			"1.1.3", "2.0.0",
@@ -99,28 +98,24 @@ public class BlogsServiceUpgrade implements UpgradeStepRegistrator {
 			new com.liferay.blogs.internal.upgrade.v2_1_1.UpgradeBlogsEntry());
 	}
 
-	private UnsafeFunction<String, Boolean, Exception>
-		_getUpgradeDiscussionSubscriptionClassNameUnsafeFunction() {
+	private UnsafeBiFunction<String, Connection, Boolean, Exception>
+		_getUpgradeDiscussionSubscriptionClassNameUnsafeBiFunction() {
 
-		return className -> {
-			try (Connection con = DataAccess.getConnection()) {
-				try (PreparedStatement ps = con.prepareStatement(
-						"update Subscription set classNameId = ? where " +
-							"classNameId = ? and classPK not in (select " +
-								"groupId from Group_ where site = TRUE)")) {
+		return (className, connection) -> {
+			try (PreparedStatement ps = connection.prepareStatement(
+					"update Subscription set classNameId = ? where " +
+						"classNameId = ? and classPK not in (select groupId " +
+							"from Group_ where site = TRUE)")) {
 
-					ps.setLong(
-						1,
-						_classNameLocalService.getClassNameId(
-							MBDiscussion.class.getName() +
-								StringPool.UNDERLINE +
-									BlogsEntry.class.getName()));
+				ps.setLong(
+					1,
+					_classNameLocalService.getClassNameId(
+						MBDiscussion.class.getName() + StringPool.UNDERLINE +
+							BlogsEntry.class.getName()));
 
-					ps.setLong(
-						2, _classNameLocalService.getClassNameId(className));
+				ps.setLong(2, _classNameLocalService.getClassNameId(className));
 
-					ps.executeUpdate();
-				}
+				ps.executeUpdate();
 			}
 
 			return true;
