@@ -152,7 +152,7 @@ public class SynchronousDestinationTestRule
 			Filter subscrpitionSenderFilter = _registerDestinationFilter(
 				DestinationNames.SUBSCRIPTION_SENDER);
 
-			boolean solrEnabled = _solrEnabled();
+			boolean solrEnabled = _isSolrEnabled();
 
 			if (!solrEnabled) {
 				Filter commerceOrderFilter = _registerDestinationFilter(
@@ -387,7 +387,7 @@ public class SynchronousDestinationTestRule
 					Destination.class.getName(), "))"));
 		}
 
-		private boolean _solrEnabled() {
+		private boolean _isSolrEnabled() {
 			SearchEngine searchEngine = SearchEngineHelperUtil.getSearchEngine(
 				SearchEngineHelperUtil.getDefaultSearchEngineId());
 
