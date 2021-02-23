@@ -56,13 +56,6 @@ public class UpgradeDiscussionSubscriptionClassName extends UpgradeProcess {
 		UnsafeBiFunction<String, Connection, Boolean, Exception>
 			unsafeBiFunction) {
 
-		_assetEntryLocalService = assetEntryLocalService;
-		_classNameLocalService = classNameLocalService;
-		_subscriptionLocalService = subscriptionLocalService;
-		_oldSubscriptionClassName = oldSubscriptionClassName;
-		_deletionMode = deletionMode;
-		_unsafeBiFunction = unsafeBiFunction;
-
 		this(
 			assetEntryLocalService, classNameLocalService,
 			subscriptionLocalService, oldSubscriptionClassName, null,
@@ -106,7 +99,7 @@ public class UpgradeDiscussionSubscriptionClassName extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		if (_unsafeBiFunction != null) {
-			_unsafeBiFunction.apply(_oldSubscriptionClassName);
+			_unsafeBiFunction.apply(_oldSubscriptionClassName, connection);
 		}
 		else if (_deletionMode == DeletionMode.ADD_NEW) {
 			_addSubscriptions();
