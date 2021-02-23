@@ -378,6 +378,13 @@ public class SynchronousDestinationTestRule
 			_sync = sync;
 		}
 
+		private boolean _isSolrEnabled() {
+			SearchEngine searchEngine = SearchEngineHelperUtil.getSearchEngine(
+				SearchEngineHelperUtil.getDefaultSearchEngineId());
+
+			return Objects.equals(searchEngine.getVendor(), "Solr");
+		}
+
 		private Filter _registerDestinationFilter(String destinationName) {
 			Registry registry = RegistryUtil.getRegistry();
 
@@ -385,13 +392,6 @@ public class SynchronousDestinationTestRule
 				StringBundler.concat(
 					"(&(destination.name=", destinationName, ")(objectClass=",
 					Destination.class.getName(), "))"));
-		}
-
-		private boolean _isSolrEnabled() {
-			SearchEngine searchEngine = SearchEngineHelperUtil.getSearchEngine(
-				SearchEngineHelperUtil.getDefaultSearchEngineId());
-
-			return Objects.equals(searchEngine.getVendor(), "Solr");
 		}
 
 		private void _waitForDependencies(Filter... filters) {
