@@ -45,18 +45,10 @@
 			%>
 
 			<c:choose>
-				<c:when test="<%= Objects.isNull(assetRenderer) %>">
+				<c:when test="<%= assetRenderer != null %>">
 
 					<%
-					row.setSkip(true);
-
-					_log.error("Unable to get asset renderer for assetEntry.entryid: " + assetEntry.getEntryId());
-					%>
-
-				</c:when>
-				<c:when test="<%= Objects.nonNull(assetRenderer) %>">
-
-					<%AssetRendererFactory<?> assetRendererFactory = assetRenderer.getAssetRendererFactory();
+					AssetRendererFactory<?> assetRendererFactory = assetRenderer.getAssetRendererFactory();
 
 					Group group = GroupLocalServiceUtil.getGroup(assetEntry.getGroupId());
 
@@ -219,6 +211,17 @@
 						</c:when>
 					</c:choose>
 				</c:when>
+				<c:otherwise>
+
+					<%
+					if (assetRenderer == null) {
+						_log.error("Unable to get asset renderer for assetEntry with primary key " + assetEntry.getEntryId());
+					}
+
+					row.setSkip(true);
+					%>
+
+				</c:otherwise>
 			</c:choose>
 		</liferay-ui:search-container-row>
 
