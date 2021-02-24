@@ -139,8 +139,7 @@ public class ContentDashboardDropdownItemsProviderTest {
 			new MockLiferayPortletURL();
 
 		mockLiferayPortletRenderRequest.setAttribute(
-			"null" + StringPool.DASH + WebKeys.CURRENT_PORTLET_URL,
-			mockLiferayPortletURL);
+			"null-" + WebKeys.CURRENT_PORTLET_URL, mockLiferayPortletURL);
 
 		ContentDashboardDropdownItemsProvider
 			contentDashboardDropdownItemsProvider =
@@ -179,8 +178,7 @@ public class ContentDashboardDropdownItemsProviderTest {
 			new MockLiferayPortletRenderRequest();
 
 		mockLiferayPortletRenderRequest.setAttribute(
-			"null" + StringPool.DASH + WebKeys.CURRENT_PORTLET_URL,
-			new MockLiferayPortletURL());
+			"null-" + WebKeys.CURRENT_PORTLET_URL, new MockLiferayPortletURL());
 
 		String backURL = RandomTestUtil.randomString();
 

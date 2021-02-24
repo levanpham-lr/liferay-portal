@@ -14,7 +14,6 @@
 
 package com.liferay.osb.commerce.provisioning.lang.internal;
 
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.Enumeration;
@@ -25,9 +24,7 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Gianmarco Brunialti Masera
  */
-@Component(
-	property = "language.id=" + StringPool.BLANK, service = ResourceBundle.class
-)
+@Component(property = "language.id=", service = ResourceBundle.class)
 public class OSBCommerceProvisioningLangResourceBundle extends ResourceBundle {
 
 	@Override
