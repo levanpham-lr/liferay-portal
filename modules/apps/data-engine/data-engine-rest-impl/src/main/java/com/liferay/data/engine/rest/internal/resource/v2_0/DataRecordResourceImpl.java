@@ -433,8 +433,8 @@ public class DataRecordResourceImpl
 
 				fieldBooleanFilter.add(
 					_ddmIndexer.createFieldValueQueryFilter(
-						ddmStructure, fieldName, value,
-						contextAcceptLanguage.getPreferredLocale()),
+						ddmStructure, fieldName,
+						contextAcceptLanguage.getPreferredLocale(), value),
 					BooleanClauseOccur.SHOULD);
 			}
 
