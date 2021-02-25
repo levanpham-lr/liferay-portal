@@ -661,7 +661,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		if (_checkDataLimitModelMaxCount == null) {
 			long dataLimitModelMaxCount = GetterUtil.getLong(
 				PropsUtil.get(
-					"data.limit.model.max.count[" + clazz.getName() + "]"));
+					"data.limit.model.max.count", new Filter(clazz.getName())));
 
 			_checkDataLimitModelMaxCount =
 				(model instanceof AuditedModel) && (dataLimitModelMaxCount > 0);
@@ -670,7 +670,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		if (_checkDataLimitModelMaxCount) {
 			long dataLimitModelMaxCount = GetterUtil.getLong(
 				PropsUtil.get(
-					"data.limit.model.max.count[" + clazz.getName() + "]"));
+					"data.limit.model.max.count", new Filter(clazz.getName())));
 
 			DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 				clazz, clazz.getClassLoader());
