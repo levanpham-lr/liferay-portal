@@ -115,7 +115,7 @@ renderResponse.setTitle(title);
 			if (form === event.form) {
 				Liferay.component('<portlet:namespace />KaleoFormsAdmin', function () {
 					return new Liferay.KaleoFormsAdmin({
-						currentURL: '<%= HtmlUtil.escape(currentURL) %>',
+						currentURL: '<%= HtmlUtil.escapeJS(currentURL) %>',
 						form: form,
 						kaleoProcessId: <%= kaleoProcessId %>,
 						namespace: '<portlet:namespace />',
