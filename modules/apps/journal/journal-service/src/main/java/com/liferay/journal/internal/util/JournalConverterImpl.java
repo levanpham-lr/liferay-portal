@@ -608,7 +608,7 @@ public class JournalConverterImpl implements JournalConverter {
 			return _getFileEntryValue(defaultLocale, dynamicContentElement);
 		}
 
-		if (Objects.equals("journal_article", type)) {
+		if (Objects.equals(DDMFormFieldType.JOURNAL_ARTICLE, type)) {
 			return _getJournalArticleValue(
 				defaultLocale, dynamicContentElement);
 		}
