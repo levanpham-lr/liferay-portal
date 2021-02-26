@@ -671,6 +671,9 @@ public class PropsValues {
 	public static final long DATA_LIMIT_MAX_USER_COUNT = GetterUtil.getLong(
 		PropsUtil.get(PropsKeys.DATA_LIMIT_MAX_USER_COUNT));
 
+	public static final long DATA_LIMIT_SITE_MAX_COUNT = GetterUtil.getLong(
+		PropsUtil.get(PropsKeys.DATA_LIMIT_SITE_MAX_COUNT));
+
 	public static final int DATABASE_IN_MAX_PARAMETERS = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.DATABASE_IN_MAX_PARAMETERS));
 
