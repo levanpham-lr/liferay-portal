@@ -421,7 +421,7 @@ definition {
 
 		GDPR.editEntryCP(
 			applications = "Documents and Media",
-			rowEntry = "Document_1.txt");
+			rowEntry = "DM Document Title");
 
 		DMDocument.editCmd(
 			dmDocumentDescriptionEdit = "Edit DM Document Description",
@@ -435,8 +435,8 @@ definition {
 			locator1 = "DataErasure#HEADER");
 
 		GDPR.viewEntryRowInApplicationCP(
-			tableEntry = "Document_1.txt",
-			tableEntryPartialTextList = "Document_1.txt,Edit DM Document Description");
+			tableEntry = "Edit DM Document Title",
+			tableEntryPartialTextList = "Edit DM Document Title,Edit DM Document Description");
 	}
 
 	@priority = "4"
