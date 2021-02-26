@@ -622,7 +622,7 @@ public class UpdateArticleMVCActionCommand extends BaseMVCActionCommand {
 						"uniqueness"));
 		}
 
-		return StringUtil.merge(messages, "<br>");
+		return StringUtil.merge(messages, "<br />");
 	}
 
 	private void _updateLayoutClassedModelUsage(
