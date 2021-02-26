@@ -619,7 +619,7 @@ public class FriendlyURLEntryLocalServiceImpl
 		return map;
 	}
 
-	private Map<String, String> _sortUrlTitleMapByGroupLocaleSettings(
+	private Map<String, String> _sortUrlTitleMap(
 		long groupId, Map<String, String> urlTitleMap) {
 
 		Map<String, String> sortedUrlTitleMap = new LinkedHashMap<>();
@@ -644,7 +644,7 @@ public class FriendlyURLEntryLocalServiceImpl
 			Map<String, String> urlTitleMap)
 		throws PortalException {
 
-		urlTitleMap = _sortUrlTitleMapByGroupLocaleSettings(
+		urlTitleMap = _sortUrlTitleMap(
 			friendlyURLEntry.getGroupId(), urlTitleMap);
 
 		for (Map.Entry<String, String> entry : urlTitleMap.entrySet()) {
