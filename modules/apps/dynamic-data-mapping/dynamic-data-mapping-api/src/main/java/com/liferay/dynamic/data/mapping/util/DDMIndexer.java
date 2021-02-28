@@ -52,19 +52,28 @@ public interface DDMIndexer {
 		Document document, DDMStructure ddmStructure,
 		DDMFormValues ddmFormValues);
 
-	public Sort createDDMStructureFieldSort(
+	public default Sort createDDMStructureFieldSort(
 			DDMStructure ddmStructure, String fieldName, Locale locale,
 			SortOrder sortOrder)
-		throws PortalException;
+		throws PortalException {
 
-	public Sort createDDMStructureFieldSort(
+		throw new UnsupportedOperationException();
+	}
+
+	public default Sort createDDMStructureFieldSort(
 			String ddmStructureFieldName, Locale locale, SortOrder sortOrder)
-		throws PortalException;
+		throws PortalException {
 
-	public QueryFilter createFieldValueQueryFilter(
+		throw new UnsupportedOperationException();
+	}
+
+	public default QueryFilter createFieldValueQueryFilter(
 			DDMStructure ddmStructure, String fieldName, Locale locale,
 			Serializable value)
-		throws Exception;
+		throws Exception {
+
+		throw new UnsupportedOperationException();
+	}
 
 	public QueryFilter createFieldValueQueryFilter(
 			String ddmStructureFieldName, Serializable ddmStructureFieldValue,
