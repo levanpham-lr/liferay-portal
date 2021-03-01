@@ -381,6 +381,13 @@ public class DLAdminManagementToolbarDisplayContext
 						_httpServletRequest, "filter-by-navigation"));
 			}
 		).addGroup(
+			this::_isNavigationRecent,
+			dropdownGroupItem -> {
+				dropdownGroupItem.setDropdownItems(_getOrderByDropdownItems());
+				dropdownGroupItem.setLabel(
+					LanguageUtil.get(_httpServletRequest, "order-by"));
+			}
+		).addGroup(
 			dropdownGroupItem -> {
 				dropdownGroupItem.setDropdownItems(_getOrderByDropdownItems());
 				dropdownGroupItem.setLabel(
@@ -698,6 +705,22 @@ public class DLAdminManagementToolbarDisplayContext
 					LanguageUtil.get(_httpServletRequest, "all"));
 			}
 		).add(
+			dropdownItem -> {
+				dropdownItem.setActive(navigation.equals("recent"));
+
+				PortletURL viewRecentDocumentsURL = PortletURLUtil.clone(
+					_currentURLObj, _liferayPortletResponse);
+
+				viewRecentDocumentsURL.setParameter(
+					"mvcRenderCommandName", "/document_library/view");
+				viewRecentDocumentsURL.setParameter("navigation", "recent");
+
+				dropdownItem.setHref(viewRecentDocumentsURL);
+
+				dropdownItem.setLabel(
+					LanguageUtil.get(_httpServletRequest, "recent"));
+			}
+		).add(
 			_themeDisplay::isSignedIn,
 			dropdownItem -> {
 				dropdownItem.setActive(navigation.equals("mine"));
@@ -887,6 +910,14 @@ public class DLAdminManagementToolbarDisplayContext
 		}
 
 		return true;
+	}
+
+	private boolean _isNavigationRecent() {
+		if (Objects.equals(_getNavigation(), "recent")) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private boolean _isSearch() {
