@@ -201,7 +201,7 @@ public class PriceListResourceImpl
 
 	@Override
 	public PriceList postPriceList(PriceList priceList) throws Exception {
-		CommercePriceList commercePriceList = _upsertPriceList(priceList);
+		CommercePriceList commercePriceList = _addOrUpdatePriceList(priceList);
 
 		return _toPriceList(commercePriceList.getCommercePriceListId());
 	}
@@ -333,7 +333,7 @@ public class PriceListResourceImpl
 			priceList, commercePriceList, serviceContext);
 	}
 
-	private CommercePriceList _upsertPriceList(PriceList priceList)
+	private CommercePriceList _addOrUpdatePriceList(PriceList priceList)
 		throws Exception {
 
 		CommerceCatalog commerceCatalog =

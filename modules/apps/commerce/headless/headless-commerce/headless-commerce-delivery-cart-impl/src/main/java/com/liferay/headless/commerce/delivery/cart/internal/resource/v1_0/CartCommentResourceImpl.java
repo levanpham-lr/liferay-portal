@@ -88,7 +88,7 @@ public class CartCommentResourceImpl
 	public CartComment postCartComment(Long cartId, CartComment cartComment)
 		throws Exception {
 
-		return _upsertOrderNote(
+		return _addOrUpdateOrderNote(
 			_commerceOrderService.getCommerceOrder(cartId), cartComment);
 	}
 
@@ -104,7 +104,7 @@ public class CartCommentResourceImpl
 
 		cartComment.setId(commentId);
 
-		return _upsertOrderNote(commerceOrder, cartComment);
+		return _addOrUpdateOrderNote(commerceOrder, cartComment);
 	}
 
 	private CartComment _toOrderNote(Long commerceOrderNoteId)
@@ -130,7 +130,7 @@ public class CartCommentResourceImpl
 		return orders;
 	}
 
-	private CartComment _upsertOrderNote(
+	private CartComment _addOrUpdateOrderNote(
 			CommerceOrder commerceOrder, CartComment cartComment)
 		throws Exception {
 

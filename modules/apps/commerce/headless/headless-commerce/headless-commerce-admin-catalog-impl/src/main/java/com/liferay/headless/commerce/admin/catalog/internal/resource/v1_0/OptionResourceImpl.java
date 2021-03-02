@@ -167,7 +167,7 @@ public class OptionResourceImpl
 
 	@Override
 	public Option postOption(Option option) throws Exception {
-		return _upsertOption(option);
+		return _addOrUpdateOption(option);
 	}
 
 	private Option _toOption(Long cpOptionId) throws Exception {
@@ -195,7 +195,7 @@ public class OptionResourceImpl
 		return _toOption(cpOption.getCPOptionId());
 	}
 
-	private Option _upsertOption(Option option) throws Exception {
+	private Option _addOrUpdateOption(Option option) throws Exception {
 		Option.FieldType fieldType = option.getFieldType();
 
 		CPOption cpOption = _cpOptionService.upsertCPOption(
@@ -207,12 +207,12 @@ public class OptionResourceImpl
 			option.getExternalReferenceCode(),
 			_serviceContextHelper.getServiceContext());
 
-		_upsertOptionValues(cpOption, option.getOptionValues());
+		_addOrUpdateOptionValues(cpOption, option.getOptionValues());
 
 		return _toOption(cpOption.getCPOptionId());
 	}
 
-	private void _upsertOptionValues(
+	private void _addOrUpdateOptionValues(
 			CPOption cpOption, OptionValue[] optionValues)
 		throws Exception {
 

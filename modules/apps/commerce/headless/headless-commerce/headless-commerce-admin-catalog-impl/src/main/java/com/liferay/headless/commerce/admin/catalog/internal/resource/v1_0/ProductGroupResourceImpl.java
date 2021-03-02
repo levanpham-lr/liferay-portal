@@ -182,7 +182,7 @@ public class ProductGroupResourceImpl
 	public ProductGroup postProductGroup(ProductGroup productGroup)
 		throws Exception {
 
-		CommercePricingClass commercePricingClass = _upsertProductGroup(
+		CommercePricingClass commercePricingClass = _addOrUpdateProductGroup(
 			productGroup);
 
 		return _toProductGroup(
@@ -282,7 +282,7 @@ public class ProductGroupResourceImpl
 		return _updateNestedResources(productGroup, commercePricingClass);
 	}
 
-	private CommercePricingClass _upsertProductGroup(ProductGroup productGroup)
+	private CommercePricingClass _addOrUpdateProductGroup(ProductGroup productGroup)
 		throws Exception {
 
 		CommercePricingClass commercePricingClass =

@@ -224,14 +224,14 @@ public class OrderItemResourceImpl
 					externalReferenceCode);
 		}
 
-		return _upsertOrderItem(commerceOrder, orderItem);
+		return _addOrUpdateOrderItem(commerceOrder, orderItem);
 	}
 
 	@Override
 	public OrderItem postOrderIdOrderItem(Long id, OrderItem orderItem)
 		throws Exception {
 
-		return _upsertOrderItem(
+		return _addOrUpdateOrderItem(
 			_commerceOrderService.getCommerceOrder(id), orderItem);
 	}
 
@@ -336,7 +336,7 @@ public class OrderItemResourceImpl
 		return _toOrderItem(commerceOrderItem.getCommerceOrderItemId());
 	}
 
-	private OrderItem _upsertOrderItem(
+	private OrderItem _addOrUpdateOrderItem(
 			CommerceOrder commerceOrder, OrderItem orderItem)
 		throws Exception {
 
