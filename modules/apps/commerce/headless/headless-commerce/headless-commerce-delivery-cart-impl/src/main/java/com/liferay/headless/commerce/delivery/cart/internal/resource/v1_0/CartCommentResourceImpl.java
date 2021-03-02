@@ -107,6 +107,21 @@ public class CartCommentResourceImpl
 		return _addOrUpdateOrderNote(commerceOrder, cartComment);
 	}
 
+	private CartComment _addOrUpdateOrderNote(
+			CommerceOrder commerceOrder, CartComment cartComment)
+		throws Exception {
+
+		CommerceOrderNote commerceOrderNote =
+			_commerceOrderNoteService.upsertCommerceOrderNote(
+				GetterUtil.get(cartComment.getId(), 0L),
+				commerceOrder.getCommerceOrderId(), cartComment.getContent(),
+				GetterUtil.get(cartComment.getRestricted(), false), null,
+				_serviceContextHelper.getServiceContext(
+					commerceOrder.getGroupId()));
+
+		return _toOrderNote(commerceOrderNote.getCommerceOrderNoteId());
+	}
+
 	private CartComment _toOrderNote(Long commerceOrderNoteId)
 		throws Exception {
 
@@ -128,21 +143,6 @@ public class CartCommentResourceImpl
 		}
 
 		return orders;
-	}
-
-	private CartComment _addOrUpdateOrderNote(
-			CommerceOrder commerceOrder, CartComment cartComment)
-		throws Exception {
-
-		CommerceOrderNote commerceOrderNote =
-			_commerceOrderNoteService.upsertCommerceOrderNote(
-				GetterUtil.get(cartComment.getId(), 0L),
-				commerceOrder.getCommerceOrderId(), cartComment.getContent(),
-				GetterUtil.get(cartComment.getRestricted(), false), null,
-				_serviceContextHelper.getServiceContext(
-					commerceOrder.getGroupId()));
-
-		return _toOrderNote(commerceOrderNote.getCommerceOrderNoteId());
 	}
 
 	@Reference

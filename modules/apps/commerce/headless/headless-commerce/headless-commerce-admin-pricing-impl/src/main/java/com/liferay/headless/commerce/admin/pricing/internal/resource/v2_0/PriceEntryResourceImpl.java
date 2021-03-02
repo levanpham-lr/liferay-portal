@@ -256,6 +256,70 @@ public class PriceEntryResourceImpl extends BasePriceEntryResourceImpl {
 		return _toPriceEntry(commercePriceEntry.getCommercePriceEntryId());
 	}
 
+	private CommercePriceEntry _addOrUpdateCommercePriceEntry(
+			CommercePriceList commercePriceList, PriceEntry priceEntry)
+		throws Exception {
+
+		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
+			commercePriceList.getGroupId());
+
+		// Commerce price entry
+
+		long cProductId = 0;
+		String cpInstanceUuid = null;
+		CPInstance cpInstance = null;
+
+		long skuId = GetterUtil.getLong(priceEntry.getSkuId());
+		String skuExternalReferenceCode =
+			priceEntry.getSkuExternalReferenceCode();
+
+		if (skuId > 0) {
+			cpInstance = _cpInstanceService.fetchCPInstance(skuId);
+		}
+		else if (Validator.isNotNull(skuExternalReferenceCode)) {
+			cpInstance = _cpInstanceService.fetchByExternalReferenceCode(
+				serviceContext.getCompanyId(), skuExternalReferenceCode);
+		}
+
+		if (cpInstance != null) {
+			CPDefinition cpDefinition = cpInstance.getCPDefinition();
+
+			cProductId = cpDefinition.getCProductId();
+
+			cpInstanceUuid = cpInstance.getCPInstanceUuid();
+		}
+
+		DateConfig displayDateConfig = _getDisplayDateConfig(
+			priceEntry.getDisplayDate(), serviceContext.getTimeZone());
+
+		DateConfig expirationDateConfig = _getExpirationDateConfig(
+			priceEntry.getExpirationDate(), serviceContext.getTimeZone());
+
+		CommercePriceEntry commercePriceEntry =
+			_commercePriceEntryService.upsertCommercePriceEntry(
+				priceEntry.getExternalReferenceCode(),
+				GetterUtil.getLong(priceEntry.getPriceEntryId()), cProductId,
+				cpInstanceUuid, commercePriceList.getCommercePriceListId(),
+				BigDecimal.valueOf(priceEntry.getPrice()),
+				GetterUtil.getBoolean(priceEntry.getDiscountDiscovery(), true),
+				priceEntry.getDiscountLevel1(), priceEntry.getDiscountLevel2(),
+				priceEntry.getDiscountLevel3(), priceEntry.getDiscountLevel4(),
+				displayDateConfig.getMonth(), displayDateConfig.getDay(),
+				displayDateConfig.getYear(), displayDateConfig.getHour(),
+				displayDateConfig.getMinute(), expirationDateConfig.getMonth(),
+				expirationDateConfig.getDay(), expirationDateConfig.getYear(),
+				expirationDateConfig.getHour(),
+				expirationDateConfig.getMinute(),
+				GetterUtil.getBoolean(priceEntry.getNeverExpire(), true),
+				priceEntry.getSkuExternalReferenceCode(), serviceContext);
+
+		// Update nested resources
+
+		_updateNestedResources(priceEntry, commercePriceEntry);
+
+		return commercePriceEntry;
+	}
+
 	private Map<String, Map<String, String>> _getActions(
 			CommercePriceEntry commercePriceEntry)
 		throws Exception {
@@ -387,70 +451,6 @@ public class PriceEntryResourceImpl extends BasePriceEntryResourceImpl {
 				expirationDateConfig.getMinute(),
 				GetterUtil.getBoolean(priceEntry.getNeverExpire(), true),
 				serviceContext);
-
-		// Update nested resources
-
-		_updateNestedResources(priceEntry, commercePriceEntry);
-
-		return commercePriceEntry;
-	}
-
-	private CommercePriceEntry _addOrUpdateCommercePriceEntry(
-			CommercePriceList commercePriceList, PriceEntry priceEntry)
-		throws Exception {
-
-		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			commercePriceList.getGroupId());
-
-		// Commerce price entry
-
-		long cProductId = 0;
-		String cpInstanceUuid = null;
-		CPInstance cpInstance = null;
-
-		long skuId = GetterUtil.getLong(priceEntry.getSkuId());
-		String skuExternalReferenceCode =
-			priceEntry.getSkuExternalReferenceCode();
-
-		if (skuId > 0) {
-			cpInstance = _cpInstanceService.fetchCPInstance(skuId);
-		}
-		else if (Validator.isNotNull(skuExternalReferenceCode)) {
-			cpInstance = _cpInstanceService.fetchByExternalReferenceCode(
-				serviceContext.getCompanyId(), skuExternalReferenceCode);
-		}
-
-		if (cpInstance != null) {
-			CPDefinition cpDefinition = cpInstance.getCPDefinition();
-
-			cProductId = cpDefinition.getCProductId();
-
-			cpInstanceUuid = cpInstance.getCPInstanceUuid();
-		}
-
-		DateConfig displayDateConfig = _getDisplayDateConfig(
-			priceEntry.getDisplayDate(), serviceContext.getTimeZone());
-
-		DateConfig expirationDateConfig = _getExpirationDateConfig(
-			priceEntry.getExpirationDate(), serviceContext.getTimeZone());
-
-		CommercePriceEntry commercePriceEntry =
-			_commercePriceEntryService.upsertCommercePriceEntry(
-				priceEntry.getExternalReferenceCode(),
-				GetterUtil.getLong(priceEntry.getPriceEntryId()), cProductId,
-				cpInstanceUuid, commercePriceList.getCommercePriceListId(),
-				BigDecimal.valueOf(priceEntry.getPrice()),
-				GetterUtil.getBoolean(priceEntry.getDiscountDiscovery(), true),
-				priceEntry.getDiscountLevel1(), priceEntry.getDiscountLevel2(),
-				priceEntry.getDiscountLevel3(), priceEntry.getDiscountLevel4(),
-				displayDateConfig.getMonth(), displayDateConfig.getDay(),
-				displayDateConfig.getYear(), displayDateConfig.getHour(),
-				displayDateConfig.getMinute(), expirationDateConfig.getMonth(),
-				expirationDateConfig.getDay(), expirationDateConfig.getYear(),
-				expirationDateConfig.getHour(),
-				expirationDateConfig.getMinute(),
-				GetterUtil.getBoolean(priceEntry.getNeverExpire(), true),
-				priceEntry.getSkuExternalReferenceCode(), serviceContext);
 
 		// Update nested resources
 

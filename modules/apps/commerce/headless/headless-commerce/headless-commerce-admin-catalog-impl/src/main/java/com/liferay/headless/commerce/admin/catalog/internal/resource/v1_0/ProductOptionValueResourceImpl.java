@@ -76,6 +76,25 @@ public class ProductOptionValueResourceImpl
 		return _addOrUpdateProductOptionValue(id, productOptionValue);
 	}
 
+	private ProductOptionValue _addOrUpdateProductOptionValue(
+			long productOptionId, ProductOptionValue productOptionValue)
+		throws Exception {
+
+		CPDefinitionOptionRel cpDefinitionOptionRel =
+			_cpDefinitionOptionRelService.getCPDefinitionOptionRel(
+				productOptionId);
+
+		CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
+			ProductOptionValueUtil.upsertCPDefinitionOptionValueRel(
+				_cpDefinitionOptionValueRelService, productOptionValue,
+				cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
+				_serviceContextHelper.getServiceContext(
+					cpDefinitionOptionRel.getGroupId()));
+
+		return _toProductOptionValue(
+			cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId());
+	}
+
 	private ProductOptionValue _toProductOptionValue(
 			Long cpDefinitionOptionValueRelId)
 		throws Exception {
@@ -102,25 +121,6 @@ public class ProductOptionValueResourceImpl
 		}
 
 		return productOptionValues;
-	}
-
-	private ProductOptionValue _addOrUpdateProductOptionValue(
-			long productOptionId, ProductOptionValue productOptionValue)
-		throws Exception {
-
-		CPDefinitionOptionRel cpDefinitionOptionRel =
-			_cpDefinitionOptionRelService.getCPDefinitionOptionRel(
-				productOptionId);
-
-		CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
-			ProductOptionValueUtil.upsertCPDefinitionOptionValueRel(
-				_cpDefinitionOptionValueRelService, productOptionValue,
-				cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
-				_serviceContextHelper.getServiceContext(
-					cpDefinitionOptionRel.getGroupId()));
-
-		return _toProductOptionValue(
-			cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId());
 	}
 
 	@Reference

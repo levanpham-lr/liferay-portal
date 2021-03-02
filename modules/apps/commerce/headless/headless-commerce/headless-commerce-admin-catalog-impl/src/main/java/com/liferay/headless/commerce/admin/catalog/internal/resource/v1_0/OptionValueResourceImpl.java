@@ -120,6 +120,20 @@ public class OptionValueResourceImpl
 			_cpOptionService.getCPOption(id), optionValue);
 	}
 
+	private OptionValue _addOrUpdateOptionValue(
+			CPOption cpOption, OptionValue optionValue)
+		throws Exception {
+
+		CPOptionValue cpOptionValue = _cpOptionValueService.upsertCPOptionValue(
+			cpOption.getCPOptionId(),
+			LanguageUtils.getLocalizedMap(optionValue.getName()),
+			GetterUtil.get(optionValue.getPriority(), 0D), optionValue.getKey(),
+			optionValue.getExternalReferenceCode(),
+			_serviceContextHelper.getServiceContext());
+
+		return _toOptionValue(cpOptionValue.getCPOptionValueId());
+	}
+
 	private OptionValue _toOptionValue(Long cpOptionValueId) throws Exception {
 		return _optionValueDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
@@ -138,20 +152,6 @@ public class OptionValueResourceImpl
 		}
 
 		return productOptionValues;
-	}
-
-	private OptionValue _addOrUpdateOptionValue(
-			CPOption cpOption, OptionValue optionValue)
-		throws Exception {
-
-		CPOptionValue cpOptionValue = _cpOptionValueService.upsertCPOptionValue(
-			cpOption.getCPOptionId(),
-			LanguageUtils.getLocalizedMap(optionValue.getName()),
-			GetterUtil.get(optionValue.getPriority(), 0D), optionValue.getKey(),
-			optionValue.getExternalReferenceCode(),
-			_serviceContextHelper.getServiceContext());
-
-		return _toOptionValue(cpOptionValue.getCPOptionValueId());
 	}
 
 	@Reference
