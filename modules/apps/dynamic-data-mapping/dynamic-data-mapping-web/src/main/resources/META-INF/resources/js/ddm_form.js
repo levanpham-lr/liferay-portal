@@ -2524,6 +2524,7 @@ AUI.add(
 							end = start + delta;
 
 							if (
+								cache.initialLoadedLayoutsCount <= start &&
 								start <= cache.total &&
 								start != cache.oldStart
 							) {
@@ -3123,8 +3124,11 @@ AUI.add(
 					if (!cache) {
 						var path = instance.get('selectedLayoutPath');
 
+						var initialLoadedLayoutsCount = layouts.length;
+
 						cache = {
 							end,
+							initialLoadedLayoutsCount,
 							layouts,
 							oldStart: 0,
 							path: path.slice(),
