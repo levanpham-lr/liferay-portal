@@ -276,9 +276,7 @@ const DatePicker = ({
 							true
 						).isValid()
 					) {
-						onChange(
-							moment(value).locale(locale).format('MM/DD/YYYY')
-						);
+						onChange(moment(value).locale(locale).format('L'));
 					}
 				}}
 				ref={inputRef}
