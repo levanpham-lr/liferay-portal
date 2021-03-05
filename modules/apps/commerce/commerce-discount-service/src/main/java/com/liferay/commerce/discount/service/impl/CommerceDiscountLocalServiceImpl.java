@@ -941,7 +941,11 @@ public class CommerceDiscountLocalServiceImpl
 				commerceDiscount.setExpirationDate(null);
 			}
 
-			commerceDiscount.setActive(true);
+			if (commerceDiscount.getStatus() ==
+					WorkflowConstants.STATUS_SCHEDULED) {
+
+				commerceDiscount.setActive(true);
+			}
 		}
 
 		if (status == WorkflowConstants.STATUS_EXPIRED) {
