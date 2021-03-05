@@ -748,6 +748,33 @@ This change was made because these properties are not useful for an entity.
 
 ---------------------------------------
 
+### Renamed portal properties "module.framework.properties.felix.fileinstall.\*" to "module.framework.properties.file.install.\*"
+- **Date:** 2020-Jul-13
+- **JIRA Ticket:** [LPS-115016](https://issues.liferay.com/browse/LPS-115016)
+
+#### What changed?
+
+Portal properties beginning with "module.framework.properties.felix.fileinstall"
+have been renamed to begin with "module.framework.properties.file.install".
+
+#### Who is affected?
+
+This affects anyone who has the portal property settings
+`module.framework.properties.felix.fileinstall.*`.
+
+#### How should I update my code?
+
+Existing usage of the `module.framework.properties.felix.fileinstall.*`
+properties can be renamed to `module.framework.properties.file.install.*`
+
+#### Why was this change made?
+
+This change was made to reflect the inlining of Apache Felix Fileinstall.
+Moving forward this functionality will be managed and maintained by Liferay
+and the properties should be appropriately named.
+
+---------------------------------------
+
 ### Dynamic Data Mapping fields in Elasticsearch have changed to a nested document
 - **Date:** 2020-Jul-27
 - **JIRA Ticket:** [LPS-103224](https://issues.liferay.com/browse/LPS-103224)
