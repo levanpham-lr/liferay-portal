@@ -173,14 +173,14 @@ public class CommerceShipmentServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
-	public static com.liferay.commerce.model.CommerceShipment reprocessShipment(
+	public static CommerceShipment reprocessCommerceShipment(
 			long commerceShipmentId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		throws PortalException {
 
-		return getService().reprocessShipment(commerceShipmentId);
+		return getService().reprocessCommerceShipment(commerceShipmentId);
 	}
 
-	public static com.liferay.commerce.model.CommerceShipment updateAddress(
+	public static CommerceShipment updateAddress(
 			long commerceShipmentId, String name, String description,
 			String street1, String street2, String street3, String city,
 			String zip, long commerceRegionId, long commerceCountryId,
