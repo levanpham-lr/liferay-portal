@@ -3191,19 +3191,29 @@ ${tomcat-gc-log}
 				<else>
 					<get-testcase-property property.name="remote.elasticsearch.enabled" />
 
-					<condition else="9201" property="elasticsearch.port" value="9200">
-						<equals arg1="${remote.elasticsearch.enabled}" arg2="true" />
-					</condition>
-
-					<ant antfile="build-test-elasticsearch7.xml" target="print-elasticsearch-indices">
-						<property name="elasticsearch.port" value="${elasticsearch.port}" />
-					</ant>
+					<if>
+						<istrue value="${remote.elasticsearch.enabled}" />
+						<then>
+							<var name="elasticsearch.ports" value="9200" />
+						</then>
+						<else>
+							<var name="elasticsearch.ports" value="9201" />
+						</else>
+					</if>
 
 					<get-testcase-property property.name="elasticsearch.ccr.enabled" />
+					<get-testcase-property property.name="elasticsearch.cluster.size" />
 
-					<ant antfile="build-test-elasticsearch7.xml" if:true="${elasticsearch.ccr.enabled}" target="print-elasticsearch-indices">
-						<property name="elasticsearch.port" value="9202" />
-					</ant>
+					<var if:set="elasticsearch.ccr.enabled" name="elasticsearch.ports" value="${elasticsearch.ports},9202" />
+					<var if:set="elasticsearch.cluster.size" name="elasticsearch.ports" value="${elasticsearch.ports},9201" />
+
+					<for list="${elasticsearch.ports}" param="elasticsearch.port">
+						<sequential>
+							<ant antfile="build-test-elasticsearch7.xml" target="print-elasticsearch-indices">
+								<property name="elasticsearch.port" value="@{elasticsearch.port}" />
+							</ant>
+						</sequential>
+					</for>
 				</else>
 			</if>
 		</sequential>
