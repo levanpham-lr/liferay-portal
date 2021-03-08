@@ -6,5 +6,8 @@ buildService {
 dependencies {
 	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "default"
 	compileOnly project(":apps:foundation:alloy:alloy-mvc-sample-api")
-	compileOnly project(":apps:foundation:portal:portal-spring-extender")
+	compileOnly project(":apps:portal:portal-spring-extender-api")
+	compileOnly project(":core:petra:petra-lang")
+	compileOnly project(":core:petra:petra-sql-dsl-api")
+	compileOnly project(":core:petra:petra-string")
 }
