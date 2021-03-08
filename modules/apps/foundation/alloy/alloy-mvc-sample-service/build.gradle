@@ -1,0 +1,10 @@
+buildService {
+	apiDir = "../alloy-mvc-sample-api/src/main/java"
+	testDir = "../alloy-mvc-sample-test/src/testIntegration/java"
+}
+
+dependencies {
+	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "default"
+	compileOnly project(":apps:foundation:alloy:alloy-mvc-sample-api")
+	compileOnly project(":apps:foundation:portal:portal-spring-extender")
+}
