@@ -80,8 +80,8 @@ public class SPAHelper {
 		return _cacheExpirationTime;
 	}
 
-	public JSONArray getExcludedPathsJSONArray() {
-		return _spaExcludedPathsJSONArray;
+	public String getExcludedPaths() {
+		return _spaExcludedPathsJSONArray.toString();
 	}
 
 	public ResourceBundle getLanguageResourceBundle(
