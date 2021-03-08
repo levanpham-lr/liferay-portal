@@ -2349,7 +2349,8 @@ public class GraphQLServletExtender {
 		public boolean canBuildType(
 			Class<?> clazz, AnnotatedType annotatedType) {
 
-			if ((clazz == MultipartBody.class) || (clazz == Object.class) ||
+			if ((clazz == Float.class) || (clazz == MultipartBody.class) ||
+				(clazz == Number.class) || (clazz == Object.class) ||
 				(clazz == Response.class)) {
 
 				return true;
