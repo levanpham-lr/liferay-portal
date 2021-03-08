@@ -37,6 +37,7 @@ config = {
 	},
 	rules: {
 		'no-empty': ['error', {allowEmptyCatch: true}],
+		'no-for-of-loops/no-for-of-loops': 'error',
 		'no-use-before-define': [
 			'error',
 			{
