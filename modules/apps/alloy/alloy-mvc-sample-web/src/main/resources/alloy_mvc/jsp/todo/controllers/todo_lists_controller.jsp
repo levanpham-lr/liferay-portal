@@ -33,7 +33,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 
 		addSuccessMessage();
 
-		String redirect = ParamUtil.getString(request, "redirect");
+		String redirect = ParamUtil.getString(portletRequest, "redirect");
 
 		redirectTo(redirect);
 	}
@@ -53,7 +53,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 
 		addSuccessMessage();
 
-		String redirect = ParamUtil.getString(request, "redirect");
+		String redirect = ParamUtil.getString(portletRequest, "redirect");
 
 		redirectTo(redirect);
 	}
@@ -71,11 +71,11 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 
 		SearchContainer<TodoList> searchContainer = new SearchContainer<TodoList>(portletRequest, portletURL, null, null);
 
-		String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
+		String orderByCol = ParamUtil.getString(portletRequest, "orderByCol", "name");
 
 		renderRequest.setAttribute("orderByCol", orderByCol);
 
-		String orderByType = ParamUtil.getString(request, "orderByType", "asc");
+		String orderByType = ParamUtil.getString(portletRequest, "orderByType", "asc");
 
 		renderRequest.setAttribute("orderByType", orderByType);
 
@@ -95,7 +95,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 
 		addSuccessMessage();
 
-		String redirect = ParamUtil.getString(request, "redirect");
+		String redirect = ParamUtil.getString(portletRequest, "redirect");
 
 		redirectTo(redirect);
 	}
@@ -115,11 +115,11 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 
 		SearchContainer<TodoItem> todoItemSearchContainer = new SearchContainer<TodoItem>(portletRequest, portletURL, null, null);
 
-		String todoItemsOrderByCol = ParamUtil.getString(request, "todoItemsOrderByCol", "priority");
+		String todoItemsOrderByCol = ParamUtil.getString(portletRequest, "todoItemsOrderByCol", "priority");
 
 		renderRequest.setAttribute("todoItemsOrderByCol", todoItemsOrderByCol);
 
-		String todoItemsOrderByType = ParamUtil.getString(request, "todoItemsOrderByType", "asc");
+		String todoItemsOrderByType = ParamUtil.getString(portletRequest, "todoItemsOrderByType", "asc");
 
 		renderRequest.setAttribute("todoItemsOrderByType", todoItemsOrderByType);
 
@@ -133,7 +133,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 	}
 
 	private TodoList _fetchTodoList() throws Exception {
-		long todoListId = ParamUtil.getLong(request, "id");
+		long todoListId = ParamUtil.getLong(portletRequest, "id");
 
 		return TodoListLocalServiceUtil.fetchTodoList(todoListId);
 	}
@@ -159,7 +159,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 	}
 
 	private void _validateName() throws Exception {
-		String name = ParamUtil.getString(request, "name");
+		String name = ParamUtil.getString(portletRequest, "name");
 
 		if (Validator.isNull(name)) {
 			throw new AlloyException("the-todo-list-name-is-invalid", false);
@@ -168,7 +168,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 		List<TodoList> todoLists = alloyServiceInvoker.executeDynamicQuery(new Object[] {"userId", themeDisplay.getUserId(), "name", name});
 
 		if (!todoLists.isEmpty()) {
-			long todoListId = ParamUtil.getLong(request, "id");
+			long todoListId = ParamUtil.getLong(portletRequest, "id");
 
 			TodoList todoList = todoLists.get(0);
 
@@ -180,7 +180,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 
 	private void _validateTodoList(TodoList todoList) throws Exception {
 		if ((todoList == null) || todoList.isNew()) {
-			long todoListId = ParamUtil.getLong(request, "id");
+			long todoListId = ParamUtil.getLong(portletRequest, "id");
 
 			throw new AlloyException("the-todo-list-with-id-x-does-not-exist", new Object[] {todoListId}, false);
 		}

@@ -33,7 +33,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 
 		addSuccessMessage();
 
-		String redirect = ParamUtil.getString(request, "redirect");
+		String redirect = ParamUtil.getString(portletRequest, "redirect");
 
 		redirectTo(redirect);
 	}
@@ -45,7 +45,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 
 		renderRequest.setAttribute("todoItem", todoItem);
 
-		long todoListId = ParamUtil.getLong(request, "todoListId");
+		long todoListId = ParamUtil.getLong(portletRequest, "todoListId");
 
 		renderRequest.setAttribute("todoListId", todoListId);
 	}
@@ -59,7 +59,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 
 		addSuccessMessage();
 
-		String redirect = ParamUtil.getString(request, "redirect");
+		String redirect = ParamUtil.getString(portletRequest, "redirect");
 
 		redirectTo(redirect);
 	}
@@ -91,7 +91,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 
 		addSuccessMessage();
 
-		String redirect = ParamUtil.getString(request, "redirect");
+		String redirect = ParamUtil.getString(portletRequest, "redirect");
 
 		redirectTo(redirect);
 	}
@@ -112,7 +112,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 	}
 
 	private TodoItem _fetchTodoItem() throws Exception {
-		long todoItemId = ParamUtil.getLong(request, "id");
+		long todoItemId = ParamUtil.getLong(portletRequest, "id");
 
 		return TodoItemLocalServiceUtil.fetchTodoItem(todoItemId);
 	}
@@ -126,7 +126,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 	}
 
 	private void _validateDescription() throws Exception {
-		String description = ParamUtil.getString(request, "description");
+		String description = ParamUtil.getString(portletRequest, "description");
 
 		if (Validator.isNull(description)) {
 			throw new AlloyException("the-todo-item-description-is-invalid", false);
@@ -137,7 +137,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 		if (!todoItems.isEmpty()) {
 			TodoItem todoItem = todoItems.get(0);
 
-			long todoItemId = ParamUtil.getLong(request, "id");
+			long todoItemId = ParamUtil.getLong(portletRequest, "id");
 
 			if (todoItem.getTodoItemId() != todoItemId) {
 				throw new AlloyException("the-todo-item-already-exists", false);
@@ -151,7 +151,7 @@ public static class AlloyControllerImpl extends BaseAlloyControllerImpl {
 
 	private void _validateTodoItem(TodoItem todoItem) throws Exception {
 		if ((todoItem == null) || todoItem.isNew()) {
-			long todoItemId = ParamUtil.getLong(request, "id");
+			long todoItemId = ParamUtil.getLong(portletRequest, "id");
 
 			throw new AlloyException("the-todo-item-with-id-x-does-not-exist", new Object[] {todoItemId}, false);
 		}
