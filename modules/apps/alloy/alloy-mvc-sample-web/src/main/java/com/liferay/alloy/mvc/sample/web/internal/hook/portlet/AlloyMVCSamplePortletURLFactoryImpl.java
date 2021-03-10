@@ -20,11 +20,11 @@ import com.liferay.portal.kernel.model.impl.VirtualLayout;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletURLFactory;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
-import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,79 +38,78 @@ import org.osgi.service.component.annotations.Reference;
  * @author Brian Wing Shun Chan
  */
 @Component(immediate = true, service = PortletURLFactory.class)
-@DoPrivileged
 public class AlloyMVCSamplePortletURLFactoryImpl implements PortletURLFactory {
 
-	@Activate
-	public void activate() throws Exception {
-		_originalPortletURLFactory =
-			PortletURLFactoryUtil.getPortletURLFactory();
-
-		PortletURLFactoryUtil portletURLFactoryUtil =
-			new PortletURLFactoryUtil();
-
-		portletURLFactoryUtil.setPortletURLFactory(this);
-	}
-
 	public LiferayPortletURL create(
-		HttpServletRequest request, Portlet portlet, Layout layout,
+		HttpServletRequest httpServletRequest, Portlet portlet, Layout layout,
 		String lifecycle) {
 
 		return new AlloyMVCSamplePortletURLWrapper(
-			request, portlet, layout, lifecycle);
+			httpServletRequest, portlet, layout, lifecycle);
 	}
 
 	public LiferayPortletURL create(
-		HttpServletRequest request, Portlet portlet, String lifecycle) {
+		HttpServletRequest httpServletRequest, Portlet portlet, Layout layout,
+		String lifecycle, MimeResponse.Copy copy) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		return null;
+	}
+
+	public LiferayPortletURL create(
+		HttpServletRequest httpServletRequest, Portlet portlet,
+		String lifecycle) {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
 		if (layout == null) {
 			layout = _getLayout(
-				(Layout)request.getAttribute(WebKeys.LAYOUT),
+				(Layout)httpServletRequest.getAttribute(WebKeys.LAYOUT),
 				themeDisplay.getPlid());
 		}
 
 		return new AlloyMVCSamplePortletURLWrapper(
-			request, portlet, layout, lifecycle);
+			httpServletRequest, portlet, layout, lifecycle);
 	}
 
 	@Override
 	public LiferayPortletURL create(
-		HttpServletRequest request, String portletId, Layout layout,
+		HttpServletRequest httpServletRequest, String portletId, Layout layout,
 		String lifecycle) {
 
 		return new AlloyMVCSamplePortletURLWrapper(
-			request, portletId, layout, lifecycle);
+			httpServletRequest, portletId, layout, lifecycle);
 	}
 
 	@Override
 	public LiferayPortletURL create(
-		HttpServletRequest request, String portletId, long plid,
+		HttpServletRequest httpServletRequest, String portletId, long plid,
 		String lifecycle) {
 
 		return new AlloyMVCSamplePortletURLWrapper(
-			request, portletId, plid, lifecycle);
+			httpServletRequest, portletId, plid, lifecycle);
 	}
 
 	public LiferayPortletURL create(
-		HttpServletRequest request, String portletId, String lifecycle) {
+		HttpServletRequest httpServletRequest, String portletId,
+		String lifecycle) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
 		if (layout != null) {
 			return new AlloyMVCSamplePortletURLWrapper(
-				request, portletId, layout, lifecycle);
+				httpServletRequest, portletId, layout, lifecycle);
 		}
 
 		return new AlloyMVCSamplePortletURLWrapper(
-			request, portletId, themeDisplay.getPlid(), lifecycle);
+			httpServletRequest, portletId, themeDisplay.getPlid(), lifecycle);
 	}
 
 	public LiferayPortletURL create(
@@ -132,6 +131,13 @@ public class AlloyMVCSamplePortletURLFactoryImpl implements PortletURLFactory {
 			lifecycle);
 	}
 
+	public LiferayPortletURL create(
+		PortletRequest portletRequest, Portlet portlet, long plid,
+		String lifecycle, MimeResponse.Copy copy) {
+
+		return null;
+	}
+
 	@Override
 	public LiferayPortletURL create(
 		PortletRequest portletRequest, String portletId, Layout layout,
@@ -151,6 +157,13 @@ public class AlloyMVCSamplePortletURLFactoryImpl implements PortletURLFactory {
 	}
 
 	public LiferayPortletURL create(
+		PortletRequest portletRequest, String portletId, long plid,
+		String lifecycle, MimeResponse.Copy copy) {
+
+		return null;
+	}
+
+	public LiferayPortletURL create(
 		PortletRequest portletRequest, String portletId, String lifecycle) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
@@ -167,8 +180,19 @@ public class AlloyMVCSamplePortletURLFactoryImpl implements PortletURLFactory {
 			portletRequest, portletId, themeDisplay.getPlid(), lifecycle);
 	}
 
+	@Activate
+	protected void activate() throws Exception {
+		_originalPortletURLFactory =
+			PortletURLFactoryUtil.getPortletURLFactory();
+
+		PortletURLFactoryUtil portletURLFactoryUtil =
+			new PortletURLFactoryUtil();
+
+		portletURLFactoryUtil.setPortletURLFactory(this);
+	}
+
 	@Deactivate
-	public void deactivate() {
+	protected void deactivate() {
 		PortletURLFactoryUtil portletURLFactoryUtil =
 			new PortletURLFactoryUtil();
 
