@@ -27,9 +27,6 @@ long cpInstanceId = 0;
 if (cpInstance != null) {
 	cpInstanceId = cpInstance.getCPInstanceId();
 }
-
-String productContentId = liferayPortletResponse.getNamespace() + cpCatalogEntry.getCPDefinitionId() + "ProductContent";
-String quantityInputId = liferayPortletResponse.getNamespace() + cpCatalogEntry.getCPDefinitionId() + "Quantity";
 %>
 
 <liferay-commerce:quantity-input
@@ -41,6 +38,6 @@ String quantityInputId = liferayPortletResponse.getNamespace() + cpCatalogEntry.
 	CPDefinitionId="<%= cpCatalogEntry.getCPDefinitionId() %>"
 	CPInstanceId="<%= cpInstanceId %>"
 	elementClasses="btn-default btn-lg"
-	productContentId="<%= productContentId %>"
-	taglibQuantityInputId="<%= quantityInputId %>"
+	productContentId="<%= liferayPortletResponse.getNamespace() + cpCatalogEntry.getCPDefinitionId() + "ProductContent" %>"
+	taglibQuantityInputId="<%= liferayPortletResponse.getNamespace() + cpCatalogEntry.getCPDefinitionId() + "Quantity" %>"
 />
