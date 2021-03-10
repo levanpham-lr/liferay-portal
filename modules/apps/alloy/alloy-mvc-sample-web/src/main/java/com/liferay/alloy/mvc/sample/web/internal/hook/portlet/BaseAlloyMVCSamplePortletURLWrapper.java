@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
+import javax.portlet.MutableResourceParameters;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletSecurityException;
@@ -101,13 +102,13 @@ public abstract class BaseAlloyMVCSamplePortletURLWrapper
 	}
 
 	@Override
-	public Map<String, String> getReservedParameterMap() {
-		return liferayPortletURL.getReservedParameterMap();
+	public String getResourceID() {
+		return liferayPortletURL.getResourceID();
 	}
 
 	@Override
-	public String getResourceID() {
-		return liferayPortletURL.getResourceID();
+	public MutableResourceParameters getResourceParameters() {
+		return liferayPortletURL.getResourceParameters();
 	}
 
 	@Override

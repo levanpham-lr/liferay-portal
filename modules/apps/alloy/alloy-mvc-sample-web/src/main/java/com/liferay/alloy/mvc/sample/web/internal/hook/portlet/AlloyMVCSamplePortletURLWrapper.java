@@ -15,6 +15,7 @@
 package com.liferay.alloy.mvc.sample.web.internal.hook.portlet;
 
 import com.liferay.alloy.mvc.sample.web.internal.constants.AlloyMVCSamplePortletKeys;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Layout;
@@ -23,7 +24,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Constructor;
 
@@ -44,7 +45,7 @@ public class AlloyMVCSamplePortletURLWrapper
 			StringPool.UNDERLINE;
 
 	public AlloyMVCSamplePortletURLWrapper(
-		HttpServletRequest request, Portlet portlet, Layout layout,
+		HttpServletRequest httpServletRequest, Portlet portlet, Layout layout,
 		String lifecycle) {
 
 		this(
@@ -53,11 +54,11 @@ public class AlloyMVCSamplePortletURLWrapper
 					HttpServletRequest.class, Portlet.class, Layout.class,
 					String.class
 				},
-				new Object[] {request, portlet, layout, lifecycle}));
+				new Object[] {httpServletRequest, portlet, layout, lifecycle}));
 	}
 
 	public AlloyMVCSamplePortletURLWrapper(
-		HttpServletRequest request, String portletId, Layout layout,
+		HttpServletRequest httpServletRequest, String portletId, Layout layout,
 		String lifecycle) {
 
 		this(
@@ -66,11 +67,13 @@ public class AlloyMVCSamplePortletURLWrapper
 					HttpServletRequest.class, String.class, Layout.class,
 					String.class
 				},
-				new Object[] {request, portletId, layout, lifecycle}));
+				new Object[] {
+					httpServletRequest, portletId, layout, lifecycle
+				}));
 	}
 
 	public AlloyMVCSamplePortletURLWrapper(
-		HttpServletRequest request, String portletId, long plid,
+		HttpServletRequest httpServletRequest, String portletId, long plid,
 		String lifecycle) {
 
 		this(
@@ -79,7 +82,7 @@ public class AlloyMVCSamplePortletURLWrapper
 					HttpServletRequest.class, String.class, long.class,
 					String.class
 				},
-				new Object[] {request, portletId, plid, lifecycle}));
+				new Object[] {httpServletRequest, portletId, plid, lifecycle}));
 	}
 
 	public AlloyMVCSamplePortletURLWrapper(
@@ -136,9 +139,7 @@ public class AlloyMVCSamplePortletURLWrapper
 
 	@Override
 	public String toString() {
-		String string = super.toString();
-
-		return string.replace(PORTLET_NAMESPACE, StringPool.BLANK);
+		return StringUtil.removeSubstring(super.toString(), PORTLET_NAMESPACE);
 	}
 
 	protected static LiferayPortletURL getLiferayPortletURL(
@@ -157,8 +158,8 @@ public class AlloyMVCSamplePortletURLWrapper
 
 			return portletURLImplConstructor.newInstance(parameters);
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		catch (Exception exception) {
+			_log.error(exception, exception);
 
 			return null;
 		}
