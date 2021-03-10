@@ -16,6 +16,7 @@ package com.liferay.alloy.mvc.sample.web.internal.hook.portlet;
 
 import com.liferay.alloy.mvc.sample.web.internal.constants.AlloyMVCSamplePortletKeys;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Layout;
@@ -23,7 +24,10 @@ import com.liferay.portal.kernel.model.Portlet;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
+import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
+import com.liferay.portal.kernel.service.PortletLocalServiceUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Constructor;
@@ -53,9 +57,11 @@ public class AlloyMVCSamplePortletURLWrapper
 			getLiferayPortletURL(
 				new Class<?>[] {
 					HttpServletRequest.class, Portlet.class, Layout.class,
-					String.class
+					String.class, MimeResponse.Copy.class
 				},
-				new Object[] {httpServletRequest, portlet, layout, lifecycle}));
+				new Object[] {
+					httpServletRequest, portlet, layout, lifecycle, null
+				}));
 	}
 
 	public AlloyMVCSamplePortletURLWrapper(
@@ -80,25 +86,34 @@ public class AlloyMVCSamplePortletURLWrapper
 		this(
 			getLiferayPortletURL(
 				new Class<?>[] {
-					HttpServletRequest.class, String.class, Layout.class,
-					String.class
+					HttpServletRequest.class, Portlet.class, Layout.class,
+					String.class, MimeResponse.Copy.class
 				},
 				new Object[] {
-					httpServletRequest, portletId, layout, lifecycle
+					httpServletRequest,
+					PortletLocalServiceUtil.getPortletById(
+						PortalUtil.getCompanyId(httpServletRequest), portletId),
+					layout, lifecycle, null
 				}));
 	}
 
 	public AlloyMVCSamplePortletURLWrapper(
-		HttpServletRequest httpServletRequest, String portletId, long plid,
-		String lifecycle) {
+			HttpServletRequest httpServletRequest, String portletId, long plid,
+			String lifecycle)
+		throws PortalException {
 
 		this(
 			getLiferayPortletURL(
 				new Class<?>[] {
-					HttpServletRequest.class, String.class, long.class,
-					String.class
+					HttpServletRequest.class, Portlet.class, Layout.class,
+					String.class, MimeResponse.Copy.class
 				},
-				new Object[] {httpServletRequest, portletId, plid, lifecycle}));
+				new Object[] {
+					httpServletRequest,
+					PortletLocalServiceUtil.getPortletById(
+						PortalUtil.getCompanyId(httpServletRequest), portletId),
+					LayoutLocalServiceUtil.getLayout(plid), lifecycle, null
+				}));
 	}
 
 	public AlloyMVCSamplePortletURLWrapper(
@@ -115,9 +130,11 @@ public class AlloyMVCSamplePortletURLWrapper
 			getLiferayPortletURL(
 				new Class<?>[] {
 					PortletRequest.class, Portlet.class, Layout.class,
-					String.class
+					String.class, MimeResponse.Copy.class
 				},
-				new Object[] {portletRequest, portlet, layout, lifecycle}));
+				new Object[] {
+					portletRequest, portlet, layout, lifecycle, null
+				}));
 	}
 
 	public AlloyMVCSamplePortletURLWrapper(
@@ -142,36 +159,52 @@ public class AlloyMVCSamplePortletURLWrapper
 		this(
 			getLiferayPortletURL(
 				new Class<?>[] {
-					PortletRequest.class, String.class, Layout.class,
-					String.class
-				},
-				new Object[] {portletRequest, portletId, layout, lifecycle}));
-	}
-
-	public AlloyMVCSamplePortletURLWrapper(
-		PortletRequest portletRequest, String portletId, long plid,
-		String lifecycle) {
-
-		this(
-			getLiferayPortletURL(
-				new Class<?>[] {
-					PortletRequest.class, String.class, long.class, String.class
-				},
-				new Object[] {portletRequest, portletId, plid, lifecycle}));
-	}
-
-	public AlloyMVCSamplePortletURLWrapper(
-		PortletRequest portletRequest, String portletId, long plid,
-		String lifecycle, MimeResponse.Copy copy) {
-
-		this(
-			getLiferayPortletURL(
-				new Class<?>[] {
-					PortletRequest.class, String.class, long.class,
+					PortletRequest.class, Portlet.class, Layout.class,
 					String.class, MimeResponse.Copy.class
 				},
 				new Object[] {
-					portletRequest, portletId, plid, lifecycle, copy
+					portletRequest,
+					PortletLocalServiceUtil.getPortletById(
+						PortalUtil.getCompanyId(portletRequest), portletId),
+					layout, lifecycle, null
+				}));
+	}
+
+	public AlloyMVCSamplePortletURLWrapper(
+			PortletRequest portletRequest, String portletId, long plid,
+			String lifecycle)
+		throws PortalException {
+
+		this(
+			getLiferayPortletURL(
+				new Class<?>[] {
+					PortletRequest.class, Portlet.class, Layout.class,
+					String.class, MimeResponse.Copy.class
+				},
+				new Object[] {
+					portletRequest,
+					PortletLocalServiceUtil.getPortletById(
+						PortalUtil.getCompanyId(portletRequest), portletId),
+					LayoutLocalServiceUtil.getLayout(plid), lifecycle, null
+				}));
+	}
+
+	public AlloyMVCSamplePortletURLWrapper(
+			PortletRequest portletRequest, String portletId, long plid,
+			String lifecycle, MimeResponse.Copy copy)
+		throws PortalException {
+
+		this(
+			getLiferayPortletURL(
+				new Class<?>[] {
+					PortletRequest.class, Portlet.class, Layout.class,
+					String.class, MimeResponse.Copy.class
+				},
+				new Object[] {
+					portletRequest,
+					PortletLocalServiceUtil.getPortletById(
+						PortalUtil.getCompanyId(portletRequest), portletId),
+					LayoutLocalServiceUtil.getLayout(plid), lifecycle, copy
 				}));
 	}
 
@@ -197,7 +230,7 @@ public class AlloyMVCSamplePortletURLWrapper
 
 			Class<? extends LiferayPortletURL> portletURLImplClass =
 				(Class<? extends LiferayPortletURL>)portalClassLoader.loadClass(
-					"com.liferay.portlet.PortletURLImpl");
+					"com.liferay.portlet.internal.PortletURLImpl");
 
 			Constructor<? extends LiferayPortletURL> portletURLImplConstructor =
 				portletURLImplClass.getConstructor(parameterTypes);
