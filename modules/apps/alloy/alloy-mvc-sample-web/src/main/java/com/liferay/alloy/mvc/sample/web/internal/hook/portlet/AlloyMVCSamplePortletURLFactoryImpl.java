@@ -52,7 +52,8 @@ public class AlloyMVCSamplePortletURLFactoryImpl implements PortletURLFactory {
 		HttpServletRequest httpServletRequest, Portlet portlet, Layout layout,
 		String lifecycle, MimeResponse.Copy copy) {
 
-		return null;
+		return new AlloyMVCSamplePortletURLWrapper(
+			httpServletRequest, portlet, layout, lifecycle, copy);
 	}
 
 	public LiferayPortletURL create(
@@ -135,7 +136,11 @@ public class AlloyMVCSamplePortletURLFactoryImpl implements PortletURLFactory {
 		PortletRequest portletRequest, Portlet portlet, long plid,
 		String lifecycle, MimeResponse.Copy copy) {
 
-		return null;
+		return new AlloyMVCSamplePortletURLWrapper(
+			portletRequest, portlet,
+			_getLayout(
+				(Layout)portletRequest.getAttribute(WebKeys.LAYOUT), plid),
+			lifecycle, copy);
 	}
 
 	@Override
@@ -160,7 +165,8 @@ public class AlloyMVCSamplePortletURLFactoryImpl implements PortletURLFactory {
 		PortletRequest portletRequest, String portletId, long plid,
 		String lifecycle, MimeResponse.Copy copy) {
 
-		return null;
+		return new AlloyMVCSamplePortletURLWrapper(
+			portletRequest, portletId, plid, lifecycle, copy);
 	}
 
 	public LiferayPortletURL create(

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Constructor;
 
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
 import javax.portlet.WindowStateException;
@@ -55,6 +56,21 @@ public class AlloyMVCSamplePortletURLWrapper
 					String.class
 				},
 				new Object[] {httpServletRequest, portlet, layout, lifecycle}));
+	}
+
+	public AlloyMVCSamplePortletURLWrapper(
+		HttpServletRequest httpServletRequest, Portlet portlet, Layout layout,
+		String lifecycle, MimeResponse.Copy copy) {
+
+		this(
+			getLiferayPortletURL(
+				new Class<?>[] {
+					HttpServletRequest.class, Portlet.class, Layout.class,
+					String.class, MimeResponse.Copy.class
+				},
+				new Object[] {
+					httpServletRequest, portlet, layout, lifecycle, copy
+				}));
 	}
 
 	public AlloyMVCSamplePortletURLWrapper(
@@ -105,6 +121,21 @@ public class AlloyMVCSamplePortletURLWrapper
 	}
 
 	public AlloyMVCSamplePortletURLWrapper(
+		PortletRequest portletRequest, Portlet portlet, Layout layout,
+		String lifecycle, MimeResponse.Copy copy) {
+
+		this(
+			getLiferayPortletURL(
+				new Class<?>[] {
+					PortletRequest.class, Portlet.class, Layout.class,
+					String.class, MimeResponse.Copy.class
+				},
+				new Object[] {
+					portletRequest, portlet, layout, lifecycle, copy
+				}));
+	}
+
+	public AlloyMVCSamplePortletURLWrapper(
 		PortletRequest portletRequest, String portletId, Layout layout,
 		String lifecycle) {
 
@@ -127,6 +158,21 @@ public class AlloyMVCSamplePortletURLWrapper
 					PortletRequest.class, String.class, long.class, String.class
 				},
 				new Object[] {portletRequest, portletId, plid, lifecycle}));
+	}
+
+	public AlloyMVCSamplePortletURLWrapper(
+		PortletRequest portletRequest, String portletId, long plid,
+		String lifecycle, MimeResponse.Copy copy) {
+
+		this(
+			getLiferayPortletURL(
+				new Class<?>[] {
+					PortletRequest.class, String.class, long.class,
+					String.class, MimeResponse.Copy.class
+				},
+				new Object[] {
+					portletRequest, portletId, plid, lifecycle, copy
+				}));
 	}
 
 	public void setPortletMode(String portletMode) throws PortletModeException {
