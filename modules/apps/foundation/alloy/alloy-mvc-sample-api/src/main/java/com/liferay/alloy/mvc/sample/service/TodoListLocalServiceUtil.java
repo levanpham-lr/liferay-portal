@@ -15,6 +15,7 @@
 package com.liferay.alloy.mvc.sample.service;
 
 import com.liferay.alloy.mvc.sample.model.TodoList;
+import com.liferay.petra.sql.dsl.query.DSLQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.PersistedModel;
@@ -56,6 +57,16 @@ public class TodoListLocalServiceUtil {
 	 */
 	public static TodoList addTodoList(TodoList todoList) {
 		return getService().addTodoList(todoList);
+	}
+
+	/**
+	 * @throws PortalException
+	 */
+	public static PersistedModel createPersistedModel(
+			Serializable primaryKeyObj)
+		throws PortalException {
+
+		return getService().createPersistedModel(primaryKeyObj);
 	}
 
 	/**
@@ -107,6 +118,10 @@ public class TodoListLocalServiceUtil {
 	 */
 	public static TodoList deleteTodoList(TodoList todoList) {
 		return getService().deleteTodoList(todoList);
+	}
+
+	public static <T> T dslQuery(DSLQuery dslQuery) {
+		return getService().dslQuery(dslQuery);
 	}
 
 	public static DynamicQuery dynamicQuery() {

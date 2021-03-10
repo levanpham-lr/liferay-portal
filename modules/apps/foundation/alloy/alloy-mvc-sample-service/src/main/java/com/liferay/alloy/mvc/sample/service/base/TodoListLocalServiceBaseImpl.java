@@ -19,6 +19,7 @@ import com.liferay.alloy.mvc.sample.service.TodoListLocalService;
 import com.liferay.alloy.mvc.sample.service.TodoListLocalServiceUtil;
 import com.liferay.alloy.mvc.sample.service.persistence.TodoItemPersistence;
 import com.liferay.alloy.mvc.sample.service.persistence.TodoListPersistence;
+import com.liferay.petra.sql.dsl.query.DSLQuery;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -136,6 +137,11 @@ public abstract class TodoListLocalServiceBaseImpl
 	@Override
 	public TodoList deleteTodoList(TodoList todoList) {
 		return todoListPersistence.remove(todoList);
+	}
+
+	@Override
+	public <T> T dslQuery(DSLQuery dslQuery) {
+		return todoListPersistence.dslQuery(dslQuery);
 	}
 
 	@Override
@@ -281,6 +287,15 @@ public abstract class TodoListLocalServiceBaseImpl
 		actionableDynamicQuery.setModelClass(TodoList.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName("todoListId");
+	}
+
+	/**
+	 * @throws PortalException
+	 */
+	public PersistedModel createPersistedModel(Serializable primaryKeyObj)
+		throws PortalException {
+
+		return todoListPersistence.create(((Long)primaryKeyObj).longValue());
 	}
 
 	/**

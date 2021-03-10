@@ -50,6 +50,17 @@ public class TodoListLocalServiceWrapper
 	}
 
 	/**
+	 * @throws PortalException
+	 */
+	@Override
+	public com.liferay.portal.kernel.model.PersistedModel createPersistedModel(
+			java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _todoListLocalService.createPersistedModel(primaryKeyObj);
+	}
+
+	/**
 	 * Creates a new todo list with the primary key. Does not add the todo list to the database.
 	 *
 	 * @param todoListId the primary key for the new todo list
@@ -107,6 +118,11 @@ public class TodoListLocalServiceWrapper
 		com.liferay.alloy.mvc.sample.model.TodoList todoList) {
 
 		return _todoListLocalService.deleteTodoList(todoList);
+	}
+
+	@Override
+	public <T> T dslQuery(com.liferay.petra.sql.dsl.query.DSLQuery dslQuery) {
+		return _todoListLocalService.dslQuery(dslQuery);
 	}
 
 	@Override

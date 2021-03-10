@@ -122,6 +122,8 @@ public class TodoItemPersistenceTest {
 
 		TodoItem newTodoItem = _persistence.create(pk);
 
+		newTodoItem.setMvccVersion(RandomTestUtil.nextLong());
+
 		newTodoItem.setCompanyId(RandomTestUtil.nextLong());
 
 		newTodoItem.setUserId(RandomTestUtil.nextLong());
@@ -145,6 +147,8 @@ public class TodoItemPersistenceTest {
 		TodoItem existingTodoItem = _persistence.findByPrimaryKey(
 			newTodoItem.getPrimaryKey());
 
+		Assert.assertEquals(
+			existingTodoItem.getMvccVersion(), newTodoItem.getMvccVersion());
 		Assert.assertEquals(
 			existingTodoItem.getTodoItemId(), newTodoItem.getTodoItemId());
 		Assert.assertEquals(
@@ -194,9 +198,9 @@ public class TodoItemPersistenceTest {
 
 	protected OrderByComparator<TodoItem> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
-			"AlloyMVCSample_TodoItem", "todoItemId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "todoListId", true, "description", true,
+			"AlloyMVCSample_TodoItem", "mvccVersion", true, "todoItemId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "todoListId", true, "description", true,
 			"priority", true, "status", true);
 	}
 
@@ -411,6 +415,8 @@ public class TodoItemPersistenceTest {
 		long pk = RandomTestUtil.nextLong();
 
 		TodoItem todoItem = _persistence.create(pk);
+
+		todoItem.setMvccVersion(RandomTestUtil.nextLong());
 
 		todoItem.setCompanyId(RandomTestUtil.nextLong());
 

@@ -24,13 +24,16 @@ import java.util.List;
  * This class is used by SOAP remote services.
  *
  * @author Brian Wing Shun Chan
+ * @deprecated As of Athanasius (7.3.x), with no direct replacement
  * @generated
  */
+@Deprecated
 public class TodoListSoap implements Serializable {
 
 	public static TodoListSoap toSoapModel(TodoList model) {
 		TodoListSoap soapModel = new TodoListSoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setTodoListId(model.getTodoListId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -91,6 +94,14 @@ public class TodoListSoap implements Serializable {
 		setTodoListId(pk);
 	}
 
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
+	}
+
 	public long getTodoListId() {
 		return _todoListId;
 	}
@@ -147,6 +158,7 @@ public class TodoListSoap implements Serializable {
 		_name = name;
 	}
 
+	private long _mvccVersion;
 	private long _todoListId;
 	private long _companyId;
 	private long _userId;

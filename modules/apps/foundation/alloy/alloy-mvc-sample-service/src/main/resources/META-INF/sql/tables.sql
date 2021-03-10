@@ -1,4 +1,5 @@
 create table AlloyMVCSample_TodoItem (
+	mvccVersion LONG default 0 not null,
 	todoItemId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
@@ -12,6 +13,7 @@ create table AlloyMVCSample_TodoItem (
 );
 
 create table AlloyMVCSample_TodoList (
+	mvccVersion LONG default 0 not null,
 	todoListId LONG not null primary key,
 	companyId LONG,
 	userId LONG,

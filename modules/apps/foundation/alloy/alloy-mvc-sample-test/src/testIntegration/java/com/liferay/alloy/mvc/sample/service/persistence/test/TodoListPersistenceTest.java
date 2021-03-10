@@ -122,6 +122,8 @@ public class TodoListPersistenceTest {
 
 		TodoList newTodoList = _persistence.create(pk);
 
+		newTodoList.setMvccVersion(RandomTestUtil.nextLong());
+
 		newTodoList.setCompanyId(RandomTestUtil.nextLong());
 
 		newTodoList.setUserId(RandomTestUtil.nextLong());
@@ -139,6 +141,8 @@ public class TodoListPersistenceTest {
 		TodoList existingTodoList = _persistence.findByPrimaryKey(
 			newTodoList.getPrimaryKey());
 
+		Assert.assertEquals(
+			existingTodoList.getMvccVersion(), newTodoList.getMvccVersion());
 		Assert.assertEquals(
 			existingTodoList.getTodoListId(), newTodoList.getTodoListId());
 		Assert.assertEquals(
@@ -181,9 +185,9 @@ public class TodoListPersistenceTest {
 
 	protected OrderByComparator<TodoList> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
-			"AlloyMVCSample_TodoList", "todoListId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "name", true);
+			"AlloyMVCSample_TodoList", "mvccVersion", true, "todoListId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "name", true);
 	}
 
 	@Test
@@ -397,6 +401,8 @@ public class TodoListPersistenceTest {
 		long pk = RandomTestUtil.nextLong();
 
 		TodoList todoList = _persistence.create(pk);
+
+		todoList.setMvccVersion(RandomTestUtil.nextLong());
 
 		todoList.setCompanyId(RandomTestUtil.nextLong());
 

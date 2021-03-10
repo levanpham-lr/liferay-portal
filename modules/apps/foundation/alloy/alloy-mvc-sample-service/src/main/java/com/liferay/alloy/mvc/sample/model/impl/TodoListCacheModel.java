@@ -15,9 +15,10 @@
 package com.liferay.alloy.mvc.sample.model.impl;
 
 import com.liferay.alloy.mvc.sample.model.TodoList;
+import com.liferay.petra.lang.HashUtil;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.model.CacheModel;
-import com.liferay.portal.kernel.util.HashUtil;
-import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.model.MVCCModel;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -33,7 +34,7 @@ import java.util.Date;
  * @generated
  */
 public class TodoListCacheModel
-	implements CacheModel<TodoList>, Externalizable {
+	implements CacheModel<TodoList>, Externalizable, MVCCModel {
 
 	@Override
 	public boolean equals(Object object) {
@@ -47,7 +48,9 @@ public class TodoListCacheModel
 
 		TodoListCacheModel todoListCacheModel = (TodoListCacheModel)object;
 
-		if (todoListId == todoListCacheModel.todoListId) {
+		if ((todoListId == todoListCacheModel.todoListId) &&
+			(mvccVersion == todoListCacheModel.mvccVersion)) {
+
 			return true;
 		}
 
@@ -56,14 +59,28 @@ public class TodoListCacheModel
 
 	@Override
 	public int hashCode() {
-		return HashUtil.hash(0, todoListId);
+		int hashCode = HashUtil.hash(0, todoListId);
+
+		return HashUtil.hash(hashCode, mvccVersion);
+	}
+
+	@Override
+	public long getMvccVersion() {
+		return mvccVersion;
+	}
+
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		this.mvccVersion = mvccVersion;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
-		sb.append("{todoListId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", todoListId=");
 		sb.append(todoListId);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -86,6 +103,7 @@ public class TodoListCacheModel
 	public TodoList toEntityModel() {
 		TodoListImpl todoListImpl = new TodoListImpl();
 
+		todoListImpl.setMvccVersion(mvccVersion);
 		todoListImpl.setTodoListId(todoListId);
 		todoListImpl.setCompanyId(companyId);
 		todoListImpl.setUserId(userId);
@@ -125,6 +143,8 @@ public class TodoListCacheModel
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
+
 		todoListId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
@@ -138,6 +158,8 @@ public class TodoListCacheModel
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		objectOutput.writeLong(todoListId);
 
 		objectOutput.writeLong(companyId);
@@ -162,6 +184,7 @@ public class TodoListCacheModel
 		}
 	}
 
+	public long mvccVersion;
 	public long todoListId;
 	public long companyId;
 	public long userId;

@@ -18,6 +18,7 @@ import com.liferay.alloy.mvc.sample.model.TodoItem;
 import com.liferay.alloy.mvc.sample.model.TodoItemModel;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.CacheModel;
@@ -28,7 +29,6 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Serializable;
 
@@ -67,17 +67,19 @@ public class TodoItemModelImpl
 	public static final String TABLE_NAME = "AlloyMVCSample_TodoItem";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"todoItemId", Types.BIGINT}, {"companyId", Types.BIGINT},
-		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
-		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
-		{"todoListId", Types.BIGINT}, {"description", Types.VARCHAR},
-		{"priority", Types.INTEGER}, {"status", Types.INTEGER}
+		{"mvccVersion", Types.BIGINT}, {"todoItemId", Types.BIGINT},
+		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}, {"todoListId", Types.BIGINT},
+		{"description", Types.VARCHAR}, {"priority", Types.INTEGER},
+		{"status", Types.INTEGER}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
 		new HashMap<String, Integer>();
 
 	static {
+		TABLE_COLUMNS_MAP.put("mvccVersion", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("todoItemId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
@@ -91,7 +93,7 @@ public class TodoItemModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table AlloyMVCSample_TodoItem (todoItemId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,todoListId LONG,description VARCHAR(75) null,priority INTEGER,status INTEGER)";
+		"create table AlloyMVCSample_TodoItem (mvccVersion LONG default 0 not null,todoItemId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,todoListId LONG,description VARCHAR(75) null,priority INTEGER,status INTEGER)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table AlloyMVCSample_TodoItem";
@@ -108,17 +110,30 @@ public class TodoItemModelImpl
 
 	public static final String TX_MANAGER = "liferayTransactionManager";
 
-	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(
-		com.liferay.alloy.mvc.sample.service.util.ServiceProps.get(
-			"value.object.entity.cache.enabled.com.liferay.alloy.mvc.sample.model.TodoItem"),
-		true);
+	/**
+	 * @deprecated As of Athanasius (7.3.x), with no direct replacement
+	 */
+	@Deprecated
+	public static final boolean ENTITY_CACHE_ENABLED = true;
 
-	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(
-		com.liferay.alloy.mvc.sample.service.util.ServiceProps.get(
-			"value.object.finder.cache.enabled.com.liferay.alloy.mvc.sample.model.TodoItem"),
-		true);
+	/**
+	 * @deprecated As of Athanasius (7.3.x), with no direct replacement
+	 */
+	@Deprecated
+	public static final boolean FINDER_CACHE_ENABLED = true;
 
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	/**
+	 * @deprecated As of Athanasius (7.3.x), with no direct replacement
+	 */
+	@Deprecated
+	public static final boolean COLUMN_BITMASK_ENABLED = true;
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 *		#getColumnBitmask(String)
+	 */
+	@Deprecated
+	public static final long TODOITEMID_COLUMN_BITMASK = 1L;
 
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(
 		com.liferay.alloy.mvc.sample.service.util.ServiceProps.get(
@@ -174,9 +189,6 @@ public class TodoItemModelImpl
 			attributes.put(
 				attributeName, attributeGetterFunction.apply((TodoItem)this));
 		}
-
-		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
-		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
 
 		return attributes;
 	}
@@ -250,215 +262,61 @@ public class TodoItemModelImpl
 		Map<String, BiConsumer<TodoItem, ?>> attributeSetterBiConsumers =
 			new LinkedHashMap<String, BiConsumer<TodoItem, ?>>();
 
-		attributeGetterFunctions.put(
-			"todoItemId",
-			new Function<TodoItem, Object>() {
-
-				@Override
-				public Object apply(TodoItem todoItem) {
-					return todoItem.getTodoItemId();
-				}
-
-			});
+		attributeGetterFunctions.put("mvccVersion", TodoItem::getMvccVersion);
 		attributeSetterBiConsumers.put(
-			"todoItemId",
-			new BiConsumer<TodoItem, Object>() {
-
-				@Override
-				public void accept(TodoItem todoItem, Object todoItemIdObject) {
-					todoItem.setTodoItemId((Long)todoItemIdObject);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"companyId",
-			new Function<TodoItem, Object>() {
-
-				@Override
-				public Object apply(TodoItem todoItem) {
-					return todoItem.getCompanyId();
-				}
-
-			});
+			"mvccVersion",
+			(BiConsumer<TodoItem, Long>)TodoItem::setMvccVersion);
+		attributeGetterFunctions.put("todoItemId", TodoItem::getTodoItemId);
 		attributeSetterBiConsumers.put(
-			"companyId",
-			new BiConsumer<TodoItem, Object>() {
-
-				@Override
-				public void accept(TodoItem todoItem, Object companyIdObject) {
-					todoItem.setCompanyId((Long)companyIdObject);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"userId",
-			new Function<TodoItem, Object>() {
-
-				@Override
-				public Object apply(TodoItem todoItem) {
-					return todoItem.getUserId();
-				}
-
-			});
+			"todoItemId", (BiConsumer<TodoItem, Long>)TodoItem::setTodoItemId);
+		attributeGetterFunctions.put("companyId", TodoItem::getCompanyId);
 		attributeSetterBiConsumers.put(
-			"userId",
-			new BiConsumer<TodoItem, Object>() {
-
-				@Override
-				public void accept(TodoItem todoItem, Object userIdObject) {
-					todoItem.setUserId((Long)userIdObject);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"userName",
-			new Function<TodoItem, Object>() {
-
-				@Override
-				public Object apply(TodoItem todoItem) {
-					return todoItem.getUserName();
-				}
-
-			});
+			"companyId", (BiConsumer<TodoItem, Long>)TodoItem::setCompanyId);
+		attributeGetterFunctions.put("userId", TodoItem::getUserId);
 		attributeSetterBiConsumers.put(
-			"userName",
-			new BiConsumer<TodoItem, Object>() {
-
-				@Override
-				public void accept(TodoItem todoItem, Object userNameObject) {
-					todoItem.setUserName((String)userNameObject);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"createDate",
-			new Function<TodoItem, Object>() {
-
-				@Override
-				public Object apply(TodoItem todoItem) {
-					return todoItem.getCreateDate();
-				}
-
-			});
+			"userId", (BiConsumer<TodoItem, Long>)TodoItem::setUserId);
+		attributeGetterFunctions.put("userName", TodoItem::getUserName);
 		attributeSetterBiConsumers.put(
-			"createDate",
-			new BiConsumer<TodoItem, Object>() {
-
-				@Override
-				public void accept(TodoItem todoItem, Object createDateObject) {
-					todoItem.setCreateDate((Date)createDateObject);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"modifiedDate",
-			new Function<TodoItem, Object>() {
-
-				@Override
-				public Object apply(TodoItem todoItem) {
-					return todoItem.getModifiedDate();
-				}
-
-			});
+			"userName", (BiConsumer<TodoItem, String>)TodoItem::setUserName);
+		attributeGetterFunctions.put("createDate", TodoItem::getCreateDate);
+		attributeSetterBiConsumers.put(
+			"createDate", (BiConsumer<TodoItem, Date>)TodoItem::setCreateDate);
+		attributeGetterFunctions.put("modifiedDate", TodoItem::getModifiedDate);
 		attributeSetterBiConsumers.put(
 			"modifiedDate",
-			new BiConsumer<TodoItem, Object>() {
-
-				@Override
-				public void accept(
-					TodoItem todoItem, Object modifiedDateObject) {
-
-					todoItem.setModifiedDate((Date)modifiedDateObject);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"todoListId",
-			new Function<TodoItem, Object>() {
-
-				@Override
-				public Object apply(TodoItem todoItem) {
-					return todoItem.getTodoListId();
-				}
-
-			});
+			(BiConsumer<TodoItem, Date>)TodoItem::setModifiedDate);
+		attributeGetterFunctions.put("todoListId", TodoItem::getTodoListId);
 		attributeSetterBiConsumers.put(
-			"todoListId",
-			new BiConsumer<TodoItem, Object>() {
-
-				@Override
-				public void accept(TodoItem todoItem, Object todoListIdObject) {
-					todoItem.setTodoListId((Long)todoListIdObject);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"description",
-			new Function<TodoItem, Object>() {
-
-				@Override
-				public Object apply(TodoItem todoItem) {
-					return todoItem.getDescription();
-				}
-
-			});
+			"todoListId", (BiConsumer<TodoItem, Long>)TodoItem::setTodoListId);
+		attributeGetterFunctions.put("description", TodoItem::getDescription);
 		attributeSetterBiConsumers.put(
 			"description",
-			new BiConsumer<TodoItem, Object>() {
-
-				@Override
-				public void accept(
-					TodoItem todoItem, Object descriptionObject) {
-
-					todoItem.setDescription((String)descriptionObject);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"priority",
-			new Function<TodoItem, Object>() {
-
-				@Override
-				public Object apply(TodoItem todoItem) {
-					return todoItem.getPriority();
-				}
-
-			});
+			(BiConsumer<TodoItem, String>)TodoItem::setDescription);
+		attributeGetterFunctions.put("priority", TodoItem::getPriority);
 		attributeSetterBiConsumers.put(
-			"priority",
-			new BiConsumer<TodoItem, Object>() {
-
-				@Override
-				public void accept(TodoItem todoItem, Object priorityObject) {
-					todoItem.setPriority((Integer)priorityObject);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"status",
-			new Function<TodoItem, Object>() {
-
-				@Override
-				public Object apply(TodoItem todoItem) {
-					return todoItem.getStatus();
-				}
-
-			});
+			"priority", (BiConsumer<TodoItem, Integer>)TodoItem::setPriority);
+		attributeGetterFunctions.put("status", TodoItem::getStatus);
 		attributeSetterBiConsumers.put(
-			"status",
-			new BiConsumer<TodoItem, Object>() {
-
-				@Override
-				public void accept(TodoItem todoItem, Object statusObject) {
-					todoItem.setStatus((Integer)statusObject);
-				}
-
-			});
+			"status", (BiConsumer<TodoItem, Integer>)TodoItem::setStatus);
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
 		_attributeSetterBiConsumers = Collections.unmodifiableMap(
 			(Map)attributeSetterBiConsumers);
+	}
+
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_mvccVersion = mvccVersion;
 	}
 
 	@Override
@@ -468,6 +326,10 @@ public class TodoItemModelImpl
 
 	@Override
 	public void setTodoItemId(long todoItemId) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
 		_todoItemId = todoItemId;
 	}
 
@@ -478,6 +340,10 @@ public class TodoItemModelImpl
 
 	@Override
 	public void setCompanyId(long companyId) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
 		_companyId = companyId;
 	}
 
@@ -488,6 +354,10 @@ public class TodoItemModelImpl
 
 	@Override
 	public void setUserId(long userId) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
 		_userId = userId;
 	}
 
@@ -519,6 +389,10 @@ public class TodoItemModelImpl
 
 	@Override
 	public void setUserName(String userName) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
 		_userName = userName;
 	}
 
@@ -529,6 +403,10 @@ public class TodoItemModelImpl
 
 	@Override
 	public void setCreateDate(Date createDate) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
 		_createDate = createDate;
 	}
 
@@ -545,6 +423,10 @@ public class TodoItemModelImpl
 	public void setModifiedDate(Date modifiedDate) {
 		_setModifiedDate = true;
 
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
 		_modifiedDate = modifiedDate;
 	}
 
@@ -555,6 +437,10 @@ public class TodoItemModelImpl
 
 	@Override
 	public void setTodoListId(long todoListId) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
 		_todoListId = todoListId;
 	}
 
@@ -570,6 +456,10 @@ public class TodoItemModelImpl
 
 	@Override
 	public void setDescription(String description) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
 		_description = description;
 	}
 
@@ -580,6 +470,10 @@ public class TodoItemModelImpl
 
 	@Override
 	public void setPriority(int priority) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
 		_priority = priority;
 	}
 
@@ -590,7 +484,33 @@ public class TodoItemModelImpl
 
 	@Override
 	public void setStatus(int status) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
 		_status = status;
+	}
+
+	public long getColumnBitmask() {
+		if (_columnBitmask > 0) {
+			return _columnBitmask;
+		}
+
+		if ((_columnOriginalValues == null) ||
+			(_columnOriginalValues == Collections.EMPTY_MAP)) {
+
+			return 0;
+		}
+
+		for (Map.Entry<String, Object> entry :
+				_columnOriginalValues.entrySet()) {
+
+			if (entry.getValue() != getColumnValue(entry.getKey())) {
+				_columnBitmask |= _columnBitmasks.get(entry.getKey());
+			}
+		}
+
+		return _columnBitmask;
 	}
 
 	@Override
@@ -625,6 +545,7 @@ public class TodoItemModelImpl
 	public Object clone() {
 		TodoItemImpl todoItemImpl = new TodoItemImpl();
 
+		todoItemImpl.setMvccVersion(getMvccVersion());
 		todoItemImpl.setTodoItemId(getTodoItemId());
 		todoItemImpl.setCompanyId(getCompanyId());
 		todoItemImpl.setUserId(getUserId());
@@ -683,11 +604,19 @@ public class TodoItemModelImpl
 		return (int)getPrimaryKey();
 	}
 
+	/**
+	 * @deprecated As of Athanasius (7.3.x), with no direct replacement
+	 */
+	@Deprecated
 	@Override
 	public boolean isEntityCacheEnabled() {
 		return ENTITY_CACHE_ENABLED;
 	}
 
+	/**
+	 * @deprecated As of Athanasius (7.3.x), with no direct replacement
+	 */
+	@Deprecated
 	@Override
 	public boolean isFinderCacheEnabled() {
 		return FINDER_CACHE_ENABLED;
@@ -695,12 +624,18 @@ public class TodoItemModelImpl
 
 	@Override
 	public void resetOriginalValues() {
+		_columnOriginalValues = Collections.emptyMap();
+
 		_setModifiedDate = false;
+
+		_columnBitmask = 0;
 	}
 
 	@Override
 	public CacheModel<TodoItem> toCacheModel() {
 		TodoItemCacheModel todoItemCacheModel = new TodoItemCacheModel();
+
+		todoItemCacheModel.mvccVersion = getMvccVersion();
 
 		todoItemCacheModel.todoItemId = getTodoItemId();
 
@@ -821,6 +756,7 @@ public class TodoItemModelImpl
 
 	}
 
+	private long _mvccVersion;
 	private long _todoItemId;
 	private long _companyId;
 	private long _userId;
@@ -832,6 +768,84 @@ public class TodoItemModelImpl
 	private String _description;
 	private int _priority;
 	private int _status;
+
+	public <T> T getColumnValue(String columnName) {
+		Function<TodoItem, Object> function = _attributeGetterFunctions.get(
+			columnName);
+
+		if (function == null) {
+			throw new IllegalArgumentException(
+				"No attribute getter function found for " + columnName);
+		}
+
+		return (T)function.apply((TodoItem)this);
+	}
+
+	public <T> T getColumnOriginalValue(String columnName) {
+		if (_columnOriginalValues == null) {
+			return null;
+		}
+
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		return (T)_columnOriginalValues.get(columnName);
+	}
+
+	private void _setColumnOriginalValues() {
+		_columnOriginalValues = new HashMap<String, Object>();
+
+		_columnOriginalValues.put("mvccVersion", _mvccVersion);
+		_columnOriginalValues.put("todoItemId", _todoItemId);
+		_columnOriginalValues.put("companyId", _companyId);
+		_columnOriginalValues.put("userId", _userId);
+		_columnOriginalValues.put("userName", _userName);
+		_columnOriginalValues.put("createDate", _createDate);
+		_columnOriginalValues.put("modifiedDate", _modifiedDate);
+		_columnOriginalValues.put("todoListId", _todoListId);
+		_columnOriginalValues.put("description", _description);
+		_columnOriginalValues.put("priority", _priority);
+		_columnOriginalValues.put("status", _status);
+	}
+
+	private transient Map<String, Object> _columnOriginalValues;
+
+	public static long getColumnBitmask(String columnName) {
+		return _columnBitmasks.get(columnName);
+	}
+
+	private static final Map<String, Long> _columnBitmasks;
+
+	static {
+		Map<String, Long> columnBitmasks = new HashMap<>();
+
+		columnBitmasks.put("mvccVersion", 1L);
+
+		columnBitmasks.put("todoItemId", 2L);
+
+		columnBitmasks.put("companyId", 4L);
+
+		columnBitmasks.put("userId", 8L);
+
+		columnBitmasks.put("userName", 16L);
+
+		columnBitmasks.put("createDate", 32L);
+
+		columnBitmasks.put("modifiedDate", 64L);
+
+		columnBitmasks.put("todoListId", 128L);
+
+		columnBitmasks.put("description", 256L);
+
+		columnBitmasks.put("priority", 512L);
+
+		columnBitmasks.put("status", 1024L);
+
+		_columnBitmasks = Collections.unmodifiableMap(columnBitmasks);
+	}
+
+	private long _columnBitmask;
 	private TodoItem _escapedModel;
 
 }

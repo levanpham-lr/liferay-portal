@@ -8,7 +8,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 >
 	<bean class="com.liferay.alloy.mvc.sample.service.impl.TodoItemLocalServiceImpl" id="com.liferay.alloy.mvc.sample.service.TodoItemLocalService" />
-	<bean class="com.liferay.alloy.mvc.sample.service.persistence.impl.TodoItemPersistenceImpl" id="com.liferay.alloy.mvc.sample.service.persistence.TodoItemPersistence" parent="basePersistence" />
+	<bean class="com.liferay.alloy.mvc.sample.service.persistence.impl.TodoItemPersistenceImpl" id="com.liferay.alloy.mvc.sample.service.persistence.TodoItemPersistence" />
 	<bean class="com.liferay.alloy.mvc.sample.service.impl.TodoListLocalServiceImpl" id="com.liferay.alloy.mvc.sample.service.TodoListLocalService" />
-	<bean class="com.liferay.alloy.mvc.sample.service.persistence.impl.TodoListPersistenceImpl" id="com.liferay.alloy.mvc.sample.service.persistence.TodoListPersistence" parent="basePersistence" />
+	<bean class="com.liferay.alloy.mvc.sample.service.persistence.impl.TodoListPersistenceImpl" id="com.liferay.alloy.mvc.sample.service.persistence.TodoListPersistence" />
 </beans>

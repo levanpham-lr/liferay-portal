@@ -14,16 +14,11 @@
 
 package com.liferay.alloy.mvc.sample.service.persistence;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.alloy.mvc.sample.exception.NoSuchTodoListException;
 import com.liferay.alloy.mvc.sample.model.TodoList;
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
 
-import java.io.Serializable;
-
-import java.util.Map;
-import java.util.Set;
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * The persistence interface for the todo list service.
@@ -44,9 +39,6 @@ public interface TodoListPersistence extends BasePersistence<TodoList> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link TodoListUtil} to access the todo list persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	@Override
-	public Map<Serializable, TodoList> fetchByPrimaryKeys(
-		Set<Serializable> primaryKeys);
 
 	/**
 	 * Caches the todo list in the entity cache if it is enabled.

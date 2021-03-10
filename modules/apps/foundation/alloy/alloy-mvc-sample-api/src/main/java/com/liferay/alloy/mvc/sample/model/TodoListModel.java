@@ -14,19 +14,15 @@
 
 package com.liferay.alloy.mvc.sample.model;
 
-import aQute.bnd.annotation.ProviderType;
-
-import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.AuditedModel;
 import com.liferay.portal.kernel.model.BaseModel;
-import com.liferay.portal.kernel.model.CacheModel;
+import com.liferay.portal.kernel.model.MVCCModel;
 import com.liferay.portal.kernel.model.ShardedModel;
-import com.liferay.portal.kernel.service.ServiceContext;
-
-import java.io.Serializable;
 
 import java.util.Date;
+
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * The base model interface for the TodoList service. Represents a row in the &quot;AlloyMVCSample_TodoList&quot; database table, with each column mapped to a property of this class.
@@ -41,7 +37,7 @@ import java.util.Date;
  */
 @ProviderType
 public interface TodoListModel
-	extends AuditedModel, BaseModel<TodoList>, ShardedModel {
+	extends AuditedModel, BaseModel<TodoList>, MVCCModel, ShardedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -62,6 +58,22 @@ public interface TodoListModel
 	 * @param primaryKey the primary key of this todo list
 	 */
 	public void setPrimaryKey(long primaryKey);
+
+	/**
+	 * Returns the mvcc version of this todo list.
+	 *
+	 * @return the mvcc version of this todo list
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this todo list.
+	 *
+	 * @param mvccVersion the mvcc version of this todo list
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
 
 	/**
 	 * Returns the todo list ID of this todo list.
@@ -188,62 +200,5 @@ public interface TodoListModel
 	 * @param name the name of this todo list
 	 */
 	public void setName(String name);
-
-	@Override
-	public boolean isNew();
-
-	@Override
-	public void setNew(boolean n);
-
-	@Override
-	public boolean isCachedModel();
-
-	@Override
-	public void setCachedModel(boolean cachedModel);
-
-	@Override
-	public boolean isEscapedModel();
-
-	@Override
-	public Serializable getPrimaryKeyObj();
-
-	@Override
-	public void setPrimaryKeyObj(Serializable primaryKeyObj);
-
-	@Override
-	public ExpandoBridge getExpandoBridge();
-
-	@Override
-	public void setExpandoBridgeAttributes(BaseModel<?> baseModel);
-
-	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge);
-
-	@Override
-	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
-
-	@Override
-	public Object clone();
-
-	@Override
-	public int compareTo(TodoList todoList);
-
-	@Override
-	public int hashCode();
-
-	@Override
-	public CacheModel<TodoList> toCacheModel();
-
-	@Override
-	public TodoList toEscapedModel();
-
-	@Override
-	public TodoList toUnescapedModel();
-
-	@Override
-	public String toString();
-
-	@Override
-	public String toXmlString();
 
 }

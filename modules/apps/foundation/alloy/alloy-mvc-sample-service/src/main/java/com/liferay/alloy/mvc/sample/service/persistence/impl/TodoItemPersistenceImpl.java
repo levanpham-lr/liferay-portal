@@ -16,9 +16,12 @@ package com.liferay.alloy.mvc.sample.service.persistence.impl;
 
 import com.liferay.alloy.mvc.sample.exception.NoSuchTodoItemException;
 import com.liferay.alloy.mvc.sample.model.TodoItem;
+import com.liferay.alloy.mvc.sample.model.TodoItemTable;
 import com.liferay.alloy.mvc.sample.model.impl.TodoItemImpl;
 import com.liferay.alloy.mvc.sample.model.impl.TodoItemModelImpl;
 import com.liferay.alloy.mvc.sample.service.persistence.TodoItemPersistence;
+import com.liferay.petra.string.StringBundler;
+import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
@@ -27,27 +30,31 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
 import java.lang.reflect.InvocationHandler;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceRegistration;
 
 /**
  * The persistence implementation for the todo item service.
@@ -82,6 +89,11 @@ public class TodoItemPersistenceImpl
 
 	public TodoItemPersistenceImpl() {
 		setModelClass(TodoItem.class);
+
+		setModelImplClass(TodoItemImpl.class);
+		setModelPKClass(long.class);
+
+		setTable(TodoItemTable.INSTANCE);
 	}
 
 	/**
@@ -92,10 +104,7 @@ public class TodoItemPersistenceImpl
 	@Override
 	public void cacheResult(TodoItem todoItem) {
 		entityCache.putResult(
-			TodoItemModelImpl.ENTITY_CACHE_ENABLED, TodoItemImpl.class,
-			todoItem.getPrimaryKey(), todoItem);
-
-		todoItem.resetOriginalValues();
+			TodoItemImpl.class, todoItem.getPrimaryKey(), todoItem);
 	}
 
 	/**
@@ -107,13 +116,9 @@ public class TodoItemPersistenceImpl
 	public void cacheResult(List<TodoItem> todoItems) {
 		for (TodoItem todoItem : todoItems) {
 			if (entityCache.getResult(
-					TodoItemModelImpl.ENTITY_CACHE_ENABLED, TodoItemImpl.class,
-					todoItem.getPrimaryKey()) == null) {
+					TodoItemImpl.class, todoItem.getPrimaryKey()) == null) {
 
 				cacheResult(todoItem);
-			}
-			else {
-				todoItem.resetOriginalValues();
 			}
 		}
 	}
@@ -143,35 +148,24 @@ public class TodoItemPersistenceImpl
 	 */
 	@Override
 	public void clearCache(TodoItem todoItem) {
-		entityCache.removeResult(
-			TodoItemModelImpl.ENTITY_CACHE_ENABLED, TodoItemImpl.class,
-			todoItem.getPrimaryKey());
-
-		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		entityCache.removeResult(TodoItemImpl.class, todoItem);
 	}
 
 	@Override
 	public void clearCache(List<TodoItem> todoItems) {
-		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
 		for (TodoItem todoItem : todoItems) {
-			entityCache.removeResult(
-				TodoItemModelImpl.ENTITY_CACHE_ENABLED, TodoItemImpl.class,
-				todoItem.getPrimaryKey());
+			entityCache.removeResult(TodoItemImpl.class, todoItem);
 		}
 	}
 
+	@Override
 	public void clearCache(Set<Serializable> primaryKeys) {
 		finderCache.clearCache(FINDER_CLASS_NAME_ENTITY);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
 		for (Serializable primaryKey : primaryKeys) {
-			entityCache.removeResult(
-				TodoItemModelImpl.ENTITY_CACHE_ENABLED, TodoItemImpl.class,
-				primaryKey);
+			entityCache.removeResult(TodoItemImpl.class, primaryKey);
 		}
 	}
 
@@ -328,8 +322,6 @@ public class TodoItemPersistenceImpl
 
 			if (isNew) {
 				session.save(todoItem);
-
-				todoItem.setNew(false);
 			}
 			else {
 				todoItem = (TodoItem)session.merge(todoItem);
@@ -342,17 +334,11 @@ public class TodoItemPersistenceImpl
 			closeSession(session);
 		}
 
-		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		entityCache.putResult(TodoItemImpl.class, todoItem, false, true);
 
 		if (isNew) {
-			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
-			finderCache.removeResult(
-				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
+			todoItem.setNew(false);
 		}
-
-		entityCache.putResult(
-			TodoItemModelImpl.ENTITY_CACHE_ENABLED, TodoItemImpl.class,
-			todoItem.getPrimaryKey(), todoItem, false);
 
 		todoItem.resetOriginalValues();
 
@@ -401,160 +387,12 @@ public class TodoItemPersistenceImpl
 	/**
 	 * Returns the todo item with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the todo item
-	 * @return the todo item, or <code>null</code> if a todo item with the primary key could not be found
-	 */
-	@Override
-	public TodoItem fetchByPrimaryKey(Serializable primaryKey) {
-		Serializable serializable = entityCache.getResult(
-			TodoItemModelImpl.ENTITY_CACHE_ENABLED, TodoItemImpl.class,
-			primaryKey);
-
-		if (serializable == nullModel) {
-			return null;
-		}
-
-		TodoItem todoItem = (TodoItem)serializable;
-
-		if (todoItem == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				todoItem = (TodoItem)session.get(
-					TodoItemImpl.class, primaryKey);
-
-				if (todoItem != null) {
-					cacheResult(todoItem);
-				}
-				else {
-					entityCache.putResult(
-						TodoItemModelImpl.ENTITY_CACHE_ENABLED,
-						TodoItemImpl.class, primaryKey, nullModel);
-				}
-			}
-			catch (Exception exception) {
-				entityCache.removeResult(
-					TodoItemModelImpl.ENTITY_CACHE_ENABLED, TodoItemImpl.class,
-					primaryKey);
-
-				throw processException(exception);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return todoItem;
-	}
-
-	/**
-	 * Returns the todo item with the primary key or returns <code>null</code> if it could not be found.
-	 *
 	 * @param todoItemId the primary key of the todo item
 	 * @return the todo item, or <code>null</code> if a todo item with the primary key could not be found
 	 */
 	@Override
 	public TodoItem fetchByPrimaryKey(long todoItemId) {
 		return fetchByPrimaryKey((Serializable)todoItemId);
-	}
-
-	@Override
-	public Map<Serializable, TodoItem> fetchByPrimaryKeys(
-		Set<Serializable> primaryKeys) {
-
-		if (primaryKeys.isEmpty()) {
-			return Collections.emptyMap();
-		}
-
-		Map<Serializable, TodoItem> map = new HashMap<Serializable, TodoItem>();
-
-		if (primaryKeys.size() == 1) {
-			Iterator<Serializable> iterator = primaryKeys.iterator();
-
-			Serializable primaryKey = iterator.next();
-
-			TodoItem todoItem = fetchByPrimaryKey(primaryKey);
-
-			if (todoItem != null) {
-				map.put(primaryKey, todoItem);
-			}
-
-			return map;
-		}
-
-		Set<Serializable> uncachedPrimaryKeys = null;
-
-		for (Serializable primaryKey : primaryKeys) {
-			Serializable serializable = entityCache.getResult(
-				TodoItemModelImpl.ENTITY_CACHE_ENABLED, TodoItemImpl.class,
-				primaryKey);
-
-			if (serializable != nullModel) {
-				if (serializable == null) {
-					if (uncachedPrimaryKeys == null) {
-						uncachedPrimaryKeys = new HashSet<Serializable>();
-					}
-
-					uncachedPrimaryKeys.add(primaryKey);
-				}
-				else {
-					map.put(primaryKey, (TodoItem)serializable);
-				}
-			}
-		}
-
-		if (uncachedPrimaryKeys == null) {
-			return map;
-		}
-
-		StringBundler sb = new StringBundler(
-			(uncachedPrimaryKeys.size() * 2) + 1);
-
-		sb.append(_SQL_SELECT_TODOITEM_WHERE_PKS_IN);
-
-		for (Serializable primaryKey : uncachedPrimaryKeys) {
-			sb.append((long)primaryKey);
-
-			sb.append(",");
-		}
-
-		sb.setIndex(sb.index() - 1);
-
-		sb.append(")");
-
-		String sql = sb.toString();
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			Query query = session.createQuery(sql);
-
-			for (TodoItem todoItem : (List<TodoItem>)query.list()) {
-				map.put(todoItem.getPrimaryKeyObj(), todoItem);
-
-				cacheResult(todoItem);
-
-				uncachedPrimaryKeys.remove(todoItem.getPrimaryKeyObj());
-			}
-
-			for (Serializable primaryKey : uncachedPrimaryKeys) {
-				entityCache.putResult(
-					TodoItemModelImpl.ENTITY_CACHE_ENABLED, TodoItemImpl.class,
-					primaryKey, nullModel);
-			}
-		}
-		catch (Exception exception) {
-			throw processException(exception);
-		}
-		finally {
-			closeSession(session);
-		}
-
-		return map;
 	}
 
 	/**
@@ -681,10 +519,6 @@ public class TodoItemPersistenceImpl
 				}
 			}
 			catch (Exception exception) {
-				if (useFinderCache) {
-					finderCache.removeResult(finderPath, finderArgs);
-				}
-
 				throw processException(exception);
 			}
 			finally {
@@ -730,9 +564,6 @@ public class TodoItemPersistenceImpl
 					_finderPathCountAll, FINDER_ARGS_EMPTY, count);
 			}
 			catch (Exception exception) {
-				finderCache.removeResult(
-					_finderPathCountAll, FINDER_ARGS_EMPTY);
-
 				throw processException(exception);
 			}
 			finally {
@@ -744,6 +575,21 @@ public class TodoItemPersistenceImpl
 	}
 
 	@Override
+	protected EntityCache getEntityCache() {
+		return entityCache;
+	}
+
+	@Override
+	protected String getPKDBName() {
+		return "todoItemId";
+	}
+
+	@Override
+	protected String getSelectSQL() {
+		return _SQL_SELECT_TODOITEM;
+	}
+
+	@Override
 	protected Map<String, Integer> getTableColumnsMap() {
 		return TodoItemModelImpl.TABLE_COLUMNS_MAP;
 	}
@@ -752,31 +598,41 @@ public class TodoItemPersistenceImpl
 	 * Initializes the todo item persistence.
 	 */
 	public void afterPropertiesSet() {
-		_finderPathWithPaginationFindAll = new FinderPath(
-			TodoItemModelImpl.ENTITY_CACHE_ENABLED,
-			TodoItemModelImpl.FINDER_CACHE_ENABLED, TodoItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
+		Bundle bundle = FrameworkUtil.getBundle(TodoItemPersistenceImpl.class);
 
-		_finderPathWithoutPaginationFindAll = new FinderPath(
-			TodoItemModelImpl.ENTITY_CACHE_ENABLED,
-			TodoItemModelImpl.FINDER_CACHE_ENABLED, TodoItemImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll",
-			new String[0]);
+		_bundleContext = bundle.getBundleContext();
 
-		_finderPathCountAll = new FinderPath(
-			TodoItemModelImpl.ENTITY_CACHE_ENABLED,
-			TodoItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+		_argumentsResolverServiceRegistration = _bundleContext.registerService(
+			ArgumentsResolver.class, new TodoItemModelArgumentsResolver(),
+			MapUtil.singletonDictionary(
+				"model.class.name", TodoItem.class.getName()));
+
+		_finderPathWithPaginationFindAll = _createFinderPath(
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],
+			new String[0], true);
+
+		_finderPathWithoutPaginationFindAll = _createFinderPath(
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0],
+			new String[0], true);
+
+		_finderPathCountAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
-			new String[0]);
+			new String[0], new String[0], false);
 	}
 
 	public void destroy() {
 		entityCache.removeCache(TodoItemImpl.class.getName());
 
-		finderCache.removeCache(FINDER_CLASS_NAME_ENTITY);
-		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		finderCache.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		_argumentsResolverServiceRegistration.unregister();
+
+		for (ServiceRegistration<FinderPath> serviceRegistration :
+				_serviceRegistrations) {
+
+			serviceRegistration.unregister();
+		}
 	}
+
+	private BundleContext _bundleContext;
 
 	@ServiceReference(type = EntityCache.class)
 	protected EntityCache entityCache;
@@ -786,9 +642,6 @@ public class TodoItemPersistenceImpl
 
 	private static final String _SQL_SELECT_TODOITEM =
 		"SELECT todoItem FROM TodoItem todoItem";
-
-	private static final String _SQL_SELECT_TODOITEM_WHERE_PKS_IN =
-		"SELECT todoItem FROM TodoItem todoItem WHERE todoItemId IN (";
 
 	private static final String _SQL_COUNT_TODOITEM =
 		"SELECT COUNT(todoItem) FROM TodoItem todoItem";
@@ -800,5 +653,101 @@ public class TodoItemPersistenceImpl
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		TodoItemPersistenceImpl.class);
+
+	private FinderPath _createFinderPath(
+		String cacheName, String methodName, String[] params,
+		String[] columnNames, boolean baseModelResult) {
+
+		FinderPath finderPath = new FinderPath(
+			cacheName, methodName, params, columnNames, baseModelResult);
+
+		if (!cacheName.equals(FINDER_CLASS_NAME_LIST_WITH_PAGINATION)) {
+			_serviceRegistrations.add(
+				_bundleContext.registerService(
+					FinderPath.class, finderPath,
+					MapUtil.singletonDictionary("cache.name", cacheName)));
+		}
+
+		return finderPath;
+	}
+
+	private Set<ServiceRegistration<FinderPath>> _serviceRegistrations =
+		new HashSet<>();
+	private ServiceRegistration<ArgumentsResolver>
+		_argumentsResolverServiceRegistration;
+
+	private static class TodoItemModelArgumentsResolver
+		implements ArgumentsResolver {
+
+		@Override
+		public Object[] getArguments(
+			FinderPath finderPath, BaseModel<?> baseModel, boolean checkColumn,
+			boolean original) {
+
+			String[] columnNames = finderPath.getColumnNames();
+
+			if ((columnNames == null) || (columnNames.length == 0)) {
+				if (baseModel.isNew()) {
+					return FINDER_ARGS_EMPTY;
+				}
+
+				return null;
+			}
+
+			TodoItemModelImpl todoItemModelImpl = (TodoItemModelImpl)baseModel;
+
+			long columnBitmask = todoItemModelImpl.getColumnBitmask();
+
+			if (!checkColumn || (columnBitmask == 0)) {
+				return _getValue(todoItemModelImpl, columnNames, original);
+			}
+
+			Long finderPathColumnBitmask = _finderPathColumnBitmasksCache.get(
+				finderPath);
+
+			if (finderPathColumnBitmask == null) {
+				finderPathColumnBitmask = 0L;
+
+				for (String columnName : columnNames) {
+					finderPathColumnBitmask |=
+						todoItemModelImpl.getColumnBitmask(columnName);
+				}
+
+				_finderPathColumnBitmasksCache.put(
+					finderPath, finderPathColumnBitmask);
+			}
+
+			if ((columnBitmask & finderPathColumnBitmask) != 0) {
+				return _getValue(todoItemModelImpl, columnNames, original);
+			}
+
+			return null;
+		}
+
+		private Object[] _getValue(
+			TodoItemModelImpl todoItemModelImpl, String[] columnNames,
+			boolean original) {
+
+			Object[] arguments = new Object[columnNames.length];
+
+			for (int i = 0; i < arguments.length; i++) {
+				String columnName = columnNames[i];
+
+				if (original) {
+					arguments[i] = todoItemModelImpl.getColumnOriginalValue(
+						columnName);
+				}
+				else {
+					arguments[i] = todoItemModelImpl.getColumnValue(columnName);
+				}
+			}
+
+			return arguments;
+		}
+
+		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
+			new ConcurrentHashMap<>();
+
+	}
 
 }

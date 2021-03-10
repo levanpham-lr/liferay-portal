@@ -14,16 +14,12 @@
 
 package com.liferay.alloy.mvc.sample.model;
 
-import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
-import com.liferay.portal.kernel.service.ServiceContext;
-
-import java.io.Serializable;
+import com.liferay.portal.kernel.model.wrapper.BaseModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * <p>
@@ -34,26 +30,19 @@ import java.util.Objects;
  * @see TodoList
  * @generated
  */
-public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
+public class TodoListWrapper
+	extends BaseModelWrapper<TodoList>
+	implements ModelWrapper<TodoList>, TodoList {
 
 	public TodoListWrapper(TodoList todoList) {
-		_todoList = todoList;
-	}
-
-	@Override
-	public Class<?> getModelClass() {
-		return TodoList.class;
-	}
-
-	@Override
-	public String getModelClassName() {
-		return TodoList.class.getName();
+		super(todoList);
 	}
 
 	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("todoListId", getTodoListId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -67,6 +56,12 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long todoListId = (Long)attributes.get("todoListId");
 
 		if (todoListId != null) {
@@ -110,16 +105,6 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 		}
 	}
 
-	@Override
-	public Object clone() {
-		return new TodoListWrapper((TodoList)_todoList.clone());
-	}
-
-	@Override
-	public int compareTo(TodoList todoList) {
-		return _todoList.compareTo(todoList);
-	}
-
 	/**
 	 * Returns the company ID of this todo list.
 	 *
@@ -127,7 +112,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public long getCompanyId() {
-		return _todoList.getCompanyId();
+		return model.getCompanyId();
 	}
 
 	/**
@@ -137,12 +122,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public Date getCreateDate() {
-		return _todoList.getCreateDate();
-	}
-
-	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return _todoList.getExpandoBridge();
+		return model.getCreateDate();
 	}
 
 	/**
@@ -152,7 +132,17 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public Date getModifiedDate() {
-		return _todoList.getModifiedDate();
+		return model.getModifiedDate();
+	}
+
+	/**
+	 * Returns the mvcc version of this todo list.
+	 *
+	 * @return the mvcc version of this todo list
+	 */
+	@Override
+	public long getMvccVersion() {
+		return model.getMvccVersion();
 	}
 
 	/**
@@ -162,7 +152,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public String getName() {
-		return _todoList.getName();
+		return model.getName();
 	}
 
 	/**
@@ -172,12 +162,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public long getPrimaryKey() {
-		return _todoList.getPrimaryKey();
-	}
-
-	@Override
-	public Serializable getPrimaryKeyObj() {
-		return _todoList.getPrimaryKeyObj();
+		return model.getPrimaryKey();
 	}
 
 	/**
@@ -187,7 +172,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public long getTodoListId() {
-		return _todoList.getTodoListId();
+		return model.getTodoListId();
 	}
 
 	/**
@@ -197,7 +182,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public long getUserId() {
-		return _todoList.getUserId();
+		return model.getUserId();
 	}
 
 	/**
@@ -207,7 +192,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public String getUserName() {
-		return _todoList.getUserName();
+		return model.getUserName();
 	}
 
 	/**
@@ -217,37 +202,12 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public String getUserUuid() {
-		return _todoList.getUserUuid();
-	}
-
-	@Override
-	public int hashCode() {
-		return _todoList.hashCode();
-	}
-
-	@Override
-	public boolean isCachedModel() {
-		return _todoList.isCachedModel();
-	}
-
-	@Override
-	public boolean isEscapedModel() {
-		return _todoList.isEscapedModel();
-	}
-
-	@Override
-	public boolean isNew() {
-		return _todoList.isNew();
+		return model.getUserUuid();
 	}
 
 	@Override
 	public void persist() {
-		_todoList.persist();
-	}
-
-	@Override
-	public void setCachedModel(boolean cachedModel) {
-		_todoList.setCachedModel(cachedModel);
+		model.persist();
 	}
 
 	/**
@@ -257,7 +217,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public void setCompanyId(long companyId) {
-		_todoList.setCompanyId(companyId);
+		model.setCompanyId(companyId);
 	}
 
 	/**
@@ -267,24 +227,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public void setCreateDate(Date createDate) {
-		_todoList.setCreateDate(createDate);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
-
-		_todoList.setExpandoBridgeAttributes(baseModel);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_todoList.setExpandoBridgeAttributes(expandoBridge);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_todoList.setExpandoBridgeAttributes(serviceContext);
+		model.setCreateDate(createDate);
 	}
 
 	/**
@@ -294,7 +237,17 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
-		_todoList.setModifiedDate(modifiedDate);
+		model.setModifiedDate(modifiedDate);
+	}
+
+	/**
+	 * Sets the mvcc version of this todo list.
+	 *
+	 * @param mvccVersion the mvcc version of this todo list
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		model.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -304,12 +257,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public void setName(String name) {
-		_todoList.setName(name);
-	}
-
-	@Override
-	public void setNew(boolean n) {
-		_todoList.setNew(n);
+		model.setName(name);
 	}
 
 	/**
@@ -319,12 +267,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		_todoList.setPrimaryKey(primaryKey);
-	}
-
-	@Override
-	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		_todoList.setPrimaryKeyObj(primaryKeyObj);
+		model.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -334,7 +277,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public void setTodoListId(long todoListId) {
-		_todoList.setTodoListId(todoListId);
+		model.setTodoListId(todoListId);
 	}
 
 	/**
@@ -344,7 +287,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public void setUserId(long userId) {
-		_todoList.setUserId(userId);
+		model.setUserId(userId);
 	}
 
 	/**
@@ -354,7 +297,7 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public void setUserName(String userName) {
-		_todoList.setUserName(userName);
+		model.setUserName(userName);
 	}
 
 	/**
@@ -364,73 +307,12 @@ public class TodoListWrapper implements ModelWrapper<TodoList>, TodoList {
 	 */
 	@Override
 	public void setUserUuid(String userUuid) {
-		_todoList.setUserUuid(userUuid);
+		model.setUserUuid(userUuid);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<TodoList> toCacheModel() {
-		return _todoList.toCacheModel();
+	protected TodoListWrapper wrap(TodoList todoList) {
+		return new TodoListWrapper(todoList);
 	}
-
-	@Override
-	public TodoList toEscapedModel() {
-		return new TodoListWrapper(_todoList.toEscapedModel());
-	}
-
-	@Override
-	public String toString() {
-		return _todoList.toString();
-	}
-
-	@Override
-	public TodoList toUnescapedModel() {
-		return new TodoListWrapper(_todoList.toUnescapedModel());
-	}
-
-	@Override
-	public String toXmlString() {
-		return _todoList.toXmlString();
-	}
-
-	@Override
-	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		}
-
-		if (!(object instanceof TodoListWrapper)) {
-			return false;
-		}
-
-		TodoListWrapper todoListWrapper = (TodoListWrapper)object;
-
-		if (Objects.equals(_todoList, todoListWrapper._todoList)) {
-			return true;
-		}
-
-		return false;
-	}
-
-	@Override
-	public TodoList getWrappedModel() {
-		return _todoList;
-	}
-
-	@Override
-	public boolean isEntityCacheEnabled() {
-		return _todoList.isEntityCacheEnabled();
-	}
-
-	@Override
-	public boolean isFinderCacheEnabled() {
-		return _todoList.isFinderCacheEnabled();
-	}
-
-	@Override
-	public void resetOriginalValues() {
-		_todoList.resetOriginalValues();
-	}
-
-	private final TodoList _todoList;
 
 }
