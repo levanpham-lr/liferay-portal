@@ -893,9 +893,10 @@ public class DataDefinitionResourceImpl
 	}
 
 	private DataLayoutResource _getDataLayoutResource(boolean checkPermission) {
-		DataLayoutResource.Builder builder = DataLayoutResource.builder();
+		DataLayoutResource.Builder dataLayoutResourceBuilder =
+			_dataLayoutResourceFactory.create();
 
-		return builder.checkPermissions(
+		return dataLayoutResourceBuilder.checkPermissions(
 			checkPermission
 		).user(
 			contextUser
@@ -905,10 +906,11 @@ public class DataDefinitionResourceImpl
 	private DataRecordCollectionResource _getDataRecordCollectionResource(
 		boolean checkPermission) {
 
-		DataRecordCollectionResource.Builder builder =
-			DataRecordCollectionResource.builder();
+		DataRecordCollectionResource.Builder
+			dataRecordCollectionResourceBuilder =
+				_dataRecordCollectionResourceFactory.create();
 
-		return builder.checkPermissions(
+		return dataRecordCollectionResourceBuilder.checkPermissions(
 			checkPermission
 		).user(
 			contextUser
@@ -1785,7 +1787,14 @@ public class DataDefinitionResourceImpl
 	private DataEngineNativeObjectTracker _dataEngineNativeObjectTracker;
 
 	@Reference
+	private DataLayoutResource.Factory _dataLayoutResourceFactory;
+
+	@Reference
 	private DataListViewResource.Factory _dataListViewResourceFactory;
+
+	@Reference
+	private DataRecordCollectionResource.Factory
+		_dataRecordCollectionResourceFactory;
 
 	@Reference
 	private DDLRecordSetLocalService _ddlRecordSetLocalService;
