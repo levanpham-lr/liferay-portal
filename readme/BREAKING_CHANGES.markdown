@@ -952,3 +952,74 @@ managed by it by default. Removing various branching logic supporting this
 feature improves code maintainability and readability.
 
 ---------------------------------------
+
+### Replaced LeftCategoryId and RightCategoryId in AssetCategory with TreePath
+- **Date:** 2019-Oct-08
+- **JIRA Ticket:** [LPS-102671](https://issues.liferay.com/browse/LPS-102671)
+
+#### What changed?
+
+The `leftCategoryId` and `rightCategoryId` fields in AssetCategory have been removed and replaced with a single new field: `treePath`.
+
+#### Who is affected?
+
+This affects anyone who utilizes the `leftCategoryId` and `rightCategoryId` fields in AssetCategory and their associated APIs.
+
+These two fields and their associated APIs were primarily used for AssetCategory's internal hierarchical tree.
+
+Existing service APIs for AssetCategory remain the same, with the exception of: `AssetCategoryLocalService::rebuildTree(long groupId, boolean force)`, which has been removed.
+
+The API for `AssetCategoryUtil` has changed with the removal of these methods:
+- `countAncestors`
+- `countDescendants`
+- `getAncestors`
+- `getDescendants`
+
+The API for `AssetEntryQuery` has changed with the removal of methods related to `leftCategoryId` and `rightCategoryId`.
+
+Finder methods involving `G_P_N_V` have been replaced with `P_N_V`
+
+#### How should I update my code?
+
+##### For leftCategoryId and rightCategoryId fields
+If anyone utilized the `leftCategoryId` and `rightCategoryId` fields, a couple options to consider would be to:
+- Adapt their existing code to utilize the new `treePath` field
+- Explore whether an existing service API can be used to accomplish the same goal
+
+For instance, usages of `category.getLeftCategoryId()` and `category.getRightCategoryId()` would need to be replaced by `category.getTreePath()`.
+
+The logic would also need to be updated to adapt to the new `treePath` implementation.
+
+As a reference, here is a snippet of how `AssetCategoryLocalService` sets the `treePath` when adding a category:
+```
+if (parentCategory == null) {
+    category.setTreePath("/" + categoryId + "/");
+}
+else {
+    category.setTreePath(
+        parentCategory.getTreePath() + categoryId + "/");
+}
+```
+- [7.3.0-ga1 - AssetCategoryLocalServiceImpl.java#L122-L128](https://github.com/liferay/liferay-portal/blob/7.3.0-ga1/portal-impl/src/com/liferay/portlet/asset/service/impl/AssetCategoryLocalServiceImpl.java#L122-L128)
+
+##### For AssetCategoryLocalService::rebuildTree(long groupId, boolean force)
+If anyone utilized the `AssetCategoryLocalService::rebuildTree(long groupId, boolean force)` method, it should no longer be needed. 
+
+This method was mainly used to help maintain the internal hierarchical tree implmentation that has now been replaced. 
+
+A suggestion would be to:
+- Re-evaluate their existing code and confirm whether this is no longer needed.
+
+##### For AssetCategoryUtil and AssetEntryQuery
+If anyone utilized the removed methods from `AssetCategoryUtil` and `AssetEntryQuery`, a suggestion would be to:
+- Re-evaluate their existing code
+- Explore whether an existing service API can be used to accomplish the same goal
+
+##### For Finder Methods Involving G_P_N_V
+If anyone utilized finder methods for AssetCategory that involve `G_P_N_V`, the usage can be updated to use `P_N_V` instead.
+
+#### Why was this change made?
+
+This change was made to improve the hierarchical tree implementation for AssetCategory.
+
+---------------------------------------
