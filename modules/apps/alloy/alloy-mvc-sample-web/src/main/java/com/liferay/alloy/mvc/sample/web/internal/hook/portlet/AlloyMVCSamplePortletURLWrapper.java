@@ -17,6 +17,7 @@ package com.liferay.alloy.mvc.sample.web.internal.hook.portlet;
 import com.liferay.alloy.mvc.sample.web.internal.constants.AlloyMVCSamplePortletKeys;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Layout;
@@ -98,9 +99,8 @@ public class AlloyMVCSamplePortletURLWrapper
 	}
 
 	public AlloyMVCSamplePortletURLWrapper(
-			HttpServletRequest httpServletRequest, String portletId, long plid,
-			String lifecycle)
-		throws PortalException {
+		HttpServletRequest httpServletRequest, String portletId, long plid,
+		String lifecycle) {
 
 		this(
 			getLiferayPortletURL(
@@ -112,7 +112,7 @@ public class AlloyMVCSamplePortletURLWrapper
 					httpServletRequest,
 					PortletLocalServiceUtil.getPortletById(
 						PortalUtil.getCompanyId(httpServletRequest), portletId),
-					LayoutLocalServiceUtil.getLayout(plid), lifecycle, null
+					_getLayout(plid), lifecycle, null
 				}));
 	}
 
@@ -171,9 +171,8 @@ public class AlloyMVCSamplePortletURLWrapper
 	}
 
 	public AlloyMVCSamplePortletURLWrapper(
-			PortletRequest portletRequest, String portletId, long plid,
-			String lifecycle)
-		throws PortalException {
+		PortletRequest portletRequest, String portletId, long plid,
+		String lifecycle) {
 
 		this(
 			getLiferayPortletURL(
@@ -185,14 +184,13 @@ public class AlloyMVCSamplePortletURLWrapper
 					portletRequest,
 					PortletLocalServiceUtil.getPortletById(
 						PortalUtil.getCompanyId(portletRequest), portletId),
-					LayoutLocalServiceUtil.getLayout(plid), lifecycle, null
+					_getLayout(plid), lifecycle, null
 				}));
 	}
 
 	public AlloyMVCSamplePortletURLWrapper(
-			PortletRequest portletRequest, String portletId, long plid,
-			String lifecycle, MimeResponse.Copy copy)
-		throws PortalException {
+		PortletRequest portletRequest, String portletId, long plid,
+		String lifecycle, MimeResponse.Copy copy) {
 
 		this(
 			getLiferayPortletURL(
@@ -204,7 +202,7 @@ public class AlloyMVCSamplePortletURLWrapper
 					portletRequest,
 					PortletLocalServiceUtil.getPortletById(
 						PortalUtil.getCompanyId(portletRequest), portletId),
-					LayoutLocalServiceUtil.getLayout(plid), lifecycle, copy
+					_getLayout(plid), lifecycle, copy
 				}));
 	}
 
@@ -241,6 +239,15 @@ public class AlloyMVCSamplePortletURLWrapper
 			_log.error(exception, exception);
 
 			return null;
+		}
+	}
+
+	private static Layout _getLayout(long plid) {
+		try {
+			return LayoutLocalServiceUtil.getLayout(plid);
+		}
+		catch (PortalException portalException) {
+			throw new SystemException(portalException);
 		}
 	}
 
