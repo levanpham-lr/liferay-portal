@@ -554,6 +554,7 @@ definition {
 	}
 
 	@description = "This is a use case for LPS-128533."
+	@ignore = "true"
 	@priority = "3"
 	test ExportImportJournalArticleWithLinkToPage {
 		JSONGroup.addGroup(groupName = "Site A");
