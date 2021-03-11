@@ -5486,7 +5486,7 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 								<isset property="elasticsearch.cluster.size" />
 							</condition>
 
-							<var name="elasticsearch.bundle.count" value="{elasticsearch.total.bundles}" />
+							<var name="elasticsearch.bundle.count" value="${elasticsearch.total.bundles}" />
 
 							<antelope:repeat count="${elasticsearch.total.bundles}">
 								<ant antfile="build-test-elasticsearch7.xml" target="stop-elasticsearch">
