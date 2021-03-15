@@ -73,7 +73,7 @@ import javax.ws.rs.core.UriInfo;
 @Generated("")
 @Path("/v1.0")
 public abstract class BaseUserAccountResourceImpl
-	implements UserAccountResource, EntityModelResource,
+	implements EntityModelResource, UserAccountResource,
 			   VulcanBatchEngineTaskItemDelegate<UserAccount> {
 
 	/**
@@ -81,14 +81,14 @@ public abstract class BaseUserAccountResourceImpl
 	 *
 	 * curl -X 'POST' 'http://localhost:8080/o/headless-osb-commerce-portal-instance/v1.0/user-accounts/{portalInstanceId}' -d $'{"birthDate": ___, "dateCreated": ___, "dateModified": ___, "emailAddress": ___, "firstName": ___, "jobTitle": ___, "languageId": ___, "lastName": ___, "middleName": ___, "name": ___, "password": ___, "screenName": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
 	 */
-	@Override
 	@Consumes({"application/json", "application/xml"})
 	@Operation(description = "Creates a new user account")
-	@POST
+	@Override
 	@Parameters(
 		value = {@Parameter(in = ParameterIn.PATH, name = "portalInstanceId")}
 	)
 	@Path("/user-accounts/{portalInstanceId}")
+	@POST
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {})
 	public UserAccount postUserAccount(
@@ -105,9 +105,8 @@ public abstract class BaseUserAccountResourceImpl
 	 *
 	 * curl -X 'POST' 'http://localhost:8080/o/headless-osb-commerce-portal-instance/v1.0/user-accounts/{portalInstanceId}/batch'  -u 'test@liferay.com:test'
 	 */
-	@Override
 	@Consumes("application/json")
-	@POST
+	@Override
 	@Parameters(
 		value = {
 			@Parameter(in = ParameterIn.PATH, name = "portalInstanceId"),
@@ -115,13 +114,14 @@ public abstract class BaseUserAccountResourceImpl
 		}
 	)
 	@Path("/user-accounts/{portalInstanceId}/batch")
+	@POST
 	@Produces("application/json")
 	@Tags(value = {})
 	public Response postUserAccountBatch(
 			@NotNull @Parameter(hidden = true) @PathParam("portalInstanceId")
 				String portalInstanceId,
-			@Parameter(hidden = true) @QueryParam("callbackURL") String
-				callbackURL,
+			@Parameter(hidden = true) @QueryParam("callbackURL")
+				String callbackURL,
 			Object object)
 		throws Exception {
 

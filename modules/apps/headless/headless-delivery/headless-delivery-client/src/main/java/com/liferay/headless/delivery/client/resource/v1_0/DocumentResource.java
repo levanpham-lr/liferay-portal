@@ -21,6 +21,7 @@ import com.liferay.headless.delivery.client.pagination.Page;
 import com.liferay.headless.delivery.client.pagination.Pagination;
 import com.liferay.headless.delivery.client.problem.Problem;
 import com.liferay.headless.delivery.client.serdes.v1_0.DocumentSerDes;
+import com.liferay.headless.delivery.client.serdes.v1_0.RatingSerDes;
 
 import java.io.File;
 
@@ -295,7 +296,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -405,7 +406,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -500,7 +501,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -585,7 +586,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -695,7 +696,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -790,7 +791,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -868,7 +869,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -949,7 +950,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1020,7 +1021,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1102,7 +1103,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1194,7 +1195,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1287,7 +1288,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1361,7 +1362,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1440,7 +1441,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1464,8 +1465,7 @@ public interface DocumentResource {
 			}
 
 			try {
-				return com.liferay.headless.delivery.client.serdes.v1_0.
-					RatingSerDes.toDTO(content);
+				return RatingSerDes.toDTO(content);
 			}
 			catch (Exception e) {
 				_logger.log(
@@ -1522,7 +1522,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1546,8 +1546,7 @@ public interface DocumentResource {
 			}
 
 			try {
-				return com.liferay.headless.delivery.client.serdes.v1_0.
-					RatingSerDes.toDTO(content);
+				return RatingSerDes.toDTO(content);
 			}
 			catch (Exception e) {
 				_logger.log(
@@ -1606,7 +1605,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1630,8 +1629,7 @@ public interface DocumentResource {
 			}
 
 			try {
-				return com.liferay.headless.delivery.client.serdes.v1_0.
-					RatingSerDes.toDTO(content);
+				return RatingSerDes.toDTO(content);
 			}
 			catch (Exception e) {
 				_logger.log(
@@ -1695,7 +1693,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1803,7 +1801,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1897,7 +1895,7 @@ public interface DocumentResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);

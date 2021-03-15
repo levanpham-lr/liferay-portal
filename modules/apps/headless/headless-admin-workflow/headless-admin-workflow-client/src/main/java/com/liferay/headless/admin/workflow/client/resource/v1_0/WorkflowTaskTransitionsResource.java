@@ -18,6 +18,7 @@ import com.liferay.headless.admin.workflow.client.dto.v1_0.WorkflowTaskIds;
 import com.liferay.headless.admin.workflow.client.dto.v1_0.WorkflowTaskTransitions;
 import com.liferay.headless.admin.workflow.client.http.HttpInvoker;
 import com.liferay.headless.admin.workflow.client.problem.Problem;
+import com.liferay.headless.admin.workflow.client.serdes.v1_0.WorkflowTaskTransitionsSerDes;
 
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -127,7 +128,7 @@ public interface WorkflowTaskTransitionsResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -151,8 +152,7 @@ public interface WorkflowTaskTransitionsResource {
 			}
 
 			try {
-				return com.liferay.headless.admin.workflow.client.serdes.v1_0.
-					WorkflowTaskTransitionsSerDes.toDTO(content);
+				return WorkflowTaskTransitionsSerDes.toDTO(content);
 			}
 			catch (Exception e) {
 				_logger.log(

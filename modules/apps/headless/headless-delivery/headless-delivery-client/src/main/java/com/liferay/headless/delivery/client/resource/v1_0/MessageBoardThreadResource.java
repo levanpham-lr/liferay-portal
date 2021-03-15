@@ -21,6 +21,7 @@ import com.liferay.headless.delivery.client.pagination.Page;
 import com.liferay.headless.delivery.client.pagination.Pagination;
 import com.liferay.headless.delivery.client.problem.Problem;
 import com.liferay.headless.delivery.client.serdes.v1_0.MessageBoardThreadSerDes;
+import com.liferay.headless.delivery.client.serdes.v1_0.RatingSerDes;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -304,7 +305,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -410,7 +411,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -497,7 +498,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -581,7 +582,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -694,7 +695,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -776,7 +777,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -851,7 +852,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -935,7 +936,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1022,7 +1023,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1107,7 +1108,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1183,7 +1184,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1265,7 +1266,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1289,8 +1290,7 @@ public interface MessageBoardThreadResource {
 			}
 
 			try {
-				return com.liferay.headless.delivery.client.serdes.v1_0.
-					RatingSerDes.toDTO(content);
+				return RatingSerDes.toDTO(content);
 			}
 			catch (Exception e) {
 				_logger.log(
@@ -1350,7 +1350,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1374,8 +1374,7 @@ public interface MessageBoardThreadResource {
 			}
 
 			try {
-				return com.liferay.headless.delivery.client.serdes.v1_0.
-					RatingSerDes.toDTO(content);
+				return RatingSerDes.toDTO(content);
 			}
 			catch (Exception e) {
 				_logger.log(
@@ -1437,7 +1436,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1461,8 +1460,7 @@ public interface MessageBoardThreadResource {
 			}
 
 			try {
-				return com.liferay.headless.delivery.client.serdes.v1_0.
-					RatingSerDes.toDTO(content);
+				return RatingSerDes.toDTO(content);
 			}
 			catch (Exception e) {
 				_logger.log(
@@ -1523,7 +1521,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1609,7 +1607,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1699,7 +1697,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1808,7 +1806,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1893,7 +1891,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -1973,7 +1971,7 @@ public interface MessageBoardThreadResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);

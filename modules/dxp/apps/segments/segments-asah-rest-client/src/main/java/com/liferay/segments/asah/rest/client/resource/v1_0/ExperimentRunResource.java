@@ -17,6 +17,7 @@ package com.liferay.segments.asah.rest.client.resource.v1_0;
 import com.liferay.segments.asah.rest.client.dto.v1_0.ExperimentRun;
 import com.liferay.segments.asah.rest.client.http.HttpInvoker;
 import com.liferay.segments.asah.rest.client.problem.Problem;
+import com.liferay.segments.asah.rest.client.serdes.v1_0.ExperimentRunSerDes;
 
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -126,7 +127,7 @@ public interface ExperimentRunResource {
 
 			String content = httpResponse.getContent();
 
-			if (httpResponse.getStatusCode() / 100 != 2) {
+			if ((httpResponse.getStatusCode() / 100) != 2) {
 				_logger.log(
 					Level.WARNING,
 					"Unable to process HTTP response content: " + content);
@@ -150,8 +151,7 @@ public interface ExperimentRunResource {
 			}
 
 			try {
-				return com.liferay.segments.asah.rest.client.serdes.v1_0.
-					ExperimentRunSerDes.toDTO(content);
+				return ExperimentRunSerDes.toDTO(content);
 			}
 			catch (Exception e) {
 				_logger.log(
