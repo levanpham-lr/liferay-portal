@@ -474,9 +474,6 @@ public class UserAccountSerDes {
 					userAccount.setScreenName((String)jsonParserFieldValue);
 				}
 			}
-			else if (jsonParserFieldName.equals("status")) {
-				throw new IllegalArgumentException();
-			}
 		}
 
 	}
