@@ -32,6 +32,7 @@ import com.liferay.portal.search.internal.filter.ComplexQueryPartBuilderFactoryI
 import com.liferay.portal.search.internal.query.QueriesImpl;
 import com.liferay.portal.search.query.Queries;
 import com.liferay.portal.search.query.Query;
+import com.liferay.portal.test.rule.LiferayUnitTestRule;
 import com.liferay.portal.util.PropsImpl;
 
 import java.util.Arrays;
@@ -41,6 +42,7 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -49,6 +51,11 @@ import org.junit.rules.TestName;
  * @author Wade Cao
  */
 public class CommonSearchSourceBuilderAssemblerImplTest {
+
+	@ClassRule
+	@Rule
+	public static final LiferayUnitTestRule liferayUnitTestRule =
+		LiferayUnitTestRule.INSTANCE;
 
 	@Before
 	public void setUp() throws Exception {

@@ -27,6 +27,7 @@ import com.liferay.portal.search.elasticsearch7.internal.test.util.microcontaine
 import com.liferay.portal.search.elasticsearch7.internal.test.util.microcontainer.MicrocontainerImpl;
 import com.liferay.portal.search.elasticsearch7.spi.index.IndexRegistrar;
 import com.liferay.portal.search.spi.index.IndexDefinition;
+import com.liferay.portal.test.rule.LiferayUnitTestRule;
 import com.liferay.portal.util.PropsImpl;
 
 import java.io.IOException;
@@ -43,12 +44,19 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * @author André de Oliveira
  */
 public class InstantIndexesTest {
+
+	@ClassRule
+	@Rule
+	public static final LiferayUnitTestRule liferayUnitTestRule =
+		LiferayUnitTestRule.INSTANCE;
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {

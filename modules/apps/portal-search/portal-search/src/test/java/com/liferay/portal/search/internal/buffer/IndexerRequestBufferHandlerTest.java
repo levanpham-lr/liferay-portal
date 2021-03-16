@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.search.configuration.IndexerRegistryConfiguration;
+import com.liferay.portal.test.rule.LiferayUnitTestRule;
 import com.liferay.portal.util.PropsImpl;
 
 import java.lang.reflect.Method;
@@ -27,6 +28,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.BeforeClass;
+import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 
 import org.mockito.Mockito;
@@ -36,6 +39,11 @@ import org.mockito.Mockito;
  * @author André de Oliveira
  */
 public class IndexerRequestBufferHandlerTest {
+
+	@ClassRule
+	@Rule
+	public static final LiferayUnitTestRule liferayUnitTestRule =
+		LiferayUnitTestRule.INSTANCE;
 
 	@BeforeClass
 	public static void setUpClass() {

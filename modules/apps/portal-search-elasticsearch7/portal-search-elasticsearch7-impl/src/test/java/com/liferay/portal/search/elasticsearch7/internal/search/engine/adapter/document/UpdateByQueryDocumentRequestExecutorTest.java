@@ -22,6 +22,7 @@ import com.liferay.portal.search.elasticsearch7.internal.query.ElasticsearchQuer
 import com.liferay.portal.search.engine.adapter.document.UpdateByQueryDocumentRequest;
 import com.liferay.portal.search.internal.script.ScriptsImpl;
 import com.liferay.portal.search.script.Scripts;
+import com.liferay.portal.test.rule.LiferayUnitTestRule;
 import com.liferay.portal.util.PropsImpl;
 
 import org.elasticsearch.index.reindex.UpdateByQueryRequest;
@@ -29,12 +30,19 @@ import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * @author Dylan Rebelak
  */
 public class UpdateByQueryDocumentRequestExecutorTest {
+
+	@ClassRule
+	@Rule
+	public static final LiferayUnitTestRule liferayUnitTestRule =
+		LiferayUnitTestRule.INSTANCE;
 
 	@Before
 	public void setUp() throws Exception {
