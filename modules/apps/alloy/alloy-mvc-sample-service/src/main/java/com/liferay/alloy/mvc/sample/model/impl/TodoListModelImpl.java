@@ -125,7 +125,7 @@ public class TodoListModelImpl
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
-	 *		#getColumnBitmask(String)
+	 *		#getColumnBitmask(String)}
 	 */
 	@Deprecated
 	public static final long TODOLISTID_COLUMN_BITMASK = 1L;
