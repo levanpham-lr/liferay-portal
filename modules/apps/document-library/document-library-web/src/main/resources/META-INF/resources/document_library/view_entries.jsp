@@ -415,11 +415,12 @@ if (portletTitleBasedNavigation && (folderId != DLFolderConstants.DEFAULT_PARENT
 
 							<%
 							row.setCssClass("entry-card lfr-asset-folder");
+
 							PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
 							rowURL.setParameter("mvcRenderCommandName", "/document_library/view_folder");
 							rowURL.setParameter("redirect", currentURL);
-							rowURL.setParameter("folderId", StrayPortletResponse.createRenderURL();ayPortletResponse.createRenderURL();ing.valueOf(curFolder.getFolderId()));
+							rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 							%>
 
 							<liferay-ui:search-container-column-text
