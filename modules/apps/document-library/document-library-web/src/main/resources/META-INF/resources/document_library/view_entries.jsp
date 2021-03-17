@@ -419,7 +419,7 @@ if (portletTitleBasedNavigation && (folderId != DLFolderConstants.DEFAULT_PARENT
 
 							rowURL.setParameter("mvcRenderCommandName", "/document_library/view_folder");
 							rowURL.setParameter("redirect", currentURL);
-							rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+							rowURL.setParameter("folderId", StrayPortletResponse.createRenderURL();ayPortletResponse.createRenderURL();ing.valueOf(curFolder.getFolderId()));
 							%>
 
 							<liferay-ui:search-container-column-text
@@ -450,13 +450,15 @@ if (portletTitleBasedNavigation && (folderId != DLFolderConstants.DEFAULT_PARENT
 
 								<c:choose>
 									<c:when test='<%= curEntryColumn.equals("name") %>'>
-										<%
-											PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
-											rowURL.setParameter("mvcRenderCommandName", "/document_library/view_folder");
-											rowURL.setParameter("redirect", currentURL);
-											rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+										<%
+										PortletURL rowURL = liferayPortletResponse.createRenderURL();
+
+										rowURL.setParameter("mvcRenderCommandName", "/document_library/view_folder");
+										rowURL.setParameter("redirect", currentURL);
+										rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 										%>
+
 										<liferay-ui:search-container-column-text
 											cssClass="table-cell-expand table-cell-minw-200 table-title"
 											name="name"
