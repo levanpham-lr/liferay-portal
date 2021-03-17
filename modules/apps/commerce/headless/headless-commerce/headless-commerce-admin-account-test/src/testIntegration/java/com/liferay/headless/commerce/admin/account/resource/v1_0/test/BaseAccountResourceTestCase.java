@@ -814,6 +814,14 @@ public abstract class BaseAccountResourceTestCase {
 	protected void assertValid(Account account) throws Exception {
 		boolean valid = true;
 
+		if (account.getDateCreated() == null) {
+			valid = false;
+		}
+
+		if (account.getDateModified() == null) {
+			valid = false;
+		}
+
 		if (account.getId() == null) {
 			valid = false;
 		}
@@ -849,6 +857,28 @@ public abstract class BaseAccountResourceTestCase {
 
 			if (Objects.equals("customFields", additionalAssertFieldName)) {
 				if (account.getCustomFields() == null) {
+					valid = false;
+				}
+
+				continue;
+			}
+
+			if (Objects.equals(
+					"defaultBillingAccountAddressId",
+					additionalAssertFieldName)) {
+
+				if (account.getDefaultBillingAccountAddressId() == null) {
+					valid = false;
+				}
+
+				continue;
+			}
+
+			if (Objects.equals(
+					"defaultShippingAccountAddressId",
+					additionalAssertFieldName)) {
+
+				if (account.getDefaultShippingAccountAddressId() == null) {
 					valid = false;
 				}
 
@@ -1057,6 +1087,55 @@ public abstract class BaseAccountResourceTestCase {
 				continue;
 			}
 
+			if (Objects.equals("dateCreated", additionalAssertFieldName)) {
+				if (!Objects.deepEquals(
+						account1.getDateCreated(), account2.getDateCreated())) {
+
+					return false;
+				}
+
+				continue;
+			}
+
+			if (Objects.equals("dateModified", additionalAssertFieldName)) {
+				if (!Objects.deepEquals(
+						account1.getDateModified(),
+						account2.getDateModified())) {
+
+					return false;
+				}
+
+				continue;
+			}
+
+			if (Objects.equals(
+					"defaultBillingAccountAddressId",
+					additionalAssertFieldName)) {
+
+				if (!Objects.deepEquals(
+						account1.getDefaultBillingAccountAddressId(),
+						account2.getDefaultBillingAccountAddressId())) {
+
+					return false;
+				}
+
+				continue;
+			}
+
+			if (Objects.equals(
+					"defaultShippingAccountAddressId",
+					additionalAssertFieldName)) {
+
+				if (!Objects.deepEquals(
+						account1.getDefaultShippingAccountAddressId(),
+						account2.getDefaultShippingAccountAddressId())) {
+
+					return false;
+				}
+
+				continue;
+			}
+
 			if (Objects.equals("emailAddresses", additionalAssertFieldName)) {
 				if (!Objects.deepEquals(
 						account1.getEmailAddresses(),
@@ -1253,6 +1332,78 @@ public abstract class BaseAccountResourceTestCase {
 				"Invalid entity field " + entityFieldName);
 		}
 
+		if (entityFieldName.equals("dateCreated")) {
+			if (operator.equals("between")) {
+				sb = new StringBundler();
+
+				sb.append("(");
+				sb.append(entityFieldName);
+				sb.append(" gt ");
+				sb.append(
+					_dateFormat.format(
+						DateUtils.addSeconds(account.getDateCreated(), -2)));
+				sb.append(" and ");
+				sb.append(entityFieldName);
+				sb.append(" lt ");
+				sb.append(
+					_dateFormat.format(
+						DateUtils.addSeconds(account.getDateCreated(), 2)));
+				sb.append(")");
+			}
+			else {
+				sb.append(entityFieldName);
+
+				sb.append(" ");
+				sb.append(operator);
+				sb.append(" ");
+
+				sb.append(_dateFormat.format(account.getDateCreated()));
+			}
+
+			return sb.toString();
+		}
+
+		if (entityFieldName.equals("dateModified")) {
+			if (operator.equals("between")) {
+				sb = new StringBundler();
+
+				sb.append("(");
+				sb.append(entityFieldName);
+				sb.append(" gt ");
+				sb.append(
+					_dateFormat.format(
+						DateUtils.addSeconds(account.getDateModified(), -2)));
+				sb.append(" and ");
+				sb.append(entityFieldName);
+				sb.append(" lt ");
+				sb.append(
+					_dateFormat.format(
+						DateUtils.addSeconds(account.getDateModified(), 2)));
+				sb.append(")");
+			}
+			else {
+				sb.append(entityFieldName);
+
+				sb.append(" ");
+				sb.append(operator);
+				sb.append(" ");
+
+				sb.append(_dateFormat.format(account.getDateModified()));
+			}
+
+			return sb.toString();
+		}
+
+		if (entityFieldName.equals("defaultBillingAccountAddressId")) {
+			throw new IllegalArgumentException(
+				"Invalid entity field " + entityFieldName);
+		}
+
+		if (entityFieldName.equals("defaultShippingAccountAddressId")) {
+			throw new IllegalArgumentException(
+				"Invalid entity field " + entityFieldName);
+		}
+
 		if (entityFieldName.equals("emailAddresses")) {
 			throw new IllegalArgumentException(
 				"Invalid entity field " + entityFieldName);
@@ -1354,6 +1505,10 @@ public abstract class BaseAccountResourceTestCase {
 	protected Account randomAccount() throws Exception {
 		return new Account() {
 			{
+				dateCreated = RandomTestUtil.nextDate();
+				dateModified = RandomTestUtil.nextDate();
+				defaultBillingAccountAddressId = RandomTestUtil.randomLong();
+				defaultShippingAccountAddressId = RandomTestUtil.randomLong();
 				externalReferenceCode = StringUtil.toLowerCase(
 					RandomTestUtil.randomString());
 				id = RandomTestUtil.randomLong();
