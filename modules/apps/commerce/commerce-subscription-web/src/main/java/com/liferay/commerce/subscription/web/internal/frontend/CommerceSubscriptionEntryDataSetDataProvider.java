@@ -201,12 +201,6 @@ public class CommerceSubscriptionEntryDataSetDataProvider
 	private Label _getSubscriptionStatus(
 		CommerceSubscriptionEntry commerceSubscriptionEntry) {
 
-		int subscriptionStatus =
-			commerceSubscriptionEntry.getSubscriptionStatus();
-
-		int deliverySubscriptionStatus =
-			commerceSubscriptionEntry.getDeliverySubscriptionStatus();
-
 		String subscriptionStatusLabel =
 			CommerceSubscriptionEntryConstants.getSubscriptionStatusLabel(
 				CommerceSubscriptionEntryConstants.
@@ -215,11 +209,11 @@ public class CommerceSubscriptionEntryDataSetDataProvider
 		String label = Label.INFO;
 
 		if (Objects.equals(
-				subscriptionStatus,
+				commerceSubscriptionEntry.getSubscriptionStatus(),
 				CommerceSubscriptionEntryConstants.
 					SUBSCRIPTION_STATUS_ACTIVE) ||
 			Objects.equals(
-				deliverySubscriptionStatus,
+				commerceSubscriptionEntry.getDeliverySubscriptionStatus(),
 				CommerceSubscriptionEntryConstants.
 					SUBSCRIPTION_STATUS_ACTIVE)) {
 
@@ -231,11 +225,11 @@ public class CommerceSubscriptionEntryDataSetDataProvider
 			label = Label.SUCCESS;
 		}
 		else if (Objects.equals(
-					subscriptionStatus,
+					commerceSubscriptionEntry.getSubscriptionStatus(),
 					CommerceSubscriptionEntryConstants.
 						SUBSCRIPTION_STATUS_INACTIVE) &&
 				 Objects.equals(
-					 deliverySubscriptionStatus,
+					 commerceSubscriptionEntry.getDeliverySubscriptionStatus(),
 					 CommerceSubscriptionEntryConstants.
 						 SUBSCRIPTION_STATUS_INACTIVE)) {
 
@@ -247,11 +241,11 @@ public class CommerceSubscriptionEntryDataSetDataProvider
 			label = Label.WARNING;
 		}
 		else if (Objects.equals(
-					subscriptionStatus,
+					commerceSubscriptionEntry.getSubscriptionStatus(),
 					CommerceSubscriptionEntryConstants.
 						SUBSCRIPTION_STATUS_SUSPENDED) &&
 				 Objects.equals(
-					 deliverySubscriptionStatus,
+					 commerceSubscriptionEntry.getDeliverySubscriptionStatus(),
 					 CommerceSubscriptionEntryConstants.
 						 SUBSCRIPTION_STATUS_SUSPENDED)) {
 
@@ -263,11 +257,11 @@ public class CommerceSubscriptionEntryDataSetDataProvider
 			label = Label.WARNING;
 		}
 		else if (Objects.equals(
-					subscriptionStatus,
+					commerceSubscriptionEntry.getSubscriptionStatus(),
 					CommerceSubscriptionEntryConstants.
 						SUBSCRIPTION_STATUS_CANCELLED) &&
 				 Objects.equals(
-					 deliverySubscriptionStatus,
+					 commerceSubscriptionEntry.getDeliverySubscriptionStatus(),
 					 CommerceSubscriptionEntryConstants.
 						 SUBSCRIPTION_STATUS_CANCELLED)) {
 
@@ -279,19 +273,19 @@ public class CommerceSubscriptionEntryDataSetDataProvider
 			label = Label.DANGER;
 		}
 		else if ((Objects.equals(
-					subscriptionStatus,
+					commerceSubscriptionEntry.getSubscriptionStatus(),
 					CommerceSubscriptionEntryConstants.
 						SUBSCRIPTION_STATUS_INACTIVE) &&
 				  Objects.equals(
-					  deliverySubscriptionStatus,
+					  commerceSubscriptionEntry.getDeliverySubscriptionStatus(),
 					  CommerceSubscriptionEntryConstants.
 						  SUBSCRIPTION_STATUS_SUSPENDED)) ||
 				 (Objects.equals(
-					 subscriptionStatus,
+					 commerceSubscriptionEntry.getSubscriptionStatus(),
 					 CommerceSubscriptionEntryConstants.
 						 SUBSCRIPTION_STATUS_SUSPENDED) &&
 				  Objects.equals(
-					  deliverySubscriptionStatus,
+					  commerceSubscriptionEntry.getDeliverySubscriptionStatus(),
 					  CommerceSubscriptionEntryConstants.
 						  SUBSCRIPTION_STATUS_INACTIVE))) {
 
@@ -303,19 +297,19 @@ public class CommerceSubscriptionEntryDataSetDataProvider
 			label = Label.WARNING;
 		}
 		else if ((Objects.equals(
-					subscriptionStatus,
+					commerceSubscriptionEntry.getSubscriptionStatus(),
 					CommerceSubscriptionEntryConstants.
 						SUBSCRIPTION_STATUS_INACTIVE) &&
 				  Objects.equals(
-					  deliverySubscriptionStatus,
+					  commerceSubscriptionEntry.getDeliverySubscriptionStatus(),
 					  CommerceSubscriptionEntryConstants.
 						  SUBSCRIPTION_STATUS_CANCELLED)) ||
 				 (Objects.equals(
-					 subscriptionStatus,
+					 commerceSubscriptionEntry.getSubscriptionStatus(),
 					 CommerceSubscriptionEntryConstants.
 						 SUBSCRIPTION_STATUS_CANCELLED) &&
 				  Objects.equals(
-					  deliverySubscriptionStatus,
+					  commerceSubscriptionEntry.getDeliverySubscriptionStatus(),
 					  CommerceSubscriptionEntryConstants.
 						  SUBSCRIPTION_STATUS_INACTIVE))) {
 
@@ -327,19 +321,19 @@ public class CommerceSubscriptionEntryDataSetDataProvider
 			label = Label.DANGER;
 		}
 		else if ((Objects.equals(
-					subscriptionStatus,
+					commerceSubscriptionEntry.getSubscriptionStatus(),
 					CommerceSubscriptionEntryConstants.
 						SUBSCRIPTION_STATUS_SUSPENDED) &&
 				  Objects.equals(
-					  deliverySubscriptionStatus,
+					  commerceSubscriptionEntry.getDeliverySubscriptionStatus(),
 					  CommerceSubscriptionEntryConstants.
 						  SUBSCRIPTION_STATUS_CANCELLED)) ||
 				 (Objects.equals(
-					 subscriptionStatus,
+					 commerceSubscriptionEntry.getSubscriptionStatus(),
 					 CommerceSubscriptionEntryConstants.
 						 SUBSCRIPTION_STATUS_CANCELLED) &&
 				  Objects.equals(
-					  deliverySubscriptionStatus,
+					  commerceSubscriptionEntry.getDeliverySubscriptionStatus(),
 					  CommerceSubscriptionEntryConstants.
 						  SUBSCRIPTION_STATUS_SUSPENDED))) {
 
