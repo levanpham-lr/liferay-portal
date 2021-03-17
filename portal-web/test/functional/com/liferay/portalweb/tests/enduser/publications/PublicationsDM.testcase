@@ -208,7 +208,9 @@ definition {
 			publicationsType = "Modified",
 			publicationsUser = "Test Test");
 
-		Navigator.openURL();
+		// Workaround LPS-121488
+
+		/*Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
 			category = "Recycle Bin",
@@ -224,7 +226,7 @@ definition {
 			publicationsSite = "Guest",
 			publicationsTitle = "DM Folder 1 Name",
 			publicationsType = "Deleted",
-			publicationsUser = "Test Test");
+			publicationsUser = "Test Test");*/
 	}
 
 	@priority = "4"
