@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.model.LayoutTypeController;
 import com.liferay.portal.kernel.model.PortletPreferences;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.SetUtil;
@@ -506,21 +507,26 @@ public class LayoutRevisionLocalServiceImpl
 			String command = serviceContext.getCommand();
 
 			if (command.equals("delete")) {
-				List<PortletPreferences> portletPreferencesList =
-					portletPreferencesLocalService.getPortletPreferencesByPlid(
-						layoutRevision.getLayoutRevisionId());
+				String[] removePortletArray =
+					(String[])serviceContext.getAttribute("removePortlets");
 
-				Set<String> removePortlets = SetUtil.fromArray(
-					(String[])serviceContext.getAttribute("removePortlets"));
+				if (!ArrayUtil.isEmpty(removePortletArray)) {
+					Set<String> removePortlets = SetUtil.fromArray(
+						removePortletArray);
 
-				for (PortletPreferences portletPreferences :
-						portletPreferencesList) {
+					for (PortletPreferences portletPreferences :
+							portletPreferencesLocalService.
+								getPortletPreferencesByPlid(
+									layoutRevision.getLayoutRevisionId())) {
 
-					if (removePortlets.contains(
-							portletPreferences.getPortletId())) {
+						if (removePortlets.contains(
+								portletPreferences.getPortletId())) {
 
-						portletPreferencesLocalService.deletePortletPreferences(
-							portletPreferences.getPortletPreferencesId());
+							portletPreferencesLocalService.
+								deletePortletPreferences(
+									portletPreferences.
+										getPortletPreferencesId());
+						}
 					}
 				}
 			}
