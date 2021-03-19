@@ -36,6 +36,7 @@ config = {
 		MODULE_PATH: true,
 	},
 	rules: {
+		'@liferay/portal/no-metal-plugins': 'off',
 		'no-empty': ['error', {allowEmptyCatch: true}],
 		'no-for-of-loops/no-for-of-loops': 'error',
 		'no-use-before-define': [
