@@ -38,6 +38,6 @@ if (cpInstance != null) {
 	CPDefinitionId="<%= cpCatalogEntry.getCPDefinitionId() %>"
 	CPInstanceId="<%= cpInstanceId %>"
 	elementClasses="btn-default btn-lg"
-	productContentId="<%= liferayPortletResponse.getNamespace() + cpCatalogEntry.getCPDefinitionId() + "ProductContent" %>"
-	taglibQuantityInputId="<%= liferayPortletResponse.getNamespace() + cpCatalogEntry.getCPDefinitionId() + "Quantity" %>"
+	productContentId='<%= liferayPortletResponse.getNamespace() + cpCatalogEntry.getCPDefinitionId() + "ProductContent" %>'
+	taglibQuantityInputId='<%= liferayPortletResponse.getNamespace() + cpCatalogEntry.getCPDefinitionId() + "Quantity" %>'
 />
