@@ -20,7 +20,7 @@ const ColorPicker = ({color, label, name}) => {
 
 	return (
 		<div className="form-group">
-			<input name={name} type="hidden" value={`${colorValue}`} />
+			<input name={name} type="hidden" value={colorValue} />
 
 			<ClayColorPicker
 				label={label}
