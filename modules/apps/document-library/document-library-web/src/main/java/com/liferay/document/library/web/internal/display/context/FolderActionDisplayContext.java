@@ -28,6 +28,8 @@ import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.repository.capabilities.TemporaryFileEntriesCapability;
@@ -485,20 +487,27 @@ public class FolderActionDisplayContext {
 	}
 
 	public boolean isDeleteExpiredTemporaryFileEntriesActionVisible() {
-		Folder folder = _getFolder();
+		try {
+			Folder folder = _getFolder();
 
-		if (folder == null) {
+			if (folder == null) {
+				return false;
+			}
+
+			if (DLFolderUtil.isRepositoryRoot(folder) &&
+				folder.isRepositoryCapabilityProvided(
+					TemporaryFileEntriesCapability.class)) {
+
+				return true;
+			}
+
 			return false;
 		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
 
-		if (DLFolderUtil.isRepositoryRoot(folder) &&
-			folder.isRepositoryCapabilityProvided(
-				TemporaryFileEntriesCapability.class)) {
-
-			return true;
+			return false;
 		}
-
-		return false;
 	}
 
 	public boolean isDeleteFolderActionVisible() throws PortalException {
@@ -649,17 +658,25 @@ public class FolderActionDisplayContext {
 	}
 
 	public boolean isTrashEnabled() throws PortalException {
-		Folder folder = _getFolder();
+		try {
+			Folder folder = _getFolder();
 
-		if (((folder == null) ||
-			 folder.isRepositoryCapabilityProvided(TrashCapability.class)) &&
-			_dlTrashHelper.isTrashEnabled(
-				_dlRequestHelper.getScopeGroupId(), _getRepositoryId())) {
+			if (((folder == null) ||
+				 folder.isRepositoryCapabilityProvided(
+					 TrashCapability.class)) &&
+				_dlTrashHelper.isTrashEnabled(
+					_dlRequestHelper.getScopeGroupId(), _getRepositoryId())) {
 
-			return true;
+				return true;
+			}
+
+			return false;
 		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
 
-		return false;
+			return false;
+		}
 	}
 
 	public boolean isViewSlideShowActionVisible() throws PortalException {
@@ -882,6 +899,9 @@ public class FolderActionDisplayContext {
 
 		return true;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		FolderActionDisplayContext.class);
 
 	private final DLRequestHelper _dlRequestHelper;
 	private final DLTrashHelper _dlTrashHelper;
