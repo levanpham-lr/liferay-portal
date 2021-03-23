@@ -821,6 +821,9 @@ public class DirectoryWatcher extends Thread implements BundleListener {
 		}
 	}
 
+	/**
+	 * @see com.liferay.portal.fragment.bundle.watcher.internal.PortalFragmentBundleWatcher#_isFragment
+	 */
 	private boolean _isFragment(Bundle bundle) {
 		BundleRevision bundleRevision = bundle.adapt(BundleRevision.class);
 
