@@ -671,6 +671,7 @@ public class UserAccount implements Serializable {
 	}
 
 	@Schema(
+		accessMode = Schema.AccessMode.READ_ONLY,
 		defaultValue = "com.liferay.headless.osb.commerce.portal.instance.dto.v1_0.UserAccount",
 		name = "x-class-name"
 	)
