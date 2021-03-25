@@ -222,7 +222,7 @@ public class DDMFormDisplayContext {
 		DDMFormRenderingContext ddmFormRenderingContext =
 			createDDMFormRenderingContext(ddmForm);
 
-		ddmFormRenderingContext.addProperty("formInstanceId",
+		ddmFormRenderingContext.setDDMFormInstanceId(
 			ddmFormInstance.getFormInstanceId());
 
 		ddmFormRenderingContext.setGroupId(ddmFormInstance.getGroupId());
