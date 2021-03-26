@@ -946,22 +946,18 @@ mariadb.executable=${mariadb.executable}]]></echo>
 			<propertycopy from="search.engine[${env.CI_TEST_SUITE}]" name="suite.search.engine" silent="true" />
 
 			<if>
+				<contains string="${suite.search.engine}" substring="remote-elasticsearch7" />
+				<then>
+					<ant antfile="build-test-elasticsearch7.xml" target="start-elasticsearch" />
+				</then>
+			</if>
+
+			<if>
 				<equals arg1="${suite.search.engine}" arg2="solr" />
 				<then>
 					<property name="com.liferay.portal.search.solr8.test.unit.started" value="true" />
 
 					<ant antfile="build-test-solr.xml" target="set-up-solr" />
-				</then>
-			</if>
-
-			<propertycopy from="suite.elastic.version[${env.CI_TEST_SUITE}]" name="suite.elastic.version" silent="true" />
-
-			<if>
-				<isset property="suite.elastic.version" />
-				<then>
-					<ant antfile="build-test-elasticsearch7.xml" target="redeploy-sidecar">
-						<property name="sidecar.redeploy.version" value="${suite.elastic.version}" />
-					</ant>
 				</then>
 			</if>
 		</sequential>
@@ -3443,6 +3439,13 @@ log.sanitizer.enabled=false</echo>
 
 	<macrodef name="stop-suite-search-engine">
 		<sequential>
+			<if>
+				<contains string="${suite.search.engine}" substring="remote-elasticsearch7" />
+				<then>
+					<ant antfile="build-test-elasticsearch7.xml" target="stop-elasticsearch" />
+				</then>
+			</if>
+
 			<if>
 				<equals arg1="${suite.search.engine}" arg2="solr" />
 				<then>
