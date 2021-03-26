@@ -21,7 +21,6 @@ definition {
 			locator1 = "Portlet#HEADER",
 			value1 = "Search");
 
-		var searchClientVersion = selenium.getText("SearchAdmin#CLIENT_VERSION");
 		var searchEngineVendor = selenium.getText("SearchAdmin#SEARCH_ENGINE_VENDOR");
 
 		if (contains("${searchEngineVendor}", "Elasticsearch")) {
