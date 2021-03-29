@@ -14,7 +14,6 @@
 
 package com.liferay.headless.admin.content.client.serdes.v1_0;
 
-import com.liferay.headless.admin.content.client.dto.v1_0.MasterPage;
 import com.liferay.headless.admin.content.client.dto.v1_0.Settings;
 import com.liferay.headless.admin.content.client.json.BaseJSONParser;
 
@@ -234,7 +233,8 @@ public class SettingsSerDes {
 			}
 			else if (Objects.equals(jsonParserFieldName, "masterPage")) {
 				if (jsonParserFieldValue != null) {
-					settings.setMasterPage((MasterPage)jsonParserFieldValue);
+					settings.setMasterPage(
+						MasterPageSerDes.toDTO((String)jsonParserFieldValue));
 				}
 			}
 			else if (Objects.equals(jsonParserFieldName, "themeName")) {
