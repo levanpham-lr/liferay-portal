@@ -16,7 +16,9 @@ package com.liferay.commerce.machine.learning.internal.gateway;
 
 /**
  * @author Riccardo Ferrari
+ * @deprecated As of Athanasius (7.3.x)
  */
+@Deprecated
 public class CommerceMLJobState {
 
 	public CommerceMLJobState() {

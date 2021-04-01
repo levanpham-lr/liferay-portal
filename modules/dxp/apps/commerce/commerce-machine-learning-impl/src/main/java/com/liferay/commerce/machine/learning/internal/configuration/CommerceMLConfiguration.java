@@ -20,7 +20,9 @@ import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClass
 
 /**
  * @author Riccardo Ferrari
+ * @deprecated As of Athanasius (7.3.x)
  */
+@Deprecated
 @ExtendedObjectClassDefinition(
 	category = "data-integration",
 	scope = ExtendedObjectClassDefinition.Scope.SYSTEM

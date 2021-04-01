@@ -37,12 +37,14 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Riccardo Ferrari
+ * @deprecated As of Athanasius (7.3.x)
  */
 @Component(
 	enabled = false, immediate = true,
 	property = "data.integration.service.executor.key=" + BatchProductContentCommerceMLRecommendationProcessType.KEY,
 	service = ScheduledTaskExecutorService.class
 )
+@Deprecated
 public class
 	BatchProductContentCommerceMLRecommendationScheduledTaskExecutorService
 		implements ScheduledTaskExecutorService {

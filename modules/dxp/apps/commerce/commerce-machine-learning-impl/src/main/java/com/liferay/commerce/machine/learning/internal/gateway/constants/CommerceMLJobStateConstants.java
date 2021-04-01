@@ -16,7 +16,9 @@ package com.liferay.commerce.machine.learning.internal.gateway.constants;
 
 /**
  * @author Riccardo Ferrari
+ * @deprecated As of Athanasius (7.3.x)
  */
+@Deprecated
 public class CommerceMLJobStateConstants {
 
 	public static final String COMPLETE = "COMPLETE";

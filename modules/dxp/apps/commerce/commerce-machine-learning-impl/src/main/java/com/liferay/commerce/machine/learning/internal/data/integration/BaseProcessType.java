@@ -23,7 +23,9 @@ import java.util.ResourceBundle;
 
 /**
  * @author Riccardo Ferrari
+ * @deprecated As of Athanasius (7.3.x)
  */
+@Deprecated
 public abstract class BaseProcessType implements ProcessType {
 
 	@Override
