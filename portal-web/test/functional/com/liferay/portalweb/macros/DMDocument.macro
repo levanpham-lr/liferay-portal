@@ -608,7 +608,12 @@ definition {
 	macro checkinManagementBar {
 		var key_dmDocumentTitle = "${dmDocumentTitle}";
 
-		Check(locator1 = "DocumentsAndMedia#DESCRIPTIVE_LIST_DOCUMENT_CHECKBOX");
+		if ("${allFiles}" == "true") {
+			PortletEntry.selectAll();
+		}
+		else {
+			Check(locator1 = "DocumentsAndMedia#DESCRIPTIVE_LIST_DOCUMENT_CHECKBOX");
+		}
 
 		Click(locator1 = "Icon#VERTICAL_ELLIPSIS_BUTTON");
 
