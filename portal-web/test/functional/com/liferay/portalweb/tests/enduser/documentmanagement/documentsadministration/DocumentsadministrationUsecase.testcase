@@ -959,6 +959,55 @@ definition {
 		DMPortlet.configureDisplaySettingsPG(currentDisplayStyleViews = "");
 	}
 
+	@description = "This case covers LPS-97708. It ensures that a document can be restored from the Recycle Bin even if its original folder no longer exists."
+	@priority = "3"
+	test RestoreDocumentWithoutOriginalFolder {
+		JSONDocument.addFolder(
+			dmFolderDescription = "DM Folder Description",
+			dmFolderName = "DM Folder Name",
+			groupName = "Guest");
+
+		JSONDocument.addFileWithUploadedFile(
+			dmDocumentDescription = "DM Document Description1",
+			dmDocumentTitle = "DM Document Title",
+			folderName = "DM Folder Name",
+			groupName = "Guest",
+			mimeType = "application/msword",
+			sourceFileName = "Document_1.doc");
+
+		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "guest");
+
+		DMNavigator.gotoFolder(dmFolderName = "DM Folder Name");
+
+		DMDocument.moveToRecycleBinCP(
+			assetType = "Document",
+			dmDocumentTitle = "DM Document Title");
+
+		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "guest");
+
+		DMFolder.moveToRecycleBinCP(
+			assetType = "Documents Folder",
+			dmFolderName = "DM Folder Name");
+
+		RecycleBin.openRecycleBinAdmin(siteURLKey = "guest");
+
+		RecycleBin.deleteCP(
+			assetName = "DM Folder Name",
+			assetType = "Documents Folder",
+			multipleAssets = "true");
+
+		RecycleBin.restoreContentWithoutOriginalFolder(
+			assetName = "DM Document Title",
+			assetRestoreLocation = "Home",
+			assetType = "Document");
+
+		AssertTextNotPresent(value1 = "NoSuchFolderException");
+
+		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "guest");
+
+		DMDocument.viewCardTitle(dmDocumentTitle = "DM Document Title");
+	}
+
 	@description = "This is a use case for LPS-98669."
 	@priority = "4"
 	test SelectLinkToPagePage {
