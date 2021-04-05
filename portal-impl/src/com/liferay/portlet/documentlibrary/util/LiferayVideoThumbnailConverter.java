@@ -144,6 +144,7 @@ public class LiferayVideoThumbnailConverter extends LiferayConverter {
 			Graphics2D graphics = bufferedImage.createGraphics();
 
 			graphics.setColor(Color.black);
+
 			graphics.fillRect(
 				0, 0, bufferedImage.getWidth(), bufferedImage.getHeight());
 
