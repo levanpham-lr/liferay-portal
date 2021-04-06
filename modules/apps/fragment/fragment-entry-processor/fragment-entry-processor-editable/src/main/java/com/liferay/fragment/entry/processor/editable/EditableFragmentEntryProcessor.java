@@ -24,6 +24,7 @@ import com.liferay.fragment.model.FragmentEntryLink;
 import com.liferay.fragment.processor.FragmentEntryProcessor;
 import com.liferay.fragment.processor.FragmentEntryProcessorContext;
 import com.liferay.fragment.processor.PortletRegistry;
+import com.liferay.info.item.InfoItemFieldValues;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -145,7 +146,7 @@ public class EditableFragmentEntryProcessor implements FragmentEntryProcessor {
 
 		Document document = _getDocument(html);
 
-		Map<Long, Map<String, Object>> infoDisplaysFieldValues =
+		Map<Long, InfoItemFieldValues> infoDisplaysFieldValues =
 			new HashMap<>();
 
 		for (Element element :
@@ -214,7 +215,7 @@ public class EditableFragmentEntryProcessor implements FragmentEntryProcessor {
 						editableValueJSONObject)) {
 
 				Object fieldValue =
-					_fragmentEntryProcessorHelper.getMappedValue(
+					_fragmentEntryProcessorHelper.getMappedInfoItemFieldValue(
 						editableValueJSONObject, infoDisplaysFieldValues,
 						fragmentEntryProcessorContext);
 

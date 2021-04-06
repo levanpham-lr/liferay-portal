@@ -70,7 +70,7 @@ public class LinkEditableElementMapper implements EditableElementMapper {
 		}
 		else if (mapped) {
 			href = GetterUtil.getString(
-				_fragmentEntryProcessorHelper.getMappedValue(
+				_fragmentEntryProcessorHelper.getMappedInfoItemFieldValue(
 					configJSONObject, new HashMap<>(),
 					fragmentEntryProcessorContext));
 		}
