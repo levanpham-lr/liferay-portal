@@ -17,9 +17,11 @@ package com.liferay.fragment.entry.processor.helper;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.fragment.processor.FragmentEntryProcessorContext;
+import com.liferay.info.item.InfoItemFieldValues;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -48,6 +50,59 @@ public interface FragmentEntryProcessorHelper {
 			FragmentEntryProcessorContext fragmentEntryProcessorContext)
 		throws PortalException;
 
+	public default Object getMappedInfoItemFieldValue(
+			JSONObject jsonObject,
+			Map<Long, InfoItemFieldValues> infoItemFieldValuesMap,
+			FragmentEntryProcessorContext fragmentEntryProcessorContext)
+		throws PortalException {
+
+		Map<Long, Map<String, Object>> infoDisplaysFieldValuesMap =
+			new HashMap<>();
+
+		for (Map.Entry<Long, InfoItemFieldValues> entry :
+				infoItemFieldValuesMap.entrySet()) {
+
+			InfoItemFieldValues infoItemFieldValues = entry.getValue();
+
+			infoDisplaysFieldValuesMap.put(
+				entry.getKey(),
+				infoItemFieldValues.getMap(
+					fragmentEntryProcessorContext.getLocale()));
+		}
+
+		return getMappedValue(
+			jsonObject, infoDisplaysFieldValuesMap,
+			fragmentEntryProcessorContext);
+	}
+
+	public default Object getMappedInfoItemFieldValue(
+			JSONObject jsonObject,
+			Map<Long, InfoItemFieldValues> infoItemFieldValuesMap, String mode,
+			Locale locale, long previewClassPK, long previewClassNameId,
+			int previewType)
+		throws PortalException {
+
+		Map<Long, Map<String, Object>> infoDisplaysFieldValuesMap =
+			new HashMap<>();
+
+		for (Map.Entry<Long, InfoItemFieldValues> entry :
+				infoItemFieldValuesMap.entrySet()) {
+
+			InfoItemFieldValues infoItemFieldValues = entry.getValue();
+
+			infoDisplaysFieldValuesMap.put(
+				entry.getKey(), infoItemFieldValues.getMap(locale));
+		}
+
+		return getMappedValue(
+			jsonObject, infoDisplaysFieldValuesMap, mode, locale,
+			previewClassPK, previewClassNameId, previewType);
+	}
+
+	/**
+	 * @deprecated As of Cavanaugh (7.4.x), replaced by {@link #getMappedInfoItemFieldValue(JSONObject, Map, FragmentEntryProcessorContext)}
+	 */
+	@Deprecated
 	public Object getMappedValue(
 			JSONObject jsonObject,
 			Map<Long, Map<String, Object>> infoDisplaysFieldValues,
@@ -65,6 +120,10 @@ public interface FragmentEntryProcessorHelper {
 			0, previewType);
 	}
 
+	/**
+	 * @deprecated As of Cavanaugh (7.4.x), replaced by {@link #getMappedInfoItemFieldValue(JSONObject, Map, String, Locale, long, long, int)}
+	 */
+	@Deprecated
 	public Object getMappedValue(
 			JSONObject jsonObject,
 			Map<Long, Map<String, Object>> infoDisplaysFieldValues, String mode,
