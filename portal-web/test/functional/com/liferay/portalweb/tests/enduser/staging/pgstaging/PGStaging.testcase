@@ -368,6 +368,8 @@ definition {
 	@description = "This is a use case for LPS-125709."
 	@priority = "3"
 	test AssertPublishPageDisplayInFullPage {
+		property portal.upstream = "quarantine";
+
 		Staging.openStagingAdmin(siteURLKey = "site-name");
 
 		Staging.activateStagingCP(siteName = "Site Name");
