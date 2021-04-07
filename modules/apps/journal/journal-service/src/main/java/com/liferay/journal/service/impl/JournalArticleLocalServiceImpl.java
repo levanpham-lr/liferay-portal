@@ -7162,15 +7162,6 @@ public class JournalArticleLocalServiceImpl
 
 				serviceContext.setCommand(Constants.UPDATE);
 
-				String portletId = PortletProviderUtil.getPortletId(
-					JournalArticle.class.getName(),
-					PortletProvider.Action.EDIT);
-
-				String layoutFullURL = _portal.getLayoutFullURL(
-					article.getGroupId(), portletId);
-
-				serviceContext.setLayoutFullURL(layoutFullURL);
-
 				serviceContext.setScopeGroupId(article.getGroupId());
 
 				journalArticleLocalService.updateStatus(
