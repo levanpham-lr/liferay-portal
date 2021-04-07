@@ -51,7 +51,7 @@
 
 					function <%= namespace + randomNamespace %>onInitEditor() {
 						Liferay.componentReady('<%= namespace + HtmlUtil.escapeJS(fieldName) %>')
-							.then(inputLocalized => {
+							.then(function(inputLocalized) {
 								var editor = window['<%= namespace + HtmlUtil.escapeJS(inputEditorName) %>'];
 								inputLocalized.updateInputPlaceholder(editor);
 							}
