@@ -458,6 +458,10 @@ public class ManagementToolbarTag extends BaseClayTag {
 
 			String parameterName = parameterParts[0];
 
+			if (parameterName.contains(StringPool.PERIOD)) {
+				continue;
+			}
+
 			String parameterValue = StringPool.BLANK;
 
 			if (parameterParts.length > 1) {
