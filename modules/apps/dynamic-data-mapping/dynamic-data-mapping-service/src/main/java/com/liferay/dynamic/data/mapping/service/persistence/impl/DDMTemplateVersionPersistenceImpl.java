@@ -2407,7 +2407,7 @@ public class DDMTemplateVersionPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			DDMTemplateVersionModelImpl ddmTemplateVersionModelImpl,
 			String[] columnNames, boolean original) {
 
@@ -2430,8 +2430,8 @@ public class DDMTemplateVersionPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

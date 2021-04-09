@@ -1595,7 +1595,7 @@ public class RatingsStatsPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			RatingsStatsModelImpl ratingsStatsModelImpl, String[] columnNames,
 			boolean original) {
 
@@ -1617,8 +1617,8 @@ public class RatingsStatsPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

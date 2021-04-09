@@ -3211,7 +3211,7 @@ public class AppPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			AppModelImpl appModelImpl, String[] columnNames, boolean original) {
 
 			Object[] arguments = new Object[columnNames.length];
@@ -3231,8 +3231,8 @@ public class AppPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

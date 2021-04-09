@@ -3444,7 +3444,7 @@ public class LayoutPageTemplateStructurePersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			LayoutPageTemplateStructureModelImpl
 				layoutPageTemplateStructureModelImpl,
 			String[] columnNames, boolean original) {
@@ -3469,8 +3469,8 @@ public class LayoutPageTemplateStructurePersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

@@ -3245,7 +3245,7 @@ public class LayoutSetPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			LayoutSetModelImpl layoutSetModelImpl, String[] columnNames,
 			boolean original) {
 
@@ -3267,8 +3267,8 @@ public class LayoutSetPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

@@ -1619,7 +1619,7 @@ public class SharepointOAuth2TokenEntryPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			SharepointOAuth2TokenEntryModelImpl
 				sharepointOAuth2TokenEntryModelImpl,
 			String[] columnNames, boolean original) {
@@ -1644,8 +1644,8 @@ public class SharepointOAuth2TokenEntryPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

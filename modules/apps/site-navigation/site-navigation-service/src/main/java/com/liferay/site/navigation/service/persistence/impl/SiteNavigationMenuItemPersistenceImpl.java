@@ -5113,7 +5113,7 @@ public class SiteNavigationMenuItemPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			SiteNavigationMenuItemModelImpl siteNavigationMenuItemModelImpl,
 			String[] columnNames, boolean original) {
 
@@ -5137,8 +5137,8 @@ public class SiteNavigationMenuItemPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

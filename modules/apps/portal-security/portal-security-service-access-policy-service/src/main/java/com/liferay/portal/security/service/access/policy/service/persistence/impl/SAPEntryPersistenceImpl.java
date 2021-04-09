@@ -4942,7 +4942,7 @@ public class SAPEntryPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			SAPEntryModelImpl sapEntryModelImpl, String[] columnNames,
 			boolean original) {
 
@@ -4963,8 +4963,8 @@ public class SAPEntryPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

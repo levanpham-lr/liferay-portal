@@ -2748,7 +2748,7 @@ public class MDRActionPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			MDRActionModelImpl mdrActionModelImpl, String[] columnNames,
 			boolean original) {
 
@@ -2770,8 +2770,8 @@ public class MDRActionPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

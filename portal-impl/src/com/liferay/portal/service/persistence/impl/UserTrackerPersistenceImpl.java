@@ -2286,7 +2286,7 @@ public class UserTrackerPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			UserTrackerModelImpl userTrackerModelImpl, String[] columnNames,
 			boolean original) {
 
@@ -2308,8 +2308,8 @@ public class UserTrackerPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

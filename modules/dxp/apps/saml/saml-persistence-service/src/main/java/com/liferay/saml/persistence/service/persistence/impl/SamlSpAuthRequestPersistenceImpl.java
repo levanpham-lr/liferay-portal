@@ -1665,7 +1665,7 @@ public class SamlSpAuthRequestPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			SamlSpAuthRequestModelImpl samlSpAuthRequestModelImpl,
 			String[] columnNames, boolean original) {
 
@@ -1688,8 +1688,8 @@ public class SamlSpAuthRequestPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

@@ -4261,7 +4261,7 @@ public class PasswordPolicyPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			PasswordPolicyModelImpl passwordPolicyModelImpl,
 			String[] columnNames, boolean original) {
 
@@ -4284,8 +4284,8 @@ public class PasswordPolicyPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

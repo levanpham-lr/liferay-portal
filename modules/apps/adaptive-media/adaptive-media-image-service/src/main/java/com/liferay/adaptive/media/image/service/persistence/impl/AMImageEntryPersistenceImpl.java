@@ -5200,7 +5200,7 @@ public class AMImageEntryPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			AMImageEntryModelImpl amImageEntryModelImpl, String[] columnNames,
 			boolean original) {
 
@@ -5222,8 +5222,8 @@ public class AMImageEntryPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

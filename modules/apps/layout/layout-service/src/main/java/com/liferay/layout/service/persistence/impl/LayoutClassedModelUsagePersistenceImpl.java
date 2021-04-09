@@ -5380,7 +5380,7 @@ public class LayoutClassedModelUsagePersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			LayoutClassedModelUsageModelImpl layoutClassedModelUsageModelImpl,
 			String[] columnNames, boolean original) {
 
@@ -5404,8 +5404,8 @@ public class LayoutClassedModelUsagePersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

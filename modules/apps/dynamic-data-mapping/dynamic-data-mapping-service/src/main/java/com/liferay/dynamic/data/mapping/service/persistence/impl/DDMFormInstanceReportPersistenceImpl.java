@@ -1302,7 +1302,7 @@ public class DDMFormInstanceReportPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			DDMFormInstanceReportModelImpl ddmFormInstanceReportModelImpl,
 			String[] columnNames, boolean original) {
 
@@ -1326,8 +1326,8 @@ public class DDMFormInstanceReportPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

@@ -2284,7 +2284,7 @@ public class KaleoDefinitionVersionPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			KaleoDefinitionVersionModelImpl kaleoDefinitionVersionModelImpl,
 			String[] columnNames, boolean original) {
 
@@ -2308,8 +2308,8 @@ public class KaleoDefinitionVersionPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

@@ -3993,7 +3993,7 @@ public class AssetListEntryUsagePersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			AssetListEntryUsageModelImpl assetListEntryUsageModelImpl,
 			String[] columnNames, boolean original) {
 
@@ -4016,8 +4016,8 @@ public class AssetListEntryUsagePersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 

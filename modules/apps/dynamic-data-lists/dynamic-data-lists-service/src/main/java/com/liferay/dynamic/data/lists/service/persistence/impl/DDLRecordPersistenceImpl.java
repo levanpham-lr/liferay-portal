@@ -5006,7 +5006,7 @@ public class DDLRecordPersistenceImpl
 			return null;
 		}
 
-		private Object[] _getValue(
+		private static Object[] _getValue(
 			DDLRecordModelImpl ddlRecordModelImpl, String[] columnNames,
 			boolean original) {
 
@@ -5028,8 +5028,8 @@ public class DDLRecordPersistenceImpl
 			return arguments;
 		}
 
-		private static Map<FinderPath, Long> _finderPathColumnBitmasksCache =
-			new ConcurrentHashMap<>();
+		private static final Map<FinderPath, Long>
+			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
 
 	}
 
