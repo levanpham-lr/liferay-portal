@@ -1181,8 +1181,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		}
 		catch (SAXException saxException) {
 			if (!writeOutContentHandler.isWriteLimitReached(saxException)) {
-				throw new TikaException(
-					"Unexpected SAX processing failure", saxException);
+				throw new TikaException(saxException, saxException);
 			}
 		}
 		finally {
