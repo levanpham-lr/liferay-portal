@@ -853,6 +853,9 @@ public class ServletResponseUtil {
 					StringPool.DOUBLE_DASH + boundary + StringPool.DOUBLE_DASH);
 			}
 		}
+		catch (IOException ioException) {
+			_checkSocketException(ioException);
+		}
 		finally {
 			StreamUtil.cleanUp(true, inputStream);
 		}
