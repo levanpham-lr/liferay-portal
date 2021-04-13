@@ -91,15 +91,8 @@ public class PortletPreferencesLocalServiceImpl
 						portletId);
 
 				if (layoutPortletPreferences != null) {
-					javax.portlet.PortletPreferences jxPortletPreferences =
-						portletPreferenceValueLocalService.getPreferences(
-							layoutPortletPreferences);
-
-					if (jxPortletPreferences != null) {
-						defaultPreferences =
-							PortletPreferencesFactoryUtil.toXML(
-								jxPortletPreferences);
-					}
+					defaultPreferences =
+						layoutPortletPreferences.getPreferences();
 				}
 			}
 
