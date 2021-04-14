@@ -38,7 +38,7 @@ definition {
 	test CheckoutAndCheckinDocumentInPublication {
 		property test.assert.warning.exceptions = "true";
 
-		Publications.createNewPublication(publicationsName = "Publication Name");
+		Publications.createNewPublication(publicationName = "Publication Name");
 
 		Navigator.openURL();
 
@@ -73,9 +73,9 @@ definition {
 
 		DMDocument.viewDocumentVersionNumberCmdPG(dmDocumentVersionNumber = "2.0");
 
-		Publications.gotoPublish(publicationsName = "Publication Name");
+		Publications.gotoPublish(publicationName = "Publication Name");
 
-		Publications.publishPublication(publicationsName = "Publication Name");
+		Publications.publishPublication(publicationName = "Publication Name");
 
 		Navigator.openURL();
 
@@ -97,7 +97,7 @@ definition {
 			dmDocumentFile = "Document_1.txt",
 			dmDocumentTitle = "DM Document Title");
 
-		Publications.createNewPublication(publicationsName = "Publication Name");
+		Publications.createNewPublication(publicationName = "Publication Name");
 
 		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "guest");
 
@@ -111,7 +111,7 @@ definition {
 			dmDocumentTitleEdit = "DM Document Title Edit",
 			dmDocumentVersionNumber = "1.1");
 
-		Publications.createNewPublication(publicationsName = "Publication Name 2");
+		Publications.createNewPublication(publicationName = "Publication Name 2");
 
 		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "guest");
 
@@ -125,13 +125,13 @@ definition {
 			dmDocumentTitleEdit = "DM Document 2 Title Edit",
 			dmDocumentVersionNumber = "1.1");
 
-		Publications.gotoPublish(publicationsName = "Publication Name 2");
+		Publications.gotoPublish(publicationName = "Publication Name 2");
 
-		Publications.publishPublication(publicationsName = "Publication Name 2");
+		Publications.publishPublication(publicationName = "Publication Name 2");
 
-		Publications.selectPublication(publicationsName = "Publication Name");
+		Publications.selectPublication(publicationName = "Publication Name");
 
-		Publications.gotoPublish(publicationsName = "Publication Name");
+		Publications.gotoPublish(publicationName = "Publication Name");
 
 		Publications.viewNeedsManualResolution(
 			entryTitle = "DM Document Title Edit",
@@ -143,7 +143,7 @@ definition {
 			columnName = "Title",
 			columnValueInPublication = "WC WebContent Title Edit",
 			entryTitle = "WC WebContent Title Edit",
-			publicationsName = "Publication Name");
+			publicationName = "Publication Name");
 
 		IFrame.closeFrame();
 
@@ -172,7 +172,7 @@ definition {
 			dmFolderDescription = "DM Folder 1 Description",
 			dmFolderName = "DM Folder 1 Name");
 
-		Publications.createNewPublication(publicationsName = "Publication Name");
+		Publications.createNewPublication(publicationName = "Publication Name");
 
 		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "guest");
 
@@ -182,7 +182,7 @@ definition {
 
 		Publications.gotoReviewChanges(
 			gotoManagePublications = "true",
-			publicationsName = "Publication Name");
+			publicationName = "Publication Name");
 
 		PublicationsChanges.viewChangesViaChangesStyle(
 			changeCategory = "Documents Folder",
@@ -242,7 +242,7 @@ definition {
 			dmDocumentFile = "Document_1.txt",
 			dmDocumentTitle = "DM Document Title");
 
-		Publications.createNewPublication(publicationsName = "Publication Name");
+		Publications.createNewPublication(publicationName = "Publication Name");
 
 		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "guest");
 
@@ -298,9 +298,9 @@ definition {
 			changeDescription = "Test Test added a Documents Folder in Guest",
 			changeTitle = "DM Folder Name");
 
-		Publications.gotoPublish(publicationsName = "Publication Name");
+		Publications.gotoPublish(publicationName = "Publication Name");
 
-		Publications.publishPublication(publicationsName = "Publication Name");
+		Publications.publishPublication(publicationName = "Publication Name");
 
 		Navigator.openURL();
 
@@ -317,7 +317,7 @@ definition {
 
 	@priority = "4"
 	test PublishDocumentWithNewDocumentType {
-		Publications.createNewPublication(publicationsName = "Publication Name");
+		Publications.createNewPublication(publicationName = "Publication Name");
 
 		Navigator.openURL();
 
@@ -370,9 +370,9 @@ definition {
 			changeDescription = "Test Test added a Document in Guest",
 			changeTitle = "DM Document Title");
 
-		Publications.gotoPublish(publicationsName = "Publication Name");
+		Publications.gotoPublish(publicationName = "Publication Name");
 
-		Publications.publishPublication(publicationsName = "Publication Name");
+		Publications.publishPublication(publicationName = "Publication Name");
 
 		Navigator.openURL();
 
