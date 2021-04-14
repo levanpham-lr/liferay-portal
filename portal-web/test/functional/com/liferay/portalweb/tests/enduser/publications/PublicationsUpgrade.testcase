@@ -48,7 +48,7 @@ definition {
 
 		Publications.selectPublication(publicationsName = "Publication 2 Name");
 
-		Publications.gotoReviewPublications();
+		Publications.gotoReviewChanges();
 
 		PublicationsChanges.viewChangesViaChangesStyle(
 			changeCategory = "Web Content Article",

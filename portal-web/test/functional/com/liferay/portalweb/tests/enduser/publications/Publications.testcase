@@ -165,7 +165,7 @@ definition {
 
 		Publications.selectPublication(publicationsName = "Publication Name");
 
-		Publications.gotoReviewPublications();
+		Publications.gotoReviewChanges();
 
 		PublicationsChanges.viewChangesViaChangesStyle(
 			changeCategory = "Web Content Article",
@@ -195,7 +195,7 @@ definition {
 			changeUser = "Test Test",
 			publishedPublication = "true");
 
-		Publications.gotoReviewPublications();
+		Publications.gotoReviewChanges();
 
 		PublicationsChanges.viewChangesViaChangesStyle(
 			changeCategory = "Web Content Article",
@@ -325,7 +325,7 @@ definition {
 
 		PortletEntry.publish();
 
-		Publications.gotoReviewPublications();
+		Publications.gotoReviewChanges();
 
 		Publications.discardChanges(
 			changeCategory = "Dynamic Data Mapping Structure",
@@ -623,7 +623,7 @@ definition {
 		PortletEntry.publish();
 
 		Publications.schedulePublication(
-			gotoReviewPublications = "true",
+			gotoReviewChanges = "true",
 			publicationsName = "Publication Name 3");
 
 		Pause(locator1 = "240000");

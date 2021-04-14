@@ -223,7 +223,7 @@ definition {
 			key_webContentTitle = "WC WebContent Title",
 			locator1 = "WC#ENTRY_LIST_TITLE");
 
-		Publications.gotoReviewPublications();
+		Publications.gotoReviewChanges();
 
 		PublicationsChanges.viewChangesViaChangesStyle(
 			changeCategory = "Dynamic Data Mapping Structure",
@@ -317,7 +317,7 @@ definition {
 			locator1 = "AP#ASSET_ABSTRACT_TITLE",
 			value1 = "WC WebContent Title");
 
-		Publications.gotoReviewPublications();
+		Publications.gotoReviewChanges();
 
 		PublicationsChanges.viewChangesViaChangesStyle(
 			changeCategory = "Widget",

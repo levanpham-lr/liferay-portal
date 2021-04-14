@@ -180,7 +180,7 @@ definition {
 
 		DMDocument.addMultipleCP(dmDocumentFileList = "Document_1.jpg,Document_2.pdf,Document_3.png");
 
-		Publications.gotoReviewPublications(
+		Publications.gotoReviewChanges(
 			gotoManagePublications = "true",
 			publicationsName = "Publication Name");
 
@@ -198,7 +198,7 @@ definition {
 			assetType = "Documents Folder",
 			dmFolderName = "DM Folder 1 Name");
 
-		Publications.gotoReviewPublications();
+		Publications.gotoReviewChanges();
 
 		PublicationsChanges.viewChangesViaChangesStyle(
 			changeCategory = "Documents Folder",
@@ -218,7 +218,7 @@ definition {
 
 		RecycleBin.emptyCP();
 
-		Publications.gotoReviewPublications();
+		Publications.gotoReviewChanges();
 
 		PublicationsChanges.viewChangesViaChangesStyle(
 			changeCategory = "Documents Folder",
@@ -272,7 +272,7 @@ definition {
 			dmDocumentTitle = "DM Document Title Edit",
 			dmFolderName = "DM Folder Name");
 
-		Publications.gotoReviewPublications();
+		Publications.gotoReviewChanges();
 
 		PublicationsChanges.viewChangesViaChangesStyle(
 			changeCategory = "Document",
@@ -349,7 +349,7 @@ definition {
 
 		DMDocument.viewCP(dmDocumentTitle = "DM Document Title");
 
-		Publications.gotoReviewPublications();
+		Publications.gotoReviewChanges();
 
 		PublicationsChanges.viewChangesViaChangesStyle(
 			changeCategory = "Document",
