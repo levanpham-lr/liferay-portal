@@ -46,16 +46,25 @@ RoleItemSelectorViewDisplayContext roleItemSelectorViewDisplayContext = (RoleIte
 			if ((rowChecker != null) && rowChecker.isDisabled(role)) {
 				cssClass += " text-muted";
 			}
+
+			row.setData(
+				HashMapBuilder.<String, Object>put(
+					"id", role.getRoleId()
+				).put(
+					"name", role.getTitle(locale)
+				).build());
 			%>
 
 			<liferay-ui:search-container-column-text
 				cssClass="<%= cssClass %>"
-				property="name"
+				name="title"
+				value="<%= role.getTitle(locale) %>"
 			/>
 
 			<liferay-ui:search-container-column-text
 				cssClass="<%= cssClass %>"
-				property="description"
+				name="description"
+				value="<%= role.getDescription(locale) %>"
 			/>
 		</liferay-ui:search-container-row>
 
@@ -66,33 +75,67 @@ RoleItemSelectorViewDisplayContext roleItemSelectorViewDisplayContext = (RoleIte
 	</liferay-ui:search-container>
 </clay:container-fluid>
 
-<aui:script require="metal-dom/src/all/dom as dom">
-	var selectItemHandler = dom.delegate(
-		document.getElementById('<portlet:namespace />roleSelectorWrapper'),
-		'change',
-		'.entry input',
-		function (event) {
-			var checked = Liferay.Util.listCheckedExcept(
-				document.getElementById(
-					'<portlet:namespace /><%= roleItemSelectorViewDisplayContext.getSearchContainerId() %>'
-				),
-				'<portlet:namespace />allRowIds'
-			);
+<c:choose>
+	<c:when test="<%= roleItemSelectorViewDisplayContext.getItemSelectorCriterion() instanceof RoleItemSelectorCriterion %>">
+		<aui:script require="metal-dom/src/all/dom as dom">
+			var selectItemHandler = dom.delegate(
+				document.getElementById('<portlet:namespace />roleSelectorWrapper'),
+				'change',
+				'.entry input',
+				function (event) {
+					var checked = Liferay.Util.listCheckedExcept(
+						document.getElementById(
+							'<portlet:namespace /><%= roleItemSelectorViewDisplayContext.getSearchContainerId() %>'
+						),
+						'<portlet:namespace />allRowIds'
+					);
 
-			Liferay.Util.getOpener().Liferay.fire(
-				'<%= HtmlUtil.escapeJS(roleItemSelectorViewDisplayContext.getItemSelectedEventName()) %>',
-				{
-					data: {
-						value: checked,
-					},
+					Liferay.Util.getOpener().Liferay.fire(
+						'<%= HtmlUtil.escapeJS(roleItemSelectorViewDisplayContext.getItemSelectedEventName()) %>',
+						{
+							data: {
+							value: checked,
+							},
+						}
+					);
 				}
 			);
-		}
-	);
 
-	Liferay.on('destroyPortlet', function removeListener() {
-		selectItemHandler.removeListener();
+			Liferay.on('destroyPortlet', function removeListener() {
+				selectItemHandler.removeListener();
 
-		Liferay.detach('destroyPortlet', removeListener);
-	});
-</aui:script>
+				Liferay.detach('destroyPortlet', removeListener);
+			});
+		</aui:script>
+	</c:when>
+	<c:otherwise>
+		<aui:script use="liferay-search-container">
+			var searchContainer = Liferay.SearchContainer.get(
+				'<portlet:namespace /><%= HtmlUtil.escape(roleItemSelectorViewDisplayContext.getSearchContainerId()) %>'
+			);
+
+			searchContainer.on('rowToggled', (event) => {
+				var allSelectedElements = event.elements.allSelectedElements;
+				var selectedData = [];
+
+				allSelectedElements.each(function () {
+					var row = this.ancestor('tr');
+
+					var data = row.getDOM().dataset;
+
+					selectedData.push({
+						id: data.id,
+						name: data.name,
+					});
+				});
+
+				Liferay.Util.getOpener().Liferay.fire(
+					'<%= HtmlUtil.escapeJS(roleItemSelectorViewDisplayContext.getItemSelectedEventName()) %>',
+					{
+						data: selectedData,
+					}
+				);
+			});
+		</aui:script>
+	</c:otherwise>
+</c:choose>
