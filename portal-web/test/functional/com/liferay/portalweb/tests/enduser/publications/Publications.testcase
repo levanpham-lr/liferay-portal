@@ -167,17 +167,17 @@ definition {
 
 		Publications.gotoReviewPublications();
 
-		PublicationsChanges.viewPublicationsViaChangesStyle(
-			publicationsCategory = "Web Content Article",
-			publicationsSite = "Guest",
-			publicationsTitle = "WC WebContent Title",
-			publicationsType = "Deleted",
-			publicationsUser = "Test Test");
+		PublicationsChanges.viewChangesViaChangesStyle(
+			changeCategory = "Web Content Article",
+			changeSite = "Guest",
+			changeTitle = "WC WebContent Title",
+			changeType = "Deleted",
+			changeUser = "Test Test");
 
-		PublicationsChanges.viewPublicationsViaContextStyle(
-			publicationsCategory = "Web Content Article",
-			publicationsDescription = "Test Test deleted a Web Content Article in Guest",
-			publicationsTitle = "WC WebContent Title");
+		PublicationsChanges.viewChangesViaContextStyle(
+			changeCategory = "Web Content Article",
+			changeDescription = "Test Test deleted a Web Content Article in Guest",
+			changeTitle = "WC WebContent Title");
 
 		Publications.gotoPublish(publicationsName = "Publication Name");
 
@@ -187,27 +187,27 @@ definition {
 
 		Navigator.gotoNavTab(navTab = "History");
 
-		PublicationsChanges.viewPublicationsViaChangesStyle(
-			publicationsCategory = "Web Content Article",
-			publicationsSite = "Guest",
-			publicationsTitle = "WC WebContent Title",
-			publicationsType = "Deleted",
-			publicationsUser = "Test Test",
+		PublicationsChanges.viewChangesViaChangesStyle(
+			changeCategory = "Web Content Article",
+			changeSite = "Guest",
+			changeTitle = "WC WebContent Title",
+			changeType = "Deleted",
+			changeUser = "Test Test",
 			publishedPublication = "true");
 
 		Publications.gotoReviewPublications();
 
-		PublicationsChanges.viewPublicationsViaChangesStyle(
-			publicationsCategory = "Web Content Article",
-			publicationsSite = "Guest",
-			publicationsTitle = "WC WebContent Title 2 Edit",
-			publicationsType = "Added",
-			publicationsUser = "Test Test");
+		PublicationsChanges.viewChangesViaChangesStyle(
+			changeCategory = "Web Content Article",
+			changeSite = "Guest",
+			changeTitle = "WC WebContent Title 2 Edit",
+			changeType = "Added",
+			changeUser = "Test Test");
 
-		PublicationsChanges.viewPublicationsViaContextStyle(
-			publicationsCategory = "Web Content Article",
-			publicationsDescription = "Test Test added a Web Content Article in Guest",
-			publicationsTitle = "WC WebContent Title 2 Edit");
+		PublicationsChanges.viewChangesViaContextStyle(
+			changeCategory = "Web Content Article",
+			changeDescription = "Test Test added a Web Content Article in Guest",
+			changeTitle = "WC WebContent Title 2 Edit");
 
 		Publications.gotoPublish(publicationsName = "Publication 2 Name");
 

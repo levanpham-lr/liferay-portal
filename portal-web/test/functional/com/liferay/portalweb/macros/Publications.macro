@@ -1,11 +1,11 @@
 definition {
 
 	macro assertDiscardIsUnavailableForInactivePublication {
-		if (isSet(publicationsOrder)) {
-			var publicationsOrder = "${publicationsOrder}";
+		if (isSet(changeOrder)) {
+			var changeOrder = "${changeOrder}";
 		}
 		else {
-			var publicationsOrder = "1";
+			var changeOrder = "1";
 		}
 
 		Click(
@@ -14,8 +14,8 @@ definition {
 
 		Pause(locator1 = "1000");
 
-		var key_publicationsCategory = "${publicationsCategory}";
-		var key_publicationsTitle = "${publicationsTitle}";
+		var key_changeCategory = "${changeCategory}";
+		var key_changeTitle = "${changeTitle}";
 
 		Click(locator1 = "PublicationsChanges#PUBLICATIONS_CHANGE_TITLE");
 
