@@ -5478,9 +5478,9 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 				<then>
 					<beanshell>
 						<![CDATA[
-							import java.time.format.DateTimeFormatter;
-							import java.time.ZonedDateTime;
 							import java.time.ZoneId;
+							import java.time.ZonedDateTime;
+							import java.time.format.DateTimeFormatter;
 
 							DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy hh:mm:ss a zz");
 
@@ -5507,9 +5507,9 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 					<then>
 						<beanshell>
 							<![CDATA[
-								import java.time.format.DateTimeFormatter;
-								import java.time.ZonedDateTime;
 								import java.time.ZoneId;
+								import java.time.ZonedDateTime;
+								import java.time.format.DateTimeFormatter;
 
 								DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy hh:mm:ss a zz");
 
@@ -5619,9 +5619,9 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 				<then>
 					<beanshell>
 						<![CDATA[
-							import java.time.format.DateTimeFormatter;
-							import java.time.ZonedDateTime;
 							import java.time.ZoneId;
+							import java.time.ZonedDateTime;
+							import java.time.format.DateTimeFormatter;
 
 							DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("EEEE, MMMM dd, yyyy hh:mm:ss a zz");
 
@@ -5900,7 +5900,6 @@ war.path=${app.server.portal.dir}/</echo>
 					<beanshell>
 						<![CDATA[
 							import org.apache.commons.io.FileUtils;
-
 							import org.apache.tools.ant.DirectoryScanner;
 
 							public String getCatalinaLogFilesContent() {
@@ -5996,7 +5995,6 @@ war.path=${app.server.portal.dir}/</echo>
 					import java.io.File;
 
 					import org.apache.commons.io.FileUtils;
-
 					import org.apache.tools.ant.DirectoryScanner;
 
 					public boolean isContainedInCatalinaLogFiles(String searchString) {
