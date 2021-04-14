@@ -149,11 +149,11 @@ definition {
 
 		Pause(locator1 = "3000");
 
-		Publications.discardPublications(
-			conflictingPublications = "true",
-			entryTitle = "DM Document Title Edit",
-			publicationsCategory = "Asset",
-			publicationsTitle = "DM Document Title Edit");
+		Publications.discardChanges(
+			changeCategory = "Asset",
+			changeTitle = "DM Document Title Edit",
+			conflictingChanges = "true",
+			entryTitle = "DM Document Title Edit");
 
 		DMNavigator.openDocumentsAndMediaAdmin(siteURLKey = "guest");
 

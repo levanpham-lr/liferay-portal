@@ -9,17 +9,17 @@
 </thead>
 <tbody>
 <tr>
-	<td>CONTEXT_PUBLICATIONS_DESCRIPTION</td>
+	<td>CONTEXT_CHANGE_DESCRIPTION</td>
 	<td>//div[contains(@class,'publication-description') and contains(.,'${key_changeDescription}')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>CONTEXT_PUBLICATIONS_TITLE</td>
+	<td>CONTEXT_CHANGE_TITLE</td>
 	<td>//div[contains(@class,'publication-name') and contains(.,'${key_changeTitle}')]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>CONTEXT_PUBLICATIONS_CATEGORY_RADIO</td>
+	<td>CONTEXT_CHANGE_CATEGORY_RADIO</td>
 	<td>//input[contains(@type,'radio') and contains(@value,'${key_changeCategory}')]</td>
 	<td></td>
 </tr>

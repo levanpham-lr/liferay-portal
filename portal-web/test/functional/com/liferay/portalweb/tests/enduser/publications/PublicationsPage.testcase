@@ -189,17 +189,17 @@ definition {
 
 		Publications.gotoPublish(publicationsName = "Publication Name 1");
 
-		Publications.discardPublications(
-			conflictingPublications = "true",
-			entryTitle = "Content Page Name",
-			publicationsCategory = "Page",
-			publicationsTitle = "Content Page Name");
+		Publications.discardChanges(
+			changeCategory = "Page",
+			changeTitle = "Content Page Name",
+			conflictingChanges = "true",
+			entryTitle = "Content Page Name");
 
-		Publications.discardPublications(
-			conflictingPublications = "true",
-			entryTitle = "com.liferay.layout.page.template.model.LayoutPageTemplateStructure",
-			publicationsCategory = "com.liferay.layout.page.template.model.LayoutPageTemplateStructure",
-			publicationsTitle = "com.liferay.layout.page.template.model.LayoutPageTemplateStructure");
+		Publications.discardChanges(
+			changesCategory = "com.liferay.layout.page.template.model.LayoutPageTemplateStructure",
+			changesTitle = "com.liferay.layout.page.template.model.LayoutPageTemplateStructure",
+			conflictingChanges = "true",
+			entryTitle = "com.liferay.layout.page.template.model.LayoutPageTemplateStructure");
 
 		AssertElementNotPresent(locator1 = "Publications#NEEDS_MANUAL_RESOLUTION_TABLE");
 	}

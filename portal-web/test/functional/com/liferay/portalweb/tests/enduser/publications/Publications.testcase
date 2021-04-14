@@ -233,11 +233,11 @@ definition {
 
 		Pause(locator1 = "3000");
 
-		Publications.discardPublications(
-			conflictingPublications = "true",
-			entryTitle = "WC WebContent Title 2 Edit",
-			publicationsCategory = "Asset",
-			publicationsTitle = "WC WebContent Title 2 Edit");
+		Publications.discardChanges(
+			changeCategory = "Asset",
+			changeTitle = "WC WebContent Title 2 Edit",
+			conflictingChanges = "true",
+			entryTitle = "WC WebContent Title 2 Edit");
 
 		Navigator.openURL();
 
@@ -327,9 +327,9 @@ definition {
 
 		Publications.gotoReviewPublications();
 
-		Publications.discardPublications(
-			publicationsCategory = "Dynamic Data Mapping Structure",
-			publicationsTitle = "WC Structure Name");
+		Publications.discardChanges(
+			changeCategory = "Dynamic Data Mapping Structure",
+			changeTitle = "WC Structure Name");
 
 		Navigator.openURL();
 

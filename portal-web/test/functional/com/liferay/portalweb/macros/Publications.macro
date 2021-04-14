@@ -111,15 +111,15 @@ definition {
 		Alert.viewSuccessMessage();
 	}
 
-	macro discardPublications {
-		if (isSet(publicationsOrder)) {
-			var publicationsOrder = "${publicationsOrder}";
+	macro discardChanges {
+		if (isSet(changeOrder)) {
+			var changeOrder = "${changeOrder}";
 		}
 		else {
-			var publicationsOrder = "1";
+			var changeOrder = "1";
 		}
 
-		if ("${conflictingPublications}" == "true") {
+		if ("${conflictingChanges}" == "true") {
 			Click(
 				key_entryTitle = "${entryTitle}",
 				locator1 = "Publications#CONFLICTING_CHANGES_DISCARD_ELLIPSIS");
@@ -127,8 +127,8 @@ definition {
 			MenuItem.click(menuItem = "Discard Change");
 		}
 		else {
-			var key_publicationsCategory = "${publicationsCategory}";
-			var key_publicationsTitle = "${publicationsTitle}";
+			var key_changeCategory = "${changeCategory}";
+			var key_changeTitle = "${changeTitle}";
 
 			Click(locator1 = "PublicationsChanges#PUBLICATIONS_CHANGE_TITLE");
 
@@ -141,12 +141,12 @@ definition {
 
 		AssertElementPresent(locator1 = "Publications#DISCARDED_CHANGES_TITLE");
 
-		var key_publicationsCategory = "${publicationsCategory}";
-		var key_publicationsTitle = "${publicationsTitle}";
+		var key_changeCategory = "${changeCategory}";
+		var key_changeTitle = "${changeTitle}";
 
 		AssertTextEquals.assertPartialText(
-			locator1 = "PublicationsChanges#CONTEXT_PUBLICATIONS_TITLE",
-			value1 = "${publicationsTitle}");
+			locator1 = "PublicationsChanges#CONTEXT_CHANGE_TITLE",
+			value1 = "${changeTitle}");
 
 		Click(
 			key_text = "Discard",
