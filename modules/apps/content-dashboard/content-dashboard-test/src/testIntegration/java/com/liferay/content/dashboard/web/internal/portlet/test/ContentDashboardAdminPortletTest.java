@@ -278,8 +278,8 @@ public class ContentDashboardAdminPortletTest {
 		Assert.assertTrue(
 			onClickConfiguration.contains(
 				HtmlUtil.escapeJS(
-					"mvcRenderCommandName=/edit_content_dashboard_" +
-						"configuration")));
+					"mvcRenderCommandName=" +
+						"/edit_content_dashboard_configuration")));
 	}
 
 	@Test
