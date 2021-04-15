@@ -103,7 +103,7 @@
 <!--DOCUMENT_LIBRARY-->
 <tr>
     <td>UPLOAD_FIELD_CLEAR_BUTTON</td>
-    <td>//button[text()='Clear']</td>
+    <td>//button[contains(@class,'clear')]</td>
     <td></td>
 </tr>
 <tr>
