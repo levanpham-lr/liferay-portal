@@ -102,6 +102,36 @@ definition {
 		Refresh();
 	}
 
+	macro assignEntryThroughTableView {
+		Click(
+			key_itemName = "${itemName}",
+			locator1 = "AppBuilder#VERTICAL_ELLIPSIS_BUTTON");
+
+		while (IsElementNotPresent(key_menuItem = "Assign to", locator1 = "MenuItem#ANY_MENU_ITEM")) {
+			Refresh();
+			Pause(locator1 = "3000");
+			Click(
+				key_itemName = "${itemName}",
+				locator1 = "AppBuilder#VERTICAL_ELLIPSIS_BUTTON");
+		}
+
+		MenuItem.clickNoError(menuItem = "Assign to");
+
+		Click(locator1 = "AppBuilderWorkflow#SELECT_NEW_ASSIGNEE_BUTTON");
+
+		Type(
+			locator1 = "AppBuilderWorkflow#SELECT_NEW_ASSIGNEE_SEARCH_FIELD",
+			value1 = "${assignee}");
+
+		Click(
+			key_assignee = "${assignee}",
+			locator1 = "AppBuilderWorkflow#SELECT_NEW_ASSIGNEE");
+
+		Button.click(button = "Done");
+
+		AppBuilderAppAdmin.waitForItemPresentOnTable(itemName = "${assignee}");
+	}
+
 	macro clickBackButton {
 		Click(locator1 = "AppBuilderWorkflow#BACK_BUTTON");
 	}
