@@ -88,12 +88,12 @@ public abstract class BaseWorkflowInstanceResourceImpl
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "WorkflowInstance")})
 	public Page<WorkflowInstance> getWorkflowInstancesPage(
-			@Parameter(hidden = true) @QueryParam("assetClassNames")
-				String[] assetClassNames,
-			@Parameter(hidden = true) @QueryParam("assetPrimaryKeys")
-				Long[] assetPrimaryKeys,
-			@Parameter(hidden = true) @QueryParam("completed")
-				Boolean completed,
+			@Parameter(hidden = true) @QueryParam("assetClassNames") String[]
+				assetClassNames,
+			@Parameter(hidden = true) @QueryParam("assetPrimaryKeys") Long[]
+				assetPrimaryKeys,
+			@Parameter(hidden = true) @QueryParam("completed") Boolean
+				completed,
 			@Context Pagination pagination)
 		throws Exception {
 

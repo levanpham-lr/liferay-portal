@@ -120,8 +120,8 @@ public abstract class BaseUserAccountResourceImpl
 	public Response postUserAccountBatch(
 			@NotNull @Parameter(hidden = true) @PathParam("portalInstanceId")
 				String portalInstanceId,
-			@Parameter(hidden = true) @QueryParam("callbackURL")
-				String callbackURL,
+			@Parameter(hidden = true) @QueryParam("callbackURL") String
+				callbackURL,
 			Object object)
 		throws Exception {
 
