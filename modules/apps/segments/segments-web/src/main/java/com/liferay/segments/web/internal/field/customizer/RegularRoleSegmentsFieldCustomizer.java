@@ -16,7 +16,6 @@ package com.liferay.segments.web.internal.field.customizer;
 
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
-import com.liferay.petra.portlet.url.builder.PortletURLBuilder;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -36,6 +35,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -108,17 +108,15 @@ public class RegularRoleSegmentsFieldCustomizer
 			regularRoleItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 				Collections.singletonList(new UUIDItemSelectorReturnType()));
 
+			PortletURL portletURL = _itemSelector.getItemSelectorURL(
+				RequestBackedPortletURLFactoryUtil.create(portletRequest),
+				"selectEntity", regularRoleItemSelectorCriterion);
+
 			return new Field.SelectEntity(
 				"selectEntity",
 				getSelectEntityTitle(
 					_portal.getLocale(portletRequest), Role.class.getName()),
-				PortletURLBuilder.create(
-					_itemSelector.getItemSelectorURL(
-						RequestBackedPortletURLFactoryUtil.create(
-							portletRequest),
-						"selectEntity", regularRoleItemSelectorCriterion)
-				).buildString(),
-				true);
+				portletURL.toString(), true);
 		}
 		catch (Exception exception) {
 			if (_log.isWarnEnabled()) {

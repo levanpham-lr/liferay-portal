@@ -94,7 +94,7 @@ RoleItemSelectorViewDisplayContext roleItemSelectorViewDisplayContext = (RoleIte
 						'<%= HtmlUtil.escapeJS(roleItemSelectorViewDisplayContext.getItemSelectedEventName()) %>',
 						{
 							data: {
-							value: checked,
+								value: checked,
 							},
 						}
 					);
@@ -114,7 +114,7 @@ RoleItemSelectorViewDisplayContext roleItemSelectorViewDisplayContext = (RoleIte
 				'<portlet:namespace /><%= HtmlUtil.escape(roleItemSelectorViewDisplayContext.getSearchContainerId()) %>'
 			);
 
-			searchContainer.on('rowToggled', (event) => {
+			searchContainer.on('rowToggled', function (event) {
 				var allSelectedElements = event.elements.allSelectedElements;
 				var selectedData = [];
 
