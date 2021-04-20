@@ -25,9 +25,9 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.asset.categories.navigation.web.internal.configuration.CPAssetCategoriesNavigationPortletInstanceConfiguration;
 import com.liferay.commerce.product.constants.CPAttachmentFileEntryConstants;
-import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
+import com.liferay.commerce.product.url.CPFriendlyURL;
 import com.liferay.friendly.url.model.FriendlyURLEntry;
 import com.liferay.friendly.url.service.FriendlyURLEntryLocalService;
 import com.liferay.petra.string.StringBundler;
@@ -60,6 +60,7 @@ public class CPAssetCategoriesNavigationDisplayContext {
 			AssetVocabularyService assetVocabularyService,
 			CommerceMediaResolver commerceMediaResolver,
 			CPAttachmentFileEntryService cpAttachmentFileEntryService,
+			CPFriendlyURL cpFriendlyURL,
 			FriendlyURLEntryLocalService friendlyURLEntryLocalService,
 			Portal portal)
 		throws ConfigurationException {
@@ -69,6 +70,7 @@ public class CPAssetCategoriesNavigationDisplayContext {
 		_assetVocabularyService = assetVocabularyService;
 		_commerceMediaResolver = commerceMediaResolver;
 		_cpAttachmentFileEntryService = cpAttachmentFileEntryService;
+		_cpFriendlyURL = cpFriendlyURL;
 		_friendlyURLEntryLocalService = friendlyURLEntryLocalService;
 		_portal = portal;
 
@@ -250,7 +252,11 @@ public class CPAssetCategoriesNavigationDisplayContext {
 		String languageId = LanguageUtil.getLanguageId(
 			themeDisplay.getLocale());
 
-		return groupFriendlyURL + CPConstants.SEPARATOR_ASSET_CATEGORY_URL +
+		String assetCategoryURLSeparator =
+			_cpFriendlyURL.getAssetCategoryURLSeparator(
+				themeDisplay.getCompanyId());
+
+		return groupFriendlyURL + assetCategoryURLSeparator +
 			friendlyURLEntry.getUrlTitle(languageId);
 	}
 
@@ -379,6 +385,7 @@ public class CPAssetCategoriesNavigationDisplayContext {
 	private final CPAssetCategoriesNavigationPortletInstanceConfiguration
 		_cpAssetCategoriesNavigationPortletInstanceConfiguration;
 	private final CPAttachmentFileEntryService _cpAttachmentFileEntryService;
+	private final CPFriendlyURL _cpFriendlyURL;
 	private long _displayStyleGroupId;
 	private final FriendlyURLEntryLocalService _friendlyURLEntryLocalService;
 	private final HttpServletRequest _httpServletRequest;
