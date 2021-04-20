@@ -53,6 +53,9 @@ public class CPConstants {
 
 	public static final String SERVICE_NAME = "com.liferay.commerce.product";
 
+	public static final String SERVICE_NAME_CP_FRIENDLY_URL =
+		"com.liferay.commerce.product.friendly.url";
+
 	public static final String WEEKLY_SUBSCRIPTION_TYPE = "weekly";
 
 	public static final String YEARLY_SUBSCRIPTION_TYPE = "yearly";
