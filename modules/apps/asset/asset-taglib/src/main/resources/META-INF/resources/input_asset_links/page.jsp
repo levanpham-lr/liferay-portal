@@ -168,8 +168,6 @@
 						});
 					}
 				},
-				selectEventName:
-					'<%= inputAssetLinksDisplayContext.getEventName() %>',
 				title: event.currentTarget.attr('data-title'),
 				url: event.currentTarget.attr('data-href'),
 			});
