@@ -302,8 +302,10 @@ definition {
 		Publications.publishPublication(publicationName = "Publication Name");
 	}
 
-	@priority = "4"
+	@priority = "5"
 	test ConflictingPublicationsNeedManualResolution {
+		property portal.acceptance = "true";
+
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
@@ -651,6 +653,8 @@ definition {
 
 	@priority = "5"
 	test RescheduleAndCancelScheduledPublication {
+		property portal.acceptance = "true";
+
 		Publications.createNewPublication(publicationName = "Publication Name");
 
 		Navigator.openURL();
@@ -682,6 +686,8 @@ definition {
 
 	@priority = "5"
 	test RevertPublicationAndPublishNow {
+		property portal.acceptance = "true";
+
 		Publications.createNewPublication(publicationName = "Publication Name");
 
 		Navigator.openURL();
