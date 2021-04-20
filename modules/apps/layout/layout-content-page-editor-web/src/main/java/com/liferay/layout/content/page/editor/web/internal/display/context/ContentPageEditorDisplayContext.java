@@ -489,7 +489,8 @@ public class ContentPageEditorDisplayContext {
 			).put(
 				"previewPageURL",
 				getResourceURL(
-					"/content_layout/get_page_preview", !isLayoutPageTemplate())
+					"/layout_content_page_editor/get_page_preview",
+					isPublicLayout())
 			).put(
 				"publishURL", getPublishURL()
 			).put(
@@ -772,18 +773,14 @@ public class ContentPageEditorDisplayContext {
 		return _sidebarPanels;
 	}
 
-	protected boolean isLayoutPageTemplate() {
+	protected boolean isPublicLayout() {
 		Layout publishedLayout = _getPublishedLayout();
 
-		LayoutPageTemplateEntry layoutPageTemplateEntry =
-			LayoutPageTemplateEntryLocalServiceUtil.
-				fetchLayoutPageTemplateEntryByPlid(publishedLayout.getPlid());
-
-		if (layoutPageTemplateEntry != null) {
-			return true;
+		if (publishedLayout.isPrivateLayout()) {
+			return false;
 		}
 
-		return false;
+		return true;
 	}
 
 	protected final HttpServletRequest httpServletRequest;
