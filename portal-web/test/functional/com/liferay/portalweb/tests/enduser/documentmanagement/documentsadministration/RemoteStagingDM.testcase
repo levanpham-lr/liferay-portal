@@ -1,6 +1,7 @@
 @component-name = "portal-collaboration"
 definition {
 
+	property custom.properties = "tunneling.servlet.shared.secret=1234567890123456${line.separator}auth.verifier.TunnelAuthVerifier.hosts.allowed=";
 	property portal.release = "true";
 	property portal.upstream = "true";
 	property testray.main.component.name = "Documents Management";
@@ -155,8 +156,6 @@ definition {
 	@description = "This is a use case for LPS-89175."
 	@priority = "3"
 	test StagingRemoteLiveDeleteDocumentWithWebContentField {
-		property custom.properties = "tunneling.servlet.shared.secret=1234567890123456${line.separator}auth.verifier.TunnelAuthVerifier.hosts.allowed=";
-
 		Staging.remoteStagingSetUp(siteName = "Site Name");
 
 		Navigator.gotoSitePage(
