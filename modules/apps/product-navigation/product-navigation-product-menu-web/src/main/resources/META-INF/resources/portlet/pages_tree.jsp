@@ -18,6 +18,12 @@
 
 <%
 LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayContext(liferayPortletRequest);
+
+Long selPlid = layout.getPlid();
+
+if (layout.isTypeControlPanel()) {
+	selPlid = layoutsTreeDisplayContext.getSelPlid();
+}
 %>
 
 <div id="<%= liferayPortletResponse.getNamespace() + "-layout-finder" %>">
@@ -177,7 +183,7 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 		privateLayout="<%= layoutsTreeDisplayContext.isPrivateLayout() %>"
 		rootLinkTemplate='<a class="{cssClass}" href="javascript:void(0);" id="{id}" title="{title}">{label}</a>'
 		rootNodeName="<%= siteGroup.getLayoutRootNodeName(layoutsTreeDisplayContext.isPrivateLayout(), locale) %>"
-		selPlid="<%= plid %>"
+		selPlid="<%= selPlid %>"
 		treeId="pagesTree"
 	/>
 

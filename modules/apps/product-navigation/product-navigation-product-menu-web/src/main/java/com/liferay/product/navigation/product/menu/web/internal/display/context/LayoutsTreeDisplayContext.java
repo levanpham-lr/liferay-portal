@@ -25,6 +25,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
+import com.liferay.portal.kernel.model.LayoutConstants;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -305,6 +306,11 @@ public class LayoutsTreeDisplayContext {
 		portletURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 
 		return portletURL.toString();
+	}
+
+	public long getSelPlid() {
+		return ParamUtil.get(
+			_liferayPortletRequest, "selPlid", LayoutConstants.DEFAULT_PLID);
 	}
 
 	public String getViewCollectionItemsURL()
