@@ -123,7 +123,7 @@
 											</ul>
 										</aui:field-wrapper>
 									</c:when>
-									<c:when test="<%= liveGroup.isStagedPortlet(portlet.getRootPortletId()) %>">
+									<c:when test="<%= (liveGroup != null) && liveGroup.isStagedPortlet(portlet.getRootPortletId()) %>">
 
 										<%
 										request.setAttribute("render_controls.jsp-action", Constants.PUBLISH);
