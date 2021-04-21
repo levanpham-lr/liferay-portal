@@ -492,8 +492,7 @@ public abstract class BaseDataRecordResourceImpl
 
 		for (DataRecord dataRecord : dataRecords) {
 			postDataDefinitionDataRecord(
-				Long.valueOf((String)parameters.get("dataDefinitionId")),
-				dataRecord);
+				(Long)parameters.get("dataDefinitionId"), dataRecord);
 		}
 	}
 
