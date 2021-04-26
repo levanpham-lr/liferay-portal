@@ -19,7 +19,6 @@ import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.document.library.kernel.service.DLFileVersionLocalService;
 import com.liferay.document.library.kernel.service.DLFolderLocalService;
-import com.liferay.document.library.kernel.store.Store;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderTracker;
 import com.liferay.dynamic.data.mapping.data.provider.settings.DDMDataProviderSettingsProvider;
 import com.liferay.dynamic.data.mapping.internal.upgrade.v1_0_0.UpgradeCompanyId;
@@ -74,6 +73,7 @@ import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.kernel.upgrade.UpgradeCTModel;
 import com.liferay.portal.kernel.upgrade.UpgradeMVCCVersion;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
+import com.liferay.portlet.documentlibrary.store.StoreFactory;
 import com.liferay.view.count.service.ViewCountEntryLocalService;
 
 import org.osgi.framework.BundleContext;
@@ -126,7 +126,7 @@ public class DDMServiceUpgrade implements UpgradeStepRegistrator {
 					_dlFolderLocalService, _expandoRowLocalService,
 					_expandoTableLocalService, _expandoValueLocalService,
 					_resourceActions, _resourceLocalService,
-					_resourcePermissionLocalService, _store,
+					_resourcePermissionLocalService, _storeFactory.getStore(),
 					_viewCountEntryLocalService),
 			new UpgradeLastPublishDate());
 
@@ -489,7 +489,7 @@ public class DDMServiceUpgrade implements UpgradeStepRegistrator {
 	private ResourcePermissionLocalService _resourcePermissionLocalService;
 
 	@Reference(target = "(dl.store.upgrade=true)")
-	private Store _store;
+	private StoreFactory _storeFactory;
 
 	@Reference
 	private ViewCountEntryLocalService _viewCountEntryLocalService;

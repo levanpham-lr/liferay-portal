@@ -24,7 +24,6 @@ import com.liferay.document.library.internal.upgrade.v1_1_0.UpgradeSchema;
 import com.liferay.document.library.internal.upgrade.v1_1_2.UpgradeDLFileEntryType;
 import com.liferay.document.library.internal.upgrade.v2_0_0.UpgradeCompanyId;
 import com.liferay.document.library.kernel.model.DLFileEntry;
-import com.liferay.document.library.kernel.store.Store;
 import com.liferay.portal.configuration.upgrade.PrefsPropsToConfigurationUpgradeHelper;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.ResourceLocalService;
@@ -33,6 +32,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeCTModel;
 import com.liferay.portal.kernel.upgrade.UpgradeMVCCVersion;
 import com.liferay.portal.kernel.upgrade.UpgradeViewCount;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
+import com.liferay.portlet.documentlibrary.store.StoreFactory;
 import com.liferay.subscription.service.SubscriptionLocalService;
 import com.liferay.view.count.service.ViewCountEntryLocalService;
 
@@ -47,7 +47,9 @@ public class DLServiceUpgrade implements UpgradeStepRegistrator {
 
 	@Override
 	public void register(Registry registry) {
-		registry.register("0.0.1", "1.0.0", new UpgradeDocumentLibrary(_store));
+		registry.register(
+			"0.0.1", "1.0.0",
+			new UpgradeDocumentLibrary(_storeFactory.getStore()));
 
 		registry.register("1.0.0", "1.0.1", new UpgradeDLFileShortcut());
 
@@ -106,7 +108,7 @@ public class DLServiceUpgrade implements UpgradeStepRegistrator {
 	private ResourceLocalService _resourceLocalService;
 
 	@Reference(target = "(dl.store.upgrade=true)")
-	private Store _store;
+	private StoreFactory _storeFactory;
 
 	@Reference
 	private SubscriptionLocalService _subscriptionLocalService;

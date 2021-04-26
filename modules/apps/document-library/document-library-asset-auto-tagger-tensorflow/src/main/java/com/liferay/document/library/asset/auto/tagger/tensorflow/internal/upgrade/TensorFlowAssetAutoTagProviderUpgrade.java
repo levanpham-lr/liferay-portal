@@ -15,9 +15,9 @@
 package com.liferay.document.library.asset.auto.tagger.tensorflow.internal.upgrade;
 
 import com.liferay.document.library.asset.auto.tagger.tensorflow.internal.upgrade.v0_0_2.UpgradeTensorFlowModel;
-import com.liferay.document.library.kernel.store.Store;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
+import com.liferay.portlet.documentlibrary.store.StoreFactory;
 
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.annotations.Component;
@@ -35,7 +35,8 @@ public class TensorFlowAssetAutoTagProviderUpgrade
 		registry.register(
 			"0.0.0", "0.0.2",
 			new UpgradeTensorFlowModel(
-				_configurationAdmin, _configurationProvider, _store));
+				_configurationAdmin, _configurationProvider,
+				_storeFactory.getStore()));
 	}
 
 	@Reference
@@ -45,6 +46,6 @@ public class TensorFlowAssetAutoTagProviderUpgrade
 	private ConfigurationProvider _configurationProvider;
 
 	@Reference(target = "(dl.store.upgrade=true)")
-	private Store _store;
+	private StoreFactory _storeFactory;
 
 }
