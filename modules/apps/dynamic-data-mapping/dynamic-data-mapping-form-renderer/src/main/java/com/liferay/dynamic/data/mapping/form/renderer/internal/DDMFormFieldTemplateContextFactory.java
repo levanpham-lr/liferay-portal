@@ -125,6 +125,8 @@ public class DDMFormFieldTemplateContextFactory {
 		DDMFormFieldRenderingContext ddmFormFieldRenderingContext =
 			new DDMFormFieldRenderingContext();
 
+		ddmFormFieldRenderingContext.setDDMFormInstanceId(
+			_ddmFormRenderingContext.getDDMFormInstanceId());
 		ddmFormFieldRenderingContext.setHttpServletRequest(
 			_ddmFormRenderingContext.getHttpServletRequest());
 		ddmFormFieldRenderingContext.setHttpServletResponse(
@@ -141,8 +143,6 @@ public class DDMFormFieldTemplateContextFactory {
 			_ddmFormRenderingContext.isReturnFullContext());
 		ddmFormFieldRenderingContext.setViewMode(
 			_ddmFormRenderingContext.isViewMode());
-		ddmFormFieldRenderingContext.setDDMFormInstanceId(
-			_ddmFormRenderingContext.getDDMFormInstanceId());
 
 		return ddmFormFieldRenderingContext;
 	}
