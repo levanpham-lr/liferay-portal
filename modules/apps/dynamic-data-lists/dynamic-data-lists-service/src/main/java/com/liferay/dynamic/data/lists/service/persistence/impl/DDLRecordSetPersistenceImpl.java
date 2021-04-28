@@ -3836,11 +3836,21 @@ public class DDLRecordSetPersistenceImpl
 	@Override
 	public void cacheResult(List<DDLRecordSet> ddlRecordSets) {
 		for (DDLRecordSet ddlRecordSet : ddlRecordSets) {
-			if (entityCache.getResult(
-					DDLRecordSetImpl.class, ddlRecordSet.getPrimaryKey()) ==
-						null) {
+			DDLRecordSet cachedDDLRecordSet =
+				(DDLRecordSet)entityCache.getResult(
+					DDLRecordSetImpl.class, ddlRecordSet.getPrimaryKey());
 
+			if (cachedDDLRecordSet == null) {
 				cacheResult(ddlRecordSet);
+			}
+			else {
+				DDLRecordSetModelImpl ddlRecordSetModelImpl =
+					(DDLRecordSetModelImpl)ddlRecordSet;
+				DDLRecordSetModelImpl cachedDDLRecordSetModelImpl =
+					(DDLRecordSetModelImpl)cachedDDLRecordSet;
+
+				ddlRecordSetModelImpl.setDDMFormValues(
+					cachedDDLRecordSetModelImpl.getDDMFormValues());
 			}
 		}
 	}

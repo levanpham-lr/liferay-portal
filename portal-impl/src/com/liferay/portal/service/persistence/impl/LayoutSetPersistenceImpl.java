@@ -2318,10 +2318,24 @@ public class LayoutSetPersistenceImpl
 				continue;
 			}
 
-			if (EntityCacheUtil.getResult(
-					LayoutSetImpl.class, layoutSet.getPrimaryKey()) == null) {
+			LayoutSet cachedLayoutSet = (LayoutSet)EntityCacheUtil.getResult(
+				LayoutSetImpl.class, layoutSet.getPrimaryKey());
 
+			if (cachedLayoutSet == null) {
 				cacheResult(layoutSet);
+			}
+			else {
+				LayoutSetModelImpl layoutSetModelImpl =
+					(LayoutSetModelImpl)layoutSet;
+				LayoutSetModelImpl cachedLayoutSetModelImpl =
+					(LayoutSetModelImpl)cachedLayoutSet;
+
+				layoutSetModelImpl.setCompanyFallbackVirtualHostname(
+					cachedLayoutSetModelImpl.
+						getCompanyFallbackVirtualHostname());
+
+				layoutSetModelImpl.setVirtualHostnames(
+					cachedLayoutSetModelImpl.getVirtualHostnames());
 			}
 		}
 	}
