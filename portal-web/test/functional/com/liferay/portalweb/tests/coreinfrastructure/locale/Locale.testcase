@@ -574,10 +574,12 @@ definition {
 			defaultPortalLanguage = "Italian (Italy)",
 			displaySettings = "Display Settings");
 
-		HeadlessPortalInstanceAPI.addPortalInstance(
-			domain = "www.able.com",
-			portalInstanceId = "www.able.com",
-			virtualHost = "www.able.com");
+		PortalInstances.openVirtualInstancesAdmin();
+
+		PortalInstances.addCP(
+			mailDomain = "www.able.com",
+			virtualHost = "www.able.com",
+			webId = "www.able.com");
 
 		User.firstLoginPG(
 			localization = "IT",
