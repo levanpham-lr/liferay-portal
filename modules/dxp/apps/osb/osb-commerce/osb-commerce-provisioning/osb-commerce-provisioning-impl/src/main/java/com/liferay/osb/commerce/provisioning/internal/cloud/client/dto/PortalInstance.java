@@ -16,6 +16,8 @@ package com.liferay.osb.commerce.provisioning.internal.cloud.client.dto;
 
 import com.liferay.petra.string.StringBundler;
 
+import java.util.Map;
+
 /**
  * @author Ivica Cardic
  */
@@ -31,6 +33,14 @@ public class PortalInstance {
 
 	public String getPortalInstanceId() {
 		return _portalInstanceId;
+	}
+
+	public String getPortalInstanceInitializerKey() {
+		return _portalInstanceInitializerKey;
+	}
+
+	public Map<String, String> getPortalInstanceInitializerPayload() {
+		return _portalInstanceInitializerPayload;
 	}
 
 	public String getVirtualHost() {
@@ -57,6 +67,18 @@ public class PortalInstance {
 		_portalInstanceId = portalInstanceId;
 	}
 
+	public void setPortalInstanceInitializerKey(
+		String portalInstanceInitializerKey) {
+
+		_portalInstanceInitializerKey = portalInstanceInitializerKey;
+	}
+
+	public void setPortalInstanceInitializerPayload(
+		Map<String, String> portalInstanceInitializerPayload) {
+
+		_portalInstanceInitializerPayload = portalInstanceInitializerPayload;
+	}
+
 	public void setVirtualHost(String virtualHost) {
 		_virtualHost = virtualHost;
 	}
@@ -66,13 +88,19 @@ public class PortalInstance {
 		return StringBundler.concat(
 			"{\"active\":\"", _active, "\", \"companyId\":\"", _companyId,
 			"\",\"domain\":\"", _domain, "\",\"portalInstanceId\":\"",
-			_portalInstanceId, "\", \"virtualHost\":\"", _virtualHost, "\"}");
+			_portalInstanceId, "\",\"_portalInstanceInitializerKey\":\"",
+			_portalInstanceInitializerKey,
+			"\",\"_portalInstanceInitializerPayload\":\"",
+			_portalInstanceInitializerPayload, "\", \"virtualHost\":\"",
+			_virtualHost, "\"}");
 	}
 
 	private boolean _active;
 	private long _companyId;
 	private String _domain;
 	private String _portalInstanceId;
+	private String _portalInstanceInitializerKey;
+	private Map<String, String> _portalInstanceInitializerPayload;
 	private String _virtualHost;
 
 }
