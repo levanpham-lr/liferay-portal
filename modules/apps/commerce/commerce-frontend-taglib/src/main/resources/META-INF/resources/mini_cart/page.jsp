@@ -46,12 +46,12 @@
 				contentRendererModuleUrl: '<%= cartView.getValue() %>',
 			};
 
-	<%
+		<%
+			}
 		}
-	}
 
-	if (!labels.isEmpty()) {
-	%>
+		if (!labels.isEmpty()) {
+		%>
 
 		initialProps.labels = {};
 

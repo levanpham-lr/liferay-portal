@@ -20,7 +20,9 @@ const SIGN_IN_WRAPPER = 'sign-in-wrapper';
 const SOLID_AFTER_PIXELS = 56;
 
 const banner = window.document.querySelector(`#${BANNER}`);
-const scrollingElement = window.document.querySelector(`.${PARALLAX_CONTAINER}`);
+const scrollingElement = window.document.querySelector(
+	`.${PARALLAX_CONTAINER}`
+);
 const signInBtn = window.document.querySelector(`.${SIGN_IN_BTN}`);
 
 function isButton(target) {
