@@ -19,9 +19,6 @@ package com.liferay.osb.commerce.provisioning.constants;
  */
 public class OSBCommerceProvisioningConstants {
 
-	public static final String FRIENDLY_URL_OSB_COMMERCE_PORTAL_INSTANCE_ADMIN =
-		"/osb-commerce-portal-instance-admin";
-
 	public static final String FRIENDLY_URL_OSB_COMMERCE_PROVISIONING =
 		"/osb-commerce-provisioning";
 
