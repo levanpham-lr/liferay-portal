@@ -2,7 +2,6 @@ dependencies {
 	compileInclude group: "org.apache.httpcomponents", name: "httpclient", version: "4.5.3"
 	compileInclude group: "org.apache.httpcomponents", name: "httpcore", version: "4.4.6"
 
-	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
-	compileOnly project(":dxp:apps:osb:osb-commerce:osb-commerce-provisioning:headless:headless-osb-commerce-portal-instance-client")
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api", version: "7.3.10.fp1"
 	compileOnly project(":dxp:apps:osb:osb-commerce:osb-commerce-provisioning:osb-commerce-provisioning-api")
 }

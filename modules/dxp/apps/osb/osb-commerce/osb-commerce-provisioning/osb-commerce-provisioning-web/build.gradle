@@ -5,6 +5,6 @@ buildCSS {
 }
 
 dependencies {
-	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api", version: "7.3.10.fp1"
 	compileOnly project(":dxp:apps:osb:osb-commerce:osb-commerce-provisioning:osb-commerce-provisioning-api")
 }
