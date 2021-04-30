@@ -82,7 +82,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TimeZone;
-import java.util.stream.Stream;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
@@ -516,13 +515,7 @@ public class AssetPublisherHelperImpl implements AssetPublisherHelper {
 			}
 		}
 
-		Stream<String> stream = allAssetTagNames.stream();
-
-		return stream.map(
-			String::toLowerCase
-		).toArray(
-			String[]::new
-		);
+		return allAssetTagNames.toArray(new String[0]);
 	}
 
 	@Override
