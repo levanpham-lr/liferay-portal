@@ -99,13 +99,9 @@ public class CommercePaymentServlet extends HttpServlet {
 			CommercePaymentResult commercePaymentResult = _startPayment(
 				httpServletRequest);
 
-			if (!commercePaymentResult.isSuccess()) {
-				httpServletResponse.sendRedirect(_nextUrl);
+			if (commercePaymentResult.isSuccess() &&
+				commercePaymentResult.isOnlineRedirect()) {
 
-				return;
-			}
-
-			if (commercePaymentResult.isOnlineRedirect()) {
 				URL portalURL = new URL(
 					_portal.getPortalURL(httpServletRequest));
 
@@ -151,6 +147,33 @@ public class CommercePaymentServlet extends HttpServlet {
 
 				_commercePaymentEngine.completePayment(
 					_commerceOrderId, null, httpServletRequest);
+
+				httpServletResponse.sendRedirect(_nextUrl);
+			}
+
+			if (commercePaymentResult.isSuccess() &&
+				(CommercePaymentConstants.
+					COMMERCE_PAYMENT_METHOD_TYPE_ONLINE_STANDARD ==
+						commercePaymentMethodType)) {
+
+				if (commerceOrder.isSubscriptionOrder()) {
+					_commerceSubscriptionEngine.completeRecurringPayment(
+						_commerceOrderId,
+						commercePaymentResult.getAuthTransactionId(),
+						httpServletRequest);
+				}
+				else {
+					_commercePaymentEngine.completePayment(
+						_commerceOrderId,
+						commercePaymentResult.getAuthTransactionId(),
+						httpServletRequest);
+				}
+
+				httpServletResponse.sendRedirect(_nextUrl);
+			}
+
+			if (!commercePaymentResult.isSuccess() &&
+				!httpServletResponse.isCommitted()) {
 
 				httpServletResponse.sendRedirect(_nextUrl);
 			}
