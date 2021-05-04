@@ -140,16 +140,15 @@ public class OSBCommerceProvisioningPortalInstanceInitializer {
 	private PortalInstance _toPortalInstance(String email, long userId)
 		throws Exception {
 
-		PortalInstance portalInstance = new PortalInstance();
-
-		portalInstance.setDomain(
-			email.substring(email.indexOf(CharPool.AT) + 1));
-		portalInstance.setPortalInstanceInitializerKey(
-			"osb-commerce-portal-instance-initializer");
-		portalInstance.setPortalInstanceInitializerPayload(
-			_toPortalInstanceInitializerPayload(userId));
-
-		return portalInstance;
+		return new PortalInstance() {
+			{
+				setDomain(email.substring(email.indexOf(CharPool.AT) + 1));
+				setPortalInstanceInitializerKey(
+					"osb-commerce-portal-instance-initializer");
+				setPortalInstanceInitializerPayload(
+					_toPortalInstanceInitializerPayload(userId));
+			}
+		};
 	}
 
 	private HashMap<String, String> _toPortalInstanceInitializerPayload(

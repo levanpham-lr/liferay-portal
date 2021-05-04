@@ -14,7 +14,7 @@
 
 package com.liferay.osb.commerce.provisioning.internal.cloud.client.dto;
 
-import com.liferay.petra.string.StringBundler;
+import com.liferay.portal.kernel.json.JSONUtil;
 
 import java.util.Map;
 
@@ -85,14 +85,22 @@ public class PortalInstance {
 
 	@Override
 	public String toString() {
-		return StringBundler.concat(
-			"{\"active\":\"", _active, "\", \"companyId\":\"", _companyId,
-			"\",\"domain\":\"", _domain, "\",\"portalInstanceId\":\"",
-			_portalInstanceId, "\",\"_portalInstanceInitializerKey\":\"",
-			_portalInstanceInitializerKey,
-			"\",\"_portalInstanceInitializerPayload\":\"",
-			_portalInstanceInitializerPayload, "\", \"virtualHost\":\"",
-			_virtualHost, "\"}");
+		return JSONUtil.put(
+			"active", _active
+		).put(
+			"companyId", _companyId
+		).put(
+			"domain", _domain
+		).put(
+			"portalInstanceId", _portalInstanceId
+		).put(
+			"portalInstanceInitializerKey", _portalInstanceInitializerKey
+		).put(
+			"portalInstanceInitializerPayload",
+			_portalInstanceInitializerPayload
+		).put(
+			"virtualHost", _virtualHost
+		).toString();
 	}
 
 	private boolean _active;
