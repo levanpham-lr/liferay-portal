@@ -5488,6 +5488,7 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 	<macrodef name="stop-remote-search-engine">
 		<sequential>
 			<get-testcase-property property.name="remote.elasticsearch.enabled" />
+			<propertycopy from="search.engine[${env.CI_TEST_SUITE}]" name="suite.search.engine" silent="true" />
 
 			<if>
 				<or>
@@ -5542,8 +5543,8 @@ org.apache.catalina.startup.ClassLoaderFactory.level=INFO]]>
 
 			<if>
 				<or>
-					<contains string="${env.CI_TEST_SUITE}" substring="solr" />
 					<equals arg1="${solr.enabled}" arg2="true" />
+					<equals arg1="${suite.search.engine}" arg2="solr" />
 				</or>
 				<then>
 					<ant antfile="build-test-solr.xml" target="stop-solr-core" />
