@@ -7693,9 +7693,12 @@ virtualHostname="localhost"
 									select="\1"
 								/>
 
+								<available file="@{app.dir}/settings.gradle" property="settings.gradle.present" />
+
 								<move
 									failonerror="false"
 									file="@{app.dir}/settings.gradle"
+									if:set="settings.gradle.present"
 									tofile="@{app.dir}/settings.gradle.temp"
 									verbose="true"
 								/>
@@ -7754,11 +7757,41 @@ virtualHostname="localhost"
 
 								<gradle-execute dir="@{app.dir}" task="clean" />
 
+								<available file="@{app.dir}/settings.gradle.temp" property="setting.gradle.temp.present" />
+
 								<move
 									failonerror="false"
 									file="@{app.dir}/settings.gradle.temp"
+									if:set="setting.gradle.temp.present"
 									tofile="@{app.dir}/settings.gradle"
+									verbose="true"
 								/>
+
+								<for param="module.dir.path">
+									<path>
+										<dirset
+											dir="@{app.dir}"
+										>
+											<exclude name="**/*-test*" />
+											<include name="**" />
+											<present targetdir="@{app.dir}">
+												<mapper
+													from="*"
+													to="*/bnd.bnd"
+													type="glob"
+												/>
+											</present>
+										</dirset>
+									</path>
+									<sequential>
+										<if>
+											<contains string="${test.modules.force.deploy}" substring="${app.name}" />
+											<then>
+												<delete file="@{module.dir.path}/.lfrbuild-portal" />
+											</then>
+										</if>
+									</sequential>
+								</for>
 							</else>
 						</if>
 					</sequential>
