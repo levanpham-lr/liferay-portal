@@ -171,9 +171,9 @@ SOLR_SSL_WANT_CLIENT_AUTH=true</echo>
 
 	<macrodef name="deploy-solr-app">
 		<sequential>
-			<gradle-execute dir="modules/apps/portal-search-solr8" task="deploy">
-				<arg value="clean" />
-			</gradle-execute>
+			<ant antfile="build-test.xml" target="deploy-osgi-apps">
+				<property name="osgi.app.includes" value="portal-search-solr8" />
+			</ant>
 		</sequential>
 	</macrodef>
 
