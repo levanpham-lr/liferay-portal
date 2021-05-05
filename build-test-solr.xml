@@ -169,6 +169,14 @@ SOLR_SSL_WANT_CLIENT_AUTH=true</echo>
 		</sequential>
 	</macrodef>
 
+	<macrodef name="deploy-solr-app">
+		<sequential>
+			<gradle-execute dir="modules/apps/portal-search-solr8" task="deploy">
+				<arg value="clean" />
+			</gradle-execute>
+		</sequential>
+	</macrodef>
+
 	<macrodef name="prepare-solr-configurations">
 		<sequential>
 			<copy
@@ -309,12 +317,6 @@ schema=schema.xml</echo>
 		</sequential>
 	</macrodef>
 
-	<target name="deploy-solr">
-		<gradle-execute dir="modules/apps/portal-search-solr8" task="deploy">
-			<arg value="clean" />
-		</gradle-execute>
-	</target>
-
 	<target name="print-solr-indices">
 		<property name="solr.print.query">
 			<![CDATA[
@@ -356,14 +358,10 @@ schema=schema.xml</echo>
 		<echo></echo>
 	</target>
 
-	<target name="set-up-solr">
-		<antcall target="deploy-solr" />
-
-		<antcall target="start-solr" />
-	</target>
-
 	<target name="start-solr">
 		<lstopwatch action="start" name="start.solr" />
+
+		<deploy-solr-app />
 
 		<unzip-solr />
 
