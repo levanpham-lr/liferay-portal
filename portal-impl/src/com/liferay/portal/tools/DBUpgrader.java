@@ -15,7 +15,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.document.library.kernel.service.DLFileEntryTypeLocalServiceUtil;
-import com.liferay.petra.lang.SafeCloseable;
+import com.liferay.petra.lang.SafeClosable;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.dao.orm.common.SQLTransformer;
 import com.liferay.portal.events.StartupHelperUtil;
@@ -122,8 +122,8 @@ public class DBUpgrader {
 
 			StartupHelperUtil.printPatchLevel();
 
-			try (SafeCloseable safeCloseable =
-					ProxyModeThreadLocal.setWithSafeCloseable(false)) {
+			try (SafeClosable safeClosable =
+					ProxyModeThreadLocal.setWithSafeClosable(false)) {
 
 				upgrade();
 			}
