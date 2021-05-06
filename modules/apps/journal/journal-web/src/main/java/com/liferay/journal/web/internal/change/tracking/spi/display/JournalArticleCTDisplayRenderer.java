@@ -99,7 +99,7 @@ public class JournalArticleCTDisplayRenderer
 		JournalArticleDisplay journalContentDisplay =
 			_journalContent.getDisplay(
 				journalArticle, "", "", _language.getLanguageId(locale), 1,
-				null, null);
+				null, displayBuilder.getThemeDisplay());
 
 		displayBuilder.display(
 			"name", journalArticle.getTitle(locale)
