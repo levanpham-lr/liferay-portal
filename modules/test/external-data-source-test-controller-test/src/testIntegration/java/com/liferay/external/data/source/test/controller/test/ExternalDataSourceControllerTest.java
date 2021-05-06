@@ -201,7 +201,7 @@ public class ExternalDataSourceControllerTest {
 				jarOutputStream.closeEntry();
 			}
 
-			try (InputStream extSpringInputSteam =
+			try (InputStream extSpringInputStream =
 					ExternalDataSourceControllerTest.class.getResourceAsStream(
 						getResourceSource())) {
 
@@ -209,7 +209,7 @@ public class ExternalDataSourceControllerTest {
 					new JarEntry(getResourceDestination()));
 
 				StreamUtil.transfer(
-					extSpringInputSteam, jarOutputStream, false);
+					extSpringInputStream, jarOutputStream, false);
 
 				jarOutputStream.closeEntry();
 			}
@@ -277,10 +277,10 @@ public class ExternalDataSourceControllerTest {
 
 			try (UnsyncStringWriter unsyncStringWriter =
 					new UnsyncStringWriter();
-				UnsyncPrintWriter unsycPrintWriter = new UnsyncPrintWriter(
+				UnsyncPrintWriter unsyncPrintWriter = new UnsyncPrintWriter(
 					unsyncStringWriter)) {
 
-				throwable.printStackTrace(unsycPrintWriter);
+				throwable.printStackTrace(unsyncPrintWriter);
 
 				throw new ArquillianThrowable(unsyncStringWriter.toString());
 			}
