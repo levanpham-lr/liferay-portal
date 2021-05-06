@@ -178,8 +178,8 @@ public class OSBCommerceProvisioningSiteInitializer implements SiteInitializer {
 
 			byte[] bytes = null;
 
-			try (InputStream is = url.openStream()) {
-				bytes = FileUtil.getBytes(is);
+			try (InputStream inputStream = url.openStream()) {
+				bytes = FileUtil.getBytes(inputStream);
 			}
 
 			String fileName = FileUtil.getShortFileName(url.getPath());
@@ -456,8 +456,8 @@ public class OSBCommerceProvisioningSiteInitializer implements SiteInitializer {
 
 		byte[] bytes = null;
 
-		try (InputStream is = url.openStream()) {
-			bytes = FileUtil.getBytes(is);
+		try (InputStream inputStream = url.openStream()) {
+			bytes = FileUtil.getBytes(inputStream);
 		}
 
 		FileEntry fileEntry = PortletFileRepositoryUtil.addPortletFileEntry(
@@ -601,8 +601,8 @@ public class OSBCommerceProvisioningSiteInitializer implements SiteInitializer {
 
 		byte[] bytes = null;
 
-		try (InputStream is = url.openStream()) {
-			bytes = FileUtil.getBytes(is);
+		try (InputStream inputStream = url.openStream()) {
+			bytes = FileUtil.getBytes(inputStream);
 		}
 
 		_layoutSetLocalService.updateLogo(
