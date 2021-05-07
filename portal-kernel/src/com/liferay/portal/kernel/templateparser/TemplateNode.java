@@ -41,6 +41,8 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.text.DecimalFormat;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -147,6 +149,20 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 		}
 		else if (type.equals("link_to_layout")) {
 			return _getLinkToLayoutData();
+		}
+		else if (type.equals("numeric")) {
+			String numberValue = (String)get("data");
+
+			Locale locale = LocaleUtil.getMostRelevantLocale();
+
+			DecimalFormat decimalFormat =
+				(DecimalFormat)DecimalFormat.getInstance(locale);
+
+			decimalFormat.setGroupingUsed(false);
+			decimalFormat.setMaximumFractionDigits(Integer.MAX_VALUE);
+			decimalFormat.setParseBigDecimal(true);
+
+			return decimalFormat.format(Double.valueOf(numberValue));
 		}
 
 		return (String)get("data");
