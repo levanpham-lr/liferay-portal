@@ -78,24 +78,28 @@ public class UpgradeUrlSubject extends UpgradeProcess {
 						"?"))) {
 
 			int count = 0;
-			String currUrlSubject;
-			String prevUrlSubject = null;
+			String curUrlSubject = null;
+			String previousURLSubject = null;
 
 			while (rs.next()) {
 				long messageId = rs.getLong(1);
 				String subject = rs.getString(2);
 
-				currUrlSubject = _getUrlSubject(messageId, subject);
+				curUrlSubject = _getUrlSubject(messageId, subject);
 
-				if (StringUtil.equals(prevUrlSubject, currUrlSubject)) {
-					ps2.setString(
-						1, currUrlSubject + StringPool.DASH + ++count);
+				String suffix = null;
+
+				if (StringUtil.equals(previousURLSubject, curUrlSubject)) {
+					count++;
+					suffix = StringPool.DASH + count;
 				}
 				else {
 					count = 0;
-					prevUrlSubject = currUrlSubject;
-					ps2.setString(1, currUrlSubject);
+					previousURLSubject = curUrlSubject;
+					suffix = StringPool.BLANK;
 				}
+
+				ps2.setString(1, curUrlSubject + suffix);
 
 				ps2.setLong(2, messageId);
 
