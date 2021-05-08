@@ -141,8 +141,13 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 	public String getData() {
 		String type = getType();
 
-		if (type.equals("ddm-journal-article") ||
-			type.equals("journal_article")) {
+		if (type.equals("ddm-decimal") || type.equals("ddm-number") ||
+			type.equals("numeric")) {
+
+			return _getNumericData();
+		}
+		else if (type.equals("ddm-journal-article") ||
+				 type.equals("journal_article")) {
 
 			return _getLatestArticleData();
 		}
@@ -151,11 +156,6 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 		}
 		else if (type.equals("link_to_layout")) {
 			return _getLinkToLayoutData();
-		}
-		else if (type.equals("ddm-decimal") || type.equals("ddm-number") ||
-				 type.equals("numeric")) {
-
-			return _getNumericData();
 		}
 
 		return (String)get("data");
