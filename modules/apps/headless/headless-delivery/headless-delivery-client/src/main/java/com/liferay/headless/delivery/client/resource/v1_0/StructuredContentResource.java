@@ -142,7 +142,7 @@ public interface StructuredContentResource {
 				Long siteId, String roleNames)
 		throws Exception;
 
-	public void putSiteStructuredContentPermission(
+	public Page<Permission> putSiteStructuredContentPermission(
 			Long siteId, Permission[] permissions)
 		throws Exception;
 
@@ -268,7 +268,7 @@ public interface StructuredContentResource {
 				Long structuredContentId, String roleNames)
 		throws Exception;
 
-	public void putStructuredContentPermission(
+	public Page<Permission> putStructuredContentPermission(
 			Long structuredContentId, Permission[] permissions)
 		throws Exception;
 
@@ -1291,7 +1291,7 @@ public interface StructuredContentResource {
 			return httpInvoker.invoke();
 		}
 
-		public void putSiteStructuredContentPermission(
+		public Page<Permission> putSiteStructuredContentPermission(
 				Long siteId, Permission[] permissions)
 			throws Exception {
 
@@ -1325,7 +1325,7 @@ public interface StructuredContentResource {
 			}
 
 			try {
-				return;
+				return Page.of(content, Permission::toDTO);
 			}
 			catch (Exception e) {
 				_logger.log(
@@ -2580,7 +2580,7 @@ public interface StructuredContentResource {
 			return httpInvoker.invoke();
 		}
 
-		public void putStructuredContentPermission(
+		public Page<Permission> putStructuredContentPermission(
 				Long structuredContentId, Permission[] permissions)
 			throws Exception {
 
@@ -2614,7 +2614,7 @@ public interface StructuredContentResource {
 			}
 
 			try {
-				return;
+				return Page.of(content, Permission::toDTO);
 			}
 			catch (Exception e) {
 				_logger.log(

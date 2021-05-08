@@ -60,6 +60,7 @@ import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
 import com.liferay.portal.vulcan.graphql.annotation.GraphQLField;
 import com.liferay.portal.vulcan.graphql.annotation.GraphQLName;
 import com.liferay.portal.vulcan.multipart.MultipartBody;
+import com.liferay.portal.vulcan.pagination.Page;
 
 import java.util.function.BiFunction;
 
@@ -2353,20 +2354,25 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public boolean updateSiteStructuredContentPermission(
-			@GraphQLName("siteKey") @NotEmpty String siteKey,
-			@GraphQLName("permissions")
-				com.liferay.portal.vulcan.permission.Permission[] permissions)
+	public java.util.Collection<com.liferay.portal.vulcan.permission.Permission>
+			updateSiteStructuredContentPermission(
+				@GraphQLName("siteKey") @NotEmpty String siteKey,
+				@GraphQLName("permissions")
+					com.liferay.portal.vulcan.permission.Permission[]
+						permissions)
 		throws Exception {
 
-		_applyVoidComponentServiceObjects(
+		return _applyComponentServiceObjects(
 			_structuredContentResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			structuredContentResource ->
-				structuredContentResource.putSiteStructuredContentPermission(
-					Long.valueOf(siteKey), permissions));
+			structuredContentResource -> {
+				Page paginationPage =
+					structuredContentResource.
+						putSiteStructuredContentPermission(
+							Long.valueOf(siteKey), permissions);
 
-		return true;
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField(
@@ -2532,20 +2538,24 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public boolean updateStructuredContentPermission(
-			@GraphQLName("structuredContentId") Long structuredContentId,
-			@GraphQLName("permissions")
-				com.liferay.portal.vulcan.permission.Permission[] permissions)
+	public java.util.Collection<com.liferay.portal.vulcan.permission.Permission>
+			updateStructuredContentPermission(
+				@GraphQLName("structuredContentId") Long structuredContentId,
+				@GraphQLName("permissions")
+					com.liferay.portal.vulcan.permission.Permission[]
+						permissions)
 		throws Exception {
 
-		_applyVoidComponentServiceObjects(
+		return _applyComponentServiceObjects(
 			_structuredContentResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			structuredContentResource ->
-				structuredContentResource.putStructuredContentPermission(
-					structuredContentId, permissions));
+			structuredContentResource -> {
+				Page paginationPage =
+					structuredContentResource.putStructuredContentPermission(
+						structuredContentId, permissions);
 
-		return true;
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
