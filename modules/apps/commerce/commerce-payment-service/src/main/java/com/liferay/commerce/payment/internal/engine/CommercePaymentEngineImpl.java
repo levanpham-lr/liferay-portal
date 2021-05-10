@@ -416,6 +416,8 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 			commerceOrderId, paymentStatus, result);
 
 		if (paymentStatus == CommerceOrderConstants.PAYMENT_STATUS_PAID) {
+			long userId = commerceOrder.getUserId();
+
 			PermissionChecker permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
