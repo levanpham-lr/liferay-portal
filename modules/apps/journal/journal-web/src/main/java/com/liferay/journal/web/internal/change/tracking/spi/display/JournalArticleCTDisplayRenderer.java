@@ -107,7 +107,7 @@ public class JournalArticleCTDisplayRenderer
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		JournalArticleDisplay journalContentDisplay =
+		JournalArticleDisplay journalArticleDisplay =
 			_journalContent.getDisplay(
 				journalArticle, "", "", _language.getLanguageId(locale), 1,
 				null, themeDisplay);
@@ -148,7 +148,7 @@ public class JournalArticleCTDisplayRenderer
 				return ddmTemplate.getName(locale);
 			}
 		).display(
-			"content", journalContentDisplay.getContent(), false
+			"content", journalArticleDisplay.getContent(), false
 		);
 	}
 
