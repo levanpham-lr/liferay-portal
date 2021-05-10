@@ -198,9 +198,19 @@
 		text-transform: capitalize;
 	}
 
-	.portlet-body .panel {
+	.header-title {
 		margin-top: 1rem;
-		padding: 1rem;
+	}
+
+	.popover.scheduler-event-recorder-popover {
+		max-width: none;
+		padding: 10px 15px 0;
+
+		.popover-content .close {
+			position: absolute;
+			right: 10px;
+			top: 5px;
+		}
 	}
 
 	.scheduler-event-content,
