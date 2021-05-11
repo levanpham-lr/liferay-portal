@@ -102,7 +102,7 @@ public class OSBCommerceProvisioningCPContentListRenderer
 
 	private Map<String, Object> _getCPEntriesMap(
 			HttpServletRequest httpServletRequest)
-		throws PortalException {
+		throws Exception {
 
 		CommerceContext commerceContext =
 			(CommerceContext)httpServletRequest.getAttribute(
@@ -127,10 +127,8 @@ public class OSBCommerceProvisioningCPContentListRenderer
 				httpServletRequest)
 		).put(
 			"commerceChannelGroupId",
-			() -> {
-				return _commerceThemeHttpHelper.getCommerceChannelGroupId(
-					commerceChannelId);
-			}
+			() -> _commerceThemeHttpHelper.getCommerceChannelGroupId(
+				commerceChannelId)
 		).put(
 			"commerceChannelId", commerceChannelId
 		).put(
