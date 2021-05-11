@@ -214,6 +214,15 @@ public interface SamlSpSessionLocalService
 		String samlSpSessionKey);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public SamlSpSession fetchSamlSpSessionBySessionIndex(
+		long companyId, String sessionIndex);
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 #fetchSamlSpSessionBySessionIndex(long, String)}
+	 */
+	@Deprecated
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public SamlSpSession fetchSamlSpSessionBySessionIndex(String sessionIndex);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

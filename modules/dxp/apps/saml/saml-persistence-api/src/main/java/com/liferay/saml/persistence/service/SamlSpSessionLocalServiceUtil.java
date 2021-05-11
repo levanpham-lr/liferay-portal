@@ -235,6 +235,18 @@ public class SamlSpSessionLocalServiceUtil {
 	}
 
 	public static SamlSpSession fetchSamlSpSessionBySessionIndex(
+		long companyId, String sessionIndex) {
+
+		return getService().fetchSamlSpSessionBySessionIndex(
+			companyId, sessionIndex);
+	}
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 #fetchSamlSpSessionBySessionIndex(long, String)}
+	 */
+	@Deprecated
+	public static SamlSpSession fetchSamlSpSessionBySessionIndex(
 		String sessionIndex) {
 
 		return getService().fetchSamlSpSessionBySessionIndex(sessionIndex);

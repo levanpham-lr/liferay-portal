@@ -257,6 +257,19 @@ public class SamlSpSessionLocalServiceWrapper
 
 	@Override
 	public com.liferay.saml.persistence.model.SamlSpSession
+		fetchSamlSpSessionBySessionIndex(long companyId, String sessionIndex) {
+
+		return _samlSpSessionLocalService.fetchSamlSpSessionBySessionIndex(
+			companyId, sessionIndex);
+	}
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 #fetchSamlSpSessionBySessionIndex(long, String)}
+	 */
+	@Deprecated
+	@Override
+	public com.liferay.saml.persistence.model.SamlSpSession
 		fetchSamlSpSessionBySessionIndex(String sessionIndex) {
 
 		return _samlSpSessionLocalService.fetchSamlSpSessionBySessionIndex(
