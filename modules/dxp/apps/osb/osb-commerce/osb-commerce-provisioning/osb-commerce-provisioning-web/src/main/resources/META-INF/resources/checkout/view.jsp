@@ -1,3 +1,4 @@
+<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -11,19 +12,17 @@
  *
  *
  */
+--%>
 
-package com.liferay.osb.commerce.provisioning.constants;
+<%@ include file="/init.jsp" %>
 
-/**
- * @author Ivica Cardic
- */
-public class OSBCommerceProvisioningConstants {
-
-	public static final String FRIENDLY_URL_OSB_COMMERCE_PROVISIONING =
-		"/osb-commerce-provisioning";
-
-	public static final String OSB_COMMERCE_CHECKOUT_URL = "/checkout";
-
-	public static final String TRIAL_PLAN_EXTERNAL_REFERENCE_CODE = "TRIAL101";
-
-}
+<div id="osb-checkout-summary">
+	<commerce-ui:mini-cart
+		toggleable="<%= false %>"
+		views='<%=
+			HashMapBuilder.<String, String>put(
+				"Cart", "osb-commerce-provisioning-theme-impl@1.0.0/js/components/cart_summary/CartSummary"
+			).build()
+		%>'
+	/>
+</div>
