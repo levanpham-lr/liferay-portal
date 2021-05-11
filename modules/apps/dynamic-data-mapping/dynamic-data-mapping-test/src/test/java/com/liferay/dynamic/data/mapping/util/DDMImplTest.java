@@ -751,8 +751,7 @@ public class DDMImplTest extends BaseDDMTestCase {
 
 	protected void setUpDDMFormValuesJSONDeserializer() throws Exception {
 		java.lang.reflect.Field field = ReflectionUtil.getDeclaredField(
-			DDMFormValuesJSONDeserializer.class,
-			"_ddmFormFieldValueJSONDeserializersServiceTrackerMap");
+			DDMFormValuesJSONDeserializer.class, "_serviceTrackerMap");
 
 		field.set(
 			_ddmFormValuesDeserializer,
@@ -766,8 +765,7 @@ public class DDMImplTest extends BaseDDMTestCase {
 
 	protected void setUpDDMFormValuesJSONSerializer() throws Exception {
 		java.lang.reflect.Field field = ReflectionUtil.getDeclaredField(
-			DDMFormValuesJSONSerializer.class,
-			"_ddmFormFieldValueJSONSerializersServiceTrackerMap");
+			DDMFormValuesJSONSerializer.class, "_serviceTrackerMap");
 
 		field.set(
 			_ddmFormValuesSerializer,
