@@ -3962,7 +3962,10 @@ AUI.add(
 									instance.get('displayLocale')
 								];
 
-							if (Lang.isValue(optionLabel)) {
+							if (
+								optionLabel !== '' &&
+								Lang.isValue(optionLabel)
+							) {
 								item.html(A.Escape.html(optionLabel));
 							}
 						});
