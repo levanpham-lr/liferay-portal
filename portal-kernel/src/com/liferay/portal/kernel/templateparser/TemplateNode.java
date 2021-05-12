@@ -194,12 +194,6 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 	}
 
 	public String getUrl() {
-		String type = getType();
-
-		if (!type.equals("link_to_layout")) {
-			return StringPool.BLANK;
-		}
-
 		long layoutGroupId = 0;
 		long layoutId = 0;
 		String layoutType = StringPool.BLANK;
