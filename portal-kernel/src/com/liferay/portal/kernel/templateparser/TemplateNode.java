@@ -204,6 +204,16 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 			try {
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject(data);
 
+				Layout layout = LayoutLocalServiceUtil.fetchLayout(
+					jsonObject.getLong("groupId"),
+					jsonObject.getBoolean("privateLayout"),
+					jsonObject.getLong("layoutId"));
+
+				if (layout != null) {
+					return PortalUtil.getLayoutFriendlyURL(
+						layout, _themeDisplay);
+				}
+
 				layoutGroupId = jsonObject.getLong("groupId");
 				layoutId = jsonObject.getLong("layoutId");
 
@@ -214,7 +224,7 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 					layoutType = _LAYOUT_TYPE_PUBLIC;
 				}
 			}
-			catch (JSONException jsonException) {
+			catch (Exception exception) {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Unable to parse JSON from data: " + data);
 				}
