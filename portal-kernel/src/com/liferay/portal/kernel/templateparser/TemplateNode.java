@@ -204,20 +204,19 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 			try {
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject(data);
 
+				layoutGroupId = jsonObject.getLong("groupId");
+				layoutId = jsonObject.getLong("layoutId");
+				boolean privateLayout = jsonObject.getBoolean("privateLayout");
+
 				Layout layout = LayoutLocalServiceUtil.fetchLayout(
-					jsonObject.getLong("groupId"),
-					jsonObject.getBoolean("privateLayout"),
-					jsonObject.getLong("layoutId"));
+					layoutGroupId, privateLayout, layoutId);
 
 				if (layout != null) {
 					return PortalUtil.getLayoutFriendlyURL(
 						layout, _themeDisplay);
 				}
 
-				layoutGroupId = jsonObject.getLong("groupId");
-				layoutId = jsonObject.getLong("layoutId");
-
-				if (jsonObject.getBoolean("privateLayout")) {
+				if (privateLayout) {
 					layoutType = _LAYOUT_TYPE_PRIVATE_GROUP;
 				}
 				else {
