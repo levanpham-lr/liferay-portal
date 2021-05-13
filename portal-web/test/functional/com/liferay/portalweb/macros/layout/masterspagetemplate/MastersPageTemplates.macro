@@ -49,7 +49,7 @@ definition {
 	macro selectMasterViaPageDesignOptions {
 		Navigator.gotoNavTab(navTab = "Master");
 
-		MetalComponent.waitForCard(card = "${masterLayoutName}");
+		WaitForPageLoad();
 
 		Click(
 			key_card = "${masterLayoutName}",

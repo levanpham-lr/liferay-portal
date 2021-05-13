@@ -50,7 +50,7 @@ definition {
 	macro selectStyleBookViaPageDesignOptions {
 		Navigator.gotoNavTab(navTab = "Style Book");
 
-		MetalComponent.waitForCard(card = "${styleBookName}");
+		WaitForPageLoad();
 
 		Click(
 			key_card = "${styleBookName}",
