@@ -1,11 +1,7 @@
 definition {
 
 	macro changeDisplayStyle {
-		var browserType = PropsUtil.get("browser.type");
-
-		if ("${browserType}" == "chrome") {
-			MetalComponent.waitForManagementBar();
-		}
+		WaitForPageLoad();
 
 		Click.clickNoMouseOver(locator1 = "Icon#CURRENT_DISPLAY_STYLE");
 
@@ -15,11 +11,7 @@ definition {
 	}
 
 	macro clickAdd {
-		var browserType = PropsUtil.get("browser.type");
-
-		if ("${browserType}" == "chrome") {
-			MetalComponent.waitForManagementBar();
-		}
+		WaitForPageLoad();
 
 		Click.clickNoMouseOver(locator1 = "Button#PLUS");
 	}
