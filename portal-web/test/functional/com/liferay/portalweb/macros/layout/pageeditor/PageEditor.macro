@@ -1,8 +1,6 @@
 definition {
 
 	macro addComment {
-		Pause(locator1 = "10000");
-
 		PageEditor.gotoTab(tabName = "Comments");
 
 		Pause(locator1 = "3000");
@@ -352,8 +350,6 @@ definition {
 	}
 
 	macro addFragment {
-		Pause(locator1 = "10000");
-
 		PageEditor.gotoTab(tabName = "Fragments and Widgets");
 
 		Navigator.gotoNavTab(navTab = "Fragments");
@@ -461,8 +457,6 @@ definition {
 	}
 
 	macro addFragmentToCollectionDisplay {
-		Pause(locator1 = "10000");
-
 		PageEditor.gotoTab(tabName = "Fragments and Widgets");
 
 		Navigator.gotoNavTab(navTab = "Fragments");
@@ -504,8 +498,6 @@ definition {
 	}
 
 	macro addWidget {
-		Pause(locator1 = "10000");
-
 		PageEditor.gotoTab(tabName = "Fragments and Widgets");
 
 		Navigator.gotoNavTab(navTab = "Widgets");
@@ -559,7 +551,7 @@ definition {
 	}
 
 	macro assertFragmentSidebarLoaded {
-		Pause(locator1 = "5000");
+		WaitForPageLoad();
 
 		AssertVisible(locator1 = "PageEditor#FRAGMENT_SIDEBAR_LOADED");
 	}
@@ -2019,8 +2011,6 @@ definition {
 	}
 
 	macro searchFragmentViaSidebar {
-		Pause(locator1 = "10000");
-
 		PageEditor.gotoTab(tabName = "Fragments");
 
 		Type(
@@ -2045,8 +2035,6 @@ definition {
 	}
 
 	macro viewCannotAddFragmentToOutsideOfDropZone {
-		Pause(locator1 = "10000");
-
 		PageEditor.gotoTab(tabName = "Fragments");
 
 		PageEditor.expandFragmentCollection(collectionName = "${collectionName}");

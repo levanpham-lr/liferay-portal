@@ -1900,7 +1900,7 @@ definition {
 
 			Refresh();
 
-			Pause(locator1 = "10000");
+			WaitForPageLoad();
 		}
 
 		task ("Assert styles of Container in view mode") {
@@ -2069,8 +2069,6 @@ definition {
 
 		task ("Navigate to page in edit mode") {
 			ContentPages.clickPencil();
-
-			Pause(locator1 = "10000");
 		}
 
 		task ("Assert styles of Container in edit mode") {
