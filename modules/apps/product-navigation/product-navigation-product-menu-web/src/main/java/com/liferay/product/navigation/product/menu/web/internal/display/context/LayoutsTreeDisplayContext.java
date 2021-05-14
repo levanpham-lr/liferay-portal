@@ -146,7 +146,7 @@ public class LayoutsTreeDisplayContext {
 			"privateLayout", String.valueOf(isPrivateLayout()));
 
 		return addLayoutURL;
-		}
+	}
 
 	public String getAdministrationPortletURL() {
 		PortletURL administrationPortletURL =
