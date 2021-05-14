@@ -15,7 +15,6 @@
 package com.liferay.layout.admin.web.internal.portlet.filter;
 
 import com.liferay.layout.admin.constants.LayoutAdminPortletKeys;
-import com.liferay.petra.portlet.url.builder.PortletURLBuilder;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -98,13 +97,12 @@ public class GroupPagesRenderParametersRenderFilter implements RenderFilter {
 				HttpServletResponse httpServletResponse =
 					_portal.getHttpServletResponse(renderResponse);
 
-				PortletURL portletURL = PortletURLBuilder.create(
-					_portal.getControlPanelPortletURL(
-						renderRequest, LayoutAdminPortletKeys.GROUP_PAGES,
-						PortletRequest.RENDER_PHASE)
-				).setParameter(
-					"p_v_l_s_g_id", String.valueOf(selGroup.getGroupId())
-				).build();
+				PortletURL portletURL = _portal.getControlPanelPortletURL(
+					renderRequest, LayoutAdminPortletKeys.GROUP_PAGES,
+					PortletRequest.RENDER_PHASE);
+
+				portletURL.setParameter(
+					"p_v_l_s_g_id", String.valueOf(selGroup.getGroupId()));
 
 				httpServletResponse.sendRedirect(portletURL.toString());
 
