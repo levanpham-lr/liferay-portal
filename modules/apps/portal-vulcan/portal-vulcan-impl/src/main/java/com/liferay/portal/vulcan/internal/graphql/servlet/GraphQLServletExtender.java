@@ -841,14 +841,14 @@ public class GraphQLServletExtender {
 
 		Class<?> contributorClass = _getContributorClass(declaringClass);
 
-		Object source = dataFetchingEnvironment.getSource();
-
 		if (contributorClass != null) {
 			instance = _getContributorInstance(
-				contributorClass, declaringClass, source);
+				contributorClass, declaringClass,
+				dataFetchingEnvironment.getSource());
 		}
 		else {
-			if ((dataFetchingEnvironment.getRoot() == source) ||
+			if ((dataFetchingEnvironment.getRoot() ==
+					dataFetchingEnvironment.getSource()) ||
 				Objects.equals(
 					graphQLFieldDefinition.getName(), "graphQLNode") ||
 				(field == null)) {
@@ -864,7 +864,8 @@ public class GraphQLServletExtender {
 					declaringClass.getConstructors();
 
 				instance = ReflectionKit.constructNewInstance(
-					constructors[0], queryInstance, source);
+					constructors[0], queryInstance,
+					dataFetchingEnvironment.getSource());
 			}
 		}
 
