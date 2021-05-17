@@ -118,13 +118,7 @@ exports[`Field DocumentLibrary has a label 1`] = `
         value="{}"
       />
     </div>
-    <span
-      class="sr-only"
-      id="textField_fieldDetails"
-    >
-      label
-      <br />
-    </span>
+    
   </div>
 </div>
 `;
@@ -502,13 +496,7 @@ exports[`Field DocumentLibrary renders Label if showLabel is true 1`] = `
         value="{}"
       />
     </div>
-    <span
-      class="sr-only"
-      id="textField_fieldDetails"
-    >
-      text
-      <br />
-    </span>
+    
   </div>
 </div>
 `;
