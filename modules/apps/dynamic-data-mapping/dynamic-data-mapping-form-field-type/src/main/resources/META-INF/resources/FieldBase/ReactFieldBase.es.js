@@ -146,10 +146,7 @@ function FieldBase({
 			type === 'paragraph' ||
 			type === 'radio');
 
-	if (renderLabel) {
-		fieldDetails += label + '<br>';
-	}
-	else {
+	if (!renderLabel) {
 		parentDivTabIndex = 0;
 		parentDivAriaLabelledby = fieldDetailsId;
 	}
