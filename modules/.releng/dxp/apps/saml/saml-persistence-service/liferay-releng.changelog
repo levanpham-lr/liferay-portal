@@ -92,3 +92,8 @@ a6416d9fb8d97f00ad69500434b6353104de4cce^..46bde3b65eafec63d6d2bfd377c59ddd9cdf2
 # Bundle Version 4.0.23
 #
 46bde3b65eafec63d6d2bfd377c59ddd9cdf297c^..5cfcd80aa97a1d0dc869d760378d59f867f889ce=RELEASE-3155
+
+#
+# Bundle Version 4.0.24
+#
+5cfcd80aa97a1d0dc869d760378d59f867f889ce^..36e8485e04c0e69a5b268b6ae5f9dde6952424f8=LPS-129933 RELEASE-3139
