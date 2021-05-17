@@ -113,7 +113,7 @@ function CardEntryRenderer({
 									to = to.toString();
 								}
 
-								navigate(to);
+								window.location.href = to;
 							}
 						)}
 					>
