@@ -1363,7 +1363,7 @@ public class GraphQLServletExtender {
 
 		Constructor<?> constructor = queryClass.getConstructors()[0];
 
-		Object[] args;
+		Object[] args = null;
 
 		if (constructor.getParameterCount() == 0) {
 			args = new Object[0];
