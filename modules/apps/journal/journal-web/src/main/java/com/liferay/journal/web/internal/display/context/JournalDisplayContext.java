@@ -1141,6 +1141,7 @@ public class JournalDisplayContext {
 		SearchContext searchContext = new SearchContext();
 
 		searchContext.setAndSearch(false);
+		searchContext.setAttribute("head", Boolean.TRUE);
 		searchContext.setAttribute("latest", Boolean.TRUE);
 
 		LinkedHashMap<String, Object> params =
@@ -1172,8 +1173,6 @@ public class JournalDisplayContext {
 				Field.TITLE, getKeywords()
 			).put(
 				"ddmStructureKey", getDDMStructureKey()
-			).put(
-				"head", !showVersions
 			).put(
 				"params", params
 			).build());
