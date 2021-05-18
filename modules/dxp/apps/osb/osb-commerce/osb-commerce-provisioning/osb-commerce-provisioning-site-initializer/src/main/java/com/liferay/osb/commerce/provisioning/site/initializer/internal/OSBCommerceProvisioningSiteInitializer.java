@@ -587,7 +587,8 @@ public class OSBCommerceProvisioningSiteInitializer implements SiteInitializer {
 
 		layoutTypePortlet.addPortletId(
 			serviceContext.getUserId(),
-			"com_liferay_commerce_checkout_web_internal_portlet_CommerceCheckoutPortlet",
+			"com_liferay_commerce_checkout_web_internal_portlet_" +
+				"CommerceCheckoutPortlet",
 			"column-1", 0, false);
 
 		layoutTypePortlet.addPortletId(
