@@ -1183,10 +1183,6 @@ public class JournalDisplayContext {
 			searchContext.setAttribute("showNonindexable", Boolean.TRUE);
 		}
 
-		searchContext.setEnd(end);
-		searchContext.setFolderIds(folderIds);
-		searchContext.setStart(start);
-
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		queryConfig.setHighlightEnabled(false);
