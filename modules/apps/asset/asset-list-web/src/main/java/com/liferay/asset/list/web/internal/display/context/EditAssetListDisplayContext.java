@@ -1152,8 +1152,6 @@ public class EditAssetListDisplayContext {
 			new AssetEntryItemSelectorReturnType());
 		assetEntryItemSelectorCriterion.setGroupId(
 			_themeDisplay.getScopeGroupId());
-		assetEntryItemSelectorCriterion.setSelectedGroupIds(
-			new long[] {_themeDisplay.getScopeGroupId()});
 		assetEntryItemSelectorCriterion.setShowNonindexable(true);
 		assetEntryItemSelectorCriterion.setShowScheduled(true);
 		assetEntryItemSelectorCriterion.setSubtypeSelectionId(
