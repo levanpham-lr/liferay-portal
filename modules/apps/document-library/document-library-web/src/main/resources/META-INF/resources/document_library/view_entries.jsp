@@ -180,7 +180,7 @@ if (portletTitleBasedNavigation && (folderId != DLFolderConstants.DEFAULT_PARENT
 								<c:choose>
 									<c:when test="<%= dlViewFileVersionDisplayContext.hasCustomThumbnail() %>">
 										<liferay-util:buffer
-											var="customThumbnailHtml"
+											var="customThumbnailHTML"
 										>
 
 											<%
@@ -193,7 +193,7 @@ if (portletTitleBasedNavigation && (folderId != DLFolderConstants.DEFAULT_PARENT
 											actionJsp="/document_library/file_entry_action.jsp"
 											actionJspServletContext="<%= application %>"
 											cssClass="entry-display-style file-card"
-											html="<%= customThumbnailHtml %>"
+											html="<%= customThumbnailHTML %>"
 											resultRow="<%= row %>"
 											rowChecker="<%= entriesChecker %>"
 											title="<%= latestFileVersion.getTitle() %>"
