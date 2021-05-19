@@ -1114,7 +1114,8 @@ public abstract class BaseStructuredContentResourceImpl
 
 		for (StructuredContent structuredContent : structuredContents) {
 			postSiteStructuredContent(
-				(Long)parameters.get("siteId"), structuredContent);
+				Long.parseLong((String)parameters.get("siteId")),
+				structuredContent);
 		}
 	}
 
@@ -1151,8 +1152,9 @@ public abstract class BaseStructuredContentResourceImpl
 		throws Exception {
 
 		return getSiteStructuredContentsPage(
-			(Long)parameters.get("siteId"), (Boolean)parameters.get("flatten"),
-			search, null, filter, pagination, sorts);
+			Long.parseLong((String)parameters.get("siteId")),
+			Boolean.parseBoolean((String)parameters.get("flatten")), search,
+			null, filter, pagination, sorts);
 	}
 
 	@Override
@@ -1186,7 +1188,8 @@ public abstract class BaseStructuredContentResourceImpl
 		for (StructuredContent structuredContent : structuredContents) {
 			putStructuredContent(
 				structuredContent.getId() != null ? structuredContent.getId() :
-					(Long)parameters.get("structuredContentId"),
+					Long.parseLong(
+						(String)parameters.get("structuredContentId")),
 				structuredContent);
 		}
 	}
