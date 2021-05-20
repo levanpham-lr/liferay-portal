@@ -521,7 +521,7 @@ public class CommerceAccountLocalServiceImpl
 		validate(
 			serviceContext.getCompanyId(),
 			commerceAccount.getCommerceAccountId(), name,
-			commerceAccount.getExternalReferenceCode());
+			externalReferenceCode);
 
 		commerceAccount.setName(name);
 
