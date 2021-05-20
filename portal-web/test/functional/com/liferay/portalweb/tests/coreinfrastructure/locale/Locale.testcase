@@ -158,7 +158,7 @@ definition {
 
 		User.firstLoginPG();
 
-		AssertLocation(value1 = "http://localhost:8080/fr/web/guest?SM_USER=test@liferay.com");
+		AssertLocation(value1 = "http://localhost:8080/fr/web/guest");
 
 		Navigator.openWithAppendToBaseURL(urlAppend = "web/guest");
 
