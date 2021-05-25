@@ -488,12 +488,6 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 			return getUrl();
 		}
 
-		String data = (String)get("data");
-
-		if (JSONUtil.isValid(data)) {
-			return getUrl();
-		}
-
 		String layoutType = getLayoutType();
 
 		if (Validator.isNull(layoutType)) {
