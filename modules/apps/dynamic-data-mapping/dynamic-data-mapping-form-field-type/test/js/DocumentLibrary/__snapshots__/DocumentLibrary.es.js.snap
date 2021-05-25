@@ -286,7 +286,7 @@ exports[`Field DocumentLibrary has a value 1`] = `
 exports[`Field DocumentLibrary has an id 1`] = `
 <div>
   <div
-    aria-labelledby="textField_fieldDetails"
+    aria-labelledby="ID_fieldDetails"
     class="form-group hide"
     data-field-name="textField"
     tabindex="0"

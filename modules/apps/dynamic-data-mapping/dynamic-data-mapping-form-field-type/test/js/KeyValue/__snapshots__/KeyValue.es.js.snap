@@ -15,7 +15,9 @@ exports[`KeyValue has a helptext 1`] = `
       tabindex="0"
     >
       <input
+        aria-labelledby="keyValueLabelkeyValue_fieldDetails"
         class="form-control ddm-field-text"
+        id="keyValueLabelkeyValue_fieldDetails"
         name="keyValueLabelkeyValue"
         type="text"
         value=""
@@ -75,7 +77,9 @@ exports[`KeyValue has a label 1`] = `
       tabindex="0"
     >
       <input
+        aria-labelledby="keyValueLabelkeyValue_fieldDetails"
         class="form-control ddm-field-text"
+        id="keyValueLabelkeyValue_fieldDetails"
         name="keyValueLabelkeyValue"
         type="text"
         value=""
@@ -118,7 +122,9 @@ exports[`KeyValue has a predefined Value 1`] = `
       tabindex="0"
     >
       <input
+        aria-labelledby="keyValueLabelkeyValue_fieldDetails"
         class="form-control ddm-field-text"
+        id="keyValueLabelkeyValue_fieldDetails"
         name="keyValueLabelkeyValue"
         placeholder="Option 1"
         type="text"
@@ -162,7 +168,9 @@ exports[`KeyValue has a value 1`] = `
       tabindex="0"
     >
       <input
+        aria-labelledby="keyValueLabelkeyValue_fieldDetails"
         class="form-control ddm-field-text"
+        id="keyValueLabelkeyValue_fieldDetails"
         name="keyValueLabelkeyValue"
         type="text"
         value="value"
@@ -193,7 +201,7 @@ exports[`KeyValue has a value 1`] = `
 exports[`KeyValue has an id 1`] = `
 <div>
   <div
-    aria-labelledby="keyValue_fieldDetails"
+    aria-labelledby="Id_fieldDetails"
     class="form-group hide"
     data-field-name="keyValue"
     tabindex="0"
@@ -205,7 +213,9 @@ exports[`KeyValue has an id 1`] = `
       tabindex="0"
     >
       <input
+        aria-labelledby="keyValueLabelkeyValue_fieldDetails"
         class="form-control ddm-field-text"
+        id="keyValueLabelkeyValue_fieldDetails"
         name="keyValueLabelkeyValue"
         type="text"
         value=""
@@ -248,8 +258,10 @@ exports[`KeyValue is not editable 1`] = `
       tabindex="0"
     >
       <input
+        aria-labelledby="keyValueLabelkeyValue_fieldDetails"
         class="form-control ddm-field-text"
         disabled=""
+        id="keyValueLabelkeyValue_fieldDetails"
         name="keyValueLabelkeyValue"
         type="text"
         value=""
@@ -292,7 +304,9 @@ exports[`KeyValue is not required 1`] = `
       tabindex="0"
     >
       <input
+        aria-labelledby="keyValueLabelkeyValue_fieldDetails"
         class="form-control ddm-field-text"
+        id="keyValueLabelkeyValue_fieldDetails"
         name="keyValueLabelkeyValue"
         type="text"
         value=""
@@ -340,7 +354,9 @@ exports[`KeyValue renders Label if showLabel is true 1`] = `
       tabindex="0"
     >
       <input
+        aria-labelledby="keyValueLabelkeyValue_fieldDetails"
         class="form-control ddm-field-text"
+        id="keyValueLabelkeyValue_fieldDetails"
         name="keyValueLabelkeyValue"
         type="text"
         value=""
@@ -383,7 +399,9 @@ exports[`KeyValue renders component with a key 1`] = `
       tabindex="0"
     >
       <input
+        aria-labelledby="keyValueLabelkeyValue_fieldDetails"
         class="form-control ddm-field-text"
+        id="keyValueLabelkeyValue_fieldDetails"
         name="keyValueLabelkeyValue"
         type="text"
         value=""
