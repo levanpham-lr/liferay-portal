@@ -90,6 +90,7 @@ function FieldBase({
 	children,
 	displayErrors,
 	errorMessage,
+	id,
 	label,
 	localizedValue = {},
 	name,
@@ -110,7 +111,7 @@ function FieldBase({
 }) {
 	const {editingLanguageId = themeDisplay.getLanguageId()} = usePage();
 	let fieldDetails = '';
-	const fieldDetailsId = name + '_fieldDetails';
+	const fieldDetailsId = id ? id + '_fieldDetails' : name + '_fieldDetails';
 	const dispatch = useForm();
 	const hasError = displayErrors && errorMessage && !valid;
 	const localizedValueArray = useMemo(() => {
