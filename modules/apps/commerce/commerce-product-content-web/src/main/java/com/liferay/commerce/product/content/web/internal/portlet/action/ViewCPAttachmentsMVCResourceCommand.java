@@ -116,7 +116,7 @@ public class ViewCPAttachmentsMVCResourceCommand
 
 				JSONObject jsonObject = _jsonFactory.createJSONObject();
 
-				String attachmentURL = _commerceMediaResolver.getDefaultURL(
+				String attachmentURL = _commerceMediaResolver.getDefaultUrl(
 					company.getGroupId());
 
 				jsonObject.put("url", attachmentURL);

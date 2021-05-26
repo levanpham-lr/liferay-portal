@@ -19,15 +19,15 @@ package com.liferay.commerce.product.catalog;
  */
 public interface CPMedia {
 
-	public String getDownloadURL();
+	public String getDownloadUrl();
 
 	public long getId();
 
-	public String getThumbnailURL();
+	public String getThumbnailUrl();
 
 	public String getTitle();
 
-	public String getURL();
+	public String getUrl();
 
 	public String mimeType();
 

@@ -31,29 +31,29 @@ public class CPMediaImpl implements CPMedia {
 	public CPMediaImpl(FileEntry fileEntry, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		String defaultURL = DLUtil.getDownloadURL(
+		String defaultUrl = DLUtil.getDownloadURL(
 			fileEntry, fileEntry.getFileVersion(), themeDisplay,
 			StringPool.BLANK);
 
-		_downloadURL = defaultURL;
+		_downloadUrl = defaultUrl;
 
 		_id = fileEntry.getFileEntryId();
-		_url = defaultURL;
-		_thumbnailURL = defaultURL;
+		_url = defaultUrl;
+		_thumbnailUrl = defaultUrl;
 		_mimeType = fileEntry.getMimeType();
 		_title = fileEntry.getTitle();
 	}
 
 	public CPMediaImpl(long groupId) throws PortalException {
-		String defaultURL = CommerceMediaResolverUtil.getDefaultURL(groupId);
+		String defaultUrl = CommerceMediaResolverUtil.getDefaultUrl(groupId);
 
-		_downloadURL = defaultURL;
+		_downloadUrl = defaultUrl;
 
 		_id = 0;
 		_mimeType = null;
-		_thumbnailURL = defaultURL;
+		_thumbnailUrl = defaultUrl;
 		_title = null;
-		_url = defaultURL;
+		_url = defaultUrl;
 	}
 
 	public CPMediaImpl(
@@ -61,7 +61,7 @@ public class CPMediaImpl implements CPMedia {
 			ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		_downloadURL = CommerceMediaResolverUtil.getDownloadURL(
+		_downloadUrl = CommerceMediaResolverUtil.getDownloadURL(
 			commerceAccountId,
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 		_id = cpAttachmentFileEntry.getCPAttachmentFileEntryId();
@@ -75,7 +75,7 @@ public class CPMediaImpl implements CPMedia {
 			_mimeType = fileEntry.getMimeType();
 		}
 
-		_thumbnailURL = CommerceMediaResolverUtil.getThumbnailURL(
+		_thumbnailUrl = CommerceMediaResolverUtil.getThumbnailURL(
 			commerceAccountId,
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 		_title = cpAttachmentFileEntry.getTitle(themeDisplay.getLanguageId());
@@ -85,8 +85,8 @@ public class CPMediaImpl implements CPMedia {
 	}
 
 	@Override
-	public String getDownloadURL() {
-		return _downloadURL;
+	public String getDownloadUrl() {
+		return _downloadUrl;
 	}
 
 	@Override
@@ -95,8 +95,8 @@ public class CPMediaImpl implements CPMedia {
 	}
 
 	@Override
-	public String getThumbnailURL() {
-		return _thumbnailURL;
+	public String getThumbnailUrl() {
+		return _thumbnailUrl;
 	}
 
 	@Override
@@ -105,7 +105,7 @@ public class CPMediaImpl implements CPMedia {
 	}
 
 	@Override
-	public String getURL() {
+	public String getUrl() {
 		return _url;
 	}
 
@@ -114,10 +114,10 @@ public class CPMediaImpl implements CPMedia {
 		return _mimeType;
 	}
 
-	private final String _downloadURL;
+	private final String _downloadUrl;
 	private final long _id;
 	private final String _mimeType;
-	private final String _thumbnailURL;
+	private final String _thumbnailUrl;
 	private final String _title;
 	private final String _url;
 
