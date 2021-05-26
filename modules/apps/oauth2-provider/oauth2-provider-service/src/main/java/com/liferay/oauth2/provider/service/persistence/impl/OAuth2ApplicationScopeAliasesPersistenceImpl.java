@@ -36,6 +36,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -46,6 +48,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.InvocationHandler;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -1385,6 +1388,21 @@ public class OAuth2ApplicationScopeAliasesPersistenceImpl
 			oAuth2ApplicationScopeAliasesModelImpl =
 				(OAuth2ApplicationScopeAliasesModelImpl)
 					oAuth2ApplicationScopeAliases;
+
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
+
+		Date date = new Date();
+
+		if (isNew && (oAuth2ApplicationScopeAliases.getCreateDate() == null)) {
+			if (serviceContext == null) {
+				oAuth2ApplicationScopeAliases.setCreateDate(date);
+			}
+			else {
+				oAuth2ApplicationScopeAliases.setCreateDate(
+					serviceContext.getCreateDate(date));
+			}
+		}
 
 		Session session = null;
 

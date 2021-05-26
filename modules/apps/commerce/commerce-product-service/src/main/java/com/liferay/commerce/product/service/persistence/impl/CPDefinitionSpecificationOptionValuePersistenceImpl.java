@@ -5452,17 +5452,17 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
-		Date now = new Date();
+		Date date = new Date();
 
 		if (isNew &&
 			(cpDefinitionSpecificationOptionValue.getCreateDate() == null)) {
 
 			if (serviceContext == null) {
-				cpDefinitionSpecificationOptionValue.setCreateDate(now);
+				cpDefinitionSpecificationOptionValue.setCreateDate(date);
 			}
 			else {
 				cpDefinitionSpecificationOptionValue.setCreateDate(
-					serviceContext.getCreateDate(now));
+					serviceContext.getCreateDate(date));
 			}
 		}
 
@@ -5470,11 +5470,11 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				hasSetModifiedDate()) {
 
 			if (serviceContext == null) {
-				cpDefinitionSpecificationOptionValue.setModifiedDate(now);
+				cpDefinitionSpecificationOptionValue.setModifiedDate(date);
 			}
 			else {
 				cpDefinitionSpecificationOptionValue.setModifiedDate(
-					serviceContext.getModifiedDate(now));
+					serviceContext.getModifiedDate(date));
 			}
 		}
 

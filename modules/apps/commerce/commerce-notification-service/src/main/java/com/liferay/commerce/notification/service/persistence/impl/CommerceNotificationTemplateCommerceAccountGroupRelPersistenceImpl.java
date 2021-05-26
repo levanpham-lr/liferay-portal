@@ -1819,7 +1819,7 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
-		Date now = new Date();
+		Date date = new Date();
 
 		if (isNew &&
 			(commerceNotificationTemplateCommerceAccountGroupRel.
@@ -1827,11 +1827,11 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 
 			if (serviceContext == null) {
 				commerceNotificationTemplateCommerceAccountGroupRel.
-					setCreateDate(now);
+					setCreateDate(date);
 			}
 			else {
 				commerceNotificationTemplateCommerceAccountGroupRel.
-					setCreateDate(serviceContext.getCreateDate(now));
+					setCreateDate(serviceContext.getCreateDate(date));
 			}
 		}
 
@@ -1840,11 +1840,11 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 
 			if (serviceContext == null) {
 				commerceNotificationTemplateCommerceAccountGroupRel.
-					setModifiedDate(now);
+					setModifiedDate(date);
 			}
 			else {
 				commerceNotificationTemplateCommerceAccountGroupRel.
-					setModifiedDate(serviceContext.getModifiedDate(now));
+					setModifiedDate(serviceContext.getModifiedDate(date));
 			}
 		}
 

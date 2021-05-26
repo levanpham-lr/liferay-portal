@@ -295,23 +295,23 @@ public class TodoListPersistenceImpl
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
-		Date now = new Date();
+		Date date = new Date();
 
 		if (isNew && (todoList.getCreateDate() == null)) {
 			if (serviceContext == null) {
-				todoList.setCreateDate(now);
+				todoList.setCreateDate(date);
 			}
 			else {
-				todoList.setCreateDate(serviceContext.getCreateDate(now));
+				todoList.setCreateDate(serviceContext.getCreateDate(date));
 			}
 		}
 
 		if (!todoListModelImpl.hasSetModifiedDate()) {
 			if (serviceContext == null) {
-				todoList.setModifiedDate(now);
+				todoList.setModifiedDate(date);
 			}
 			else {
-				todoList.setModifiedDate(serviceContext.getModifiedDate(now));
+				todoList.setModifiedDate(serviceContext.getModifiedDate(date));
 			}
 		}
 

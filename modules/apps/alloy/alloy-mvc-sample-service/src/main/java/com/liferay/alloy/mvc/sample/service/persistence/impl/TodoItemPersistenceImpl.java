@@ -295,23 +295,23 @@ public class TodoItemPersistenceImpl
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
-		Date now = new Date();
+		Date date = new Date();
 
 		if (isNew && (todoItem.getCreateDate() == null)) {
 			if (serviceContext == null) {
-				todoItem.setCreateDate(now);
+				todoItem.setCreateDate(date);
 			}
 			else {
-				todoItem.setCreateDate(serviceContext.getCreateDate(now));
+				todoItem.setCreateDate(serviceContext.getCreateDate(date));
 			}
 		}
 
 		if (!todoItemModelImpl.hasSetModifiedDate()) {
 			if (serviceContext == null) {
-				todoItem.setModifiedDate(now);
+				todoItem.setModifiedDate(date);
 			}
 			else {
-				todoItem.setModifiedDate(serviceContext.getModifiedDate(now));
+				todoItem.setModifiedDate(serviceContext.getModifiedDate(date));
 			}
 		}
 

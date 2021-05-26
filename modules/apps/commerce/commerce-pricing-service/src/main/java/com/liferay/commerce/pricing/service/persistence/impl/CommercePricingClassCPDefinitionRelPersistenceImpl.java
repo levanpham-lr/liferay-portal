@@ -1714,17 +1714,17 @@ public class CommercePricingClassCPDefinitionRelPersistenceImpl
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
-		Date now = new Date();
+		Date date = new Date();
 
 		if (isNew &&
 			(commercePricingClassCPDefinitionRel.getCreateDate() == null)) {
 
 			if (serviceContext == null) {
-				commercePricingClassCPDefinitionRel.setCreateDate(now);
+				commercePricingClassCPDefinitionRel.setCreateDate(date);
 			}
 			else {
 				commercePricingClassCPDefinitionRel.setCreateDate(
-					serviceContext.getCreateDate(now));
+					serviceContext.getCreateDate(date));
 			}
 		}
 
@@ -1732,11 +1732,11 @@ public class CommercePricingClassCPDefinitionRelPersistenceImpl
 				hasSetModifiedDate()) {
 
 			if (serviceContext == null) {
-				commercePricingClassCPDefinitionRel.setModifiedDate(now);
+				commercePricingClassCPDefinitionRel.setModifiedDate(date);
 			}
 			else {
 				commercePricingClassCPDefinitionRel.setModifiedDate(
-					serviceContext.getModifiedDate(now));
+					serviceContext.getModifiedDate(date));
 			}
 		}
 
