@@ -40,11 +40,11 @@ String productContentAuthToken = AuthTokenUtil.getToken(request, plid, CPPortlet
 
 							<%
 							for (CPMedia imageCPMedia : cpContentHelper.getImages(cpDefinitionId, themeDisplay)) {
-								String thumbnailUrl = imageCPMedia.getThumbnailUrl();
+								String thumbnailURL = imageCPMedia.getThumbnailURL();
 							%>
 
-								<div class="card thumb" data-url="<%= thumbnailUrl %>">
-									<img class="center-block img-responsive" src="<%= thumbnailUrl %>" />
+								<div class="card thumb" data-url="<%= thumbnailURL %>">
+									<img class="center-block img-responsive" src="<%= thumbnailURL %>" />
 								</div>
 
 							<%
@@ -266,7 +266,7 @@ String productContentAuthToken = AuthTokenUtil.getToken(request, plid, CPPortlet
 												<span><%= attachmentCPMedia.getTitle() %></span>
 
 												<span>
-													<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" url="<%= attachmentCPMedia.getDownloadUrl() %>" />
+													<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" url="<%= attachmentCPMedia.getDownloadURL() %>" />
 												</span>
 											</td>
 										</tr>

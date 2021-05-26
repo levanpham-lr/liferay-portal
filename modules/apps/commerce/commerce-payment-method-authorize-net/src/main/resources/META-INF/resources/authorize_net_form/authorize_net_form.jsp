@@ -17,14 +17,14 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String redirectUrlAttribute = (String)request.getAttribute("redirectUrl");
+String redirectURLAttribute = (String)request.getAttribute("redirectUrl");
 
-String redirectUrl = URLCodec.decodeURL(redirectUrlAttribute);
+String redirectURL = URLCodec.decodeURL(redirectURLAttribute);
 
 String tokenAttribute = (String)request.getAttribute("token");
 %>
 
-<form action="<%= redirectUrl %>" class="hide" id="formAuthorizeNet" method="post" name="formAuthorizeNet">
+<form action="<%= redirectURL %>" class="hide" id="formAuthorizeNet" method="post" name="formAuthorizeNet">
 	<input name="token" type="hidden" value="<%= URLDecoder.decode(tokenAttribute, "UTF-8") %>" />
 	<button id="btnContinue">Continue</button>
 </form>
