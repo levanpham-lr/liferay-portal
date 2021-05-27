@@ -695,6 +695,7 @@ public class ContentDashboardAdminPortletTest {
 		try {
 			JournalArticle journalArticle = JournalTestUtil.addArticle(
 				user.getUserId(), _group.getGroupId(), 0);
+
 			JournalTestUtil.addArticle(
 				_user.getUserId(), _group.getGroupId(), 0);
 
