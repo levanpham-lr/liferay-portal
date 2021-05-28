@@ -29,7 +29,7 @@ rowURL.setParameter("mvcRenderCommandName", "/document_library/view_folder");
 rowURL.setParameter("redirect", currentURL);
 rowURL.setParameter("folderId", String.valueOf(folder.getFolderId()));
 
-Date modifiedDate = folder.getLastPostDate();
+Date modifiedDate = folder.getModifiedDate();
 
 String modifiedDateDescription = LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - modifiedDate.getTime(), true);
 %>
