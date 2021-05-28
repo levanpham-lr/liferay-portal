@@ -1141,8 +1141,6 @@ public class JournalDisplayContext {
 		SearchContext searchContext = new SearchContext();
 
 		searchContext.setAndSearch(false);
-		searchContext.setAttribute("head", !showVersions);
-		searchContext.setAttribute("latest", !showVersions);
 
 		LinkedHashMap<String, Object> params =
 			LinkedHashMapBuilder.<String, Object>put(
@@ -1151,7 +1149,6 @@ public class JournalDisplayContext {
 				"keywords", getKeywords()
 			).build();
 
-		searchContext.setAttribute("params", params);
 		searchContext.setAttributes(
 			HashMapBuilder.<String, Serializable>put(
 				Field.ARTICLE_ID, getKeywords()
@@ -1168,6 +1165,10 @@ public class JournalDisplayContext {
 				Field.TITLE, getKeywords()
 			).put(
 				"ddmStructureKey", getDDMStructureKey()
+			).put(
+				"head", !showVersions
+			).put(
+				"latest", !showVersions
 			).put(
 				"params", params
 			).build());
