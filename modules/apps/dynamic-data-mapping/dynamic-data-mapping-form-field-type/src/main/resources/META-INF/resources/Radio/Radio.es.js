@@ -41,6 +41,10 @@ const Radio = ({
 	...otherProps
 }) => {
 	const predefinedValueMemo = useMemo(() => {
+		if (typeof predefinedValue === 'string') {
+			return predefinedValue;
+		}
+
 		const predefinedValueJSONArray =
 			setJSONArrayValue(predefinedValue) || [];
 
