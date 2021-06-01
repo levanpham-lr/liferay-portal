@@ -736,7 +736,8 @@ public class LayoutPageTemplateEntryLocalServiceImpl
 			draftLayout.getKeywordsMap(), draftLayout.getRobotsMap(),
 			draftLayout.getType(), draftLayout.isHidden(),
 			draftLayout.getFriendlyURLMap(), draftLayout.getIconImage(), null,
-			serviceContext);
+			draftLayout.getMasterLayoutPlid(),
+			draftLayout.getStyleBookEntryId(), serviceContext);
 
 		return layoutPageTemplateEntry;
 	}
