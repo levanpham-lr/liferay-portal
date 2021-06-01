@@ -32,9 +32,9 @@ name = namespace + name;
 <liferay-util:html-top
 	outputKey="js_maps_openstreet_skip_loading"
 >
-	<link href="https://npmcdn.com/leaflet@1.2.0/dist/leaflet.css" rel="stylesheet" />
+	<link href="https://npmcdn.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet" />
 
-	<script src="https://npmcdn.com/leaflet@1.2.0/dist/leaflet.js" type="text/javascript"></script>
+	<script src="https://npmcdn.com/leaflet@1.7.1/dist/leaflet.js" type="text/javascript"></script>
 </liferay-util:html-top>
 
 <aui:script require="<%= bootstrapRequire %>">
