@@ -73,7 +73,7 @@ const Validation = ({
 				expression = {
 					name: newState.selectedValidation.name,
 					value: subWords(newState.selectedValidation.template, {
-						name: validation.fieldName,
+						name: validation?.fieldName,
 					}),
 				};
 			}
