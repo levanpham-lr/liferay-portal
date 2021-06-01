@@ -1140,11 +1140,6 @@ public class JournalDisplayContext {
 		SearchContext searchContext = new SearchContext();
 
 		searchContext.setAndSearch(false);
-
-		if (!showVersions) {
-			searchContext.setAttribute("showNonindexable", Boolean.TRUE);
-		}
-
 		searchContext.setAttributes(
 			HashMapBuilder.<String, Serializable>put(
 				Field.ARTICLE_ID, getKeywords()
@@ -1172,6 +1167,8 @@ public class JournalDisplayContext {
 				).put(
 					"keywords", getKeywords()
 				).build()
+			).put(
+				"showNonindexable", !showVersions
 			).build());
 		searchContext.setCompanyId(_themeDisplay.getCompanyId());
 		searchContext.setEnd(end);
