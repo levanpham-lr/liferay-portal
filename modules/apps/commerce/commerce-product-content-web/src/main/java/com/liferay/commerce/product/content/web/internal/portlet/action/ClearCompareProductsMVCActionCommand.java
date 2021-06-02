@@ -48,14 +48,14 @@ public class ClearCompareProductsMVCActionCommand extends BaseMVCActionCommand {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		HttpServletRequest originalServletRequest =
+		HttpServletRequest originalHttpServletRequest =
 			_portal.getOriginalServletRequest(
 				_portal.getHttpServletRequest(actionRequest));
 
 		CPCompareHelperUtil.setCPDefinitionIds(
 			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
-				_portal.getScopeGroupId(originalServletRequest)),
-			null, originalServletRequest.getSession());
+				_portal.getScopeGroupId(originalHttpServletRequest)),
+			null, originalHttpServletRequest.getSession());
 
 		hideDefaultErrorMessage(actionRequest);
 		hideDefaultSuccessMessage(actionRequest);
