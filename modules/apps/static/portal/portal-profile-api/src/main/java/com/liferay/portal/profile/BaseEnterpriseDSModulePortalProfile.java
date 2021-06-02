@@ -78,7 +78,7 @@ public class BaseEnterpriseDSModulePortalProfile implements PortalProfile {
 			return;
 		}
 
-		if (!_startedBundleNames.add(bundle.getSymbolicName())) {
+		if (!_startedBundleSymbolicNames.add(bundle.getSymbolicName())) {
 			return;
 		}
 
@@ -98,9 +98,9 @@ public class BaseEnterpriseDSModulePortalProfile implements PortalProfile {
 
 	private static final boolean _DXP;
 
-
-	private static final Set<String> _startedBundleNames =
+	private static final Set<String> _startedBundleSymbolicNames =
 		Collections.newSetFromMap(new ConcurrentHashMap<>());
+
 	static {
 		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 
