@@ -1406,7 +1406,10 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 			if ((values != null) && (portletSpecMajorVersion >= 3)) {
 				for (int i = 0; i < values.length; i++) {
-					if ((values[i] != null) && values[i].isEmpty()) {
+					if (Objects.equals(
+							values[i],
+							LiferayMutablePortletParameters.NULL_PARAM_VALUE)) {
+
 						values[i] = null;
 					}
 				}
