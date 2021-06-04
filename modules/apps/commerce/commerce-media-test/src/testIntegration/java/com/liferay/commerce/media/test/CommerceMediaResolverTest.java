@@ -172,7 +172,7 @@ public class CommerceMediaResolverTest {
 
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			_cpAttachmentFileEntryLocalService.addCPAttachmentFileEntry(
-				null, _user.getUserId(), _group.getGroupId(),
+				_user.getUserId(), _group.getGroupId(),
 				PortalUtil.getClassNameId(CPDefinition.class.getName()),
 				cpDefinition.getCPDefinitionId(), dlFileEntry.getFileEntryId(),
 				displayDateMonth, displayDateDay, displayDateYear,
@@ -180,7 +180,8 @@ public class CommerceMediaResolverTest {
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, true,
 				RandomTestUtil.randomLocaleStringMap(), null, 0D,
-				CPAttachmentFileEntryConstants.TYPE_IMAGE, _serviceContext);
+				CPAttachmentFileEntryConstants.TYPE_IMAGE, null,
+				_serviceContext);
 
 		String url = _commerceMediaResolver.getURL(
 			_commerceAccount.getCommerceAccountId(),
