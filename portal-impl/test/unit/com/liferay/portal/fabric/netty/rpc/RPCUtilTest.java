@@ -139,8 +139,10 @@ public class RPCUtilTest {
 		catch (ExecutionException executionException) {
 			Throwable throwable = executionException.getCause();
 
+			Class<?> clazz = throwable.getClass();
+
 			Assert.assertSame(
-				ClosedChannelException.class, throwable.getClass());
+				ClosedChannelException.class, clazz.getSuperclass());
 		}
 
 		// Channel closed failure, no match key
@@ -184,8 +186,10 @@ public class RPCUtilTest {
 
 			Throwable throwable = logRecord.getThrown();
 
+			Class<?> clazz = throwable.getClass();
+
 			Assert.assertSame(
-				ClosedChannelException.class, throwable.getClass());
+				ClosedChannelException.class, clazz.getSuperclass());
 		}
 	}
 
