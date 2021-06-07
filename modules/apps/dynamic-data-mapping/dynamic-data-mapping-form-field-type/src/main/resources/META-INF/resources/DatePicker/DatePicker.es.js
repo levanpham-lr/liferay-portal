@@ -269,7 +269,7 @@ const DatePicker = ({
 						return onChange('');
 					}
 
-					if (moment(value).isValid()) {
+					if (moment(value, getLocaleDateFormat(locale), true).isValid()) {
 						onChange(
 							moment(value).locale(locale).format('MM/DD/YYYY')
 						);
