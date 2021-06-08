@@ -427,6 +427,10 @@ definition {
 
 		Portlet.addPG(portletName = "Documents and Media");
 
+		Navigator.gotoPage(pageName = "Documents and Media Page");
+
+		DMDocument.enableActionsMenuOnPortlet();
+
 		DMRepository.cleanRepository(dmDocumentTitle = "Document_1.doc");
 
 		Navigator.gotoPage(pageName = "Documents and Media Page");
