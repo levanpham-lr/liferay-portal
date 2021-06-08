@@ -270,6 +270,11 @@ public class DBPartitionUtil {
 			}
 
 			@Override
+			public String getCatalog() throws SQLException {
+				return _getSchemaName(CompanyThreadLocal.getCompanyId());
+			}
+
+			@Override
 			public PreparedStatement prepareStatement(String sql)
 				throws SQLException {
 
