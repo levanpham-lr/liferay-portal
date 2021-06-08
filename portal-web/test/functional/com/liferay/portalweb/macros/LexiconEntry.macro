@@ -54,6 +54,10 @@ definition {
 			Click(locator1 = "Button#PLUS_IE");
 		}
 		else {
+			if (IsElementPresent(locator1 = "//button[.//*[contains(@class,'icon-plus')]]")) {
+				Pause(locator1 = "3000");
+			}
+
 			Click(locator1 = "Button#PLUS");
 		}
 	}
