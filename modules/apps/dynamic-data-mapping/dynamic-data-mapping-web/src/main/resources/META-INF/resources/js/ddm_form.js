@@ -3758,9 +3758,26 @@ AUI.add(
 								editor.setHTML(value);
 							}
 
-							editor.getNativeEditor().once('dataReady', () => {
+							var nativeEditor = editor.getNativeEditor();
+
+							var usingCKEditor =
+								CKEDITOR &&
+								CKEDITOR.instances &&
+								CKEDITOR.instances[editorComponentName];
+
+							var usingAlloyEditor =
+								nativeEditor &&
+								nativeEditor._editor &&
+								nativeEditor._editor.window.$.AlloyEditor;
+
+							if (usingCKEditor && !usingAlloyEditor) {
+								nativeEditor.once('dataReady', () => {
+									Liferay.fire('ddmEditorDataReady');
+								});
+							}
+							else {
 								Liferay.fire('ddmEditorDataReady');
-							});
+							}
 						}
 					});
 				},
