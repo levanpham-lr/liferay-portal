@@ -49,7 +49,6 @@ import com.liferay.portal.kernel.service.GroupServiceUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LinkedHashMapBuilder;
 import com.liferay.portal.kernel.util.OrderByComparator;
