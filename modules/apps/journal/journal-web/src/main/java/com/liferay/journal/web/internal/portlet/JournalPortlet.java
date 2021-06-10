@@ -97,6 +97,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	configurationPid = {
 		"com.liferay.dynamic.data.mapping.configuration.DDMWebConfiguration",
+		"com.liferay.journal.configuration.JournalFileUploadsConfiguration",
 		"com.liferay.journal.web.internal.configuration.JournalDDMEditorConfiguration",
 		"com.liferay.journal.web.internal.configuration.JournalWebConfiguration"
 	},
