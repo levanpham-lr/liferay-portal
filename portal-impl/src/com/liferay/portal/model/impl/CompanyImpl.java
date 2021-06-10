@@ -391,13 +391,6 @@ public class CompanyImpl extends CompanyBaseImpl {
 		return companySecurityBag._strangersWithMx;
 	}
 
-	@Override
-	public boolean isUpdatePasswordRequired() {
-		CompanySecurityBag companySecurityBag = getCompanySecurityBag();
-
-		return companySecurityBag._updatePasswordRequired;
-	}
-
 	public void setCompanySecurityBag(Object companySecurityBag) {
 		_companySecurityBag = (CompanySecurityBag)companySecurityBag;
 	}
@@ -447,10 +440,6 @@ public class CompanyImpl extends CompanyBaseImpl {
 				preferences, company,
 				PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX,
 				PropsValues.COMPANY_SECURITY_STRANGERS_WITH_MX);
-			_updatePasswordRequired = _getPrefsPropsBoolean(
-				preferences, company,
-				PropsKeys.COMPANY_SECURITY_UPDATE_PASSWORD_REQUIRED,
-				PropsValues.COMPANY_SECURITY_UPDATE_PASSWORD_REQUIRED);
 		}
 
 		private final String _authType;
@@ -459,7 +448,6 @@ public class CompanyImpl extends CompanyBaseImpl {
 		private final boolean _strangers;
 		private final boolean _strangersVerify;
 		private final boolean _strangersWithMx;
-		private final boolean _updatePasswordRequired;
 
 	}
 
