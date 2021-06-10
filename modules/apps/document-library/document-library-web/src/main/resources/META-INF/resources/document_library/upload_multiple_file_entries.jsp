@@ -116,7 +116,7 @@ if (portletTitleBasedNavigation) {
 								Liferay.on('tempFileRemoved', function () {
 									Liferay.Util.openToast({
 										message:
-											'<%= LanguageUtil.get(request, "your-request-completed-successfully") %>',
+											'<%= HtmlUtil.escapeJS(LanguageUtil.get(request, "your-request-completed-successfully")) %>',
 									});
 								});
 
