@@ -34,16 +34,20 @@ export const AutoFocus = ({children}) => {
 				setTimeout(() => setIncrement((value) => value + 1), 5);
 			}
 			else {
-				const firstInput = childRef.current.querySelector('input');
+				if (!document.activeElement.id) {
+					const firstInput = childRef.current.querySelector('input');
 
-				if (
-					firstInput &&
-					!containerElement.current.contains(document.activeElement)
-				) {
-					firstInput.focus();
+					if (
+						firstInput &&
+						!containerElement.current.contains(
+							document.activeElement
+						)
+					) {
+						firstInput.focus();
 
-					if (firstInput.select) {
-						firstInput.select();
+						if (firstInput.select) {
+							firstInput.select();
+						}
 					}
 				}
 			}
