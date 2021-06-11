@@ -1572,12 +1572,12 @@ public class AnnouncementsFlagPersistenceImpl
 		AnnouncementsFlagModelImpl announcementsFlagModelImpl =
 			(AnnouncementsFlagModelImpl)announcementsFlag;
 
-		ServiceContext serviceContext =
-			ServiceContextThreadLocal.getServiceContext();
-
-		Date date = new Date();
-
 		if (isNew && (announcementsFlag.getCreateDate() == null)) {
+			ServiceContext serviceContext =
+				ServiceContextThreadLocal.getServiceContext();
+
+			Date date = new Date();
+
 			if (serviceContext == null) {
 				announcementsFlag.setCreateDate(date);
 			}

@@ -1718,12 +1718,12 @@ public class DDMStructureVersionPersistenceImpl
 		DDMStructureVersionModelImpl ddmStructureVersionModelImpl =
 			(DDMStructureVersionModelImpl)ddmStructureVersion;
 
-		ServiceContext serviceContext =
-			ServiceContextThreadLocal.getServiceContext();
-
-		Date date = new Date();
-
 		if (isNew && (ddmStructureVersion.getCreateDate() == null)) {
+			ServiceContext serviceContext =
+				ServiceContextThreadLocal.getServiceContext();
+
+			Date date = new Date();
+
 			if (serviceContext == null) {
 				ddmStructureVersion.setCreateDate(date);
 			}
