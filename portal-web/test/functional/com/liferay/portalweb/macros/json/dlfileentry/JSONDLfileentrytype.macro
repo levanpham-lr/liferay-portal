@@ -16,7 +16,7 @@ definition {
 		var fileEntryTypeId = StringUtil.replace("${fileEntryTypeId}", "[&quot;", "");
 		var fileEntryTypeId = StringUtil.replace("${fileEntryTypeId}", "&quot;]", "");
 
-		if ("${fileEntryTypeId}" == "[]") {
+		if ("${fileEntryTypeId}" == "") {
 			fail("FAIL. Cannot find fileEntryTypeId.");
 		}
 

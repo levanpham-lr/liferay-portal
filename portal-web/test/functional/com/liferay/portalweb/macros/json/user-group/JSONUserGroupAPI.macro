@@ -48,7 +48,7 @@ definition {
 		var userGroupId = StringUtil.replace("${userGroupId}", "[&quot;", "");
 		var userGroupId = StringUtil.replace("${userGroupId}", "&quot;]", "");
 
-		if ("${groupId}" == "[]") {
+		if ("${groupId}" == "") {
 			fail("FAIL. Cannot find user group.");
 		}
 

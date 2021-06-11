@@ -23,7 +23,7 @@ definition {
 		var structureId = StringUtil.replace("${structureId}", "[&quot;", "");
 		var structureId = StringUtil.replace("${structureId}", "&quot;]", "");
 
-		if ("${structureId}" == "[]") {
+		if ("${structureId}" == "") {
 			fail("FAIL. Cannot find structureId.");
 		}
 

@@ -130,7 +130,7 @@ definition {
 		var layoutPageTemplateCollectionId = StringUtil.replace("${layoutPageTemplateCollectionId}", "[&quot;", "");
 		var layoutPageTemplateCollectionId = StringUtil.replace("${layoutPageTemplateCollectionId}", "&quot;]", "");
 
-		if ("${layoutPageTemplateCollectionId}" == "[]") {
+		if ("${layoutPageTemplateCollectionId}" == "") {
 			fail("FAIL. Cannot find layoutPageTemplateCollection.");
 		}
 
@@ -157,7 +157,7 @@ definition {
 		var layoutPageTemplateEntryId = StringUtil.replace("${layoutPageTemplateEntryId}", "[&quot;", "");
 		var layoutPageTemplateEntryId = StringUtil.replace("${layoutPageTemplateEntryId}", "&quot;]", "");
 
-		if ("${layoutPageTemplateEntryId}" == "[]") {
+		if ("${layoutPageTemplateEntryId}" == "") {
 			fail("FAIL. Cannot find layoutPageTemplateEntry.");
 		}
 
@@ -184,7 +184,7 @@ definition {
 		var masterLayoutPlid = StringUtil.replace("${masterLayoutPlid}", "[&quot;", "");
 		var masterLayoutPlid = StringUtil.replace("${masterLayoutPlid}", "&quot;]", "");
 
-		if ("${masterLayoutPlid}" == "[]") {
+		if ("${masterLayoutPlid}" == "") {
 			fail("FAIL. Cannot find masterLayoutEntry.");
 		}
 

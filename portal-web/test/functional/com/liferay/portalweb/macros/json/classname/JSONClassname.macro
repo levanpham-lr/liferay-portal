@@ -15,7 +15,7 @@ definition {
 		var classNameId = StringUtil.replace("${classNameId}", "[&quot;", "");
 		var classNameId = StringUtil.replace("${classNameId}", "&quot;]", "");
 
-		if ("${classNameId}" == "[]") {
+		if ("${classNameId}" == "") {
 			fail("FAIL. Cannot find classNameId.");
 		}
 

@@ -37,7 +37,7 @@ definition {
 		var resourcePrimKey = StringUtil.replace("${resourcePrimKey}", "[&quot;", "");
 		var resourcePrimKey = StringUtil.replace("${resourcePrimKey}", "&quot;]", "");
 
-		if ("${resourcePrimKey}" == "[]") {
+		if ("${resourcePrimKey}" == "") {
 			fail("FAIL. Cannot find resourcePrimKey.");
 		}
 		else {
@@ -79,7 +79,7 @@ definition {
 		var resourcePrimKey = StringUtil.replace("${resourcePrimKey}", "[&quot;", "");
 		var resourcePrimKey = StringUtil.replace("${resourcePrimKey}", "&quot;]", "");
 
-		if ("${resourcePrimKey}" == "[]") {
+		if ("${resourcePrimKey}" == "") {
 			fail("FAIL. Cannot find resourcePrimKey.");
 		}
 		else {
@@ -304,7 +304,7 @@ definition {
 		var kbFolderId = StringUtil.replace("${kbFolderId}", "[&quot;", "");
 		var kbFolderId = StringUtil.replace("${kbFolderId}", "&quot;]", "");
 
-		if ("${kbFolderId}" == "[]") {
+		if ("${kbFolderId}" == "") {
 			fail("FAIL. Cannot find folder.");
 		}
 		else {
