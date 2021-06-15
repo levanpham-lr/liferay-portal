@@ -236,7 +236,7 @@ AssetListEntry assetListEntry = assetListDisplayContext.getAssetListEntry();
 						Array.prototype.forEach.call(selectedItems, function (
 							assetEntry
 						) {
-							assetEntryIds.push(assetEntry.entityid);
+							assetEntryIds.push(assetEntry.value);
 						});
 
 						Liferay.Util.postForm(document.<portlet:namespace />fm, {
