@@ -218,19 +218,21 @@ public class UpgradeJournal extends UpgradeProcess {
 			long journalArticleClassNameId = PortalUtil.getClassNameId(
 				JournalArticle.class.getName());
 
-			StringBundler sb = new StringBundler(6);
+			StringBundler sb = new StringBundler(7);
 
 			sb.append("select DDMTemplate.templateId, JournalArticle.id_ ");
 			sb.append("from JournalArticle inner join DDMTemplate on (");
 			sb.append("DDMTemplate.groupId = JournalArticle.groupId and ");
 			sb.append("DDMTemplate.templateKey = ");
 			sb.append("JournalArticle.DDMTemplateKey and ");
-			sb.append("JournalArticle.classNameId != ?)");
+			sb.append("JournalArticle.classNameId != ? and ");
+			sb.append("DDMTemplate.classNameId = ?)");
 
 			try (PreparedStatement ps = connection.prepareStatement(
 					sb.toString())) {
 
 				ps.setLong(1, ddmStructureClassNameId);
+				ps.setLong(2, ddmStructureClassNameId);
 
 				try (ResultSet rs = ps.executeQuery()) {
 					while (rs.next()) {
