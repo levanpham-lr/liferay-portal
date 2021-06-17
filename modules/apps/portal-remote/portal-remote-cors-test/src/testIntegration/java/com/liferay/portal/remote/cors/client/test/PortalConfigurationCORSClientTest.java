@@ -117,7 +117,8 @@ public class PortalConfigurationCORSClientTest extends BaseCORSClientTestCase {
 
 		Map<String, NewCookie> newCookies = response.getCookies();
 
-		NewCookie cookieSupportNewCookie = newCookies.get(CookieKeys.COOKIE_SUPPORT);
+		NewCookie cookieSupportNewCookie = newCookies.get(
+			CookieKeys.COOKIE_SUPPORT);
 		NewCookie jSessionIdNewCookie = newCookies.get(CookieKeys.JSESSIONID);
 
 		invocationBuilder = _getWebTarget(
