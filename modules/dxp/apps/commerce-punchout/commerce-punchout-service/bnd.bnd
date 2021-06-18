@@ -5,7 +5,7 @@ Import-Package:\
 	com.liferay.asset.kernel.service; version="[2.0.0,99.0.0)",\
 	com.liferay.commerce.account.service; version="[2.0.0,99.0.0)",\
 	com.liferay.commerce.product.service; version="[11.0.0,99.0.0)",\
-	com.liferay.commerce.service; version="[11.0.0,12.0.0)",\
+	com.liferay.commerce.service; version="[11.0.0,99.0.0)",\
 	com.liferay.portal.kernel.service; version="[4.0.0,99.0.0)",\
 	\
 	*

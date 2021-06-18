@@ -4,7 +4,7 @@ Bundle-Version: 3.0.13
 Import-Package:\
 	com.liferay.commerce.account.service; version="[3.0.0,99.0.0)",\
 	com.liferay.commerce.product.service; version="[12.0.0,99.0.0)",\
-	com.liferay.commerce.service; version="[11.0.0,12.0.0)",\
+	com.liferay.commerce.service; version="[11.0.0,99.0.0)",\
 	com.liferay.portal.kernel.security.auth; version="[2.0.0,99.0.0)",\
 	com.liferay.portal.kernel.service; version="[4.0.0,99.0.0)",\
 	\
