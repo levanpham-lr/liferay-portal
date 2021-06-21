@@ -158,6 +158,7 @@
 					doAsGroupId: <%= scopeGroupId %>,
 					fieldsNamespace: '<%= HtmlUtil.escapeJS(fieldsNamespace) %>',
 					imageSelectorURL: '<%= imageSelectorURL %>',
+					initialChildren: <%= PropsValues.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN %>,
 					mode: '<%= HtmlUtil.escapeJS(mode) %>',
 					p_l_id: <%= themeDisplay.getPlid() %>,
 					portletNamespace: '<portlet:namespace />',

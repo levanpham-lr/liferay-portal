@@ -26,7 +26,8 @@ page import="com.liferay.portal.kernel.util.HashMapBuilder" %><%@
 page import="com.liferay.portal.kernel.util.JavaConstants" %><%@
 page import="com.liferay.portal.kernel.util.LocaleUtil" %><%@
 page import="com.liferay.portal.kernel.util.StringUtil" %><%@
-page import="com.liferay.portal.kernel.util.Validator" %>
+page import="com.liferay.portal.kernel.util.Validator" %><%@
+page import="com.liferay.portal.util.PropsValues" %>
 
 <%@ page import="java.util.ArrayList" %><%@
 page import="java.util.HashMap" %><%@
