@@ -65,9 +65,7 @@ else if (collapsible) {
 					<legend class="fieldset-legend">
 						<div class="panel-heading" id="<%= id %>Header" role="presentation">
 							<div id="<%= id %>Title">
-								<span class="legend">
-									<h3 class="sheet-subtitle"><%= header %></h3>
-								</span>
+								<h3 class="legend sheet-subtitle"><%= header %></h3>
 							</div>
 						</div>
 					</legend>
