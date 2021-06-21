@@ -1077,12 +1077,11 @@ public class JournalArticleLocalServiceImpl
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
-		if (serviceContext != null) {
-			modifiedDate = serviceContext.getModifiedDate(modifiedDate);
-		}
-		else {
+		if (serviceContext == null) {
 			serviceContext = new ServiceContext();
 		}
+
+		modifiedDate = serviceContext.getModifiedDate(modifiedDate);
 
 		newArticle.setModifiedDate(modifiedDate);
 
