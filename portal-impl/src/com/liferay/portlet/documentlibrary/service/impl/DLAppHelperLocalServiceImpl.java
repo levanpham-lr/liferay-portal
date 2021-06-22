@@ -1659,6 +1659,12 @@ public class DLAppHelperLocalServiceImpl
 				false);
 		}
 
+		if (!dlFolders.contains(dlFolder)) {
+			dlFolders = new ArrayList<>(dlFolders);
+
+			dlFolders.add(dlFolder);
+		}
+
 		for (DLFolder childDLFolder : dlFolders) {
 			trashOrRestoreFolder(
 				dlFolder, childDLFolder, moveToTrash, trashEntry);
