@@ -131,12 +131,6 @@ definition {
 			pageName = "Documents and Media Page",
 			siteName = "Site Name");
 
-		DMDocument.enableActionsMenuOnPortlet();
-
-		Navigator.gotoSitePage(
-			pageName = "Documents and Media Page",
-			siteName = "Site Name");
-
 		DMDocument.addPG(
 			dmDocumentFile = "Document_1.doc",
 			dmDocumentTitle = "Document_1.doc");
