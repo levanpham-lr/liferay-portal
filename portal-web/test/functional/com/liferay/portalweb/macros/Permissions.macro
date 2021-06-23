@@ -335,6 +335,14 @@ definition {
 			layoutName = "${pageName}",
 			widgetName = "${portletName}");
 
+		if ("${portletName}" == "Documents and Media") {
+			Navigator.gotoSitePage(
+				pageName = "${pageName}",
+				siteName = "${siteName}");
+
+			DMDocument.enableActionsMenuOnPortlet();
+		}
+
 		User.logoutAndLoginPG(
 			userLoginEmailAddress = "${userLoginEmailAddress}",
 			userLoginFullName = "${userLoginFullName}");
