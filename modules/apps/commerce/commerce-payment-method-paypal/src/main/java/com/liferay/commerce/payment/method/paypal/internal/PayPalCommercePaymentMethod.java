@@ -173,7 +173,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		CommercePaymentRequest commercePaymentRequest) {
 
 		return new CommercePaymentResult(
-			null, commercePaymentRequest.getCommerceOrderId(),
+			commercePaymentRequest.getTransactionId(),
+			commercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderPaymentConstants.STATUS_CANCELLED, false, null, null,
 			Collections.emptyList(), true);
 	}
@@ -248,7 +249,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		List<String> messages = Arrays.asList(responseCapture.getReasonCode());
 
 		return new CommercePaymentResult(
-			null, commercePaymentRequest.getCommerceOrderId(),
+			commercePaymentRequest.getTransactionId(),
+			commercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderConstants.PAYMENT_STATUS_PAID, false, null,
 			responseCapture.getId(), messages, success);
 	}
@@ -290,7 +292,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 			List<String> messages = Arrays.asList(payment.getFailureReason());
 
 			return new CommercePaymentResult(
-				null, payPalCommercePaymentRequest.getCommerceOrderId(),
+				payment.getId(),
+				payPalCommercePaymentRequest.getCommerceOrderId(),
 				CommerceOrderConstants.PAYMENT_STATUS_PAID, false, null, null,
 				messages, success);
 		}
@@ -301,7 +304,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 				payPalRESTException);
 
 			return new CommercePaymentResult(
-				null, commercePaymentRequest.getCommerceOrderId(),
+				commercePaymentRequest.getTransactionId(),
+				commercePaymentRequest.getCommerceOrderId(),
 				CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED, true, null,
 				null, resultMessages, false);
 		}
@@ -352,7 +356,8 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 				payPalRESTException);
 
 			return new CommercePaymentResult(
-				null, commercePaymentRequest.getCommerceOrderId(),
+				commercePaymentRequest.getTransactionId(),
+				commercePaymentRequest.getCommerceOrderId(),
 				CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED, true, null,
 				null, resultMessages, false);
 		}
@@ -545,9 +550,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		List<String> messages = Arrays.asList(detailedRefund.getDescription());
 
 		return new CommercePaymentResult(
-			null, commercePaymentRequest.getCommerceOrderId(),
+			commercePaymentRequest.getTransactionId(),
+			commercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderConstants.ORDER_STATUS_PARTIALLY_REFUNDED, false, null,
-			null, messages, success);
+			detailedRefund.getId(), messages, success);
 	}
 
 	@Override
@@ -608,8 +614,9 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 				payPalRESTException);
 
 			return new CommercePaymentResult(
-				null, commercePaymentRequest.getCommerceOrderId(), status, true,
-				null, null, resultMessages, success);
+				commercePaymentRequest.getTransactionId(),
+				commercePaymentRequest.getCommerceOrderId(), status, true, null,
+				null, resultMessages, success);
 		}
 	}
 
@@ -677,8 +684,9 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 				payPalRESTException);
 
 			return new CommercePaymentResult(
-				null, commercePaymentRequest.getCommerceOrderId(), status, true,
-				null, null, resultMessages, success);
+				commercePaymentRequest.getTransactionId(),
+				commercePaymentRequest.getCommerceOrderId(), status, true, null,
+				null, resultMessages, success);
 		}
 	}
 
@@ -713,9 +721,10 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		List<String> messages = Arrays.asList(detailedRefund.getDescription());
 
 		return new CommercePaymentResult(
-			null, commercePaymentRequest.getCommerceOrderId(),
-			CommerceOrderConstants.ORDER_STATUS_REFUNDED, false, null, null,
-			messages, success);
+			commercePaymentRequest.getTransactionId(),
+			commercePaymentRequest.getCommerceOrderId(),
+			CommerceOrderConstants.ORDER_STATUS_REFUNDED, false, null,
+			detailedRefund.getId(), messages, success);
 	}
 
 	@Override
@@ -782,7 +791,7 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		List<String> messages = Arrays.asList(authorization.getPendingReason());
 
 		return new CommercePaymentResult(
-			null, commercePaymentRequest.getCommerceOrderId(),
+			authorization.getId(), commercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderConstants.PAYMENT_STATUS_PENDING, false, null, null,
 			messages, success);
 	}
