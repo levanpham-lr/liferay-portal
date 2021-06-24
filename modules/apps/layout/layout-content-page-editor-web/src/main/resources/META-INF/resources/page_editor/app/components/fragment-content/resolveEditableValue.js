@@ -24,6 +24,10 @@ export default function (
 ) {
 	const editableValue = editableValues[processorType][editableId];
 
+	if (!editableValue) {
+		return Promise.resolve(null);
+	}
+
 	let valuePromise;
 
 	if (editableIsMappedToInfoItem(editableValue)) {
