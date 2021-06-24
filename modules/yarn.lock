@@ -1088,16 +1088,17 @@
     fast-json-stable-stringify "^2.0.0"
     warning "^4.0.3"
 
-"@clayui/date-picker@3.6.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@clayui/date-picker/-/date-picker-3.6.0.tgz#742cdfccbf2940d26d427e7a34d7b1b3ad59a03b"
+"@clayui/date-picker@3.25.4":
+  version "3.25.4"
+  resolved "https://registry.yarnpkg.com/@clayui/date-picker/-/date-picker-3.25.4.tgz#f59ddbba0b46c94ed99bb9d061346cd558ffc3ff"
+  integrity sha512-u71vq5fb0uRFUXkHvrx9TVNBZfncVmXh5kC/iUaFUpqWvM02htKkiKIpSwGC0nhsLghavjkGwG3Q+iFodUrmFQ==
   dependencies:
-    "@clayui/button" "^3.5.0"
-    "@clayui/drop-down" "^3.8.0"
-    "@clayui/form" "^3.12.0"
+    "@clayui/button" "^3.6.0"
+    "@clayui/drop-down" "^3.25.1"
+    "@clayui/form" "^3.14.4"
     "@clayui/icon" "^3.1.0"
-    "@clayui/shared" "^3.3.0"
-    "@clayui/time-picker" "^3.2.0"
+    "@clayui/shared" "^3.5.1"
+    "@clayui/time-picker" "^3.2.6"
     classnames "^2.2.6"
     date-fns "^2.14.0"
 
@@ -1110,6 +1111,21 @@
     "@clayui/icon" "^3.1.0"
     "@clayui/link" "^3.2.0"
     "@clayui/shared" "^3.3.0"
+    classnames "^2.2.6"
+    dom-align "^1.10.2"
+    react-transition-group "^4.4.1"
+    warning "^4.0.3"
+
+"@clayui/drop-down@^3.25.1":
+  version "3.30.0"
+  resolved "https://registry.yarnpkg.com/@clayui/drop-down/-/drop-down-3.30.0.tgz#7bf6abb3a20cd961772b4fffaaeb8c85cf80ee9a"
+  integrity sha512-57o4yVFSpKxEs8nMTPbJa0w5VbVxP8UAaiqnnQLXDvTQZthWNbJfCShz9kpEj5VlmoOBvVjyQQ9tASpeVGVv6w==
+  dependencies:
+    "@clayui/button" "^3.6.0"
+    "@clayui/form" "^3.29.0"
+    "@clayui/icon" "^3.1.0"
+    "@clayui/link" "^3.2.0"
+    "@clayui/shared" "^3.29.0"
     classnames "^2.2.6"
     dom-align "^1.10.2"
     react-transition-group "^4.4.1"
@@ -1153,6 +1169,16 @@
     "@clayui/button" "^3.6.0"
     "@clayui/icon" "^3.1.0"
     "@clayui/shared" "^3.28.0"
+    classnames "^2.2.6"
+
+"@clayui/form@^3.29.0":
+  version "3.29.0"
+  resolved "https://registry.yarnpkg.com/@clayui/form/-/form-3.29.0.tgz#86271903fcd0c95565182c3ae218400f4321fc31"
+  integrity sha512-f2PTXpTffNzVkpi2dZgyQ7e8135MVBzE7uU+d0ihpHEqu+Y13AP4H8Gx7TQV6rhqeRU3pSAq9OAf5OvihZGWUg==
+  dependencies:
+    "@clayui/button" "^3.6.0"
+    "@clayui/icon" "^3.1.0"
+    "@clayui/shared" "^3.29.0"
     classnames "^2.2.6"
 
 "@clayui/icon@3.1.0", "@clayui/icon@^3.1.0":
@@ -1337,6 +1363,14 @@
     "@clayui/button" "^3.6.0"
     "@clayui/link" "^3.2.0"
 
+"@clayui/shared@^3.29.0":
+  version "3.29.0"
+  resolved "https://registry.yarnpkg.com/@clayui/shared/-/shared-3.29.0.tgz#b737dfee602fe69f3f495bf77142b8d498151984"
+  integrity sha512-lfIOHH3l31PpgqW1hgYvfQVDVjyXOJuLvJjW0y1wNTGchA2fKnxYoI8PObP3JRAJEUno7Zw2s3BYIA3lm2dw/g==
+  dependencies:
+    "@clayui/button" "^3.6.0"
+    "@clayui/link" "^3.2.0"
+
 "@clayui/slider@3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@clayui/slider/-/slider-3.2.0.tgz#9c023cd38875cd4bc97ba93883d23e9371ba24b4"
@@ -1362,7 +1396,7 @@
     "@clayui/shared" "^3.3.0"
     classnames "^2.2.6"
 
-"@clayui/time-picker@3.2.0", "@clayui/time-picker@^3.2.0":
+"@clayui/time-picker@3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@clayui/time-picker/-/time-picker-3.2.0.tgz#6def1cd2e15f9f90f13750f452f746aaa983e258"
   dependencies:
@@ -1370,6 +1404,17 @@
     "@clayui/form" "^3.12.0"
     "@clayui/icon" "^3.1.0"
     "@clayui/shared" "^3.3.0"
+    classnames "^2.2.6"
+
+"@clayui/time-picker@^3.2.6":
+  version "3.29.0"
+  resolved "https://registry.yarnpkg.com/@clayui/time-picker/-/time-picker-3.29.0.tgz#ac554d324a7b0f4c9af57775c1b6ab547d6ce33f"
+  integrity sha512-QcLIXaWJOuG6hOaeFpmMAOoCVJskOZ+YrAwflo1rUtW7sIrXmbS8gD3OioxIuvp3lYd/eO7qENkLkybjWJTj1Q==
+  dependencies:
+    "@clayui/button" "^3.6.0"
+    "@clayui/form" "^3.29.0"
+    "@clayui/icon" "^3.1.0"
+    "@clayui/shared" "^3.29.0"
     classnames "^2.2.6"
 
 "@clayui/toolbar@3.0.0":
