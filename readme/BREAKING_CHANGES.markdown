@@ -150,7 +150,6 @@ If you're using left and right category IDs, consider these options:
 
 For example, instead of working with the category IDs via `category.getLeftCategoryId()` and `category.getRightCategoryId()`, you can get the tree path via `category.getTreePath()`. Then use the tree path.
 
-As a reference, this snippet `AssetCategoryLocalService` sets the tree path when adding a category:
 ```
 if (parentCategory == null) {
     category.setTreePath("/" + categoryId + "/");
@@ -160,6 +159,7 @@ else {
         parentCategory.getTreePath() + categoryId + "/");
 }
 ```
+As a reference, this snippet `AssetCategoryLocalService` sets the tree path when adding a category:
 
 See [7.3.0-ga1 - AssetCategoryLocalServiceImpl.java#L122-L128](https://github.com/liferay/liferay-portal/blob/7.3.0-ga1/portal-impl/src/com/liferay/portlet/asset/service/impl/AssetCategoryLocalServiceImpl.java#L122-L128).
 
@@ -310,9 +310,7 @@ This change was made to unify the auto-upgrade feature between the Core and modu
 
 The cache bootstrap feature has been removed. These properties can no longer be used to enable/configure cache bootstrap:
 
-`ehcache.bootstrap.cache.loader.enabled`,
-`ehcache.bootstrap.cache.loader.properties.default`,
-`ehcache.bootstrap.cache.loader.properties.${specific.cache.name}`.
+`ehcache.bootstrap.cache.loader.enabled`, `ehcache.bootstrap.cache.loader.properties.default`, `ehcache.bootstrap.cache.loader.properties.${specific.cache.name}`.
 
 #### Who is affected?
 
