@@ -687,7 +687,7 @@ definition {
 			key_commentBody = "${entryComment}",
 			locator1 = "Comments#COMMENT_BODY_ASSET");
 
-		Click(locator1 = "Comments#COMMENT_ACTIONS");
+		Click.clickNoMouseOverNoWaitForVisible(locator1 = "Comments#COMMENT_ACTIONS");
 
 		MenuItem.click(menuItem = "Edit");
 
