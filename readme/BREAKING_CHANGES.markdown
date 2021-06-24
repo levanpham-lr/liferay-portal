@@ -12,7 +12,7 @@ Here are some of the types of changes documented in this file:
 * Execution requirements: Java version, J2EE Version, browser versions, etc.
 * Deprecations or end of support: For example, warning that a certain feature or API will be dropped in an upcoming version.
 
-*This document has been reviewed through commit `bc5ebe59ef84c`.*
+*This document has been reviewed through commit `f80a672a0e625`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -149,6 +149,8 @@ If you're using left and right category IDs, consider these options:
 
 For example, instead of working with the category IDs via `category.getLeftCategoryId()` and `category.getRightCategoryId()`, you can get the tree path via `category.getTreePath()`. Then use the tree path.
 
+As a reference, this snippet `AssetCategoryLocalService` sets the tree path when adding a category:
+
 ```
 if (parentCategory == null) {
     category.setTreePath("/" + categoryId + "/");
@@ -158,7 +160,6 @@ else {
         parentCategory.getTreePath() + categoryId + "/");
 }
 ```
-As a reference, this snippet `AssetCategoryLocalService` sets the tree path when adding a category:
 
 See [7.3.0-ga1 - AssetCategoryLocalServiceImpl.java#L122-L128](https://github.com/liferay/liferay-portal/blob/7.3.0-ga1/portal-impl/src/com/liferay/portlet/asset/service/impl/AssetCategoryLocalServiceImpl.java#L122-L128).
 
