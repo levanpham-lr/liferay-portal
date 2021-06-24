@@ -12,8 +12,7 @@ Here are some of the types of changes documented in this file:
 * Execution requirements: Java version, J2EE Version, browser versions, etc.
 * Deprecations or end of support: For example, warning that a certain feature or API will be dropped in an upcoming version.
 
-*This document has been reviewed through commit `980251208850b`.*
-*This document has been reviewed through commit `211d7a331ffc`.*
+*This document has been reviewed through commit `bc5ebe59ef84c`.*
 
 ## Breaking Changes Contribution Guidelines
 
@@ -310,7 +309,9 @@ This change was made to unify the auto-upgrade feature between the Core and modu
 
 The cache bootstrap feature has been removed. These properties can no longer be used to enable/configure cache bootstrap:
 
-`ehcache.bootstrap.cache.loader.enabled`, `ehcache.bootstrap.cache.loader.properties.default`, `ehcache.bootstrap.cache.loader.properties.${specific.cache.name}`.
+- `ehcache.bootstrap.cache.loader.enabled`
+- `ehcache.bootstrap.cache.loader.properties.default`
+- `ehcache.bootstrap.cache.loader.properties.${specific.cache.name}`
 
 #### Who is affected?
 
