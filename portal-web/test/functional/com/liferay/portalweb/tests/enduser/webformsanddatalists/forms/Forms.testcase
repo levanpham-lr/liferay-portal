@@ -3215,8 +3215,6 @@ definition {
 
 		Form.editFieldLabelMetal(fieldValue = "Radio");
 
-		FormFields.enableSwitcher(fieldName = "Required");
-
 		FormFields.editOptionsRow(
 			optionName = "Option1",
 			optionValue = "Option 1");
@@ -3225,6 +3223,8 @@ definition {
 			optionName = "Option2",
 			optionValue = "Option 2",
 			rowNumber = "2");
+
+		FormFields.enableSwitcher(fieldName = "Required");
 
 		Form.closeSidebar();
 
@@ -3246,8 +3246,6 @@ definition {
 
 		Form.editFieldLabelMetal(fieldValue = "Checkbox");
 
-		FormFields.enableSwitcher(fieldName = "Required");
-
 		FormFields.editOptionsRow(
 			optionName = "Checkbox1",
 			optionValue = "Checkbox 1",
@@ -3257,6 +3255,8 @@ definition {
 			optionName = "Checkbox2",
 			optionValue = "Checkbox 2",
 			rowNumber = "2");
+
+		FormFields.enableSwitcher(fieldName = "Required");
 
 		Form.closeSidebar();
 
