@@ -110,6 +110,7 @@ definition {
 	@priority = "5"
 	test ViewSegmentFieldsType {
 		LexiconEntry.gotoAdd();
+
 		for (var fieldType : list "User,Organization,Session") {
 			AssertElementPresent(
 				key_typeName = "${fieldType}",

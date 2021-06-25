@@ -361,6 +361,7 @@ definition {
 					key_rowPosition = "${i}",
 					locator1 = "PageEditor#COLLECTION_ITEM_TITLE");
 			}
+
 			if ("${i}" == "2") {
 				AssertVisible(
 					key_colPosition = "1",
@@ -369,6 +370,7 @@ definition {
 					key_rowPosition = "${i}",
 					locator1 = "PageEditor#COLLECTION_ITEM_TITLE");
 			}
+
 			if ("${i}" == "3") {
 				AssertVisible(
 					key_colPosition = "1",
