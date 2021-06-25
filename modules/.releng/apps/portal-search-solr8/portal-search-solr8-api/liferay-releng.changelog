@@ -42,3 +42,8 @@ d006219cc4dadf3ccebdac5810d3ef2bd518424c^..866e13c9b6710d1d42602ab0bd6fe79fd1ec6
 # Bundle Version 4.0.0
 #
 866e13c9b6710d1d42602ab0bd6fe79fd1ec69e0^..ddbde2437fb1aa1556f89d4acecc824992fc1ab4=LPS-77699 LPS-102232
+
+#
+# Bundle Version 4.0.1
+#
+ddbde2437fb1aa1556f89d4acecc824992fc1ab4^..c57c62fa2d5533ad61312a007cf46c640a323348=LRQA-51488
