@@ -99,6 +99,11 @@ public interface FragmentEntryProcessorHelper {
 			previewClassPK, previewClassNameId, previewType);
 	}
 
+	public Object getMappedLayoutValue(
+			JSONObject jsonObject,
+			FragmentEntryProcessorContext fragmentEntryProcessorContext)
+		throws PortalException;
+
 	/**
 	 * @deprecated As of Cavanaugh (7.4.x), replaced by {@link #getMappedInfoItemFieldValue(JSONObject, Map, FragmentEntryProcessorContext)}
 	 */
@@ -136,6 +141,8 @@ public interface FragmentEntryProcessorHelper {
 	public boolean isMapped(JSONObject jsonObject);
 
 	public boolean isMappedCollection(JSONObject jsonObject);
+
+	public boolean isMappedLayout(JSONObject jsonObject);
 
 	public String processTemplate(
 			String html,
