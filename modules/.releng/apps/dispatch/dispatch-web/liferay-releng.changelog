@@ -97,3 +97,8 @@ ea4a06dbdaa59e9e9b8705f44a2149666e1aff75^..bd303fddd364e0a2778a46edbc17fd329ca1f
 # Bundle Version 2.0.12
 #
 bd303fddd364e0a2778a46edbc17fd329ca1f633^..68084f3f0fc1413b9e4db77bc46edaec649eb620=COMMERCE-5657 COMMERCE-5697
+
+#
+# Bundle Version 2.0.13
+#
+68084f3f0fc1413b9e4db77bc46edaec649eb620^..967a1bdf985296ccca52f6ff38dc44a7d6c8742f=LRQA-51488
