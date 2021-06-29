@@ -621,7 +621,8 @@ public class MillerColumnsDisplayContext {
 					LanguageUtil.get(_httpServletRequest, "orphan-widgets")
 				).put(
 					"url",
-					_layoutsAdminDisplayContext.getOrphanPortletsURL(layout)
+					_layoutsAdminDisplayContext.getOrphanPortletsPortletURL(
+						layout)
 				));
 		}
 

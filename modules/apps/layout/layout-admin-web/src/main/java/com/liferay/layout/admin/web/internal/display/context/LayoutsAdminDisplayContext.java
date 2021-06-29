@@ -673,16 +673,18 @@ public class LayoutsAdminDisplayContext {
 		return deleteLayoutURL.toString();
 	}
 
-	public String getOrphanPortletsURL(Layout layout) {
-		PortletURL orphanPortletsURL =
+	public String getOrphanPortletsPortletURL(Layout layout) {
+		PortletURL orphanPortletsPortletURL =
 			_liferayPortletResponse.createRenderURL();
 
-		orphanPortletsURL.setParameter("mvcPath", "/orphan_portlets.jsp");
-		orphanPortletsURL.setParameter("backURL", themeDisplay.getURLCurrent());
-		orphanPortletsURL.setParameter(
+		orphanPortletsPortletURL.setParameter(
+			"mvcPath", "/orphan_portlets.jsp");
+		orphanPortletsPortletURL.setParameter(
+			"backURL", themeDisplay.getURLCurrent());
+		orphanPortletsPortletURL.setParameter(
 			"selPlid", String.valueOf(layout.getPlid()));
 
-		return orphanPortletsURL.toString();
+		return orphanPortletsPortletURL.toString();
 	}
 
 	public long getParentLayoutId() {
