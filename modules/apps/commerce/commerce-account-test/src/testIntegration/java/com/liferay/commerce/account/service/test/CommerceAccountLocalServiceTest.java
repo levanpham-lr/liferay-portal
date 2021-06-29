@@ -206,7 +206,7 @@ public class CommerceAccountLocalServiceTest {
 		User organizationUser2 = _userLocalService.getUserByScreenName(
 			_user.getCompanyId(), "organizationUser2");
 
-		List<CommerceAccount> organizationUser1CommerceAccounts =
+		List<CommerceAccount> organizationUserCommerceAccounts1 =
 			_commerceAccountLocalService.getUserCommerceAccounts(
 				organizationUser1.getUserId(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
@@ -214,17 +214,17 @@ public class CommerceAccountLocalServiceTest {
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		Assert.assertEquals(
-			organizationUser1CommerceAccounts.toString(), 1,
-			organizationUser1CommerceAccounts.size());
+			organizationUserCommerceAccounts1.toString(), 1,
+			organizationUserCommerceAccounts1.size());
 
-		CommerceAccount organizationUser1CommerceAccount =
-			organizationUser1CommerceAccounts.get(0);
+		CommerceAccount organizationUserCommerceAccount1 =
+			organizationUserCommerceAccounts1.get(0);
 
 		Assert.assertEquals(
 			"businessOrganizationAccount1",
-			organizationUser1CommerceAccount.getName());
+			organizationUserCommerceAccount1.getName());
 
-		List<CommerceAccount> organizationUser2CommerceAccounts =
+		List<CommerceAccount> organizationUserCommerceAccounts2 =
 			_commerceAccountLocalService.getUserCommerceAccounts(
 				organizationUser2.getUserId(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
@@ -232,15 +232,15 @@ public class CommerceAccountLocalServiceTest {
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		Assert.assertEquals(
-			organizationUser2CommerceAccounts.toString(), 1,
-			organizationUser2CommerceAccounts.size());
+			organizationUserCommerceAccounts2.toString(), 1,
+			organizationUserCommerceAccounts2.size());
 
-		CommerceAccount organizationUser2CommerceAccount =
-			organizationUser2CommerceAccounts.get(0);
+		CommerceAccount organizationUserCommerceAccount2 =
+			organizationUserCommerceAccounts2.get(0);
 
 		Assert.assertEquals(
 			"businessOrganizationAccount2",
-			organizationUser2CommerceAccount.getName());
+			organizationUserCommerceAccount2.getName());
 	}
 
 	@Test
@@ -277,7 +277,7 @@ public class CommerceAccountLocalServiceTest {
 		User businessUser2 = _userLocalService.getUserByScreenName(
 			_user.getCompanyId(), "businessUser2");
 
-		List<CommerceAccount> businessUser1CommerceAccounts =
+		List<CommerceAccount> businessUserCommerceAccounts1 =
 			_commerceAccountLocalService.getUserCommerceAccounts(
 				businessUser1.getUserId(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
@@ -285,16 +285,16 @@ public class CommerceAccountLocalServiceTest {
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		Assert.assertEquals(
-			businessUser1CommerceAccounts.toString(), 1,
-			businessUser1CommerceAccounts.size());
+			businessUserCommerceAccounts1.toString(), 1,
+			businessUserCommerceAccounts1.size());
 
-		CommerceAccount businessUser1CommerceAccount =
-			businessUser1CommerceAccounts.get(0);
+		CommerceAccount businessUserCommerceAccount1 =
+			businessUserCommerceAccounts1.get(0);
 
 		Assert.assertEquals(
-			"businessUserAccount1", businessUser1CommerceAccount.getName());
+			"businessUserAccount1", businessUserCommerceAccount1.getName());
 
-		List<CommerceAccount> businessUser2CommerceAccounts =
+		List<CommerceAccount> businessUserCommerceAccounts2 =
 			_commerceAccountLocalService.getUserCommerceAccounts(
 				businessUser2.getUserId(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
@@ -302,14 +302,14 @@ public class CommerceAccountLocalServiceTest {
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		Assert.assertEquals(
-			businessUser2CommerceAccounts.toString(), 1,
-			businessUser2CommerceAccounts.size());
+			businessUserCommerceAccounts2.toString(), 1,
+			businessUserCommerceAccounts2.size());
 
-		CommerceAccount businessUser2CommerceAccount =
-			businessUser2CommerceAccounts.get(0);
+		CommerceAccount businessUserCommerceAccount2 =
+			businessUserCommerceAccounts2.get(0);
 
 		Assert.assertEquals(
-			"businessUserAccount2", businessUser2CommerceAccount.getName());
+			"businessUserAccount2", businessUserCommerceAccount2.getName());
 	}
 
 	@Test
