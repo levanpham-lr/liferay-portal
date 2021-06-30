@@ -17,6 +17,7 @@ package com.liferay.asset.tags.selector.web.internal.display.context;
 import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetTagServiceUtil;
 import com.liferay.asset.tags.selector.web.internal.search.EntriesChecker;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -171,7 +172,10 @@ public class AssetTagsSelectorDisplayContext {
 			return _keywords;
 		}
 
-		_keywords = ParamUtil.getString(_httpServletRequest, "keywords", null);
+		String keywords = ParamUtil.getString(
+			_httpServletRequest, "keywords", null);
+
+		_keywords = StringUtil.quote(keywords, StringPool.PERCENT);
 
 		return _keywords;
 	}
