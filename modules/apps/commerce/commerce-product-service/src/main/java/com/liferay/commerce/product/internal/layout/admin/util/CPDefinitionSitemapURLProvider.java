@@ -18,13 +18,13 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPQuery;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.product.url.CPFriendlyURL;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.friendly.url.model.FriendlyURLEntry;
 import com.liferay.friendly.url.service.FriendlyURLEntryLocalService;
@@ -151,9 +151,6 @@ public class CPDefinitionSitemapURLProvider implements SitemapURLProvider {
 		String currentSiteURL = _portal.getGroupFriendlyURL(
 			layout.getLayoutSet(), themeDisplay);
 
-		String urlSeparator = _cpFriendlyURL.getProductURLSeparator(
-			themeDisplay.getCompanyId());
-
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
 
@@ -163,7 +160,7 @@ public class CPDefinitionSitemapURLProvider implements SitemapURLProvider {
 				cpDefinition.getCProductId());
 
 		String productFriendlyURL =
-			currentSiteURL + urlSeparator +
+			currentSiteURL + CPConstants.SEPARATOR_PRODUCT_URL +
 				friendlyURLEntry.getUrlTitle(themeDisplay.getLanguageId());
 
 		_sitemap.addURLElement(
@@ -182,9 +179,6 @@ public class CPDefinitionSitemapURLProvider implements SitemapURLProvider {
 
 	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;
-
-	@Reference
-	private CPFriendlyURL _cpFriendlyURL;
 
 	@Reference
 	private FriendlyURLEntryLocalService _friendlyURLEntryLocalService;

@@ -23,6 +23,7 @@ import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.importer.CPFileImporter;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -31,7 +32,6 @@ import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.test.util.CPTestUtil;
-import com.liferay.commerce.product.url.CPFriendlyURL;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.friendly.url.model.FriendlyURLEntry;
 import com.liferay.friendly.url.service.FriendlyURLEntryLocalService;
@@ -227,11 +227,8 @@ public class CommerceSitemapURLProviderTest {
 		String currentSiteURL = _portal.getGroupFriendlyURL(
 			layout.getLayoutSet(), _themeDisplay);
 
-		String urlSeparator = _cpFriendlyURL.getAssetCategoryURLSeparator(
-			_themeDisplay.getCompanyId());
-
 		String categoryFriendlyURL =
-			currentSiteURL + urlSeparator +
+			currentSiteURL + CPConstants.SEPARATOR_ASSET_CATEGORY_URL +
 				friendlyURLEntry.getUrlTitle(_themeDisplay.getLanguageId());
 
 		Assert.assertTrue(node.hasContent());
@@ -302,11 +299,8 @@ public class CommerceSitemapURLProviderTest {
 		String currentSiteURL = _portal.getGroupFriendlyURL(
 			layout.getLayoutSet(), _themeDisplay);
 
-		String urlSeparator = _cpFriendlyURL.getProductURLSeparator(
-			_themeDisplay.getCompanyId());
-
 		String productFriendlyURL =
-			currentSiteURL + urlSeparator +
+			currentSiteURL + CPConstants.SEPARATOR_PRODUCT_URL +
 				friendlyURLEntry.getUrlTitle(_themeDisplay.getLanguageId());
 
 		Assert.assertTrue(node.hasContent());
@@ -329,9 +323,6 @@ public class CommerceSitemapURLProviderTest {
 
 	@Inject
 	private CPFileImporter _cpFileImporter;
-
-	@Inject
-	private CPFriendlyURL _cpFriendlyURL;
 
 	@Inject
 	private FriendlyURLEntryLocalService _friendlyURLEntryLocalService;
