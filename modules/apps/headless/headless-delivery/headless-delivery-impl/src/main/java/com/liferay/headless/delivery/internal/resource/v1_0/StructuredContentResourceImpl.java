@@ -204,8 +204,7 @@ public class StructuredContentResourceImpl
 						contentStructureId.toString()),
 					BooleanClauseOccur.MUST);
 			},
-			ddmStructure.getGroupId(), search, aggregation, filter, pagination,
-			sorts);
+			null, search, aggregation, filter, pagination, sorts);
 	}
 
 	@Override
