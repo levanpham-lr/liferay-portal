@@ -22,6 +22,8 @@ PanelCategory panelCategory = (PanelCategory)request.getAttribute(ApplicationLis
 SiteAdministrationPanelCategoryDisplayContext siteAdministrationPanelCategoryDisplayContext = new SiteAdministrationPanelCategoryDisplayContext(liferayPortletRequest, liferayPortletResponse, null);
 
 Group group = siteAdministrationPanelCategoryDisplayContext.getGroup();
+
+String p_p_id = ParamUtil.getString(PortalUtil.getOriginalServletRequest(request), "p_p_id");
 %>
 
 <c:if test="<%= siteAdministrationPanelCategoryDisplayContext.getGroup() != null %>">
@@ -128,6 +130,13 @@ Group group = siteAdministrationPanelCategoryDisplayContext.getGroup();
 		var pagesTreeToggle = document.getElementById(
 			'<portlet:namespace />pagesTreeSidenavToggleId'
 		);
+
+		if (
+			'<%= p_p_id.toString() %>' ===
+			'<%= LayoutAdminPortletKeys.GROUP_PAGES.toString() %>'
+		) {
+			pagesTreeToggle.classList.add('disabled');
+		}
 
 		pagesTreeToggle.addEventListener('click', function (event) {
 			Liferay.Portlet.destroy('#p_p_id<portlet:namespace />', true);
