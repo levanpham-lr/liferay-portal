@@ -43,12 +43,14 @@ import com.liferay.wiki.constants.WikiPageConstants;
 import com.liferay.wiki.constants.WikiPortletKeys;
 import com.liferay.wiki.constants.WikiWebKeys;
 import com.liferay.wiki.engine.WikiEngineRenderer;
+import com.liferay.wiki.model.WikiNode;
 import com.liferay.wiki.model.WikiPage;
 import com.liferay.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.wiki.web.internal.security.permission.resource.WikiPagePermission;
 
 import java.util.Locale;
 
+import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
@@ -84,6 +86,8 @@ public class WikiPageAssetRenderer
 		_page = page;
 		_wikiEngineRenderer = wikiEngineRenderer;
 		_trashHelper = trashHelper;
+
+		_node = page.getNode();
 	}
 
 	@Override
@@ -217,13 +221,14 @@ public class WikiPageAssetRenderer
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL portletURL = PortalUtil.getControlPanelPortletURL(
-			liferayPortletRequest, WikiPortletKeys.WIKI,
-			PortletRequest.RENDER_PHASE);
+		PortletURL portletURL = liferayPortletResponse.createActionURL(
+			WikiPortletKeys.WIKI);
 
-		portletURL.setParameter("mvcRenderCommandName", "/wiki/export_page");
+		portletURL.setParameter(ActionRequest.ACTION_NAME, "/wiki/export_page");
 		portletURL.setParameter("nodeId", String.valueOf(_page.getNodeId()));
+		portletURL.setParameter("nodeName", _node.getName());
 		portletURL.setParameter("title", _page.getTitle());
+		portletURL.setParameter("version", String.valueOf(_page.getVersion()));
 
 		return portletURL;
 	}
@@ -403,6 +408,7 @@ public class WikiPageAssetRenderer
 
 	private AssetDisplayPageFriendlyURLProvider
 		_assetDisplayPageFriendlyURLProvider;
+	private final WikiNode _node;
 	private final WikiPage _page;
 	private final TrashHelper _trashHelper;
 	private final WikiEngineRenderer _wikiEngineRenderer;
