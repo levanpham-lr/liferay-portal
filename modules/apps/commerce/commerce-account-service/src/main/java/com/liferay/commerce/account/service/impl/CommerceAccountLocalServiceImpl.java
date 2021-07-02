@@ -879,9 +879,9 @@ public class CommerceAccountLocalServiceImpl
 			}
 		}
 
-		Stream<Organization> organizationStream = organizations.stream();
+		Stream<Organization> organizationsStream = organizations.stream();
 
-		return organizationStream.map(
+		return organizationsStream.map(
 			Organization::getOrganizationId
 		).collect(
 			Collectors.toList()
