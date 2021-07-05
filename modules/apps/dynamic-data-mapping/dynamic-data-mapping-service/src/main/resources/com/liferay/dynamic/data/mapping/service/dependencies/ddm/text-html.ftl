@@ -60,7 +60,9 @@
 				function() {
 					var A = AUI();
 
-					var field = A.one('#${portletNamespace}${namespacedFieldName}');
+					var field = A.one(
+						'input[name="${portletNamespace}${namespacedFieldName}"]'
+					);
 
 					field.val(window['${portletNamespace}${namespacedFieldName}Editor'].getHTML());
 
