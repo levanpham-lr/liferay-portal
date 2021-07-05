@@ -618,8 +618,11 @@ public class UserImpl extends UserBaseImpl {
 		}
 
 		if (questions.isEmpty()) {
-			Set<String> defaultQuestions = SetUtil.fromArray(
-				PropsUtil.getArray(PropsKeys.USERS_REMINDER_QUERIES_QUESTIONS));
+			Set<String> defaultQuestions =
+				SetUtil.fromArray(
+					PrefsPropsUtil.getStringArray(getCompanyId(),
+						PropsKeys.USERS_REMINDER_QUERIES_QUESTIONS,
+						StringPool.COMMA));
 
 			questions.addAll(defaultQuestions);
 		}
@@ -839,7 +842,9 @@ public class UserImpl extends UserBaseImpl {
 			return true;
 		}
 
-		if (PropsValues.USERS_REMINDER_QUERIES_ENABLED &&
+		if (PrefsPropsUtil.getBoolean(getCompanyId(),
+				PropsKeys.USERS_REMINDER_QUERIES_ENABLED,
+				PropsValues.USERS_REMINDER_QUERIES_ENABLED) &&
 			(Validator.isNull(getReminderQueryQuestion()) ||
 			 Validator.isNull(getReminderQueryAnswer()))) {
 
