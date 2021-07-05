@@ -106,6 +106,7 @@ const ClassicEditor = ({
 			<Editor
 				className="lfr-editable"
 				config={getConfig()}
+				data={contents}
 				onBeforeLoad={(CKEDITOR) => {
 					CKEDITOR.disableAutoInline = true;
 					CKEDITOR.dtd.$removeEmpty.i = 0;
