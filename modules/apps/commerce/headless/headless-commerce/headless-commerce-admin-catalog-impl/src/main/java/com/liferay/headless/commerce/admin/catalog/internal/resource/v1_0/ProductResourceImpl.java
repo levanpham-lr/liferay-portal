@@ -721,7 +721,6 @@ public class ProductResourceImpl
 		String[] assetTags = product.getTags();
 
 		if (assetTags == null) {
-
 			assetTags = _getTags(cpDefinition);
 		}
 
