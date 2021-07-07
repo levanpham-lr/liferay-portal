@@ -49,6 +49,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -73,8 +74,10 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.portlet.ResourceURL;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -221,6 +224,23 @@ public class AssetPublisherPortlet extends MVCPortlet {
 			}
 			catch (ServletException servletException) {
 			}
+
+			return;
+		}
+
+		String currentURL = portal.getCurrentURL(resourceRequest);
+
+		String cacheability = httpUtil.getParameter(
+			currentURL, "p_p_cacheability");
+
+		if (cacheability.equals(ResourceURL.FULL)) {
+			HttpServletResponse httpServletResponse =
+				portal.getHttpServletResponse(resourceResponse);
+
+			String redirectURL = httpUtil.removeParameter(
+				currentURL, "p_p_cacheability");
+
+			httpServletResponse.sendRedirect(redirectURL);
 
 			return;
 		}
@@ -404,6 +424,9 @@ public class AssetPublisherPortlet extends MVCPortlet {
 
 	@Reference
 	protected AssetRSSHelper assetRSSHelper;
+
+	@Reference
+	protected HttpUtil httpUtil;
 
 	@Reference
 	protected InfoListProviderTracker infoListProviderTracker;
