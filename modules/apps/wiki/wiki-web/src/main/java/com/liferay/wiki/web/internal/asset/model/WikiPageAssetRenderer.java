@@ -86,8 +86,6 @@ public class WikiPageAssetRenderer
 		_page = page;
 		_wikiEngineRenderer = wikiEngineRenderer;
 		_trashHelper = trashHelper;
-
-		_node = page.getNode();
 	}
 
 	@Override
@@ -224,9 +222,11 @@ public class WikiPageAssetRenderer
 		PortletURL portletURL = liferayPortletResponse.createActionURL(
 			WikiPortletKeys.WIKI);
 
+		WikiNode node = _page.getNode();
+
 		portletURL.setParameter(ActionRequest.ACTION_NAME, "/wiki/export_page");
 		portletURL.setParameter("nodeId", String.valueOf(_page.getNodeId()));
-		portletURL.setParameter("nodeName", _node.getName());
+		portletURL.setParameter("nodeName", node.getName());
 		portletURL.setParameter("title", _page.getTitle());
 		portletURL.setParameter("version", String.valueOf(_page.getVersion()));
 
@@ -408,7 +408,6 @@ public class WikiPageAssetRenderer
 
 	private AssetDisplayPageFriendlyURLProvider
 		_assetDisplayPageFriendlyURLProvider;
-	private final WikiNode _node;
 	private final WikiPage _page;
 	private final TrashHelper _trashHelper;
 	private final WikiEngineRenderer _wikiEngineRenderer;
