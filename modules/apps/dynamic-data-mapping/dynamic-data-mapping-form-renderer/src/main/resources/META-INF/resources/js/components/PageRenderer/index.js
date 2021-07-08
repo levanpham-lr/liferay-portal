@@ -202,8 +202,9 @@ const Renderer = ({
 		});
 	}
 
-	const isDDMFormPortletNamespace =
-		DDM_FORM_PORTLET_NAMESPACE === portletNamespace;
+	const isDDMFormPortletNamespace = portletNamespace.includes(
+		DDM_FORM_PORTLET_NAMESPACE
+	);
 
 	return (
 		<Components.Container
