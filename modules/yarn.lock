@@ -1063,6 +1063,19 @@
     classnames "^2.2.6"
     d3 "^5.9.2"
 
+"@clayui/color-picker@3.31.0":
+  version "3.31.0"
+  resolved "https://registry.yarnpkg.com/@clayui/color-picker/-/color-picker-3.31.0.tgz#8033b0d5cc409e3cbc0eae34348ddb50831194a7"
+  integrity sha512-fFW62/7EJYzKROirL99C4R0ek2Pa/VIWQ1Vz/ObOXcFxy+ZJp46TdC38gQaNz2UhtX8H0eveo72m2E6VngagLw==
+  dependencies:
+    "@clayui/button" "^3.6.0"
+    "@clayui/drop-down" "^3.30.0"
+    "@clayui/form" "^3.29.0"
+    "@clayui/icon" "^3.1.0"
+    "@clayui/shared" "^3.29.0"
+    classnames "^2.2.6"
+    tinycolor2 "^1.4.2"
+
 "@clayui/color-picker@3.5.0":
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/@clayui/color-picker/-/color-picker-3.5.0.tgz#b1b1d3744de377b4736162be5e272471a30864e6"
@@ -1116,7 +1129,7 @@
     react-transition-group "^4.4.1"
     warning "^4.0.3"
 
-"@clayui/drop-down@^3.25.1":
+"@clayui/drop-down@^3.25.1", "@clayui/drop-down@^3.30.0":
   version "3.30.0"
   resolved "https://registry.yarnpkg.com/@clayui/drop-down/-/drop-down-3.30.0.tgz#7bf6abb3a20cd961772b4fffaaeb8c85cf80ee9a"
   integrity sha512-57o4yVFSpKxEs8nMTPbJa0w5VbVxP8UAaiqnnQLXDvTQZthWNbJfCShz9kpEj5VlmoOBvVjyQQ9tASpeVGVv6w==
@@ -16182,6 +16195,11 @@ tiny-warning@^1.0.0, tiny-warning@^1.0.2:
 tinycolor2@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
+
+tinycolor2@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.2.tgz#3f6a4d1071ad07676d7fa472e1fac40a719d8803"
+  integrity sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA==
 
 tmp@^0.0.33:
   version "0.0.33"
