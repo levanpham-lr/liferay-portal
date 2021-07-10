@@ -37,12 +37,14 @@ class AddToCart extends Component {
 		var instance = this;
 
 		var _quantity = this.quantity;
-		var ddmFormValues = '[]';
+		var ddmFormValues = [];
 
 		var productContent = this._getProductContent();
 
 		if (productContent) {
-			ddmFormValues = JSON.stringify(productContent.getFormValues());
+			ddmFormValues = JSON.stringify(
+				productContent.getFormValues() || ddmFormValues
+			);
 
 			if (this.cpInstanceId == '0') {
 				this.cpInstanceId = productContent.getCPInstanceId();
