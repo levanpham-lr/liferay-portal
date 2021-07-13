@@ -76,6 +76,10 @@ public class SessionErrors {
 			return;
 		}
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("key=" + key);
+		}
+
 		map.put(key, key);
 	}
 
@@ -84,6 +88,18 @@ public class SessionErrors {
 
 		if (map == null) {
 			return;
+		}
+
+		if (_log.isDebugEnabled()) {
+			Exception exception = null;
+
+			if (value instanceof Exception) {
+				exception = (Exception)value;
+			}
+
+			_log.debug(
+				StringBundler.concat("key=", key, ", value=", value),
+				exception);
 		}
 
 		map.put(key, value);
@@ -106,6 +122,12 @@ public class SessionErrors {
 			return;
 		}
 
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				StringBundler.concat(
+					"portletId=", portletRequest.getWindowID(), ", key=", key));
+		}
+
 		map.put(key, key);
 	}
 
@@ -116,6 +138,20 @@ public class SessionErrors {
 
 		if (map == null) {
 			return;
+		}
+
+		if (_log.isDebugEnabled()) {
+			Exception exception = null;
+
+			if (value instanceof Exception) {
+				exception = (Exception)value;
+			}
+
+			_log.debug(
+				StringBundler.concat(
+					"portletId=", portletRequest.getWindowID(), ", key=", key,
+					", value=", value),
+				exception);
 		}
 
 		map.put(key, value);
