@@ -333,7 +333,7 @@ public class OrderResourceImpl
 				orderDate.getMinute(), serviceContext);
 		}
 
-		// Requested Delivery Date
+		// Requested delivery date
 
 		if (order.getRequestedDeliveryDate() != null) {
 			Calendar requestedDeliveryDateCalendar =
