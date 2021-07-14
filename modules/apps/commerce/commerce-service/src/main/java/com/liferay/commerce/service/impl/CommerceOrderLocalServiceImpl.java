@@ -1404,10 +1404,6 @@ public class CommerceOrderLocalServiceImpl
 			requestedDeliveryDateMinute, user.getTimeZone(),
 			CommerceOrderRequestedDeliveryDateException.class);
 
-		if (requestedDeliveryDate.before(new Date())) {
-			throw new CommerceOrderRequestedDeliveryDateException();
-		}
-
 		commerceOrder.setPrintedNote(printedNote);
 		commerceOrder.setRequestedDeliveryDate(requestedDeliveryDate);
 
