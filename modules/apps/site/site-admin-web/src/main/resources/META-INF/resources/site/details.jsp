@@ -93,7 +93,7 @@ else {
 <aui:input name="description" placeholder="description" />
 
 <c:if test="<%= !group.isCompany() && !group.isGuest() %>">
-	<aui:input name="active" type="toggle-switch" value="<%= group.isActive() %>" />
+	<aui:input name="active" type="toggle-switch" value="<%= (liveGroup != null) ? liveGroup.isActive() : group.isActive() %>" />
 </c:if>
 
 <c:if test="<%= (parentGroupId != GroupConstants.DEFAULT_PARENT_GROUP_ID) && PropsValues.SITES_SHOW_INHERIT_CONTENT_SCOPE_FROM_PARENT_SITE %>">
