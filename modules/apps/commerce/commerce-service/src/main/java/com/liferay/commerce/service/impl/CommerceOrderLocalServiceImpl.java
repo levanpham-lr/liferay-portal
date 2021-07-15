@@ -228,6 +228,14 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setShippingWithTaxAmount(shippingWithTaxAmount);
 		commerceOrder.setTotalWithTaxAmount(totalWithTaxAmount);
 		commerceOrder.setPaymentStatus(paymentStatus);
+
+		_setCommerceOrderShippingDiscountValue(commerceOrder, null, true);
+		_setCommerceOrderShippingDiscountValue(commerceOrder, null, false);
+		_setCommerceOrderSubtotalDiscountValue(commerceOrder, null, true);
+		_setCommerceOrderSubtotalDiscountValue(commerceOrder, null, false);
+		_setCommerceOrderTotalDiscountValue(commerceOrder, null, true);
+		_setCommerceOrderTotalDiscountValue(commerceOrder, null, false);
+
 		commerceOrder.setOrderStatus(orderStatus);
 		commerceOrder.setManuallyAdjusted(false);
 		commerceOrder.setStatus(WorkflowConstants.STATUS_DRAFT);
