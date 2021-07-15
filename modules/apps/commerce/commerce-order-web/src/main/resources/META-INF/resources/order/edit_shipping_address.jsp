@@ -48,6 +48,10 @@ if ((commerceOrder != null) && Validator.isNull(cmd)) {
 
 		<aui:input name="street1" wrapperCssClass="form-group-item" />
 
+		<aui:input name="street2" wrapperCssClass="form-group-item" />
+
+		<aui:input name="street3" wrapperCssClass="form-group-item" />
+
 		<aui:select label="country" name="commerceCountryId" wrapperCssClass="form-group-item" />
 
 		<aui:input name="zip" wrapperCssClass="form-group-item" />
