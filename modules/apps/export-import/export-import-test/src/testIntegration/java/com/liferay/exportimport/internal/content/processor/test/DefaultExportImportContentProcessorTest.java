@@ -329,7 +329,10 @@ public class DefaultExportImportContentProcessorTest {
 			if (entry.contains(DLFileEntryConstants.getClassName())) {
 				Assert.assertTrue(
 					content,
-					content.contains("[$dl-reference=" + entry + "$]"));
+					content.contains(
+						"[$dl-reference=" + entry + "$,$include-uuid=true$]") ||
+					content.contains(
+						"[$dl-reference=" + entry + "$,$include-uuid=false$]"));
 
 				count++;
 			}
