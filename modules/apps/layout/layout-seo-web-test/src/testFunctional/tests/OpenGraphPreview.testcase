@@ -192,7 +192,7 @@ definition {
 
 		Page.viewPreview(
 			description = "Custom Description",
-			htmlTitle = "Custom Title - Test Site Name - ${siteName}",
+			htmlTitle = "Custom Title",
 			key_imageName = "Document_1.jpg",
 			openGraph = "true",
 			portalURL = "${portalURL}",
@@ -204,7 +204,7 @@ definition {
 
 		Page.viewPreview(
 			description = "Custom Description",
-			htmlTitle = "Custom Title - Test Site Name - ${siteName}",
+			htmlTitle = "Custom Title",
 			key_imageName = "Document_1.jpg",
 			openGraph = "true",
 			portalURL = "${portalURL}",
