@@ -41,7 +41,7 @@ if ((commerceTierPriceEntry != null) && (commerceTierPriceEntry.getPrice() != nu
 <commerce-ui:modal-content
 	title="<%= title %>"
 >
-	<portlet:actionURL name="editCPInstanceCommerceTierPriceEntry" var="editCommerceTierPriceEntryActionURL" />
+	<portlet:actionURL name="/cp_definitions/edit_cp_instance_commerce_tier_price_entry" var="editCommerceTierPriceEntryActionURL" />
 
 	<aui:form action="<%= editCommerceTierPriceEntryActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
