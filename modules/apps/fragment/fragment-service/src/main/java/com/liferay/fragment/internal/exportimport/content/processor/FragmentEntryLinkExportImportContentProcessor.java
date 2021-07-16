@@ -283,25 +283,30 @@ public class FragmentEntryLinkExportImportContentProcessor
 			PortletDataContext portletDataContext, StagedModel stagedModel)
 		throws Exception {
 
-		JSONObject editableProcessorJSONObject =
+		_replaceAllEditableExportContentReferences(
 			editableValuesJSONObject.getJSONObject(
-				_KEY_EDITABLE_FRAGMENT_ENTRY_PROCESSOR);
+				_KEY_EDITABLE_FRAGMENT_ENTRY_PROCESSOR),
+			exportReferencedContent, portletDataContext, stagedModel);
 
 		_replaceAllEditableExportContentReferences(
-			editableProcessorJSONObject, exportReferencedContent,
-			portletDataContext, stagedModel);
+			editableValuesJSONObject.getJSONObject(
+				_KEY_FREEMARKER_FRAGMENT_ENTRY_PROCESSOR),
+			exportReferencedContent, portletDataContext, stagedModel);
 	}
 
 	private void _replaceEditableImportContentReferences(
 		JSONObject editableValuesJSONObject,
 		PortletDataContext portletDataContext) {
 
-		JSONObject editableProcessorJSONObject =
+		_replaceAllEditableImportContentReferences(
 			editableValuesJSONObject.getJSONObject(
-				_KEY_EDITABLE_FRAGMENT_ENTRY_PROCESSOR);
+				_KEY_EDITABLE_FRAGMENT_ENTRY_PROCESSOR),
+			portletDataContext);
 
 		_replaceAllEditableImportContentReferences(
-			editableProcessorJSONObject, portletDataContext);
+			editableValuesJSONObject.getJSONObject(
+				_KEY_FREEMARKER_FRAGMENT_ENTRY_PROCESSOR),
+			portletDataContext);
 	}
 
 	private void _replaceMappedFieldExportContentReferences(
@@ -460,6 +465,10 @@ public class FragmentEntryLinkExportImportContentProcessor
 	private static final String _KEY_EDITABLE_FRAGMENT_ENTRY_PROCESSOR =
 		"com.liferay.fragment.entry.processor.editable." +
 			"EditableFragmentEntryProcessor";
+
+	private static final String _KEY_FREEMARKER_FRAGMENT_ENTRY_PROCESSOR =
+		"com.liferay.fragment.entry.processor.freemarker." +
+			"FreeMarkerFragmentEntryProcessor";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		FragmentEntryLinkExportImportContentProcessor.class);
