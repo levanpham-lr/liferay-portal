@@ -2638,7 +2638,11 @@ AUI.add(
 
 					var privateLayout = !!value.privateLayout;
 
+					var selectedLayout = instance.get('selectedLayout');
+
 					var modal = instance._modal;
+
+					var listNode;
 
 					if (!modal) {
 						var config = instance._getModalConfig();
@@ -2658,7 +2662,7 @@ AUI.add(
 						);
 						instance._renderLayoutsList(privateLayout);
 
-						var listNode = modal.bodyNode.one(
+						listNode = modal.bodyNode.one(
 							'.lfr-ddm-pages-container'
 						);
 
@@ -2679,6 +2683,29 @@ AUI.add(
 						instance._resetBreadcrumb(privateLayout);
 						instance._renderLayoutsList(privateLayout);
 						instance._clearedModal = false;
+					}
+					else if (
+						value &&
+						selectedLayout &&
+						value.layoutId !== selectedLayout.layoutId
+					) {
+						instance.set('selectedLayout', value);
+
+						var layoutId = value.layoutId;
+
+						listNode = modal.bodyNode.one(
+							'.lfr-ddm-pages-container'
+						);
+
+						var entryNode = listNode.one(
+							'.lfr-ddm-link[data-layoutid=' +
+								layoutId +
+								'] input'
+						);
+
+						entryNode.set('checked', true);
+
+						entryNode.scrollIntoView();
 					}
 
 					modal.show();
