@@ -524,9 +524,9 @@ public class AssetCategoryLocalServiceImpl
 		if (vocabularyId != category.getVocabularyId()) {
 			assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
 
-			category.setVocabularyId(vocabularyId);
-
 			updateChildrenVocabularyId(category, vocabularyId);
+
+			category.setVocabularyId(vocabularyId);
 		}
 
 		if (parentCategoryId != category.getParentCategoryId()) {
