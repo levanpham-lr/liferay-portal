@@ -370,6 +370,15 @@ public class LayoutSEOEntryLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	public static LayoutSEOEntry updateCustomMetaTags(
+			long userId, long groupId, boolean privateLayout, long layoutId,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws PortalException {
+
+		return getService().updateCustomMetaTags(
+			userId, groupId, privateLayout, layoutId, serviceContext);
+	}
+
 	/**
 	 * Updates the layout seo entry in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *

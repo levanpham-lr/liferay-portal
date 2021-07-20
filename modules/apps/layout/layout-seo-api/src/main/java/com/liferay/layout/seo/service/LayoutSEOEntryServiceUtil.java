@@ -48,6 +48,15 @@ public class LayoutSEOEntryServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
+	public static LayoutSEOEntry updateCustomMetaTags(
+			long groupId, boolean privateLayout, long layoutId,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws PortalException {
+
+		return getService().updateCustomMetaTags(
+			groupId, privateLayout, layoutId, serviceContext);
+	}
+
 	public static LayoutSEOEntry updateLayoutSEOEntry(
 			long groupId, boolean privateLayout, long layoutId,
 			boolean canonicalURLEnabled,
