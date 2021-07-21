@@ -222,11 +222,13 @@ public class WikiPageAssetRenderer
 		PortletURL portletURL = liferayPortletResponse.createActionURL(
 			WikiPortletKeys.WIKI);
 
-		WikiNode node = _page.getNode();
-
 		portletURL.setParameter(ActionRequest.ACTION_NAME, "/wiki/export_page");
 		portletURL.setParameter("nodeId", String.valueOf(_page.getNodeId()));
+
+		WikiNode node = _page.getNode();
+
 		portletURL.setParameter("nodeName", node.getName());
+
 		portletURL.setParameter("title", _page.getTitle());
 		portletURL.setParameter("version", String.valueOf(_page.getVersion()));
 
