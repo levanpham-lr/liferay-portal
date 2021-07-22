@@ -128,6 +128,29 @@ definition {
 		return "${categoryId}";
 	}
 
+	@summary = "Get the categoryId by using categoryName and groupName"
+	macro getCategoryIdByName {
+		Variables.assertDefined(parameterList = "${categoryName},${groupName}");
+
+		var portalURL = JSONCompany.getPortalURL();
+
+		var groupId = JSONGroupSetter.setGroupId(groupName = "${groupName}");
+
+		var curl = '''
+			${portalURL}/api/jsonws/mb.mbcategory/get-categories \
+			-u test@liferay.com:test \
+			-d groupId=${groupId}
+		''';
+
+		var categoryId = JSONCurlUtil.post("${curl}", "$.[?(@['name'] == '${categoryName}')]['categoryId']");
+
+		if ("${categoryId}" == "") {
+			fail("FAIL. Cannot find category.");
+		}
+
+		return "${categoryId}";
+	}
+
 	@summary = "This calls the JSON WS API to get the ID of a MB thread through the URL"
 	macro getmessageId {
 		var messageBoardsThreadURL = selenium.getLocation();
@@ -135,6 +158,69 @@ definition {
 		var messageId = StringUtil.replace("${messageBoardsThreadURL}", "${portalURL}/web/guest/message-boards-page/-/message_boards/message/", "");
 
 		return "${messageId}";
+	}
+
+	@summary = "Get the messageId by using both categoryName and groupName"
+	macro getMessageIdByName {
+		if (isSet(categoryName)) {
+			var categoryId = JSONMBMessage.getCategoryIdByName(
+				groupName = "${groupName}",
+				categoryName = "${categoryName}");
+		}
+		else {
+			var categoryId = "0";
+		}
+
+		var portalURL = JSONCompany.getPortalURL();
+
+		var groupId = JSONGroupSetter.setGroupId(groupName = "${groupName}");
+
+		var curl = '''
+			${portalURL}/api/jsonws/mb.mbthread/get-threads \
+			-u test@liferay.com:test \
+			-d groupId=${groupId} \
+			-d categoryId=${categoryId} \
+			-d status=0 \
+			-d "start=-1" \
+			-d "end=-1"
+
+		''';
+
+		var messageId = JSONCurlUtil.post("${curl}", "$.[?(@['title'] == '${threadSubject}')]['rootMessageId']");
+
+		if ("${messageId}" == "") {
+			fail("FAIL. Cannot find category.");
+		}
+
+		return "${messageId}";
+	}
+
+	@summary = "This calls the JSON WS API to subscribe to a message"
+	macro subscribeToMessage {
+		Variables.assertDefined(parameterList = "${threadSubject},${groupName}");
+
+		var messageId = JSONMBMessage.getMessageIdByName(
+			categoryName = "${categoryName}",
+			groupName = "${groupName}",
+			threadSubject = "${threadSubject}");
+
+		var portalURL = JSONCompany.getPortalURL();
+
+		if (!(isSet(userEmailAddress))) {
+			var userEmailAddress = "test@liferay.com";
+		}
+
+		if (!(isSet(userPassword))) {
+			var userPassword = "test";
+		}
+
+		var curl = '''
+			${portalURL}/api/jsonws/mb.mbmessage/subscribe-message \
+				-u ${userEmailAddress}:${userPassword} \
+				-d messageId=${messageId} \
+		''';
+
+		com.liferay.poshi.runner.util.JSONCurlUtil.post("${curl}");
 	}
 
 }
