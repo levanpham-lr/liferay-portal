@@ -3869,7 +3869,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					"languageId",
 					LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 
-			validateLanguageIds(groupId, defaultLanguageId, newLanguageIds);
+			Group companyGroup = getCompanyGroup(group.getCompanyId());
+
+			validateLanguageIds(
+				companyGroup.getGroupId(), defaultLanguageId, newLanguageIds);
 
 			if (!Objects.equals(
 					group.getDefaultLanguageId(), defaultLanguageId)) {
