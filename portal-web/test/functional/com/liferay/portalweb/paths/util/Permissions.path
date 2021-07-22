@@ -57,6 +57,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>CONFIGURATION_PERMISSIONS_SUBSCRIBE_CHECKBOX</td>
+	<td>//input[@id='${key_roleTitle}_ACTION_SUBSCRIBE']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>CONFIGURATION_PERMISSIONS_VIEW_CHECKBOX</td>
 	<td>//input[@id='${key_roleTitle}_ACTION_VIEW']</td>
 	<td></td>
