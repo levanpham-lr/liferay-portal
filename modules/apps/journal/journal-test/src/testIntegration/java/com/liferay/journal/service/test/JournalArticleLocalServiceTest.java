@@ -146,7 +146,6 @@ public class JournalArticleLocalServiceTest {
 			oldArticle.getArticleId(), null, true, oldArticle.getVersion());
 
 		Assert.assertNotEquals(oldArticle, newArticle);
-
 		Assert.assertNotEquals(
 			thirdArticle.getUrlTitle(), newArticle.getUrlTitle());
 
