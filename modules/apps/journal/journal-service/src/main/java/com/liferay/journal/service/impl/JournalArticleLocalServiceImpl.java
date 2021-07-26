@@ -1134,7 +1134,6 @@ public class JournalArticleLocalServiceImpl
 			JournalUtil.getUrlTitle(id, oldArticle.getUrlTitle()));
 
 		Map<Locale, String> newTitleMap = oldArticle.getTitleMap();
-
 		Map<Locale, String> newUniqueURLTitleMap = new HashMap<>();
 
 		for (Map.Entry<Locale, String> entry : newTitleMap.entrySet()) {
@@ -1148,11 +1147,11 @@ public class JournalArticleLocalServiceImpl
 			sb.append(StringPool.SPACE);
 			sb.append(uniqueUrlTitleCount);
 
-			newTitleMap.put(locale, sb.toString());
+			String urlTitle = sb.toString();
 
+			newTitleMap.put(locale, urlTitle);
 			newUniqueURLTitleMap.put(
-				locale,
-				getUniqueUrlTitle(id, groupId, newArticleId, sb.toString()));
+				locale, getUniqueUrlTitle(id, groupId, newArticleId, urlTitle));
 		}
 
 		Locale locale = getArticleDefaultLocale(oldArticle.getContent());
