@@ -94,10 +94,10 @@ public class ActionUtil {
 
 		if ((privateLayoutSetPrototypeId ==
 				privateLayoutSet.getLayoutSetPrototypeId()) &&
-			(publicLayoutSetPrototypeId ==
-				publicLayoutSet.getLayoutSetPrototypeId()) &&
 			(privateLayoutSetPrototypeLinkEnabled ==
 				privateLayoutSet.isLayoutSetPrototypeLinkEnabled()) &&
+			(publicLayoutSetPrototypeId ==
+				publicLayoutSet.getLayoutSetPrototypeId()) &&
 			(publicLayoutSetPrototypeLinkEnabled ==
 				publicLayoutSet.isLayoutSetPrototypeLinkEnabled())) {
 
