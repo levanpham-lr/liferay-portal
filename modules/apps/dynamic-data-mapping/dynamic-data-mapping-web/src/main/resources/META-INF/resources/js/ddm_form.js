@@ -1229,7 +1229,12 @@ AUI.add(
 							instance.setValue(value);
 						}
 						else {
-							instance.setValue(instance.getValue());
+							if (dataType === "number" && !A.Object.isEmpty(localizationMap)) {
+								instance.setValue(localizationMap);
+							}
+							else {
+								instance.setValue(instance.getValue());
+							}
 						}
 					}
 				},
