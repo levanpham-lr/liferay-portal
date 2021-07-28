@@ -1109,20 +1109,16 @@ public class SiteAdminPortlet extends MVCPortlet {
 				}
 			}
 
+			Group group = liveGroup.getStagingGroup();
+
 			if (!liveGroup.isStaged() || liveGroup.isStagedRemotely()) {
-				SitesUtil.updateLayoutSetPrototypesLinks(
-					liveGroup, publicLayoutSetPrototypeId,
-					privateLayoutSetPrototypeId,
-					publicLayoutSetPrototypeLinkEnabled,
-					privateLayoutSetPrototypeLinkEnabled);
+				group = liveGroup;
 			}
-			else {
-				SitesUtil.updateLayoutSetPrototypesLinks(
-					liveGroup.getStagingGroup(), publicLayoutSetPrototypeId,
-					privateLayoutSetPrototypeId,
-					publicLayoutSetPrototypeLinkEnabled,
-					privateLayoutSetPrototypeLinkEnabled);
-			}
+
+			SitesUtil.updateLayoutSetPrototypesLinks(
+				group, publicLayoutSetPrototypeId, privateLayoutSetPrototypeId,
+				publicLayoutSetPrototypeLinkEnabled,
+				privateLayoutSetPrototypeLinkEnabled);
 		}
 		else if (creationType.equals(
 					SiteAdminConstants.CREATION_TYPE_INITIALIZER)) {
