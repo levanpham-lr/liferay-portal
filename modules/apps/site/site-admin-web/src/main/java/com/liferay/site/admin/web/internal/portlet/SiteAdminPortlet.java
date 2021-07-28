@@ -1065,18 +1065,10 @@ public class SiteAdminPortlet extends MVCPortlet {
 				actionRequest, "privateLayoutSetPrototypeId");
 			long publicLayoutSetPrototypeId = ParamUtil.getLong(
 				actionRequest, "publicLayoutSetPrototypeId");
-
-			LayoutSet privateLayoutSet = liveGroup.getPrivateLayoutSet();
-
 			boolean privateLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
-				actionRequest, "privateLayoutSetPrototypeLinkEnabled",
-				privateLayoutSet.isLayoutSetPrototypeLinkEnabled());
-
-			LayoutSet publicLayoutSet = liveGroup.getPublicLayoutSet();
-
+				actionRequest, "privateLayoutSetPrototypeLinkEnabled");
 			boolean publicLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
-				actionRequest, "publicLayoutSetPrototypeLinkEnabled",
-				publicLayoutSet.isLayoutSetPrototypeLinkEnabled());
+				actionRequest, "publicLayoutSetPrototypeLinkEnabled");
 
 			if ((privateLayoutSetPrototypeId == 0) &&
 				(publicLayoutSetPrototypeId == 0) &&
@@ -1107,6 +1099,21 @@ public class SiteAdminPortlet extends MVCPortlet {
 					publicLayoutSetPrototypeLinkEnabled =
 						layoutSetPrototypeLinkEnabled;
 				}
+			}
+
+			LayoutSet privateLayoutSet = liveGroup.getPrivateLayoutSet();
+			LayoutSet publicLayoutSet = liveGroup.getPublicLayoutSet();
+
+			if ((privateLayoutSetPrototypeId ==
+					privateLayoutSet.getLayoutSetPrototypeId()) &&
+				(publicLayoutSetPrototypeId ==
+					publicLayoutSet.getLayoutSetPrototypeId()) &&
+				(privateLayoutSetPrototypeLinkEnabled ==
+					privateLayoutSet.isLayoutSetPrototypeLinkEnabled()) &&
+				(publicLayoutSetPrototypeLinkEnabled ==
+					publicLayoutSet.isLayoutSetPrototypeLinkEnabled())) {
+
+				return liveGroup;
 			}
 
 			Group group = liveGroup.getStagingGroup();
