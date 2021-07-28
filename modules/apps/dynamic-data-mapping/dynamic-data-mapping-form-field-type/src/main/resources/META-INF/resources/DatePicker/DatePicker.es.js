@@ -213,14 +213,19 @@ const DatePicker = ({
 				showMask: true,
 			});
 
-			if (localizedValue[locale]) {
-				if (typeof localizedValue[locale] === 'string') {
-					inputRef.current.value = localizedValue[locale];
-				}
-				else {
-					inputRef.current.value = moment(
-						localizedValue[locale]
-					).format(dateMask.toUpperCase());
+			const currentValue = localizedValue[locale];
+
+			if (currentValue) {
+				const currentValue = localizedValue[locale];
+
+				if (currentValue) {
+					inputRef.current.value =
+						/_/.test(currentValue) &&
+						currentValue.match(DIGIT_REGEX)
+							? currentValue
+							: moment(currentValue).format(
+									dateMask.toUpperCase()
+							  );
 				}
 			}
 			else if (initialValueMemoized) {
