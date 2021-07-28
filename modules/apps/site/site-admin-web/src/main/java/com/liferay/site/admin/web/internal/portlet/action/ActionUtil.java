@@ -77,13 +77,11 @@ public class ActionUtil {
 				layoutSetVisibilityPrivate) {
 
 				privateLayoutSetPrototypeId = layoutSetPrototypeId;
-
 				privateLayoutSetPrototypeLinkEnabled =
 					layoutSetPrototypeLinkEnabled;
 			}
 			else {
 				publicLayoutSetPrototypeId = layoutSetPrototypeId;
-
 				publicLayoutSetPrototypeLinkEnabled =
 					layoutSetPrototypeLinkEnabled;
 			}
