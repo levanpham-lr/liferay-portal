@@ -117,6 +117,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.odata.entity.EntityModel;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+import com.liferay.portal.vulcan.permission.ModelPermissionsUtil;
 import com.liferay.portal.vulcan.permission.Permission;
 import com.liferay.portal.vulcan.permission.PermissionUtil;
 import com.liferay.portal.vulcan.resource.EntityModelResource;
@@ -706,6 +707,41 @@ public class DataDefinitionResourceImpl
 			));
 
 		return _updateDataDefinition(dataDefinition, dataDefinitionId, ddmForm);
+	}
+
+	@Override
+	public Page<Permission> putDataDefinitionPermission(
+			Long dataDefinitionId, Permission[] permissions)
+		throws Exception {
+
+		_dataDefinitionModelResourcePermission.check(
+			PermissionThreadLocal.getPermissionChecker(), dataDefinitionId,
+			ActionKeys.PERMISSIONS);
+
+		String resourceName = getPermissionCheckerResourceName(
+			dataDefinitionId);
+
+		resourcePermissionLocalService.updateResourcePermissions(
+			contextCompany.getCompanyId(), 0, resourceName,
+			String.valueOf(dataDefinitionId),
+			ModelPermissionsUtil.toModelPermissions(
+				contextCompany.getCompanyId(), permissions, dataDefinitionId,
+				resourceName, resourceActionLocalService,
+				resourcePermissionLocalService, roleLocalService));
+
+		return toPermissionPage(
+			HashMapBuilder.put(
+				"get",
+				addAction(
+					ActionKeys.PERMISSIONS, "getDataDefinitionPermissionsPage",
+					resourceName, dataDefinitionId)
+			).put(
+				"replace",
+				addAction(
+					ActionKeys.PERMISSIONS, "putDataDefinitionPermission",
+					resourceName, dataDefinitionId)
+			).build(),
+			dataDefinitionId, resourceName, null);
 	}
 
 	@Override
