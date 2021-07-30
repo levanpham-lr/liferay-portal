@@ -61,45 +61,42 @@ public class DDMFormEmailNotificationSenderTest {
 	}
 
 	@Test
-	public void testGetField() {
+	public void testGetFieldProperties() {
 		DDMFormValues ddmFormValues = createDDMFormValues(
 			new UnlocalizedValue("test"));
 
-		Map<String, Object> fieldLabelValueMap =
-			_ddmFormEmailNotificationSender.getField(
+		Map<String, Object> fieldProperties =
+			_ddmFormEmailNotificationSender.getFieldProperties(
 				ddmFormValues.getDDMFormFieldValues(), LocaleUtil.US);
 
 		Assert.assertEquals(
-			fieldLabelValueMap.toString(), 2, fieldLabelValueMap.size());
+			fieldProperties.toString(), 2, fieldProperties.size());
 
-		Assert.assertTrue(fieldLabelValueMap.containsKey("label"));
-		Assert.assertTrue(fieldLabelValueMap.containsKey("value"));
-		Assert.assertNull(fieldLabelValueMap.get("label"));
+		Assert.assertTrue(fieldProperties.containsKey("label"));
+		Assert.assertTrue(fieldProperties.containsKey("value"));
+		Assert.assertNull(fieldProperties.get("label"));
 
-		SoyRawData soyRawData = (SoyRawData)fieldLabelValueMap.get("value");
-
-		Assert.assertEquals("test", String.valueOf(soyRawData.getValue()));
+		Assert.assertEquals(
+			"test", String.valueOf(fieldProperties.get("value")));
 	}
 
 	@Test
-	public void testGetFieldWithNullValue() {
+	public void testGetFieldPropertiesNullValue() {
 		DDMFormValues ddmFormValues = createDDMFormValues(null);
 
-		Map<String, Object> fieldLabelValueMap =
-			_ddmFormEmailNotificationSender.getField(
+		Map<String, Object> fieldProperties =
+			_ddmFormEmailNotificationSender.getFieldProperties(
 				ddmFormValues.getDDMFormFieldValues(), LocaleUtil.US);
 
 		Assert.assertEquals(
-			fieldLabelValueMap.toString(), 2, fieldLabelValueMap.size());
+			fieldProperties.toString(), 2, fieldProperties.size());
 
-		Assert.assertTrue(fieldLabelValueMap.containsKey("label"));
-		Assert.assertTrue(fieldLabelValueMap.containsKey("value"));
-		Assert.assertNull(fieldLabelValueMap.get("label"));
-
-		SoyRawData soyRawData = (SoyRawData)fieldLabelValueMap.get("value");
+		Assert.assertTrue(fieldProperties.containsKey("label"));
+		Assert.assertTrue(fieldProperties.containsKey("value"));
+		Assert.assertNull(fieldProperties.get("label"));
 
 		Assert.assertEquals(
-			StringPool.BLANK, String.valueOf(soyRawData.getValue()));
+			StringPool.BLANK, String.valueOf(fieldProperties.get("value")));
 	}
 
 	protected DDMFormValues createDDMFormValues(Value value) {
