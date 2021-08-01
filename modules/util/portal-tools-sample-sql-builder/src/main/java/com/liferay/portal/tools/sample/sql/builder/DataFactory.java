@@ -202,6 +202,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PortletKeys;
@@ -1043,23 +1044,16 @@ public class DataFactory {
 	public List<PortletPreferencesModel>
 		newAssetPublisherPortletPreferencesModels(long plid) {
 
-		List<PortletPreferencesModel> portletPreferencesModels =
-			new ArrayList<>(3);
-
-		portletPreferencesModels.add(
+		return ListUtil.fromArray(
 			newPortletPreferencesModel(
 				plid, BlogsPortletKeys.BLOGS,
-				PortletConstants.DEFAULT_PREFERENCES));
-		portletPreferencesModels.add(
+				PortletConstants.DEFAULT_PREFERENCES),
 			newPortletPreferencesModel(
 				plid, JournalPortletKeys.JOURNAL,
-				PortletConstants.DEFAULT_PREFERENCES));
-		portletPreferencesModels.add(
+				PortletConstants.DEFAULT_PREFERENCES),
 			newPortletPreferencesModel(
 				plid, WikiPortletKeys.WIKI,
 				PortletConstants.DEFAULT_PREFERENCES));
-
-		return portletPreferencesModels;
 	}
 
 	public List<BlogsEntryModel> newBlogsEntryModels(long groupId) {
@@ -1710,23 +1704,16 @@ public class DataFactory {
 	public List<PortletPreferencesModel> newDDLPortletPreferencesModels(
 		long plid) {
 
-		List<PortletPreferencesModel> portletPreferencesModels =
-			new ArrayList<>(3);
-
-		portletPreferencesModels.add(
+		return ListUtil.fromArray(
 			newPortletPreferencesModel(
 				plid, DDLPortletKeys.DYNAMIC_DATA_LISTS_DISPLAY,
-				PortletConstants.DEFAULT_PREFERENCES));
-		portletPreferencesModels.add(
+				PortletConstants.DEFAULT_PREFERENCES),
 			newPortletPreferencesModel(
 				plid, DDLPortletKeys.DYNAMIC_DATA_LISTS,
-				PortletConstants.DEFAULT_PREFERENCES));
-		portletPreferencesModels.add(
+				PortletConstants.DEFAULT_PREFERENCES),
 			newPortletPreferencesModel(
 				plid, DDMPortletKeys.DYNAMIC_DATA_MAPPING,
 				PortletConstants.DEFAULT_PREFERENCES));
-
-		return portletPreferencesModels;
 	}
 
 	public DDLRecordModel newDDLRecordModel(
@@ -2919,12 +2906,9 @@ public class DataFactory {
 	}
 
 	public List<LayoutSetModel> newLayoutSetModels(long groupId) {
-		List<LayoutSetModel> layoutSetModels = new ArrayList<>(2);
-
-		layoutSetModels.add(newLayoutSetModel(groupId, true));
-		layoutSetModels.add(newLayoutSetModel(groupId, false));
-
-		return layoutSetModels;
+		return ListUtil.fromArray(
+			newLayoutSetModel(groupId, true),
+			newLayoutSetModel(groupId, false));
 	}
 
 	public List<MBCategoryModel> newMBCategoryModels(long groupId) {
@@ -3316,29 +3300,20 @@ public class DataFactory {
 	}
 
 	public List<LayoutModel> newPublicLayoutModels(long groupId) {
-		List<LayoutModel> layoutModels = new ArrayList<>();
-
-		layoutModels.add(
+		return ListUtil.fromArray(
 			newLayoutModel(
 				groupId, "welcome", LoginPortletKeys.LOGIN + ",",
-				HelloWorldPortletKeys.HELLO_WORLD + ","));
-		layoutModels.add(
-			newLayoutModel(groupId, "blogs", "", BlogsPortletKeys.BLOGS + ","));
-		layoutModels.add(
+				HelloWorldPortletKeys.HELLO_WORLD + ","),
+			newLayoutModel(groupId, "blogs", "", BlogsPortletKeys.BLOGS + ","),
 			newLayoutModel(
 				groupId, "commerce_product", "",
-				CPPortletKeys.CP_CONTENT_WEB + ","));
-		layoutModels.add(
+				CPPortletKeys.CP_CONTENT_WEB + ","),
 			newLayoutModel(
 				groupId, "document_library", "",
-				DLPortletKeys.DOCUMENT_LIBRARY + ","));
-		layoutModels.add(
+				DLPortletKeys.DOCUMENT_LIBRARY + ","),
 			newLayoutModel(
-				groupId, "forums", "", MBPortletKeys.MESSAGE_BOARDS + ","));
-		layoutModels.add(
+				groupId, "forums", "", MBPortletKeys.MESSAGE_BOARDS + ","),
 			newLayoutModel(groupId, "wiki", "", WikiPortletKeys.WIKI + ","));
-
-		return layoutModels;
 	}
 
 	public List<ReleaseModel> newReleaseModels() throws IOException {
@@ -4645,20 +4620,13 @@ public class DataFactory {
 	protected List<ResourcePermissionModel> newResourcePermissionModels(
 		String name, String primKey, long ownerId) {
 
-		List<ResourcePermissionModel> resourcePermissionModels =
-			new ArrayList<>(3);
-
-		resourcePermissionModels.add(
+		return ListUtil.fromArray(
 			newResourcePermissionModel(
-				name, primKey, _guestRoleModel.getRoleId(), 0));
-		resourcePermissionModels.add(
+				name, primKey, _guestRoleModel.getRoleId(), 0),
 			newResourcePermissionModel(
-				name, primKey, _ownerRoleModel.getRoleId(), ownerId));
-		resourcePermissionModels.add(
+				name, primKey, _ownerRoleModel.getRoleId(), ownerId),
 			newResourcePermissionModel(
 				name, primKey, _siteMemberRoleModel.getRoleId(), 0));
-
-		return resourcePermissionModels;
 	}
 
 	protected RoleModel newRoleModel(String name, int type) {
