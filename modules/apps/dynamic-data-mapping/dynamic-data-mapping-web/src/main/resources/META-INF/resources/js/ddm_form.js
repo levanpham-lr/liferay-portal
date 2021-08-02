@@ -1230,8 +1230,8 @@ AUI.add(
 						}
 						else {
 							if (
-								(dataType === 'number' ||
-									dataType === 'double') &&
+								(dataType === 'double' ||
+									dataType === 'number') &&
 								!A.Object.isEmpty(localizationMap)
 							) {
 								instance.setValue(localizationMap);
