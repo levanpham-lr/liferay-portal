@@ -102,6 +102,7 @@ import com.liferay.ratings.kernel.RatingsType;
 import com.liferay.site.admin.web.internal.constants.SiteAdminConstants;
 import com.liferay.site.admin.web.internal.constants.SiteAdminPortletKeys;
 import com.liferay.site.admin.web.internal.handler.GroupExceptionRequestHandler;
+import com.liferay.site.admin.web.internal.portlet.action.ActionUtil;
 import com.liferay.site.constants.SiteWebKeys;
 import com.liferay.site.initializer.SiteInitializer;
 import com.liferay.site.initializer.SiteInitializerRegistry;
@@ -1061,71 +1062,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 			creationType.equals(
 				SiteAdminConstants.CREATION_TYPE_SITE_TEMPLATE)) {
 
-			long privateLayoutSetPrototypeId = ParamUtil.getLong(
-				actionRequest, "privateLayoutSetPrototypeId");
-			long publicLayoutSetPrototypeId = ParamUtil.getLong(
-				actionRequest, "publicLayoutSetPrototypeId");
-			boolean privateLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
-				actionRequest, "privateLayoutSetPrototypeLinkEnabled");
-			boolean publicLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
-				actionRequest, "publicLayoutSetPrototypeLinkEnabled");
-
-			if ((privateLayoutSetPrototypeId == 0) &&
-				(publicLayoutSetPrototypeId == 0) &&
-				!privateLayoutSetPrototypeLinkEnabled &&
-				!publicLayoutSetPrototypeLinkEnabled) {
-
-				long layoutSetPrototypeId = ParamUtil.getLong(
-					actionRequest, "layoutSetPrototypeId");
-				int layoutSetVisibility = ParamUtil.getInteger(
-					actionRequest, "layoutSetVisibility");
-				boolean layoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
-					actionRequest, "layoutSetPrototypeLinkEnabled",
-					layoutSetPrototypeId > 0);
-				boolean layoutSetVisibilityPrivate = ParamUtil.getBoolean(
-					actionRequest, "layoutSetVisibilityPrivate");
-
-				if ((layoutSetVisibility == _LAYOUT_SET_VISIBILITY_PRIVATE) ||
-					layoutSetVisibilityPrivate) {
-
-					privateLayoutSetPrototypeId = layoutSetPrototypeId;
-
-					privateLayoutSetPrototypeLinkEnabled =
-						layoutSetPrototypeLinkEnabled;
-				}
-				else {
-					publicLayoutSetPrototypeId = layoutSetPrototypeId;
-
-					publicLayoutSetPrototypeLinkEnabled =
-						layoutSetPrototypeLinkEnabled;
-				}
-			}
-
-			LayoutSet privateLayoutSet = liveGroup.getPrivateLayoutSet();
-			LayoutSet publicLayoutSet = liveGroup.getPublicLayoutSet();
-
-			if ((privateLayoutSetPrototypeId ==
-					privateLayoutSet.getLayoutSetPrototypeId()) &&
-				(publicLayoutSetPrototypeId ==
-					publicLayoutSet.getLayoutSetPrototypeId()) &&
-				(privateLayoutSetPrototypeLinkEnabled ==
-					privateLayoutSet.isLayoutSetPrototypeLinkEnabled()) &&
-				(publicLayoutSetPrototypeLinkEnabled ==
-					publicLayoutSet.isLayoutSetPrototypeLinkEnabled())) {
-
-				return liveGroup;
-			}
-
-			Group group = liveGroup.getStagingGroup();
-
-			if (!liveGroup.isStaged() || liveGroup.isStagedRemotely()) {
-				group = liveGroup;
-			}
-
-			SitesUtil.updateLayoutSetPrototypesLinks(
-				group, publicLayoutSetPrototypeId, privateLayoutSetPrototypeId,
-				publicLayoutSetPrototypeLinkEnabled,
-				privateLayoutSetPrototypeLinkEnabled);
+			ActionUtil.updateLayoutSetPrototypesLinks(actionRequest, liveGroup);
 		}
 		else if (creationType.equals(
 					SiteAdminConstants.CREATION_TYPE_INITIALIZER)) {
@@ -1198,8 +1135,6 @@ public class SiteAdminPortlet extends MVCPortlet {
 	protected TeamLocalService teamLocalService;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
-
-	private static final int _LAYOUT_SET_VISIBILITY_PRIVATE = 1;
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		SiteAdminPortlet.class);

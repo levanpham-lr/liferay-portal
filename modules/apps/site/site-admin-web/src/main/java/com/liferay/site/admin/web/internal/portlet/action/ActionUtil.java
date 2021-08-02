@@ -15,12 +15,15 @@
 package com.liferay.site.admin.web.internal.portlet.action;
 
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.LayoutSet;
 import com.liferay.portal.kernel.service.GroupServiceUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.sites.kernel.util.SitesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.portlet.ActionRequest;
 import javax.portlet.ResourceRequest;
 
 /**
@@ -41,5 +44,78 @@ public class ActionUtil {
 
 		return groups;
 	}
+
+	public static void updateLayoutSetPrototypesLinks(
+			ActionRequest actionRequest, Group liveGroup)
+		throws Exception {
+
+		long privateLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "privateLayoutSetPrototypeId");
+		long publicLayoutSetPrototypeId = ParamUtil.getLong(
+			actionRequest, "publicLayoutSetPrototypeId");
+		boolean privateLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
+			actionRequest, "privateLayoutSetPrototypeLinkEnabled");
+		boolean publicLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
+			actionRequest, "publicLayoutSetPrototypeLinkEnabled");
+
+		if ((privateLayoutSetPrototypeId == 0) &&
+			(publicLayoutSetPrototypeId == 0) &&
+			!privateLayoutSetPrototypeLinkEnabled &&
+			!publicLayoutSetPrototypeLinkEnabled) {
+
+			long layoutSetPrototypeId = ParamUtil.getLong(
+				actionRequest, "layoutSetPrototypeId");
+			int layoutSetVisibility = ParamUtil.getInteger(
+				actionRequest, "layoutSetVisibility");
+			boolean layoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
+				actionRequest, "layoutSetPrototypeLinkEnabled",
+				layoutSetPrototypeId > 0);
+			boolean layoutSetVisibilityPrivate = ParamUtil.getBoolean(
+				actionRequest, "layoutSetVisibilityPrivate");
+
+			if ((layoutSetVisibility == _LAYOUT_SET_VISIBILITY_PRIVATE) ||
+				layoutSetVisibilityPrivate) {
+
+				privateLayoutSetPrototypeId = layoutSetPrototypeId;
+
+				privateLayoutSetPrototypeLinkEnabled =
+					layoutSetPrototypeLinkEnabled;
+			}
+			else {
+				publicLayoutSetPrototypeId = layoutSetPrototypeId;
+
+				publicLayoutSetPrototypeLinkEnabled =
+					layoutSetPrototypeLinkEnabled;
+			}
+		}
+
+		LayoutSet privateLayoutSet = liveGroup.getPrivateLayoutSet();
+		LayoutSet publicLayoutSet = liveGroup.getPublicLayoutSet();
+
+		if ((privateLayoutSetPrototypeId ==
+				privateLayoutSet.getLayoutSetPrototypeId()) &&
+			(publicLayoutSetPrototypeId ==
+				publicLayoutSet.getLayoutSetPrototypeId()) &&
+			(privateLayoutSetPrototypeLinkEnabled ==
+				privateLayoutSet.isLayoutSetPrototypeLinkEnabled()) &&
+			(publicLayoutSetPrototypeLinkEnabled ==
+				publicLayoutSet.isLayoutSetPrototypeLinkEnabled())) {
+
+			return;
+		}
+
+		Group group = liveGroup.getStagingGroup();
+
+		if (!liveGroup.isStaged() || liveGroup.isStagedRemotely()) {
+			group = liveGroup;
+		}
+
+		SitesUtil.updateLayoutSetPrototypesLinks(
+			group, publicLayoutSetPrototypeId, privateLayoutSetPrototypeId,
+			publicLayoutSetPrototypeLinkEnabled,
+			privateLayoutSetPrototypeLinkEnabled);
+	}
+
+	private static final int _LAYOUT_SET_VISIBILITY_PRIVATE = 1;
 
 }
