@@ -385,8 +385,6 @@ public class AuthenticatedSessionManagerImpl
 				protectedAttributeName, protectedAttributeValue);
 		}
 
-		session.setAttribute(WebKeys.RENEW_SESSION, Boolean.TRUE);
-
 		session.invalidate();
 
 		session = httpServletRequest.getSession(true);
