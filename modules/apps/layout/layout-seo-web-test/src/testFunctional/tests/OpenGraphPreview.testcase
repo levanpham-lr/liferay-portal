@@ -236,7 +236,7 @@ definition {
 
 		Page.viewPreview(
 			description = '''description@#$%^&amp;*()~`1234567890''',
-			htmlTitle = '''@#$%^&amp;*()~`1234567890title - ${siteName}''',
+			htmlTitle = '''@#$%^&amp;*()~`1234567890title''',
 			openGraph = "true",
 			pageName = "Test Page Name",
 			portalURL = "${portalURL}");
@@ -247,7 +247,7 @@ definition {
 
 		Page.viewPreview(
 			description = '''description@#$%^&amp;*()~`1234567890''',
-			htmlTitle = '''@#$%^&amp;*()~`1234567890title - ${siteName}''',
+			htmlTitle = '''@#$%^&amp;*()~`1234567890title''',
 			openGraph = "true",
 			pageName = "Test Page Name",
 			portalURL = "${portalURL}");
@@ -279,7 +279,7 @@ definition {
 
 		Page.viewPreview(
 			description = "Liferay Portal provides an excellent platform for building web applications, websites, and portals, but it can additionally be used for a new category of web ap…",
-			htmlTitle = "Liferay Portal provides an excellent platform for building web applications - Test Site Name - ${siteName}",
+			htmlTitle = "Liferay Portal provides an excellent platform for building web applications",
 			openGraph = "true",
 			portalURL = "${portalURL}",
 			siteNameURL = "test-site-name",
@@ -372,7 +372,7 @@ definition {
 
 		Page.viewPreview(
 			description = "وصف الاختبار",
-			htmlTitle = "عنوان الاختبار - Test Site Name - ${siteName}",
+			htmlTitle = "عنوان الاختبار",
 			locale = "ar-SA",
 			openGraph = "true",
 			portalURL = "${portalURL}",
