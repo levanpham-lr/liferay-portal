@@ -154,8 +154,8 @@ public class AssetDisplayPageFriendlyURLProviderImpl
 
 		themeDisplay.setI18nLanguageId(locale.toString());
 		themeDisplay.setI18nPath(i18nPath);
-		themeDisplay.setLocale(locale);
 		themeDisplay.setLanguageId(LocaleUtil.toLanguageId(locale));
+		themeDisplay.setLocale(locale);
 	}
 
 	@Reference
