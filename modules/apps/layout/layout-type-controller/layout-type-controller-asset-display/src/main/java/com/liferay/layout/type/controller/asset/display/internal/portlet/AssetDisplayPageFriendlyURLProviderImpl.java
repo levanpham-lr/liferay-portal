@@ -134,7 +134,17 @@ public class AssetDisplayPageFriendlyURLProviderImpl
 			group.getPublicLayoutSet(), themeDisplay);
 	}
 
-	protected void setThemeDisplayI18n(
+	private String _getI18nPath(Locale locale) {
+		Locale defaultLocale = _language.getLocale(locale.getLanguage());
+
+		if (LocaleUtil.equals(defaultLocale, locale)) {
+			return StringPool.SLASH + defaultLocale.getLanguage();
+		}
+
+		return StringPool.SLASH + locale.toLanguageTag();
+	}
+
+	private void _setThemeDisplayI18n(
 		ThemeDisplay themeDisplay, Locale locale) {
 
 		String i18nPath = null;
@@ -152,16 +162,6 @@ public class AssetDisplayPageFriendlyURLProviderImpl
 		themeDisplay.setI18nLanguageId(locale.toString());
 		themeDisplay.setI18nPath(i18nPath);
 		themeDisplay.setLocale(locale);
-	}
-
-	private String _getI18nPath(Locale locale) {
-		Locale defaultLocale = _language.getLocale(locale.getLanguage());
-
-		if (LocaleUtil.equals(defaultLocale, locale)) {
-			return StringPool.SLASH + defaultLocale.getLanguage();
-		}
-
-		return StringPool.SLASH + locale.toLanguageTag();
 	}
 
 	@Reference
