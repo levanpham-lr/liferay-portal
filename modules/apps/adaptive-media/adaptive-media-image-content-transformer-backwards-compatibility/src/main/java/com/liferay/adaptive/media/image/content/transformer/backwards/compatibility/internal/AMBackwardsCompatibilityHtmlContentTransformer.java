@@ -20,7 +20,6 @@ import com.liferay.adaptive.media.content.transformer.ContentTransformerContentT
 import com.liferay.adaptive.media.content.transformer.constants.ContentTransformerContentTypes;
 import com.liferay.adaptive.media.image.html.AMImageHTMLTagFactory;
 import com.liferay.adaptive.media.image.html.constants.AMImageHTMLConstants;
-import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -84,13 +83,7 @@ public class AMBackwardsCompatibilityHtmlContentTransformer
 		long folderId = Long.valueOf(matcher.group(2));
 		String title = matcher.group(3);
 
-		try {
-			return _dlAppLocalService.getFileEntry(groupId, folderId, title);
-		}
-		catch (NoSuchFileEntryException noSuchFileEntryException) {
-			return _dlAppLocalService.getFileEntryByFileName(
-				groupId, folderId, title);
-		}
+		return _dlAppLocalService.getFileEntry(groupId, folderId, title);
 	}
 
 	@Override
