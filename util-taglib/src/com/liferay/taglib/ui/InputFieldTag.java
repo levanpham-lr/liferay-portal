@@ -82,6 +82,14 @@ public class InputFieldTag extends IncludeTag {
 		return _placeholder;
 	}
 
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getAutoComplete()}
+	 */
+	@Deprecated
+	public boolean isAutoComplete() {
+		return Boolean.valueOf(_autoComplete);
+	}
+
 	public boolean isAutoFocus() {
 		return _autoFocus;
 	}
