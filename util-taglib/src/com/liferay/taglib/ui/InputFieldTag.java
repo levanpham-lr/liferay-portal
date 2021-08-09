@@ -106,6 +106,14 @@ public class InputFieldTag extends IncludeTag {
 		return _ignoreRequestValue;
 	}
 
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #setAutoComplete(String)}
+	 */
+	@Deprecated
+	public void setAutoComplete(boolean autoComplete) {
+		_autoComplete = String.valueOf(autoComplete);
+	}
+
 	public void setAutoComplete(String autoComplete) {
 		_autoComplete = autoComplete;
 	}
