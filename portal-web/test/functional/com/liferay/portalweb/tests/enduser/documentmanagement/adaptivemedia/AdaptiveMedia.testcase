@@ -148,6 +148,7 @@ definition {
 		AdaptiveMedia.viewNumberOfAdaptedImages(numberOfAdaptedImages = "0/1");
 
 		AdaptiveMedia.editImageResolution(
+			backspaceCount = "4",
 			imageName = "High Resolution",
 			imageNameEdit = "High Resolution Edited",
 			maxHeightEdit = "1080",
@@ -401,6 +402,7 @@ definition {
 			percentAdapted = "0");
 
 		AdaptiveMedia.editImageResolution(
+			backspaceCount = "4",
 			imageName = "Small Image Variant",
 			imageNameEdit = "Large Image Variant",
 			maxHeightEdit = "1000",
@@ -489,6 +491,7 @@ definition {
 			maxWidth = "1000");
 
 		AdaptiveMedia.editImageResolution(
+			backspaceCount = "4",
 			imageName = "testResolution",
 			imageNameEdit = "testResolutionEdit",
 			maxHeightEdit = "",
@@ -523,6 +526,7 @@ definition {
 			percentAdapted = "0");
 
 		AdaptiveMedia.editImageResolution(
+			backspaceCount = "4",
 			imageIDEdit = "large-image",
 			imageName = "Small Image Variant",
 			imageNameEdit = "Large Image Variant",
@@ -550,9 +554,10 @@ definition {
 			maxWidth = "1000");
 
 		AdaptiveMedia.editImageResolution(
+			backspaceCount = "4",
 			imageName = "testResolutionWidth",
 			imageNameEdit = "testResolutionWidthEdit",
-			maxHeightEdit = "");
+			maxHeightEdit = "0");
 
 		AdaptiveMedia.viewImageResolutionTableEntry(
 			imageName = "testResolutionWidthEdit",
@@ -567,7 +572,7 @@ definition {
 		AdaptiveMedia.editImageResolution(
 			imageName = "testResolutionHeight",
 			imageNameEdit = "testResolutionHeightEdit",
-			maxWidthEdit = "");
+			maxWidthEdit = "0");
 
 		AdaptiveMedia.viewImageResolutionTableEntry(
 			imageName = "testResolutionHeightEdit",
