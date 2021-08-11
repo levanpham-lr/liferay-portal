@@ -570,6 +570,7 @@ definition {
 			maxWidth = "1000");
 
 		AdaptiveMedia.editImageResolution(
+			backspaceCount = "4",
 			imageName = "testResolutionHeight",
 			imageNameEdit = "testResolutionHeightEdit",
 			maxWidthEdit = "0");
