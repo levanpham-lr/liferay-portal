@@ -109,7 +109,7 @@ public class DDMFormInstanceRecordSearchTest {
 		_searchContext.setKeywords("Simple description");
 		_searchContext.setUserId(user.getUserId());
 
-		assertSearch("description", 1);
+		assertSearch("description", 0);
 	}
 
 	@Test
