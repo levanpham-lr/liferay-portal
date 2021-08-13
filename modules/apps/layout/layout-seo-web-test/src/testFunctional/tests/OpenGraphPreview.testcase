@@ -292,7 +292,7 @@ definition {
 
 		Page.viewPreview(
 			description = "Liferay Portal provides an excellent platform for building web applications, websites, and portals, but it can additionally be used for a new category of web ap…",
-			htmlTitle = "Liferay Portal provides an excellent platform for building web applications - Test Site Name - ${siteName}",
+			htmlTitle = "Liferay Portal provides an excellent platform for building web applications",
 			openGraph = "true",
 			portalURL = "${portalURL}",
 			siteNameURL = "test-site-name",
