@@ -987,6 +987,13 @@ public class JournalArticleStagedModelDataHandler
 				article.getResourcePrimKey(),
 				importedArticle.getResourcePrimKey());
 
+			if (!StringUtil.equals(
+					article.getArticleId(), importedArticle.getArticleId())) {
+
+				articleIds.put(
+					article.getArticleId(), importedArticle.getArticleId());
+			}
+
 			StagedModelDataHandlerUtil.importReferenceStagedModels(
 				portletDataContext, article, Layout.class);
 
