@@ -845,7 +845,7 @@ public class RenderLayoutStructureDisplayContext {
 		String backgroundImageURL = rowConfigJSONObject.getString("url");
 
 		if (Validator.isNotNull(backgroundImageURL)) {
-			return PortalUtil.getPathContext() + backgroundImageURL;
+			return backgroundImageURL;
 		}
 
 		return StringPool.BLANK;
