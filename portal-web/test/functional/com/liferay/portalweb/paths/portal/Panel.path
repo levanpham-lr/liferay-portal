@@ -41,6 +41,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>PANEL_RECYCLE_BIN</td>
+	<td>//div[contains(@class,'panel-heading')]//span[normalize-space()='Recycle Bin']</td>
+	<td></td>
+</tr>
+<tr>
 	<td></td>
 	<td></td>
 	<td></td>
