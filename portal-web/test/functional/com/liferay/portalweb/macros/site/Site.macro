@@ -592,7 +592,9 @@ definition {
 			locator1 = "SitesEditSite#MENU_ADVANCED_TAB",
 			value1 = "Advanced");
 
-		Panel.expandPanel(panel = "Recycle Bin");
+		AssertClick(
+			locator1 = "Panel#PANEL_RECYCLE_BIN",
+			value1 = "Recycle Bin");
 
 		Uncheck.uncheckToggleSwitchNoErrorNoAssert(locator1 = "Checkbox#ENABLE_RECYCLE_BIN");
 
