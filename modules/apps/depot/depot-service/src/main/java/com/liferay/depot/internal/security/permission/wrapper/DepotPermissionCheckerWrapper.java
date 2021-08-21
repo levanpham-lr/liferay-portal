@@ -124,7 +124,7 @@ public class DepotPermissionCheckerWrapper extends PermissionCheckerWrapper {
 				return true;
 			}
 
-			return _getOrAddToPermissionCache(
+			return _isOrAddToPermissionCache(
 				_groupLocalService.fetchGroup(groupId),
 				DepotRolesConstants.ASSET_LIBRARY_CONTENT_REVIEWER,
 				this::_isContentReviewer);
@@ -147,7 +147,7 @@ public class DepotPermissionCheckerWrapper extends PermissionCheckerWrapper {
 				return true;
 			}
 
-			return _getOrAddToPermissionCache(
+			return _isOrAddToPermissionCache(
 				_groupLocalService.fetchGroup(groupId),
 				DepotRolesConstants.ASSET_LIBRARY_ADMINISTRATOR,
 				this::_isGroupAdmin);
@@ -190,7 +190,7 @@ public class DepotPermissionCheckerWrapper extends PermissionCheckerWrapper {
 				return true;
 			}
 
-			return _getOrAddToPermissionCache(
+			return _isOrAddToPermissionCache(
 				_groupLocalService.fetchGroup(groupId),
 				DepotRolesConstants.ASSET_LIBRARY_OWNER, this::_isGroupOwner);
 		}
@@ -199,30 +199,6 @@ public class DepotPermissionCheckerWrapper extends PermissionCheckerWrapper {
 
 			return false;
 		}
-	}
-
-	private boolean _getOrAddToPermissionCache(
-			Group group, String roleName,
-			UnsafeFunction<Group, Boolean, Exception> unsafeFunction)
-		throws Exception {
-
-		if (group == null) {
-			return false;
-		}
-
-		Boolean value = PermissionCacheUtil.getUserPrimaryKeyRole(
-			getUserId(), group.getGroupId(), roleName);
-
-		if (value != null) {
-			return value;
-		}
-
-		value = unsafeFunction.apply(group);
-
-		PermissionCacheUtil.putUserPrimaryKeyRole(
-			getUserId(), group.getGroupId(), roleName, value);
-
-		return value;
 	}
 
 	private boolean _hasPermission(
@@ -345,6 +321,30 @@ public class DepotPermissionCheckerWrapper extends PermissionCheckerWrapper {
 		}
 
 		return false;
+	}
+
+	private boolean _isOrAddToPermissionCache(
+			Group group, String roleName,
+			UnsafeFunction<Group, Boolean, Exception> unsafeFunction)
+		throws Exception {
+
+		if (group == null) {
+			return false;
+		}
+
+		Boolean value = PermissionCacheUtil.getUserPrimaryKeyRole(
+			getUserId(), group.getGroupId(), roleName);
+
+		if (value != null) {
+			return value;
+		}
+
+		value = unsafeFunction.apply(group);
+
+		PermissionCacheUtil.putUserPrimaryKeyRole(
+			getUserId(), group.getGroupId(), roleName, value);
+
+		return value;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
