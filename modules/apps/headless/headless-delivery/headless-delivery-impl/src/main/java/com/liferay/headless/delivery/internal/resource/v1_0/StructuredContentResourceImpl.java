@@ -53,6 +53,7 @@ import com.liferay.headless.delivery.internal.search.filter.FilterUtil;
 import com.liferay.headless.delivery.internal.search.sort.SortUtil;
 import com.liferay.headless.delivery.resource.v1_0.StructuredContentResource;
 import com.liferay.journal.constants.JournalFolderConstants;
+import com.liferay.journal.exception.NoSuchFolderException;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalFolder;
 import com.liferay.journal.service.JournalArticleLocalService;
@@ -63,11 +64,11 @@ import com.liferay.journal.util.JournalConverter;
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.search.filter.Filter;
@@ -871,36 +872,7 @@ public class StructuredContentResourceImpl
 					_ddmIndexer, searchRequestBuilder, searchContext.getSorts(),
 					_queries, _sorts);
 			},
-			sorts,
-			document -> {
-				JournalArticle journalArticle = null;
-
-				try {
-					journalArticle = _journalArticleService.getLatestArticle(
-						GetterUtil.getLong(
-							document.get(
-								com.liferay.portal.kernel.search.Field.
-									SCOPE_GROUP_ID)),
-						document.get(
-							com.liferay.portal.kernel.search.Field.ARTICLE_ID),
-						WorkflowConstants.STATUS_APPROVED);
-				}
-				catch (PortalException portalException) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Error retrieving content: " + portalException);
-					}
-				}
-				catch (Exception exception) {
-					throw new Exception(exception);
-				}
-
-				if (journalArticle != null) {
-					return _toStructuredContent(journalArticle);
-				}
-
-				return null;
-			});
+			sorts, this::_toStructuredContent);
 	}
 
 	private Fields _toFields(
@@ -980,9 +952,35 @@ public class StructuredContentResourceImpl
 
 		DDMFormValuesSerializerSerializeResponse
 			ddmFormValuesSerializerSerializeResponse =
-				_jsonDDMFormValuesSerializer.serialize(builder.build());
+			_jsonDDMFormValuesSerializer.serialize(builder.build());
 
 		return ddmFormValuesSerializerSerializeResponse.getContent();
+	}
+
+	private StructuredContent _toStructuredContent(Document document)
+		throws Exception {
+
+		try {
+			return _toStructuredContent(
+				_journalArticleService.getLatestArticle(
+					GetterUtil.getLong(
+						document.get(
+							com.liferay.portal.kernel.search.Field.
+								SCOPE_GROUP_ID)),
+					document.get(
+						com.liferay.portal.kernel.search.Field.ARTICLE_ID),
+					WorkflowConstants.STATUS_APPROVED));
+		}
+		catch (NoSuchFolderException noSuchFolderException) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Error retrieving folder: " + noSuchFolderException);
+			}
+
+			return null;
+		}
+		catch (Exception exception) {
+			throw new Exception(exception);
+		}
 	}
 
 	private StructuredContent _toStructuredContent(
