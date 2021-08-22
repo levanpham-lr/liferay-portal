@@ -146,7 +146,6 @@ public abstract class BaseNavigationMenuResourceImpl
 	 * curl -X 'GET' 'http://localhost:8080/o/headless-delivery/v1.0/navigation-menus/{navigationMenuId}'  -u 'test@liferay.com:test'
 	 */
 	@GET
-	@Operation(description = "")
 	@Override
 	@Parameters(
 		value = {@Parameter(in = ParameterIn.PATH, name = "navigationMenuId")}
@@ -230,7 +229,6 @@ public abstract class BaseNavigationMenuResourceImpl
 	 * curl -X 'GET' 'http://localhost:8080/o/headless-delivery/v1.0/sites/{siteId}/navigation-menus'  -u 'test@liferay.com:test'
 	 */
 	@GET
-	@Operation(description = "")
 	@Override
 	@Parameters(
 		value = {

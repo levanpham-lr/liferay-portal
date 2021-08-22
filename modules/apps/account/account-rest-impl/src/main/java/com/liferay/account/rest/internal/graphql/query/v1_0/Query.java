@@ -108,7 +108,7 @@ public class Query {
 	 *
 	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {accountByExternalReferenceCode(externalReferenceCode: ___){description, domains, externalReferenceCode, id, name, organizationIds, parentAccountId, status}}"}' -u 'test@liferay.com:test'
 	 */
-	@GraphQLField(description = "")
+	@GraphQLField
 	public Account accountByExternalReferenceCode(
 			@GraphQLName("externalReferenceCode") String externalReferenceCode)
 		throws Exception {
@@ -126,7 +126,7 @@ public class Query {
 	 *
 	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {account(accountId: ___){description, domains, externalReferenceCode, id, name, organizationIds, parentAccountId, status}}"}' -u 'test@liferay.com:test'
 	 */
-	@GraphQLField(description = "")
+	@GraphQLField
 	public Account account(@GraphQLName("accountId") Long accountId)
 		throws Exception {
 
@@ -308,7 +308,7 @@ public class Query {
 			_accountRole = accountRole;
 		}
 
-		@GraphQLField(description = "")
+		@GraphQLField
 		public Account account() throws Exception {
 			return _applyComponentServiceObjects(
 				_accountResourceComponentServiceObjects,
@@ -493,7 +493,7 @@ public class Query {
 			_account = account;
 		}
 
-		@GraphQLField(description = "")
+		@GraphQLField
 		public Account parentAccount() throws Exception {
 			if (_account.getParentAccountId() == null) {
 				return null;

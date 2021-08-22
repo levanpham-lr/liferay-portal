@@ -1874,7 +1874,7 @@ public class Query {
 	 *
 	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {navigationMenu(navigationMenuId: ___){actions, creator, dateCreated, dateModified, id, name, navigationMenuItems, navigationType, siteId}}"}' -u 'test@liferay.com:test'
 	 */
-	@GraphQLField(description = "")
+	@GraphQLField
 	public NavigationMenu navigationMenu(
 			@GraphQLName("navigationMenuId") Long navigationMenuId)
 		throws Exception {
@@ -1891,7 +1891,7 @@ public class Query {
 	 *
 	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {navigationMenus(page: ___, pageSize: ___, siteKey: ___){items {__}, page, pageSize, totalCount}}"}' -u 'test@liferay.com:test'
 	 */
-	@GraphQLField(description = "")
+	@GraphQLField
 	public NavigationMenuPage navigationMenus(
 			@GraphQLName("siteKey") @NotEmpty String siteKey,
 			@GraphQLName("pageSize") int pageSize,
@@ -4541,7 +4541,7 @@ public class Query {
 			_navigationMenuItem = navigationMenuItem;
 		}
 
-		@GraphQLField(description = "")
+		@GraphQLField
 		public NavigationMenu parentNavigationMenuItem() throws Exception {
 			if (_navigationMenuItem.getParentNavigationMenuId() == null) {
 				return null;
