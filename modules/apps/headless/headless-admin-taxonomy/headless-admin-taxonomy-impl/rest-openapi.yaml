@@ -365,8 +365,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/Keyword"
                                 type: array
-                    description:
-                        ""
             tags: ["Keyword"]
         post:
             operationId: postAssetLibraryKeyword
@@ -394,8 +392,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/Keyword"
-                    description:
-                        ""
             tags: ["Keyword"]
     "/asset-libraries/{assetLibraryId}/taxonomy-vocabularies":
         get:
@@ -440,8 +436,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/TaxonomyVocabulary"
                                 type: array
-                    description:
-                        ""
             tags: ["TaxonomyVocabulary"]
         post:
             operationId: postAssetLibraryTaxonomyVocabulary
@@ -469,8 +463,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/TaxonomyVocabulary"
-                    description:
-                        ""
             tags: ["TaxonomyVocabulary"]
     "/keywords/ranked":
         get:
@@ -506,8 +498,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/Keyword"
                                 type: array
-                    description:
-                        ""
             tags: ["Keyword"]
     "/keywords/{keywordId}":
         delete:
@@ -526,8 +516,6 @@ paths:
                     content:
                         application/json: {}
                         application/xml: {}
-                    description:
-                        ""
             tags: ["Keyword"]
         get:
             description:
@@ -549,8 +537,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/Keyword"
-                    description:
-                        ""
             tags: ["Keyword"]
         put:
             description:
@@ -581,8 +567,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/Keyword"
-                    description:
-                        ""
             tags: ["Keyword"]
     "/sites/{siteId}/keywords":
         get:
@@ -629,8 +613,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/Keyword"
                                 type: array
-                    description:
-                        ""
             tags: ["Keyword"]
         post:
             description:
@@ -660,8 +642,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/Keyword"
-                    description:
-                        ""
             tags: ["Keyword"]
     "/sites/{siteId}/taxonomy-vocabularies":
         get:
@@ -708,8 +688,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/TaxonomyVocabulary"
                                 type: array
-                    description:
-                        ""
             tags: ["TaxonomyVocabulary"]
         post:
             description:
@@ -739,8 +717,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/TaxonomyVocabulary"
-                    description:
-                        ""
             tags: ["TaxonomyVocabulary"]
     "/taxonomy-categories/ranked":
         get:
@@ -772,8 +748,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/TaxonomyCategory"
                                 type: array
-                    description:
-                        ""
             tags: ["TaxonomyCategory"]
     "/taxonomy-categories/{parentTaxonomyCategoryId}/taxonomy-categories":
         get:
@@ -820,8 +794,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/TaxonomyCategory"
                                 type: array
-                    description:
-                        ""
             tags: ["TaxonomyCategory"]
         post:
             description:
@@ -850,8 +822,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/TaxonomyCategory"
-                    description:
-                        ""
             tags: ["TaxonomyCategory"]
     "/taxonomy-categories/{taxonomyCategoryId}":
         delete:
@@ -869,8 +839,6 @@ paths:
                     content:
                         application/json: {}
                         application/xml: {}
-                    description:
-                        ""
             tags: ["TaxonomyCategory"]
         get:
             description:
@@ -891,8 +859,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/TaxonomyCategory"
-                    description:
-                        ""
             tags: ["TaxonomyCategory"]
         patch:
             description:
@@ -921,8 +887,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/TaxonomyCategory"
-                    description:
-                        ""
             tags: ["TaxonomyCategory"]
         put:
             description:
@@ -952,8 +916,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/TaxonomyCategory"
-                    description:
-                        ""
             tags: ["TaxonomyCategory"]
     "/taxonomy-vocabularies/{taxonomyVocabularyId}":
         delete:
@@ -972,8 +934,6 @@ paths:
                     content:
                         application/json: {}
                         application/xml: {}
-                    description:
-                        ""
             tags: ["TaxonomyVocabulary"]
         get:
             description:
@@ -995,8 +955,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/TaxonomyVocabulary"
-                    description:
-                        ""
             tags: ["TaxonomyVocabulary"]
         patch:
             description:
@@ -1026,8 +984,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/TaxonomyVocabulary"
-                    description:
-                        ""
             tags: ["TaxonomyVocabulary"]
         put:
             description:
@@ -1058,8 +1014,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/TaxonomyVocabulary"
-                    description:
-                        ""
             tags: ["TaxonomyVocabulary"]
     "/taxonomy-vocabularies/{taxonomyVocabularyId}/taxonomy-categories":
         get:
@@ -1106,8 +1060,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/TaxonomyCategory"
                                 type: array
-                    description:
-                        ""
             tags: ["TaxonomyCategory"]
         post:
             description:
@@ -1137,6 +1089,4 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/TaxonomyCategory"
-                    description:
-                        ""
             tags: ["TaxonomyCategory"]

@@ -149,8 +149,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/Account"
                                 type: array
-                    description:
-                        ""
             tags: ["Account"]
         post:
             description:
@@ -205,8 +203,6 @@ paths:
                     content:
                         application/json: {}
                         application/xml: {}
-                    description:
-                        ""
             tags: ["AccountRole"]
         post:
             # @review
@@ -235,8 +231,6 @@ paths:
                     content:
                         application/json: {}
                         application/xml: {}
-                    description:
-                        ""
             tags: ["AccountRole"]
     "/accounts/by-external-reference-code/{externalReferenceCode}":
         delete:
@@ -255,12 +249,8 @@ paths:
                     content:
                         application/json: {}
                         application/xml: {}
-                    description:
-                        ""
             tags: ["Account"]
         get:
-            description:
-                ""
             operationId: getAccountByExternalReferenceCode
             parameters:
                 - in: path
@@ -277,8 +267,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/Account"
-                    description:
-                        ""
             tags: ["Account"]
         patch:
             # @review
@@ -388,8 +376,6 @@ paths:
                                     $ref: "#/components/schemas/AccountRole"
                                 type: array
                     # @review
-                    description:
-                        ""
             tags: ["AccountRole"]
         post:
             # @review
@@ -420,8 +406,6 @@ paths:
                             schema:
                                 $ref: "#/components/schemas/AccountRole"
                     # @review
-                    description:
-                        ""
             tags: ["AccountRole"]
     "/accounts/by-external-reference-code/{externalReferenceCode}/account-users":
         get:
@@ -468,8 +452,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/AccountUser"
                                 type: array
-                    description:
-                        ""
             tags: ["AccountUser"]
         post:
             # @review
@@ -499,8 +481,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/AccountUser"
-                    description:
-                        ""
             tags: ["AccountUser"]
     "/accounts/{accountId}":
         delete:
@@ -520,12 +500,8 @@ paths:
                     content:
                         application/json: {}
                         application/xml: {}
-                    description:
-                        ""
             tags: ["Account"]
         get:
-            description:
-                ""
             operationId: getAccount
             parameters:
                 - in: path
@@ -543,8 +519,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/Account"
-                    description:
-                        ""
             tags: ["Account"]
         patch:
             # @review
@@ -657,8 +631,6 @@ paths:
                                     $ref: "#/components/schemas/AccountRole"
                                 type: array
                     # @review
-                    description:
-                        ""
             tags: ["AccountRole"]
         post:
             # @review
@@ -690,8 +662,6 @@ paths:
                             schema:
                                 $ref: "#/components/schemas/AccountRole"
                     # @review
-                    description:
-                        ""
             tags: ["AccountRole"]
     "/accounts/{accountId}/account-roles/{accountRoleId}/account-users/{accountUserId}":
         delete:
@@ -723,8 +693,6 @@ paths:
                     content:
                         application/json: {}
                         application/xml: {}
-                    description:
-                        ""
             tags: ["AccountRole"]
         post:
             # @review
@@ -755,8 +723,6 @@ paths:
                     content:
                         application/json: {}
                         application/xml: {}
-                    description:
-                        ""
             tags: ["AccountRole"]
     "/accounts/{accountId}/account-users":
         get:
@@ -804,8 +770,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/AccountUser"
                                 type: array
-                    description:
-                        ""
             tags: ["AccountUser"]
         post:
             # @review
@@ -836,6 +800,4 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/AccountUser"
-                    description:
-                        ""
             tags: ["AccountUser"]

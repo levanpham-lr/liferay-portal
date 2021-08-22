@@ -117,8 +117,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/Selection"
-                    description:
-                        ""
             tags: ["Selection"]
     "/keywords/batch":
         patch:
@@ -134,8 +132,6 @@ paths:
                 200:
                     content:
                         {}
-                    description:
-                        ""
             tags: ["Keyword"]
         put:
             requestBody:
@@ -150,8 +146,6 @@ paths:
                 200:
                     content:
                         {}
-                    description:
-                        ""
             tags: ["Keyword"]
     "/keywords/common":
         post:
@@ -177,8 +171,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/Keyword"
                                 type: array
-                    description:
-                        ""
             tags: ["Keyword"]
     "/sites/{siteId}/taxonomy-vocabularies/common":
         post:
@@ -211,8 +203,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/TaxonomyVocabulary"
                                 type: array
-                    description:
-                        ""
             tags: ["TaxonomyVocabulary"]
     "/status":
         get:
@@ -226,8 +216,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/Status"
-                    description:
-                        ""
             tags: ["Status"]
     "/taxonomy-categories/batch":
         patch:
@@ -243,8 +231,6 @@ paths:
                 200:
                     content:
                         {}
-                    description:
-                        ""
             tags: ["TaxonomyCategory"]
         put:
             requestBody:
@@ -259,6 +245,4 @@ paths:
                 200:
                     content:
                         {}
-                    description:
-                        ""
             tags: ["TaxonomyCategory"]

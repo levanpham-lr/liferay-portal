@@ -23,8 +23,6 @@ components:
                     type: string
             type: object
 info:
-    description:
-        ""
     license:
         name: Apache 2.0
         url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -109,8 +107,6 @@ paths:
                     content:
                         application/json: {}
                         application/xml: {}
-                    description:
-                        ""
             # @review
             tags: ["PortalInstance"]
         get:

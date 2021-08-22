@@ -123,8 +123,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/App"
                                 type: array
-                    description:
-                        ""
             tags: ["App"]
     "/apps/{appId}":
         delete:
@@ -141,8 +139,6 @@ paths:
                     content:
                         application/json: {}
                         application/xml: {}
-                    description:
-                        ""
             tags: ["App"]
         get:
             operationId: getApp
@@ -162,8 +158,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/App"
-                    description:
-                        ""
             tags: ["App"]
         put:
             operationId: putApp
@@ -191,8 +185,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/App"
-                    description:
-                        ""
             tags: ["App"]
     "/apps/{appId}/deploy":
         put:
@@ -268,8 +260,6 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/App"
                                 type: array
-                    description:
-                        ""
             tags: ["App"]
         post:
             operationId: postDataDefinitionApp
@@ -297,8 +287,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/App"
-                    description:
-                        ""
             tags: ["App"]
     "/sites/{siteId}/apps":
         get:
@@ -344,6 +332,4 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/App"
                                 type: array
-                    description:
-                        ""
             tags: ["App"]

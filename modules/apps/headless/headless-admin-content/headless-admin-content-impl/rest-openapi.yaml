@@ -36,6 +36,4 @@ paths:
                         text/html:
                             schema:
                                 type: string
-                    description:
-                        ""
             tags: ["PageDefinition"]

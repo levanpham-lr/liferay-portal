@@ -114,8 +114,6 @@ paths:
                     content:
                         application/json: {}
                         application/xml: {}
-                    description:
-                        ""
             tags: ["AppWorkflow"]
         get:
             operationId: getAppWorkflow
@@ -135,8 +133,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/AppWorkflow"
-                    description:
-                        ""
             tags: ["AppWorkflow"]
         post:
             operationId: postAppWorkflow
@@ -164,8 +160,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/AppWorkflow"
-                    description:
-                        ""
             tags: ["AppWorkflow"]
         put:
             operationId: putAppWorkflow
@@ -193,8 +187,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: "#/components/schemas/AppWorkflow"
-                    description:
-                        ""
             tags: ["AppWorkflow"]
     "/apps/{appId}/app-workflows/data-record-links":
         post:
@@ -227,6 +219,4 @@ paths:
                                 items:
                                     $ref: "#/components/schemas/AppWorkflowDataRecordLink"
                                 type: array
-                    description:
-                        ""
             tags: ["AppWorkflowDataRecordLink"]
