@@ -978,9 +978,6 @@ public class StructuredContentResourceImpl
 
 			return null;
 		}
-		catch (Exception exception) {
-			throw new Exception(exception);
-		}
 	}
 
 	private StructuredContent _toStructuredContent(
