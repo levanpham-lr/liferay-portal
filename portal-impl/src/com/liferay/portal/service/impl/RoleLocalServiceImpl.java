@@ -1041,7 +1041,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	 */
 	@Override
 	public List<Role> getUserRelatedRoles(long userId, List<Group> groups) {
-		if ((groups == null) || groups.isEmpty()) {
+		if (ListUtil.isEmpty(groups)) {
 			return Collections.emptyList();
 		}
 
