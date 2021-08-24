@@ -57,6 +57,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.LinkedHashMapBuilder;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
@@ -852,9 +853,7 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			cpDefinitionOptionValueRelLocalService.
 				getCPDefinitionOptionValueRels(cpDefinitionOptionRelId);
 
-		if ((cpDefinitionOptionValueRels == null) ||
-			cpDefinitionOptionValueRels.isEmpty()) {
-
+		if (ListUtil.isEmpty(cpDefinitionOptionValueRels)) {
 			return;
 		}
 
