@@ -973,7 +973,7 @@ public class StructuredContentResourceImpl
 		}
 		catch (NoSuchFolderException noSuchFolderException) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Error retrieving folder: " + noSuchFolderException);
+				_log.debug(noSuchFolderException, noSuchFolderException);
 			}
 
 			return null;
