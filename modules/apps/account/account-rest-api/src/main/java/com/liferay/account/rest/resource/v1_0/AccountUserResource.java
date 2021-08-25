@@ -108,6 +108,9 @@ public interface AccountUserResource {
 		public Builder httpServletRequest(
 			HttpServletRequest httpServletRequest);
 
+		public Builder httpServletResponse(
+			HttpServletResponse httpServletResponse);
+
 		public Builder preferredLocale(Locale preferredLocale);
 
 		public Builder user(com.liferay.portal.kernel.model.User user);
