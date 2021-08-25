@@ -29,6 +29,7 @@ import com.liferay.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.journal.test.util.JournalTestUtil;
 import com.liferay.layout.test.util.LayoutTestUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.StagedModel;
@@ -349,6 +350,120 @@ public class JournalFeedStagedModelDataHandlerTest
 			feed.getOrderByType(), importedFeed.getOrderByType());
 		Assert.assertEquals(
 			feed.getContentField(), importedFeed.getContentField());
+	}
+
+	private Log _getMockWarnLog(List<Object> warnMessages) {
+		return new Log() {
+
+			@Override
+			public void debug(Object msg) {
+			}
+
+			@Override
+			public void debug(Object msg, Throwable throwable) {
+			}
+
+			@Override
+			public void debug(Throwable throwable) {
+			}
+
+			@Override
+			public void error(Object msg) {
+			}
+
+			@Override
+			public void error(Object msg, Throwable throwable) {
+			}
+
+			@Override
+			public void error(Throwable throwable) {
+			}
+
+			@Override
+			public void fatal(Object msg) {
+			}
+
+			@Override
+			public void fatal(Object msg, Throwable throwable) {
+			}
+
+			@Override
+			public void fatal(Throwable throwable) {
+			}
+
+			@Override
+			public void info(Object msg) {
+			}
+
+			@Override
+			public void info(Object msg, Throwable throwable) {
+			}
+
+			@Override
+			public void info(Throwable throwable) {
+			}
+
+			@Override
+			public boolean isDebugEnabled() {
+				return false;
+			}
+
+			@Override
+			public boolean isErrorEnabled() {
+				return false;
+			}
+
+			@Override
+			public boolean isFatalEnabled() {
+				return false;
+			}
+
+			@Override
+			public boolean isInfoEnabled() {
+				return false;
+			}
+
+			@Override
+			public boolean isTraceEnabled() {
+				return false;
+			}
+
+			@Override
+			public boolean isWarnEnabled() {
+				return true;
+			}
+
+			@Override
+			public void setLogWrapperClassName(String className) {
+			}
+
+			@Override
+			public void trace(Object msg) {
+			}
+
+			@Override
+			public void trace(Object msg, Throwable throwable) {
+			}
+
+			@Override
+			public void trace(Throwable throwable) {
+			}
+
+			@Override
+			public void warn(Object msg) {
+				warnMessages.add(msg);
+			}
+
+			@Override
+			public void warn(Object msg, Throwable throwable) {
+				warnMessages.add(msg);
+			}
+
+			@Override
+			public void warn(Throwable throwable) {
+			}
+
+		};
 	}
 
 	private Layout _layout;
