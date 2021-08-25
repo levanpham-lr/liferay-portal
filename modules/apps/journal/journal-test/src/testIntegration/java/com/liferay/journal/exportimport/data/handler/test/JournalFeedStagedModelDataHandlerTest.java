@@ -145,6 +145,9 @@ public class JournalFeedStagedModelDataHandlerTest
 
 		Log newLog = _getMockWarnLog(warnMessages);
 
+		Object oldLog = ReflectionTestUtil.getFieldValue(
+			_journalFeedStagedModelDataHandler, "_log");
+
 		ReflectionTestUtil.setFieldValue(
 			_journalFeedStagedModelDataHandler, "_log", newLog);
 
@@ -159,6 +162,8 @@ public class JournalFeedStagedModelDataHandlerTest
 			message,
 			message.contains(" already exists. The new generated ID is "));
 
+		ReflectionTestUtil.setFieldValue(
+			_journalFeedStagedModelDataHandler, "_log", oldLog);
 	}
 
 	@Test
@@ -204,6 +209,9 @@ public class JournalFeedStagedModelDataHandlerTest
 
 		Log newLog = _getMockWarnLog(warnMessages);
 
+		Object oldLog = ReflectionTestUtil.getFieldValue(
+			_journalFeedStagedModelDataHandler, "_log");
+
 		ReflectionTestUtil.setFieldValue(
 			_journalFeedStagedModelDataHandler, "_log", newLog);
 
@@ -218,6 +226,8 @@ public class JournalFeedStagedModelDataHandlerTest
 			message,
 			message.contains(" already exists. The new generated ID is "));
 
+		ReflectionTestUtil.setFieldValue(
+			_journalFeedStagedModelDataHandler, "_log", oldLog);
 	}
 
 	@Override
