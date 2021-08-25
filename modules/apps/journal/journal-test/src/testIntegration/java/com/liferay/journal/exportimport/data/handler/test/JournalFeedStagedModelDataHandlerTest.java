@@ -22,6 +22,7 @@ import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalServiceUtil;
 import com.liferay.dynamic.data.mapping.test.util.DDMStructureTestUtil;
 import com.liferay.dynamic.data.mapping.test.util.DDMTemplateTestUtil;
 import com.liferay.exportimport.kernel.lar.ExportImportThreadLocal;
+import com.liferay.exportimport.kernel.lar.StagedModelDataHandler;
 import com.liferay.exportimport.test.util.lar.BaseStagedModelDataHandlerTestCase;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalFeed;
@@ -39,15 +40,16 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
 import com.liferay.portal.kernel.service.PortalPreferencesLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PortletKeys;
-import com.liferay.portal.test.log.CaptureAppender;
-import com.liferay.portal.test.log.Log4JLoggerTestUtil;
+import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -139,30 +141,24 @@ public class JournalFeedStagedModelDataHandlerTest
 	@Override
 	@Test
 	public void testCleanStagedModelDataHandler() throws Exception {
-		try (CaptureAppender captureAppender =
-				Log4JLoggerTestUtil.configureLog4JLogger(
-					"com.liferay.journal.internal.exportimport.data.handler." +
-						"JournalFeedStagedModelDataHandler",
-					Level.WARN)) {
+		List<Object> warnMessages = new ArrayList<>();
 
-			super.testCleanStagedModelDataHandler();
+		Log newLog = _getMockWarnLog(warnMessages);
 
-			List<LoggingEvent> loggingEvents =
-				captureAppender.getLoggingEvents();
+		ReflectionTestUtil.setFieldValue(
+			_journalFeedStagedModelDataHandler, "_log", newLog);
 
-			Assert.assertEquals(
-				loggingEvents.toString(), 1, loggingEvents.size());
+		super.testCleanStagedModelDataHandler();
 
-			LoggingEvent loggingEvent = loggingEvents.get(0);
+		Assert.assertEquals(warnMessages.toString(), 1, warnMessages.size());
 
-			String message = (String)loggingEvent.getMessage();
+		String message = (String)warnMessages.get(0);
 
-			Assert.assertTrue(
-				message, message.startsWith("A feed with the ID "));
-			Assert.assertTrue(
-				message,
-				message.contains(" already exists. The new generated ID is "));
-		}
+		Assert.assertTrue(message, message.startsWith("A feed with the ID "));
+		Assert.assertTrue(
+			message,
+			message.contains(" already exists. The new generated ID is "));
+
 	}
 
 	@Test
@@ -204,30 +200,24 @@ public class JournalFeedStagedModelDataHandlerTest
 	@Override
 	@Test
 	public void testStagedModelDataHandler() throws Exception {
-		try (CaptureAppender captureAppender =
-				Log4JLoggerTestUtil.configureLog4JLogger(
-					"com.liferay.journal.internal.exportimport.data.handler." +
-						"JournalFeedStagedModelDataHandler",
-					Level.WARN)) {
+		List<Object> warnMessages = new ArrayList<>();
 
-			super.testStagedModelDataHandler();
+		Log newLog = _getMockWarnLog(warnMessages);
 
-			List<LoggingEvent> loggingEvents =
-				captureAppender.getLoggingEvents();
+		ReflectionTestUtil.setFieldValue(
+			_journalFeedStagedModelDataHandler, "_log", newLog);
 
-			Assert.assertEquals(
-				loggingEvents.toString(), 1, loggingEvents.size());
+		super.testStagedModelDataHandler();
 
-			LoggingEvent loggingEvent = loggingEvents.get(0);
+		Assert.assertEquals(warnMessages.toString(), 1, warnMessages.size());
 
-			String message = (String)loggingEvent.getMessage();
+		String message = (String)warnMessages.get(0);
 
-			Assert.assertTrue(
-				message, message.startsWith("A feed with the ID "));
-			Assert.assertTrue(
-				message,
-				message.contains(" already exists. The new generated ID is "));
-		}
+		Assert.assertTrue(message, message.startsWith("A feed with the ID "));
+		Assert.assertTrue(
+			message,
+			message.contains(" already exists. The new generated ID is "));
+
 	}
 
 	@Override
@@ -465,6 +455,10 @@ public class JournalFeedStagedModelDataHandlerTest
 
 		};
 	}
+
+	@Inject(filter = "component.name=*JournalFeedStagedModelDataHandler")
+	private StagedModelDataHandler<JournalFeed>
+		_journalFeedStagedModelDataHandler;
 
 	private Layout _layout;
 	private String _originalPortalPreferencesXML;
