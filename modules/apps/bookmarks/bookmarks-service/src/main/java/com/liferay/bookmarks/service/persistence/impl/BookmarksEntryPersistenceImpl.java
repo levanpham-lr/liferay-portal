@@ -13435,7 +13435,7 @@ public class BookmarksEntryPersistenceImpl
 
 			if ((columnNames == null) || (columnNames.length == 0)) {
 				if (baseModel.isNew()) {
-					return FINDER_ARGS_EMPTY;
+					return new Object[0];
 				}
 
 				return null;
@@ -13463,8 +13463,9 @@ public class BookmarksEntryPersistenceImpl
 				}
 
 				if (finderPath.isBaseModelResult() &&
-					(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION ==
-						finderPath.getCacheName())) {
+					(BookmarksEntryPersistenceImpl.
+						FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION ==
+							finderPath.getCacheName())) {
 
 					finderPathColumnBitmask |= _ORDER_BY_COLUMNS_BITMASK;
 				}

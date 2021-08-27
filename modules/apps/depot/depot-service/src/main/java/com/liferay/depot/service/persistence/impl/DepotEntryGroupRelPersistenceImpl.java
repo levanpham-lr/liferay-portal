@@ -4657,7 +4657,7 @@ public class DepotEntryGroupRelPersistenceImpl
 
 			if ((columnNames == null) || (columnNames.length == 0)) {
 				if (baseModel.isNew()) {
-					return FINDER_ARGS_EMPTY;
+					return new Object[0];
 				}
 
 				return null;
