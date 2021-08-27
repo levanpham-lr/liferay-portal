@@ -42,6 +42,7 @@ import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -151,7 +152,9 @@ public class CommerceAccountGroupLocalServiceImpl
 			CommerceAccountGroup commerceAccountGroup)
 		throws PortalException {
 
-		if (commerceAccountGroup.isSystem()) {
+		if (commerceAccountGroup.isSystem() &&
+			!CompanyThreadLocal.isDeleteInProcess()) {
+
 			throw new SystemCommerceAccountGroupException();
 		}
 
