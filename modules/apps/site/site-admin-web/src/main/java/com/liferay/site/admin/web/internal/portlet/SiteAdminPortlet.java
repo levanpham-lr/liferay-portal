@@ -1062,9 +1062,7 @@ public class SiteAdminPortlet extends MVCPortlet {
 			creationType.equals(
 				SiteAdminConstants.CREATION_TYPE_SITE_TEMPLATE)) {
 
-			ActionUtil.updateLayoutSetPrototypesLinks(actionRequest, liveGroup);
-
-			ActionUtil.updateWorkflowDefinitionLinks(actionRequest, liveGroup);
+			updateGroupFromSiteTemplate(actionRequest, liveGroup);
 		}
 		else if (creationType.equals(
 					SiteAdminConstants.CREATION_TYPE_INITIALIZER)) {
@@ -1088,6 +1086,15 @@ public class SiteAdminPortlet extends MVCPortlet {
 		themeDisplay.setSiteGroupId(liveGroup.getGroupId());
 
 		return liveGroup;
+	}
+
+	protected void updateGroupFromSiteTemplate(
+			ActionRequest actionRequest, Group group)
+		throws Exception {
+
+		ActionUtil.updateLayoutSetPrototypesLinks(actionRequest, group);
+
+		ActionUtil.updateWorkflowDefinitionLinks(actionRequest, group);
 	}
 
 	protected void validateDefaultLocaleGroupName(
