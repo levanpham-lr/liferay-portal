@@ -16,6 +16,7 @@ package com.liferay.headless.admin.user.internal.resource.v1_0;
 
 import com.liferay.headless.admin.user.dto.v1_0.UserAccount;
 import com.liferay.headless.admin.user.resource.v1_0.UserAccountResource;
+import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
 import com.liferay.portal.kernel.model.GroupedModel;
 import com.liferay.portal.kernel.search.Sort;
@@ -501,8 +502,11 @@ public abstract class BaseUserAccountResourceImpl
 			Map<String, Serializable> parameters)
 		throws Exception {
 
+		UnsafeConsumer<UserAccount, Exception> userAccountUnsafeConsumer =
+			userAccount -> postUserAccount(userAccount);
+
 		for (UserAccount userAccount : userAccounts) {
-			postUserAccount(userAccount);
+			userAccountUnsafeConsumer.accept(userAccount);
 		}
 	}
 
@@ -538,9 +542,16 @@ public abstract class BaseUserAccountResourceImpl
 			Map<String, Serializable> parameters, String search)
 		throws Exception {
 
-		return getSiteUserAccountsPage(
-			Long.parseLong((String)parameters.get("siteId")), search, filter,
-			pagination, sorts);
+		if (parameters.containsKey("siteId")) {
+			return getSiteUserAccountsPage(
+				(Long)parameters.get("siteId"), search, filter, pagination,
+				sorts);
+		}
+		else {
+			return getOrganizationUserAccountsPage(
+				(String)parameters.get("organizationId"), search, filter,
+				pagination, sorts);
+		}
 	}
 
 	@Override

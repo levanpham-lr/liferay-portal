@@ -404,10 +404,20 @@ public abstract class BaseAppResourceImpl
 			Map<String, Serializable> parameters, String search)
 		throws Exception {
 
-		return getSiteAppsPage(
-			Long.parseLong((String)parameters.get("siteId")),
-			(String)parameters.get("keywords"), (String)parameters.get("scope"),
-			pagination, sorts);
+		if (parameters.containsKey("siteId")) {
+			return getSiteAppsPage(
+				(Long)parameters.get("siteId"),
+				(String)parameters.get("keywords"),
+				(String)parameters.get("scope"), pagination, sorts);
+		}
+		else {
+			return getAppsPage(
+				Boolean.parseBoolean((String)parameters.get("active")),
+				(String[])parameters.get("deploymentTypes"),
+				(String)parameters.get("keywords"),
+				(String)parameters.get("scope"),
+				(Long[])parameters.get("userIds"), pagination, sorts);
+		}
 	}
 
 	@Override
