@@ -996,6 +996,12 @@ AUI.add(
 
 					instance._removeFieldValidation(instance);
 
+					instance.getForm().newRepeatableInstances = instance
+						.getForm()
+						.newRepeatableInstances.filter(
+							(field) => field !== instance
+						);
+
 					instance.destroy();
 
 					instance.get('container').remove(true);
