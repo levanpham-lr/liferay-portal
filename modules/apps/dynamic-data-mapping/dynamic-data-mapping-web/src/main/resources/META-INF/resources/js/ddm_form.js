@@ -23,9 +23,9 @@ AUI.add(
 
 		var DateMath = A.DataType.DateMath;
 
-		var EMPTY_VALUE = '_EMPTY_VALUE_';
-
 		var Lang = A.Lang;
+
+		var EMPTY_VALUE = '_EMPTY_VALUE_';
 
 		var INSTANCE_ID_PREFIX = '_INSTANCE_';
 
@@ -4374,10 +4374,7 @@ AUI.add(
 							var localizationMap = field.get('localizationMap');
 
 							availableLanguageIds.forEach((locale) => {
-								if (
-									!localizationMap[locale] &&
-									localizationMap[locale] !== ''
-								) {
+								if (localizationMap[locale] == null) {
 									localizationMap[locale] = EMPTY_VALUE;
 								}
 							});
@@ -4468,10 +4465,7 @@ AUI.add(
 					localizations.push(currentLocale);
 
 					localizations.forEach((localization) => {
-						if (
-							!newFieldLocalizations[localization] &&
-							newFieldLocalizations[localization] !== ''
-						) {
+						if (newFieldLocalizations[localization] == null) {
 							var localizationValue = EMPTY_VALUE;
 
 							if (
