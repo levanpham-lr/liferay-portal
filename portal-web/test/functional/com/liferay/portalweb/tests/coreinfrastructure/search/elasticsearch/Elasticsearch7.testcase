@@ -600,13 +600,15 @@ definition {
 			locator1 = "build-test-elasticsearch7.xml",
 			value1 = "start-elasticsearch");
 
-		AssertConsoleTextPresent(value1 = "Stopping sidecar Elasticsearch");
+		WaitForConsoleTextPresent(value1 = "Stopping sidecar Elasticsearch");
 
-		var portalHostname = PropsUtil.get("portal.hostname");
+		// LRCI-2401
 
-		Navigator.openSpecificURL(url = "http://${portalHostname}:9201");
+		//var portalHostname = PropsUtil.get("portal.hostname");
 
-		AssertTextNotPresent(value1 = "cluster_name");
+		//Navigator.openSpecificURL(url = "http://${portalHostname}:9201");
+
+		//AssertTextNotPresent(value1 = "cluster_name");
 
 		Navigator.openURL();
 
