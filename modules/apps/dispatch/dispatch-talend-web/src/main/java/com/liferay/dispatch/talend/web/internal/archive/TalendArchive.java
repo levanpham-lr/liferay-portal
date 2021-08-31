@@ -16,6 +16,7 @@ package com.liferay.dispatch.talend.web.internal.archive;
 
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;
@@ -139,7 +140,7 @@ public class TalendArchive {
 		}
 
 		private String _buildJVMOptions() {
-			if ((_jvmOptionsList == null) || _jvmOptionsList.isEmpty()) {
+			if (ListUtil.isEmpty(_jvmOptionsList)) {
 				return null;
 			}
 
