@@ -952,7 +952,7 @@ public class StructuredContentResourceImpl
 
 		DDMFormValuesSerializerSerializeResponse
 			ddmFormValuesSerializerSerializeResponse =
-			_jsonDDMFormValuesSerializer.serialize(builder.build());
+				_jsonDDMFormValuesSerializer.serialize(builder.build());
 
 		return ddmFormValuesSerializerSerializeResponse.getContent();
 	}
@@ -1151,9 +1151,6 @@ public class StructuredContentResourceImpl
 
 	@Reference
 	private LayoutLocalService _layoutLocalService;
-
-	@Reference
-	private LayoutPageTemplateEntryService _layoutPageTemplateEntryService;
 
 	@Reference
 	private Portal _portal;
