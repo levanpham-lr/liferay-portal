@@ -285,11 +285,6 @@ AUI.add(
 					instance._moveDefaultLanguageFlagToFirstPosition(
 						defaultLanguageId
 					);
-
-					Liferay.fire('inputLocalized:localeChanged', {
-						item: event.item,
-						source: instance,
-					});
 				},
 
 				_onInputValueChange(event, input) {
