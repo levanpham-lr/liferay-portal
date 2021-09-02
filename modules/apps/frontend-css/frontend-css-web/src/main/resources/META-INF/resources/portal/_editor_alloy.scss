@@ -1,5 +1,5 @@
 * [class*='ae-toolbar-'][role='toolbar'] {
-	z-index: 980;
+	z-index: 990;
 
 	@include media-breakpoint-down(sm) {
 		z-index: 1000;
