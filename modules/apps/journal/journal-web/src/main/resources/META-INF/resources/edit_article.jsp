@@ -141,7 +141,9 @@ JournalEditArticleDisplayContext journalEditArticleDisplayContext = new JournalE
 		<clay:container-fluid
 			cssClass="container-view"
 		>
-			<clay:sheet>
+			<clay:sheet
+				size=""
+			>
 				<aui:model-context bean="<%= article %>" defaultLanguageId="<%= journalEditArticleDisplayContext.getDefaultArticleLanguageId() %>" model="<%= JournalArticle.class %>" />
 
 				<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
