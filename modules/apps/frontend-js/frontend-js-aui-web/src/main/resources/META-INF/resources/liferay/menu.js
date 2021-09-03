@@ -646,8 +646,6 @@ AUI.add(
 						}
 					}
 					else {
-						menuInstance._closeActiveMenu();
-
 						return;
 					}
 				}
