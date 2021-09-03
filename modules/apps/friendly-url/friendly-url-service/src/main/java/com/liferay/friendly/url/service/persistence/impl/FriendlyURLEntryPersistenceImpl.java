@@ -19,6 +19,7 @@ import com.liferay.friendly.url.model.FriendlyURLEntry;
 import com.liferay.friendly.url.model.FriendlyURLEntryTable;
 import com.liferay.friendly.url.model.impl.FriendlyURLEntryImpl;
 import com.liferay.friendly.url.model.impl.FriendlyURLEntryModelImpl;
+import com.liferay.friendly.url.service.persistence.FriendlyURLEntryLocalizationPersistence;
 import com.liferay.friendly.url.service.persistence.FriendlyURLEntryPersistence;
 import com.liferay.friendly.url.service.persistence.impl.constants.FURLPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
@@ -2308,6 +2309,9 @@ public class FriendlyURLEntryPersistenceImpl
 
 	@Override
 	protected FriendlyURLEntry removeImpl(FriendlyURLEntry friendlyURLEntry) {
+		friendlyURLEntryLocalizationPersistence.removeByFriendlyURLEntryId(
+			friendlyURLEntry.getFriendlyURLEntryId());
+
 		Session session = null;
 
 		try {
@@ -3046,6 +3050,10 @@ public class FriendlyURLEntryPersistenceImpl
 
 	@Reference
 	protected FinderCache finderCache;
+
+	@Reference
+	protected FriendlyURLEntryLocalizationPersistence
+		friendlyURLEntryLocalizationPersistence;
 
 	private static final String _SQL_SELECT_FRIENDLYURLENTRY =
 		"SELECT friendlyURLEntry FROM FriendlyURLEntry friendlyURLEntry";
