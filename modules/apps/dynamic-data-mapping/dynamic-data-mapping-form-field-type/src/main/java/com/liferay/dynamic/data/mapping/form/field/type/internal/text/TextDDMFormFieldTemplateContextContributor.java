@@ -16,6 +16,7 @@ package com.liferay.dynamic.data.mapping.form.field.type.internal.text;
 
 import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldOptionsFactory;
 import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTemplateContextContributor;
+import com.liferay.dynamic.data.mapping.form.field.type.internal.util.DDMFormFieldTypeUtil;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import com.liferay.dynamic.data.mapping.model.DDMFormFieldOptions;
 import com.liferay.dynamic.data.mapping.model.LocalizedValue;
@@ -69,23 +70,21 @@ public class TextDDMFormFieldTemplateContextContributor
 				getTooltip(ddmFormField, ddmFormFieldRenderingContext));
 		}
 
-		parameters.put(
-			"options", getOptions(ddmFormField, ddmFormFieldRenderingContext));
-
-		String predefinedValue = getPredefinedValue(
-			ddmFormField, ddmFormFieldRenderingContext);
-
-		if (predefinedValue != null) {
-			parameters.put("predefinedValue", predefinedValue);
-		}
-
 		String value = getValue(ddmFormFieldRenderingContext);
 
 		if (Validator.isNotNull(value)) {
 			parameters.put("value", value);
 		}
 
-		return parameters;
+		return HashMapBuilder.<String, Object>put(
+			"options", getOptions(ddmFormField, ddmFormFieldRenderingContext)
+		).put(
+			"predefinedValue",
+			DDMFormFieldTypeUtil.getPredefinedValue(
+				ddmFormField, ddmFormFieldRenderingContext)
+		).putAll(
+			parameters
+		).build();
 	}
 
 	protected String getDisplayStyle(DDMFormField ddmFormField) {
@@ -135,20 +134,6 @@ public class TextDDMFormFieldTemplateContextContributor
 		return getValueString(
 			placeholder, ddmFormFieldRenderingContext.getLocale(),
 			ddmFormFieldRenderingContext);
-	}
-
-	protected String getPredefinedValue(
-		DDMFormField ddmFormField,
-		DDMFormFieldRenderingContext ddmFormFieldRenderingContext) {
-
-		LocalizedValue predefinedValue = ddmFormField.getPredefinedValue();
-
-		if (predefinedValue == null) {
-			return null;
-		}
-
-		return predefinedValue.getString(
-			ddmFormFieldRenderingContext.getLocale());
 	}
 
 	protected String getTooltip(
