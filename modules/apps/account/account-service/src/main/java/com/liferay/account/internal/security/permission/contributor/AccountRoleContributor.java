@@ -49,13 +49,17 @@ public class AccountRoleContributor implements RoleContributor {
 			Group group = _groupLocalService.getGroup(
 				roleCollection.getGroupId());
 
+			User user = roleCollection.getUser();
+
+			if (group.getCompanyId() != user.getCompanyId()) {
+				return;
+			}
+
 			if (!Objects.equals(
 					AccountEntry.class.getName(), group.getClassName())) {
 
 				return;
 			}
-
-			User user = roleCollection.getUser();
 
 			if (_accountEntryUserRelLocalService.hasAccountEntryUserRel(
 					group.getClassPK(), user.getUserId())) {
