@@ -68,7 +68,17 @@
 		var selectedItems = event.elements.allSelectedElements;
 
 		if (selectedItems.size() > 0) {
-			items = selectedTagNames.concat(selectedItems.attr('value')).join(',');
+			var selections = selectedTagNames.concat(selectedItems.attr('value'));
+
+			var uniqueSelections = [];
+
+			Array.prototype.forEach.call(selections, function (selection) {
+				if (!uniqueSelections.includes(selection)) {
+					uniqueSelections.push(selection);
+				}
+			});
+
+			items = uniqueSelections.join(',');
 		}
 
 		Liferay.Util.getOpener().Liferay.fire(
