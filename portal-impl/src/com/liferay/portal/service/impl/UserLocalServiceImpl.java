@@ -2194,6 +2194,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		socialRequestLocalService.deleteReceiverUserRequests(user.getUserId());
 		socialRequestLocalService.deleteUserRequests(user.getUserId());
 
+		// Ticket
+
+		ticketLocalService.deleteTickets(
+			user.getCompanyId(), User.class.getName(), user.getUserId());
+
 		// Mail
 
 		mailService.deleteUser(user.getCompanyId(), user.getUserId());
