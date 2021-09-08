@@ -519,7 +519,7 @@ definition {
 
 		Navigator.openURL();
 
-		UserBar.gotoDropdownItem(dropdownItem = "Mi cuenta");
+		UserBar.gotoDropdownItem(dropdownItem = "Configuración de la cuenta");
 
 		MyAccount.changeUserLanguage(
 			languageName = "English (United States)",
