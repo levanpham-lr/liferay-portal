@@ -36,14 +36,14 @@
 	<td></td>
 </tr>
 <tr>
-    <td>NAME_FIELD</td>
-    <td>//div[contains(@class,'ddm-form-basic-info')]//textarea[contains(@id, 'nameEditor')]</td>
-    <td></td>
+	<td>NAME_FIELD</td>
+	<td>//div[contains(@class,'ddm-form-basic-info')]//textarea[contains(@id, 'nameEditor')]</td>
+	<td></td>
 </tr>
 <tr>
-    <td>DESCRIPTION_FIELD</td>
-    <td>//div[contains(@class,'ddm-form-basic-info')]//textarea[contains(@id, 'descriptionEditor')]</td>
-    <td></td>
+	<td>DESCRIPTION_FIELD</td>
+	<td>//div[contains(@class,'ddm-form-basic-info')]//textarea[contains(@id, 'descriptionEditor')]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>PAGE_TITLE_FIELD</td>
