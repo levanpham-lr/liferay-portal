@@ -403,7 +403,7 @@ definition {
 
 		ProductMenu.gotoPortlet(
 			category = "Generador del sitio",
-			portlet = "Páginas del sitio web");
+			portlet = "Páginas");
 
 		SitePages.gotoPageMenuItem(
 			menuItem = "Configurar",
@@ -423,7 +423,7 @@ definition {
 
 		ProductMenu.gotoPortlet(
 			category = "Generador del sitio",
-			portlet = "Páginas del sitio web");
+			portlet = "Páginas");
 
 		SitePages.gotoPageMenuItem(
 			menuItem = "Configurar",
@@ -762,7 +762,7 @@ definition {
 
 		ProductMenu.gotoPortlet(
 			category = "Generador del sitio",
-			portlet = "Páginas del sitio web");
+			portlet = "Páginas");
 
 		SitePages.gotoPageMenuItem(
 			menuItem = "Configurar",
