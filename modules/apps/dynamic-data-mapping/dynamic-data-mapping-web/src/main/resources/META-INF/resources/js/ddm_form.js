@@ -3758,23 +3758,18 @@ AUI.add(
 								'localizationMap'
 							);
 
+							var currentLocale = instance.get('displayLocale');
+
+							var defaultLocale = instance.getDefaultLocale();
+
 							if (
 								value ===
 									instance.getFieldDefinition()
-										.predefinedValue[
-										instance.get('displayLocale')
-									] ||
-								value ===
-									localizationMap[
-										instance.get('displayLocale')
-									] ||
-								(!localizationMap[
-									instance.get('displayLocale')
-								] &&
-									value ===
-										localizationMap[
-											instance.getDefaultLocale()
-										])
+										.predefinedValue[currentLocale] ||
+								value === localizationMap[currentLocale] ||
+								(!localizationMap[currentLocale] &&
+									value === localizationMap[defaultLocale]) ||
+								currentLocale === defaultLocale
 							) {
 								editor.setHTML(value);
 							}
