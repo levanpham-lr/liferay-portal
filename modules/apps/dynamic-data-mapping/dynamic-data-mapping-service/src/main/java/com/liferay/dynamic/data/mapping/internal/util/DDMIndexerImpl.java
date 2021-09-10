@@ -349,6 +349,8 @@ public class DDMIndexerImpl implements DDMIndexer {
 
 		Fields fields = toFields(ddmStructure, ddmFormValues);
 
+		boolean firstField = true;
+
 		for (Field field : fields) {
 			try {
 				String indexType = ddmStructure.getFieldProperty(
@@ -360,20 +362,24 @@ public class DDMIndexerImpl implements DDMIndexer {
 
 				Serializable value = field.getValue(locale);
 
+				if (!firstField) {
+					sb.append(StringPool.SPACE);
+				}
+				else {
+					firstField = false;
+				}
+
 				if (value instanceof Boolean || value instanceof Number) {
 					sb.append(value);
-					sb.append(StringPool.SPACE);
 				}
 				else if (value instanceof Date) {
 					sb.append(dateFormat.format(value));
-					sb.append(StringPool.SPACE);
 				}
 				else if (value instanceof Date[]) {
 					Date[] dates = (Date[])value;
 
 					for (Date date : dates) {
 						sb.append(dateFormat.format(date));
-						sb.append(StringPool.SPACE);
 					}
 				}
 				else if (value instanceof Object[]) {
@@ -381,7 +387,6 @@ public class DDMIndexerImpl implements DDMIndexer {
 
 					for (Object object : values) {
 						sb.append(object);
-						sb.append(StringPool.SPACE);
 					}
 				}
 				else {
@@ -399,8 +404,6 @@ public class DDMIndexerImpl implements DDMIndexer {
 							jsonArray);
 
 						sb.append(stringArray);
-
-						sb.append(StringPool.SPACE);
 					}
 					else {
 						if (type.equals(DDMImpl.TYPE_DDM_TEXT_HTML)) {
@@ -408,7 +411,6 @@ public class DDMIndexerImpl implements DDMIndexer {
 						}
 
 						sb.append(valueString);
-						sb.append(StringPool.SPACE);
 					}
 				}
 			}
