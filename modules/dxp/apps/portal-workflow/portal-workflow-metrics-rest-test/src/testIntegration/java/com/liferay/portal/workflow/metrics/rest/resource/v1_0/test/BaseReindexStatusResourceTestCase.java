@@ -191,7 +191,48 @@ public abstract class BaseReindexStatusResourceTestCase {
 
 	@Test
 	public void testGetReindexStatusPage() throws Exception {
-		Assert.assertTrue(false);
+		Page<ReindexStatus> page = reindexStatusResource.getReindexStatusPage();
+
+		long totalCount = page.getTotalCount();
+
+		ReindexStatus reindexStatus1 =
+			testGetReindexStatusPage_addReindexStatus(randomReindexStatus());
+
+		ReindexStatus reindexStatus2 =
+			testGetReindexStatusPage_addReindexStatus(randomReindexStatus());
+
+		page = reindexStatusResource.getReindexStatusPage();
+
+		Assert.assertEquals(totalCount + 2, page.getTotalCount());
+
+		assertContains(reindexStatus1, (List<ReindexStatus>)page.getItems());
+		assertContains(reindexStatus2, (List<ReindexStatus>)page.getItems());
+		assertValid(page);
+	}
+
+	protected ReindexStatus testGetReindexStatusPage_addReindexStatus(
+			ReindexStatus reindexStatus)
+		throws Exception {
+
+		throw new UnsupportedOperationException(
+			"This method needs to be implemented");
+	}
+
+	protected void assertContains(
+		ReindexStatus reindexStatus, List<ReindexStatus> reindexStatuses) {
+
+		boolean contains = false;
+
+		for (ReindexStatus item : reindexStatuses) {
+			if (equals(reindexStatus, item)) {
+				contains = true;
+
+				break;
+			}
+		}
+
+		Assert.assertTrue(
+			reindexStatuses + " does not contain " + reindexStatus, contains);
 	}
 
 	protected void assertHttpResponseStatusCode(

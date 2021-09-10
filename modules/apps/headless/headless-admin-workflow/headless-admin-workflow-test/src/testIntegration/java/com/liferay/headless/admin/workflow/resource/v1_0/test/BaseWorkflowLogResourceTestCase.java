@@ -197,17 +197,16 @@ public abstract class BaseWorkflowLogResourceTestCase {
 
 	@Test
 	public void testGetWorkflowInstanceWorkflowLogsPage() throws Exception {
-		Page<WorkflowLog> page =
-			workflowLogResource.getWorkflowInstanceWorkflowLogsPage(
-				testGetWorkflowInstanceWorkflowLogsPage_getWorkflowInstanceId(),
-				null, Pagination.of(1, 2));
-
-		Assert.assertEquals(0, page.getTotalCount());
-
 		Long workflowInstanceId =
 			testGetWorkflowInstanceWorkflowLogsPage_getWorkflowInstanceId();
 		Long irrelevantWorkflowInstanceId =
 			testGetWorkflowInstanceWorkflowLogsPage_getIrrelevantWorkflowInstanceId();
+
+		Page<WorkflowLog> page =
+			workflowLogResource.getWorkflowInstanceWorkflowLogsPage(
+				workflowInstanceId, null, Pagination.of(1, 10));
+
+		Assert.assertEquals(0, page.getTotalCount());
 
 		if (irrelevantWorkflowInstanceId != null) {
 			WorkflowLog irrelevantWorkflowLog =
@@ -235,7 +234,7 @@ public abstract class BaseWorkflowLogResourceTestCase {
 				workflowInstanceId, randomWorkflowLog());
 
 		page = workflowLogResource.getWorkflowInstanceWorkflowLogsPage(
-			workflowInstanceId, null, Pagination.of(1, 2));
+			workflowInstanceId, null, Pagination.of(1, 10));
 
 		Assert.assertEquals(2, page.getTotalCount());
 
@@ -376,17 +375,16 @@ public abstract class BaseWorkflowLogResourceTestCase {
 
 	@Test
 	public void testGetWorkflowTaskWorkflowLogsPage() throws Exception {
-		Page<WorkflowLog> page =
-			workflowLogResource.getWorkflowTaskWorkflowLogsPage(
-				testGetWorkflowTaskWorkflowLogsPage_getWorkflowTaskId(), null,
-				Pagination.of(1, 2));
-
-		Assert.assertEquals(0, page.getTotalCount());
-
 		Long workflowTaskId =
 			testGetWorkflowTaskWorkflowLogsPage_getWorkflowTaskId();
 		Long irrelevantWorkflowTaskId =
 			testGetWorkflowTaskWorkflowLogsPage_getIrrelevantWorkflowTaskId();
+
+		Page<WorkflowLog> page =
+			workflowLogResource.getWorkflowTaskWorkflowLogsPage(
+				workflowTaskId, null, Pagination.of(1, 10));
+
+		Assert.assertEquals(0, page.getTotalCount());
 
 		if (irrelevantWorkflowTaskId != null) {
 			WorkflowLog irrelevantWorkflowLog =
@@ -413,7 +411,7 @@ public abstract class BaseWorkflowLogResourceTestCase {
 				workflowTaskId, randomWorkflowLog());
 
 		page = workflowLogResource.getWorkflowTaskWorkflowLogsPage(
-			workflowTaskId, null, Pagination.of(1, 2));
+			workflowTaskId, null, Pagination.of(1, 10));
 
 		Assert.assertEquals(2, page.getTotalCount());
 
@@ -496,6 +494,23 @@ public abstract class BaseWorkflowLogResourceTestCase {
 
 		throw new UnsupportedOperationException(
 			"This method needs to be implemented");
+	}
+
+	protected void assertContains(
+		WorkflowLog workflowLog, List<WorkflowLog> workflowLogs) {
+
+		boolean contains = false;
+
+		for (WorkflowLog item : workflowLogs) {
+			if (equals(workflowLog, item)) {
+				contains = true;
+
+				break;
+			}
+		}
+
+		Assert.assertTrue(
+			workflowLogs + " does not contain " + workflowLog, contains);
 	}
 
 	protected void assertHttpResponseStatusCode(

@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.odata.entity.EntityField;
@@ -205,21 +206,21 @@ public abstract class BaseAppResourceTestCase {
 	public void testGetAppsPage() throws Exception {
 		Page<App> page = appResource.getAppsPage(
 			null, null, RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(), null, Pagination.of(1, 2), null);
+			RandomTestUtil.randomString(), null, Pagination.of(1, 10), null);
 
-		Assert.assertEquals(0, page.getTotalCount());
+		long totalCount = page.getTotalCount();
 
 		App app1 = testGetAppsPage_addApp(randomApp());
 
 		App app2 = testGetAppsPage_addApp(randomApp());
 
 		page = appResource.getAppsPage(
-			null, null, null, null, null, Pagination.of(1, 2), null);
+			null, null, null, null, null, Pagination.of(1, 10), null);
 
-		Assert.assertEquals(2, page.getTotalCount());
+		Assert.assertEquals(totalCount + 2, page.getTotalCount());
 
-		assertEqualsIgnoringOrder(
-			Arrays.asList(app1, app2), (List<App>)page.getItems());
+		assertContains(app1, (List<App>)page.getItems());
+		assertContains(app2, (List<App>)page.getItems());
 		assertValid(page);
 
 		appResource.deleteApp(app1.getId());
@@ -229,6 +230,11 @@ public abstract class BaseAppResourceTestCase {
 
 	@Test
 	public void testGetAppsPageWithPagination() throws Exception {
+		Page<App> totalPage = appResource.getAppsPage(
+			null, null, null, null, null, null, null);
+
+		int totalCount = GetterUtil.getInteger(totalPage.getTotalCount());
+
 		App app1 = testGetAppsPage_addApp(randomApp());
 
 		App app2 = testGetAppsPage_addApp(randomApp());
@@ -236,26 +242,30 @@ public abstract class BaseAppResourceTestCase {
 		App app3 = testGetAppsPage_addApp(randomApp());
 
 		Page<App> page1 = appResource.getAppsPage(
-			null, null, null, null, null, Pagination.of(1, 2), null);
+			null, null, null, null, null, Pagination.of(1, totalCount + 2),
+			null);
 
 		List<App> apps1 = (List<App>)page1.getItems();
 
-		Assert.assertEquals(apps1.toString(), 2, apps1.size());
+		Assert.assertEquals(apps1.toString(), totalCount + 2, apps1.size());
 
 		Page<App> page2 = appResource.getAppsPage(
-			null, null, null, null, null, Pagination.of(2, 2), null);
+			null, null, null, null, null, Pagination.of(2, totalCount + 2),
+			null);
 
-		Assert.assertEquals(3, page2.getTotalCount());
+		Assert.assertEquals(totalCount + 3, page2.getTotalCount());
 
 		List<App> apps2 = (List<App>)page2.getItems();
 
 		Assert.assertEquals(apps2.toString(), 1, apps2.size());
 
 		Page<App> page3 = appResource.getAppsPage(
-			null, null, null, null, null, Pagination.of(1, 3), null);
+			null, null, null, null, null, Pagination.of(1, totalCount + 3),
+			null);
 
-		assertEqualsIgnoringOrder(
-			Arrays.asList(app1, app2, app3), (List<App>)page3.getItems());
+		assertContains(app1, (List<App>)page3.getItems());
+		assertContains(app2, (List<App>)page3.getItems());
+		assertContains(app3, (List<App>)page3.getItems());
 	}
 
 	@Test
@@ -382,7 +392,7 @@ public abstract class BaseAppResourceTestCase {
 			new HashMap<String, Object>() {
 				{
 					put("page", 1);
-					put("pageSize", 2);
+					put("pageSize", 10);
 				}
 			},
 			new GraphQLField("items", getGraphQLFields()),
@@ -392,7 +402,7 @@ public abstract class BaseAppResourceTestCase {
 			invokeGraphQLQuery(graphQLField), "JSONObject/data",
 			"JSONObject/apps");
 
-		Assert.assertEquals(0, appsJSONObject.get("totalCount"));
+		long totalCount = appsJSONObject.getLong("totalCount");
 
 		App app1 = testGraphQLApp_addApp();
 		App app2 = testGraphQLApp_addApp();
@@ -401,10 +411,14 @@ public abstract class BaseAppResourceTestCase {
 			invokeGraphQLQuery(graphQLField), "JSONObject/data",
 			"JSONObject/apps");
 
-		Assert.assertEquals(2, appsJSONObject.get("totalCount"));
+		Assert.assertEquals(
+			totalCount + 2, appsJSONObject.getLong("totalCount"));
 
-		assertEqualsIgnoringOrder(
-			Arrays.asList(app1, app2),
+		assertContains(
+			app1,
+			Arrays.asList(AppSerDes.toDTOs(appsJSONObject.getString("items"))));
+		assertContains(
+			app2,
 			Arrays.asList(AppSerDes.toDTOs(appsJSONObject.getString("items"))));
 	}
 
@@ -548,17 +562,16 @@ public abstract class BaseAppResourceTestCase {
 
 	@Test
 	public void testGetDataDefinitionAppsPage() throws Exception {
-		Page<App> page = appResource.getDataDefinitionAppsPage(
-			testGetDataDefinitionAppsPage_getDataDefinitionId(),
-			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-			Pagination.of(1, 2), null);
-
-		Assert.assertEquals(0, page.getTotalCount());
-
 		Long dataDefinitionId =
 			testGetDataDefinitionAppsPage_getDataDefinitionId();
 		Long irrelevantDataDefinitionId =
 			testGetDataDefinitionAppsPage_getIrrelevantDataDefinitionId();
+
+		Page<App> page = appResource.getDataDefinitionAppsPage(
+			dataDefinitionId, RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), Pagination.of(1, 10), null);
+
+		Assert.assertEquals(0, page.getTotalCount());
 
 		if (irrelevantDataDefinitionId != null) {
 			App irrelevantApp = testGetDataDefinitionAppsPage_addApp(
@@ -582,7 +595,7 @@ public abstract class BaseAppResourceTestCase {
 			dataDefinitionId, randomApp());
 
 		page = appResource.getDataDefinitionAppsPage(
-			dataDefinitionId, null, null, Pagination.of(1, 2), null);
+			dataDefinitionId, null, null, Pagination.of(1, 10), null);
 
 		Assert.assertEquals(2, page.getTotalCount());
 
@@ -788,14 +801,14 @@ public abstract class BaseAppResourceTestCase {
 
 	@Test
 	public void testGetSiteAppsPage() throws Exception {
-		Page<App> page = appResource.getSiteAppsPage(
-			testGetSiteAppsPage_getSiteId(), RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(), Pagination.of(1, 2), null);
-
-		Assert.assertEquals(0, page.getTotalCount());
-
 		Long siteId = testGetSiteAppsPage_getSiteId();
 		Long irrelevantSiteId = testGetSiteAppsPage_getIrrelevantSiteId();
+
+		Page<App> page = appResource.getSiteAppsPage(
+			siteId, RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), Pagination.of(1, 10), null);
+
+		Assert.assertEquals(0, page.getTotalCount());
 
 		if (irrelevantSiteId != null) {
 			App irrelevantApp = testGetSiteAppsPage_addApp(
@@ -816,7 +829,7 @@ public abstract class BaseAppResourceTestCase {
 		App app2 = testGetSiteAppsPage_addApp(siteId, randomApp());
 
 		page = appResource.getSiteAppsPage(
-			siteId, null, null, Pagination.of(1, 2), null);
+			siteId, null, null, Pagination.of(1, 10), null);
 
 		Assert.assertEquals(2, page.getTotalCount());
 
@@ -994,6 +1007,20 @@ public abstract class BaseAppResourceTestCase {
 	protected App testGraphQLApp_addApp() throws Exception {
 		throw new UnsupportedOperationException(
 			"This method needs to be implemented");
+	}
+
+	protected void assertContains(App app, List<App> apps) {
+		boolean contains = false;
+
+		for (App item : apps) {
+			if (equals(app, item)) {
+				contains = true;
+
+				break;
+			}
+		}
+
+		Assert.assertTrue(apps + " does not contain " + app, contains);
 	}
 
 	protected void assertHttpResponseStatusCode(

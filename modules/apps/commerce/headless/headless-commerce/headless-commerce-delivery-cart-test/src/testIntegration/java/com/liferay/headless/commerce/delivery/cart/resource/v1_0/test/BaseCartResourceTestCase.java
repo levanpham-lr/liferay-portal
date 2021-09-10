@@ -401,14 +401,14 @@ public abstract class BaseCartResourceTestCase {
 
 	@Test
 	public void testGetChannelCartsPage() throws Exception {
-		Page<Cart> page = cartResource.getChannelCartsPage(
-			testGetChannelCartsPage_getChannelId(), Pagination.of(1, 2));
-
-		Assert.assertEquals(0, page.getTotalCount());
-
 		Long channelId = testGetChannelCartsPage_getChannelId();
 		Long irrelevantChannelId =
 			testGetChannelCartsPage_getIrrelevantChannelId();
+
+		Page<Cart> page = cartResource.getChannelCartsPage(
+			channelId, Pagination.of(1, 10));
+
+		Assert.assertEquals(0, page.getTotalCount());
 
 		if (irrelevantChannelId != null) {
 			Cart irrelevantCart = testGetChannelCartsPage_addCart(
@@ -428,7 +428,8 @@ public abstract class BaseCartResourceTestCase {
 
 		Cart cart2 = testGetChannelCartsPage_addCart(channelId, randomCart());
 
-		page = cartResource.getChannelCartsPage(channelId, Pagination.of(1, 2));
+		page = cartResource.getChannelCartsPage(
+			channelId, Pagination.of(1, 10));
 
 		Assert.assertEquals(2, page.getTotalCount());
 
@@ -509,6 +510,20 @@ public abstract class BaseCartResourceTestCase {
 	protected Cart testGraphQLCart_addCart() throws Exception {
 		throw new UnsupportedOperationException(
 			"This method needs to be implemented");
+	}
+
+	protected void assertContains(Cart cart, List<Cart> carts) {
+		boolean contains = false;
+
+		for (Cart item : carts) {
+			if (equals(cart, item)) {
+				contains = true;
+
+				break;
+			}
+		}
+
+		Assert.assertTrue(carts + " does not contain " + cart, contains);
 	}
 
 	protected void assertHttpResponseStatusCode(

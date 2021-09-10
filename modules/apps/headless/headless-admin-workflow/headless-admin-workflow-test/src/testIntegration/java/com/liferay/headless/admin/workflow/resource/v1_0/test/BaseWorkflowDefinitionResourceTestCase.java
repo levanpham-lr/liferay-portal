@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.liferay.headless.admin.workflow.client.dto.v1_0.WorkflowDefinition;
 import com.liferay.headless.admin.workflow.client.http.HttpInvoker;
 import com.liferay.headless.admin.workflow.client.pagination.Page;
+import com.liferay.headless.admin.workflow.client.pagination.Pagination;
 import com.liferay.headless.admin.workflow.client.resource.v1_0.WorkflowDefinitionResource;
 import com.liferay.headless.admin.workflow.client.serdes.v1_0.WorkflowDefinitionSerDes;
 import com.liferay.petra.reflect.ReflectionUtil;
@@ -40,6 +41,7 @@ import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.odata.entity.EntityField;
@@ -202,7 +204,95 @@ public abstract class BaseWorkflowDefinitionResourceTestCase {
 
 	@Test
 	public void testGetWorkflowDefinitionsPage() throws Exception {
-		Assert.assertTrue(false);
+		Page<WorkflowDefinition> page =
+			workflowDefinitionResource.getWorkflowDefinitionsPage(
+				Pagination.of(1, 10));
+
+		long totalCount = page.getTotalCount();
+
+		WorkflowDefinition workflowDefinition1 =
+			testGetWorkflowDefinitionsPage_addWorkflowDefinition(
+				randomWorkflowDefinition());
+
+		WorkflowDefinition workflowDefinition2 =
+			testGetWorkflowDefinitionsPage_addWorkflowDefinition(
+				randomWorkflowDefinition());
+
+		page = workflowDefinitionResource.getWorkflowDefinitionsPage(
+			Pagination.of(1, 10));
+
+		Assert.assertEquals(totalCount + 2, page.getTotalCount());
+
+		assertContains(
+			workflowDefinition1, (List<WorkflowDefinition>)page.getItems());
+		assertContains(
+			workflowDefinition2, (List<WorkflowDefinition>)page.getItems());
+		assertValid(page);
+	}
+
+	@Test
+	public void testGetWorkflowDefinitionsPageWithPagination()
+		throws Exception {
+
+		Page<WorkflowDefinition> totalPage =
+			workflowDefinitionResource.getWorkflowDefinitionsPage(null);
+
+		int totalCount = GetterUtil.getInteger(totalPage.getTotalCount());
+
+		WorkflowDefinition workflowDefinition1 =
+			testGetWorkflowDefinitionsPage_addWorkflowDefinition(
+				randomWorkflowDefinition());
+
+		WorkflowDefinition workflowDefinition2 =
+			testGetWorkflowDefinitionsPage_addWorkflowDefinition(
+				randomWorkflowDefinition());
+
+		WorkflowDefinition workflowDefinition3 =
+			testGetWorkflowDefinitionsPage_addWorkflowDefinition(
+				randomWorkflowDefinition());
+
+		Page<WorkflowDefinition> page1 =
+			workflowDefinitionResource.getWorkflowDefinitionsPage(
+				Pagination.of(1, totalCount + 2));
+
+		List<WorkflowDefinition> workflowDefinitions1 =
+			(List<WorkflowDefinition>)page1.getItems();
+
+		Assert.assertEquals(
+			workflowDefinitions1.toString(), totalCount + 2,
+			workflowDefinitions1.size());
+
+		Page<WorkflowDefinition> page2 =
+			workflowDefinitionResource.getWorkflowDefinitionsPage(
+				Pagination.of(2, totalCount + 2));
+
+		Assert.assertEquals(totalCount + 3, page2.getTotalCount());
+
+		List<WorkflowDefinition> workflowDefinitions2 =
+			(List<WorkflowDefinition>)page2.getItems();
+
+		Assert.assertEquals(
+			workflowDefinitions2.toString(), 1, workflowDefinitions2.size());
+
+		Page<WorkflowDefinition> page3 =
+			workflowDefinitionResource.getWorkflowDefinitionsPage(
+				Pagination.of(1, totalCount + 3));
+
+		assertContains(
+			workflowDefinition1, (List<WorkflowDefinition>)page3.getItems());
+		assertContains(
+			workflowDefinition2, (List<WorkflowDefinition>)page3.getItems());
+		assertContains(
+			workflowDefinition3, (List<WorkflowDefinition>)page3.getItems());
+	}
+
+	protected WorkflowDefinition
+			testGetWorkflowDefinitionsPage_addWorkflowDefinition(
+				WorkflowDefinition workflowDefinition)
+		throws Exception {
+
+		throw new UnsupportedOperationException(
+			"This method needs to be implemented");
 	}
 
 	@Test
@@ -296,6 +386,25 @@ public abstract class BaseWorkflowDefinitionResourceTestCase {
 
 		throw new UnsupportedOperationException(
 			"This method needs to be implemented");
+	}
+
+	protected void assertContains(
+		WorkflowDefinition workflowDefinition,
+		List<WorkflowDefinition> workflowDefinitions) {
+
+		boolean contains = false;
+
+		for (WorkflowDefinition item : workflowDefinitions) {
+			if (equals(workflowDefinition, item)) {
+				contains = true;
+
+				break;
+			}
+		}
+
+		Assert.assertTrue(
+			workflowDefinitions + " does not contain " + workflowDefinition,
+			contains);
 	}
 
 	protected void assertHttpResponseStatusCode(

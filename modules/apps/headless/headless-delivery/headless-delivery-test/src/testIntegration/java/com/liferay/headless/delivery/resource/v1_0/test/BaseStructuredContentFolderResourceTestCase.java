@@ -231,19 +231,18 @@ public abstract class BaseStructuredContentFolderResourceTestCase {
 	public void testGetAssetLibraryStructuredContentFoldersPage()
 		throws Exception {
 
-		Page<StructuredContentFolder> page =
-			structuredContentFolderResource.
-				getAssetLibraryStructuredContentFoldersPage(
-					testGetAssetLibraryStructuredContentFoldersPage_getAssetLibraryId(),
-					null, RandomTestUtil.randomString(), null, null,
-					Pagination.of(1, 2), null);
-
-		Assert.assertEquals(0, page.getTotalCount());
-
 		Long assetLibraryId =
 			testGetAssetLibraryStructuredContentFoldersPage_getAssetLibraryId();
 		Long irrelevantAssetLibraryId =
 			testGetAssetLibraryStructuredContentFoldersPage_getIrrelevantAssetLibraryId();
+
+		Page<StructuredContentFolder> page =
+			structuredContentFolderResource.
+				getAssetLibraryStructuredContentFoldersPage(
+					assetLibraryId, null, RandomTestUtil.randomString(), null,
+					null, Pagination.of(1, 10), null);
+
+		Assert.assertEquals(0, page.getTotalCount());
 
 		if (irrelevantAssetLibraryId != null) {
 			StructuredContentFolder irrelevantStructuredContentFolder =
@@ -276,8 +275,8 @@ public abstract class BaseStructuredContentFolderResourceTestCase {
 		page =
 			structuredContentFolderResource.
 				getAssetLibraryStructuredContentFoldersPage(
-					assetLibraryId, null, null, null, null, Pagination.of(1, 2),
-					null);
+					assetLibraryId, null, null, null, null,
+					Pagination.of(1, 10), null);
 
 		Assert.assertEquals(2, page.getTotalCount());
 
@@ -619,17 +618,16 @@ public abstract class BaseStructuredContentFolderResourceTestCase {
 
 	@Test
 	public void testGetSiteStructuredContentFoldersPage() throws Exception {
-		Page<StructuredContentFolder> page =
-			structuredContentFolderResource.getSiteStructuredContentFoldersPage(
-				testGetSiteStructuredContentFoldersPage_getSiteId(), null,
-				RandomTestUtil.randomString(), null, null, Pagination.of(1, 2),
-				null);
-
-		Assert.assertEquals(0, page.getTotalCount());
-
 		Long siteId = testGetSiteStructuredContentFoldersPage_getSiteId();
 		Long irrelevantSiteId =
 			testGetSiteStructuredContentFoldersPage_getIrrelevantSiteId();
+
+		Page<StructuredContentFolder> page =
+			structuredContentFolderResource.getSiteStructuredContentFoldersPage(
+				siteId, null, RandomTestUtil.randomString(), null, null,
+				Pagination.of(1, 10), null);
+
+		Assert.assertEquals(0, page.getTotalCount());
 
 		if (irrelevantSiteId != null) {
 			StructuredContentFolder irrelevantStructuredContentFolder =
@@ -661,7 +659,7 @@ public abstract class BaseStructuredContentFolderResourceTestCase {
 
 		page =
 			structuredContentFolderResource.getSiteStructuredContentFoldersPage(
-				siteId, null, null, null, null, Pagination.of(1, 2), null);
+				siteId, null, null, null, null, Pagination.of(1, 10), null);
 
 		Assert.assertEquals(2, page.getTotalCount());
 
@@ -973,7 +971,7 @@ public abstract class BaseStructuredContentFolderResourceTestCase {
 			new HashMap<String, Object>() {
 				{
 					put("page", 1);
-					put("pageSize", 2);
+					put("pageSize", 10);
 
 					put("siteKey", "\"" + siteId + "\"");
 				}
@@ -999,7 +997,7 @@ public abstract class BaseStructuredContentFolderResourceTestCase {
 			"JSONObject/structuredContentFolders");
 
 		Assert.assertEquals(
-			2, structuredContentFoldersJSONObject.get("totalCount"));
+			2, structuredContentFoldersJSONObject.getLong("totalCount"));
 
 		assertEqualsIgnoringOrder(
 			Arrays.asList(structuredContentFolder1, structuredContentFolder2),
@@ -1049,19 +1047,19 @@ public abstract class BaseStructuredContentFolderResourceTestCase {
 	public void testGetStructuredContentFolderStructuredContentFoldersPage()
 		throws Exception {
 
-		Page<StructuredContentFolder> page =
-			structuredContentFolderResource.
-				getStructuredContentFolderStructuredContentFoldersPage(
-					testGetStructuredContentFolderStructuredContentFoldersPage_getParentStructuredContentFolderId(),
-					RandomTestUtil.randomString(), null, null,
-					Pagination.of(1, 2), null);
-
-		Assert.assertEquals(0, page.getTotalCount());
-
 		Long parentStructuredContentFolderId =
 			testGetStructuredContentFolderStructuredContentFoldersPage_getParentStructuredContentFolderId();
 		Long irrelevantParentStructuredContentFolderId =
 			testGetStructuredContentFolderStructuredContentFoldersPage_getIrrelevantParentStructuredContentFolderId();
+
+		Page<StructuredContentFolder> page =
+			structuredContentFolderResource.
+				getStructuredContentFolderStructuredContentFoldersPage(
+					parentStructuredContentFolderId,
+					RandomTestUtil.randomString(), null, null,
+					Pagination.of(1, 10), null);
+
+		Assert.assertEquals(0, page.getTotalCount());
 
 		if (irrelevantParentStructuredContentFolderId != null) {
 			StructuredContentFolder irrelevantStructuredContentFolder =
@@ -1097,7 +1095,7 @@ public abstract class BaseStructuredContentFolderResourceTestCase {
 			structuredContentFolderResource.
 				getStructuredContentFolderStructuredContentFoldersPage(
 					parentStructuredContentFolderId, null, null, null,
-					Pagination.of(1, 2), null);
+					Pagination.of(1, 10), null);
 
 		Assert.assertEquals(2, page.getTotalCount());
 
@@ -1809,6 +1807,26 @@ public abstract class BaseStructuredContentFolderResourceTestCase {
 				"JSONObject/data",
 				"JSONObject/createSiteStructuredContentFolder"),
 			StructuredContentFolder.class);
+	}
+
+	protected void assertContains(
+		StructuredContentFolder structuredContentFolder,
+		List<StructuredContentFolder> structuredContentFolders) {
+
+		boolean contains = false;
+
+		for (StructuredContentFolder item : structuredContentFolders) {
+			if (equals(structuredContentFolder, item)) {
+				contains = true;
+
+				break;
+			}
+		}
+
+		Assert.assertTrue(
+			structuredContentFolders + " does not contain " +
+				structuredContentFolder,
+			contains);
 	}
 
 	protected void assertHttpResponseStatusCode(

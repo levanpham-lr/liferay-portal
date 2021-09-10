@@ -256,17 +256,17 @@ public abstract class BaseAccountRoleResourceTestCase {
 	public void testGetAccountRolesByExternalReferenceCodePage()
 		throws Exception {
 
-		Page<AccountRole> page =
-			accountRoleResource.getAccountRolesByExternalReferenceCodePage(
-				testGetAccountRolesByExternalReferenceCodePage_getExternalReferenceCode(),
-				RandomTestUtil.randomString(), Pagination.of(1, 2), null);
-
-		Assert.assertEquals(0, page.getTotalCount());
-
 		String externalReferenceCode =
 			testGetAccountRolesByExternalReferenceCodePage_getExternalReferenceCode();
 		String irrelevantExternalReferenceCode =
 			testGetAccountRolesByExternalReferenceCodePage_getIrrelevantExternalReferenceCode();
+
+		Page<AccountRole> page =
+			accountRoleResource.getAccountRolesByExternalReferenceCodePage(
+				externalReferenceCode, RandomTestUtil.randomString(),
+				Pagination.of(1, 10), null);
+
+		Assert.assertEquals(0, page.getTotalCount());
 
 		if (irrelevantExternalReferenceCode != null) {
 			AccountRole irrelevantAccountRole =
@@ -296,7 +296,7 @@ public abstract class BaseAccountRoleResourceTestCase {
 				externalReferenceCode, randomAccountRole());
 
 		page = accountRoleResource.getAccountRolesByExternalReferenceCodePage(
-			externalReferenceCode, null, Pagination.of(1, 2), null);
+			externalReferenceCode, null, Pagination.of(1, 10), null);
 
 		Assert.assertEquals(2, page.getTotalCount());
 
@@ -528,15 +528,15 @@ public abstract class BaseAccountRoleResourceTestCase {
 
 	@Test
 	public void testGetAccountRolesPage() throws Exception {
-		Page<AccountRole> page = accountRoleResource.getAccountRolesPage(
-			testGetAccountRolesPage_getAccountId(),
-			RandomTestUtil.randomString(), Pagination.of(1, 2), null);
-
-		Assert.assertEquals(0, page.getTotalCount());
-
 		Long accountId = testGetAccountRolesPage_getAccountId();
 		Long irrelevantAccountId =
 			testGetAccountRolesPage_getIrrelevantAccountId();
+
+		Page<AccountRole> page = accountRoleResource.getAccountRolesPage(
+			accountId, RandomTestUtil.randomString(), Pagination.of(1, 10),
+			null);
+
+		Assert.assertEquals(0, page.getTotalCount());
 
 		if (irrelevantAccountId != null) {
 			AccountRole irrelevantAccountRole =
@@ -561,7 +561,7 @@ public abstract class BaseAccountRoleResourceTestCase {
 			accountId, randomAccountRole());
 
 		page = accountRoleResource.getAccountRolesPage(
-			accountId, null, Pagination.of(1, 2), null);
+			accountId, null, Pagination.of(1, 10), null);
 
 		Assert.assertEquals(2, page.getTotalCount());
 
@@ -755,7 +755,7 @@ public abstract class BaseAccountRoleResourceTestCase {
 			new HashMap<String, Object>() {
 				{
 					put("page", 1);
-					put("pageSize", 2);
+					put("pageSize", 10);
 
 					put("accountId", accountId);
 				}
@@ -776,7 +776,7 @@ public abstract class BaseAccountRoleResourceTestCase {
 			invokeGraphQLQuery(graphQLField), "JSONObject/data",
 			"JSONObject/accountRoles");
 
-		Assert.assertEquals(2, accountRolesJSONObject.get("totalCount"));
+		Assert.assertEquals(2, accountRolesJSONObject.getLong("totalCount"));
 
 		assertEqualsIgnoringOrder(
 			Arrays.asList(accountRole1, accountRole2),
@@ -852,6 +852,23 @@ public abstract class BaseAccountRoleResourceTestCase {
 
 		throw new UnsupportedOperationException(
 			"This method needs to be implemented");
+	}
+
+	protected void assertContains(
+		AccountRole accountRole, List<AccountRole> accountRoles) {
+
+		boolean contains = false;
+
+		for (AccountRole item : accountRoles) {
+			if (equals(accountRole, item)) {
+				contains = true;
+
+				break;
+			}
+		}
+
+		Assert.assertTrue(
+			accountRoles + " does not contain " + accountRole, contains);
 	}
 
 	protected void assertHttpResponseStatusCode(

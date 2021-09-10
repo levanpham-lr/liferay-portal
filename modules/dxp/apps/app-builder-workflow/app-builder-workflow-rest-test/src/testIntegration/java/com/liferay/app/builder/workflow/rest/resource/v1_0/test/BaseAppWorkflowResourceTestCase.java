@@ -238,6 +238,23 @@ public abstract class BaseAppWorkflowResourceTestCase {
 		Assert.assertTrue(false);
 	}
 
+	protected void assertContains(
+		AppWorkflow appWorkflow, List<AppWorkflow> appWorkflows) {
+
+		boolean contains = false;
+
+		for (AppWorkflow item : appWorkflows) {
+			if (equals(appWorkflow, item)) {
+				contains = true;
+
+				break;
+			}
+		}
+
+		Assert.assertTrue(
+			appWorkflows + " does not contain " + appWorkflow, contains);
+	}
+
 	protected void assertHttpResponseStatusCode(
 		int expectedHttpResponseStatusCode,
 		HttpInvoker.HttpResponse actualHttpResponse) {

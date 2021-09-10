@@ -199,6 +199,26 @@ public abstract class BaseAppWorkflowDataRecordLinkResourceTestCase {
 		Assert.assertTrue(false);
 	}
 
+	protected void assertContains(
+		AppWorkflowDataRecordLink appWorkflowDataRecordLink,
+		List<AppWorkflowDataRecordLink> appWorkflowDataRecordLinks) {
+
+		boolean contains = false;
+
+		for (AppWorkflowDataRecordLink item : appWorkflowDataRecordLinks) {
+			if (equals(appWorkflowDataRecordLink, item)) {
+				contains = true;
+
+				break;
+			}
+		}
+
+		Assert.assertTrue(
+			appWorkflowDataRecordLinks + " does not contain " +
+				appWorkflowDataRecordLink,
+			contains);
+	}
+
 	protected void assertHttpResponseStatusCode(
 		int expectedHttpResponseStatusCode,
 		HttpInvoker.HttpResponse actualHttpResponse) {
