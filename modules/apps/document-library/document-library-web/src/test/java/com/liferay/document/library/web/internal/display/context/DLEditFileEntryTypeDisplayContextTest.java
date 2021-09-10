@@ -200,8 +200,7 @@ public class DLEditFileEntryTypeDisplayContextTest {
 					).build()),
 				null);
 
-		Assert.assertEquals(
-			true,
+		Assert.assertTrue(
 			dlEditFileEntryTypeDisplayContext.isChangeableDefaultLanguage());
 	}
 

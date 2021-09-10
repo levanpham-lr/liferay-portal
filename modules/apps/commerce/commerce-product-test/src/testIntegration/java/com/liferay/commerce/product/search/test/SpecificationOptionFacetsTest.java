@@ -163,7 +163,7 @@ public class SpecificationOptionFacetsTest {
 
 		long expectedTerm = cpSpecificationOption.getCPSpecificationOptionId();
 
-		Assert.assertEquals(true, terms.contains(expectedTerm));
+		Assert.assertTrue(terms.contains(expectedTerm));
 	}
 
 	@Test
@@ -234,7 +234,7 @@ public class SpecificationOptionFacetsTest {
 
 		List<TermCollector> termCollector = facetCollector.getTermCollectors();
 
-		Assert.assertEquals(true, termCollector.isEmpty());
+		Assert.assertTrue(termCollector.isEmpty());
 	}
 
 	@Rule

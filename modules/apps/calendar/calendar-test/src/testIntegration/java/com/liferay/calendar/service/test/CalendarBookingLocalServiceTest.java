@@ -3367,7 +3367,7 @@ public class CalendarBookingLocalServiceTest {
 				workflowTask.getWorkflowTaskId(), Constants.APPROVE,
 				StringPool.BLANK, null);
 
-			Assert.assertEquals(true, workflowTask.isCompleted());
+			Assert.assertTrue(workflowTask.isCompleted());
 		}
 	}
 

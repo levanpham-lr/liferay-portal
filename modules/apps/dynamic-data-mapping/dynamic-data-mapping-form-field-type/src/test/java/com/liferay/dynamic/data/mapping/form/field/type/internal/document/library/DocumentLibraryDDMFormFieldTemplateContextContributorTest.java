@@ -125,7 +125,7 @@ public class DocumentLibraryDDMFormFieldTemplateContextContributorTest
 		Map<String, Object> parameters = spy.getParameters(
 			ddmFormField, createDDMFormFieldRenderingContext());
 
-		Assert.assertEquals(true, parameters.get("allowGuestUsers"));
+		Assert.assertTrue(parameters.get("allowGuestUsers"));
 	}
 
 	@Test
