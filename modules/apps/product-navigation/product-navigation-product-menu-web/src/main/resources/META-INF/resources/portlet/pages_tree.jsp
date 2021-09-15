@@ -83,6 +83,27 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 						</button>
 
 						<ul class="dropdown-menu dropdown-menu-left" role="menu">
+							<li class="preview-draft-action-option {draftStatus}">
+								<clay:content-row
+									containerElement="a"
+									cssClass="dropdown-item layout-action"
+									href="{draftURL}"
+									target="_blank"
+								>
+									<clay:content-col
+										containerElement="span"
+										expand="<%= true %>"
+									>
+										<clay:content-section
+											containerElement="span"
+											cssClass="text-left"
+										>
+											<liferay-ui:message key="preview-draft" />
+										</clay:content-section>
+									</clay:content-col>
+								</clay:content-row>
+							</li>
+
 							<c:if test="<%= layoutsTreeDisplayContext.hasAddLayoutPermission() && ((stagingGroup == null) || Objects.equals(scopeGroupId, stagingGroupId)) %>">
 								<li class="child-page-action-option type-{parentable}">
 									<clay:content-row

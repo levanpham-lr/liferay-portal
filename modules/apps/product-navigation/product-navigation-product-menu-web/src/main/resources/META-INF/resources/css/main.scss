@@ -224,6 +224,14 @@ $product-menu-pages-administration-link-height: 72px;
 					visibility: visible !important;
 				}
 			}
+
+			.preview-draft-action-option {
+				display: none;
+			}
+
+			.preview-draft-action-option.draft {
+				display: block;
+			}
 		}
 
 		a.tree-node-paginator {
