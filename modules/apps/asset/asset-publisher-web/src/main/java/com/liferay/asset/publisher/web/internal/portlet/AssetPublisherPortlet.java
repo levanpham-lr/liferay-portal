@@ -231,7 +231,7 @@ public class AssetPublisherPortlet extends MVCPortlet {
 		String currentURL = portal.getCurrentURL(resourceRequest);
 
 		String cacheability = httpUtil.getParameter(
-			currentURL, "p_p_cacheability");
+			currentURL, "p_p_cacheability", false);
 
 		if (cacheability.equals(ResourceURL.FULL)) {
 			HttpServletResponse httpServletResponse =
