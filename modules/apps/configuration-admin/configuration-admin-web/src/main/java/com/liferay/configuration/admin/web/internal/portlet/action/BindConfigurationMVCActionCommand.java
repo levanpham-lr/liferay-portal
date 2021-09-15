@@ -51,12 +51,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
-import java.net.URI;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -276,49 +270,33 @@ public class BindConfigurationMVCActionCommand implements MVCActionCommand {
 				configuredProperties.put(
 					"configuration.cleaner.ignore", "true");
 
-				String pid = configuration.getPid();
+				String fileName = (String)configuredProperties.get(
+					"felix.fileinstall.filename");
 
-				int index = pid.lastIndexOf('.');
+				if (Validator.isNull(fileName)) {
+					String pid = configuration.getPid();
 
-				String factoryPid = pid.substring(index + 1);
+					int index = pid.lastIndexOf('.');
 
-				StringBundler sb = new StringBundler(4);
+					String factoryPid = pid.substring(index + 1);
 
-				sb.append(configuration.getFactoryPid());
-				sb.append(StringPool.DASH);
-				sb.append(factoryPid);
-				sb.append(".config");
+					StringBundler sb = new StringBundler(4);
 
-				File file = new File(
-					PropsValues.MODULE_FRAMEWORK_CONFIGS_DIR, sb.toString());
+					sb.append(configuration.getFactoryPid());
+					sb.append(StringPool.DASH);
+					sb.append(factoryPid);
+					sb.append(".config");
 
-				file = file.getAbsoluteFile();
+					File file = new File(
+						PropsValues.MODULE_FRAMEWORK_CONFIGS_DIR,
+						sb.toString());
 
-				String fileName = String.valueOf(file.toURI());
+					file = file.getAbsoluteFile();
 
-				String oldFileName = (String)configuredProperties.put(
-					"felix.fileinstall.filename", fileName);
+					fileName = String.valueOf(file.toURI());
 
-				if ((oldFileName != null) && !oldFileName.equals(fileName)) {
-					try {
-						Path oldFilePath = Paths.get(new URI(oldFileName));
-
-						Files.deleteIfExists(oldFilePath);
-
-						if (_log.isInfoEnabled()) {
-							_log.info(
-								"Delete inconsistent factory configuration " +
-									oldFileName);
-						}
-					}
-					catch (Exception exception) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Unable to delete inconsistent factory " +
-									"configuration " + oldFileName,
-								exception);
-						}
-					}
+					configuredProperties.put(
+						"felix.fileinstall.filename", fileName);
 				}
 			}
 
