@@ -25,12 +25,14 @@ import com.liferay.portal.kernel.test.JDKLoggerTestUtil;
 import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.CodeCoverageAssertor;
+import com.liferay.portal.kernel.test.rule.NewEnv;
 import com.liferay.portal.kernel.transaction.TransactionConfig;
 import com.liferay.portal.kernel.transaction.TransactionInvoker;
 import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.spring.aop.AopCacheManager;
 import com.liferay.portal.test.rule.LiferayUnitTestRule;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.registry.BasicRegistryImpl;
 import com.liferay.registry.RegistryUtil;
 
@@ -299,40 +301,44 @@ public class RestrictedLiferayObjectWrapperTest
 		}
 	}
 
+	@NewEnv(type = NewEnv.Type.CLASSLOADER)
 	@Test
-	public void testWrap() throws Exception {
-		testWrap(new RestrictedLiferayObjectWrapper(null, null, null));
-		testWrap(
-			new RestrictedLiferayObjectWrapper(
-				new String[] {StringPool.STAR}, null, null));
-		testWrap(
-			new RestrictedLiferayObjectWrapper(
-				new String[] {StringPool.STAR},
-				new String[] {LiferayObjectWrapper.class.getName()}, null));
-		testWrap(
-			new RestrictedLiferayObjectWrapper(
-				new String[] {StringPool.BLANK}, null, null));
-		testWrap(
-			new RestrictedLiferayObjectWrapper(
-				null, new String[] {StringPool.BLANK}, null));
-		testWrap(
-			new RestrictedLiferayObjectWrapper(
-				new String[] {StringPool.BLANK},
-				new String[] {StringPool.BLANK}, null));
+	public void testWrapWithTransactionStrictReadOnlyForFalse()
+		throws Exception {
 
-		testWrap(
-			new RestrictedLiferayObjectWrapper(
-				new String[] {StringPool.BLANK},
-				new String[] {StringPool.BLANK},
-				new String[] {StringPool.BLANK}));
+		RegistryUtil.setRegistry(new BasicRegistryImpl());
 
-		testWrap(
-			new RestrictedLiferayObjectWrapper(
-				new String[] {StringPool.BLANK},
-				new String[] {StringPool.BLANK},
-				new String[] {
-					TestLiferayMethodObject.class.getName() + "#getName"
-				}));
+		TransactionInvokerUtil transactionInvokerUtil =
+			new TransactionInvokerUtil();
+
+		transactionInvokerUtil.setTransactionInvoker(
+			new TestTransactionInvoker());
+
+		ReflectionTestUtil.setFieldValue(
+			PropsValues.class,
+			"TEMPLATE_ENGINE_FREEMARKER_TRANSACTION_READ_ONLY", false);
+
+		_testWrap();
+	}
+
+	@NewEnv(type = NewEnv.Type.CLASSLOADER)
+	@Test
+	public void testWrapWithTransactionStrictReadOnlyForTrue()
+		throws Exception {
+
+		RegistryUtil.setRegistry(new BasicRegistryImpl());
+
+		TransactionInvokerUtil transactionInvokerUtil =
+			new TransactionInvokerUtil();
+
+		transactionInvokerUtil.setTransactionInvoker(
+			new TestTransactionInvoker());
+
+		ReflectionTestUtil.setFieldValue(
+			PropsValues.class,
+			"TEMPLATE_ENGINE_FREEMARKER_TRANSACTION_READ_ONLY", true);
+
+		_testWrap();
 	}
 
 	public class TestLiferayMethodObject {
@@ -493,6 +499,41 @@ public class RestrictedLiferayObjectWrapperTest
 		}
 	}
 
+	private void _testWrap() throws Exception {
+		testWrap(new RestrictedLiferayObjectWrapper(null, null, null));
+		testWrap(
+			new RestrictedLiferayObjectWrapper(
+				new String[] {StringPool.STAR}, null, null));
+		testWrap(
+			new RestrictedLiferayObjectWrapper(
+				new String[] {StringPool.STAR},
+				new String[] {LiferayObjectWrapper.class.getName()}, null));
+		testWrap(
+			new RestrictedLiferayObjectWrapper(
+				new String[] {StringPool.BLANK}, null, null));
+		testWrap(
+			new RestrictedLiferayObjectWrapper(
+				null, new String[] {StringPool.BLANK}, null));
+		testWrap(
+			new RestrictedLiferayObjectWrapper(
+				new String[] {StringPool.BLANK},
+				new String[] {StringPool.BLANK}, null));
+
+		testWrap(
+			new RestrictedLiferayObjectWrapper(
+				new String[] {StringPool.BLANK},
+				new String[] {StringPool.BLANK},
+				new String[] {StringPool.BLANK}));
+
+		testWrap(
+			new RestrictedLiferayObjectWrapper(
+				new String[] {StringPool.BLANK},
+				new String[] {StringPool.BLANK},
+				new String[] {
+					TestLiferayMethodObject.class.getName() + "#getName"
+				}));
+	}
+
 	private static class TestBaseModel extends BaseModelImpl<TestBaseModel> {
 
 		@Override
@@ -605,7 +646,14 @@ public class RestrictedLiferayObjectWrapperTest
 				TransactionConfig transactionConfig, Callable<T> callable)
 			throws Throwable {
 
-			if (transactionConfig.isStrictReadOnly()) {
+			boolean transactionReadOnly = ReflectionTestUtil.getFieldValue(
+				PropsValues.class,
+				"TEMPLATE_ENGINE_FREEMARKER_TRANSACTION_READ_ONLY");
+
+			if ((transactionConfig.isStrictReadOnly() && transactionReadOnly) ||
+				(!transactionConfig.isStrictReadOnly() &&
+				 !transactionReadOnly)) {
+
 				return callable.call();
 			}
 
