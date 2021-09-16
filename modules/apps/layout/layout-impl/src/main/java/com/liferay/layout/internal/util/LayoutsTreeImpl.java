@@ -261,6 +261,22 @@ public class LayoutsTreeImpl implements LayoutsTree {
 			httpServletRequest, groupId, layoutTreeNodes, layoutSetBranch);
 	}
 
+	private Layout _getDraftLayout(Layout layout) {
+		if (!layout.isTypeContent()) {
+			return null;
+		}
+
+		Layout draftLayout = layout.fetchDraftLayout();
+
+		if ((draftLayout != null) &&
+			(draftLayout.getStatus() == WorkflowConstants.STATUS_DRAFT)) {
+
+			return draftLayout;
+		}
+
+		return null;
+	}
+
 	private LayoutTreeNodes _getLayoutTreeNodes(
 			HttpServletRequest httpServletRequest, long groupId,
 			boolean privateLayout, long parentLayoutId, boolean incomplete,
@@ -544,9 +560,20 @@ public class LayoutsTreeImpl implements LayoutsTree {
 			).put(
 				"deleteable",
 				_isDeleteable(layout, themeDisplay, layoutSetBranch)
-			).put(
-				"friendlyURL", layout.getFriendlyURL()
 			);
+
+			Layout draftLayout = _getDraftLayout(layout);
+
+			if (draftLayout != null) {
+				jsonObject.put("draftStatus", "draft");
+
+				String draftLayoutURL = _portal.getLayoutFriendlyURL(
+					draftLayout, themeDisplay);
+
+				jsonObject.put("draftURL", draftLayoutURL);
+			}
+
+			jsonObject.put("friendlyURL", layout.getFriendlyURL());
 
 			if (layout instanceof VirtualLayout) {
 				VirtualLayout virtualLayout = (VirtualLayout)layout;
@@ -561,8 +588,16 @@ public class LayoutsTreeImpl implements LayoutsTree {
 				"hasChildren", layout.hasChildren()
 			).put(
 				"layoutId", layout.getLayoutId()
-			).put(
-				"name", layout.getName(themeDisplay.getLocale())
+			);
+
+			String layoutName = layout.getName(themeDisplay.getLocale());
+
+			if (draftLayout != null) {
+				layoutName = layoutName + StringPool.STAR;
+			}
+
+			jsonObject.put(
+				"name", layoutName
 			).put(
 				"parentable",
 				LayoutPermissionUtil.contains(
@@ -592,22 +627,6 @@ public class LayoutsTreeImpl implements LayoutsTree {
 			).put(
 				"uuid", layout.getUuid()
 			);
-
-			if (layout.isTypeContent()) {
-				Layout draftLayout = layout.fetchDraftLayout();
-
-				if ((draftLayout != null) &&
-					(draftLayout.getStatus() ==
-						WorkflowConstants.STATUS_DRAFT)) {
-
-					jsonObject.put("draftStatus", "draft");
-
-					String draftLayoutURL = _portal.getLayoutFriendlyURL(
-						draftLayout, themeDisplay);
-
-					jsonObject.put("draftURL", draftLayoutURL);
-				}
-			}
 
 			LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
 				layout);
