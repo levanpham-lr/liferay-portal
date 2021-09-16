@@ -222,8 +222,7 @@ public abstract class BaseAccountUserResourceTestCase {
 
 		Page<AccountUser> page =
 			accountUserResource.getAccountUsersByExternalReferenceCodePage(
-				externalReferenceCode, RandomTestUtil.randomString(), null,
-				Pagination.of(1, 10), null);
+				externalReferenceCode, null, null, Pagination.of(1, 10), null);
 
 		Assert.assertEquals(0, page.getTotalCount());
 
@@ -561,8 +560,7 @@ public abstract class BaseAccountUserResourceTestCase {
 			testGetAccountUsersPage_getIrrelevantAccountId();
 
 		Page<AccountUser> page = accountUserResource.getAccountUsersPage(
-			accountId, RandomTestUtil.randomString(), null,
-			Pagination.of(1, 10), null);
+			accountId, null, null, Pagination.of(1, 10), null);
 
 		Assert.assertEquals(0, page.getTotalCount());
 

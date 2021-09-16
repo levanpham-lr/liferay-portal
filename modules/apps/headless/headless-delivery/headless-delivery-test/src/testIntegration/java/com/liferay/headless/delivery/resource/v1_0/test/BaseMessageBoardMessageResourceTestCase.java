@@ -502,8 +502,7 @@ public abstract class BaseMessageBoardMessageResourceTestCase {
 		Page<MessageBoardMessage> page =
 			messageBoardMessageResource.
 				getMessageBoardMessageMessageBoardMessagesPage(
-					parentMessageBoardMessageId, null,
-					RandomTestUtil.randomString(), null, null,
+					parentMessageBoardMessageId, null, null, null, null,
 					Pagination.of(1, 10), null);
 
 		Assert.assertEquals(0, page.getTotalCount());
@@ -886,8 +885,8 @@ public abstract class BaseMessageBoardMessageResourceTestCase {
 		Page<MessageBoardMessage> page =
 			messageBoardMessageResource.
 				getMessageBoardThreadMessageBoardMessagesPage(
-					messageBoardThreadId, RandomTestUtil.randomString(), null,
-					null, Pagination.of(1, 10), null);
+					messageBoardThreadId, null, null, null,
+					Pagination.of(1, 10), null);
 
 		Assert.assertEquals(0, page.getTotalCount());
 
@@ -1265,8 +1264,7 @@ public abstract class BaseMessageBoardMessageResourceTestCase {
 
 		Page<MessageBoardMessage> page =
 			messageBoardMessageResource.getSiteMessageBoardMessagesPage(
-				siteId, null, RandomTestUtil.randomString(), null, null,
-				Pagination.of(1, 10), null);
+				siteId, null, null, null, null, Pagination.of(1, 10), null);
 
 		Assert.assertEquals(0, page.getTotalCount());
 

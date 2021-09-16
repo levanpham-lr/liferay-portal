@@ -316,8 +316,8 @@ public abstract class BaseTaxonomyCategoryResourceTestCase {
 
 		Page<TaxonomyCategory> page =
 			taxonomyCategoryResource.getTaxonomyCategoryTaxonomyCategoriesPage(
-				parentTaxonomyCategoryId, RandomTestUtil.randomString(), null,
-				Pagination.of(1, 10), null);
+				parentTaxonomyCategoryId, null, null, Pagination.of(1, 10),
+				null);
 
 		Assert.assertEquals(0, page.getTotalCount());
 
@@ -882,8 +882,8 @@ public abstract class BaseTaxonomyCategoryResourceTestCase {
 		Page<TaxonomyCategory> page =
 			taxonomyCategoryResource.
 				getTaxonomyVocabularyTaxonomyCategoriesPage(
-					taxonomyVocabularyId, RandomTestUtil.randomString(), null,
-					Pagination.of(1, 10), null);
+					taxonomyVocabularyId, null, null, Pagination.of(1, 10),
+					null);
 
 		Assert.assertEquals(0, page.getTotalCount());
 

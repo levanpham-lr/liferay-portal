@@ -228,8 +228,8 @@ public abstract class BaseDocumentFolderResourceTestCase {
 
 		Page<DocumentFolder> page =
 			documentFolderResource.getAssetLibraryDocumentFoldersPage(
-				assetLibraryId, null, RandomTestUtil.randomString(), null, null,
-				Pagination.of(1, 10), null);
+				assetLibraryId, null, null, null, null, Pagination.of(1, 10),
+				null);
 
 		Assert.assertEquals(0, page.getTotalCount());
 
@@ -814,8 +814,8 @@ public abstract class BaseDocumentFolderResourceTestCase {
 
 		Page<DocumentFolder> page =
 			documentFolderResource.getDocumentFolderDocumentFoldersPage(
-				parentDocumentFolderId, null, RandomTestUtil.randomString(),
-				null, null, Pagination.of(1, 10), null);
+				parentDocumentFolderId, null, null, null, null,
+				Pagination.of(1, 10), null);
 
 		Assert.assertEquals(0, page.getTotalCount());
 
@@ -1170,8 +1170,7 @@ public abstract class BaseDocumentFolderResourceTestCase {
 
 		Page<DocumentFolder> page =
 			documentFolderResource.getSiteDocumentFoldersPage(
-				siteId, null, RandomTestUtil.randomString(), null, null,
-				Pagination.of(1, 10), null);
+				siteId, null, null, null, null, Pagination.of(1, 10), null);
 
 		Assert.assertEquals(0, page.getTotalCount());
 

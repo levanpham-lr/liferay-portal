@@ -229,8 +229,7 @@ public abstract class BaseTaxonomyVocabularyResourceTestCase {
 
 		Page<TaxonomyVocabulary> page =
 			taxonomyVocabularyResource.getAssetLibraryTaxonomyVocabulariesPage(
-				assetLibraryId, RandomTestUtil.randomString(), null,
-				Pagination.of(1, 10), null);
+				assetLibraryId, null, null, Pagination.of(1, 10), null);
 
 		Assert.assertEquals(0, page.getTotalCount());
 
@@ -592,8 +591,7 @@ public abstract class BaseTaxonomyVocabularyResourceTestCase {
 
 		Page<TaxonomyVocabulary> page =
 			taxonomyVocabularyResource.getSiteTaxonomyVocabulariesPage(
-				siteId, RandomTestUtil.randomString(), null,
-				Pagination.of(1, 10), null);
+				siteId, null, null, Pagination.of(1, 10), null);
 
 		Assert.assertEquals(0, page.getTotalCount());
 

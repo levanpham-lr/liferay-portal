@@ -208,8 +208,7 @@ public abstract class BaseOrganizationResourceTestCase {
 	@Test
 	public void testGetOrganizationsPage() throws Exception {
 		Page<Organization> page = organizationResource.getOrganizationsPage(
-			null, RandomTestUtil.randomString(), null, Pagination.of(1, 10),
-			null);
+			null, null, null, Pagination.of(1, 10), null);
 
 		long totalCount = page.getTotalCount();
 
@@ -706,8 +705,8 @@ public abstract class BaseOrganizationResourceTestCase {
 
 		Page<Organization> page =
 			organizationResource.getOrganizationOrganizationsPage(
-				parentOrganizationId, null, RandomTestUtil.randomString(), null,
-				Pagination.of(1, 10), null);
+				parentOrganizationId, null, null, null, Pagination.of(1, 10),
+				null);
 
 		Assert.assertEquals(0, page.getTotalCount());
 
