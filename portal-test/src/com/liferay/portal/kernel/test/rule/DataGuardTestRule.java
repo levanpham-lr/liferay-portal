@@ -113,7 +113,8 @@ public class DataGuardTestRule
 		_recordsThreadLocal.remove();
 
 		_autoDeleteAndAssert(
-			description, dataBag._dataMap, dataBag._portlets, dataBag._records);
+			description, dataBag._dataMap, dataBag._portlets, dataBag._records,
+			_autoDelete(description));
 	}
 
 	@Override
@@ -127,7 +128,7 @@ public class DataGuardTestRule
 
 		_autoDeleteAndAssert(
 			description, dataBag._dataMap, dataBag._portlets,
-			_recordsThreadLocal.get());
+			_recordsThreadLocal.get(), _autoDelete(description));
 	}
 
 	@Override
@@ -177,11 +178,23 @@ public class DataGuardTestRule
 	private DataGuardTestRule() {
 	}
 
+	private boolean _autoDelete(Description description) {
+		Class<?> testClass = description.getTestClass();
+
+		DataGuard dataGuard = testClass.getAnnotation(DataGuard.class);
+
+		if (dataGuard == null) {
+			return true;
+		}
+
+		return dataGuard.autoDelete();
+	}
+
 	private void _autoDeleteAndAssert(
 			Description description,
 			Map<String, List<BaseModel<?>>> previousDataMap,
 			List<Portlet> previousPortlets,
-			Map<String, Map<Serializable, String>> records)
+			Map<String, Map<Serializable, String>> records, boolean autoDelete)
 		throws Throwable {
 
 		for (Portlet portlet : PortletLocalServiceUtil.getPortlets()) {
@@ -190,7 +203,9 @@ public class DataGuardTestRule
 			}
 		}
 
-		_autoDeleteLeftovers(previousDataMap);
+		if (autoDelete) {
+			_autoDeleteLeftovers(previousDataMap);
+		}
 
 		StringBundler sb = new StringBundler();
 
