@@ -93,8 +93,23 @@ Layout curLayout = (Layout)row.getObject();
 	</c:if>
 
 	<c:if test="<%= layoutsAdminDisplayContext.isShowDeleteAction(curLayout) %>">
+
+		<%
+		String messageKey = "are-you-sure-you-want-to-delete-this-page";
+
+		if (curLayout.hasChildren() && curLayout.hasScopeGroup()) {
+			messageKey = "this-page-is-being-used-as-a-scope-for-content-and-also-has-child-pages-any-content-that-is-scoped-to-this-page-will-also-be-removed-along-with-any-child-pages-are-you-sure-you-want-to-delete-this-page";
+		}
+		else if (curLayout.hasScopeGroup()) {
+			messageKey = "this-page-is-being-used-as-a-scope-for-content-any-content-that-is-scoped-to-this-page-will-also-be-removed-are-you-sure-you-want-to-delete-this-page";
+		}
+		else if (curLayout.hasChildren()) {
+			messageKey = "this-page-has-child-pages-that-will-also-be-removed-are-you-sure-you-want-to-delete-this-page";
+		}
+		%>
+
 		<liferay-ui:icon-delete
-			confirmation='<%= curLayout.hasChildren() ? "this-page-has-child-pages-that-will-also-be-removed-are-you-sure-you-want-to-delete-this-page" : "are-you-sure-you-want-to-delete-this-page" %>'
+			confirmation="<%= messageKey %>"
 			url="<%= layoutsAdminDisplayContext.getDeleteLayoutURL(curLayout) %>"
 		/>
 	</c:if>
