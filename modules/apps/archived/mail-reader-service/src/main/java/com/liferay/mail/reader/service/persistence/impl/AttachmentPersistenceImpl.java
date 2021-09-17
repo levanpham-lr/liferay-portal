@@ -37,8 +37,11 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 
@@ -615,6 +618,8 @@ public class AttachmentPersistenceImpl
 			AttachmentImpl.class, attachment.getPrimaryKey(), attachment);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the attachments in the entity cache if it is enabled.
 	 *
@@ -622,6 +627,13 @@ public class AttachmentPersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<Attachment> attachments) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (attachments.size() > _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (Attachment attachment : attachments) {
 			if (entityCache.getResult(
 					AttachmentImpl.class, attachment.getPrimaryKey()) == null) {
@@ -1099,6 +1111,9 @@ public class AttachmentPersistenceImpl
 			ArgumentsResolver.class, new AttachmentModelArgumentsResolver(),
 			MapUtil.singletonDictionary(
 				"model.class.name", Attachment.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

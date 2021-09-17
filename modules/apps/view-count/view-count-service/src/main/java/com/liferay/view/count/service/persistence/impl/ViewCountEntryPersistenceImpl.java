@@ -29,8 +29,11 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.view.count.exception.NoSuchEntryException;
 import com.liferay.view.count.model.ViewCountEntry;
@@ -112,6 +115,8 @@ public class ViewCountEntryPersistenceImpl
 			viewCountEntry);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the view count entries in the entity cache if it is enabled.
 	 *
@@ -119,6 +124,14 @@ public class ViewCountEntryPersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<ViewCountEntry> viewCountEntries) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (viewCountEntries.size() >
+				 _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (ViewCountEntry viewCountEntry : viewCountEntries) {
 			if (entityCache.getResult(
 					ViewCountEntryImpl.class, viewCountEntry.getPrimaryKey()) ==
@@ -580,6 +593,9 @@ public class ViewCountEntryPersistenceImpl
 			ArgumentsResolver.class, new ViewCountEntryModelArgumentsResolver(),
 			MapUtil.singletonDictionary(
 				"model.class.name", ViewCountEntry.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

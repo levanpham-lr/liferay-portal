@@ -44,8 +44,11 @@ import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.change.tracking.helper.CTPersistenceHelper;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -12184,6 +12187,8 @@ public class DDMTemplatePersistenceImpl
 			ddmTemplate);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the ddm templates in the entity cache if it is enabled.
 	 *
@@ -12191,6 +12196,13 @@ public class DDMTemplatePersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<DDMTemplate> ddmTemplates) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (ddmTemplates.size() > _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (DDMTemplate ddmTemplate : ddmTemplates) {
 			if (ddmTemplate.getCtCollectionId() != 0) {
 				continue;
@@ -12982,6 +12994,9 @@ public class DDMTemplatePersistenceImpl
 			ArgumentsResolver.class, new DDMTemplateModelArgumentsResolver(),
 			MapUtil.singletonDictionary(
 				"model.class.name", DDMTemplate.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

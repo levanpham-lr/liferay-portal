@@ -32,8 +32,11 @@ import com.liferay.portal.kernel.model.ClassName;
 import com.liferay.portal.kernel.model.ClassNameTable;
 import com.liferay.portal.kernel.service.persistence.ClassNamePersistence;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.model.impl.ClassNameImpl;
 import com.liferay.portal.model.impl.ClassNameModelImpl;
@@ -330,6 +333,8 @@ public class ClassNamePersistenceImpl
 			className);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the class names in the entity cache if it is enabled.
 	 *
@@ -337,6 +342,13 @@ public class ClassNamePersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<ClassName> classNames) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (classNames.size() > _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (ClassName className : classNames) {
 			if (EntityCacheUtil.getResult(
 					ClassNameImpl.class, className.getPrimaryKey()) == null) {
@@ -817,6 +829,9 @@ public class ClassNamePersistenceImpl
 			HashMapBuilder.<String, Object>put(
 				"model.class.name", ClassName.class.getName()
 			).build());
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

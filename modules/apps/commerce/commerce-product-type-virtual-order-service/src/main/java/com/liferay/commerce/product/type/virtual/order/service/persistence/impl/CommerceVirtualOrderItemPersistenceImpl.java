@@ -36,8 +36,11 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -1729,6 +1732,8 @@ public class CommerceVirtualOrderItemPersistenceImpl
 			commerceVirtualOrderItem);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the commerce virtual order items in the entity cache if it is enabled.
 	 *
@@ -1737,6 +1742,14 @@ public class CommerceVirtualOrderItemPersistenceImpl
 	@Override
 	public void cacheResult(
 		List<CommerceVirtualOrderItem> commerceVirtualOrderItems) {
+
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (commerceVirtualOrderItems.size() >
+				 _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
 
 		for (CommerceVirtualOrderItem commerceVirtualOrderItem :
 				commerceVirtualOrderItems) {
@@ -2314,6 +2327,9 @@ public class CommerceVirtualOrderItemPersistenceImpl
 			new CommerceVirtualOrderItemModelArgumentsResolver(),
 			MapUtil.singletonDictionary(
 				"model.class.name", CommerceVirtualOrderItem.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

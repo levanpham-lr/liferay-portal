@@ -33,8 +33,11 @@ import com.liferay.portal.kernel.model.LayoutBranchTable;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.persistence.LayoutBranchPersistence;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.model.impl.LayoutBranchImpl;
 import com.liferay.portal.model.impl.LayoutBranchModelImpl;
@@ -2018,6 +2021,8 @@ public class LayoutBranchPersistenceImpl
 			layoutBranch);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the layout branches in the entity cache if it is enabled.
 	 *
@@ -2025,6 +2030,13 @@ public class LayoutBranchPersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<LayoutBranch> layoutBranchs) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (layoutBranchs.size() > _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (LayoutBranch layoutBranch : layoutBranchs) {
 			if (EntityCacheUtil.getResult(
 					LayoutBranchImpl.class, layoutBranch.getPrimaryKey()) ==
@@ -2515,6 +2527,9 @@ public class LayoutBranchPersistenceImpl
 			HashMapBuilder.<String, Object>put(
 				"model.class.name", LayoutBranch.class.getName()
 			).build());
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

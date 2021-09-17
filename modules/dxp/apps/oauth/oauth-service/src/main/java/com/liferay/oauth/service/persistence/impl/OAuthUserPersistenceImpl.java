@@ -41,8 +41,11 @@ import com.liferay.portal.kernel.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.io.Serializable;
@@ -2318,6 +2321,8 @@ public class OAuthUserPersistenceImpl
 			oAuthUser);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the o auth users in the entity cache if it is enabled.
 	 *
@@ -2325,6 +2330,13 @@ public class OAuthUserPersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<OAuthUser> oAuthUsers) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (oAuthUsers.size() > _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (OAuthUser oAuthUser : oAuthUsers) {
 			if (entityCache.getResult(
 					OAuthUserImpl.class, oAuthUser.getPrimaryKey()) == null) {
@@ -2840,6 +2852,9 @@ public class OAuthUserPersistenceImpl
 			ArgumentsResolver.class, new OAuthUserModelArgumentsResolver(),
 			MapUtil.singletonDictionary(
 				"model.class.name", OAuthUser.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

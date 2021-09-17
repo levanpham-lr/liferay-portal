@@ -32,8 +32,11 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.workflow.kaleo.exception.NoSuchActionException;
 import com.liferay.portal.workflow.kaleo.model.KaleoAction;
@@ -3737,6 +3740,8 @@ public class KaleoActionPersistenceImpl
 			KaleoActionImpl.class, kaleoAction.getPrimaryKey(), kaleoAction);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the kaleo actions in the entity cache if it is enabled.
 	 *
@@ -3744,6 +3749,13 @@ public class KaleoActionPersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<KaleoAction> kaleoActions) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (kaleoActions.size() > _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (KaleoAction kaleoAction : kaleoActions) {
 			if (entityCache.getResult(
 					KaleoActionImpl.class, kaleoAction.getPrimaryKey()) ==
@@ -4239,6 +4251,9 @@ public class KaleoActionPersistenceImpl
 			ArgumentsResolver.class, new KaleoActionModelArgumentsResolver(),
 			MapUtil.singletonDictionary(
 				"model.class.name", KaleoAction.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

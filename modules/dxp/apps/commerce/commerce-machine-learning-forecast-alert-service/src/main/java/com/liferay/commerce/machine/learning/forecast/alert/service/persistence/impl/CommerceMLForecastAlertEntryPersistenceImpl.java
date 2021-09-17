@@ -37,8 +37,11 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -4416,6 +4419,8 @@ public class CommerceMLForecastAlertEntryPersistenceImpl
 			commerceMLForecastAlertEntry);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the commerce ml forecast alert entries in the entity cache if it is enabled.
 	 *
@@ -4424,6 +4429,14 @@ public class CommerceMLForecastAlertEntryPersistenceImpl
 	@Override
 	public void cacheResult(
 		List<CommerceMLForecastAlertEntry> commerceMLForecastAlertEntries) {
+
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (commerceMLForecastAlertEntries.size() >
+				 _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
 
 		for (CommerceMLForecastAlertEntry commerceMLForecastAlertEntry :
 				commerceMLForecastAlertEntries) {
@@ -5008,6 +5021,9 @@ public class CommerceMLForecastAlertEntryPersistenceImpl
 			MapUtil.singletonDictionary(
 				"model.class.name",
 				CommerceMLForecastAlertEntry.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

@@ -39,8 +39,11 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -873,6 +876,8 @@ public class FolderPersistenceImpl
 			new Object[] {folder.getAccountId(), folder.getFullName()}, folder);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the folders in the entity cache if it is enabled.
 	 *
@@ -880,6 +885,13 @@ public class FolderPersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<Folder> folders) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (folders.size() > _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (Folder folder : folders) {
 			if (entityCache.getResult(
 					FolderImpl.class, folder.getPrimaryKey()) == null) {
@@ -1379,6 +1391,9 @@ public class FolderPersistenceImpl
 			ArgumentsResolver.class, new FolderModelArgumentsResolver(),
 			MapUtil.singletonDictionary(
 				"model.class.name", Folder.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

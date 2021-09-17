@@ -34,8 +34,11 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.ReleasePersistence;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -355,6 +358,8 @@ public class ReleasePersistenceImpl
 			new Object[] {release.getServletContextName()}, release);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the releases in the entity cache if it is enabled.
 	 *
@@ -362,6 +367,13 @@ public class ReleasePersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<Release> releases) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (releases.size() > _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (Release release : releases) {
 			if (EntityCacheUtil.getResult(
 					ReleaseImpl.class, release.getPrimaryKey()) == null) {
@@ -869,6 +881,9 @@ public class ReleasePersistenceImpl
 			HashMapBuilder.<String, Object>put(
 				"model.class.name", Release.class.getName()
 			).build());
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

@@ -43,6 +43,8 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -22207,6 +22209,8 @@ public class WikiPagePersistenceImpl
 			wikiPage);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the wiki pages in the entity cache if it is enabled.
 	 *
@@ -22214,6 +22218,13 @@ public class WikiPagePersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<WikiPage> wikiPages) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (wikiPages.size() > _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (WikiPage wikiPage : wikiPages) {
 			if (entityCache.getResult(
 					WikiPageImpl.class, wikiPage.getPrimaryKey()) == null) {
@@ -22777,6 +22788,9 @@ public class WikiPagePersistenceImpl
 			ArgumentsResolver.class, new WikiPageModelArgumentsResolver(),
 			MapUtil.singletonDictionary(
 				"model.class.name", WikiPage.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

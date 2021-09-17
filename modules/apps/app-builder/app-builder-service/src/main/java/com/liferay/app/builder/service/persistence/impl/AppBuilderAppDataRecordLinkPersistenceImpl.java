@@ -38,8 +38,11 @@ import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -1691,6 +1694,8 @@ public class AppBuilderAppDataRecordLinkPersistenceImpl
 			appBuilderAppDataRecordLink);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the app builder app data record links in the entity cache if it is enabled.
 	 *
@@ -1699,6 +1704,14 @@ public class AppBuilderAppDataRecordLinkPersistenceImpl
 	@Override
 	public void cacheResult(
 		List<AppBuilderAppDataRecordLink> appBuilderAppDataRecordLinks) {
+
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (appBuilderAppDataRecordLinks.size() >
+				 _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
 
 		for (AppBuilderAppDataRecordLink appBuilderAppDataRecordLink :
 				appBuilderAppDataRecordLinks) {
@@ -2237,6 +2250,9 @@ public class AppBuilderAppDataRecordLinkPersistenceImpl
 			MapUtil.singletonDictionary(
 				"model.class.name",
 				AppBuilderAppDataRecordLink.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

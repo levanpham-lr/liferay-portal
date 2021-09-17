@@ -31,8 +31,11 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.powwow.exception.NoSuchServerException;
@@ -694,6 +697,8 @@ public class PowwowServerPersistenceImpl
 			PowwowServerImpl.class, powwowServer.getPrimaryKey(), powwowServer);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the powwow servers in the entity cache if it is enabled.
 	 *
@@ -701,6 +706,13 @@ public class PowwowServerPersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<PowwowServer> powwowServers) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (powwowServers.size() > _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (PowwowServer powwowServer : powwowServers) {
 			if (EntityCacheUtil.getResult(
 					PowwowServerImpl.class, powwowServer.getPrimaryKey()) ==
@@ -1204,6 +1216,9 @@ public class PowwowServerPersistenceImpl
 			HashMapBuilder.<String, Object>put(
 				"model.class.name", PowwowServer.class.getName()
 			).build());
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

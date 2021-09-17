@@ -36,8 +36,11 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
@@ -1219,6 +1222,8 @@ public class CommerceApplicationModelCProductRelPersistenceImpl
 			commerceApplicationModelCProductRel);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the commerce application model c product rels in the entity cache if it is enabled.
 	 *
@@ -1228,6 +1233,14 @@ public class CommerceApplicationModelCProductRelPersistenceImpl
 	public void cacheResult(
 		List<CommerceApplicationModelCProductRel>
 			commerceApplicationModelCProductRels) {
+
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (commerceApplicationModelCProductRels.size() >
+				 _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
 
 		for (CommerceApplicationModelCProductRel
 				commerceApplicationModelCProductRel :
@@ -1807,6 +1820,9 @@ public class CommerceApplicationModelCProductRelPersistenceImpl
 			MapUtil.singletonDictionary(
 				"model.class.name",
 				CommerceApplicationModelCProductRel.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

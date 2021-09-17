@@ -39,8 +39,11 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -895,6 +898,8 @@ public class AccountGroupPersistenceImpl
 			accountGroup);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the account groups in the entity cache if it is enabled.
 	 *
@@ -902,6 +907,13 @@ public class AccountGroupPersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<AccountGroup> accountGroups) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (accountGroups.size() > _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (AccountGroup accountGroup : accountGroups) {
 			if (entityCache.getResult(
 					AccountGroupImpl.class, accountGroup.getPrimaryKey()) ==
@@ -1416,6 +1428,9 @@ public class AccountGroupPersistenceImpl
 			ArgumentsResolver.class, new AccountGroupModelArgumentsResolver(),
 			MapUtil.singletonDictionary(
 				"model.class.name", AccountGroup.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],

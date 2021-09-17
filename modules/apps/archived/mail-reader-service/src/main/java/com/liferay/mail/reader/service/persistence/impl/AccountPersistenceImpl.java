@@ -39,8 +39,11 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -879,6 +882,8 @@ public class AccountPersistenceImpl
 			new Object[] {account.getUserId(), account.getAddress()}, account);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the accounts in the entity cache if it is enabled.
 	 *
@@ -886,6 +891,13 @@ public class AccountPersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<Account> accounts) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (accounts.size() > _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (Account account : accounts) {
 			if (entityCache.getResult(
 					AccountImpl.class, account.getPrimaryKey()) == null) {
@@ -1395,6 +1407,9 @@ public class AccountPersistenceImpl
 			ArgumentsResolver.class, new AccountModelArgumentsResolver(),
 			MapUtil.singletonDictionary(
 				"model.class.name", Account.class.getName()));
+
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
 
 		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],
