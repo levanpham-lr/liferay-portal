@@ -4772,6 +4772,52 @@ definition {
 			fieldValue = "01/01/2016");
 	}
 
+	@description = "LPS-84111 - Verify that Text Field can be autosaved on form builder"
+	@priority = "5"
+	test TextFieldCanBeAutosaved {
+		property portal.acceptance = "false";
+		property portal.upstream = "true";
+		property test.name.skip.portal.instance = "Forms#TextFieldCanBeAutosaved";
+
+		Navigator.openURL();
+
+		ProductMenu.gotoPortlet(
+			category = "Content &amp; Data",
+			portlet = "Forms");
+
+		FormsAdminNavigator.gotoAddForm();
+
+		Form.editName();
+
+		Form.addTextField(fieldPositionNumber = "1");
+
+		Form.editFieldLabelMetal(fieldValue = "First Field");
+
+		Form.save();
+
+		Form.addTextField(fieldPositionNumber = "2");
+
+		Form.editFieldLabelMetal(fieldValue = "For Autosave");
+
+		Form.gotoAutocompleteTab();
+
+		Form.enableAutocompleteConfiguration();
+
+		Pause(locator1 = "60000");
+
+		FormsAdminNavigator.gotoBack();
+
+		FormsAdminNavigator.gotoEditFormByName();
+
+		FormFields.viewTextLabel(
+			fieldLabel = "First Field",
+			fieldName = "FirstField");
+
+		FormFields.viewTextLabel(
+			fieldLabel = "For Autosave",
+			fieldName = "ForAutosave");
+	}
+
 	@description = "This is a use case for LPS-125499."
 	@priority = "2"
 	test UploadFileWithInvalidSizeAsGuestUser {
