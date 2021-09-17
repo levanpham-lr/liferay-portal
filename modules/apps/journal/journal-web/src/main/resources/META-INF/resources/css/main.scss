@@ -69,13 +69,15 @@ $productMenuWidth: 320px;
 		}
 
 		.lfr-ddm-field-group {
-			margin-bottom: 10px;
-			margin-top: 10px;
-			padding: 28px 24px;
-		}
-
-		.lfr-ddm-container > .lfr-ddm-field-group {
-			padding: 0;
+			background: #fff;
+			border-radius: 3px;
+			border-top: 5px solid transparent;
+			box-shadow: 0 1px 2px #c4c4c4;
+			margin: 8px 6px 0;
+			outline: 0;
+			padding: 10px;
+			position: relative;
+			-webkit-box-shadow: 0 1px 2px #c4c4c4;
 		}
 	}
 
