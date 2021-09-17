@@ -489,8 +489,7 @@ public class ContentPageEditorDisplayContext {
 			).put(
 				"previewPageURL",
 				getResourceURL(
-					"/layout_content_page_editor/get_page_preview",
-					isPublicLayout())
+					"/content_layout/get_page_preview", isPublicLayout())
 			).put(
 				"publishURL", getPublishURL()
 			).put(
