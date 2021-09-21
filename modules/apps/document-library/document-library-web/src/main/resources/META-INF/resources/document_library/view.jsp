@@ -20,6 +20,12 @@
 DLAdminDisplayContext dlAdminDisplayContext = (DLAdminDisplayContext)request.getAttribute(DLAdminDisplayContext.class.getName());
 
 DLViewDisplayContext dlViewDisplayContext = new DLViewDisplayContext(dlAdminDisplayContext, request, renderRequest, renderResponse);
+
+Folder parentFolder = dlViewDisplayContext.getFolder();
+
+if (parentFolder != null) {
+	renderResponse.setTitle(parentFolder.getName());
+}
 %>
 
 <liferay-ui:success key='<%= portletDisplay.getId() + "requestProcessed" %>' message="your-request-completed-successfully" />
