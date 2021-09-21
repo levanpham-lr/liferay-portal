@@ -779,8 +779,7 @@ public class CompanyLocalServiceTest {
 	public void testGetCompanyByVirtualHost() throws Exception {
 		String virtualHostName = "::1";
 
-		Company company = CompanyLocalServiceUtil.addCompany(
-			null, virtualHostName, virtualHostName, "test.com", false, 0, true);
+		Company company = addCompany(virtualHostName);
 
 		Assert.assertEquals(
 			company,
@@ -839,6 +838,8 @@ public class CompanyLocalServiceTest {
 		Assert.assertEquals(
 			languageIds,
 			groupTypeSettingsUnicodeProperties.getProperty(PropsKeys.LOCALES));
+
+		CompanyLocalServiceUtil.deleteCompany(company);
 	}
 
 	@Test
@@ -921,12 +922,16 @@ public class CompanyLocalServiceTest {
 	}
 
 	protected Company addCompany() throws Exception {
-		String webId = RandomTestUtil.randomString() + "test.com";
+		return addCompany(RandomTestUtil.randomString() + "test.com");
+	}
 
+	protected Company addCompany(String webId) throws Exception {
 		Company company = CompanyLocalServiceUtil.addCompany(
 			null, webId, webId, "test.com", false, 0, true);
 
 		PortalInstances.initCompany(_mockServletContext, webId);
+
+		CompanyThreadLocal.setCompanyId(company.getCompanyId());
 
 		return company;
 	}
