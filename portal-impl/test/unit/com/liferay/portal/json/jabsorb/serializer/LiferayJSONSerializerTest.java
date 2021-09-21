@@ -89,6 +89,8 @@ public class LiferayJSONSerializerTest {
 					" in context TestClassLoader",
 				logRecord.getMessage());
 		}
+
+		ClassLoaderPool.unregister("TestClassLoader");
 	}
 
 }
