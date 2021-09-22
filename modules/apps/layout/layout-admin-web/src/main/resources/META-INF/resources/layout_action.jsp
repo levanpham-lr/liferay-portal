@@ -99,7 +99,12 @@ Layout curLayout = (Layout)row.getObject();
 		/>
 	</c:if>
 
-	<c:if test="<%= layoutsAdminDisplayContext.isShowDiscardDraftAction(curLayout) %>">
+	<c:if test="<%= layoutsAdminDisplayContext.isShowDraftActions(curLayout) %>">
+		<liferay-ui:icon
+			message="preview-draft"
+			url="<%= layoutsAdminDisplayContext.getPreviewDraftURL(curLayout) %>"
+		/>
+
 		<liferay-ui:icon
 			message="discard-draft"
 			url="<%= layoutsAdminDisplayContext.getDiscardDraftURL(curLayout) %>"

@@ -638,8 +638,18 @@ public class MillerColumnsDisplayContext {
 				));
 		}
 
-		if (_layoutsAdminDisplayContext.isShowDiscardDraftAction(layout)) {
+		if (_layoutsAdminDisplayContext.isShowDraftActions(layout)) {
 			jsonArray.put(
+				JSONUtil.put(
+					"id", "previewDraft"
+				).put(
+					"label",
+					LanguageUtil.get(_httpServletRequest, "preview-draft")
+				).put(
+					"url",
+					_layoutsAdminDisplayContext.getPreviewDraftURL(layout)
+				)
+			).put(
 				JSONUtil.put(
 					"id", "discardDraft"
 				).put(
@@ -648,7 +658,8 @@ public class MillerColumnsDisplayContext {
 				).put(
 					"url",
 					_layoutsAdminDisplayContext.getDiscardDraftURL(layout)
-				));
+				)
+			);
 		}
 
 		if (_layoutsAdminDisplayContext.isShowDeleteAction(layout)) {
