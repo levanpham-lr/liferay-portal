@@ -337,7 +337,7 @@ public class TypedPropertiesTest {
 
 		_assertSave(
 			typedProperties,
-			"testKey = [\\\r\n  \"testValue3\",\\\r\n  \"testValue4\"\\\r\n]");
+			"testKey=[\\\r\n  \"testValue3\",\\\r\n  \"testValue4\"\\\r\n]");
 	}
 
 	@Test
@@ -394,7 +394,7 @@ public class TypedPropertiesTest {
 
 		typedProperties.put("testKey", "testValue");
 
-		_assertSave(typedProperties, "testKey = \"testValue\"");
+		_assertSave(typedProperties, "testKey=\"testValue\"");
 	}
 
 	@Test
