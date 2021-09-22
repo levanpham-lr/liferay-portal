@@ -1471,47 +1471,47 @@ public class SiteFriendlyURLPersistenceImpl
 	private FinderPath _finderPathCountByC_G;
 
 	/**
-	 * Returns all the site friendly urls where companyId = &#63; and groupId = &#63;.
+	 * Returns all the site friendly urls where groupId = &#63; and companyId = &#63;.
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the matching site friendly urls
 	 */
 	@Override
-	public List<SiteFriendlyURL> findByC_G(long companyId, long groupId) {
+	public List<SiteFriendlyURL> findByC_G(long groupId, long companyId) {
 		return findByC_G(
-			companyId, groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+			groupId, companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the site friendly urls where companyId = &#63; and groupId = &#63;.
+	 * Returns a range of all the site friendly urls where groupId = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>SiteFriendlyURLModelImpl</code>.
 	 * </p>
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of site friendly urls
 	 * @param end the upper bound of the range of site friendly urls (not inclusive)
 	 * @return the range of matching site friendly urls
 	 */
 	@Override
 	public List<SiteFriendlyURL> findByC_G(
-		long companyId, long groupId, int start, int end) {
+		long groupId, long companyId, int start, int end) {
 
-		return findByC_G(companyId, groupId, start, end, null);
+		return findByC_G(groupId, companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the site friendly urls where companyId = &#63; and groupId = &#63;.
+	 * Returns an ordered range of all the site friendly urls where groupId = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>SiteFriendlyURLModelImpl</code>.
 	 * </p>
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of site friendly urls
 	 * @param end the upper bound of the range of site friendly urls (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1519,22 +1519,22 @@ public class SiteFriendlyURLPersistenceImpl
 	 */
 	@Override
 	public List<SiteFriendlyURL> findByC_G(
-		long companyId, long groupId, int start, int end,
+		long groupId, long companyId, int start, int end,
 		OrderByComparator<SiteFriendlyURL> orderByComparator) {
 
 		return findByC_G(
-			companyId, groupId, start, end, orderByComparator, true);
+			groupId, companyId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the site friendly urls where companyId = &#63; and groupId = &#63;.
+	 * Returns an ordered range of all the site friendly urls where groupId = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>SiteFriendlyURLModelImpl</code>.
 	 * </p>
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param start the lower bound of the range of site friendly urls
 	 * @param end the upper bound of the range of site friendly urls (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1543,7 +1543,7 @@ public class SiteFriendlyURLPersistenceImpl
 	 */
 	@Override
 	public List<SiteFriendlyURL> findByC_G(
-		long companyId, long groupId, int start, int end,
+		long groupId, long companyId, int start, int end,
 		OrderByComparator<SiteFriendlyURL> orderByComparator,
 		boolean useFinderCache) {
 
@@ -1555,13 +1555,13 @@ public class SiteFriendlyURLPersistenceImpl
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByC_G;
-				finderArgs = new Object[] {companyId, groupId};
+				finderArgs = new Object[] {groupId, companyId};
 			}
 		}
 		else if (useFinderCache) {
 			finderPath = _finderPathWithPaginationFindByC_G;
 			finderArgs = new Object[] {
-				companyId, groupId, start, end, orderByComparator
+				groupId, companyId, start, end, orderByComparator
 			};
 		}
 
@@ -1573,8 +1573,8 @@ public class SiteFriendlyURLPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (SiteFriendlyURL siteFriendlyURL : list) {
-					if ((companyId != siteFriendlyURL.getCompanyId()) ||
-						(groupId != siteFriendlyURL.getGroupId())) {
+					if ((groupId != siteFriendlyURL.getGroupId()) ||
+						(companyId != siteFriendlyURL.getCompanyId())) {
 
 						list = null;
 
@@ -1597,9 +1597,9 @@ public class SiteFriendlyURLPersistenceImpl
 
 			sb.append(_SQL_SELECT_SITEFRIENDLYURL_WHERE);
 
-			sb.append(_FINDER_COLUMN_C_G_COMPANYID_2);
-
 			sb.append(_FINDER_COLUMN_C_G_GROUPID_2);
+
+			sb.append(_FINDER_COLUMN_C_G_COMPANYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(
@@ -1620,9 +1620,9 @@ public class SiteFriendlyURLPersistenceImpl
 
 				QueryPos queryPos = QueryPos.getInstance(query);
 
-				queryPos.add(companyId);
-
 				queryPos.add(groupId);
+
+				queryPos.add(companyId);
 
 				list = (List<SiteFriendlyURL>)QueryUtil.list(
 					query, getDialect(), start, end);
@@ -1645,22 +1645,22 @@ public class SiteFriendlyURLPersistenceImpl
 	}
 
 	/**
-	 * Returns the first site friendly url in the ordered set where companyId = &#63; and groupId = &#63;.
+	 * Returns the first site friendly url in the ordered set where groupId = &#63; and companyId = &#63;.
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching site friendly url
 	 * @throws NoSuchFriendlyURLException if a matching site friendly url could not be found
 	 */
 	@Override
 	public SiteFriendlyURL findByC_G_First(
-			long companyId, long groupId,
+			long groupId, long companyId,
 			OrderByComparator<SiteFriendlyURL> orderByComparator)
 		throws NoSuchFriendlyURLException {
 
 		SiteFriendlyURL siteFriendlyURL = fetchByC_G_First(
-			companyId, groupId, orderByComparator);
+			groupId, companyId, orderByComparator);
 
 		if (siteFriendlyURL != null) {
 			return siteFriendlyURL;
@@ -1670,11 +1670,11 @@ public class SiteFriendlyURLPersistenceImpl
 
 		sb.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		sb.append("companyId=");
-		sb.append(companyId);
-
-		sb.append(", groupId=");
+		sb.append("groupId=");
 		sb.append(groupId);
+
+		sb.append(", companyId=");
+		sb.append(companyId);
 
 		sb.append("}");
 
@@ -1682,20 +1682,20 @@ public class SiteFriendlyURLPersistenceImpl
 	}
 
 	/**
-	 * Returns the first site friendly url in the ordered set where companyId = &#63; and groupId = &#63;.
+	 * Returns the first site friendly url in the ordered set where groupId = &#63; and companyId = &#63;.
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching site friendly url, or <code>null</code> if a matching site friendly url could not be found
 	 */
 	@Override
 	public SiteFriendlyURL fetchByC_G_First(
-		long companyId, long groupId,
+		long groupId, long companyId,
 		OrderByComparator<SiteFriendlyURL> orderByComparator) {
 
 		List<SiteFriendlyURL> list = findByC_G(
-			companyId, groupId, 0, 1, orderByComparator);
+			groupId, companyId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1705,22 +1705,22 @@ public class SiteFriendlyURLPersistenceImpl
 	}
 
 	/**
-	 * Returns the last site friendly url in the ordered set where companyId = &#63; and groupId = &#63;.
+	 * Returns the last site friendly url in the ordered set where groupId = &#63; and companyId = &#63;.
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching site friendly url
 	 * @throws NoSuchFriendlyURLException if a matching site friendly url could not be found
 	 */
 	@Override
 	public SiteFriendlyURL findByC_G_Last(
-			long companyId, long groupId,
+			long groupId, long companyId,
 			OrderByComparator<SiteFriendlyURL> orderByComparator)
 		throws NoSuchFriendlyURLException {
 
 		SiteFriendlyURL siteFriendlyURL = fetchByC_G_Last(
-			companyId, groupId, orderByComparator);
+			groupId, companyId, orderByComparator);
 
 		if (siteFriendlyURL != null) {
 			return siteFriendlyURL;
@@ -1730,11 +1730,11 @@ public class SiteFriendlyURLPersistenceImpl
 
 		sb.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		sb.append("companyId=");
-		sb.append(companyId);
-
-		sb.append(", groupId=");
+		sb.append("groupId=");
 		sb.append(groupId);
+
+		sb.append(", companyId=");
+		sb.append(companyId);
 
 		sb.append("}");
 
@@ -1742,26 +1742,26 @@ public class SiteFriendlyURLPersistenceImpl
 	}
 
 	/**
-	 * Returns the last site friendly url in the ordered set where companyId = &#63; and groupId = &#63;.
+	 * Returns the last site friendly url in the ordered set where groupId = &#63; and companyId = &#63;.
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching site friendly url, or <code>null</code> if a matching site friendly url could not be found
 	 */
 	@Override
 	public SiteFriendlyURL fetchByC_G_Last(
-		long companyId, long groupId,
+		long groupId, long companyId,
 		OrderByComparator<SiteFriendlyURL> orderByComparator) {
 
-		int count = countByC_G(companyId, groupId);
+		int count = countByC_G(groupId, companyId);
 
 		if (count == 0) {
 			return null;
 		}
 
 		List<SiteFriendlyURL> list = findByC_G(
-			companyId, groupId, count - 1, count, orderByComparator);
+			groupId, companyId, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1771,18 +1771,18 @@ public class SiteFriendlyURLPersistenceImpl
 	}
 
 	/**
-	 * Returns the site friendly urls before and after the current site friendly url in the ordered set where companyId = &#63; and groupId = &#63;.
+	 * Returns the site friendly urls before and after the current site friendly url in the ordered set where groupId = &#63; and companyId = &#63;.
 	 *
 	 * @param siteFriendlyURLId the primary key of the current site friendly url
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next site friendly url
 	 * @throws NoSuchFriendlyURLException if a site friendly url with the primary key could not be found
 	 */
 	@Override
 	public SiteFriendlyURL[] findByC_G_PrevAndNext(
-			long siteFriendlyURLId, long companyId, long groupId,
+			long siteFriendlyURLId, long groupId, long companyId,
 			OrderByComparator<SiteFriendlyURL> orderByComparator)
 		throws NoSuchFriendlyURLException {
 
@@ -1796,13 +1796,13 @@ public class SiteFriendlyURLPersistenceImpl
 			SiteFriendlyURL[] array = new SiteFriendlyURLImpl[3];
 
 			array[0] = getByC_G_PrevAndNext(
-				session, siteFriendlyURL, companyId, groupId, orderByComparator,
+				session, siteFriendlyURL, groupId, companyId, orderByComparator,
 				true);
 
 			array[1] = siteFriendlyURL;
 
 			array[2] = getByC_G_PrevAndNext(
-				session, siteFriendlyURL, companyId, groupId, orderByComparator,
+				session, siteFriendlyURL, groupId, companyId, orderByComparator,
 				false);
 
 			return array;
@@ -1816,8 +1816,8 @@ public class SiteFriendlyURLPersistenceImpl
 	}
 
 	protected SiteFriendlyURL getByC_G_PrevAndNext(
-		Session session, SiteFriendlyURL siteFriendlyURL, long companyId,
-		long groupId, OrderByComparator<SiteFriendlyURL> orderByComparator,
+		Session session, SiteFriendlyURL siteFriendlyURL, long groupId,
+		long companyId, OrderByComparator<SiteFriendlyURL> orderByComparator,
 		boolean previous) {
 
 		StringBundler sb = null;
@@ -1833,9 +1833,9 @@ public class SiteFriendlyURLPersistenceImpl
 
 		sb.append(_SQL_SELECT_SITEFRIENDLYURL_WHERE);
 
-		sb.append(_FINDER_COLUMN_C_G_COMPANYID_2);
-
 		sb.append(_FINDER_COLUMN_C_G_GROUPID_2);
+
+		sb.append(_FINDER_COLUMN_C_G_COMPANYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields =
@@ -1906,9 +1906,9 @@ public class SiteFriendlyURLPersistenceImpl
 
 		QueryPos queryPos = QueryPos.getInstance(query);
 
-		queryPos.add(companyId);
-
 		queryPos.add(groupId);
+
+		queryPos.add(companyId);
 
 		if (orderByComparator != null) {
 			for (Object orderByConditionValue :
@@ -1930,16 +1930,16 @@ public class SiteFriendlyURLPersistenceImpl
 	}
 
 	/**
-	 * Removes all the site friendly urls where companyId = &#63; and groupId = &#63; from the database.
+	 * Removes all the site friendly urls where groupId = &#63; and companyId = &#63; from the database.
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 */
 	@Override
-	public void removeByC_G(long companyId, long groupId) {
+	public void removeByC_G(long groupId, long companyId) {
 		for (SiteFriendlyURL siteFriendlyURL :
 				findByC_G(
-					companyId, groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					groupId, companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 					null)) {
 
 			remove(siteFriendlyURL);
@@ -1947,17 +1947,17 @@ public class SiteFriendlyURLPersistenceImpl
 	}
 
 	/**
-	 * Returns the number of site friendly urls where companyId = &#63; and groupId = &#63;.
+	 * Returns the number of site friendly urls where groupId = &#63; and companyId = &#63;.
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @return the number of matching site friendly urls
 	 */
 	@Override
-	public int countByC_G(long companyId, long groupId) {
+	public int countByC_G(long groupId, long companyId) {
 		FinderPath finderPath = _finderPathCountByC_G;
 
-		Object[] finderArgs = new Object[] {companyId, groupId};
+		Object[] finderArgs = new Object[] {groupId, companyId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1966,9 +1966,9 @@ public class SiteFriendlyURLPersistenceImpl
 
 			sb.append(_SQL_COUNT_SITEFRIENDLYURL_WHERE);
 
-			sb.append(_FINDER_COLUMN_C_G_COMPANYID_2);
-
 			sb.append(_FINDER_COLUMN_C_G_GROUPID_2);
+
+			sb.append(_FINDER_COLUMN_C_G_COMPANYID_2);
 
 			String sql = sb.toString();
 
@@ -1981,9 +1981,9 @@ public class SiteFriendlyURLPersistenceImpl
 
 				QueryPos queryPos = QueryPos.getInstance(query);
 
-				queryPos.add(companyId);
-
 				queryPos.add(groupId);
+
+				queryPos.add(companyId);
 
 				count = (Long)query.uniqueResult();
 
@@ -2000,11 +2000,11 @@ public class SiteFriendlyURLPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_G_COMPANYID_2 =
-		"siteFriendlyURL.companyId = ? AND ";
-
 	private static final String _FINDER_COLUMN_C_G_GROUPID_2 =
-		"siteFriendlyURL.groupId = ?";
+		"siteFriendlyURL.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_G_COMPANYID_2 =
+		"siteFriendlyURL.companyId = ?";
 
 	private FinderPath _finderPathFetchByC_F;
 	private FinderPath _finderPathCountByC_F;
@@ -2259,32 +2259,32 @@ public class SiteFriendlyURLPersistenceImpl
 	private FinderPath _finderPathCountByC_G_L;
 
 	/**
-	 * Returns the site friendly url where companyId = &#63; and groupId = &#63; and languageId = &#63; or throws a <code>NoSuchFriendlyURLException</code> if it could not be found.
+	 * Returns the site friendly url where groupId = &#63; and companyId = &#63; and languageId = &#63; or throws a <code>NoSuchFriendlyURLException</code> if it could not be found.
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param languageId the language ID
 	 * @return the matching site friendly url
 	 * @throws NoSuchFriendlyURLException if a matching site friendly url could not be found
 	 */
 	@Override
 	public SiteFriendlyURL findByC_G_L(
-			long companyId, long groupId, String languageId)
+			long groupId, long companyId, String languageId)
 		throws NoSuchFriendlyURLException {
 
 		SiteFriendlyURL siteFriendlyURL = fetchByC_G_L(
-			companyId, groupId, languageId);
+			groupId, companyId, languageId);
 
 		if (siteFriendlyURL == null) {
 			StringBundler sb = new StringBundler(8);
 
 			sb.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			sb.append("companyId=");
-			sb.append(companyId);
-
-			sb.append(", groupId=");
+			sb.append("groupId=");
 			sb.append(groupId);
+
+			sb.append(", companyId=");
+			sb.append(companyId);
 
 			sb.append(", languageId=");
 			sb.append(languageId);
@@ -2302,32 +2302,32 @@ public class SiteFriendlyURLPersistenceImpl
 	}
 
 	/**
-	 * Returns the site friendly url where companyId = &#63; and groupId = &#63; and languageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the site friendly url where groupId = &#63; and companyId = &#63; and languageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param languageId the language ID
 	 * @return the matching site friendly url, or <code>null</code> if a matching site friendly url could not be found
 	 */
 	@Override
 	public SiteFriendlyURL fetchByC_G_L(
-		long companyId, long groupId, String languageId) {
+		long groupId, long companyId, String languageId) {
 
-		return fetchByC_G_L(companyId, groupId, languageId, true);
+		return fetchByC_G_L(groupId, companyId, languageId, true);
 	}
 
 	/**
-	 * Returns the site friendly url where companyId = &#63; and groupId = &#63; and languageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the site friendly url where groupId = &#63; and companyId = &#63; and languageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param languageId the language ID
 	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching site friendly url, or <code>null</code> if a matching site friendly url could not be found
 	 */
 	@Override
 	public SiteFriendlyURL fetchByC_G_L(
-		long companyId, long groupId, String languageId,
+		long groupId, long companyId, String languageId,
 		boolean useFinderCache) {
 
 		languageId = Objects.toString(languageId, "");
@@ -2335,7 +2335,7 @@ public class SiteFriendlyURLPersistenceImpl
 		Object[] finderArgs = null;
 
 		if (useFinderCache) {
-			finderArgs = new Object[] {companyId, groupId, languageId};
+			finderArgs = new Object[] {groupId, companyId, languageId};
 		}
 
 		Object result = null;
@@ -2348,8 +2348,8 @@ public class SiteFriendlyURLPersistenceImpl
 		if (result instanceof SiteFriendlyURL) {
 			SiteFriendlyURL siteFriendlyURL = (SiteFriendlyURL)result;
 
-			if ((companyId != siteFriendlyURL.getCompanyId()) ||
-				(groupId != siteFriendlyURL.getGroupId()) ||
+			if ((groupId != siteFriendlyURL.getGroupId()) ||
+				(companyId != siteFriendlyURL.getCompanyId()) ||
 				!Objects.equals(languageId, siteFriendlyURL.getLanguageId())) {
 
 				result = null;
@@ -2361,9 +2361,9 @@ public class SiteFriendlyURLPersistenceImpl
 
 			sb.append(_SQL_SELECT_SITEFRIENDLYURL_WHERE);
 
-			sb.append(_FINDER_COLUMN_C_G_L_COMPANYID_2);
-
 			sb.append(_FINDER_COLUMN_C_G_L_GROUPID_2);
+
+			sb.append(_FINDER_COLUMN_C_G_L_COMPANYID_2);
 
 			boolean bindLanguageId = false;
 
@@ -2387,9 +2387,9 @@ public class SiteFriendlyURLPersistenceImpl
 
 				QueryPos queryPos = QueryPos.getInstance(query);
 
-				queryPos.add(companyId);
-
 				queryPos.add(groupId);
+
+				queryPos.add(companyId);
 
 				if (bindLanguageId) {
 					queryPos.add(languageId);
@@ -2428,39 +2428,39 @@ public class SiteFriendlyURLPersistenceImpl
 	}
 
 	/**
-	 * Removes the site friendly url where companyId = &#63; and groupId = &#63; and languageId = &#63; from the database.
+	 * Removes the site friendly url where groupId = &#63; and companyId = &#63; and languageId = &#63; from the database.
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param languageId the language ID
 	 * @return the site friendly url that was removed
 	 */
 	@Override
 	public SiteFriendlyURL removeByC_G_L(
-			long companyId, long groupId, String languageId)
+			long groupId, long companyId, String languageId)
 		throws NoSuchFriendlyURLException {
 
 		SiteFriendlyURL siteFriendlyURL = findByC_G_L(
-			companyId, groupId, languageId);
+			groupId, companyId, languageId);
 
 		return remove(siteFriendlyURL);
 	}
 
 	/**
-	 * Returns the number of site friendly urls where companyId = &#63; and groupId = &#63; and languageId = &#63;.
+	 * Returns the number of site friendly urls where groupId = &#63; and companyId = &#63; and languageId = &#63;.
 	 *
-	 * @param companyId the company ID
 	 * @param groupId the group ID
+	 * @param companyId the company ID
 	 * @param languageId the language ID
 	 * @return the number of matching site friendly urls
 	 */
 	@Override
-	public int countByC_G_L(long companyId, long groupId, String languageId) {
+	public int countByC_G_L(long groupId, long companyId, String languageId) {
 		languageId = Objects.toString(languageId, "");
 
 		FinderPath finderPath = _finderPathCountByC_G_L;
 
-		Object[] finderArgs = new Object[] {companyId, groupId, languageId};
+		Object[] finderArgs = new Object[] {groupId, companyId, languageId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -2469,9 +2469,9 @@ public class SiteFriendlyURLPersistenceImpl
 
 			sb.append(_SQL_COUNT_SITEFRIENDLYURL_WHERE);
 
-			sb.append(_FINDER_COLUMN_C_G_L_COMPANYID_2);
-
 			sb.append(_FINDER_COLUMN_C_G_L_GROUPID_2);
+
+			sb.append(_FINDER_COLUMN_C_G_L_COMPANYID_2);
 
 			boolean bindLanguageId = false;
 
@@ -2495,9 +2495,9 @@ public class SiteFriendlyURLPersistenceImpl
 
 				QueryPos queryPos = QueryPos.getInstance(query);
 
-				queryPos.add(companyId);
-
 				queryPos.add(groupId);
+
+				queryPos.add(companyId);
 
 				if (bindLanguageId) {
 					queryPos.add(languageId);
@@ -2518,11 +2518,11 @@ public class SiteFriendlyURLPersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_G_L_COMPANYID_2 =
-		"siteFriendlyURL.companyId = ? AND ";
-
 	private static final String _FINDER_COLUMN_C_G_L_GROUPID_2 =
 		"siteFriendlyURL.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_G_L_COMPANYID_2 =
+		"siteFriendlyURL.companyId = ? AND ";
 
 	private static final String _FINDER_COLUMN_C_G_L_LANGUAGEID_2 =
 		"siteFriendlyURL.languageId = ?";
@@ -2878,7 +2878,7 @@ public class SiteFriendlyURLPersistenceImpl
 		finderCache.putResult(
 			_finderPathFetchByC_G_L,
 			new Object[] {
-				siteFriendlyURL.getCompanyId(), siteFriendlyURL.getGroupId(),
+				siteFriendlyURL.getGroupId(), siteFriendlyURL.getCompanyId(),
 				siteFriendlyURL.getLanguageId()
 			},
 			siteFriendlyURL);
@@ -2991,8 +2991,8 @@ public class SiteFriendlyURLPersistenceImpl
 			_finderPathFetchByC_F, args, siteFriendlyURLModelImpl, false);
 
 		args = new Object[] {
-			siteFriendlyURLModelImpl.getCompanyId(),
 			siteFriendlyURLModelImpl.getGroupId(),
+			siteFriendlyURLModelImpl.getCompanyId(),
 			siteFriendlyURLModelImpl.getLanguageId()
 		};
 
@@ -3548,17 +3548,17 @@ public class SiteFriendlyURLPersistenceImpl
 				Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			},
-			new String[] {"companyId", "groupId"}, true);
+			new String[] {"groupId", "companyId"}, true);
 
 		_finderPathWithoutPaginationFindByC_G = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_G",
 			new String[] {Long.class.getName(), Long.class.getName()},
-			new String[] {"companyId", "groupId"}, true);
+			new String[] {"groupId", "companyId"}, true);
 
 		_finderPathCountByC_G = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_G",
 			new String[] {Long.class.getName(), Long.class.getName()},
-			new String[] {"companyId", "groupId"}, false);
+			new String[] {"groupId", "companyId"}, false);
 
 		_finderPathFetchByC_F = _createFinderPath(
 			FINDER_CLASS_NAME_ENTITY, "fetchByC_F",
@@ -3576,7 +3576,7 @@ public class SiteFriendlyURLPersistenceImpl
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName()
 			},
-			new String[] {"companyId", "groupId", "languageId"}, true);
+			new String[] {"groupId", "companyId", "languageId"}, true);
 
 		_finderPathCountByC_G_L = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_G_L",
@@ -3584,7 +3584,7 @@ public class SiteFriendlyURLPersistenceImpl
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName()
 			},
-			new String[] {"companyId", "groupId", "languageId"}, false);
+			new String[] {"groupId", "companyId", "languageId"}, false);
 
 		_finderPathFetchByC_F_L = _createFinderPath(
 			FINDER_CLASS_NAME_ENTITY, "fetchByC_F_L",
