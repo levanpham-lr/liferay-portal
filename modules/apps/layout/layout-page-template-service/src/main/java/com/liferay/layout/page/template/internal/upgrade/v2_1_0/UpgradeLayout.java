@@ -67,9 +67,9 @@ public class UpgradeLayout extends UpgradeProcess {
 	protected void upgradeLayout() throws Exception {
 		StringBundler sb = new StringBundler(3);
 
-		sb.append("select layoutPageTemplateEntryId, userId, groupId, name, ");
-		sb.append("type_, layoutPrototypeId from LayoutPageTemplateEntry ");
-		sb.append("where plid is null or plid = 0");
+		sb.append("select layoutPageTemplateEntryId, groupId, companyId, ");
+		sb.append("userId, name, type_, layoutPrototypeId, companyId from ");
+		sb.append("LayoutPageTemplateEntry where plid is null or plid = 0");
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -82,7 +82,11 @@ public class UpgradeLayout extends UpgradeProcess {
 						"layoutPageTemplateEntryId = ?"))) {
 
 			while (rs.next()) {
+				long companyId = rs.getLong("companyId");
 				long userId = rs.getLong("userId");
+
+				userId = PortalUtil.getValidUserId(companyId, userId);
+
 				long groupId = rs.getLong("groupId");
 				String name = rs.getString("name");
 				int type = rs.getInt("type_");
