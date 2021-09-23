@@ -815,16 +815,16 @@ definition {
 			Button.clickPublish();
 
 			AssertTextEquals(
-				locator1 = "Message#ERROR_FORM_VALIDATION",
-				value1 = "This field is required.");
+				locator1 = "Message#ERROR_DISMISSIBLE",
+				value1 = "Close Error:Please fill out all required fields.");
 		}
 
 		task ("Assert the alert message is still shown after click the outside of HTML field") {
 			WebContent.clickMarginOfContentContainer();
 
 			AssertTextEquals(
-				locator1 = "Message#ERROR_FORM_VALIDATION",
-				value1 = "This field is required.");
+				locator1 = "Message#ERROR_DISMISSIBLE",
+				value1 = "Close Error:Please fill out all required fields.");
 		}
 
 		task ("Assert the alert message is still shown after clear content of HTML field") {
@@ -839,8 +839,8 @@ definition {
 				value1 = "");
 
 			AssertTextEquals(
-				locator1 = "Message#ERROR_FORM_VALIDATION",
-				value1 = "This field is required.");
+				locator1 = "Message#ERROR_DISMISSIBLE",
+				value1 = "Close Error:Please fill out all required fields.");
 		}
 
 		task ("Type content in HTML field then Publish") {
