@@ -509,6 +509,10 @@ AUI.add(
 							'inputLocalized:defaultLocaleChanged',
 							A.bind('_onDefaultLocaleChanged', instance)
 						),
+						Liferay.after(
+							'inputLocalized:defaultLocaleChanged',
+							A.bind('_onLocaleChanged', instance)
+						),
 						Liferay.on(
 							'inputLocalized:localeChanged',
 							A.bind('_onLocaleChanged', instance)
