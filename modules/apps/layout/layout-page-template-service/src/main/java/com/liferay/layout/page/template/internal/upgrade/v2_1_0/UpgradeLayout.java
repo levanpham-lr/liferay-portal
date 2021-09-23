@@ -84,16 +84,13 @@ public class UpgradeLayout extends UpgradeProcess {
 			while (rs.next()) {
 				long companyId = rs.getLong("companyId");
 				long userId = rs.getLong("userId");
-
-				userId = PortalUtil.getValidUserId(companyId, userId);
-
 				long groupId = rs.getLong("groupId");
 				String name = rs.getString("name");
 				int type = rs.getInt("type_");
 				long layoutPrototypeId = rs.getLong("layoutPrototypeId");
 
 				long plid = _getPlid(
-					userId, groupId, name, type, layoutPrototypeId,
+					companyId, userId, groupId, name, type, layoutPrototypeId,
 					serviceContext);
 
 				ps.setLong(1, plid);
@@ -147,7 +144,7 @@ public class UpgradeLayout extends UpgradeProcess {
 	}
 
 	private long _getPlid(
-			long userId, long groupId, String name, int type,
+			long companyId, long userId, long groupId, String name, int type,
 			long layoutPrototypeId, ServiceContext serviceContext)
 		throws Exception {
 
@@ -178,9 +175,9 @@ public class UpgradeLayout extends UpgradeProcess {
 			"layout.instanceable.allowed", Boolean.TRUE);
 
 		Layout layout = _layoutLocalService.addLayout(
-			userId, groupId, privateLayout, 0, titleMap, titleMap, null, null,
-			null, layoutType, StringPool.BLANK, true, true, new HashMap<>(),
-			serviceContext);
+			PortalUtil.getValidUserId(companyId, userId), groupId,
+			privateLayout, 0, titleMap, titleMap, null, null, null, layoutType,
+			StringPool.BLANK, true, true, new HashMap<>(), serviceContext);
 
 		_layoutLocalService.addLayout(
 			layout.getUserId(), layout.getGroupId(), privateLayout,
