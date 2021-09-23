@@ -188,8 +188,10 @@ public class PublishLayoutMVCActionCommand
 			Layout layout, ServiceContext serviceContext)
 		throws Exception {
 
+		Layout proxyLayout = _layoutLocalService.fetchLayout(layout.getPlid());
+
 		LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
-			layout);
+			proxyLayout);
 
 		if (layoutRevision == null) {
 			return;
