@@ -100,11 +100,11 @@ Layout curLayout = (Layout)row.getObject();
 		if (curLayout.hasChildren() && _hasScopeGroup(curLayout)) {
 			messageKey = "this-page-is-being-used-as-a-scope-for-content-and-also-has-child-pages-any-content-that-is-scoped-to-this-page-will-also-be-removed-along-with-any-child-pages-are-you-sure-you-want-to-delete-this-page";
 		}
-		else if (_hasScopeGroup(curLayout)) {
-			messageKey = "this-page-is-being-used-as-a-scope-for-content-any-content-that-is-scoped-to-this-page-will-also-be-removed-are-you-sure-you-want-to-delete-this-page";
-		}
 		else if (curLayout.hasChildren()) {
 			messageKey = "this-page-has-child-pages-that-will-also-be-removed-are-you-sure-you-want-to-delete-this-page";
+		}
+		else if (_hasScopeGroup(curLayout)) {
+			messageKey = "this-page-is-being-used-as-a-scope-for-content-any-content-that-is-scoped-to-this-page-will-also-be-removed-are-you-sure-you-want-to-delete-this-page";
 		}
 		%>
 
