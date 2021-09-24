@@ -323,7 +323,6 @@ public abstract class OpenIdConnectSessionLocalServiceBaseImpl
 	/**
 	 * @throws PortalException
 	 */
-	@Override
 	public PersistedModel createPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 
@@ -342,7 +341,6 @@ public abstract class OpenIdConnectSessionLocalServiceBaseImpl
 			(OpenIdConnectSession)persistedModel);
 	}
 
-	@Override
 	public BasePersistence<OpenIdConnectSession> getBasePersistence() {
 		return openIdConnectSessionPersistence;
 	}

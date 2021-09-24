@@ -30,10 +30,12 @@ import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
-import com.liferay.portal.kernel.service.persistence.BasePersistence;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
-import com.liferay.portal.kernel.util.HashMapDictionary;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.security.sso.openid.connect.persistence.exception.NoSuchSessionException;
 import com.liferay.portal.security.sso.openid.connect.persistence.model.OpenIdConnectSession;
@@ -48,6 +50,7 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -72,9 +75,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Arthur Chan
  * @generated
  */
-@Component(
-	service = {OpenIdConnectSessionPersistence.class, BasePersistence.class}
-)
+@Component(service = OpenIdConnectSessionPersistence.class)
 public class OpenIdConnectSessionPersistenceImpl
 	extends BasePersistenceImpl<OpenIdConnectSession>
 	implements OpenIdConnectSessionPersistence {
@@ -118,6 +119,8 @@ public class OpenIdConnectSessionPersistenceImpl
 			openIdConnectSession.getPrimaryKey(), openIdConnectSession);
 	}
 
+	private int _valueObjectFinderCacheListThreshold;
+
 	/**
 	 * Caches the open ID connect sessions in the entity cache if it is enabled.
 	 *
@@ -125,6 +128,14 @@ public class OpenIdConnectSessionPersistenceImpl
 	 */
 	@Override
 	public void cacheResult(List<OpenIdConnectSession> openIdConnectSessions) {
+		if ((_valueObjectFinderCacheListThreshold == 0) ||
+			((_valueObjectFinderCacheListThreshold > 0) &&
+			 (openIdConnectSessions.size() >
+				 _valueObjectFinderCacheListThreshold))) {
+
+			return;
+		}
+
 		for (OpenIdConnectSession openIdConnectSession :
 				openIdConnectSessions) {
 
@@ -148,7 +159,9 @@ public class OpenIdConnectSessionPersistenceImpl
 	public void clearCache() {
 		entityCache.clearCache(OpenIdConnectSessionImpl.class);
 
-		finderCache.clearCache(OpenIdConnectSessionImpl.class);
+		finderCache.clearCache(FINDER_CLASS_NAME_ENTITY);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
 	/**
@@ -176,7 +189,9 @@ public class OpenIdConnectSessionPersistenceImpl
 
 	@Override
 	public void clearCache(Set<Serializable> primaryKeys) {
-		finderCache.clearCache(OpenIdConnectSessionImpl.class);
+		finderCache.clearCache(FINDER_CLASS_NAME_ENTITY);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
 		for (Serializable primaryKey : primaryKeys) {
 			entityCache.removeResult(
@@ -501,7 +516,7 @@ public class OpenIdConnectSessionPersistenceImpl
 
 		if (useFinderCache) {
 			list = (List<OpenIdConnectSession>)finderCache.getResult(
-				finderPath, finderArgs);
+				finderPath, finderArgs, this);
 		}
 
 		if (list == null) {
@@ -571,7 +586,7 @@ public class OpenIdConnectSessionPersistenceImpl
 	@Override
 	public int countAll() {
 		Long count = (Long)finderCache.getResult(
-			_finderPathCountAll, FINDER_ARGS_EMPTY);
+			_finderPathCountAll, FINDER_ARGS_EMPTY, this);
 
 		if (count == null) {
 			Session session = null;
@@ -628,17 +643,21 @@ public class OpenIdConnectSessionPersistenceImpl
 		_argumentsResolverServiceRegistration = _bundleContext.registerService(
 			ArgumentsResolver.class,
 			new OpenIdConnectSessionModelArgumentsResolver(),
-			new HashMapDictionary<>());
+			MapUtil.singletonDictionary(
+				"model.class.name", OpenIdConnectSession.class.getName()));
 
-		_finderPathWithPaginationFindAll = new FinderPath(
+		_valueObjectFinderCacheListThreshold = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_LIST_THRESHOLD));
+
+		_finderPathWithPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0],
 			new String[0], true);
 
-		_finderPathWithoutPaginationFindAll = new FinderPath(
+		_finderPathWithoutPaginationFindAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0],
 			new String[0], true);
 
-		_finderPathCountAll = new FinderPath(
+		_finderPathCountAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0], new String[0], false);
 	}
@@ -648,6 +667,12 @@ public class OpenIdConnectSessionPersistenceImpl
 		entityCache.removeCache(OpenIdConnectSessionImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
+
+		for (ServiceRegistration<FinderPath> serviceRegistration :
+				_serviceRegistrations) {
+
+			serviceRegistration.unregister();
+		}
 	}
 
 	@Override
@@ -699,11 +724,25 @@ public class OpenIdConnectSessionPersistenceImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		OpenIdConnectSessionPersistenceImpl.class);
 
-	@Override
-	protected FinderCache getFinderCache() {
-		return finderCache;
+	private FinderPath _createFinderPath(
+		String cacheName, String methodName, String[] params,
+		String[] columnNames, boolean baseModelResult) {
+
+		FinderPath finderPath = new FinderPath(
+			cacheName, methodName, params, columnNames, baseModelResult);
+
+		if (!cacheName.equals(FINDER_CLASS_NAME_LIST_WITH_PAGINATION)) {
+			_serviceRegistrations.add(
+				_bundleContext.registerService(
+					FinderPath.class, finderPath,
+					MapUtil.singletonDictionary("cache.name", cacheName)));
+		}
+
+		return finderPath;
 	}
 
+	private Set<ServiceRegistration<FinderPath>> _serviceRegistrations =
+		new HashSet<>();
 	private ServiceRegistration<ArgumentsResolver>
 		_argumentsResolverServiceRegistration;
 
@@ -719,7 +758,7 @@ public class OpenIdConnectSessionPersistenceImpl
 
 			if ((columnNames == null) || (columnNames.length == 0)) {
 				if (baseModel.isNew()) {
-					return FINDER_ARGS_EMPTY;
+					return new Object[0];
 				}
 
 				return null;
@@ -758,16 +797,6 @@ public class OpenIdConnectSessionPersistenceImpl
 			}
 
 			return null;
-		}
-
-		@Override
-		public String getClassName() {
-			return OpenIdConnectSessionImpl.class.getName();
-		}
-
-		@Override
-		public String getTableName() {
-			return OpenIdConnectSessionTable.INSTANCE.getTableName();
 		}
 
 		private static Object[] _getValue(
