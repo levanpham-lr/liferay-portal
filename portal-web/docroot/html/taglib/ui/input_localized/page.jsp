@@ -261,7 +261,7 @@
 			for (Locale availableLocale : availableLocales) {
 			%>
 
-				available['<%= LocaleUtil.toLanguageId(availableLocale) %>'] = '<%= availableLocale.getDisplayName(locale) %>';
+				available['<%= LocaleUtil.toLanguageId(availableLocale) %>'] = '<%= HtmlUtil.escapeJS(availableLocale.getDisplayName(locale)) %>';
 
 			<%
 			}
