@@ -243,8 +243,7 @@ definition {
 	}
 
 	@description = "This is a use case for LPS-58754"
-	@ignore = "true"
-	@priority = "2"
+	@priority = "3"
 	test WithdrawWorkflowSubmissionFromRemovedUser {
 		ApplicationsMenu.gotoPortlet(
 			category = "Users",
@@ -336,12 +335,6 @@ definition {
 			category = "Workflow",
 			panel = "Applications",
 			portlet = "Submissions");
-
-		Workflow.withdrawTaskByActions(
-			workflowAssetTitle = "Site Page Name",
-			workflowAssetType = "Page Revision",
-			workflowDefinition = "Single Approver",
-			workflowTask = "Update");
 
 		Workflow.viewDefaultWorkflowSubmissions();
 	}
