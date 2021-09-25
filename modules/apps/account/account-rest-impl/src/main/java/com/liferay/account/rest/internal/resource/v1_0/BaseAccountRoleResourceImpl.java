@@ -40,13 +40,6 @@ import com.liferay.portal.vulcan.resource.EntityModelResource;
 import com.liferay.portal.vulcan.util.ActionUtil;
 import com.liferay.portal.vulcan.util.TransformUtil;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.tags.Tags;
-
 import java.io.Serializable;
 
 import java.util.Collections;
@@ -59,17 +52,6 @@ import javax.annotation.Generated;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javax.validation.constraints.NotNull;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
@@ -79,7 +61,7 @@ import javax.ws.rs.core.UriInfo;
  * @generated
  */
 @Generated("")
-@Path("/v1.0")
+@javax.ws.rs.Path("/v1.0")
 public abstract class BaseAccountRoleResourceImpl
 	implements AccountRoleResource, EntityModelResource,
 			   VulcanBatchEngineTaskItemDelegate<AccountRole> {
@@ -89,33 +71,46 @@ public abstract class BaseAccountRoleResourceImpl
 	 *
 	 * curl -X 'DELETE' 'http://localhost:8080/o/account-rest/v1.0/accounts/by-external-reference-code/{accountExternalReferenceCode}/account-roles/{accountRoleId}/account-users/{accountUserExternalReferenceCode}'  -u 'test@liferay.com:test'
 	 */
-	@DELETE
-	@Operation(description = "Unassigns account users to the account role")
-	@Override
-	@Parameters(
+	@io.swagger.v3.oas.annotations.Operation(
+		description = "Unassigns account users to the account role"
+	)
+	@io.swagger.v3.oas.annotations.Parameters(
 		value = {
-			@Parameter(
-				in = ParameterIn.PATH, name = "accountExternalReferenceCode"
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountExternalReferenceCode"
 			),
-			@Parameter(in = ParameterIn.PATH, name = "accountRoleId"),
-			@Parameter(
-				in = ParameterIn.PATH, name = "accountUserExternalReferenceCode"
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountRoleId"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountUserExternalReferenceCode"
 			)
 		}
 	)
-	@Path(
+	@io.swagger.v3.oas.annotations.tags.Tags(
+		value = {@io.swagger.v3.oas.annotations.tags.Tag(name = "AccountRole")}
+	)
+	@javax.ws.rs.DELETE
+	@javax.ws.rs.Path(
 		"/accounts/by-external-reference-code/{accountExternalReferenceCode}/account-roles/{accountRoleId}/account-users/{accountUserExternalReferenceCode}"
 	)
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountRole")})
+	@javax.ws.rs.Produces({"application/json", "application/xml"})
+	@Override
 	public void deleteAccountRoleUserAssociationByExternalReferenceCode(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("accountExternalReferenceCode")
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountExternalReferenceCode")
 			String accountExternalReferenceCode,
-			@NotNull @Parameter(hidden = true) @PathParam("accountRoleId") Long
-				accountRoleId,
-			@NotNull @Parameter(hidden = true)
-			@PathParam("accountUserExternalReferenceCode")
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountRoleId")
+			Long accountRoleId,
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountUserExternalReferenceCode")
 			String accountUserExternalReferenceCode)
 		throws Exception {
 	}
@@ -125,33 +120,46 @@ public abstract class BaseAccountRoleResourceImpl
 	 *
 	 * curl -X 'POST' 'http://localhost:8080/o/account-rest/v1.0/accounts/by-external-reference-code/{accountExternalReferenceCode}/account-roles/{accountRoleId}/account-users/{accountUserExternalReferenceCode}'  -u 'test@liferay.com:test'
 	 */
-	@Operation(description = "Assigns account users to the account role")
-	@Override
-	@Parameters(
+	@io.swagger.v3.oas.annotations.Operation(
+		description = "Assigns account users to the account role"
+	)
+	@io.swagger.v3.oas.annotations.Parameters(
 		value = {
-			@Parameter(
-				in = ParameterIn.PATH, name = "accountExternalReferenceCode"
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountExternalReferenceCode"
 			),
-			@Parameter(in = ParameterIn.PATH, name = "accountRoleId"),
-			@Parameter(
-				in = ParameterIn.PATH, name = "accountUserExternalReferenceCode"
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountRoleId"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountUserExternalReferenceCode"
 			)
 		}
 	)
-	@Path(
+	@io.swagger.v3.oas.annotations.tags.Tags(
+		value = {@io.swagger.v3.oas.annotations.tags.Tag(name = "AccountRole")}
+	)
+	@javax.ws.rs.Path(
 		"/accounts/by-external-reference-code/{accountExternalReferenceCode}/account-roles/{accountRoleId}/account-users/{accountUserExternalReferenceCode}"
 	)
-	@POST
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountRole")})
+	@javax.ws.rs.POST
+	@javax.ws.rs.Produces({"application/json", "application/xml"})
+	@Override
 	public void postAccountRoleUserAssociationByExternalReferenceCode(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("accountExternalReferenceCode")
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountExternalReferenceCode")
 			String accountExternalReferenceCode,
-			@NotNull @Parameter(hidden = true) @PathParam("accountRoleId") Long
-				accountRoleId,
-			@NotNull @Parameter(hidden = true)
-			@PathParam("accountUserExternalReferenceCode")
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountRoleId")
+			Long accountRoleId,
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountUserExternalReferenceCode")
 			String accountUserExternalReferenceCode)
 		throws Exception {
 	}
@@ -161,29 +169,52 @@ public abstract class BaseAccountRoleResourceImpl
 	 *
 	 * curl -X 'GET' 'http://localhost:8080/o/account-rest/v1.0/accounts/by-external-reference-code/{externalReferenceCode}/account-roles'  -u 'test@liferay.com:test'
 	 */
-	@GET
-	@Operation(description = "Gets the account's roles")
-	@Override
-	@Parameters(
+	@io.swagger.v3.oas.annotations.Operation(
+		description = "Gets the account's roles"
+	)
+	@io.swagger.v3.oas.annotations.Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
-			@Parameter(in = ParameterIn.QUERY, name = "keywords"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize"),
-			@Parameter(in = ParameterIn.QUERY, name = "sort")
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "externalReferenceCode"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.QUERY,
+				name = "keywords"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.QUERY,
+				name = "page"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.QUERY,
+				name = "pageSize"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.QUERY,
+				name = "sort"
+			)
 		}
 	)
-	@Path(
+	@io.swagger.v3.oas.annotations.tags.Tags(
+		value = {@io.swagger.v3.oas.annotations.tags.Tag(name = "AccountRole")}
+	)
+	@javax.ws.rs.GET
+	@javax.ws.rs.Path(
 		"/accounts/by-external-reference-code/{externalReferenceCode}/account-roles"
 	)
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountRole")})
+	@javax.ws.rs.Produces({"application/json", "application/xml"})
+	@Override
 	public Page<AccountRole> getAccountRolesByExternalReferenceCodePage(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode")
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("externalReferenceCode")
 			String externalReferenceCode,
-			@Parameter(hidden = true) @QueryParam("keywords") String keywords,
-			@Context Pagination pagination, @Context Sort[] sorts)
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.ws.rs.QueryParam("keywords")
+			String keywords,
+			@javax.ws.rs.core.Context Pagination pagination,
+			@javax.ws.rs.core.Context Sort[] sorts)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
@@ -194,23 +225,31 @@ public abstract class BaseAccountRoleResourceImpl
 	 *
 	 * curl -X 'POST' 'http://localhost:8080/o/account-rest/v1.0/accounts/by-external-reference-code/{externalReferenceCode}/account-roles' -d $'{"description": ___, "displayName": ___, "name": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
 	 */
-	@Consumes({"application/json", "application/xml"})
-	@Operation(description = "Adds a role for the account")
-	@Override
-	@Parameters(
+	@io.swagger.v3.oas.annotations.Operation(
+		description = "Adds a role for the account"
+	)
+	@io.swagger.v3.oas.annotations.Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "externalReferenceCode"
+			)
 		}
 	)
-	@Path(
+	@io.swagger.v3.oas.annotations.tags.Tags(
+		value = {@io.swagger.v3.oas.annotations.tags.Tag(name = "AccountRole")}
+	)
+	@javax.ws.rs.Consumes({"application/json", "application/xml"})
+	@javax.ws.rs.Path(
 		"/accounts/by-external-reference-code/{externalReferenceCode}/account-roles"
 	)
-	@POST
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountRole")})
+	@javax.ws.rs.POST
+	@javax.ws.rs.Produces({"application/json", "application/xml"})
+	@Override
 	public AccountRole postAccountRoleByExternalReferenceCode(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode")
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("externalReferenceCode")
 			String externalReferenceCode,
 			AccountRole accountRole)
 		throws Exception {
@@ -223,26 +262,50 @@ public abstract class BaseAccountRoleResourceImpl
 	 *
 	 * curl -X 'GET' 'http://localhost:8080/o/account-rest/v1.0/accounts/{accountId}/account-roles'  -u 'test@liferay.com:test'
 	 */
-	@GET
-	@Operation(description = "Gets the account's roles")
-	@Override
-	@Parameters(
+	@io.swagger.v3.oas.annotations.Operation(
+		description = "Gets the account's roles"
+	)
+	@io.swagger.v3.oas.annotations.Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "accountId"),
-			@Parameter(in = ParameterIn.QUERY, name = "keywords"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize"),
-			@Parameter(in = ParameterIn.QUERY, name = "sort")
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountId"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.QUERY,
+				name = "keywords"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.QUERY,
+				name = "page"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.QUERY,
+				name = "pageSize"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.QUERY,
+				name = "sort"
+			)
 		}
 	)
-	@Path("/accounts/{accountId}/account-roles")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountRole")})
+	@io.swagger.v3.oas.annotations.tags.Tags(
+		value = {@io.swagger.v3.oas.annotations.tags.Tag(name = "AccountRole")}
+	)
+	@javax.ws.rs.GET
+	@javax.ws.rs.Path("/accounts/{accountId}/account-roles")
+	@javax.ws.rs.Produces({"application/json", "application/xml"})
+	@Override
 	public Page<AccountRole> getAccountRolesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("accountId") Long
-				accountId,
-			@Parameter(hidden = true) @QueryParam("keywords") String keywords,
-			@Context Pagination pagination, @Context Sort[] sorts)
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountId")
+			Long accountId,
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.ws.rs.QueryParam("keywords")
+			String keywords,
+			@javax.ws.rs.core.Context Pagination pagination,
+			@javax.ws.rs.core.Context Sort[] sorts)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
@@ -253,17 +316,30 @@ public abstract class BaseAccountRoleResourceImpl
 	 *
 	 * curl -X 'POST' 'http://localhost:8080/o/account-rest/v1.0/accounts/{accountId}/account-roles' -d $'{"description": ___, "displayName": ___, "name": ___}' --header 'Content-Type: application/json' -u 'test@liferay.com:test'
 	 */
-	@Consumes({"application/json", "application/xml"})
-	@Operation(description = "Adds a role for the account")
+	@io.swagger.v3.oas.annotations.Operation(
+		description = "Adds a role for the account"
+	)
+	@io.swagger.v3.oas.annotations.Parameters(
+		value = {
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountId"
+			)
+		}
+	)
+	@io.swagger.v3.oas.annotations.tags.Tags(
+		value = {@io.swagger.v3.oas.annotations.tags.Tag(name = "AccountRole")}
+	)
+	@javax.ws.rs.Consumes({"application/json", "application/xml"})
+	@javax.ws.rs.Path("/accounts/{accountId}/account-roles")
+	@javax.ws.rs.POST
+	@javax.ws.rs.Produces({"application/json", "application/xml"})
 	@Override
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "accountId")})
-	@Path("/accounts/{accountId}/account-roles")
-	@POST
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountRole")})
 	public AccountRole postAccountRole(
-			@NotNull @Parameter(hidden = true) @PathParam("accountId") Long
-				accountId,
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountId")
+			Long accountId,
 			AccountRole accountRole)
 		throws Exception {
 
@@ -275,28 +351,47 @@ public abstract class BaseAccountRoleResourceImpl
 	 *
 	 * curl -X 'DELETE' 'http://localhost:8080/o/account-rest/v1.0/accounts/{accountId}/account-roles/{accountRoleId}/account-users/{accountUserId}'  -u 'test@liferay.com:test'
 	 */
-	@DELETE
-	@Operation(description = "Unassigns account users to the account role")
-	@Override
-	@Parameters(
+	@io.swagger.v3.oas.annotations.Operation(
+		description = "Unassigns account users to the account role"
+	)
+	@io.swagger.v3.oas.annotations.Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "accountId"),
-			@Parameter(in = ParameterIn.PATH, name = "accountRoleId"),
-			@Parameter(in = ParameterIn.PATH, name = "accountUserId")
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountId"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountRoleId"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountUserId"
+			)
 		}
 	)
-	@Path(
+	@io.swagger.v3.oas.annotations.tags.Tags(
+		value = {@io.swagger.v3.oas.annotations.tags.Tag(name = "AccountRole")}
+	)
+	@javax.ws.rs.DELETE
+	@javax.ws.rs.Path(
 		"/accounts/{accountId}/account-roles/{accountRoleId}/account-users/{accountUserId}"
 	)
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountRole")})
+	@javax.ws.rs.Produces({"application/json", "application/xml"})
+	@Override
 	public void deleteAccountRoleUserAssociation(
-			@NotNull @Parameter(hidden = true) @PathParam("accountId") Long
-				accountId,
-			@NotNull @Parameter(hidden = true) @PathParam("accountRoleId") Long
-				accountRoleId,
-			@NotNull @Parameter(hidden = true) @PathParam("accountUserId") Long
-				accountUserId)
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountId")
+			Long accountId,
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountRoleId")
+			Long accountRoleId,
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountUserId")
+			Long accountUserId)
 		throws Exception {
 	}
 
@@ -305,28 +400,47 @@ public abstract class BaseAccountRoleResourceImpl
 	 *
 	 * curl -X 'POST' 'http://localhost:8080/o/account-rest/v1.0/accounts/{accountId}/account-roles/{accountRoleId}/account-users/{accountUserId}'  -u 'test@liferay.com:test'
 	 */
-	@Operation(description = "Assigns account users to the account role")
-	@Override
-	@Parameters(
+	@io.swagger.v3.oas.annotations.Operation(
+		description = "Assigns account users to the account role"
+	)
+	@io.swagger.v3.oas.annotations.Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "accountId"),
-			@Parameter(in = ParameterIn.PATH, name = "accountRoleId"),
-			@Parameter(in = ParameterIn.PATH, name = "accountUserId")
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountId"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountRoleId"
+			),
+			@io.swagger.v3.oas.annotations.Parameter(
+				in = io.swagger.v3.oas.annotations.enums.ParameterIn.PATH,
+				name = "accountUserId"
+			)
 		}
 	)
-	@Path(
+	@io.swagger.v3.oas.annotations.tags.Tags(
+		value = {@io.swagger.v3.oas.annotations.tags.Tag(name = "AccountRole")}
+	)
+	@javax.ws.rs.Path(
 		"/accounts/{accountId}/account-roles/{accountRoleId}/account-users/{accountUserId}"
 	)
-	@POST
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountRole")})
+	@javax.ws.rs.POST
+	@javax.ws.rs.Produces({"application/json", "application/xml"})
+	@Override
 	public void postAccountRoleUserAssociation(
-			@NotNull @Parameter(hidden = true) @PathParam("accountId") Long
-				accountId,
-			@NotNull @Parameter(hidden = true) @PathParam("accountRoleId") Long
-				accountRoleId,
-			@NotNull @Parameter(hidden = true) @PathParam("accountUserId") Long
-				accountUserId)
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountId")
+			Long accountId,
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountRoleId")
+			Long accountRoleId,
+			@io.swagger.v3.oas.annotations.Parameter(hidden = true)
+			@javax.validation.constraints.NotNull
+			@javax.ws.rs.PathParam("accountUserId")
+			Long accountUserId)
 		throws Exception {
 	}
 
