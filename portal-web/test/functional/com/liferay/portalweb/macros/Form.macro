@@ -661,6 +661,14 @@ definition {
 		AssertVisible(locator1 = "Form#PUBLISH_UNPUBLISH_ICON_CLOSE");
 	}
 
+	macro viewRedirectedURL {
+		WaitForElementPresent(
+			key_navItem = "Home",
+			locator1 = "NavBar#NAV_ITEM_LINK");
+
+		AssertLocation(value1 = "${friendlyURL}");
+	}
+
 	macro viewSaveNotification {
 		AssertTextEquals.assertPartialText(
 			locator1 = "Form#SAVE_NOTIFICATION",
