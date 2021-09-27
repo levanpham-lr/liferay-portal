@@ -92,7 +92,7 @@ public class DDMFormEmailNotificationSender {
 
 		try {
 			MailMessage mailMessage = createMailMessage(
-				serviceContext.getRequest(), ddmFormInstanceRecord);
+				serviceContext, ddmFormInstanceRecord);
 
 			_mailService.sendEmail(mailMessage);
 		}
@@ -102,7 +102,7 @@ public class DDMFormEmailNotificationSender {
 	}
 
 	protected MailMessage createMailMessage(
-			HttpServletRequest httpServletRequest,
+		ServiceContext serviceContext,
 			DDMFormInstanceRecord ddmFormInstanceRecord)
 		throws Exception {
 
@@ -116,7 +116,7 @@ public class DDMFormEmailNotificationSender {
 		String subject = getEmailSubject(ddmFormInstance);
 
 		String body = getEmailBody(
-			httpServletRequest, ddmFormInstance, ddmFormInstanceRecord);
+			serviceContext, ddmFormInstance, ddmFormInstanceRecord);
 
 		MailMessage mailMessage = new MailMessage(
 			fromInternetAddress, subject, body, true);
@@ -130,7 +130,7 @@ public class DDMFormEmailNotificationSender {
 	}
 
 	protected Template createTemplate(
-			HttpServletRequest httpServletRequest,
+		ServiceContext serviceContext,
 			DDMFormInstance ddmFormInstance,
 			DDMFormInstanceRecord ddmFormInstanceRecord)
 		throws PortalException {
@@ -140,7 +140,7 @@ public class DDMFormEmailNotificationSender {
 			getTemplateResource(_TEMPLATE_PATH), false);
 
 		populateParameters(
-			template, httpServletRequest, ddmFormInstance,
+			template, serviceContext, ddmFormInstance,
 			ddmFormInstanceRecord);
 
 		return template;
@@ -172,13 +172,13 @@ public class DDMFormEmailNotificationSender {
 	}
 
 	protected String getEmailBody(
-			HttpServletRequest httpServletRequest,
+		ServiceContext serviceContext,
 			DDMFormInstance ddmFormInstance,
 			DDMFormInstanceRecord ddmFormInstanceRecord)
 		throws PortalException {
 
 		Template template = createTemplate(
-			httpServletRequest, ddmFormInstance, ddmFormInstanceRecord);
+			serviceContext, ddmFormInstance, ddmFormInstanceRecord);
 
 		return render(template);
 	}
@@ -421,14 +421,14 @@ public class DDMFormEmailNotificationSender {
 	}
 
 	protected String getViewFormEntriesURL(
-			DDMFormInstance ddmFormInstance, ThemeDisplay themeDisplay)
+			DDMFormInstance ddmFormInstance, ServiceContext serviceContext)
 		throws PortalException {
 
 		String portletNamespace = _portal.getPortletNamespace(
 			DDMPortletKeys.DYNAMIC_DATA_MAPPING_FORM_ADMIN);
 
 		return _portal.getSiteAdminURL(
-			themeDisplay.getPortalURL(),
+			serviceContext.getPortalURL(),
 			_groupLocalService.getGroup(ddmFormInstance.getGroupId()),
 			DDMPortletKeys.DYNAMIC_DATA_MAPPING_FORM_ADMIN,
 			HashMapBuilder.put(
@@ -445,14 +445,14 @@ public class DDMFormEmailNotificationSender {
 	protected String getViewFormURL(
 			DDMFormInstance ddmFormInstance,
 			DDMFormInstanceRecord ddmFormInstanceRecord,
-			ThemeDisplay themeDisplay)
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		String portletNamespace = _portal.getPortletNamespace(
 			DDMPortletKeys.DYNAMIC_DATA_MAPPING_FORM_ADMIN);
 
 		return _portal.getSiteAdminURL(
-			themeDisplay.getPortalURL(),
+			serviceContext.getPortalURL(),
 			_groupLocalService.getGroup(ddmFormInstance.getGroupId()),
 			DDMPortletKeys.DYNAMIC_DATA_MAPPING_FORM_ADMIN,
 			HashMapBuilder.put(
@@ -473,7 +473,7 @@ public class DDMFormEmailNotificationSender {
 	}
 
 	protected void populateParameters(
-			Template template, HttpServletRequest httpServletRequest,
+			Template template, ServiceContext serviceContext,
 			DDMFormInstance ddmFormInstance,
 			DDMFormInstanceRecord ddmFormInstanceRecord)
 		throws PortalException {
@@ -487,15 +487,14 @@ public class DDMFormEmailNotificationSender {
 			"siteName", getSiteName(ddmFormInstance.getGroupId(), locale));
 		template.put("userName", getUserName(ddmFormInstanceRecord, locale));
 
-		ThemeDisplay themeDisplay = getThemeDisplay(httpServletRequest);
 
 		template.put(
 			"viewFormEntriesURL",
-			getViewFormEntriesURL(ddmFormInstance, themeDisplay));
+			getViewFormEntriesURL(ddmFormInstance, serviceContext));
 		template.put(
 			"viewFormURL",
 			getViewFormURL(
-				ddmFormInstance, ddmFormInstanceRecord, themeDisplay));
+				ddmFormInstance, ddmFormInstanceRecord, serviceContext));
 	}
 
 	protected String render(Template template) throws TemplateException {
