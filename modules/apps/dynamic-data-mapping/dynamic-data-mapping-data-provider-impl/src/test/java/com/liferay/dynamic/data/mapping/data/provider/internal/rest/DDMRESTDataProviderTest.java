@@ -637,6 +637,66 @@ public class DDMRESTDataProviderTest extends PowerMockito {
 	}
 
 	@Test
+	public void testListWithVariousTypes() {
+		DocumentContext documentContext = mock(DocumentContext.class);
+
+		DDMDataProviderRequest.Builder builder =
+			DDMDataProviderRequest.Builder.newBuilder();
+
+		DDMDataProviderRequest ddmDataProviderRequest = builder.build();
+
+		String outputParameterId = StringUtil.randomString();
+
+		DDMRESTDataProviderSettings ddmRESTDataProviderSettings =
+			_createSettingsWithOutputParameter(
+				outputParameterId, "list output", false, "value;key", "list");
+
+		when(
+			documentContext.read(".value", List.class)
+		).thenReturn(
+			new ArrayList() {
+				{
+					add("Moreno");
+					add(42);
+					add(3.14);
+				}
+			}
+		);
+
+		when(
+			documentContext.read(".key")
+		).thenReturn(
+			new ArrayList() {
+				{
+					add("5");
+					add("6");
+					add("7");
+				}
+			}
+		);
+
+		DDMDataProviderResponse ddmDataProviderResponse =
+			_ddmRESTDataProvider.createDDMDataProviderResponse(
+				documentContext, ddmDataProviderRequest,
+				ddmRESTDataProviderSettings);
+
+		Optional<List<KeyValuePair>> optional =
+			ddmDataProviderResponse.getOutputOptional(
+				outputParameterId, List.class);
+
+		List<KeyValuePair> keyValuePairs = new ArrayList<KeyValuePair>() {
+			{
+				add(new KeyValuePair("5", "Moreno"));
+				add(new KeyValuePair("6", "42"));
+				add(new KeyValuePair("7", "3.14"));
+			}
+		};
+
+		Assert.assertEquals(
+			keyValuePairs.toString(), keyValuePairs, optional.get());
+	}
+
+	@Test
 	public void testListOutputWithoutPagination() {
 		DocumentContext documentContext = mock(DocumentContext.class);
 
