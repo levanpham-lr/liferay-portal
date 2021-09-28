@@ -15,11 +15,13 @@
 package com.liferay.company.service.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.asset.kernel.model.adapter.StagedAssetLink;
 import com.liferay.document.library.kernel.model.DLFileEntryType;
 import com.liferay.document.library.kernel.model.DLFileEntryTypeConstants;
 import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.exportimport.kernel.service.StagingLocalServiceUtil;
+import com.liferay.layout.set.model.adapter.StagedLayoutSet;
 import com.liferay.petra.reflect.ReflectionUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskThreadLocal;
@@ -34,6 +36,7 @@ import com.liferay.portal.kernel.exception.NoSuchVirtualHostException;
 import com.liferay.portal.kernel.exception.RequiredCompanyException;
 import com.liferay.portal.kernel.model.Account;
 import com.liferay.portal.kernel.model.BaseModelListener;
+import com.liferay.portal.kernel.model.ClassName;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
@@ -46,9 +49,12 @@ import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroup;
 import com.liferay.portal.kernel.model.UserGroupRole;
+import com.liferay.portal.kernel.model.adapter.StagedTheme;
 import com.liferay.portal.kernel.model.role.RoleConstants;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.AccountLocalServiceUtil;
+import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
 import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.LayoutPrototypeLocalServiceUtil;
@@ -82,12 +88,14 @@ import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerMethodTestRule;
 import com.liferay.portal.test.rule.SybaseDump;
 import com.liferay.portal.test.rule.SybaseDumpTransactionLog;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.site.model.adapter.StagedGroup;
 import com.liferay.sites.kernel.util.SitesUtil;
 
 import java.io.File;
@@ -261,6 +269,8 @@ public class CompanyLocalServiceTest {
 			companyStagingGroup.getGroupId());
 
 		Assert.assertNull(companyStagingGroup);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -336,6 +346,8 @@ public class CompanyLocalServiceTest {
 				layoutSetPrototype.getLayoutSetPrototypeId());
 
 		Assert.assertNull(layoutSetPrototype);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -374,6 +386,8 @@ public class CompanyLocalServiceTest {
 			});
 
 		CompanyLocalServiceUtil.deleteCompany(companyId);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -436,6 +450,8 @@ public class CompanyLocalServiceTest {
 			companyOrganizationGroup.getGroupId());
 
 		Assert.assertNull(companyOrganizationGroup);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -962,6 +978,24 @@ public class CompanyLocalServiceTest {
 			serviceContext);
 	}
 
+	protected void deleteClassName(String value) {
+		ClassName className = _classNameLocalService.fetchClassName(value);
+
+		if (className == null) {
+			return;
+		}
+
+		_classNameLocalService.deleteClassName(className);
+	}
+
+	protected void deleteStagingClassNameEntries() {
+		deleteClassName(Folder.class.getName());
+		deleteClassName(StagedAssetLink.class.getName());
+		deleteClassName(StagedLayoutSet.class.getName());
+		deleteClassName(StagedGroup.class.getName());
+		deleteClassName(StagedTheme.class.getName());
+	}
+
 	protected ServiceContext getServiceContext(long companyId) {
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -1116,6 +1150,9 @@ public class CompanyLocalServiceTest {
 
 		_transactionConfig = builder.build();
 	}
+
+	@Inject
+	private ClassNameLocalService _classNameLocalService;
 
 	private long _companyId;
 	private MockServletContext _mockServletContext;
