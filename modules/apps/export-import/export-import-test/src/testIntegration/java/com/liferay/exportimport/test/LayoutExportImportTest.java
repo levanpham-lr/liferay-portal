@@ -326,6 +326,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 		int priority = layout1.getPriority();
 
 		layout1.setPriority(layout3.getPriority());
+
 		layout3.setPriority(priority);
 
 		layout1 = LayoutLocalServiceUtil.updateLayout(layout1);
