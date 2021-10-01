@@ -33,15 +33,8 @@ import com.liferay.segments.context.vocabulary.internal.configuration.persistenc
 import java.io.File;
 import java.io.IOException;
 
-import java.net.URI;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.Objects;
 import java.util.Optional;
 
 import javax.portlet.ActionRequest;
@@ -129,30 +122,6 @@ public class UpdateSegmentsContextVocabularyConfigurationMVCActionCommand
 		return _configurationAdmin.getConfiguration(pid, StringPool.QUESTION);
 	}
 
-	private String _getFileName(Configuration configuration) {
-		String pid = configuration.getPid();
-
-		int index = pid.lastIndexOf('.');
-
-		String factoryPid = pid.substring(index + 1);
-
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(configuration.getFactoryPid());
-		sb.append(StringPool.DASH);
-		sb.append(factoryPid);
-		sb.append(".config");
-
-		File file = new File(
-			PropsValues.MODULE_FRAMEWORK_CONFIGS_DIR, sb.toString());
-
-		file = file.getAbsoluteFile();
-
-		URI uri = file.toURI();
-
-		return uri.toString();
-	}
-
 	private void _updateConfiguration(
 			Configuration configuration, String entityField,
 			String assetVocabulary)
@@ -177,33 +146,32 @@ public class UpdateSegmentsContextVocabularyConfigurationMVCActionCommand
 
 			configuredProperties.put("configuration.cleaner.ignore", "true");
 
-			String fileName = _getFileName(configuration);
+			String fileName = (String)configuredProperties.get(
+				"felix.fileinstall.filename");
 
-			String oldFileName = (String)configuredProperties.put(
-				"felix.fileinstall.filename", fileName);
+			if (Validator.isNull(fileName)) {
+				String pid = configuration.getPid();
 
-			if ((oldFileName != null) &&
-				!Objects.equals(fileName, oldFileName)) {
+				int index = pid.lastIndexOf('.');
 
-				try {
-					Path oldFilePath = Paths.get(new URI(oldFileName));
+				String factoryPid = pid.substring(index + 1);
 
-					Files.deleteIfExists(oldFilePath);
+				StringBundler sb = new StringBundler(4);
 
-					if (_log.isInfoEnabled()) {
-						_log.info(
-							"Delete inconsistent factory configuration " +
-								oldFileName);
-					}
-				}
-				catch (Exception exception) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Unable to delete inconsistent factory " +
-								"configuration " + oldFileName,
-							exception);
-					}
-				}
+				sb.append(configuration.getFactoryPid());
+				sb.append(StringPool.DASH);
+				sb.append(factoryPid);
+				sb.append(".config");
+
+				File file = new File(
+					PropsValues.MODULE_FRAMEWORK_CONFIGS_DIR, sb.toString());
+
+				file = file.getAbsoluteFile();
+
+				fileName = String.valueOf(file.toURI());
+
+				configuredProperties.put(
+					"felix.fileinstall.filename", fileName);
 			}
 
 			configuration.update(configuredProperties);
