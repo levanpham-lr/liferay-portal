@@ -156,6 +156,7 @@ public abstract class BaseScheduledTaskExecutorService {
 
 			batchEngineImportTaskLocalService.deleteBatchEngineImportTask(
 				batchEngineImportTask);
+
 			appendToLogOutput(
 				commerceDataIntegrationProcessLog,
 				"Completed import task: " + resourceName);
