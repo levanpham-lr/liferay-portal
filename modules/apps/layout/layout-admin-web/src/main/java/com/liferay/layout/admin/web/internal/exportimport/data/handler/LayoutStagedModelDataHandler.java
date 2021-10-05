@@ -131,6 +131,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.adapter.impl.StagedThemeImpl;
 import com.liferay.portal.service.impl.LayoutLocalServiceHelper;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.segments.service.SegmentsExperienceLocalService;
 import com.liferay.sites.kernel.util.Sites;
 import com.liferay.sites.kernel.util.SitesUtil;
 
@@ -1672,6 +1673,11 @@ public class LayoutStagedModelDataHandler
 			return;
 		}
 
+		_segmentsExperienceLocalService.deleteSegmentsExperiences(
+			portletDataContext.getScopeGroupId(),
+			_portal.getClassNameId(Layout.class.getName()),
+			importedLayout.getPlid());
+
 		importFragmentEntryLinks(portletDataContext, layout, importedLayout);
 
 		List<Element> layoutPageTemplateStructureElements =
@@ -2838,6 +2844,9 @@ public class LayoutStagedModelDataHandler
 	private PortletRegistry _portletRegistry;
 
 	private ResourceLocalService _resourceLocalService;
+
+	@Reference
+	private SegmentsExperienceLocalService _segmentsExperienceLocalService;
 
 	@Reference
 	private Staging _staging;
