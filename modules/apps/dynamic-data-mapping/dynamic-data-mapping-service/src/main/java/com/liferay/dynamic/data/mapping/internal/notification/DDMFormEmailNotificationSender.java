@@ -87,12 +87,12 @@ import org.osgi.service.component.annotations.Reference;
 public class DDMFormEmailNotificationSender {
 
 	public void sendEmailNotification(
-		ServiceContext serviceContext,
-		DDMFormInstanceRecord ddmFormInstanceRecord) {
+		DDMFormInstanceRecord ddmFormInstanceRecord,
+		ServiceContext serviceContext) {
 
 		try {
 			MailMessage mailMessage = createMailMessage(
-				serviceContext, ddmFormInstanceRecord);
+				ddmFormInstanceRecord, serviceContext);
 
 			_mailService.sendEmail(mailMessage);
 		}
@@ -102,8 +102,8 @@ public class DDMFormEmailNotificationSender {
 	}
 
 	protected MailMessage createMailMessage(
-			ServiceContext serviceContext,
-			DDMFormInstanceRecord ddmFormInstanceRecord)
+			DDMFormInstanceRecord ddmFormInstanceRecord,
+			ServiceContext serviceContext)
 		throws Exception {
 
 		DDMFormInstance ddmFormInstance =
