@@ -191,7 +191,7 @@ BackgroundTask lastCompletedInitialPublicationBackgroundTask = BackgroundTaskMan
 				'input[name=<portlet:namespace />stagingType]:checked'
 			);
 
-			if (selectedStagingTypeInput || forceDisable) {
+			if (forceDisable || selectedStagingTypeInput) {
 				var currentValue = selectedStagingTypeInput.value;
 
 				if (forceDisable) {
