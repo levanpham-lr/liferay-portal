@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portlet.documentlibrary.store.StoreFactory;
 
 import java.util.List;
 
@@ -73,5 +74,8 @@ public class PortalInstanceLifecycleListenerImpl
 
 	@Reference
 	private CommerceCatalogLocalService _commerceCatalogLocalService;
+
+	@Reference(target = "(dl.store.impl.enabled=true)")
+	private StoreFactory _storeFactory;
 
 }
