@@ -191,6 +191,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SELECT_ID</td>
+	<td>//select[contains(@id,'${selectFieldId}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SITES</td>
 	<td>//div[label[contains(.,'Sites')]]/select</td>
 	<td></td>

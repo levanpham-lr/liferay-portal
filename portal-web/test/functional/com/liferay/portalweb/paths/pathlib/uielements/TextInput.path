@@ -286,6 +286,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>INPUT_ID</td>
+	<td>//input[contains(@id,'${inputFieldId}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>KEY</td>
 	<td>//div[label[contains(.,'Key')]]//input[@type='text']</td>
 	<td></td>
