@@ -2014,6 +2014,16 @@ definition {
 			value1 = "${fragmentName}");
 	}
 
+	macro selectColorSwatch {
+		Click(
+			key_fieldLabel = "${fieldLabel}",
+			locator1 = "Button#COLOR_PICKER_1");
+
+		Click(
+			key_colorSwatchItem = "${colorSwatchItem}",
+			locator1 = "Button#COLOR_SWATCH_ITEM");
+	}
+
 	macro selectColorSwatchItem {
 		Click(
 			key_fieldLabel = "${fieldLabel}",
