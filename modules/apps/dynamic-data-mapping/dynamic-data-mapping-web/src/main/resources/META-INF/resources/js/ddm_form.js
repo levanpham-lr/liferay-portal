@@ -1222,9 +1222,11 @@ AUI.add(
 						if (dataType === 'html') {
 							var form = instance.getForm();
 
-							form.editorInitializingCount++;
+							if (!instance.getReadOnly()) {
+								form.editorInitializingCount++;
 
-							form._toggleActionButtons(true);
+								form._toggleActionButtons(true);
+							}
 						}
 
 						if (instance.get('localizable')) {
@@ -3793,13 +3795,15 @@ AUI.add(
 								nativeEditor._editor &&
 								nativeEditor._editor.window.$.AlloyEditor;
 
-							if (usingCKEditor && !usingAlloyEditor) {
-								nativeEditor.once('dataReady', () => {
+							if (!instance.getReadOnly()) {
+								if (usingCKEditor && !usingAlloyEditor) {
+									nativeEditor.once('dataReady', () => {
+										Liferay.fire('ddmEditorDataReady');
+									});
+								}
+								else {
 									Liferay.fire('ddmEditorDataReady');
-								});
-							}
-							else {
-								Liferay.fire('ddmEditorDataReady');
+								}
 							}
 						}
 					});
