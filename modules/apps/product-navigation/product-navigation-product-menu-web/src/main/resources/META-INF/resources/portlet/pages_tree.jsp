@@ -28,7 +28,7 @@ LayoutsTreeDisplayContext layoutsTreeDisplayContext = new LayoutsTreeDisplayCont
 	/>
 </div>
 
-<div id="<%= liferayPortletResponse.getNamespace() + "layoutsTree" %>">
+<div id="<portlet:namespace />layoutsTree">
 	<div id="<%= liferayPortletResponse.getNamespace() + "-page-type" %>">
 		<react:component
 			module="js/PageTypeSelector.es"
