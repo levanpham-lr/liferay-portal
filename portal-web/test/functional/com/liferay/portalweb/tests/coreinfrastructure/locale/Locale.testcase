@@ -47,7 +47,7 @@ definition {
 		Form.editDescription();
 
 		Form.gotoAddField(
-			fieldType = "texto",
+			fieldType = "Texto",
 			local = "true",
 			localeBasic = "Básico",
 			localeElements = "Elementos");
