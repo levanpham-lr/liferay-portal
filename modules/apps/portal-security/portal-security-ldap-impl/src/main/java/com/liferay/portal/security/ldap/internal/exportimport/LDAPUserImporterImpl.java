@@ -846,6 +846,10 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 
 		byte[] cookie = new byte[0];
 
+		SafeLdapContext safeLdapContext = _safePortalLDAP.getSafeLdapContext(
+			ldapImportContext.getLdapServerId(),
+			ldapImportContext.getCompanyId());
+
 		while (cookie != null) {
 			List<SearchResult> searchResults = new ArrayList<>();
 
@@ -859,8 +863,7 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 
 			cookie = _safePortalLDAP.getUsers(
 				ldapImportContext.getLdapServerId(),
-				ldapImportContext.getCompanyId(),
-				ldapImportContext.getSafeLdapContext(), cookie, 0,
+				ldapImportContext.getCompanyId(), safeLdapContext, cookie, 0,
 				new String[] {userMappingsScreenName}, searchResults);
 
 			for (SearchResult searchResult : searchResults) {
