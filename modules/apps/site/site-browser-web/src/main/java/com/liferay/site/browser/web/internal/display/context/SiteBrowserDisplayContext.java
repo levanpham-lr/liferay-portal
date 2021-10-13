@@ -484,7 +484,6 @@ public class SiteBrowserDisplayContext {
 			_groupParams.put("groupsTree", ListUtil.fromArray(parentGroup));
 		}
 		else if (filterManageableGroups) {
-
 			if (Objects.equals(type, "sites-that-i-administer")) {
 				_groupParams.put("userId", user.getUserId());
 
