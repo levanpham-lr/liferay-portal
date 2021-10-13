@@ -1203,14 +1203,7 @@ public class GroupFinderImpl
 		for (Map.Entry<String, Object> entry : params.entrySet()) {
 			String key = entry.getKey();
 
-			if (key.equals("active") || key.equals("layout") ||
-				key.equals("manualMembership") || key.equals("site")) {
-
-				Boolean value = (Boolean)entry.getValue();
-
-				queryPos.add(value);
-			}
-			else if (key.equals("actionId")) {
+			if (key.equals("actionId")) {
 				Long companyId = CompanyThreadLocal.getCompanyId();
 
 				Role siteAdmin = RoleLocalServiceUtil.fetchRole(
@@ -1225,6 +1218,13 @@ public class GroupFinderImpl
 				queryPos.add(siteAdmin.getRoleId());
 				queryPos.add(siteOwner.getRoleId());
 				queryPos.add(resourceAction.getBitwiseValue());
+			}
+			else if (key.equals("active") || key.equals("layout") ||
+				key.equals("manualMembership") || key.equals("site")) {
+
+				Boolean value = (Boolean)entry.getValue();
+
+				queryPos.add(value);
 			}
 			else if (key.equals("classNameIds")) {
 				if (entry.getValue() instanceof Long) {
