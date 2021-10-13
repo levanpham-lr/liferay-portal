@@ -88,6 +88,7 @@ import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.repository.liferayrepository.LiferayRepository;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerMethodTestRule;
@@ -196,6 +197,8 @@ public class CompanyLocalServiceTest {
 		for (String webId : PortalInstances.getWebIds()) {
 			Assert.assertNotEquals(companyWebId, webId);
 		}
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -240,6 +243,8 @@ public class CompanyLocalServiceTest {
 			"The company organization child group should delete with the " +
 				"company",
 			group);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -300,6 +305,8 @@ public class CompanyLocalServiceTest {
 			"test.xml", "", "", "test".getBytes(), serviceContext);
 
 		CompanyLocalServiceUtil.deleteCompany(companyId);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -418,6 +425,8 @@ public class CompanyLocalServiceTest {
 		group = GroupLocalServiceUtil.fetchGroup(group.getGroupId());
 
 		Assert.assertNull(group);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -484,6 +493,8 @@ public class CompanyLocalServiceTest {
 		user = UserLocalServiceUtil.fetchUser(user.getUserId());
 
 		Assert.assertNull(user);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -532,6 +543,8 @@ public class CompanyLocalServiceTest {
 				user.getUserId(), group.getGroupId(), role.getRoleId()));
 
 		Assert.assertNull(UserLocalServiceUtil.fetchUser(user.getUserId()));
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test(expected = NoSuchAccountException.class)
@@ -539,6 +552,8 @@ public class CompanyLocalServiceTest {
 		Company company = addCompany();
 
 		CompanyLocalServiceUtil.deleteCompany(company);
+
+		deleteStagingClassNameEntries();
 
 		AccountLocalServiceUtil.getAccount(company.getAccountId());
 	}
@@ -550,6 +565,8 @@ public class CompanyLocalServiceTest {
 		Company company = addCompany();
 
 		CompanyLocalServiceUtil.deleteCompany(company);
+
+		deleteStagingClassNameEntries();
 
 		PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(
 			company.getCompanyId());
@@ -570,6 +587,8 @@ public class CompanyLocalServiceTest {
 			company.getCompanyId(), GroupConstants.ANY_PARENT_GROUP_ID, false);
 
 		Assert.assertEquals(0, count);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -587,6 +606,8 @@ public class CompanyLocalServiceTest {
 			company.getCompanyId(), false);
 
 		Assert.assertEquals(0, count);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -601,6 +622,8 @@ public class CompanyLocalServiceTest {
 
 		Assert.assertEquals(
 			layoutSetPrototypes.toString(), 0, layoutSetPrototypes.size());
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test(expected = NoSuchPasswordPolicyException.class)
@@ -610,6 +633,8 @@ public class CompanyLocalServiceTest {
 		final Company company = addCompany();
 
 		CompanyLocalServiceUtil.deleteCompany(company);
+
+		deleteStagingClassNameEntries();
 
 		TransactionInvokerUtil.invoke(
 			_transactionConfig,
@@ -637,6 +662,8 @@ public class CompanyLocalServiceTest {
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 
 		Assert.assertEquals(0, count);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -650,6 +677,8 @@ public class CompanyLocalServiceTest {
 				"Company instance was not deleted", company.getCompanyId(),
 				companyId);
 		}
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -676,6 +705,8 @@ public class CompanyLocalServiceTest {
 				}
 
 			});
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -699,6 +730,8 @@ public class CompanyLocalServiceTest {
 				}
 
 			});
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -711,6 +744,8 @@ public class CompanyLocalServiceTest {
 			company.getCompanyId());
 
 		Assert.assertEquals(roles.toString(), 0, roles.size());
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -752,6 +787,8 @@ public class CompanyLocalServiceTest {
 
 		Assert.assertEquals(UserGroupRole.class.getName(), list.get(0));
 		Assert.assertEquals(Role.class.getName(), list.get(1));
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -764,6 +801,8 @@ public class CompanyLocalServiceTest {
 			company.getCompanyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		Assert.assertEquals(users.toString(), 0, users.size());
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test(expected = NoSuchVirtualHostException.class)
@@ -771,6 +810,8 @@ public class CompanyLocalServiceTest {
 		Company company = addCompany();
 
 		CompanyLocalServiceUtil.deleteCompany(company);
+
+		deleteStagingClassNameEntries();
 
 		VirtualHostLocalServiceUtil.getVirtualHost(company.getWebId());
 	}
@@ -782,6 +823,8 @@ public class CompanyLocalServiceTest {
 		Company company = addCompany();
 
 		CompanyLocalServiceUtil.deleteCompany(company);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test(expected = RequiredCompanyException.class)
@@ -789,6 +832,8 @@ public class CompanyLocalServiceTest {
 		long companyId = PortalInstances.getDefaultCompanyId();
 
 		CompanyLocalServiceUtil.deleteCompany(companyId);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -805,6 +850,8 @@ public class CompanyLocalServiceTest {
 			CompanyLocalServiceUtil.getCompanyByVirtualHost("0:0:0:0:0:0:0:1"));
 
 		CompanyLocalServiceUtil.deleteCompany(company);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -856,6 +903,8 @@ public class CompanyLocalServiceTest {
 			groupTypeSettingsUnicodeProperties.getProperty(PropsKeys.LOCALES));
 
 		CompanyLocalServiceUtil.deleteCompany(company);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -877,6 +926,8 @@ public class CompanyLocalServiceTest {
 
 		Assert.assertEquals(languageId, user.getLanguageId());
 		Assert.assertEquals("CET", user.getTimeZoneId());
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -895,18 +946,24 @@ public class CompanyLocalServiceTest {
 			new String[] {StringPool.BLANK, group.getDescriptiveName()}, true);
 
 		CompanyLocalServiceUtil.deleteCompany(company.getCompanyId());
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
 	public void testUpdateInvalidMx() throws Exception {
 		testUpdateMx("abc", false, true);
 		testUpdateMx(StringPool.BLANK, false, true);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
 	public void testUpdateInvalidVirtualHostnames() throws Exception {
 		testUpdateVirtualHostnames(
 			new String[] {StringPool.BLANK, "localhost", ".abc"}, true);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -915,6 +972,8 @@ public class CompanyLocalServiceTest {
 		testUpdateMx("abc.com", true, false);
 		testUpdateMx(StringPool.BLANK, false, true);
 		testUpdateMx(StringPool.BLANK, false, false);
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -925,6 +984,8 @@ public class CompanyLocalServiceTest {
 			company, new String[] {RandomTestUtil.randomString()}, false);
 
 		CompanyLocalServiceUtil.deleteCompany(company.getCompanyId());
+
+		deleteStagingClassNameEntries();
 	}
 
 	@Test
@@ -935,6 +996,8 @@ public class CompanyLocalServiceTest {
 				"0000:0000:0000:0000:0000:0000:0000:0001"
 			},
 			false);
+
+		deleteStagingClassNameEntries();
 	}
 
 	protected Company addCompany() throws Exception {
@@ -989,6 +1052,7 @@ public class CompanyLocalServiceTest {
 	}
 
 	protected void deleteStagingClassNameEntries() {
+		deleteClassName(LiferayRepository.class.getName());
 		deleteClassName(Folder.class.getName());
 		deleteClassName(StagedAssetLink.class.getName());
 		deleteClassName(StagedLayoutSet.class.getName());
