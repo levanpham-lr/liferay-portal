@@ -485,22 +485,18 @@ public class SiteBrowserDisplayContext {
 		}
 		else if (filterManageableGroups) {
 			if (Objects.equals(type, "sites-that-i-administer")) {
-				_groupParams.put("userId", user.getUserId());
-
 				_groupParams.put("actionId", ActionKeys.UPDATE);
 			}
 			else {
-				_groupParams.put("userId", user.getUserId());
-
 				_groupParams.put("actionId", ActionKeys.ASSIGN_MEMBERS);
+				_groupParams.put("userId", user.getUserId());
 			}
 
 			_groupParams.put("usersGroups", user.getUserId());
 		}
 		else {
-			_groupParams.put("userId", user.getUserId());
-
 			_groupParams.put("actionId", ActionKeys.ASSIGN_MEMBERS);
+			_groupParams.put("userId", user.getUserId());
 		}
 
 		_groupParams.put("site", Boolean.TRUE);
