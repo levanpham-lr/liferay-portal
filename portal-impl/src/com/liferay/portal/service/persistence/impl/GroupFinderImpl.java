@@ -29,9 +29,13 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.ResourceAction;
+import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.role.RoleConstants;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.security.permission.RolePermissions;
 import com.liferay.portal.kernel.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.kernel.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.kernel.service.RoleLocalServiceUtil;
 import com.liferay.portal.kernel.service.persistence.GroupFinder;
 import com.liferay.portal.kernel.service.persistence.GroupUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -109,6 +113,9 @@ public class GroupFinderImpl
 		"GroupFinderImpl_findByC_A",
 		new String[] {Long.class.getName(), Boolean.class.getName()},
 		new String[] {"companyId", "active_"}, false);
+
+	public static final String JOIN_BY_ACTION_ID =
+		GroupFinder.class.getName() + ".joinByActionId";
 
 	public static final String JOIN_BY_ACTIVE =
 		GroupFinder.class.getName() + ".joinByActive";
@@ -1203,6 +1210,18 @@ public class GroupFinderImpl
 
 				queryPos.add(value);
 			}
+			else if (key.equals("actionId")){
+				Long companyId = CompanyThreadLocal.getCompanyId();
+				Role siteAdmin = RoleLocalServiceUtil.fetchRole(
+					companyId, RoleConstants.SITE_ADMINISTRATOR);
+				Role siteOwner = RoleLocalServiceUtil.fetchRole(
+					companyId, RoleConstants.SITE_OWNER);
+				ResourceAction resourceAction =
+					ResourceActionLocalServiceUtil.getResourceAction(Group.class.getName(),(String)entry.getValue());
+				queryPos.add(siteAdmin.getRoleId());
+				queryPos.add(siteOwner.getRoleId());
+				queryPos.add(resourceAction.getBitwiseValue());
+			}
 			else if (key.equals("classNameIds")) {
 				if (entry.getValue() instanceof Long) {
 					queryPos.add((long)entry.getValue());
@@ -1271,6 +1290,14 @@ public class GroupFinderImpl
 
 				queryPos.add(userId);
 				queryPos.add(roleId);
+			}
+			else if (key.equals("userId")){
+				Long companyId = CompanyThreadLocal.getCompanyId();
+				Role admin = RoleLocalServiceUtil.fetchRole(
+					companyId, RoleConstants.ADMINISTRATOR);
+				boolean isAdmin = RoleLocalServiceUtil.hasUserRole((Long)entry.getValue(),admin.getRoleId());
+				queryPos.add(isAdmin);
+				queryPos.add(entry.getValue());
 			}
 			else {
 				Object value = entry.getValue();
@@ -1399,6 +1426,8 @@ public class GroupFinderImpl
 		}
 
 		Map<String, String> joinMap = HashMapBuilder.put(
+			"actionId", _removeWhere(CustomSQLUtil.get(JOIN_BY_ACTION_ID))
+		).put(
 			"active", _removeWhere(CustomSQLUtil.get(JOIN_BY_ACTIVE))
 		).put(
 			"groupOrg", _removeWhere(CustomSQLUtil.get(JOIN_BY_GROUP_ORG))
@@ -1441,6 +1470,8 @@ public class GroupFinderImpl
 		}
 
 		Map<String, String> whereMap = HashMapBuilder.put(
+			"actionId", _getCondition(CustomSQLUtil.get(JOIN_BY_ACTION_ID))
+		).put(
 			"active", _getCondition(CustomSQLUtil.get(JOIN_BY_ACTIVE))
 		).put(
 			"creatorUserId",
