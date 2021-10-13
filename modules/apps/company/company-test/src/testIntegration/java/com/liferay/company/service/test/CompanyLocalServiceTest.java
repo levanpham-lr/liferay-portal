@@ -89,6 +89,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.repository.liferayrepository.LiferayRepository;
+import com.liferay.portal.repository.temporaryrepository.TemporaryFileEntryRepository;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerMethodTestRule;
@@ -1052,6 +1053,7 @@ public class CompanyLocalServiceTest {
 	}
 
 	protected void deleteStagingClassNameEntries() {
+		deleteClassName(TemporaryFileEntryRepository.class.getName());
 		deleteClassName(LiferayRepository.class.getName());
 		deleteClassName(Folder.class.getName());
 		deleteClassName(StagedAssetLink.class.getName());
