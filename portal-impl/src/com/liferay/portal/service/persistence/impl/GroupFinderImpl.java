@@ -1215,14 +1215,12 @@ public class GroupFinderImpl
 
 				Long userId = (Long)params.get("userId");
 
-				boolean isAdmin = RoleLocalServiceUtil.hasUserRole(
-					userId, admin.getRoleId());
-
 				ResourceAction resourceAction =
 					ResourceActionLocalServiceUtil.getResourceAction(
 						Group.class.getName(), (String)entry.getValue());
 
-				queryPos.add(isAdmin);
+				queryPos.add(RoleLocalServiceUtil.hasUserRole(
+					userId, admin.getRoleId()));
 				queryPos.add(userId);
 
 				queryPos.add(siteAdmin.getRoleId());
