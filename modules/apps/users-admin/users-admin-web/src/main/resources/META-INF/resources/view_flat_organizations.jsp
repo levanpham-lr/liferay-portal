@@ -54,6 +54,8 @@ if (filterManageableOrganizations) {
 }
 %>
 
+<liferay-ui:success key="userAdded" message="the-user-was-created-successfully" />
+
 <c:choose>
 	<c:when test="<%= showList %>">
 
