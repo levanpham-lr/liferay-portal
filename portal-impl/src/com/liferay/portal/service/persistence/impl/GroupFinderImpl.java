@@ -1219,8 +1219,10 @@ public class GroupFinderImpl
 					ResourceActionLocalServiceUtil.getResourceAction(
 						Group.class.getName(), (String)entry.getValue());
 
-				queryPos.add(RoleLocalServiceUtil.hasUserRole(
-					userId, adminRole.getRoleId()));
+				queryPos.add(
+					RoleLocalServiceUtil.hasUserRole(
+						userId, adminRole.getRoleId()));
+
 				queryPos.add(userId);
 
 				queryPos.add(siteAdminRole.getRoleId());
@@ -1228,7 +1230,7 @@ public class GroupFinderImpl
 				queryPos.add(resourceAction.getBitwiseValue());
 			}
 			else if (key.equals("active") || key.equals("layout") ||
-				key.equals("manualMembership") || key.equals("site")) {
+					 key.equals("manualMembership") || key.equals("site")) {
 
 				Boolean value = (Boolean)entry.getValue();
 
