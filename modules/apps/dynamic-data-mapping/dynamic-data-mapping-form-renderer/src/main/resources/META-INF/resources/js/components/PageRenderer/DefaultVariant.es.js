@@ -167,7 +167,12 @@ export const Page = ({
 			data-ddm-page={pageIndex}
 		>
 			{invalidFormMessage && (
-				<span aria-atomic="true" aria-hidden="false" aria-live="polite">
+				<span
+					aria-atomic="true"
+					aria-hidden="false"
+					aria-live="polite"
+					className="sr-only"
+				>
 					{invalidFormMessage}
 					<span aria-hidden="true">{forceAriaUpdate}</span>
 				</span>
