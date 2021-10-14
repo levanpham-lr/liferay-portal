@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.repository.registry.RepositoryEventRegistry;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
 import com.liferay.portal.repository.capabilities.util.GroupServiceAdapter;
@@ -119,7 +120,8 @@ public class LiferaySyncCapability
 
 		if (!CTCollectionThreadLocal.isProductionMode() ||
 			isStagingGroup(fileEntry.getGroupId()) ||
-			!(fileEntry instanceof LiferayFileEntry)) {
+			!(fileEntry instanceof LiferayFileEntry) ||
+			CompanyThreadLocal.isDeleteInProcess()) {
 
 			return;
 		}
@@ -142,7 +144,8 @@ public class LiferaySyncCapability
 	protected void registerDLSyncEventCallback(String event, Folder folder) {
 		if (!CTCollectionThreadLocal.isProductionMode() ||
 			isStagingGroup(folder.getGroupId()) ||
-			!(folder instanceof LiferayFolder)) {
+			!(folder instanceof LiferayFolder) ||
+			CompanyThreadLocal.isDeleteInProcess()) {
 
 			return;
 		}
