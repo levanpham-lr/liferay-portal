@@ -31,7 +31,7 @@
 				dropdownItems="<%= SocialBookmarksTagUtil.getDropdownItems(request.getLocale(), types, className, classPK, title, url) %>"
 				icon="share"
 				label='<%= BrowserSnifferUtil.isMobile(request) ? null : "share" %>'
-				propsTransformer="bookmarks/SocialBookmarksDropdownPropsTransformer"
+				propsTransformer="js/SocialBookmarksDropdownPropsTransformer"
 				small="<%= true %>"
 			/>
 		</c:when>
@@ -43,7 +43,7 @@
 					SocialBookmark socialBookmark = SocialBookmarksRegistryUtil.getSocialBookmark(types[i]);
 				%>
 
-					<li class="taglib-social-bookmark <%= "taglib-social-bookmark-" + types[i] %>" onClick="<%= "return " + SocialBookmarksTagUtil.getClickJSCall(className, classPK, types[i], socialBookmark.getPostURL(title, url), url) %>">
+					<li class="taglib-social-bookmark <%= "taglib-social-bookmark-" + types[i] %>" onClick="<%= SocialBookmarksTagUtil.getClickJSCall(className, classPK, types[i], socialBookmark.getPostURL(title, url), url) %>">
 						<liferay-social-bookmarks:bookmark
 							displayStyle="<%= displayStyle %>"
 							target="<%= target %>"
@@ -71,11 +71,19 @@
 					dropdownItems="<%= SocialBookmarksTagUtil.getDropdownItems(request.getLocale(), remainingTypes, className, classPK, title, url) %>"
 					icon="share"
 					monospaced="<%= true %>"
-					propsTransformer="bookmarks/SocialBookmarksDropdownPropsTransformer"
+					propsTransformer="js/SocialBookmarksDropdownPropsTransformer"
 					small="<%= true %>"
 					title="share"
 				/>
 			</c:if>
 		</c:otherwise>
 	</c:choose>
+
+	<liferay-util:html-bottom
+		outputKey="social_bookmarks"
+	>
+		<liferay-frontend:component
+			module="js/SocialBookmarksHandleItemClick"
+		/>
+	</liferay-util:html-bottom>
 </div>

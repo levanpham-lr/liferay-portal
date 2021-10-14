@@ -15,7 +15,13 @@
 const SHARE_WINDOW_HEIGHT = 436;
 const SHARE_WINDOW_WIDTH = 626;
 
-function openSocialBookmark({className, classPK, postURL, type, url}) {
+export default function openSocialBookmark({
+	className,
+	classPK,
+	postURL,
+	type,
+	url,
+}) {
 	const shareWindowFeatures = `
 		height=${SHARE_WINDOW_HEIGHT},
 		left=${window.innerWidth / 2 - SHARE_WINDOW_WIDTH / 2},
@@ -35,18 +41,4 @@ function openSocialBookmark({className, classPK, postURL, type, url}) {
 	});
 
 	return false;
-}
-
-export default function propsTransformer({items, ...otherProps}) {
-	return {
-		...otherProps,
-		items: items.map(({data, ...rest}) => {
-			return {
-				...rest,
-				onClick() {
-					openSocialBookmark(data);
-				},
-			};
-		}),
-	};
 }
