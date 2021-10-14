@@ -54,6 +54,10 @@ public class AccountUser implements Serializable {
 		return ObjectMapperUtil.readValue(AccountUser.class, json);
 	}
 
+	public static AccountUser unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(AccountUser.class, json);
+	}
+
 	@Schema
 	public String getEmailAddress() {
 		return emailAddress;

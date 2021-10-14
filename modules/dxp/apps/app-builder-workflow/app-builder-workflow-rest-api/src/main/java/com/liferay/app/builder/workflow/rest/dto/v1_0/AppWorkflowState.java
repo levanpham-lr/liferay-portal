@@ -53,6 +53,10 @@ public class AppWorkflowState implements Serializable {
 		return ObjectMapperUtil.readValue(AppWorkflowState.class, json);
 	}
 
+	public static AppWorkflowState unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(AppWorkflowState.class, json);
+	}
+
 	@Schema
 	@Valid
 	public AppWorkflowTransition[] getAppWorkflowTransitions() {

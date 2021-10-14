@@ -60,6 +60,10 @@ public class ContentTemplate implements Serializable {
 		return ObjectMapperUtil.readValue(ContentTemplate.class, json);
 	}
 
+	public static ContentTemplate unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(ContentTemplate.class, json);
+	}
+
 	@Schema
 	@Valid
 	public Map<String, Map<String, String>> getActions() {

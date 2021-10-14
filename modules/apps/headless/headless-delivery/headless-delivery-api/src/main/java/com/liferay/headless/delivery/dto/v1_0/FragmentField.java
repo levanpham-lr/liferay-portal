@@ -53,6 +53,10 @@ public class FragmentField implements Serializable {
 		return ObjectMapperUtil.readValue(FragmentField.class, json);
 	}
 
+	public static FragmentField unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(FragmentField.class, json);
+	}
+
 	@Schema
 	public String getId() {
 		return id;

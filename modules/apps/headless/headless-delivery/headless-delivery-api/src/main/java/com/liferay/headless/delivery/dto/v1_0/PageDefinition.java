@@ -53,6 +53,10 @@ public class PageDefinition implements Serializable {
 		return ObjectMapperUtil.readValue(PageDefinition.class, json);
 	}
 
+	public static PageDefinition unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(PageDefinition.class, json);
+	}
+
 	@Schema
 	@Valid
 	public PageElement getPageElement() {

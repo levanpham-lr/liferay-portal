@@ -54,6 +54,11 @@ public class PageWidgetInstanceDefinition implements Serializable {
 			PageWidgetInstanceDefinition.class, json);
 	}
 
+	public static PageWidgetInstanceDefinition unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(
+			PageWidgetInstanceDefinition.class, json);
+	}
+
 	@Schema
 	@Valid
 	public FragmentStyle getFragmentStyle() {

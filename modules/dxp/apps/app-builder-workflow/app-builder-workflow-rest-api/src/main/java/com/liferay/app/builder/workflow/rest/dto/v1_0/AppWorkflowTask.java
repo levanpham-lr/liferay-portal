@@ -53,6 +53,10 @@ public class AppWorkflowTask implements Serializable {
 		return ObjectMapperUtil.readValue(AppWorkflowTask.class, json);
 	}
 
+	public static AppWorkflowTask unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(AppWorkflowTask.class, json);
+	}
+
 	@Schema
 	@Valid
 	public AppWorkflowDataLayoutLink[] getAppWorkflowDataLayoutLinks() {

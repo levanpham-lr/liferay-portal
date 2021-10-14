@@ -53,6 +53,10 @@ public class AppDeployment implements Serializable {
 		return ObjectMapperUtil.readValue(AppDeployment.class, json);
 	}
 
+	public static AppDeployment unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(AppDeployment.class, json);
+	}
+
 	@Schema
 	@Valid
 	public Map<String, Object> getSettings() {

@@ -53,6 +53,10 @@ public class FragmentFieldImage implements Serializable {
 		return ObjectMapperUtil.readValue(FragmentFieldImage.class, json);
 	}
 
+	public static FragmentFieldImage unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(FragmentFieldImage.class, json);
+	}
+
 	@Schema
 	@Valid
 	public FragmentImage getFragmentImage() {

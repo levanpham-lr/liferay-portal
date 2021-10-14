@@ -56,6 +56,10 @@ public class FragmentViewport implements Serializable {
 		return ObjectMapperUtil.readValue(FragmentViewport.class, json);
 	}
 
+	public static FragmentViewport unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(FragmentViewport.class, json);
+	}
+
 	@Schema
 	@Valid
 	public FragmentViewportStyle getFragmentViewportStyle() {

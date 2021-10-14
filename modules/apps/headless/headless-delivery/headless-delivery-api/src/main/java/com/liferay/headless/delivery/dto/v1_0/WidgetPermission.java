@@ -51,6 +51,10 @@ public class WidgetPermission implements Serializable {
 		return ObjectMapperUtil.readValue(WidgetPermission.class, json);
 	}
 
+	public static WidgetPermission unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(WidgetPermission.class, json);
+	}
+
 	@Schema
 	public String[] getActionKeys() {
 		return actionKeys;

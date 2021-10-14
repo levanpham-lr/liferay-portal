@@ -56,6 +56,10 @@ public class RowViewport implements Serializable {
 		return ObjectMapperUtil.readValue(RowViewport.class, json);
 	}
 
+	public static RowViewport unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(RowViewport.class, json);
+	}
+
 	@Schema
 	public String getId() {
 		return id;

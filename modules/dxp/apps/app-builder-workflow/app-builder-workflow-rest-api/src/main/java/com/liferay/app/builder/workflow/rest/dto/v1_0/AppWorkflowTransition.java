@@ -51,6 +51,11 @@ public class AppWorkflowTransition implements Serializable {
 		return ObjectMapperUtil.readValue(AppWorkflowTransition.class, json);
 	}
 
+	public static AppWorkflowTransition unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(
+			AppWorkflowTransition.class, json);
+	}
+
 	@Schema
 	public String getName() {
 		return name;

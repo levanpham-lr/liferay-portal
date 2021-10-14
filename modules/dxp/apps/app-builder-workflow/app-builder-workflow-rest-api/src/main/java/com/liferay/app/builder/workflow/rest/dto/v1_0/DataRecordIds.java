@@ -51,6 +51,10 @@ public class DataRecordIds implements Serializable {
 		return ObjectMapperUtil.readValue(DataRecordIds.class, json);
 	}
 
+	public static DataRecordIds unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(DataRecordIds.class, json);
+	}
+
 	@Schema
 	public Long[] getDataRecordIds() {
 		return dataRecordIds;

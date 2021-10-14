@@ -57,6 +57,10 @@ public class PageTemplate implements Serializable {
 		return ObjectMapperUtil.readValue(PageTemplate.class, json);
 	}
 
+	public static PageTemplate unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(PageTemplate.class, json);
+	}
+
 	@Schema
 	@Valid
 	public Creator getCreator() {

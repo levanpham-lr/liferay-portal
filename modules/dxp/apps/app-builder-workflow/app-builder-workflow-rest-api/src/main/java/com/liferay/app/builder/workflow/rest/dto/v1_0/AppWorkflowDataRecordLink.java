@@ -54,6 +54,11 @@ public class AppWorkflowDataRecordLink implements Serializable {
 			AppWorkflowDataRecordLink.class, json);
 	}
 
+	public static AppWorkflowDataRecordLink unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(
+			AppWorkflowDataRecordLink.class, json);
+	}
+
 	@Schema
 	@Valid
 	public AppWorkflow getAppWorkflow() {

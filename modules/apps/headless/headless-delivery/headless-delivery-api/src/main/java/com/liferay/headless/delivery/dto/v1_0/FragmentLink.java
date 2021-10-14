@@ -55,6 +55,10 @@ public class FragmentLink implements Serializable {
 		return ObjectMapperUtil.readValue(FragmentLink.class, json);
 	}
 
+	public static FragmentLink unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(FragmentLink.class, json);
+	}
+
 	@Schema
 	@Valid
 	public Object getHref() {

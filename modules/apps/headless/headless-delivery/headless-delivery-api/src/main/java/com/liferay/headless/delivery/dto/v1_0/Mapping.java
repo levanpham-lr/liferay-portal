@@ -53,6 +53,10 @@ public class Mapping implements Serializable {
 		return ObjectMapperUtil.readValue(Mapping.class, json);
 	}
 
+	public static Mapping unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(Mapping.class, json);
+	}
+
 	@Schema
 	public String getFieldKey() {
 		return fieldKey;

@@ -57,6 +57,10 @@ public class App implements Serializable {
 		return ObjectMapperUtil.readValue(App.class, json);
 	}
 
+	public static App unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(App.class, json);
+	}
+
 	@Schema
 	public Boolean getActive() {
 		return active;

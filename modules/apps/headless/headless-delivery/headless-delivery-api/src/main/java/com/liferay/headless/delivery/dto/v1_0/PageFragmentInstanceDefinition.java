@@ -54,6 +54,11 @@ public class PageFragmentInstanceDefinition implements Serializable {
 			PageFragmentInstanceDefinition.class, json);
 	}
 
+	public static PageFragmentInstanceDefinition unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(
+			PageFragmentInstanceDefinition.class, json);
+	}
+
 	@Schema
 	@Valid
 	public Fragment getFragment() {

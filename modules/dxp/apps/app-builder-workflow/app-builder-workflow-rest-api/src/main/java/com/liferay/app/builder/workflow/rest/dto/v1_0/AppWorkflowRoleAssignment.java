@@ -52,6 +52,11 @@ public class AppWorkflowRoleAssignment implements Serializable {
 			AppWorkflowRoleAssignment.class, json);
 	}
 
+	public static AppWorkflowRoleAssignment unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(
+			AppWorkflowRoleAssignment.class, json);
+	}
+
 	@Schema
 	public Long getRoleId() {
 		return roleId;

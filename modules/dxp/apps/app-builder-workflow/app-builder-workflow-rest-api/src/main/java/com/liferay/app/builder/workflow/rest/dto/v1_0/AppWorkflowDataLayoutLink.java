@@ -52,6 +52,11 @@ public class AppWorkflowDataLayoutLink implements Serializable {
 			AppWorkflowDataLayoutLink.class, json);
 	}
 
+	public static AppWorkflowDataLayoutLink unsafeToDTO(String json) {
+		return ObjectMapperUtil.unsafeReadValue(
+			AppWorkflowDataLayoutLink.class, json);
+	}
+
 	@Schema
 	public Long getDataLayoutId() {
 		return dataLayoutId;
