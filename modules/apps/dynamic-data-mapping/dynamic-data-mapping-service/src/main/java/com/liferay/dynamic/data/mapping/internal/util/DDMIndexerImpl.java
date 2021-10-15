@@ -589,8 +589,12 @@ public class DDMIndexerImpl implements DDMIndexer {
 			else if (type.equals(DDMImpl.TYPE_SELECT)) {
 				document.addKeyword(
 					_getSortableFieldName(name),
-					ArrayUtil.toStringArray(
-						JSONFactoryUtil.createJSONArray(sortableValueString)));
+					StringUtil.merge(
+						ArrayUtil.toStringArray(
+							JSONFactoryUtil.createJSONArray(
+								sortableValueString)),
+						StringPool.SPACE));
+
 				document.addKeyword(
 					name,
 					ArrayUtil.toStringArray(
