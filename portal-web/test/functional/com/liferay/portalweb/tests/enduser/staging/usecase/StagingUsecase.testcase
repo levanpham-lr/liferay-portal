@@ -898,6 +898,8 @@ definition {
 			teamName = "Site Team Name");
 	}
 
+	@description = "This will be ignored until LPS-110206 is fixed."
+	@ignore = "true"
 	@priority = "5"
 	test PublishThemeFromStagedToLive {
 		property portal.upstream = "quarantine";

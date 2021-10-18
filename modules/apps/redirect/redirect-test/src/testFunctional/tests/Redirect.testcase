@@ -807,7 +807,8 @@ definition {
 			requestNumber = "1");
 	}
 
-	@description = "This ensures that the 404 URLs can be ordered by requests."
+	@description = "This will be ignored until LPS-121379 is fixed. This ensures that the 404 URLs can be ordered by requests."
+	@ignore = "true"
 	@priority = "5"
 	test Order404URLsByRequests {
 		var portalURL = PropsUtil.get("portal.url");

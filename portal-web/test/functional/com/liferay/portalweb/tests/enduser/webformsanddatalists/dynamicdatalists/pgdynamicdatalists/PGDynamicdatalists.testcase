@@ -43,6 +43,8 @@ definition {
 		}
 	}
 
+	@description = "This will be ignored until LPS-129727 is fixed."
+	@ignore = "true"
 	@priority = "3"
 	test AddFormTemplate {
 		Navigator.gotoPage(pageName = "Dynamic Data Lists Display Page");

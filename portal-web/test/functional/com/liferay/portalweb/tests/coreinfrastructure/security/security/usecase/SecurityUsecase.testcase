@@ -284,7 +284,8 @@ out.println(PortalUtil.escapeRedirect("/"));
 			locator1 = "Home#PAGE");
 	}
 
-	@description = "This is a use case for LPS-57776."
+	@description = "This will be ignored until LPS-129240 is fixed. This is a use case for LPS-57776."
+	@ignore = "true"
 	@priority = "5"
 	test ValidateNoLARRemoteCodeExecution {
 		ProductMenu.gotoPortlet(

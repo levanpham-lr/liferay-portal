@@ -128,6 +128,8 @@ definition {
 			configurationScope = "System Scope");
 	}
 
+	@description = "This will be ignored until LPS-122119 is fixed."
+	@ignore = "true"
 	@priority = "4"
 	test UninstallJarOffline {
 		property test.name.skip.portal.instance = "FileInstall#UninstallJarOffline";
@@ -163,6 +165,8 @@ definition {
 		GogoShell.viewNoOutput(outputContent = "Active");
 	}
 
+	@description = "This will be ignored until LPS-122119 is fixed."
+	@ignore = "true"
 	@priority = "4"
 	test UninstallWarOffline {
 		property test.name.skip.portal.instance = "FileInstall#UninstallWarOffline";
