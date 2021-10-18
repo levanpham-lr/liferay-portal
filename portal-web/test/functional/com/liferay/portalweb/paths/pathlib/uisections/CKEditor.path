@@ -61,6 +61,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>BODY_SOURCE_VALUE_1</td>
+	<td>//*[contains(@value, 'Link to Document')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>OK_BUTTON</td>
 	<td>//a[contains(@role,'button')][normalize-space()='OK']</td>
 	<td></td>
