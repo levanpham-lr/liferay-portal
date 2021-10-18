@@ -842,6 +842,17 @@ definition {
 			value1 = "${webContentTitle} is not approved.");
 	}
 
+	macro clickChangeDefaultLanguage {
+		var menuItem = "${menuItem}";
+
+		Click(locator1 = "Button#CHANGE");
+
+		AssertClick(
+			key_locale = "${menuItem}",
+			locator1 = "Translation#CONTENT_TITLE",
+			value1 = "${menuItem}");
+	}
+
 	macro clickMarginOfContentContainer {
 		var elementHeight = selenium.getElementHeight("WCEditWebContent#CONTENT_CONTAINER");
 		var offSetY = MathUtil.product("50","${elementHeight}");
