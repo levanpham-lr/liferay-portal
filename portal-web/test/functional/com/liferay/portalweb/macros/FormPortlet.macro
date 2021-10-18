@@ -57,6 +57,8 @@ definition {
 		Pause(locator1 = "5000");
 
 		FormPortlet.clickSubmit();
+
+		Pause(locator1 = "1000");
 	}
 
 	macro submitLocalizedSuccessfully {
