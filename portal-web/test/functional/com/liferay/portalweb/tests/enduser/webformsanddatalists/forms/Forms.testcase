@@ -1318,6 +1318,8 @@ definition {
 
 		FormPortlet.submit();
 
+		WaitForElementNotPresent(locator1 = "Button#MAIN_CONTENT_SUBMIT");
+
 		Form.viewRedirectedURL(friendlyURL = "http://localhost:8080/web/guest");
 	}
 
