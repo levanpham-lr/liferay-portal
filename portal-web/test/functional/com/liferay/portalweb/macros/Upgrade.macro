@@ -2772,6 +2772,10 @@ definition {
 
 		SelectFrame(locator1 = "IFrame#CONFIGURATION");
 
+		WaitForElementPresent(
+			key_fieldName = "paginationDelta",
+			locator1 = "FormFields#TEXT_FIELD");
+
 		FormFields.viewTextValue(
 			fieldName = "paginationDelta",
 			fieldValue = "2");
@@ -2784,6 +2788,10 @@ definition {
 
 		SelectFrame(locator1 = "IFrame#CONFIGURATION");
 
+		WaitForElementPresent(
+			key_fieldName = "allowEmptySearches",
+			locator1 = "FormFields#CHECKBOX");
+
 		FormFields.viewCheckboxChecked(fieldName = "allowEmptySearches");
 
 		IFrame.closeFrame();
@@ -2794,6 +2802,10 @@ definition {
 
 		SelectFrame(locator1 = "IFrame#CONFIGURATION");
 
+		WaitForElementPresent(
+			key_fieldName = "spellCheckSuggestionEnabled",
+			locator1 = "FormFields#CHECKBOX");
+
 		FormFields.viewCheckboxChecked(fieldName = "spellCheckSuggestionEnabled");
 
 		IFrame.closeFrame();
@@ -2803,6 +2815,10 @@ definition {
 			portletOption = "Configuration");
 
 		SelectFrame(locator1 = "IFrame#CONFIGURATION");
+
+		WaitForElementPresent(
+			key_fieldName = "frequenciesVisible",
+			locator1 = "FormFields#CHECKBOX");
 
 		FormFields.viewCheckboxNotChecked(fieldName = "frequenciesVisible");
 
