@@ -54,12 +54,12 @@
 			</library>
 			<library>
 				<file-name>com.liferay.analytics.message.sender.impl.jar!httpclient.jar</file-name>
-				<version>4.5.3</version>
-				<project-name>HttpComponents Apache HttpClient</project-name>
+				<version>4.5.13</version>
+				<project-name>Apache HttpClient</project-name>
 				<project-url>http://hc.apache.org/httpcomponents-client</project-url>
 				<licenses>
 					<license>
-						<license-name>The Apache Software License, Version 2.0</license-name>
+						<license-name>Apache License, Version 2.0</license-name>
 						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
 					</license>
 				</licenses>
@@ -90,12 +90,12 @@
 			</library>
 			<library>
 				<file-name>com.liferay.analytics.settings.web.jar!httpclient.jar</file-name>
-				<version>4.5.3</version>
-				<project-name>HttpComponents Apache HttpClient</project-name>
+				<version>4.5.13</version>
+				<project-name>Apache HttpClient</project-name>
 				<project-url>http://hc.apache.org/httpcomponents-client</project-url>
 				<licenses>
 					<license>
-						<license-name>The Apache Software License, Version 2.0</license-name>
+						<license-name>Apache License, Version 2.0</license-name>
 						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
 					</license>
 				</licenses>
@@ -150,24 +150,24 @@
 			</library>
 			<library>
 				<file-name>com.liferay.batch.engine.service.jar!httpclient.jar</file-name>
-				<version>4.5.3</version>
-				<project-name>HttpComponents Apache HttpClient</project-name>
+				<version>4.5.13</version>
+				<project-name>Apache HttpClient</project-name>
 				<project-url>http://hc.apache.org/httpcomponents-client</project-url>
 				<licenses>
 					<license>
-						<license-name>The Apache Software License, Version 2.0</license-name>
+						<license-name>Apache License, Version 2.0</license-name>
 						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
 					</license>
 				</licenses>
 			</library>
 			<library>
 				<file-name>com.liferay.batch.engine.service.jar!httpcore.jar</file-name>
-				<version>4.4.6</version>
+				<version>4.4.14</version>
 				<project-name>HttpComponents Apache HttpCore</project-name>
 				<project-url>http://hc.apache.org/httpcomponents-core-ga</project-url>
 				<licenses>
 					<license>
-						<license-name>The Apache Software License, Version 2.0</license-name>
+						<license-name>Apache License, Version 2.0</license-name>
 						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
 					</license>
 				</licenses>
@@ -506,21 +506,21 @@
 			</library>
 			<library>
 				<file-name>com.liferay.commerce.payment.method.mercanet.jar!commons-codec.jar</file-name>
-				<version>1.4</version>
-				<project-name>Commons Codec</project-name>
-				<project-url>http://commons.apache.org/codec/</project-url>
+				<version>1.15</version>
+				<project-name>Apache Commons Codec</project-name>
+				<project-url>https://commons.apache.org/proper/commons-codec/</project-url>
 				<licenses>
 					<license>
-						<license-name>The Apache Software License, Version 2.0</license-name>
-						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
+						<license-name>Apache License, Version 2.0</license-name>
+						<license-url>https://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
 					</license>
 				</licenses>
 			</library>
 			<library>
 				<file-name>com.liferay.commerce.payment.method.mercanet.jar!commons-lang3.jar</file-name>
-				<version>3.8.1</version>
+				<version>3.11</version>
 				<project-name>Apache Commons Lang</project-name>
-				<project-url>http://commons.apache.org/proper/commons-lang/</project-url>
+				<project-url>https://commons.apache.org/proper/commons-lang/</project-url>
 				<licenses>
 					<license>
 						<license-name>Apache License, Version 2.0</license-name>
@@ -545,6 +545,18 @@
 				<version>4.4.6</version>
 				<project-name>HttpComponents Apache HttpCore</project-name>
 				<project-url>http://hc.apache.org/httpcomponents-core-ga</project-url>
+				<licenses>
+					<license>
+						<license-name>The Apache Software License, Version 2.0</license-name>
+						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
+					</license>
+				</licenses>
+			</library>
+			<library>
+				<file-name>com.liferay.commerce.payment.method.mercanet.jar!jackson-annotations.jar</file-name>
+				<version>2.10.3</version>
+				<project-name>Jackson-annotations</project-name>
+				<project-url>http://github.com/FasterXML/jackson</project-url>
 				<licenses>
 					<license>
 						<license-name>The Apache Software License, Version 2.0</license-name>
@@ -578,7 +590,7 @@
 			</library>
 			<library>
 				<file-name>com.liferay.commerce.payment.method.mercanet.jar!jackson-datatype-jsr310.jar</file-name>
-				<version>2.10.3</version>
+				<version>2.12.1</version>
 				<project-name>Jackson datatype: JSR310</project-name>
 				<project-url>https://github.com/FasterXML/jackson-modules-java8/jackson-datatype-jsr310</project-url>
 				<licenses>
@@ -590,7 +602,7 @@
 			</library>
 			<library>
 				<file-name>com.liferay.commerce.payment.method.mercanet.jar!payment-sdk-common.jar</file-name>
-				<version>1.2.0</version>
+				<version>1.4.1</version>
 				<project-name>SIPS Payment SDK</project-name>
 				<project-url>https://github.com/worldline/sips-sdk-java/</project-url>
 				<licenses>
@@ -1952,12 +1964,12 @@
 			</library>
 			<library>
 				<file-name>com.liferay.layout.impl.jar!httpclient.jar</file-name>
-				<version>4.5.3</version>
-				<project-name>HttpComponents Apache HttpClient</project-name>
+				<version>4.5.13</version>
+				<project-name>Apache HttpClient</project-name>
 				<project-url>http://hc.apache.org/httpcomponents-client</project-url>
 				<licenses>
 					<license>
-						<license-name>The Apache Software License, Version 2.0</license-name>
+						<license-name>Apache License, Version 2.0</license-name>
 						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
 					</license>
 				</licenses>
@@ -2295,10 +2307,9 @@
 				</licenses>
 			</library>
 			<library>
-				<file-name>com.liferay.portal.change.tracking.jar!jsqlparser.jar</file-name>
-				<version>2.1</version>
+				<file-name>com.liferay.portal.change.tracking.jar!com.github.jsqlparser.jar</file-name>
+				<version>2.1.LIFERAY-PATCHED-1</version>
 				<project-name>JSQLParser library</project-name>
-				<project-url>https://github.com/JSQLParser/JSqlParser</project-url>
 				<licenses>
 					<license>
 						<license-name>http://www.gnu.org/licenses/lgpl-2.1.html, http://www.apache.org/licenses/LICENSE-2.0.txt</license-name>
@@ -2818,7 +2829,7 @@
 			</library>
 			<library>
 				<file-name>com.liferay.portal.search.elasticsearch7.impl.jar!httpclient.jar</file-name>
-				<version>4.5.10</version>
+				<version>4.5.13</version>
 				<project-name>Apache HttpClient</project-name>
 				<project-url>http://hc.apache.org/httpcomponents-client</project-url>
 				<licenses>
@@ -3411,6 +3422,18 @@
 				</licenses>
 			</library>
 			<library>
+				<file-name>com.liferay.portal.security.sso.openid.connect.impl.jar!content-type.jar</file-name>
+				<version>2.0</version>
+				<project-name>Nimbus Content Type</project-name>
+				<project-url>https://connect2id.com</project-url>
+				<licenses>
+					<license>
+						<license-name>The Apache Software License, Version 2.0</license-name>
+						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
+					</license>
+				</licenses>
+			</library>
+			<library>
 				<file-name>com.liferay.portal.security.sso.openid.connect.impl.jar!jakarta.mail.jar</file-name>
 				<version>1.6.6</version>
 				<project-name>Jakarta Mail API</project-name>
@@ -3459,7 +3482,7 @@
 			</library>
 			<library>
 				<file-name>com.liferay.portal.security.sso.openid.connect.impl.jar!nimbus-jose-jwt.jar</file-name>
-				<version>7.9</version>
+				<version>8.14.1</version>
 				<project-name>Nimbus JOSE+JWT</project-name>
 				<project-url>https://bitbucket.org/connect2id/nimbus-jose-jwt</project-url>
 				<licenses>
@@ -3471,9 +3494,9 @@
 			</library>
 			<library>
 				<file-name>com.liferay.portal.security.sso.openid.connect.impl.jar!oauth2-oidc-sdk.jar</file-name>
-				<version>6.16.2</version>
+				<version>8.4.3</version>
 				<project-name>OAuth 2.0 SDK with OpenID Connect extensions</project-name>
-				<project-url>https://bitbucket.org/connect2id/oauth-2.0-sdk-with-openid-connect-extensions</project-url>
+				<project-url>https://connect2id.com</project-url>
 				<licenses>
 					<license>
 						<license-name>Apache License, version 2.0</license-name>
@@ -3763,8 +3786,8 @@
 			</library>
 			<library>
 				<file-name>com.liferay.portal.store.gcs.jar!httpclient.jar</file-name>
-				<version>4.5.5</version>
-				<project-name>HttpComponents Apache HttpClient</project-name>
+				<version>4.5.13</version>
+				<project-name>Apache HttpClient</project-name>
 				<project-url>http://hc.apache.org/httpcomponents-client</project-url>
 				<licenses>
 					<license>
@@ -3775,7 +3798,7 @@
 			</library>
 			<library>
 				<file-name>com.liferay.portal.store.gcs.jar!httpcore.jar</file-name>
-				<version>4.4.9</version>
+				<version>4.4.14</version>
 				<project-name>HttpComponents Apache HttpCore</project-name>
 				<project-url>http://hc.apache.org/httpcomponents-core-ga</project-url>
 				<licenses>
