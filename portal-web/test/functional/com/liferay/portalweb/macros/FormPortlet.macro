@@ -54,11 +54,7 @@ definition {
 			Click(locator1 = "Form#PUBLISH_URL_FORM_PAGE");
 		}
 
-		Pause(locator1 = "5000");
-
 		FormPortlet.clickSubmit();
-
-		Pause(locator1 = "1000");
 	}
 
 	macro submitLocalizedSuccessfully {
