@@ -78,6 +78,7 @@ export const getFilteredSettingsContext = ({
 							name: generateName(name, updatedField),
 							predefinedValue: '["manual"]',
 							readOnly: true,
+							visible: false,
 						};
 					}
 
