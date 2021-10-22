@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -61,7 +60,6 @@ import java.io.IOException;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Optional;
 
 import javax.portlet.ActionRequest;
@@ -326,33 +324,20 @@ public class LayoutSiteNavigationMenuItemType
 			return false;
 		}
 
-		Map<Long, Long> layoutPlids =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				Layout.class);
+		UnicodeProperties typeSettingsUnicodeProperties =
+			new UnicodeProperties();
 
-		long plid = MapUtil.getLong(
-			layoutPlids, layout.getPlid(), layout.getPlid());
+		typeSettingsUnicodeProperties.fastLoad(
+			siteNavigationMenuItem.getTypeSettings());
 
-		Layout importedLayout = _layoutLocalService.fetchLayout(plid);
+		typeSettingsUnicodeProperties.put("layoutUuid", layout.getUuid());
+		typeSettingsUnicodeProperties.put(
+			"groupId", String.valueOf(layout.getGroupId()));
+		typeSettingsUnicodeProperties.put(
+			"privateLayout", String.valueOf(layout.isPrivateLayout()));
 
-		if (importedLayout != null) {
-			UnicodeProperties typeSettingsUnicodeProperties =
-				new UnicodeProperties();
-
-			typeSettingsUnicodeProperties.fastLoad(
-				siteNavigationMenuItem.getTypeSettings());
-
-			typeSettingsUnicodeProperties.put(
-				"layoutUuid", importedLayout.getUuid());
-			typeSettingsUnicodeProperties.put(
-				"groupId", String.valueOf(importedLayout.getGroupId()));
-			typeSettingsUnicodeProperties.put(
-				"privateLayout",
-				String.valueOf(importedLayout.isPrivateLayout()));
-
-			importedSiteNavigationMenuItem.setTypeSettings(
-				typeSettingsUnicodeProperties.toString());
-		}
+		importedSiteNavigationMenuItem.setTypeSettings(
+			typeSettingsUnicodeProperties.toString());
 
 		return true;
 	}
