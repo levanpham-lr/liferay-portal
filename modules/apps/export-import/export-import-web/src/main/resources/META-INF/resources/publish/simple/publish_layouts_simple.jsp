@@ -173,6 +173,8 @@ advancedPublishURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 									<%
 									}
+
+									settingsMap.remove("portletId");
 									%>
 
 									<c:if test="<%= !displayingChanges %>">
