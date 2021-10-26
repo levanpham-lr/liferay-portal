@@ -120,40 +120,42 @@ public class NestedPortletsPortlet extends MVCPortlet {
 				_layoutTemplateLocalService.getLayoutTemplate(
 					layoutTemplateId, false, theme.getThemeId());
 
-			String content = layoutTemplate.getContent();
+			if (layoutTemplate != null) {
+				String content = layoutTemplate.getContent();
 
-			Matcher processColumnMatcher = _processColumnPattern.matcher(
-				content);
+				Matcher processColumnMatcher = _processColumnPattern.matcher(
+					content);
 
-			while (processColumnMatcher.find()) {
-				String columnId = processColumnMatcher.group(2);
+				while (processColumnMatcher.find()) {
+					String columnId = processColumnMatcher.group(2);
 
-				if (Validator.isNotNull(columnId)) {
-					columnIds.put(
-						columnId,
-						renderResponse.getNamespace() + StringPool.UNDERLINE +
-							columnId);
+					if (Validator.isNotNull(columnId)) {
+						columnIds.put(
+							columnId,
+							renderResponse.getNamespace() +
+								StringPool.UNDERLINE + columnId);
+					}
 				}
+
+				processColumnMatcher.reset();
+
+				StringBundler sb = new StringBundler(4);
+
+				sb.append(theme.getThemeId());
+				sb.append(LayoutTemplateConstants.CUSTOM_SEPARATOR);
+				sb.append(renderResponse.getNamespace());
+				sb.append(layoutTemplateId);
+
+				templateId = sb.toString();
+
+				content = processColumnMatcher.replaceAll(
+					"$1" + renderResponse.getNamespace() + "_$2$3");
+
+				Matcher columnIdMatcher = _columnIdPattern.matcher(content);
+
+				templateContent = columnIdMatcher.replaceAll(
+					"$1" + renderResponse.getNamespace() + "_$2$3");
 			}
-
-			processColumnMatcher.reset();
-
-			StringBundler sb = new StringBundler(4);
-
-			sb.append(theme.getThemeId());
-			sb.append(LayoutTemplateConstants.CUSTOM_SEPARATOR);
-			sb.append(renderResponse.getNamespace());
-			sb.append(layoutTemplateId);
-
-			templateId = sb.toString();
-
-			content = processColumnMatcher.replaceAll(
-				"$1" + renderResponse.getNamespace() + "_$2$3");
-
-			Matcher columnIdMatcher = _columnIdPattern.matcher(content);
-
-			templateContent = columnIdMatcher.replaceAll(
-				"$1" + renderResponse.getNamespace() + "_$2$3");
 		}
 
 		checkLayout(themeDisplay.getLayout(), columnIds.values());
