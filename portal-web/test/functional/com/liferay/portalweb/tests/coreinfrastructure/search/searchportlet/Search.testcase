@@ -1662,7 +1662,9 @@ definition {
 			webContentText = "Unlocalized text field",
 			webContentTitle = "WC Title");
 
-		var curl = "http://localhost:9201/_search?q=entryClassName:com.liferay.journal.model.JournalArticle";
+		var portalHostname = PropsUtil.get("portal.hostname");
+
+		var curl = "http://${portalHostname}:9201/_search?q=entryClassName:com.liferay.journal.model.JournalArticle";
 
 		var journalArticleDocumentType = JSONCurlUtil.get("${curl}");
 
