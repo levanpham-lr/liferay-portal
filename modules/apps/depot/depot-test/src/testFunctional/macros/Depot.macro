@@ -92,7 +92,7 @@ definition {
 			card = "${resourceName}",
 			item = "Assign Roles");
 
-		SelectFrame(locator1 = "IFrame#MODAL_BODY");
+		SelectFrame.selectFrameNoLoading(locator1 = "IFrame#MODAL_BODY");
 
 		LexiconCard.checkCardCheckbox(card = "${roleTitle}");
 
