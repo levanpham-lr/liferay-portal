@@ -330,9 +330,9 @@ public class LayoutSiteNavigationMenuItemType
 		typeSettingsUnicodeProperties.fastLoad(
 			siteNavigationMenuItem.getTypeSettings());
 
-		typeSettingsUnicodeProperties.put("layoutUuid", layout.getUuid());
 		typeSettingsUnicodeProperties.put(
 			"groupId", String.valueOf(layout.getGroupId()));
+		typeSettingsUnicodeProperties.put("layoutUuid", layout.getUuid());
 		typeSettingsUnicodeProperties.put(
 			"privateLayout", String.valueOf(layout.isPrivateLayout()));
 
