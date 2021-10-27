@@ -310,29 +310,27 @@ public class JournalArticleExportImportContentProcessor
 				Class<?> fieldValueClass = fieldValue.getClass();
 
 				if (fieldValueClass.isArray()) {
-					List<String> articleList = new ArrayList<>();
+					List<String> jsonList = new ArrayList<>();
 
-					for (String jsonData : (String[])fieldValue) {
-						String journalArticleJsonString =
-							_extractJournalArticleForExport(
-								jsonData, stagedModel, portletDataContext,
-								exportReferencedContent);
+					for (String json : (String[])fieldValue) {
+						json = _extractJournalArticleForExport(
+							json, stagedModel, portletDataContext,
+							exportReferencedContent);
 
-						if (Validator.isNotNull(journalArticleJsonString)) {
-							articleList.add(journalArticleJsonString);
+						if (Validator.isNotNull(json)) {
+							jsonList.add(json);
 						}
 					}
 
-					field.setValue(locale, articleList.toArray(new String[0]));
+					field.setValue(locale, jsonList.toArray(new String[0]));
 				}
 				else {
-					String journalArticleJsonString =
-						_extractJournalArticleForExport(
-							String.valueOf(fieldValue), stagedModel,
-							portletDataContext, exportReferencedContent);
+					String json = _extractJournalArticleForExport(
+						String.valueOf(fieldValue), stagedModel,
+						portletDataContext, exportReferencedContent);
 
-					if (Validator.isNotNull(journalArticleJsonString)) {
-						field.setValue(locale, journalArticleJsonString);
+					if (Validator.isNotNull(json)) {
+						field.setValue(locale, json);
 					}
 				}
 			}
@@ -359,28 +357,26 @@ public class JournalArticleExportImportContentProcessor
 				Class<?> serializableClass = serializable.getClass();
 
 				if (serializableClass.isArray()) {
-					List<String> articleList = new ArrayList<>();
+					List<String> jsonList = new ArrayList<>();
 
-					for (String jsonData : (String[])serializable) {
-						String journalArticleJsonString =
-							_extractJournalArticleForImport(
-								jsonData, portletDataContext, stagedModel);
+					for (String json : (String[])serializable) {
+						json = _extractJournalArticleForImport(
+							json, portletDataContext, stagedModel);
 
-						if (Validator.isNotNull(journalArticleJsonString)) {
-							articleList.add(journalArticleJsonString);
+						if (Validator.isNotNull(json)) {
+							jsonList.add(json);
 						}
 					}
 
-					field.setValue(locale, articleList.toArray(new String[0]));
+					field.setValue(locale, jsonList.toArray(new String[0]));
 				}
 				else {
-					String journalArticleJsonString =
-						_extractJournalArticleForImport(
-							String.valueOf(serializable), portletDataContext,
-							stagedModel);
+					String json = _extractJournalArticleForImport(
+						String.valueOf(serializable), portletDataContext,
+						stagedModel);
 
-					if (Validator.isNotNull(journalArticleJsonString)) {
-						field.setValue(locale, journalArticleJsonString);
+					if (Validator.isNotNull(json)) {
+						field.setValue(locale, json);
 					}
 				}
 			}
@@ -499,14 +495,14 @@ public class JournalArticleExportImportContentProcessor
 	}
 
 	private String _extractJournalArticleForExport(
-		String jsonData, StagedModel stagedModel,
+		String json, StagedModel stagedModel,
 		PortletDataContext portletDataContext,
 		boolean exportReferencedContent) {
 
 		JSONObject jsonObject = null;
 
 		try {
-			jsonObject = _jsonFactory.createJSONObject(jsonData);
+			jsonObject = _jsonFactory.createJSONObject(json);
 		}
 		catch (JSONException jsonException) {
 			if (_log.isDebugEnabled()) {
@@ -523,20 +519,17 @@ public class JournalArticleExportImportContentProcessor
 
 		if (journalArticle == null) {
 			if (_log.isInfoEnabled()) {
-				StringBundler messageSB = new StringBundler(6);
+				StringBundler sb = new StringBundler(7);
 
-				String referencMissing =
-					" references missing journal" +
-						" article with class primary key ";
+				sb.append("Staged model with class name ");
+				sb.append(stagedModel.getModelClassName());
+				sb.append(" and primary key ");
+				sb.append(stagedModel.getPrimaryKeyObj());
+				sb.append(" references missing journal article with ");
+				sb.append("class primary key ");
+				sb.append(classPK);
 
-				messageSB.append("Staged model with class name ");
-				messageSB.append(stagedModel.getModelClassName());
-				messageSB.append(" and primary key ");
-				messageSB.append(stagedModel.getPrimaryKeyObj());
-				messageSB.append(referencMissing);
-				messageSB.append(classPK);
-
-				_log.info(messageSB.toString());
+				_log.info(sb.toString());
 			}
 
 			return null;
@@ -548,7 +541,7 @@ public class JournalArticleExportImportContentProcessor
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				StringBundler.concat(
-					"Replacing ", jsonData, " with ",
+					"Replacing ", json, " with ",
 					newArticleJSONObject.toJSONString()));
 		}
 
@@ -560,19 +553,19 @@ public class JournalArticleExportImportContentProcessor
 			}
 			catch (Exception exception) {
 				if (_log.isDebugEnabled()) {
-					StringBundler messageSB = new StringBundler(8);
+					StringBundler sb = new StringBundler(9);
 
-					messageSB.append("Staged model with class name ");
-					messageSB.append(stagedModel.getModelClassName());
-					messageSB.append(" and primary key ");
-					messageSB.append(stagedModel.getPrimaryKeyObj());
-					messageSB.append(
-						" references journal article with class primary key ");
-					messageSB.append(classPK);
-					messageSB.append(" that could not be exported due to ");
-					messageSB.append(exception);
+					sb.append("Staged model with class name ");
+					sb.append(stagedModel.getModelClassName());
+					sb.append(" and primary key ");
+					sb.append(stagedModel.getPrimaryKeyObj());
+					sb.append(" references journal article with class ");
+					sb.append("primary key ");
+					sb.append(classPK);
+					sb.append(" that could not be exported due to ");
+					sb.append(exception);
 
-					String errorMessage = messageSB.toString();
+					String errorMessage = sb.toString();
 
 					if (Validator.isNotNull(exception.getMessage())) {
 						errorMessage = StringBundler.concat(
@@ -596,13 +589,13 @@ public class JournalArticleExportImportContentProcessor
 	}
 
 	private String _extractJournalArticleForImport(
-		String jsonData, PortletDataContext portletDataContext,
+		String json, PortletDataContext portletDataContext,
 		StagedModel stagedModel) {
 
 		JSONObject jsonObject = null;
 
 		try {
-			jsonObject = _jsonFactory.createJSONObject(jsonData);
+			jsonObject = _jsonFactory.createJSONObject(json);
 		}
 		catch (JSONException jsonException) {
 			if (_log.isDebugEnabled()) {
