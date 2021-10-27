@@ -429,6 +429,8 @@ public class AssetPublisherHelperImpl implements AssetPublisherHelper {
 			assetEntryQuery.setLayout(layout);
 		}
 
+		assetEntryQuery.setListable(null);
+
 		String orderByColumn1 = GetterUtil.getString(
 			portletPreferences.getValue("orderByColumn1", "modifiedDate"));
 
