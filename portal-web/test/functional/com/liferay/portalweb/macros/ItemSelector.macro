@@ -543,6 +543,8 @@ definition {
 
 		SelectFrame.selectFrameNoLoading(locator1 = "IFrame#MODAL_BODY");
 
+		WaitForPageLoad();
+
 		ManagementBar.setFilterAndOrder(filterBy = "Everywhere");
 
 		LexiconEntry.changeDisplayStyle(displayStyle = "cards");
