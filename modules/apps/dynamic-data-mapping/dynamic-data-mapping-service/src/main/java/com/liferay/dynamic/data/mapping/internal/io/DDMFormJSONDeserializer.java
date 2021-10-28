@@ -163,14 +163,14 @@ public class DDMFormJSONDeserializer implements DDMFormDeserializer {
 			DDMForm ddmForm = ddmFormFieldTypeSetting.getDDMForm();
 
 			return deserializeDDMFormFieldValidation(
-				serializedDDMFormFieldProperty, ddmForm.getAvailableLocales());
+				ddmForm.getAvailableLocales(), serializedDDMFormFieldProperty);
 		}
 
 		return serializedDDMFormFieldProperty;
 	}
 
 	protected static DDMFormFieldValidation deserializeDDMFormFieldValidation(
-			String serializedDDMFormFieldProperty, Set<Locale> availableLocales)
+			Set<Locale> availableLocales, String serializedDDMFormFieldProperty)
 		throws PortalException {
 
 		DDMFormFieldValidation ddmFormFieldValidation =
