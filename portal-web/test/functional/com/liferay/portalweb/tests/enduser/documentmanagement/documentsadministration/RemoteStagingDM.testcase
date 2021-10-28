@@ -159,7 +159,12 @@ definition {
 	@description = "This is a use case for LPS-89175."
 	@priority = "3"
 	test StagingRemoteLiveDeleteDocumentWithWebContentField {
-		Staging.remoteStagingSetUp(siteName = "Site Name");
+		property test.name.skip.portal.instance = "RemoteStagingDM#StagingRemoteLiveDeleteDocumentWithWebContentField";
+
+		Staging.remoteStagingSetUp(
+			remotePort = "9080",
+			remoteStaging = "true",
+			siteName = "Site Name");
 
 		Navigator.gotoSitePage(
 			pageName = "Staging DM Page",
@@ -228,6 +233,7 @@ definition {
 		AssertConsoleTextNotPresent(value1 = "RuntimeException");
 
 		Navigator.gotoSitePage(
+			baseURL = "http://localhost:9080",
 			pageName = "Staging DM Page",
 			siteName = "Remote Site");
 
