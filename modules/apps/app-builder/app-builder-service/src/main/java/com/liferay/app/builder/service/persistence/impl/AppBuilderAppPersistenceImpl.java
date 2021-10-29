@@ -20,6 +20,7 @@ import com.liferay.app.builder.model.AppBuilderAppTable;
 import com.liferay.app.builder.model.impl.AppBuilderAppImpl;
 import com.liferay.app.builder.model.impl.AppBuilderAppModelImpl;
 import com.liferay.app.builder.service.persistence.AppBuilderAppPersistence;
+import com.liferay.app.builder.service.persistence.AppBuilderAppUtil;
 import com.liferay.app.builder.service.persistence.impl.constants.AppBuilderPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -53,6 +54,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -9088,10 +9090,14 @@ public class AppBuilderAppPersistenceImpl
 			},
 			new String[] {"groupId", "companyId", "ddmStructureId", "scope"},
 			false);
+
+		_setAppBuilderAppUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAppBuilderAppUtilPersistence(null);
+
 		entityCache.removeCache(AppBuilderAppImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -9100,6 +9106,22 @@ public class AppBuilderAppPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAppBuilderAppUtilPersistence(
+		AppBuilderAppPersistence appBuilderAppPersistence) {
+
+		try {
+			Field field = AppBuilderAppUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, appBuilderAppPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

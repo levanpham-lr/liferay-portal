@@ -18,6 +18,7 @@ import com.liferay.asset.kernel.exception.NoSuchLinkException;
 import com.liferay.asset.kernel.model.AssetLink;
 import com.liferay.asset.kernel.model.AssetLinkTable;
 import com.liferay.asset.kernel.service.persistence.AssetLinkPersistence;
+import com.liferay.asset.kernel.service.persistence.AssetLinkUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
@@ -52,6 +53,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -3911,9 +3913,13 @@ public class AssetLinkPersistenceImpl
 				Integer.class.getName()
 			},
 			new String[] {"entryId1", "entryId2", "type_"}, false);
+
+		_setAssetLinkUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setAssetLinkUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(AssetLinkImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3922,6 +3928,21 @@ public class AssetLinkPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAssetLinkUtilPersistence(
+		AssetLinkPersistence assetLinkPersistence) {
+
+		try {
+			Field field = AssetLinkUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, assetLinkPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

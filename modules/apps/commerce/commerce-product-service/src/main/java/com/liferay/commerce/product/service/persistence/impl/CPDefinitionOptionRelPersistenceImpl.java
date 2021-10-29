@@ -20,6 +20,7 @@ import com.liferay.commerce.product.model.CPDefinitionOptionRelTable;
 import com.liferay.commerce.product.model.impl.CPDefinitionOptionRelImpl;
 import com.liferay.commerce.product.model.impl.CPDefinitionOptionRelModelImpl;
 import com.liferay.commerce.product.service.persistence.CPDefinitionOptionRelPersistence;
+import com.liferay.commerce.product.service.persistence.CPDefinitionOptionRelUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -49,6 +50,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -5391,9 +5393,13 @@ public class CPDefinitionOptionRelPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_K",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"CPDefinitionId", "key_"}, false);
+
+		_setCPDefinitionOptionRelUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCPDefinitionOptionRelUtilPersistence(null);
+
 		entityCache.removeCache(CPDefinitionOptionRelImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -5402,6 +5408,22 @@ public class CPDefinitionOptionRelPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCPDefinitionOptionRelUtilPersistence(
+		CPDefinitionOptionRelPersistence cpDefinitionOptionRelPersistence) {
+
+		try {
+			Field field = CPDefinitionOptionRelUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, cpDefinitionOptionRelPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

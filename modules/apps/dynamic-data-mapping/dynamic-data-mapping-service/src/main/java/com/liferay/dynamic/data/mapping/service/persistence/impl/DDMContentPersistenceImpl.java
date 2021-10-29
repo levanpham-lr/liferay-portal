@@ -20,6 +20,7 @@ import com.liferay.dynamic.data.mapping.model.DDMContentTable;
 import com.liferay.dynamic.data.mapping.model.impl.DDMContentImpl;
 import com.liferay.dynamic.data.mapping.model.impl.DDMContentModelImpl;
 import com.liferay.dynamic.data.mapping.service.persistence.DDMContentPersistence;
+import com.liferay.dynamic.data.mapping.service.persistence.DDMContentUtil;
 import com.liferay.dynamic.data.mapping.service.persistence.impl.constants.DDMPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -53,6 +54,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -3419,10 +3421,14 @@ public class DDMContentPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] {Long.class.getName()}, new String[] {"companyId"},
 			false);
+
+		_setDDMContentUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setDDMContentUtilPersistence(null);
+
 		entityCache.removeCache(DDMContentImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3431,6 +3437,21 @@ public class DDMContentPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setDDMContentUtilPersistence(
+		DDMContentPersistence ddmContentPersistence) {
+
+		try {
+			Field field = DDMContentUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, ddmContentPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

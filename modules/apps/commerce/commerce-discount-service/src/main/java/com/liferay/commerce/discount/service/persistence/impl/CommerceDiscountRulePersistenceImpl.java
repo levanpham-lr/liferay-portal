@@ -20,6 +20,7 @@ import com.liferay.commerce.discount.model.CommerceDiscountRuleTable;
 import com.liferay.commerce.discount.model.impl.CommerceDiscountRuleImpl;
 import com.liferay.commerce.discount.model.impl.CommerceDiscountRuleModelImpl;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountRulePersistence;
+import com.liferay.commerce.discount.service.persistence.CommerceDiscountRuleUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -47,6 +48,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -1214,9 +1216,13 @@ public class CommerceDiscountRulePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"countByCommerceDiscountId", new String[] {Long.class.getName()},
 			new String[] {"commerceDiscountId"}, false);
+
+		_setCommerceDiscountRuleUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceDiscountRuleUtilPersistence(null);
+
 		entityCache.removeCache(CommerceDiscountRuleImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1225,6 +1231,22 @@ public class CommerceDiscountRulePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceDiscountRuleUtilPersistence(
+		CommerceDiscountRulePersistence commerceDiscountRulePersistence) {
+
+		try {
+			Field field = CommerceDiscountRuleUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceDiscountRulePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

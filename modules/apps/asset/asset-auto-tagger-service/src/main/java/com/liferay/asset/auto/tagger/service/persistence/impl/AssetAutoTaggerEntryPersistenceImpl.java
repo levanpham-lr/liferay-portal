@@ -20,6 +20,7 @@ import com.liferay.asset.auto.tagger.model.AssetAutoTaggerEntryTable;
 import com.liferay.asset.auto.tagger.model.impl.AssetAutoTaggerEntryImpl;
 import com.liferay.asset.auto.tagger.model.impl.AssetAutoTaggerEntryModelImpl;
 import com.liferay.asset.auto.tagger.service.persistence.AssetAutoTaggerEntryPersistence;
+import com.liferay.asset.auto.tagger.service.persistence.AssetAutoTaggerEntryUtil;
 import com.liferay.asset.auto.tagger.service.persistence.impl.constants.AssetAutoTaggerPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -50,6 +51,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -2260,10 +2262,14 @@ public class AssetAutoTaggerEntryPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByA_A",
 			new String[] {Long.class.getName(), Long.class.getName()},
 			new String[] {"assetEntryId", "assetTagId"}, false);
+
+		_setAssetAutoTaggerEntryUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAssetAutoTaggerEntryUtilPersistence(null);
+
 		entityCache.removeCache(AssetAutoTaggerEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2272,6 +2278,22 @@ public class AssetAutoTaggerEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAssetAutoTaggerEntryUtilPersistence(
+		AssetAutoTaggerEntryPersistence assetAutoTaggerEntryPersistence) {
+
+		try {
+			Field field = AssetAutoTaggerEntryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, assetAutoTaggerEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.model.UserNotificationEvent;
 import com.liferay.portal.kernel.model.UserNotificationEventTable;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.persistence.UserNotificationEventPersistence;
+import com.liferay.portal.kernel.service.persistence.UserNotificationEventUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -50,6 +51,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.HashMap;
@@ -12499,9 +12501,13 @@ public class UserNotificationEventPersistenceImpl
 				"archived"
 			},
 			false);
+
+		_setUserNotificationEventUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setUserNotificationEventUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(UserNotificationEventImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -12510,6 +12516,22 @@ public class UserNotificationEventPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setUserNotificationEventUtilPersistence(
+		UserNotificationEventPersistence userNotificationEventPersistence) {
+
+		try {
+			Field field = UserNotificationEventUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, userNotificationEventPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

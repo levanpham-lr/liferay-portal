@@ -20,6 +20,7 @@ import com.liferay.commerce.account.model.CommerceAccountGroupTable;
 import com.liferay.commerce.account.model.impl.CommerceAccountGroupImpl;
 import com.liferay.commerce.account.model.impl.CommerceAccountGroupModelImpl;
 import com.liferay.commerce.account.service.persistence.CommerceAccountGroupPersistence;
+import com.liferay.commerce.account.service.persistence.CommerceAccountGroupUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -51,6 +52,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -3939,9 +3941,13 @@ public class CommerceAccountGroupPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"companyId", "externalReferenceCode"}, false);
+
+		_setCommerceAccountGroupUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceAccountGroupUtilPersistence(null);
+
 		entityCache.removeCache(CommerceAccountGroupImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3950,6 +3956,22 @@ public class CommerceAccountGroupPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceAccountGroupUtilPersistence(
+		CommerceAccountGroupPersistence commerceAccountGroupPersistence) {
+
+		try {
+			Field field = CommerceAccountGroupUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceAccountGroupPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -20,6 +20,7 @@ import com.liferay.app.builder.model.AppBuilderAppDeploymentTable;
 import com.liferay.app.builder.model.impl.AppBuilderAppDeploymentImpl;
 import com.liferay.app.builder.model.impl.AppBuilderAppDeploymentModelImpl;
 import com.liferay.app.builder.service.persistence.AppBuilderAppDeploymentPersistence;
+import com.liferay.app.builder.service.persistence.AppBuilderAppDeploymentUtil;
 import com.liferay.app.builder.service.persistence.impl.constants.AppBuilderPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -48,6 +49,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -1511,10 +1513,14 @@ public class AppBuilderAppDeploymentPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByA_T",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"appBuilderAppId", "type_"}, false);
+
+		_setAppBuilderAppDeploymentUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAppBuilderAppDeploymentUtilPersistence(null);
+
 		entityCache.removeCache(AppBuilderAppDeploymentImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1523,6 +1529,22 @@ public class AppBuilderAppDeploymentPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAppBuilderAppDeploymentUtilPersistence(
+		AppBuilderAppDeploymentPersistence appBuilderAppDeploymentPersistence) {
+
+		try {
+			Field field = AppBuilderAppDeploymentUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, appBuilderAppDeploymentPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

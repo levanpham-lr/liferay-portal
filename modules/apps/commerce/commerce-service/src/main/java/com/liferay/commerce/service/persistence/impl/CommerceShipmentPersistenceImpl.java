@@ -20,6 +20,7 @@ import com.liferay.commerce.model.CommerceShipmentTable;
 import com.liferay.commerce.model.impl.CommerceShipmentImpl;
 import com.liferay.commerce.model.impl.CommerceShipmentModelImpl;
 import com.liferay.commerce.service.persistence.CommerceShipmentPersistence;
+import com.liferay.commerce.service.persistence.CommerceShipmentUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -48,6 +49,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -3110,9 +3112,13 @@ public class CommerceShipmentPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByG_S",
 			new String[] {Long.class.getName(), Integer.class.getName()},
 			new String[] {"groupId", "status"}, false);
+
+		_setCommerceShipmentUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceShipmentUtilPersistence(null);
+
 		entityCache.removeCache(CommerceShipmentImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3121,6 +3127,22 @@ public class CommerceShipmentPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceShipmentUtilPersistence(
+		CommerceShipmentPersistence commerceShipmentPersistence) {
+
+		try {
+			Field field = CommerceShipmentUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceShipmentPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

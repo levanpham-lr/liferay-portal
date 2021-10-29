@@ -20,6 +20,7 @@ import com.liferay.commerce.model.CommerceSubscriptionEntryTable;
 import com.liferay.commerce.model.impl.CommerceSubscriptionEntryImpl;
 import com.liferay.commerce.model.impl.CommerceSubscriptionEntryModelImpl;
 import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryPersistence;
+import com.liferay.commerce.service.persistence.CommerceSubscriptionEntryUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -49,6 +50,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -5503,9 +5505,13 @@ public class CommerceSubscriptionEntryPersistenceImpl
 				"CPInstanceUuid", "CProductId", "commerceOrderItemId"
 			},
 			false);
+
+		_setCommerceSubscriptionEntryUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceSubscriptionEntryUtilPersistence(null);
+
 		entityCache.removeCache(CommerceSubscriptionEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -5514,6 +5520,23 @@ public class CommerceSubscriptionEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceSubscriptionEntryUtilPersistence(
+		CommerceSubscriptionEntryPersistence
+			commerceSubscriptionEntryPersistence) {
+
+		try {
+			Field field = CommerceSubscriptionEntryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceSubscriptionEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

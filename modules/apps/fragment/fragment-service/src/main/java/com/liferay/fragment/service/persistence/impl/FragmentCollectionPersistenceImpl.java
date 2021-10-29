@@ -20,6 +20,7 @@ import com.liferay.fragment.model.FragmentCollectionTable;
 import com.liferay.fragment.model.impl.FragmentCollectionImpl;
 import com.liferay.fragment.model.impl.FragmentCollectionModelImpl;
 import com.liferay.fragment.service.persistence.FragmentCollectionPersistence;
+import com.liferay.fragment.service.persistence.FragmentCollectionUtil;
 import com.liferay.fragment.service.persistence.impl.constants.FragmentPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -55,6 +56,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -4438,10 +4440,14 @@ public class FragmentCollectionPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByG_LikeN",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"groupId", "name"}, false);
+
+		_setFragmentCollectionUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setFragmentCollectionUtilPersistence(null);
+
 		entityCache.removeCache(FragmentCollectionImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -4450,6 +4456,22 @@ public class FragmentCollectionPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setFragmentCollectionUtilPersistence(
+		FragmentCollectionPersistence fragmentCollectionPersistence) {
+
+		try {
+			Field field = FragmentCollectionUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, fragmentCollectionPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

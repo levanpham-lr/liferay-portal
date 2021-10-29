@@ -20,6 +20,7 @@ import com.liferay.depot.model.DepotEntryTable;
 import com.liferay.depot.model.impl.DepotEntryImpl;
 import com.liferay.depot.model.impl.DepotEntryModelImpl;
 import com.liferay.depot.service.persistence.DepotEntryPersistence;
+import com.liferay.depot.service.persistence.DepotEntryUtil;
 import com.liferay.depot.service.persistence.impl.constants.DepotPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -51,6 +52,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2305,10 +2307,14 @@ public class DepotEntryPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
 			new String[] {Long.class.getName()}, new String[] {"groupId"},
 			false);
+
+		_setDepotEntryUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setDepotEntryUtilPersistence(null);
+
 		entityCache.removeCache(DepotEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2317,6 +2323,21 @@ public class DepotEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setDepotEntryUtilPersistence(
+		DepotEntryPersistence depotEntryPersistence) {
+
+		try {
+			Field field = DepotEntryUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, depotEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

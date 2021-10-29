@@ -53,10 +53,12 @@ import com.liferay.segments.model.SegmentsExperimentTable;
 import com.liferay.segments.model.impl.SegmentsExperimentImpl;
 import com.liferay.segments.model.impl.SegmentsExperimentModelImpl;
 import com.liferay.segments.service.persistence.SegmentsExperimentPersistence;
+import com.liferay.segments.service.persistence.SegmentsExperimentUtil;
 import com.liferay.segments.service.persistence.impl.constants.SegmentsPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -6992,10 +6994,14 @@ public class SegmentsExperimentPersistenceImpl
 				"segmentsExperienceId", "classNameId", "classPK", "status"
 			},
 			false);
+
+		_setSegmentsExperimentUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setSegmentsExperimentUtilPersistence(null);
+
 		entityCache.removeCache(SegmentsExperimentImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -7004,6 +7010,22 @@ public class SegmentsExperimentPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setSegmentsExperimentUtilPersistence(
+		SegmentsExperimentPersistence segmentsExperimentPersistence) {
+
+		try {
+			Field field = SegmentsExperimentUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, segmentsExperimentPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -45,10 +45,12 @@ import com.liferay.sync.model.SyncDLObjectTable;
 import com.liferay.sync.model.impl.SyncDLObjectImpl;
 import com.liferay.sync.model.impl.SyncDLObjectModelImpl;
 import com.liferay.sync.service.persistence.SyncDLObjectPersistence;
+import com.liferay.sync.service.persistence.SyncDLObjectUtil;
 import com.liferay.sync.service.persistence.impl.constants.SyncPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.HashMap;
@@ -6955,10 +6957,14 @@ public class SyncDLObjectPersistenceImpl
 				String.class.getName()
 			},
 			new String[] {"repositoryId", "parentFolderId", "type_"}, false);
+
+		_setSyncDLObjectUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setSyncDLObjectUtilPersistence(null);
+
 		entityCache.removeCache(SyncDLObjectImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -6967,6 +6973,22 @@ public class SyncDLObjectPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setSyncDLObjectUtilPersistence(
+		SyncDLObjectPersistence syncDLObjectPersistence) {
+
+		try {
+			Field field = SyncDLObjectUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, syncDLObjectPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

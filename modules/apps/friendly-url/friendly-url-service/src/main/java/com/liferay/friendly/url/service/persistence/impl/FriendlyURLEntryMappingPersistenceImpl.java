@@ -20,6 +20,7 @@ import com.liferay.friendly.url.model.FriendlyURLEntryMappingTable;
 import com.liferay.friendly.url.model.impl.FriendlyURLEntryMappingImpl;
 import com.liferay.friendly.url.model.impl.FriendlyURLEntryMappingModelImpl;
 import com.liferay.friendly.url.service.persistence.FriendlyURLEntryMappingPersistence;
+import com.liferay.friendly.url.service.persistence.FriendlyURLEntryMappingUtil;
 import com.liferay.friendly.url.service.persistence.impl.constants.FURLPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -48,6 +49,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -1161,10 +1163,14 @@ public class FriendlyURLEntryMappingPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
 			new String[] {Long.class.getName(), Long.class.getName()},
 			new String[] {"classNameId", "classPK"}, false);
+
+		_setFriendlyURLEntryMappingUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setFriendlyURLEntryMappingUtilPersistence(null);
+
 		entityCache.removeCache(FriendlyURLEntryMappingImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1173,6 +1179,22 @@ public class FriendlyURLEntryMappingPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setFriendlyURLEntryMappingUtilPersistence(
+		FriendlyURLEntryMappingPersistence friendlyURLEntryMappingPersistence) {
+
+		try {
+			Field field = FriendlyURLEntryMappingUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, friendlyURLEntryMappingPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

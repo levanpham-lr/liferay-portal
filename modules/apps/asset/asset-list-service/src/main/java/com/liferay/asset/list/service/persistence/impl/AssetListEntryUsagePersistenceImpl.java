@@ -20,6 +20,7 @@ import com.liferay.asset.list.model.AssetListEntryUsageTable;
 import com.liferay.asset.list.model.impl.AssetListEntryUsageImpl;
 import com.liferay.asset.list.model.impl.AssetListEntryUsageModelImpl;
 import com.liferay.asset.list.service.persistence.AssetListEntryUsagePersistence;
+import com.liferay.asset.list.service.persistence.AssetListEntryUsageUtil;
 import com.liferay.asset.list.service.persistence.impl.constants.AssetListPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -53,6 +54,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -3875,10 +3877,14 @@ public class AssetListEntryUsagePersistenceImpl
 				String.class.getName()
 			},
 			new String[] {"classNameId", "classPK", "portletId"}, false);
+
+		_setAssetListEntryUsageUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAssetListEntryUsageUtilPersistence(null);
+
 		entityCache.removeCache(AssetListEntryUsageImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3887,6 +3893,22 @@ public class AssetListEntryUsagePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAssetListEntryUsageUtilPersistence(
+		AssetListEntryUsagePersistence assetListEntryUsagePersistence) {
+
+		try {
+			Field field = AssetListEntryUsageUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, assetListEntryUsagePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

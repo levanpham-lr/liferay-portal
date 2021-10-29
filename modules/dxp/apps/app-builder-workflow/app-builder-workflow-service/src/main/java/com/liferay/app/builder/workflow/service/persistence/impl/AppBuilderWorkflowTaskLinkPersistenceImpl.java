@@ -20,6 +20,7 @@ import com.liferay.app.builder.workflow.model.AppBuilderWorkflowTaskLinkTable;
 import com.liferay.app.builder.workflow.model.impl.AppBuilderWorkflowTaskLinkImpl;
 import com.liferay.app.builder.workflow.model.impl.AppBuilderWorkflowTaskLinkModelImpl;
 import com.liferay.app.builder.workflow.service.persistence.AppBuilderWorkflowTaskLinkPersistence;
+import com.liferay.app.builder.workflow.service.persistence.AppBuilderWorkflowTaskLinkUtil;
 import com.liferay.app.builder.workflow.service.persistence.impl.constants.AppBuilderWorkflowPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -47,6 +48,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -2871,10 +2873,14 @@ public class AppBuilderWorkflowTaskLinkPersistenceImpl
 				"ddmStructureLayoutId", "workflowTaskName"
 			},
 			false);
+
+		_setAppBuilderWorkflowTaskLinkUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAppBuilderWorkflowTaskLinkUtilPersistence(null);
+
 		entityCache.removeCache(AppBuilderWorkflowTaskLinkImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2883,6 +2889,23 @@ public class AppBuilderWorkflowTaskLinkPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAppBuilderWorkflowTaskLinkUtilPersistence(
+		AppBuilderWorkflowTaskLinkPersistence
+			appBuilderWorkflowTaskLinkPersistence) {
+
+		try {
+			Field field = AppBuilderWorkflowTaskLinkUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, appBuilderWorkflowTaskLinkPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

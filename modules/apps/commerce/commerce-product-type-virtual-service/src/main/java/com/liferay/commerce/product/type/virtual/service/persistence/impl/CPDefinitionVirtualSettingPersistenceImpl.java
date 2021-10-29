@@ -20,6 +20,7 @@ import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSettin
 import com.liferay.commerce.product.type.virtual.model.impl.CPDefinitionVirtualSettingImpl;
 import com.liferay.commerce.product.type.virtual.model.impl.CPDefinitionVirtualSettingModelImpl;
 import com.liferay.commerce.product.type.virtual.service.persistence.CPDefinitionVirtualSettingPersistence;
+import com.liferay.commerce.product.type.virtual.service.persistence.CPDefinitionVirtualSettingUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -49,6 +50,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2439,9 +2441,13 @@ public class CPDefinitionVirtualSettingPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
 			new String[] {Long.class.getName(), Long.class.getName()},
 			new String[] {"classNameId", "classPK"}, false);
+
+		_setCPDefinitionVirtualSettingUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCPDefinitionVirtualSettingUtilPersistence(null);
+
 		entityCache.removeCache(CPDefinitionVirtualSettingImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2450,6 +2456,23 @@ public class CPDefinitionVirtualSettingPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCPDefinitionVirtualSettingUtilPersistence(
+		CPDefinitionVirtualSettingPersistence
+			cpDefinitionVirtualSettingPersistence) {
+
+		try {
+			Field field = CPDefinitionVirtualSettingUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, cpDefinitionVirtualSettingPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

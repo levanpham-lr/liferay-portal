@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.model.PortletPreferences;
 import com.liferay.portal.kernel.model.PortletPreferencesTable;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.persistence.PortletPreferencesPersistence;
+import com.liferay.portal.kernel.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.kernel.service.persistence.change.tracking.helper.CTPersistenceHelperUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -50,6 +51,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -6738,9 +6740,13 @@ public class PortletPreferencesPersistenceImpl
 				Long.class.getName(), String.class.getName()
 			},
 			new String[] {"ownerId", "ownerType", "plid", "portletId"}, false);
+
+		_setPortletPreferencesUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setPortletPreferencesUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(PortletPreferencesImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -6749,6 +6755,22 @@ public class PortletPreferencesPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setPortletPreferencesUtilPersistence(
+		PortletPreferencesPersistence portletPreferencesPersistence) {
+
+		try {
+			Field field = PortletPreferencesUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, portletPreferencesPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

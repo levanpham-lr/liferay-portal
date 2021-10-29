@@ -44,12 +44,14 @@ import com.liferay.powwow.model.PowwowMeeting;
 import com.liferay.powwow.model.impl.PowwowMeetingImpl;
 import com.liferay.powwow.model.impl.PowwowMeetingModelImpl;
 import com.liferay.powwow.service.persistence.PowwowMeetingPersistence;
+import com.liferay.powwow.service.persistence.PowwowMeetingUtil;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -3684,9 +3686,13 @@ public class PowwowMeetingPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByPSI_S",
 			new String[] {Long.class.getName(), Integer.class.getName()},
 			new String[] {"powwowServerId", "status"}, false);
+
+		_setPowwowMeetingUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setPowwowMeetingUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(PowwowMeetingImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3695,6 +3701,22 @@ public class PowwowMeetingPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setPowwowMeetingUtilPersistence(
+		PowwowMeetingPersistence powwowMeetingPersistence) {
+
+		try {
+			Field field = PowwowMeetingUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, powwowMeetingPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

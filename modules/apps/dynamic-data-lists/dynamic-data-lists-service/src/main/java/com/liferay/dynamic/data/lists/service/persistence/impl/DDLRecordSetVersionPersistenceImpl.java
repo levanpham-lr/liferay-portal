@@ -20,6 +20,7 @@ import com.liferay.dynamic.data.lists.model.DDLRecordSetVersionTable;
 import com.liferay.dynamic.data.lists.model.impl.DDLRecordSetVersionImpl;
 import com.liferay.dynamic.data.lists.model.impl.DDLRecordSetVersionModelImpl;
 import com.liferay.dynamic.data.lists.service.persistence.DDLRecordSetVersionPersistence;
+import com.liferay.dynamic.data.lists.service.persistence.DDLRecordSetVersionUtil;
 import com.liferay.dynamic.data.lists.service.persistence.impl.constants.DDLPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -49,6 +50,7 @@ import com.liferay.portal.kernel.util.SetUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2039,10 +2041,14 @@ public class DDLRecordSetVersionPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByRS_S",
 			new String[] {Long.class.getName(), Integer.class.getName()},
 			new String[] {"recordSetId", "status"}, false);
+
+		_setDDLRecordSetVersionUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setDDLRecordSetVersionUtilPersistence(null);
+
 		entityCache.removeCache(DDLRecordSetVersionImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2051,6 +2057,22 @@ public class DDLRecordSetVersionPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setDDLRecordSetVersionUtilPersistence(
+		DDLRecordSetVersionPersistence ddlRecordSetVersionPersistence) {
+
+		try {
+			Field field = DDLRecordSetVersionUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, ddlRecordSetVersionPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

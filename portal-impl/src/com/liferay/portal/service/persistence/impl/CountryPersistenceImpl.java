@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.Country;
 import com.liferay.portal.kernel.model.CountryTable;
 import com.liferay.portal.kernel.service.persistence.CountryPersistence;
+import com.liferay.portal.kernel.service.persistence.CountryUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -47,6 +48,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.HashMap;
@@ -1846,9 +1848,13 @@ public class CountryPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByActive",
 			new String[] {Boolean.class.getName()}, new String[] {"active_"},
 			false);
+
+		_setCountryUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCountryUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(CountryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1857,6 +1863,21 @@ public class CountryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCountryUtilPersistence(
+		CountryPersistence countryPersistence) {
+
+		try {
+			Field field = CountryUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, countryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

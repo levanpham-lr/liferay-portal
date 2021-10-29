@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.model.OrgGroupRoleTable;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.persistence.OrgGroupRolePK;
 import com.liferay.portal.kernel.service.persistence.OrgGroupRolePersistence;
+import com.liferay.portal.kernel.service.persistence.OrgGroupRoleUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -49,6 +50,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.HashSet;
@@ -1639,9 +1641,13 @@ public class OrgGroupRolePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByRoleId",
 			new String[] {Long.class.getName()}, new String[] {"roleId"},
 			false);
+
+		_setOrgGroupRoleUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setOrgGroupRoleUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(OrgGroupRoleImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1650,6 +1656,22 @@ public class OrgGroupRolePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setOrgGroupRoleUtilPersistence(
+		OrgGroupRolePersistence orgGroupRolePersistence) {
+
+		try {
+			Field field = OrgGroupRoleUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, orgGroupRolePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -20,6 +20,7 @@ import com.liferay.commerce.model.CommerceShipmentItemTable;
 import com.liferay.commerce.model.impl.CommerceShipmentItemImpl;
 import com.liferay.commerce.model.impl.CommerceShipmentItemModelImpl;
 import com.liferay.commerce.service.persistence.CommerceShipmentItemPersistence;
+import com.liferay.commerce.service.persistence.CommerceShipmentItemUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -46,6 +47,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -3146,9 +3148,13 @@ public class CommerceShipmentItemPersistenceImpl
 				"commerceInventoryWarehouseId"
 			},
 			false);
+
+		_setCommerceShipmentItemUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceShipmentItemUtilPersistence(null);
+
 		entityCache.removeCache(CommerceShipmentItemImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3157,6 +3163,22 @@ public class CommerceShipmentItemPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceShipmentItemUtilPersistence(
+		CommerceShipmentItemPersistence commerceShipmentItemPersistence) {
+
+		try {
+			Field field = CommerceShipmentItemUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceShipmentItemPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

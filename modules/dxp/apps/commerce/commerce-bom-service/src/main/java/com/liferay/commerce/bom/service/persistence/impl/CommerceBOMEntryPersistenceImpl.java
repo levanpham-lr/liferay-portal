@@ -20,6 +20,7 @@ import com.liferay.commerce.bom.model.CommerceBOMEntryTable;
 import com.liferay.commerce.bom.model.impl.CommerceBOMEntryImpl;
 import com.liferay.commerce.bom.model.impl.CommerceBOMEntryModelImpl;
 import com.liferay.commerce.bom.service.persistence.CommerceBOMEntryPersistence;
+import com.liferay.commerce.bom.service.persistence.CommerceBOMEntryUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -47,6 +48,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -1208,9 +1210,13 @@ public class CommerceBOMEntryPersistenceImpl
 			"countByCommerceBOMDefinitionId",
 			new String[] {Long.class.getName()},
 			new String[] {"commerceBOMDefinitionId"}, false);
+
+		_setCommerceBOMEntryUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceBOMEntryUtilPersistence(null);
+
 		entityCache.removeCache(CommerceBOMEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1219,6 +1225,22 @@ public class CommerceBOMEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceBOMEntryUtilPersistence(
+		CommerceBOMEntryPersistence commerceBOMEntryPersistence) {
+
+		try {
+			Field field = CommerceBOMEntryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceBOMEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

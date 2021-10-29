@@ -44,10 +44,12 @@ import com.liferay.portal.workflow.kaleo.model.KaleoDefinitionVersionTable;
 import com.liferay.portal.workflow.kaleo.model.impl.KaleoDefinitionVersionImpl;
 import com.liferay.portal.workflow.kaleo.model.impl.KaleoDefinitionVersionModelImpl;
 import com.liferay.portal.workflow.kaleo.service.persistence.KaleoDefinitionVersionPersistence;
+import com.liferay.portal.workflow.kaleo.service.persistence.KaleoDefinitionVersionUtil;
 import com.liferay.portal.workflow.kaleo.service.persistence.impl.constants.KaleoPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2152,10 +2154,14 @@ public class KaleoDefinitionVersionPersistenceImpl
 				String.class.getName()
 			},
 			new String[] {"companyId", "name", "version"}, false);
+
+		_setKaleoDefinitionVersionUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setKaleoDefinitionVersionUtilPersistence(null);
+
 		entityCache.removeCache(KaleoDefinitionVersionImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2164,6 +2170,22 @@ public class KaleoDefinitionVersionPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setKaleoDefinitionVersionUtilPersistence(
+		KaleoDefinitionVersionPersistence kaleoDefinitionVersionPersistence) {
+
+		try {
+			Field field = KaleoDefinitionVersionUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, kaleoDefinitionVersionPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

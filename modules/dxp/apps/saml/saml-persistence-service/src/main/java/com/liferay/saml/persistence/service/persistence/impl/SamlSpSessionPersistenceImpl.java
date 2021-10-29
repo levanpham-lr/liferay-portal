@@ -46,10 +46,12 @@ import com.liferay.saml.persistence.model.SamlSpSessionTable;
 import com.liferay.saml.persistence.model.impl.SamlSpSessionImpl;
 import com.liferay.saml.persistence.model.impl.SamlSpSessionModelImpl;
 import com.liferay.saml.persistence.service.persistence.SamlSpSessionPersistence;
+import com.liferay.saml.persistence.service.persistence.SamlSpSessionUtil;
 import com.liferay.saml.persistence.service.persistence.impl.constants.SamlPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -2311,10 +2313,14 @@ public class SamlSpSessionPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_SI",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"companyId", "sessionIndex"}, false);
+
+		_setSamlSpSessionUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setSamlSpSessionUtilPersistence(null);
+
 		entityCache.removeCache(SamlSpSessionImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2323,6 +2329,22 @@ public class SamlSpSessionPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setSamlSpSessionUtilPersistence(
+		SamlSpSessionPersistence samlSpSessionPersistence) {
+
+		try {
+			Field field = SamlSpSessionUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, samlSpSessionPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

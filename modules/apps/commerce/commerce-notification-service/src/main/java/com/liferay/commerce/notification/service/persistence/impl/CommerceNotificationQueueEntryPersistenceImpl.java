@@ -20,6 +20,7 @@ import com.liferay.commerce.notification.model.CommerceNotificationQueueEntryTab
 import com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryImpl;
 import com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryModelImpl;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationQueueEntryPersistence;
+import com.liferay.commerce.notification.service.persistence.CommerceNotificationQueueEntryUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -47,6 +48,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.sql.Timestamp;
@@ -3563,9 +3565,13 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				Long.class.getName(), Boolean.class.getName()
 			},
 			new String[] {"groupId", "classNameId", "classPK", "sent"}, false);
+
+		_setCommerceNotificationQueueEntryUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceNotificationQueueEntryUtilPersistence(null);
+
 		entityCache.removeCache(
 			CommerceNotificationQueueEntryImpl.class.getName());
 
@@ -3575,6 +3581,24 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceNotificationQueueEntryUtilPersistence(
+		CommerceNotificationQueueEntryPersistence
+			commerceNotificationQueueEntryPersistence) {
+
+		try {
+			Field field =
+				CommerceNotificationQueueEntryUtil.class.getDeclaredField(
+					"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceNotificationQueueEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

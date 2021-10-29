@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.ListType;
 import com.liferay.portal.kernel.model.ListTypeTable;
 import com.liferay.portal.kernel.service.persistence.ListTypePersistence;
+import com.liferay.portal.kernel.service.persistence.ListTypeUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -48,6 +49,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -1484,9 +1486,13 @@ public class ListTypePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByN_T",
 			new String[] {String.class.getName(), String.class.getName()},
 			new String[] {"name", "type_"}, false);
+
+		_setListTypeUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setListTypeUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(ListTypeImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1495,6 +1501,21 @@ public class ListTypePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setListTypeUtilPersistence(
+		ListTypePersistence listTypePersistence) {
+
+		try {
+			Field field = ListTypeUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, listTypePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -20,6 +20,7 @@ import com.liferay.commerce.data.integration.model.CommerceDataIntegrationProces
 import com.liferay.commerce.data.integration.model.impl.CommerceDataIntegrationProcessImpl;
 import com.liferay.commerce.data.integration.model.impl.CommerceDataIntegrationProcessModelImpl;
 import com.liferay.commerce.data.integration.service.persistence.CommerceDataIntegrationProcessPersistence;
+import com.liferay.commerce.data.integration.service.persistence.CommerceDataIntegrationProcessUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -49,6 +50,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -3006,9 +3008,13 @@ public class CommerceDataIntegrationProcessPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_T",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"companyId", "type_"}, false);
+
+		_setCommerceDataIntegrationProcessUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceDataIntegrationProcessUtilPersistence(null);
+
 		entityCache.removeCache(
 			CommerceDataIntegrationProcessImpl.class.getName());
 
@@ -3018,6 +3024,24 @@ public class CommerceDataIntegrationProcessPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceDataIntegrationProcessUtilPersistence(
+		CommerceDataIntegrationProcessPersistence
+			commerceDataIntegrationProcessPersistence) {
+
+		try {
+			Field field =
+				CommerceDataIntegrationProcessUtil.class.getDeclaredField(
+					"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceDataIntegrationProcessPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

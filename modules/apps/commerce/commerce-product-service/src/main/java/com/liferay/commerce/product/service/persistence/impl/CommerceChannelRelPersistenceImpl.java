@@ -20,6 +20,7 @@ import com.liferay.commerce.product.model.CommerceChannelRelTable;
 import com.liferay.commerce.product.model.impl.CommerceChannelRelImpl;
 import com.liferay.commerce.product.model.impl.CommerceChannelRelModelImpl;
 import com.liferay.commerce.product.service.persistence.CommerceChannelRelPersistence;
+import com.liferay.commerce.product.service.persistence.CommerceChannelRelUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -46,6 +47,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2044,9 +2046,13 @@ public class CommerceChannelRelPersistenceImpl
 			},
 			new String[] {"classNameId", "classPK", "commerceChannelId"},
 			false);
+
+		_setCommerceChannelRelUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceChannelRelUtilPersistence(null);
+
 		entityCache.removeCache(CommerceChannelRelImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2055,6 +2061,22 @@ public class CommerceChannelRelPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceChannelRelUtilPersistence(
+		CommerceChannelRelPersistence commerceChannelRelPersistence) {
+
+		try {
+			Field field = CommerceChannelRelUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceChannelRelPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

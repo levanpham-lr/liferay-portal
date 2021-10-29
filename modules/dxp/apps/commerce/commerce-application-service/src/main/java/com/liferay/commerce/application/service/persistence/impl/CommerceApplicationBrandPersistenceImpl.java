@@ -20,6 +20,7 @@ import com.liferay.commerce.application.model.CommerceApplicationBrandTable;
 import com.liferay.commerce.application.model.impl.CommerceApplicationBrandImpl;
 import com.liferay.commerce.application.model.impl.CommerceApplicationBrandModelImpl;
 import com.liferay.commerce.application.service.persistence.CommerceApplicationBrandPersistence;
+import com.liferay.commerce.application.service.persistence.CommerceApplicationBrandUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -48,6 +49,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -1595,9 +1597,13 @@ public class CommerceApplicationBrandPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] {Long.class.getName()}, new String[] {"companyId"},
 			false);
+
+		_setCommerceApplicationBrandUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceApplicationBrandUtilPersistence(null);
+
 		entityCache.removeCache(CommerceApplicationBrandImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1606,6 +1612,23 @@ public class CommerceApplicationBrandPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceApplicationBrandUtilPersistence(
+		CommerceApplicationBrandPersistence
+			commerceApplicationBrandPersistence) {
+
+		try {
+			Field field = CommerceApplicationBrandUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceApplicationBrandPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -20,6 +20,7 @@ import com.liferay.calendar.model.CalendarResourceTable;
 import com.liferay.calendar.model.impl.CalendarResourceImpl;
 import com.liferay.calendar.model.impl.CalendarResourceModelImpl;
 import com.liferay.calendar.service.persistence.CalendarResourcePersistence;
+import com.liferay.calendar.service.persistence.CalendarResourceUtil;
 import com.liferay.calendar.service.persistence.impl.constants.CalendarPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -55,6 +56,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -6979,10 +6981,14 @@ public class CalendarResourcePersistenceImpl
 				Boolean.class.getName()
 			},
 			new String[] {"companyId", "code_", "active_"}, false);
+
+		_setCalendarResourceUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setCalendarResourceUtilPersistence(null);
+
 		entityCache.removeCache(CalendarResourceImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -6991,6 +6997,22 @@ public class CalendarResourcePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCalendarResourceUtilPersistence(
+		CalendarResourcePersistence calendarResourcePersistence) {
+
+		try {
+			Field field = CalendarResourceUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, calendarResourcePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

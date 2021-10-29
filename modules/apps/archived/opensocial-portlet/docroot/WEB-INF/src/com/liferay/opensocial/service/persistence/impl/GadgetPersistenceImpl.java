@@ -19,6 +19,7 @@ import com.liferay.opensocial.model.Gadget;
 import com.liferay.opensocial.model.impl.GadgetImpl;
 import com.liferay.opensocial.model.impl.GadgetModelImpl;
 import com.liferay.opensocial.service.persistence.GadgetPersistence;
+import com.liferay.opensocial.service.persistence.GadgetUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -53,6 +54,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -3796,9 +3798,13 @@ public class GadgetPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_U",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"companyId", "url"}, false);
+
+		_setGadgetUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setGadgetUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(GadgetImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3807,6 +3813,21 @@ public class GadgetPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setGadgetUtilPersistence(
+		GadgetPersistence gadgetPersistence) {
+
+		try {
+			Field field = GadgetUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, gadgetPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

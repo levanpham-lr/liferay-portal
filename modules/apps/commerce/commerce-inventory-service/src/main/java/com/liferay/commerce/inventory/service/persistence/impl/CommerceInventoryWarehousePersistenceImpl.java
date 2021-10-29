@@ -20,6 +20,7 @@ import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseTable;
 import com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseImpl;
 import com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseModelImpl;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehousePersistence;
+import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -50,6 +51,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -5151,9 +5153,13 @@ public class CommerceInventoryWarehousePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"companyId", "externalReferenceCode"}, false);
+
+		_setCommerceInventoryWarehouseUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceInventoryWarehouseUtilPersistence(null);
+
 		entityCache.removeCache(CommerceInventoryWarehouseImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -5162,6 +5168,23 @@ public class CommerceInventoryWarehousePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceInventoryWarehouseUtilPersistence(
+		CommerceInventoryWarehousePersistence
+			commerceInventoryWarehousePersistence) {
+
+		try {
+			Field field = CommerceInventoryWarehouseUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceInventoryWarehousePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -18,6 +18,7 @@ import com.liferay.expando.kernel.exception.NoSuchColumnException;
 import com.liferay.expando.kernel.model.ExpandoColumn;
 import com.liferay.expando.kernel.model.ExpandoColumnTable;
 import com.liferay.expando.kernel.service.persistence.ExpandoColumnPersistence;
+import com.liferay.expando.kernel.service.persistence.ExpandoColumnUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
@@ -54,6 +55,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -2560,9 +2562,13 @@ public class ExpandoColumnPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByT_N",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"tableId", "name"}, false);
+
+		_setExpandoColumnUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setExpandoColumnUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(ExpandoColumnImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2571,6 +2577,22 @@ public class ExpandoColumnPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setExpandoColumnUtilPersistence(
+		ExpandoColumnPersistence expandoColumnPersistence) {
+
+		try {
+			Field field = ExpandoColumnUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, expandoColumnPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

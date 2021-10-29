@@ -20,6 +20,7 @@ import com.liferay.layout.model.LayoutClassedModelUsageTable;
 import com.liferay.layout.model.impl.LayoutClassedModelUsageImpl;
 import com.liferay.layout.model.impl.LayoutClassedModelUsageModelImpl;
 import com.liferay.layout.service.persistence.LayoutClassedModelUsagePersistence;
+import com.liferay.layout.service.persistence.LayoutClassedModelUsageUtil;
 import com.liferay.layout.service.persistence.impl.constants.LayoutPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -53,6 +54,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -5261,10 +5263,14 @@ public class LayoutClassedModelUsagePersistenceImpl
 				"plid"
 			},
 			false);
+
+		_setLayoutClassedModelUsageUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setLayoutClassedModelUsageUtilPersistence(null);
+
 		entityCache.removeCache(LayoutClassedModelUsageImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -5273,6 +5279,22 @@ public class LayoutClassedModelUsagePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setLayoutClassedModelUsageUtilPersistence(
+		LayoutClassedModelUsagePersistence layoutClassedModelUsagePersistence) {
+
+		try {
+			Field field = LayoutClassedModelUsageUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, layoutClassedModelUsagePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

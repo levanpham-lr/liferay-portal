@@ -20,6 +20,7 @@ import com.liferay.alloy.mvc.sample.model.TodoListTable;
 import com.liferay.alloy.mvc.sample.model.impl.TodoListImpl;
 import com.liferay.alloy.mvc.sample.model.impl.TodoListModelImpl;
 import com.liferay.alloy.mvc.sample.service.persistence.TodoListPersistence;
+import com.liferay.alloy.mvc.sample.service.persistence.TodoListUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -45,6 +46,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -633,9 +635,13 @@ public class TodoListPersistenceImpl
 		_finderPathCountAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0], new String[0], false);
+
+		_setTodoListUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setTodoListUtilPersistence(null);
+
 		entityCache.removeCache(TodoListImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -644,6 +650,21 @@ public class TodoListPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setTodoListUtilPersistence(
+		TodoListPersistence todoListPersistence) {
+
+		try {
+			Field field = TodoListUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, todoListPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

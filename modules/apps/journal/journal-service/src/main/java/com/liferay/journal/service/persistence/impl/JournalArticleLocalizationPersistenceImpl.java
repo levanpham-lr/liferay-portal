@@ -20,6 +20,7 @@ import com.liferay.journal.model.JournalArticleLocalizationTable;
 import com.liferay.journal.model.impl.JournalArticleLocalizationImpl;
 import com.liferay.journal.model.impl.JournalArticleLocalizationModelImpl;
 import com.liferay.journal.service.persistence.JournalArticleLocalizationPersistence;
+import com.liferay.journal.service.persistence.JournalArticleLocalizationUtil;
 import com.liferay.journal.service.persistence.impl.constants.JournalPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -49,6 +50,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -2764,10 +2766,14 @@ public class JournalArticleLocalizationPersistenceImpl
 			},
 			new String[] {"companyId", "articlePK", "title", "languageId"},
 			false);
+
+		_setJournalArticleLocalizationUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setJournalArticleLocalizationUtilPersistence(null);
+
 		entityCache.removeCache(JournalArticleLocalizationImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2776,6 +2782,23 @@ public class JournalArticleLocalizationPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setJournalArticleLocalizationUtilPersistence(
+		JournalArticleLocalizationPersistence
+			journalArticleLocalizationPersistence) {
+
+		try {
+			Field field = JournalArticleLocalizationUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, journalArticleLocalizationPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

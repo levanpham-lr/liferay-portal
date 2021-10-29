@@ -45,10 +45,12 @@ import com.liferay.wiki.model.WikiPageResourceTable;
 import com.liferay.wiki.model.impl.WikiPageResourceImpl;
 import com.liferay.wiki.model.impl.WikiPageResourceModelImpl;
 import com.liferay.wiki.service.persistence.WikiPageResourcePersistence;
+import com.liferay.wiki.service.persistence.WikiPageResourceUtil;
 import com.liferay.wiki.service.persistence.impl.constants.WikiPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.HashMap;
@@ -2362,10 +2364,14 @@ public class WikiPageResourcePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByN_T",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"nodeId", "title"}, false);
+
+		_setWikiPageResourceUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setWikiPageResourceUtilPersistence(null);
+
 		entityCache.removeCache(WikiPageResourceImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2374,6 +2380,22 @@ public class WikiPageResourcePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setWikiPageResourceUtilPersistence(
+		WikiPageResourcePersistence wikiPageResourcePersistence) {
+
+		try {
+			Field field = WikiPageResourceUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, wikiPageResourcePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

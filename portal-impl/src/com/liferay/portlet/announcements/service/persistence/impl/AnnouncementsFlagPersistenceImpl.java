@@ -18,6 +18,7 @@ import com.liferay.announcements.kernel.exception.NoSuchFlagException;
 import com.liferay.announcements.kernel.model.AnnouncementsFlag;
 import com.liferay.announcements.kernel.model.AnnouncementsFlagTable;
 import com.liferay.announcements.kernel.service.persistence.AnnouncementsFlagPersistence;
+import com.liferay.announcements.kernel.service.persistence.AnnouncementsFlagUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -49,6 +50,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -1965,9 +1967,13 @@ public class AnnouncementsFlagPersistenceImpl
 				Integer.class.getName()
 			},
 			new String[] {"userId", "entryId", "value"}, false);
+
+		_setAnnouncementsFlagUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setAnnouncementsFlagUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(AnnouncementsFlagImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1976,6 +1982,22 @@ public class AnnouncementsFlagPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAnnouncementsFlagUtilPersistence(
+		AnnouncementsFlagPersistence announcementsFlagPersistence) {
+
+		try {
+			Field field = AnnouncementsFlagUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, announcementsFlagPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

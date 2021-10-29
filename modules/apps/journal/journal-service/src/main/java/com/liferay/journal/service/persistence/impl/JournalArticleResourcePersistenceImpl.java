@@ -20,6 +20,7 @@ import com.liferay.journal.model.JournalArticleResourceTable;
 import com.liferay.journal.model.impl.JournalArticleResourceImpl;
 import com.liferay.journal.model.impl.JournalArticleResourceModelImpl;
 import com.liferay.journal.service.persistence.JournalArticleResourcePersistence;
+import com.liferay.journal.service.persistence.JournalArticleResourceUtil;
 import com.liferay.journal.service.persistence.impl.constants.JournalPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -51,6 +52,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -3240,10 +3242,14 @@ public class JournalArticleResourcePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"groupId", "articleId"}, false);
+
+		_setJournalArticleResourceUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setJournalArticleResourceUtilPersistence(null);
+
 		entityCache.removeCache(JournalArticleResourceImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3252,6 +3258,22 @@ public class JournalArticleResourcePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setJournalArticleResourceUtilPersistence(
+		JournalArticleResourcePersistence journalArticleResourcePersistence) {
+
+		try {
+			Field field = JournalArticleResourceUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, journalArticleResourcePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

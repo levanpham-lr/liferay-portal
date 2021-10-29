@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.ClassName;
 import com.liferay.portal.kernel.model.ClassNameTable;
 import com.liferay.portal.kernel.service.persistence.ClassNamePersistence;
+import com.liferay.portal.kernel.service.persistence.ClassNameUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -46,6 +47,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.HashSet;
@@ -854,9 +856,13 @@ public class ClassNamePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByValue",
 			new String[] {String.class.getName()}, new String[] {"value"},
 			false);
+
+		_setClassNameUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setClassNameUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(ClassNameImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -865,6 +871,21 @@ public class ClassNamePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setClassNameUtilPersistence(
+		ClassNamePersistence classNamePersistence) {
+
+		try {
+			Field field = ClassNameUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, classNamePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

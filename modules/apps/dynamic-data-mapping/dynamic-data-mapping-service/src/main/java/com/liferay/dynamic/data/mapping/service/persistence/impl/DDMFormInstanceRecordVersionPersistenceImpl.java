@@ -20,6 +20,7 @@ import com.liferay.dynamic.data.mapping.model.DDMFormInstanceRecordVersionTable;
 import com.liferay.dynamic.data.mapping.model.impl.DDMFormInstanceRecordVersionImpl;
 import com.liferay.dynamic.data.mapping.model.impl.DDMFormInstanceRecordVersionModelImpl;
 import com.liferay.dynamic.data.mapping.service.persistence.DDMFormInstanceRecordVersionPersistence;
+import com.liferay.dynamic.data.mapping.service.persistence.DDMFormInstanceRecordVersionUtil;
 import com.liferay.dynamic.data.mapping.service.persistence.impl.constants.DDMPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -50,6 +51,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -3772,10 +3774,14 @@ public class DDMFormInstanceRecordVersionPersistenceImpl
 				"userId", "formInstanceId", "formInstanceVersion", "status"
 			},
 			false);
+
+		_setDDMFormInstanceRecordVersionUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setDDMFormInstanceRecordVersionUtilPersistence(null);
+
 		entityCache.removeCache(
 			DDMFormInstanceRecordVersionImpl.class.getName());
 
@@ -3785,6 +3791,24 @@ public class DDMFormInstanceRecordVersionPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setDDMFormInstanceRecordVersionUtilPersistence(
+		DDMFormInstanceRecordVersionPersistence
+			ddmFormInstanceRecordVersionPersistence) {
+
+		try {
+			Field field =
+				DDMFormInstanceRecordVersionUtil.class.getDeclaredField(
+					"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, ddmFormInstanceRecordVersionPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

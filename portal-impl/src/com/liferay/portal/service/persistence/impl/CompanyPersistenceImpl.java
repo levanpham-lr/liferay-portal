@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.CompanyTable;
 import com.liferay.portal.kernel.service.persistence.CompanyPersistence;
+import com.liferay.portal.kernel.service.persistence.CompanyUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -48,6 +49,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -1866,9 +1868,13 @@ public class CompanyPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBySystem",
 			new String[] {Boolean.class.getName()}, new String[] {"system_"},
 			false);
+
+		_setCompanyUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCompanyUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(CompanyImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1877,6 +1883,21 @@ public class CompanyPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCompanyUtilPersistence(
+		CompanyPersistence companyPersistence) {
+
+		try {
+			Field field = CompanyUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, companyPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

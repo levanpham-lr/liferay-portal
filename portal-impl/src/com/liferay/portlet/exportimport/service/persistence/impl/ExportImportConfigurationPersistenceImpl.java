@@ -18,6 +18,7 @@ import com.liferay.exportimport.kernel.exception.NoSuchConfigurationException;
 import com.liferay.exportimport.kernel.model.ExportImportConfiguration;
 import com.liferay.exportimport.kernel.model.ExportImportConfigurationTable;
 import com.liferay.exportimport.kernel.service.persistence.ExportImportConfigurationPersistence;
+import com.liferay.exportimport.kernel.service.persistence.ExportImportConfigurationUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -50,6 +51,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -3483,9 +3485,13 @@ public class ExportImportConfigurationPersistenceImpl
 				Integer.class.getName()
 			},
 			new String[] {"groupId", "type_", "status"}, false);
+
+		_setExportImportConfigurationUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setExportImportConfigurationUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(
 			ExportImportConfigurationImpl.class.getName());
 
@@ -3495,6 +3501,23 @@ public class ExportImportConfigurationPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setExportImportConfigurationUtilPersistence(
+		ExportImportConfigurationPersistence
+			exportImportConfigurationPersistence) {
+
+		try {
+			Field field = ExportImportConfigurationUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, exportImportConfigurationPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

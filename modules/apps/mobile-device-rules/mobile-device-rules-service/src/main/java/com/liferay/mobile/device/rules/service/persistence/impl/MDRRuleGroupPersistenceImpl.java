@@ -20,6 +20,7 @@ import com.liferay.mobile.device.rules.model.MDRRuleGroupTable;
 import com.liferay.mobile.device.rules.model.impl.MDRRuleGroupImpl;
 import com.liferay.mobile.device.rules.model.impl.MDRRuleGroupModelImpl;
 import com.liferay.mobile.device.rules.service.persistence.MDRRuleGroupPersistence;
+import com.liferay.mobile.device.rules.service.persistence.MDRRuleGroupUtil;
 import com.liferay.mobile.device.rules.service.persistence.impl.constants.MDRPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -55,6 +56,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -3447,10 +3449,14 @@ public class MDRRuleGroupPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByGroupId",
 			new String[] {Long.class.getName()}, new String[] {"groupId"},
 			false);
+
+		_setMDRRuleGroupUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setMDRRuleGroupUtilPersistence(null);
+
 		entityCache.removeCache(MDRRuleGroupImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3459,6 +3465,22 @@ public class MDRRuleGroupPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setMDRRuleGroupUtilPersistence(
+		MDRRuleGroupPersistence mdrRuleGroupPersistence) {
+
+		try {
+			Field field = MDRRuleGroupUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, mdrRuleGroupPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

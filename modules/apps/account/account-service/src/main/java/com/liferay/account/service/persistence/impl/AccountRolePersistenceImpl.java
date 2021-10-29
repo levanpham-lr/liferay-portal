@@ -20,6 +20,7 @@ import com.liferay.account.model.AccountRoleTable;
 import com.liferay.account.model.impl.AccountRoleImpl;
 import com.liferay.account.model.impl.AccountRoleModelImpl;
 import com.liferay.account.service.persistence.AccountRolePersistence;
+import com.liferay.account.service.persistence.AccountRoleUtil;
 import com.liferay.account.service.persistence.impl.constants.AccountPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -48,6 +49,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -2142,10 +2144,14 @@ public class AccountRolePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByRoleId",
 			new String[] {Long.class.getName()}, new String[] {"roleId"},
 			false);
+
+		_setAccountRoleUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAccountRoleUtilPersistence(null);
+
 		entityCache.removeCache(AccountRoleImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2154,6 +2160,22 @@ public class AccountRolePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAccountRoleUtilPersistence(
+		AccountRolePersistence accountRolePersistence) {
+
+		try {
+			Field field = AccountRoleUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, accountRolePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

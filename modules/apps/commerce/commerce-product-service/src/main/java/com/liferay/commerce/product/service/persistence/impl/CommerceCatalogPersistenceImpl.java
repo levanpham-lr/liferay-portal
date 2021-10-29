@@ -20,6 +20,7 @@ import com.liferay.commerce.product.model.CommerceCatalogTable;
 import com.liferay.commerce.product.model.impl.CommerceCatalogImpl;
 import com.liferay.commerce.product.model.impl.CommerceCatalogModelImpl;
 import com.liferay.commerce.product.service.persistence.CommerceCatalogPersistence;
+import com.liferay.commerce.product.service.persistence.CommerceCatalogUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -50,6 +51,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -2837,9 +2839,13 @@ public class CommerceCatalogPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"companyId", "externalReferenceCode"}, false);
+
+		_setCommerceCatalogUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceCatalogUtilPersistence(null);
+
 		entityCache.removeCache(CommerceCatalogImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2848,6 +2854,22 @@ public class CommerceCatalogPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceCatalogUtilPersistence(
+		CommerceCatalogPersistence commerceCatalogPersistence) {
+
+		try {
+			Field field = CommerceCatalogUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceCatalogPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

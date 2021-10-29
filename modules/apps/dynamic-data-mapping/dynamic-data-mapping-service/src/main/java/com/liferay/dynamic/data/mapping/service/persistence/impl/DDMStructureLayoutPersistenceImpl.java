@@ -20,6 +20,7 @@ import com.liferay.dynamic.data.mapping.model.DDMStructureLayoutTable;
 import com.liferay.dynamic.data.mapping.model.impl.DDMStructureLayoutImpl;
 import com.liferay.dynamic.data.mapping.model.impl.DDMStructureLayoutModelImpl;
 import com.liferay.dynamic.data.mapping.service.persistence.DDMStructureLayoutPersistence;
+import com.liferay.dynamic.data.mapping.service.persistence.DDMStructureLayoutUtil;
 import com.liferay.dynamic.data.mapping.service.persistence.impl.constants.DDMPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -54,6 +55,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -5366,10 +5368,14 @@ public class DDMStructureLayoutPersistenceImpl
 			},
 			new String[] {"groupId", "classNameId", "structureVersionId"},
 			false);
+
+		_setDDMStructureLayoutUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setDDMStructureLayoutUtilPersistence(null);
+
 		entityCache.removeCache(DDMStructureLayoutImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -5378,6 +5384,22 @@ public class DDMStructureLayoutPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setDDMStructureLayoutUtilPersistence(
+		DDMStructureLayoutPersistence ddmStructureLayoutPersistence) {
+
+		try {
+			Field field = DDMStructureLayoutUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, ddmStructureLayoutPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -20,6 +20,7 @@ import com.liferay.oauth.model.OAuthApplicationTable;
 import com.liferay.oauth.model.impl.OAuthApplicationImpl;
 import com.liferay.oauth.model.impl.OAuthApplicationModelImpl;
 import com.liferay.oauth.service.persistence.OAuthApplicationPersistence;
+import com.liferay.oauth.service.persistence.OAuthApplicationUtil;
 import com.liferay.oauth.service.persistence.impl.constants.OAuthPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -51,6 +52,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -4770,10 +4772,14 @@ public class OAuthApplicationPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByU_N",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"userId", "name"}, false);
+
+		_setOAuthApplicationUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setOAuthApplicationUtilPersistence(null);
+
 		entityCache.removeCache(OAuthApplicationImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -4782,6 +4788,22 @@ public class OAuthApplicationPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setOAuthApplicationUtilPersistence(
+		OAuthApplicationPersistence oAuthApplicationPersistence) {
+
+		try {
+			Field field = OAuthApplicationUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, oAuthApplicationPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

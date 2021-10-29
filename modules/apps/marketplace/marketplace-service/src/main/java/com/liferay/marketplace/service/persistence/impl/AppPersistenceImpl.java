@@ -20,6 +20,7 @@ import com.liferay.marketplace.model.AppTable;
 import com.liferay.marketplace.model.impl.AppImpl;
 import com.liferay.marketplace.model.impl.AppModelImpl;
 import com.liferay.marketplace.service.persistence.AppPersistence;
+import com.liferay.marketplace.service.persistence.AppUtil;
 import com.liferay.marketplace.service.persistence.impl.constants.MarketplacePersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -52,6 +53,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -3082,10 +3084,14 @@ public class AppPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCategory",
 			new String[] {String.class.getName()}, new String[] {"category"},
 			false);
+
+		_setAppUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAppUtilPersistence(null);
+
 		entityCache.removeCache(AppImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3094,6 +3100,19 @@ public class AppPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAppUtilPersistence(AppPersistence appPersistence) {
+		try {
+			Field field = AppUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, appPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

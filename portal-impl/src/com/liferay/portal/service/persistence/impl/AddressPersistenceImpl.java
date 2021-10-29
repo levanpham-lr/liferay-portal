@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.AddressPersistence;
+import com.liferay.portal.kernel.service.persistence.AddressUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -52,6 +53,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -5275,9 +5277,13 @@ public class AddressPersistenceImpl
 			},
 			new String[] {"companyId", "classNameId", "classPK", "primary_"},
 			false);
+
+		_setAddressUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setAddressUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(AddressImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -5286,6 +5292,21 @@ public class AddressPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAddressUtilPersistence(
+		AddressPersistence addressPersistence) {
+
+		try {
+			Field field = AddressUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, addressPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

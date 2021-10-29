@@ -20,6 +20,7 @@ import com.liferay.asset.list.model.AssetListEntryAssetEntryRelTable;
 import com.liferay.asset.list.model.impl.AssetListEntryAssetEntryRelImpl;
 import com.liferay.asset.list.model.impl.AssetListEntryAssetEntryRelModelImpl;
 import com.liferay.asset.list.service.persistence.AssetListEntryAssetEntryRelPersistence;
+import com.liferay.asset.list.service.persistence.AssetListEntryAssetEntryRelUtil;
 import com.liferay.asset.list.service.persistence.impl.constants.AssetListPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -55,6 +56,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -4868,10 +4870,14 @@ public class AssetListEntryAssetEntryRelPersistenceImpl
 			},
 			new String[] {"assetListEntryId", "segmentsEntryId", "position"},
 			false);
+
+		_setAssetListEntryAssetEntryRelUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAssetListEntryAssetEntryRelUtilPersistence(null);
+
 		entityCache.removeCache(
 			AssetListEntryAssetEntryRelImpl.class.getName());
 
@@ -4881,6 +4887,24 @@ public class AssetListEntryAssetEntryRelPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAssetListEntryAssetEntryRelUtilPersistence(
+		AssetListEntryAssetEntryRelPersistence
+			assetListEntryAssetEntryRelPersistence) {
+
+		try {
+			Field field =
+				AssetListEntryAssetEntryRelUtil.class.getDeclaredField(
+					"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, assetListEntryAssetEntryRelPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

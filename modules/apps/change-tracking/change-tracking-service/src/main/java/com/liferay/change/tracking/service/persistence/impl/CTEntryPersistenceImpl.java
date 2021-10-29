@@ -20,6 +20,7 @@ import com.liferay.change.tracking.model.CTEntryTable;
 import com.liferay.change.tracking.model.impl.CTEntryImpl;
 import com.liferay.change.tracking.model.impl.CTEntryModelImpl;
 import com.liferay.change.tracking.service.persistence.CTEntryPersistence;
+import com.liferay.change.tracking.service.persistence.CTEntryUtil;
 import com.liferay.change.tracking.service.persistence.impl.constants.CTPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -50,6 +51,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2903,10 +2905,14 @@ public class CTEntryPersistenceImpl
 			},
 			new String[] {"ctCollectionId", "modelClassNameId", "modelClassPK"},
 			false);
+
+		_setCTEntryUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setCTEntryUtilPersistence(null);
+
 		entityCache.removeCache(CTEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2915,6 +2921,21 @@ public class CTEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCTEntryUtilPersistence(
+		CTEntryPersistence ctEntryPersistence) {
+
+		try {
+			Field field = CTEntryUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, ctEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

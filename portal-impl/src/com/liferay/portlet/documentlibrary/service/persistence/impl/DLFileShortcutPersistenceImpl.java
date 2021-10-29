@@ -18,6 +18,7 @@ import com.liferay.document.library.kernel.exception.NoSuchFileShortcutException
 import com.liferay.document.library.kernel.model.DLFileShortcut;
 import com.liferay.document.library.kernel.model.DLFileShortcutTable;
 import com.liferay.document.library.kernel.service.persistence.DLFileShortcutPersistence;
+import com.liferay.document.library.kernel.service.persistence.DLFileShortcutUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
@@ -56,6 +57,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -7141,9 +7143,13 @@ public class DLFileShortcutPersistenceImpl
 				Boolean.class.getName(), Integer.class.getName()
 			},
 			new String[] {"groupId", "folderId", "active_", "status"}, false);
+
+		_setDLFileShortcutUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setDLFileShortcutUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(DLFileShortcutImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -7152,6 +7158,22 @@ public class DLFileShortcutPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setDLFileShortcutUtilPersistence(
+		DLFileShortcutPersistence dlFileShortcutPersistence) {
+
+		try {
+			Field field = DLFileShortcutUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, dlFileShortcutPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

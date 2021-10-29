@@ -20,6 +20,7 @@ import com.liferay.dynamic.data.lists.model.DDLRecordSetTable;
 import com.liferay.dynamic.data.lists.model.impl.DDLRecordSetImpl;
 import com.liferay.dynamic.data.lists.model.impl.DDLRecordSetModelImpl;
 import com.liferay.dynamic.data.lists.service.persistence.DDLRecordSetPersistence;
+import com.liferay.dynamic.data.lists.service.persistence.DDLRecordSetUtil;
 import com.liferay.dynamic.data.lists.service.persistence.impl.constants.DDLPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -55,6 +56,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -4513,10 +4515,14 @@ public class DDLRecordSetPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_R",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"groupId", "recordSetKey"}, false);
+
+		_setDDLRecordSetUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setDDLRecordSetUtilPersistence(null);
+
 		entityCache.removeCache(DDLRecordSetImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -4525,6 +4531,22 @@ public class DDLRecordSetPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setDDLRecordSetUtilPersistence(
+		DDLRecordSetPersistence ddlRecordSetPersistence) {
+
+		try {
+			Field field = DDLRecordSetUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, ddlRecordSetPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

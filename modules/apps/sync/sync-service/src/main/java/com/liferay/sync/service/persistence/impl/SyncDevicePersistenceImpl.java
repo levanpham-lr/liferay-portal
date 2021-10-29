@@ -48,10 +48,12 @@ import com.liferay.sync.model.SyncDeviceTable;
 import com.liferay.sync.model.impl.SyncDeviceImpl;
 import com.liferay.sync.model.impl.SyncDeviceModelImpl;
 import com.liferay.sync.service.persistence.SyncDevicePersistence;
+import com.liferay.sync.service.persistence.SyncDeviceUtil;
 import com.liferay.sync.service.persistence.impl.constants.SyncPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2904,10 +2906,14 @@ public class SyncDevicePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByC_U",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"companyId", "userName"}, false);
+
+		_setSyncDeviceUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setSyncDeviceUtilPersistence(null);
+
 		entityCache.removeCache(SyncDeviceImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2916,6 +2922,21 @@ public class SyncDevicePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setSyncDeviceUtilPersistence(
+		SyncDevicePersistence syncDevicePersistence) {
+
+		try {
+			Field field = SyncDeviceUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, syncDevicePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

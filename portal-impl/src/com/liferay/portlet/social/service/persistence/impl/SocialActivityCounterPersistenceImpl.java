@@ -47,9 +47,11 @@ import com.liferay.social.kernel.exception.NoSuchActivityCounterException;
 import com.liferay.social.kernel.model.SocialActivityCounter;
 import com.liferay.social.kernel.model.SocialActivityCounterTable;
 import com.liferay.social.kernel.service.persistence.SocialActivityCounterPersistence;
+import com.liferay.social.kernel.service.persistence.SocialActivityCounterUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -3530,9 +3532,13 @@ public class SocialActivityCounterPersistenceImpl
 				"endPeriod"
 			},
 			false);
+
+		_setSocialActivityCounterUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setSocialActivityCounterUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(SocialActivityCounterImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3541,6 +3547,22 @@ public class SocialActivityCounterPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setSocialActivityCounterUtilPersistence(
+		SocialActivityCounterPersistence socialActivityCounterPersistence) {
+
+		try {
+			Field field = SocialActivityCounterUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, socialActivityCounterPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

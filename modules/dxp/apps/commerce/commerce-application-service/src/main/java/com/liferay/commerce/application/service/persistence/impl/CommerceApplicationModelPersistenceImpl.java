@@ -20,6 +20,7 @@ import com.liferay.commerce.application.model.CommerceApplicationModelTable;
 import com.liferay.commerce.application.model.impl.CommerceApplicationModelImpl;
 import com.liferay.commerce.application.model.impl.CommerceApplicationModelModelImpl;
 import com.liferay.commerce.application.service.persistence.CommerceApplicationModelPersistence;
+import com.liferay.commerce.application.service.persistence.CommerceApplicationModelUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -48,6 +49,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2557,9 +2559,13 @@ public class CommerceApplicationModelPersistenceImpl
 			"countByCommerceApplicationBrandId",
 			new String[] {Long.class.getName()},
 			new String[] {"commerceApplicationBrandId"}, false);
+
+		_setCommerceApplicationModelUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceApplicationModelUtilPersistence(null);
+
 		entityCache.removeCache(CommerceApplicationModelImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2568,6 +2574,23 @@ public class CommerceApplicationModelPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceApplicationModelUtilPersistence(
+		CommerceApplicationModelPersistence
+			commerceApplicationModelPersistence) {
+
+		try {
+			Field field = CommerceApplicationModelUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceApplicationModelPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

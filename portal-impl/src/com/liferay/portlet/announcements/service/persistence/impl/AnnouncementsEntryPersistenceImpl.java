@@ -18,6 +18,7 @@ import com.liferay.announcements.kernel.exception.NoSuchEntryException;
 import com.liferay.announcements.kernel.model.AnnouncementsEntry;
 import com.liferay.announcements.kernel.model.AnnouncementsEntryTable;
 import com.liferay.announcements.kernel.service.persistence.AnnouncementsEntryPersistence;
+import com.liferay.announcements.kernel.service.persistence.AnnouncementsEntryUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -60,6 +61,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -8678,9 +8680,13 @@ public class AnnouncementsEntryPersistenceImpl
 			},
 			new String[] {"companyId", "classNameId", "classPK", "alert"},
 			false);
+
+		_setAnnouncementsEntryUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setAnnouncementsEntryUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(AnnouncementsEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -8689,6 +8695,22 @@ public class AnnouncementsEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAnnouncementsEntryUtilPersistence(
+		AnnouncementsEntryPersistence announcementsEntryPersistence) {
+
+		try {
+			Field field = AnnouncementsEntryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, announcementsEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -20,6 +20,7 @@ import com.liferay.commerce.bom.model.CommerceBOMFolderApplicationRelTable;
 import com.liferay.commerce.bom.model.impl.CommerceBOMFolderApplicationRelImpl;
 import com.liferay.commerce.bom.model.impl.CommerceBOMFolderApplicationRelModelImpl;
 import com.liferay.commerce.bom.service.persistence.CommerceBOMFolderApplicationRelPersistence;
+import com.liferay.commerce.bom.service.persistence.CommerceBOMFolderApplicationRelUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -47,6 +48,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -1846,9 +1848,13 @@ public class CommerceBOMFolderApplicationRelPersistenceImpl
 			"countByCommerceApplicationModelId",
 			new String[] {Long.class.getName()},
 			new String[] {"commerceApplicationModelId"}, false);
+
+		_setCommerceBOMFolderApplicationRelUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceBOMFolderApplicationRelUtilPersistence(null);
+
 		entityCache.removeCache(
 			CommerceBOMFolderApplicationRelImpl.class.getName());
 
@@ -1858,6 +1864,24 @@ public class CommerceBOMFolderApplicationRelPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceBOMFolderApplicationRelUtilPersistence(
+		CommerceBOMFolderApplicationRelPersistence
+			commerceBOMFolderApplicationRelPersistence) {
+
+		try {
+			Field field =
+				CommerceBOMFolderApplicationRelUtil.class.getDeclaredField(
+					"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceBOMFolderApplicationRelPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

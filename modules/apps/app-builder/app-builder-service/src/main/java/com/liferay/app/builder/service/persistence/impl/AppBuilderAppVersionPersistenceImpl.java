@@ -20,6 +20,7 @@ import com.liferay.app.builder.model.AppBuilderAppVersionTable;
 import com.liferay.app.builder.model.impl.AppBuilderAppVersionImpl;
 import com.liferay.app.builder.model.impl.AppBuilderAppVersionModelImpl;
 import com.liferay.app.builder.service.persistence.AppBuilderAppVersionPersistence;
+import com.liferay.app.builder.service.persistence.AppBuilderAppVersionUtil;
 import com.liferay.app.builder.service.persistence.impl.constants.AppBuilderPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -52,6 +53,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -4024,10 +4026,14 @@ public class AppBuilderAppVersionPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByA_V",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"appBuilderAppId", "version"}, false);
+
+		_setAppBuilderAppVersionUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAppBuilderAppVersionUtilPersistence(null);
+
 		entityCache.removeCache(AppBuilderAppVersionImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -4036,6 +4042,22 @@ public class AppBuilderAppVersionPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAppBuilderAppVersionUtilPersistence(
+		AppBuilderAppVersionPersistence appBuilderAppVersionPersistence) {
+
+		try {
+			Field field = AppBuilderAppVersionUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, appBuilderAppVersionPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

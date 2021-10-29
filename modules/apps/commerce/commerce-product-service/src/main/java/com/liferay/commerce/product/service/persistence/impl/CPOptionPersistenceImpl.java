@@ -20,6 +20,7 @@ import com.liferay.commerce.product.model.CPOptionTable;
 import com.liferay.commerce.product.model.impl.CPOptionImpl;
 import com.liferay.commerce.product.model.impl.CPOptionModelImpl;
 import com.liferay.commerce.product.service.persistence.CPOptionPersistence;
+import com.liferay.commerce.product.service.persistence.CPOptionUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -52,6 +53,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -4108,9 +4110,13 @@ public class CPOptionPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"companyId", "externalReferenceCode"}, false);
+
+		_setCPOptionUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCPOptionUtilPersistence(null);
+
 		entityCache.removeCache(CPOptionImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -4119,6 +4125,21 @@ public class CPOptionPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCPOptionUtilPersistence(
+		CPOptionPersistence cpOptionPersistence) {
+
+		try {
+			Field field = CPOptionUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, cpOptionPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

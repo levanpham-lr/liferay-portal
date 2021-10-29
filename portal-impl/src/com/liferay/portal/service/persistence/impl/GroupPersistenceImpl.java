@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupTable;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.persistence.GroupPersistence;
+import com.liferay.portal.kernel.service.persistence.GroupUtil;
 import com.liferay.portal.kernel.service.persistence.OrganizationPersistence;
 import com.liferay.portal.kernel.service.persistence.RolePersistence;
 import com.liferay.portal.kernel.service.persistence.UserGroupPersistence;
@@ -62,6 +63,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -15865,9 +15867,13 @@ public class GroupPersistenceImpl
 				"companyId", "parentGroupId", "site", "inheritContent"
 			},
 			false);
+
+		_setGroupUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setGroupUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(GroupImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -15882,6 +15888,19 @@ public class GroupPersistenceImpl
 		TableMapperFactory.removeTableMapper("Groups_Roles");
 		TableMapperFactory.removeTableMapper("Groups_UserGroups");
 		TableMapperFactory.removeTableMapper("Users_Groups");
+	}
+
+	private void _setGroupUtilPersistence(GroupPersistence groupPersistence) {
+		try {
+			Field field = GroupUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, groupPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
+		}
 	}
 
 	@BeanReference(type = OrganizationPersistence.class)

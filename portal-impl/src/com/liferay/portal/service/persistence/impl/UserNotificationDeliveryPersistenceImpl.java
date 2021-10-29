@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.model.UserNotificationDelivery;
 import com.liferay.portal.kernel.model.UserNotificationDeliveryTable;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.persistence.UserNotificationDeliveryPersistence;
+import com.liferay.portal.kernel.service.persistence.UserNotificationDeliveryUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -47,6 +48,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.HashSet;
@@ -1559,9 +1561,13 @@ public class UserNotificationDeliveryPersistenceImpl
 				"deliveryType"
 			},
 			false);
+
+		_setUserNotificationDeliveryUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setUserNotificationDeliveryUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(
 			UserNotificationDeliveryImpl.class.getName());
 
@@ -1571,6 +1577,23 @@ public class UserNotificationDeliveryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setUserNotificationDeliveryUtilPersistence(
+		UserNotificationDeliveryPersistence
+			userNotificationDeliveryPersistence) {
+
+		try {
+			Field field = UserNotificationDeliveryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, userNotificationDeliveryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

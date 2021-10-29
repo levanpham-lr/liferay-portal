@@ -43,10 +43,12 @@ import com.liferay.portal.reports.engine.console.model.EntryTable;
 import com.liferay.portal.reports.engine.console.model.impl.EntryImpl;
 import com.liferay.portal.reports.engine.console.model.impl.EntryModelImpl;
 import com.liferay.portal.reports.engine.console.service.persistence.EntryPersistence;
+import com.liferay.portal.reports.engine.console.service.persistence.EntryUtil;
 import com.liferay.portal.reports.engine.console.service.persistence.impl.constants.ReportsPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -633,10 +635,14 @@ public class EntryPersistenceImpl
 		_finderPathCountAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0], new String[0], false);
+
+		_setEntryUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setEntryUtilPersistence(null);
+
 		entityCache.removeCache(EntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -645,6 +651,19 @@ public class EntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setEntryUtilPersistence(EntryPersistence entryPersistence) {
+		try {
+			Field field = EntryUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, entryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

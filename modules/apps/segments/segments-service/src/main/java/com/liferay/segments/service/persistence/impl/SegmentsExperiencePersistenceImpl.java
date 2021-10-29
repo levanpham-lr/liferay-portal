@@ -53,10 +53,12 @@ import com.liferay.segments.model.SegmentsExperienceTable;
 import com.liferay.segments.model.impl.SegmentsExperienceImpl;
 import com.liferay.segments.model.impl.SegmentsExperienceModelImpl;
 import com.liferay.segments.service.persistence.SegmentsExperiencePersistence;
+import com.liferay.segments.service.persistence.SegmentsExperienceUtil;
 import com.liferay.segments.service.persistence.impl.constants.SegmentsPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -11832,10 +11834,14 @@ public class SegmentsExperiencePersistenceImpl
 				"active_"
 			},
 			false);
+
+		_setSegmentsExperienceUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setSegmentsExperienceUtilPersistence(null);
+
 		entityCache.removeCache(SegmentsExperienceImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -11844,6 +11850,22 @@ public class SegmentsExperiencePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setSegmentsExperienceUtilPersistence(
+		SegmentsExperiencePersistence segmentsExperiencePersistence) {
+
+		try {
+			Field field = SegmentsExperienceUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, segmentsExperiencePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

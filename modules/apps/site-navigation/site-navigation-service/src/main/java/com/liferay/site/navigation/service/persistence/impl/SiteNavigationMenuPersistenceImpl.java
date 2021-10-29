@@ -51,10 +51,12 @@ import com.liferay.site.navigation.model.SiteNavigationMenuTable;
 import com.liferay.site.navigation.model.impl.SiteNavigationMenuImpl;
 import com.liferay.site.navigation.model.impl.SiteNavigationMenuModelImpl;
 import com.liferay.site.navigation.service.persistence.SiteNavigationMenuPersistence;
+import com.liferay.site.navigation.service.persistence.SiteNavigationMenuUtil;
 import com.liferay.site.navigation.service.persistence.impl.constants.SiteNavigationPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -7807,10 +7809,14 @@ public class SiteNavigationMenuPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_A",
 			new String[] {Long.class.getName(), Boolean.class.getName()},
 			new String[] {"groupId", "auto_"}, false);
+
+		_setSiteNavigationMenuUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setSiteNavigationMenuUtilPersistence(null);
+
 		entityCache.removeCache(SiteNavigationMenuImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -7819,6 +7825,22 @@ public class SiteNavigationMenuPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setSiteNavigationMenuUtilPersistence(
+		SiteNavigationMenuPersistence siteNavigationMenuPersistence) {
+
+		try {
+			Field field = SiteNavigationMenuUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, siteNavigationMenuPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

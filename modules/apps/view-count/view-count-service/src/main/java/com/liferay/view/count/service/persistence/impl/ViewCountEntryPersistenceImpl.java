@@ -42,9 +42,12 @@ import com.liferay.view.count.model.impl.ViewCountEntryImpl;
 import com.liferay.view.count.model.impl.ViewCountEntryModelImpl;
 import com.liferay.view.count.service.persistence.ViewCountEntryPK;
 import com.liferay.view.count.service.persistence.ViewCountEntryPersistence;
+import com.liferay.view.count.service.persistence.ViewCountEntryUtil;
 import com.liferay.view.count.service.persistence.impl.constants.ViewCountPersistenceConstants;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Field;
 
 import java.util.HashSet;
 import java.util.List;
@@ -608,10 +611,14 @@ public class ViewCountEntryPersistenceImpl
 		_finderPathCountAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0], new String[0], false);
+
+		_setViewCountEntryUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setViewCountEntryUtilPersistence(null);
+
 		entityCache.removeCache(ViewCountEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -620,6 +627,22 @@ public class ViewCountEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setViewCountEntryUtilPersistence(
+		ViewCountEntryPersistence viewCountEntryPersistence) {
+
+		try {
+			Field field = ViewCountEntryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, viewCountEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

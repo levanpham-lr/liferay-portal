@@ -21,6 +21,7 @@ import com.liferay.commerce.product.model.impl.CPDefinitionImpl;
 import com.liferay.commerce.product.model.impl.CPDefinitionModelImpl;
 import com.liferay.commerce.product.service.persistence.CPDefinitionLocalizationPersistence;
 import com.liferay.commerce.product.service.persistence.CPDefinitionPersistence;
+import com.liferay.commerce.product.service.persistence.CPDefinitionUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
@@ -52,6 +53,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.sql.Timestamp;
@@ -6164,9 +6166,13 @@ public class CPDefinitionPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByLtD_S",
 			new String[] {Date.class.getName(), Integer.class.getName()},
 			new String[] {"displayDate", "status"}, false);
+
+		_setCPDefinitionUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCPDefinitionUtilPersistence(null);
+
 		entityCache.removeCache(CPDefinitionImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -6175,6 +6181,22 @@ public class CPDefinitionPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCPDefinitionUtilPersistence(
+		CPDefinitionPersistence cpDefinitionPersistence) {
+
+		try {
+			Field field = CPDefinitionUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, cpDefinitionPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

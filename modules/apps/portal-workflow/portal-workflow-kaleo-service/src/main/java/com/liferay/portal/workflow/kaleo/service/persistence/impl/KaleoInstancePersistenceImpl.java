@@ -45,10 +45,12 @@ import com.liferay.portal.workflow.kaleo.model.KaleoInstanceTable;
 import com.liferay.portal.workflow.kaleo.model.impl.KaleoInstanceImpl;
 import com.liferay.portal.workflow.kaleo.model.impl.KaleoInstanceModelImpl;
 import com.liferay.portal.workflow.kaleo.service.persistence.KaleoInstancePersistence;
+import com.liferay.portal.workflow.kaleo.service.persistence.KaleoInstanceUtil;
 import com.liferay.portal.workflow.kaleo.service.persistence.impl.constants.KaleoPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.sql.Timestamp;
@@ -5080,10 +5082,14 @@ public class KaleoInstancePersistenceImpl
 				"completionDate"
 			},
 			false);
+
+		_setKaleoInstanceUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setKaleoInstanceUtilPersistence(null);
+
 		entityCache.removeCache(KaleoInstanceImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -5092,6 +5098,22 @@ public class KaleoInstancePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setKaleoInstanceUtilPersistence(
+		KaleoInstancePersistence kaleoInstancePersistence) {
+
+		try {
+			Field field = KaleoInstanceUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, kaleoInstancePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

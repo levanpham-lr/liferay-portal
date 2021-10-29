@@ -20,6 +20,7 @@ import com.liferay.message.boards.model.MBMessageTable;
 import com.liferay.message.boards.model.impl.MBMessageImpl;
 import com.liferay.message.boards.model.impl.MBMessageModelImpl;
 import com.liferay.message.boards.service.persistence.MBMessagePersistence;
+import com.liferay.message.boards.service.persistence.MBMessageUtil;
 import com.liferay.message.boards.service.persistence.impl.constants.MBPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -63,6 +64,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -22622,10 +22624,14 @@ public class MBMessagePersistenceImpl
 				Long.class.getName(), Integer.class.getName()
 			},
 			new String[] {"userId", "classNameId", "classPK", "status"}, false);
+
+		_setMBMessageUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setMBMessageUtilPersistence(null);
+
 		entityCache.removeCache(MBMessageImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -22634,6 +22640,21 @@ public class MBMessagePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setMBMessageUtilPersistence(
+		MBMessagePersistence mbMessagePersistence) {
+
+		try {
+			Field field = MBMessageUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, mbMessagePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

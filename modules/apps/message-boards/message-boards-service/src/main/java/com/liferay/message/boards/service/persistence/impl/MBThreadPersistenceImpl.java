@@ -20,6 +20,7 @@ import com.liferay.message.boards.model.MBThreadTable;
 import com.liferay.message.boards.model.impl.MBThreadImpl;
 import com.liferay.message.boards.model.impl.MBThreadModelImpl;
 import com.liferay.message.boards.service.persistence.MBThreadPersistence;
+import com.liferay.message.boards.service.persistence.MBThreadUtil;
 import com.liferay.message.boards.service.persistence.impl.constants.MBPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -63,6 +64,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.sql.Timestamp;
@@ -14367,10 +14369,14 @@ public class MBThreadPersistenceImpl
 				Integer.class.getName()
 			},
 			new String[] {"groupId", "categoryId", "status"}, false);
+
+		_setMBThreadUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setMBThreadUtilPersistence(null);
+
 		entityCache.removeCache(MBThreadImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -14379,6 +14385,21 @@ public class MBThreadPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setMBThreadUtilPersistence(
+		MBThreadPersistence mbThreadPersistence) {
+
+		try {
+			Field field = MBThreadUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, mbThreadPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

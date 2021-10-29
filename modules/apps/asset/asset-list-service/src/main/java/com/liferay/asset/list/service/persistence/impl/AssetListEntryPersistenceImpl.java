@@ -20,6 +20,7 @@ import com.liferay.asset.list.model.AssetListEntryTable;
 import com.liferay.asset.list.model.impl.AssetListEntryImpl;
 import com.liferay.asset.list.model.impl.AssetListEntryModelImpl;
 import com.liferay.asset.list.service.persistence.AssetListEntryPersistence;
+import com.liferay.asset.list.service.persistence.AssetListEntryUtil;
 import com.liferay.asset.list.service.persistence.impl.constants.AssetListPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -57,6 +58,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -14625,10 +14627,14 @@ public class AssetListEntryPersistenceImpl
 				"groupId", "title", "assetEntrySubtype", "assetEntryType"
 			},
 			false);
+
+		_setAssetListEntryUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAssetListEntryUtilPersistence(null);
+
 		entityCache.removeCache(AssetListEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -14637,6 +14643,22 @@ public class AssetListEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAssetListEntryUtilPersistence(
+		AssetListEntryPersistence assetListEntryPersistence) {
+
+		try {
+			Field field = AssetListEntryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, assetListEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

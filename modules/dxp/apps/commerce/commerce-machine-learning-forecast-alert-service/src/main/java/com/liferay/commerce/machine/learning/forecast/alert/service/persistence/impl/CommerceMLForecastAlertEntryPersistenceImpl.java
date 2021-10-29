@@ -20,6 +20,7 @@ import com.liferay.commerce.machine.learning.forecast.alert.model.CommerceMLFore
 import com.liferay.commerce.machine.learning.forecast.alert.model.impl.CommerceMLForecastAlertEntryImpl;
 import com.liferay.commerce.machine.learning.forecast.alert.model.impl.CommerceMLForecastAlertEntryModelImpl;
 import com.liferay.commerce.machine.learning.forecast.alert.service.persistence.CommerceMLForecastAlertEntryPersistence;
+import com.liferay.commerce.machine.learning.forecast.alert.service.persistence.CommerceMLForecastAlertEntryUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -51,6 +52,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.sql.Timestamp;
@@ -5169,9 +5171,13 @@ public class CommerceMLForecastAlertEntryPersistenceImpl
 				"companyId", "commerceAccountId", "relativeChange", "status"
 			},
 			false);
+
+		_setCommerceMLForecastAlertEntryUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceMLForecastAlertEntryUtilPersistence(null);
+
 		entityCache.removeCache(
 			CommerceMLForecastAlertEntryImpl.class.getName());
 
@@ -5181,6 +5187,24 @@ public class CommerceMLForecastAlertEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceMLForecastAlertEntryUtilPersistence(
+		CommerceMLForecastAlertEntryPersistence
+			commerceMLForecastAlertEntryPersistence) {
+
+		try {
+			Field field =
+				CommerceMLForecastAlertEntryUtil.class.getDeclaredField(
+					"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceMLForecastAlertEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

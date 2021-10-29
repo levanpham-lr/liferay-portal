@@ -44,10 +44,12 @@ import com.liferay.portal.workflow.kaleo.model.KaleoInstanceTokenTable;
 import com.liferay.portal.workflow.kaleo.model.impl.KaleoInstanceTokenImpl;
 import com.liferay.portal.workflow.kaleo.model.impl.KaleoInstanceTokenModelImpl;
 import com.liferay.portal.workflow.kaleo.service.persistence.KaleoInstanceTokenPersistence;
+import com.liferay.portal.workflow.kaleo.service.persistence.KaleoInstanceTokenUtil;
 import com.liferay.portal.workflow.kaleo.service.persistence.impl.constants.KaleoPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.sql.Timestamp;
@@ -3524,10 +3526,14 @@ public class KaleoInstanceTokenPersistenceImpl
 				"companyId", "parentKaleoInstanceTokenId", "completionDate"
 			},
 			false);
+
+		_setKaleoInstanceTokenUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setKaleoInstanceTokenUtilPersistence(null);
+
 		entityCache.removeCache(KaleoInstanceTokenImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3536,6 +3542,22 @@ public class KaleoInstanceTokenPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setKaleoInstanceTokenUtilPersistence(
+		KaleoInstanceTokenPersistence kaleoInstanceTokenPersistence) {
+
+		try {
+			Field field = KaleoInstanceTokenUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, kaleoInstanceTokenPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

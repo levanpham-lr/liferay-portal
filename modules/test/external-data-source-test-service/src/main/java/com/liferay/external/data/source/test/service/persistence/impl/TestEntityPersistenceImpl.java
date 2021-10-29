@@ -20,6 +20,7 @@ import com.liferay.external.data.source.test.model.TestEntityTable;
 import com.liferay.external.data.source.test.model.impl.TestEntityImpl;
 import com.liferay.external.data.source.test.model.impl.TestEntityModelImpl;
 import com.liferay.external.data.source.test.service.persistence.TestEntityPersistence;
+import com.liferay.external.data.source.test.service.persistence.TestEntityUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -41,6 +42,8 @@ import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Field;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -598,9 +601,13 @@ public class TestEntityPersistenceImpl
 		_finderPathCountAll = _createFinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0], new String[0], false);
+
+		_setTestEntityUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setTestEntityUtilPersistence(null);
+
 		entityCache.removeCache(TestEntityImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -609,6 +616,21 @@ public class TestEntityPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setTestEntityUtilPersistence(
+		TestEntityPersistence testEntityPersistence) {
+
+		try {
+			Field field = TestEntityUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, testEntityPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

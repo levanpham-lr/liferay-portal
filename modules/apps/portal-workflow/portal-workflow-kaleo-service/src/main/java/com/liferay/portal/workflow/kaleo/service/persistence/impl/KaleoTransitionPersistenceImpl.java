@@ -45,10 +45,12 @@ import com.liferay.portal.workflow.kaleo.model.KaleoTransitionTable;
 import com.liferay.portal.workflow.kaleo.model.impl.KaleoTransitionImpl;
 import com.liferay.portal.workflow.kaleo.model.impl.KaleoTransitionModelImpl;
 import com.liferay.portal.workflow.kaleo.service.persistence.KaleoTransitionPersistence;
+import com.liferay.portal.workflow.kaleo.service.persistence.KaleoTransitionUtil;
 import com.liferay.portal.workflow.kaleo.service.persistence.impl.constants.KaleoPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -2810,10 +2812,14 @@ public class KaleoTransitionPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByKNI_DT",
 			new String[] {Long.class.getName(), Boolean.class.getName()},
 			new String[] {"kaleoNodeId", "defaultTransition"}, false);
+
+		_setKaleoTransitionUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setKaleoTransitionUtilPersistence(null);
+
 		entityCache.removeCache(KaleoTransitionImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2822,6 +2828,22 @@ public class KaleoTransitionPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setKaleoTransitionUtilPersistence(
+		KaleoTransitionPersistence kaleoTransitionPersistence) {
+
+		try {
+			Field field = KaleoTransitionUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, kaleoTransitionPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

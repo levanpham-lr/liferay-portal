@@ -19,6 +19,7 @@ import com.liferay.opensocial.model.OAuthToken;
 import com.liferay.opensocial.model.impl.OAuthTokenImpl;
 import com.liferay.opensocial.model.impl.OAuthTokenModelImpl;
 import com.liferay.opensocial.service.persistence.OAuthTokenPersistence;
+import com.liferay.opensocial.service.persistence.OAuthTokenUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -49,6 +50,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -1725,9 +1727,13 @@ public class OAuthTokenPersistenceImpl
 				"userId", "gadgetKey", "serviceName", "moduleId", "tokenName"
 			},
 			false);
+
+		_setOAuthTokenUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setOAuthTokenUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(OAuthTokenImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1736,6 +1742,21 @@ public class OAuthTokenPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setOAuthTokenUtilPersistence(
+		OAuthTokenPersistence oAuthTokenPersistence) {
+
+		try {
+			Field field = OAuthTokenUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, oAuthTokenPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

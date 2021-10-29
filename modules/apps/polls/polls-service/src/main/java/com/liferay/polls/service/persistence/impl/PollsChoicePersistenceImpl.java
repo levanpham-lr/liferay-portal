@@ -21,6 +21,7 @@ import com.liferay.polls.model.PollsChoiceTable;
 import com.liferay.polls.model.impl.PollsChoiceImpl;
 import com.liferay.polls.model.impl.PollsChoiceModelImpl;
 import com.liferay.polls.service.persistence.PollsChoicePersistence;
+import com.liferay.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.polls.service.persistence.impl.constants.PollsPersistenceConstants;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
@@ -51,6 +52,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2879,10 +2881,14 @@ public class PollsChoicePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByQ_N",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"questionId", "name"}, false);
+
+		_setPollsChoiceUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setPollsChoiceUtilPersistence(null);
+
 		entityCache.removeCache(PollsChoiceImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2891,6 +2897,22 @@ public class PollsChoicePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setPollsChoiceUtilPersistence(
+		PollsChoicePersistence pollsChoicePersistence) {
+
+		try {
+			Field field = PollsChoiceUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, pollsChoicePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

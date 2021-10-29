@@ -20,6 +20,7 @@ import com.liferay.friendly.url.model.FriendlyURLEntryLocalizationTable;
 import com.liferay.friendly.url.model.impl.FriendlyURLEntryLocalizationImpl;
 import com.liferay.friendly.url.model.impl.FriendlyURLEntryLocalizationModelImpl;
 import com.liferay.friendly.url.service.persistence.FriendlyURLEntryLocalizationPersistence;
+import com.liferay.friendly.url.service.persistence.FriendlyURLEntryLocalizationUtil;
 import com.liferay.friendly.url.service.persistence.impl.constants.FURLPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -48,6 +49,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -2859,10 +2861,14 @@ public class FriendlyURLEntryLocalizationPersistenceImpl
 			},
 			new String[] {"groupId", "classNameId", "classPK", "languageId"},
 			false);
+
+		_setFriendlyURLEntryLocalizationUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setFriendlyURLEntryLocalizationUtilPersistence(null);
+
 		entityCache.removeCache(
 			FriendlyURLEntryLocalizationImpl.class.getName());
 
@@ -2872,6 +2878,24 @@ public class FriendlyURLEntryLocalizationPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setFriendlyURLEntryLocalizationUtilPersistence(
+		FriendlyURLEntryLocalizationPersistence
+			friendlyURLEntryLocalizationPersistence) {
+
+		try {
+			Field field =
+				FriendlyURLEntryLocalizationUtil.class.getDeclaredField(
+					"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, friendlyURLEntryLocalizationPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -20,6 +20,7 @@ import com.liferay.adaptive.media.image.model.AMImageEntryTable;
 import com.liferay.adaptive.media.image.model.impl.AMImageEntryImpl;
 import com.liferay.adaptive.media.image.model.impl.AMImageEntryModelImpl;
 import com.liferay.adaptive.media.image.service.persistence.AMImageEntryPersistence;
+import com.liferay.adaptive.media.image.service.persistence.AMImageEntryUtil;
 import com.liferay.adaptive.media.image.service.persistence.impl.constants.AMImageEntryPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -51,6 +52,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -5086,10 +5088,14 @@ public class AMImageEntryPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_F",
 			new String[] {String.class.getName(), Long.class.getName()},
 			new String[] {"configurationUuid", "fileVersionId"}, false);
+
+		_setAMImageEntryUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAMImageEntryUtilPersistence(null);
+
 		entityCache.removeCache(AMImageEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -5098,6 +5104,22 @@ public class AMImageEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAMImageEntryUtilPersistence(
+		AMImageEntryPersistence amImageEntryPersistence) {
+
+		try {
+			Field field = AMImageEntryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, amImageEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

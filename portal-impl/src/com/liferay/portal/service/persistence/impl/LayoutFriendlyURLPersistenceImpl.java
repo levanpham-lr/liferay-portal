@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.LayoutFriendlyURLPersistence;
+import com.liferay.portal.kernel.service.persistence.LayoutFriendlyURLUtil;
 import com.liferay.portal.kernel.service.persistence.change.tracking.helper.CTPersistenceHelperUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -56,6 +57,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -6395,9 +6397,13 @@ public class LayoutFriendlyURLPersistenceImpl
 				"groupId", "privateLayout", "friendlyURL", "languageId"
 			},
 			false);
+
+		_setLayoutFriendlyURLUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setLayoutFriendlyURLUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(LayoutFriendlyURLImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -6406,6 +6412,22 @@ public class LayoutFriendlyURLPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setLayoutFriendlyURLUtilPersistence(
+		LayoutFriendlyURLPersistence layoutFriendlyURLPersistence) {
+
+		try {
+			Field field = LayoutFriendlyURLUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, layoutFriendlyURLPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

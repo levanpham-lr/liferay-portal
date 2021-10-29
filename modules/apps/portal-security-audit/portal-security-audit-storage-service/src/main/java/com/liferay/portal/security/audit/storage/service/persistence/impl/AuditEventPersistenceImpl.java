@@ -44,10 +44,12 @@ import com.liferay.portal.security.audit.storage.model.AuditEventTable;
 import com.liferay.portal.security.audit.storage.model.impl.AuditEventImpl;
 import com.liferay.portal.security.audit.storage.model.impl.AuditEventModelImpl;
 import com.liferay.portal.security.audit.storage.service.persistence.AuditEventPersistence;
+import com.liferay.portal.security.audit.storage.service.persistence.AuditEventUtil;
 import com.liferay.portal.security.audit.storage.service.persistence.impl.constants.AuditPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -1146,10 +1148,14 @@ public class AuditEventPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] {Long.class.getName()}, new String[] {"companyId"},
 			false);
+
+		_setAuditEventUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAuditEventUtilPersistence(null);
+
 		entityCache.removeCache(AuditEventImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1158,6 +1164,21 @@ public class AuditEventPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAuditEventUtilPersistence(
+		AuditEventPersistence auditEventPersistence) {
+
+		try {
+			Field field = AuditEventUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, auditEventPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

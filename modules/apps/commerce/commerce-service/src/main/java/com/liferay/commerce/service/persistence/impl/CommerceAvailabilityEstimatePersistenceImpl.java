@@ -20,6 +20,7 @@ import com.liferay.commerce.model.CommerceAvailabilityEstimateTable;
 import com.liferay.commerce.model.impl.CommerceAvailabilityEstimateImpl;
 import com.liferay.commerce.model.impl.CommerceAvailabilityEstimateModelImpl;
 import com.liferay.commerce.service.persistence.CommerceAvailabilityEstimatePersistence;
+import com.liferay.commerce.service.persistence.CommerceAvailabilityEstimateUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -49,6 +50,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2429,9 +2431,13 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] {Long.class.getName()}, new String[] {"companyId"},
 			false);
+
+		_setCommerceAvailabilityEstimateUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceAvailabilityEstimateUtilPersistence(null);
+
 		entityCache.removeCache(
 			CommerceAvailabilityEstimateImpl.class.getName());
 
@@ -2441,6 +2447,24 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceAvailabilityEstimateUtilPersistence(
+		CommerceAvailabilityEstimatePersistence
+			commerceAvailabilityEstimatePersistence) {
+
+		try {
+			Field field =
+				CommerceAvailabilityEstimateUtil.class.getDeclaredField(
+					"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceAvailabilityEstimatePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -18,6 +18,7 @@ import com.liferay.expando.kernel.exception.NoSuchRowException;
 import com.liferay.expando.kernel.model.ExpandoRow;
 import com.liferay.expando.kernel.model.ExpandoRowTable;
 import com.liferay.expando.kernel.service.persistence.ExpandoRowPersistence;
+import com.liferay.expando.kernel.service.persistence.ExpandoRowUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
@@ -52,6 +53,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -2173,9 +2175,13 @@ public class ExpandoRowPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByT_C",
 			new String[] {Long.class.getName(), Long.class.getName()},
 			new String[] {"tableId", "classPK"}, false);
+
+		_setExpandoRowUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setExpandoRowUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(ExpandoRowImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2184,6 +2190,21 @@ public class ExpandoRowPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setExpandoRowUtilPersistence(
+		ExpandoRowPersistence expandoRowPersistence) {
+
+		try {
+			Field field = ExpandoRowUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, expandoRowPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

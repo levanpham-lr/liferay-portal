@@ -18,6 +18,7 @@ import com.liferay.asset.kernel.exception.NoSuchVocabularyException;
 import com.liferay.asset.kernel.model.AssetVocabulary;
 import com.liferay.asset.kernel.model.AssetVocabularyTable;
 import com.liferay.asset.kernel.service.persistence.AssetVocabularyPersistence;
+import com.liferay.asset.kernel.service.persistence.AssetVocabularyUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
@@ -58,6 +59,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -7535,9 +7537,13 @@ public class AssetVocabularyPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"companyId", "externalReferenceCode"}, false);
+
+		_setAssetVocabularyUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setAssetVocabularyUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(AssetVocabularyImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -7546,6 +7552,22 @@ public class AssetVocabularyPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAssetVocabularyUtilPersistence(
+		AssetVocabularyPersistence assetVocabularyPersistence) {
+
+		try {
+			Field field = AssetVocabularyUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, assetVocabularyPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

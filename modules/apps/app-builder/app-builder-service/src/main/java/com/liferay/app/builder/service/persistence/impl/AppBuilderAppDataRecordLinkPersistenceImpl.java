@@ -20,6 +20,7 @@ import com.liferay.app.builder.model.AppBuilderAppDataRecordLinkTable;
 import com.liferay.app.builder.model.impl.AppBuilderAppDataRecordLinkImpl;
 import com.liferay.app.builder.model.impl.AppBuilderAppDataRecordLinkModelImpl;
 import com.liferay.app.builder.service.persistence.AppBuilderAppDataRecordLinkPersistence;
+import com.liferay.app.builder.service.persistence.AppBuilderAppDataRecordLinkUtil;
 import com.liferay.app.builder.service.persistence.impl.constants.AppBuilderPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -48,6 +49,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -2317,10 +2319,14 @@ public class AppBuilderAppDataRecordLinkPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByA_D",
 			new String[] {Long.class.getName(), Long.class.getName()},
 			new String[] {"appBuilderAppId", "ddlRecordId"}, false);
+
+		_setAppBuilderAppDataRecordLinkUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAppBuilderAppDataRecordLinkUtilPersistence(null);
+
 		entityCache.removeCache(
 			AppBuilderAppDataRecordLinkImpl.class.getName());
 
@@ -2330,6 +2336,24 @@ public class AppBuilderAppDataRecordLinkPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAppBuilderAppDataRecordLinkUtilPersistence(
+		AppBuilderAppDataRecordLinkPersistence
+			appBuilderAppDataRecordLinkPersistence) {
+
+		try {
+			Field field =
+				AppBuilderAppDataRecordLinkUtil.class.getDeclaredField(
+					"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, appBuilderAppDataRecordLinkPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -20,6 +20,7 @@ import com.liferay.journal.model.JournalFeedTable;
 import com.liferay.journal.model.impl.JournalFeedImpl;
 import com.liferay.journal.model.impl.JournalFeedModelImpl;
 import com.liferay.journal.service.persistence.JournalFeedPersistence;
+import com.liferay.journal.service.persistence.JournalFeedUtil;
 import com.liferay.journal.service.persistence.impl.constants.JournalPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -55,6 +56,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -3570,10 +3572,14 @@ public class JournalFeedPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_F",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"groupId", "feedId"}, false);
+
+		_setJournalFeedUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setJournalFeedUtilPersistence(null);
+
 		entityCache.removeCache(JournalFeedImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3582,6 +3588,22 @@ public class JournalFeedPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setJournalFeedUtilPersistence(
+		JournalFeedPersistence journalFeedPersistence) {
+
+		try {
+			Field field = JournalFeedUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, journalFeedPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

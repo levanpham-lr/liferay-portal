@@ -50,12 +50,14 @@ import com.liferay.ratings.kernel.exception.NoSuchEntryException;
 import com.liferay.ratings.kernel.model.RatingsEntry;
 import com.liferay.ratings.kernel.model.RatingsEntryTable;
 import com.liferay.ratings.kernel.service.persistence.RatingsEntryPersistence;
+import com.liferay.ratings.kernel.service.persistence.RatingsEntryUtil;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -3968,9 +3970,13 @@ public class RatingsEntryPersistenceImpl
 				Double.class.getName()
 			},
 			new String[] {"classNameId", "classPK", "score"}, false);
+
+		_setRatingsEntryUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setRatingsEntryUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(RatingsEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3979,6 +3985,22 @@ public class RatingsEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setRatingsEntryUtilPersistence(
+		RatingsEntryPersistence ratingsEntryPersistence) {
+
+		try {
+			Field field = RatingsEntryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, ratingsEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

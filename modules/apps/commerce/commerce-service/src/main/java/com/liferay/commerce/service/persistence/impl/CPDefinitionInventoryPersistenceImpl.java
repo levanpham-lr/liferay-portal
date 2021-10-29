@@ -20,6 +20,7 @@ import com.liferay.commerce.model.CPDefinitionInventoryTable;
 import com.liferay.commerce.model.impl.CPDefinitionInventoryImpl;
 import com.liferay.commerce.model.impl.CPDefinitionInventoryModelImpl;
 import com.liferay.commerce.service.persistence.CPDefinitionInventoryPersistence;
+import com.liferay.commerce.service.persistence.CPDefinitionInventoryUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -49,6 +50,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2376,9 +2378,13 @@ public class CPDefinitionInventoryPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCPDefinitionId",
 			new String[] {Long.class.getName()},
 			new String[] {"CPDefinitionId"}, false);
+
+		_setCPDefinitionInventoryUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCPDefinitionInventoryUtilPersistence(null);
+
 		entityCache.removeCache(CPDefinitionInventoryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2387,6 +2393,22 @@ public class CPDefinitionInventoryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCPDefinitionInventoryUtilPersistence(
+		CPDefinitionInventoryPersistence cpDefinitionInventoryPersistence) {
+
+		try {
+			Field field = CPDefinitionInventoryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, cpDefinitionInventoryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

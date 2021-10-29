@@ -20,6 +20,7 @@ import com.liferay.calendar.model.CalendarTable;
 import com.liferay.calendar.model.impl.CalendarImpl;
 import com.liferay.calendar.model.impl.CalendarModelImpl;
 import com.liferay.calendar.service.persistence.CalendarPersistence;
+import com.liferay.calendar.service.persistence.CalendarUtil;
 import com.liferay.calendar.service.persistence.impl.constants.CalendarPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -53,6 +54,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -4081,10 +4083,14 @@ public class CalendarPersistenceImpl
 			},
 			new String[] {"groupId", "calendarResourceId", "defaultCalendar"},
 			false);
+
+		_setCalendarUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setCalendarUtilPersistence(null);
+
 		entityCache.removeCache(CalendarImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -4093,6 +4099,21 @@ public class CalendarPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCalendarUtilPersistence(
+		CalendarPersistence calendarPersistence) {
+
+		try {
+			Field field = CalendarUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, calendarPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

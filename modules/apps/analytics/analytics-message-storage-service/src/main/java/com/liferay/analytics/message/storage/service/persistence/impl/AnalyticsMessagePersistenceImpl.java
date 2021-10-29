@@ -20,6 +20,7 @@ import com.liferay.analytics.message.storage.model.AnalyticsMessageTable;
 import com.liferay.analytics.message.storage.model.impl.AnalyticsMessageImpl;
 import com.liferay.analytics.message.storage.model.impl.AnalyticsMessageModelImpl;
 import com.liferay.analytics.message.storage.service.persistence.AnalyticsMessagePersistence;
+import com.liferay.analytics.message.storage.service.persistence.AnalyticsMessageUtil;
 import com.liferay.analytics.message.storage.service.persistence.impl.constants.AnalyticsPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -48,6 +49,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -1171,10 +1173,14 @@ public class AnalyticsMessagePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] {Long.class.getName()}, new String[] {"companyId"},
 			false);
+
+		_setAnalyticsMessageUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAnalyticsMessageUtilPersistence(null);
+
 		entityCache.removeCache(AnalyticsMessageImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1183,6 +1189,22 @@ public class AnalyticsMessagePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAnalyticsMessageUtilPersistence(
+		AnalyticsMessagePersistence analyticsMessagePersistence) {
+
+		try {
+			Field field = AnalyticsMessageUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, analyticsMessagePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

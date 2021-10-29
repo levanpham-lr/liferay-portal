@@ -43,12 +43,14 @@ import com.liferay.powwow.model.PowwowServer;
 import com.liferay.powwow.model.impl.PowwowServerImpl;
 import com.liferay.powwow.model.impl.PowwowServerModelImpl;
 import com.liferay.powwow.service.persistence.PowwowServerPersistence;
+import com.liferay.powwow.service.persistence.PowwowServerUtil;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -1250,9 +1252,13 @@ public class PowwowServerPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByPT_A",
 			new String[] {String.class.getName(), Boolean.class.getName()},
 			new String[] {"providerType", "active_"}, false);
+
+		_setPowwowServerUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setPowwowServerUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(PowwowServerImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1261,6 +1267,22 @@ public class PowwowServerPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setPowwowServerUtilPersistence(
+		PowwowServerPersistence powwowServerPersistence) {
+
+		try {
+			Field field = PowwowServerUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, powwowServerPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

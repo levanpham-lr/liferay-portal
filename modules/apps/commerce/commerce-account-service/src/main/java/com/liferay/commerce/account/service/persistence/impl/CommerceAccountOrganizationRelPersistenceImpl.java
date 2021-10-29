@@ -21,6 +21,7 @@ import com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelImp
 import com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelModelImpl;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPersistence;
+import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -48,6 +49,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -1783,9 +1785,13 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByOrganizationId",
 			new String[] {Long.class.getName()},
 			new String[] {"organizationId"}, false);
+
+		_setCommerceAccountOrganizationRelUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceAccountOrganizationRelUtilPersistence(null);
+
 		entityCache.removeCache(
 			CommerceAccountOrganizationRelImpl.class.getName());
 
@@ -1795,6 +1801,24 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceAccountOrganizationRelUtilPersistence(
+		CommerceAccountOrganizationRelPersistence
+			commerceAccountOrganizationRelPersistence) {
+
+		try {
+			Field field =
+				CommerceAccountOrganizationRelUtil.class.getDeclaredField(
+					"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceAccountOrganizationRelPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

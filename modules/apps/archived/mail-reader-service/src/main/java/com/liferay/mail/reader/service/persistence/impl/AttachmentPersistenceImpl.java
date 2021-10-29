@@ -20,6 +20,7 @@ import com.liferay.mail.reader.model.AttachmentTable;
 import com.liferay.mail.reader.model.impl.AttachmentImpl;
 import com.liferay.mail.reader.model.impl.AttachmentModelImpl;
 import com.liferay.mail.reader.service.persistence.AttachmentPersistence;
+import com.liferay.mail.reader.service.persistence.AttachmentUtil;
 import com.liferay.mail.reader.service.persistence.impl.constants.MailPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -47,6 +48,7 @@ import com.liferay.portal.kernel.util.SetUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.HashMap;
@@ -1144,10 +1146,14 @@ public class AttachmentPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByMessageId",
 			new String[] {Long.class.getName()}, new String[] {"messageId"},
 			false);
+
+		_setAttachmentUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAttachmentUtilPersistence(null);
+
 		entityCache.removeCache(AttachmentImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1156,6 +1162,21 @@ public class AttachmentPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAttachmentUtilPersistence(
+		AttachmentPersistence attachmentPersistence) {
+
+		try {
+			Field field = AttachmentUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, attachmentPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

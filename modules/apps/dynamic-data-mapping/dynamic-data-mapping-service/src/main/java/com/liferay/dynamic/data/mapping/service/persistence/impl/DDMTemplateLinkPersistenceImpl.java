@@ -20,6 +20,7 @@ import com.liferay.dynamic.data.mapping.model.DDMTemplateLinkTable;
 import com.liferay.dynamic.data.mapping.model.impl.DDMTemplateLinkImpl;
 import com.liferay.dynamic.data.mapping.model.impl.DDMTemplateLinkModelImpl;
 import com.liferay.dynamic.data.mapping.service.persistence.DDMTemplateLinkPersistence;
+import com.liferay.dynamic.data.mapping.service.persistence.DDMTemplateLinkUtil;
 import com.liferay.dynamic.data.mapping.service.persistence.impl.constants.DDMPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -48,6 +49,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -1655,10 +1657,14 @@ public class DDMTemplateLinkPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
 			new String[] {Long.class.getName(), Long.class.getName()},
 			new String[] {"classNameId", "classPK"}, false);
+
+		_setDDMTemplateLinkUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setDDMTemplateLinkUtilPersistence(null);
+
 		entityCache.removeCache(DDMTemplateLinkImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1667,6 +1673,22 @@ public class DDMTemplateLinkPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setDDMTemplateLinkUtilPersistence(
+		DDMTemplateLinkPersistence ddmTemplateLinkPersistence) {
+
+		try {
+			Field field = DDMTemplateLinkUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, ddmTemplateLinkPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

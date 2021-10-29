@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.TicketPersistence;
+import com.liferay.portal.kernel.service.persistence.TicketUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -51,6 +52,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -2741,9 +2743,13 @@ public class TicketPersistenceImpl
 			},
 			new String[] {"companyId", "classNameId", "classPK", "type_"},
 			false);
+
+		_setTicketUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setTicketUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(TicketImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2752,6 +2758,21 @@ public class TicketPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setTicketUtilPersistence(
+		TicketPersistence ticketPersistence) {
+
+		try {
+			Field field = TicketUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, ticketPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

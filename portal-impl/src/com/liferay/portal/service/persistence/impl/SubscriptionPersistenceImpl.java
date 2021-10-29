@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.SubscriptionPersistence;
+import com.liferay.portal.kernel.service.persistence.SubscriptionUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -51,6 +52,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -3536,9 +3538,13 @@ public class SubscriptionPersistenceImpl
 			},
 			new String[] {"companyId", "userId", "classNameId", "classPK"},
 			false);
+
+		_setSubscriptionUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setSubscriptionUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(SubscriptionImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3547,6 +3553,22 @@ public class SubscriptionPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setSubscriptionUtilPersistence(
+		SubscriptionPersistence subscriptionPersistence) {
+
+		try {
+			Field field = SubscriptionUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, subscriptionPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

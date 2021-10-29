@@ -45,10 +45,12 @@ import com.liferay.saml.persistence.model.SamlSpIdpConnectionTable;
 import com.liferay.saml.persistence.model.impl.SamlSpIdpConnectionImpl;
 import com.liferay.saml.persistence.model.impl.SamlSpIdpConnectionModelImpl;
 import com.liferay.saml.persistence.service.persistence.SamlSpIdpConnectionPersistence;
+import com.liferay.saml.persistence.service.persistence.SamlSpIdpConnectionUtil;
 import com.liferay.saml.persistence.service.persistence.impl.constants.SamlPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -1500,10 +1502,14 @@ public class SamlSpIdpConnectionPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_SIEI",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"companyId", "samlIdpEntityId"}, false);
+
+		_setSamlSpIdpConnectionUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setSamlSpIdpConnectionUtilPersistence(null);
+
 		entityCache.removeCache(SamlSpIdpConnectionImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1512,6 +1518,22 @@ public class SamlSpIdpConnectionPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setSamlSpIdpConnectionUtilPersistence(
+		SamlSpIdpConnectionPersistence samlSpIdpConnectionPersistence) {
+
+		try {
+			Field field = SamlSpIdpConnectionUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, samlSpIdpConnectionPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

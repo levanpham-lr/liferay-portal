@@ -20,6 +20,7 @@ import com.liferay.chat.model.EntryTable;
 import com.liferay.chat.model.impl.EntryImpl;
 import com.liferay.chat.model.impl.EntryModelImpl;
 import com.liferay.chat.service.persistence.EntryPersistence;
+import com.liferay.chat.service.persistence.EntryUtil;
 import com.liferay.chat.service.persistence.impl.constants.ChatPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -45,6 +46,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.HashSet;
@@ -5031,10 +5033,14 @@ public class EntryPersistenceImpl
 				String.class.getName()
 			},
 			new String[] {"fromUserId", "toUserId", "content"}, false);
+
+		_setEntryUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setEntryUtilPersistence(null);
+
 		entityCache.removeCache(EntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -5043,6 +5049,19 @@ public class EntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setEntryUtilPersistence(EntryPersistence entryPersistence) {
+		try {
+			Field field = EntryUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, entryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

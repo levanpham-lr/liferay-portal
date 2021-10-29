@@ -46,10 +46,12 @@ import com.liferay.segments.model.SegmentsExperimentRelTable;
 import com.liferay.segments.model.impl.SegmentsExperimentRelImpl;
 import com.liferay.segments.model.impl.SegmentsExperimentRelModelImpl;
 import com.liferay.segments.service.persistence.SegmentsExperimentRelPersistence;
+import com.liferay.segments.service.persistence.SegmentsExperimentRelUtil;
 import com.liferay.segments.service.persistence.impl.constants.SegmentsPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -1757,10 +1759,14 @@ public class SegmentsExperimentRelPersistenceImpl
 			new String[] {Long.class.getName(), Long.class.getName()},
 			new String[] {"segmentsExperimentId", "segmentsExperienceId"},
 			false);
+
+		_setSegmentsExperimentRelUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setSegmentsExperimentRelUtilPersistence(null);
+
 		entityCache.removeCache(SegmentsExperimentRelImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1769,6 +1775,22 @@ public class SegmentsExperimentRelPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setSegmentsExperimentRelUtilPersistence(
+		SegmentsExperimentRelPersistence segmentsExperimentRelPersistence) {
+
+		try {
+			Field field = SegmentsExperimentRelUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, segmentsExperimentRelPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -55,10 +55,12 @@ import com.liferay.redirect.model.RedirectEntryTable;
 import com.liferay.redirect.model.impl.RedirectEntryImpl;
 import com.liferay.redirect.model.impl.RedirectEntryModelImpl;
 import com.liferay.redirect.service.persistence.RedirectEntryPersistence;
+import com.liferay.redirect.service.persistence.RedirectEntryUtil;
 import com.liferay.redirect.service.persistence.impl.constants.RedirectPersistenceConstants;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -4356,10 +4358,14 @@ public class RedirectEntryPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_S",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"groupId", "sourceURL"}, false);
+
+		_setRedirectEntryUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setRedirectEntryUtilPersistence(null);
+
 		entityCache.removeCache(RedirectEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -4368,6 +4374,22 @@ public class RedirectEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setRedirectEntryUtilPersistence(
+		RedirectEntryPersistence redirectEntryPersistence) {
+
+		try {
+			Field field = RedirectEntryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, redirectEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

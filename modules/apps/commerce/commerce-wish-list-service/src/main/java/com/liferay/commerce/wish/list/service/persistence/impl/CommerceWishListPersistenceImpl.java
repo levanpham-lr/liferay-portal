@@ -20,6 +20,7 @@ import com.liferay.commerce.wish.list.model.CommerceWishListTable;
 import com.liferay.commerce.wish.list.model.impl.CommerceWishListImpl;
 import com.liferay.commerce.wish.list.model.impl.CommerceWishListModelImpl;
 import com.liferay.commerce.wish.list.service.persistence.CommerceWishListPersistence;
+import com.liferay.commerce.wish.list.service.persistence.CommerceWishListUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -49,6 +50,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.sql.Timestamp;
@@ -4894,9 +4896,13 @@ public class CommerceWishListPersistenceImpl
 				Boolean.class.getName()
 			},
 			new String[] {"groupId", "userId", "defaultWishList"}, false);
+
+		_setCommerceWishListUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceWishListUtilPersistence(null);
+
 		entityCache.removeCache(CommerceWishListImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -4905,6 +4911,22 @@ public class CommerceWishListPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceWishListUtilPersistence(
+		CommerceWishListPersistence commerceWishListPersistence) {
+
+		try {
+			Field field = CommerceWishListUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceWishListPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

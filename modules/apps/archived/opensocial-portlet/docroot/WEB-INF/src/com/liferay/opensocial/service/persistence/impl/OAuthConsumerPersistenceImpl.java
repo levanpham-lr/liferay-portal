@@ -19,6 +19,7 @@ import com.liferay.opensocial.model.OAuthConsumer;
 import com.liferay.opensocial.model.impl.OAuthConsumerImpl;
 import com.liferay.opensocial.model.impl.OAuthConsumerModelImpl;
 import com.liferay.opensocial.service.persistence.OAuthConsumerPersistence;
+import com.liferay.opensocial.service.persistence.OAuthConsumerUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -49,6 +50,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -1527,9 +1529,13 @@ public class OAuthConsumerPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_S",
 			new String[] {String.class.getName(), String.class.getName()},
 			new String[] {"gadgetKey", "serviceName"}, false);
+
+		_setOAuthConsumerUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setOAuthConsumerUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(OAuthConsumerImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1538,6 +1544,22 @@ public class OAuthConsumerPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setOAuthConsumerUtilPersistence(
+		OAuthConsumerPersistence oAuthConsumerPersistence) {
+
+		try {
+			Field field = OAuthConsumerUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, oAuthConsumerPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

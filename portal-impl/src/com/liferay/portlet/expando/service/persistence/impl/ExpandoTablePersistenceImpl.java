@@ -18,6 +18,7 @@ import com.liferay.expando.kernel.exception.NoSuchTableException;
 import com.liferay.expando.kernel.model.ExpandoTable;
 import com.liferay.expando.kernel.model.ExpandoTableTable;
 import com.liferay.expando.kernel.service.persistence.ExpandoTablePersistence;
+import com.liferay.expando.kernel.service.persistence.ExpandoTableUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
@@ -49,6 +50,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -1737,9 +1739,13 @@ public class ExpandoTablePersistenceImpl
 				String.class.getName()
 			},
 			new String[] {"companyId", "classNameId", "name"}, false);
+
+		_setExpandoTableUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setExpandoTableUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(ExpandoTableImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1748,6 +1754,22 @@ public class ExpandoTablePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setExpandoTableUtilPersistence(
+		ExpandoTablePersistence expandoTablePersistence) {
+
+		try {
+			Field field = ExpandoTableUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, expandoTablePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

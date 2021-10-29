@@ -20,6 +20,7 @@ import com.liferay.document.library.model.DLFileVersionPreviewTable;
 import com.liferay.document.library.model.impl.DLFileVersionPreviewImpl;
 import com.liferay.document.library.model.impl.DLFileVersionPreviewModelImpl;
 import com.liferay.document.library.service.persistence.DLFileVersionPreviewPersistence;
+import com.liferay.document.library.service.persistence.DLFileVersionPreviewUtil;
 import com.liferay.document.library.service.persistence.impl.constants.DLPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -48,6 +49,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -2542,10 +2544,14 @@ public class DLFileVersionPreviewPersistenceImpl
 			},
 			new String[] {"fileEntryId", "fileVersionId", "previewStatus"},
 			false);
+
+		_setDLFileVersionPreviewUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setDLFileVersionPreviewUtilPersistence(null);
+
 		entityCache.removeCache(DLFileVersionPreviewImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2554,6 +2560,22 @@ public class DLFileVersionPreviewPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setDLFileVersionPreviewUtilPersistence(
+		DLFileVersionPreviewPersistence dlFileVersionPreviewPersistence) {
+
+		try {
+			Field field = DLFileVersionPreviewUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, dlFileVersionPreviewPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

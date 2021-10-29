@@ -20,6 +20,7 @@ import com.liferay.change.tracking.model.CTProcessTable;
 import com.liferay.change.tracking.model.impl.CTProcessImpl;
 import com.liferay.change.tracking.model.impl.CTProcessModelImpl;
 import com.liferay.change.tracking.service.persistence.CTProcessPersistence;
+import com.liferay.change.tracking.service.persistence.CTProcessUtil;
 import com.liferay.change.tracking.service.persistence.impl.constants.CTPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -48,6 +49,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -1659,10 +1661,14 @@ public class CTProcessPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCollectionId",
 			new String[] {Long.class.getName()},
 			new String[] {"ctCollectionId"}, false);
+
+		_setCTProcessUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setCTProcessUtilPersistence(null);
+
 		entityCache.removeCache(CTProcessImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1671,6 +1677,21 @@ public class CTProcessPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCTProcessUtilPersistence(
+		CTProcessPersistence ctProcessPersistence) {
+
+		try {
+			Field field = CTProcessUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, ctProcessPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

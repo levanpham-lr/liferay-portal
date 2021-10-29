@@ -20,6 +20,7 @@ import com.liferay.account.model.AccountEntryTable;
 import com.liferay.account.model.impl.AccountEntryImpl;
 import com.liferay.account.model.impl.AccountEntryModelImpl;
 import com.liferay.account.service.persistence.AccountEntryPersistence;
+import com.liferay.account.service.persistence.AccountEntryUtil;
 import com.liferay.account.service.persistence.impl.constants.AccountPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -52,6 +53,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -2818,10 +2820,14 @@ public class AccountEntryPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"companyId", "externalReferenceCode"}, false);
+
+		_setAccountEntryUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAccountEntryUtilPersistence(null);
+
 		entityCache.removeCache(AccountEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2830,6 +2836,22 @@ public class AccountEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAccountEntryUtilPersistence(
+		AccountEntryPersistence accountEntryPersistence) {
+
+		try {
+			Field field = AccountEntryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, accountEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

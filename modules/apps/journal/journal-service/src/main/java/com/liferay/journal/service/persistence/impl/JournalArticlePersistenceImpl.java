@@ -20,6 +20,7 @@ import com.liferay.journal.model.JournalArticleTable;
 import com.liferay.journal.model.impl.JournalArticleImpl;
 import com.liferay.journal.model.impl.JournalArticleModelImpl;
 import com.liferay.journal.service.persistence.JournalArticlePersistence;
+import com.liferay.journal.service.persistence.JournalArticleUtil;
 import com.liferay.journal.service.persistence.impl.constants.JournalPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.change.tracking.CTColumnResolutionType;
@@ -57,6 +58,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.sql.Timestamp;
@@ -34283,10 +34285,14 @@ public class JournalArticlePersistenceImpl
 			},
 			new String[] {"groupId", "folderId", "classNameId", "status"},
 			false);
+
+		_setJournalArticleUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setJournalArticleUtilPersistence(null);
+
 		entityCache.removeCache(JournalArticleImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -34295,6 +34301,22 @@ public class JournalArticlePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setJournalArticleUtilPersistence(
+		JournalArticlePersistence journalArticlePersistence) {
+
+		try {
+			Field field = JournalArticleUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, journalArticlePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -20,6 +20,7 @@ import com.liferay.commerce.data.integration.model.CommerceDataIntegrationProces
 import com.liferay.commerce.data.integration.model.impl.CommerceDataIntegrationProcessLogImpl;
 import com.liferay.commerce.data.integration.model.impl.CommerceDataIntegrationProcessLogModelImpl;
 import com.liferay.commerce.data.integration.service.persistence.CommerceDataIntegrationProcessLogPersistence;
+import com.liferay.commerce.data.integration.service.persistence.CommerceDataIntegrationProcessLogUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -47,6 +48,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -1890,9 +1892,13 @@ public class CommerceDataIntegrationProcessLogPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_S",
 			new String[] {Long.class.getName(), Integer.class.getName()},
 			new String[] {"CDataIntegrationProcessId", "status"}, false);
+
+		_setCommerceDataIntegrationProcessLogUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceDataIntegrationProcessLogUtilPersistence(null);
+
 		entityCache.removeCache(
 			CommerceDataIntegrationProcessLogImpl.class.getName());
 
@@ -1902,6 +1908,24 @@ public class CommerceDataIntegrationProcessLogPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceDataIntegrationProcessLogUtilPersistence(
+		CommerceDataIntegrationProcessLogPersistence
+			commerceDataIntegrationProcessLogPersistence) {
+
+		try {
+			Field field =
+				CommerceDataIntegrationProcessLogUtil.class.getDeclaredField(
+					"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceDataIntegrationProcessLogPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

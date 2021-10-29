@@ -49,9 +49,11 @@ import com.liferay.tasks.model.TasksEntry;
 import com.liferay.tasks.model.impl.TasksEntryImpl;
 import com.liferay.tasks.model.impl.TasksEntryModelImpl;
 import com.liferay.tasks.service.persistence.TasksEntryPersistence;
+import com.liferay.tasks.service.persistence.TasksEntryUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -10672,9 +10674,13 @@ public class TasksEntryPersistenceImpl
 				Integer.class.getName()
 			},
 			new String[] {"groupId", "assigneeUserId", "status"}, false);
+
+		_setTasksEntryUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setTasksEntryUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(TasksEntryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -10683,6 +10689,21 @@ public class TasksEntryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setTasksEntryUtilPersistence(
+		TasksEntryPersistence tasksEntryPersistence) {
+
+		try {
+			Field field = TasksEntryUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, tasksEntryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

@@ -20,6 +20,7 @@ import com.liferay.commerce.inventory.model.CommerceInventoryAuditTable;
 import com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditImpl;
 import com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditModelImpl;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryAuditPersistence;
+import com.liferay.commerce.inventory.service.persistence.CommerceInventoryAuditUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -47,6 +48,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.sql.Timestamp;
@@ -1841,9 +1843,13 @@ public class CommerceInventoryAuditPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_S",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"companyId", "sku"}, false);
+
+		_setCommerceInventoryAuditUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setCommerceInventoryAuditUtilPersistence(null);
+
 		entityCache.removeCache(CommerceInventoryAuditImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1852,6 +1858,22 @@ public class CommerceInventoryAuditPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCommerceInventoryAuditUtilPersistence(
+		CommerceInventoryAuditPersistence commerceInventoryAuditPersistence) {
+
+		try {
+			Field field = CommerceInventoryAuditUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, commerceInventoryAuditPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

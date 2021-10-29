@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.WebsitePersistence;
+import com.liferay.portal.kernel.service.persistence.WebsiteUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -52,6 +53,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -4624,9 +4626,13 @@ public class WebsitePersistenceImpl
 			},
 			new String[] {"companyId", "classNameId", "classPK", "primary_"},
 			false);
+
+		_setWebsiteUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setWebsiteUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(WebsiteImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -4635,6 +4641,21 @@ public class WebsitePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setWebsiteUtilPersistence(
+		WebsitePersistence websitePersistence) {
+
+		try {
+			Field field = WebsiteUtil.class.getDeclaredField("_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, websitePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

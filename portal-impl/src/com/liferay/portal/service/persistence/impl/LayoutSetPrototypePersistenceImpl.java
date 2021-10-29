@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.persistence.LayoutSetPrototypePersistence;
+import com.liferay.portal.kernel.service.persistence.LayoutSetPrototypeUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashMapBuilder;
@@ -54,6 +55,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -4601,9 +4603,13 @@ public class LayoutSetPrototypePersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_A",
 			new String[] {Long.class.getName(), Boolean.class.getName()},
 			new String[] {"companyId", "active_"}, false);
+
+		_setLayoutSetPrototypeUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setLayoutSetPrototypeUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(LayoutSetPrototypeImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -4612,6 +4618,22 @@ public class LayoutSetPrototypePersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setLayoutSetPrototypeUtilPersistence(
+		LayoutSetPrototypePersistence layoutSetPrototypePersistence) {
+
+		try {
+			Field field = LayoutSetPrototypeUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, layoutSetPrototypePersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

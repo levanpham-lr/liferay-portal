@@ -21,6 +21,7 @@ import com.liferay.polls.model.PollsQuestionTable;
 import com.liferay.polls.model.impl.PollsQuestionImpl;
 import com.liferay.polls.model.impl.PollsQuestionModelImpl;
 import com.liferay.polls.service.persistence.PollsQuestionPersistence;
+import com.liferay.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.polls.service.persistence.impl.constants.PollsPersistenceConstants;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
@@ -53,6 +54,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2996,10 +2998,14 @@ public class PollsQuestionPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
 			new String[] {Long.class.getName()}, new String[] {"groupId"},
 			false);
+
+		_setPollsQuestionUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setPollsQuestionUtilPersistence(null);
+
 		entityCache.removeCache(PollsQuestionImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3008,6 +3014,22 @@ public class PollsQuestionPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setPollsQuestionUtilPersistence(
+		PollsQuestionPersistence pollsQuestionPersistence) {
+
+		try {
+			Field field = PollsQuestionUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, pollsQuestionPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

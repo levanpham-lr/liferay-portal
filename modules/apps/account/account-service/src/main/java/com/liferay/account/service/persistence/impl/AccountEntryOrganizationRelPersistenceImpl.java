@@ -20,6 +20,7 @@ import com.liferay.account.model.AccountEntryOrganizationRelTable;
 import com.liferay.account.model.impl.AccountEntryOrganizationRelImpl;
 import com.liferay.account.model.impl.AccountEntryOrganizationRelModelImpl;
 import com.liferay.account.service.persistence.AccountEntryOrganizationRelPersistence;
+import com.liferay.account.service.persistence.AccountEntryOrganizationRelUtil;
 import com.liferay.account.service.persistence.impl.constants.AccountPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -47,6 +48,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
@@ -2025,10 +2027,14 @@ public class AccountEntryOrganizationRelPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByA_O",
 			new String[] {Long.class.getName(), Long.class.getName()},
 			new String[] {"accountEntryId", "organizationId"}, false);
+
+		_setAccountEntryOrganizationRelUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setAccountEntryOrganizationRelUtilPersistence(null);
+
 		entityCache.removeCache(
 			AccountEntryOrganizationRelImpl.class.getName());
 
@@ -2038,6 +2044,24 @@ public class AccountEntryOrganizationRelPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAccountEntryOrganizationRelUtilPersistence(
+		AccountEntryOrganizationRelPersistence
+			accountEntryOrganizationRelPersistence) {
+
+		try {
+			Field field =
+				AccountEntryOrganizationRelUtil.class.getDeclaredField(
+					"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, accountEntryOrganizationRelPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

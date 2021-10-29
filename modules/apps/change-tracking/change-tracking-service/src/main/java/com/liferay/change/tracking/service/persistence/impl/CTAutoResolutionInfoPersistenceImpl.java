@@ -20,6 +20,7 @@ import com.liferay.change.tracking.model.CTAutoResolutionInfoTable;
 import com.liferay.change.tracking.model.impl.CTAutoResolutionInfoImpl;
 import com.liferay.change.tracking.model.impl.CTAutoResolutionInfoModelImpl;
 import com.liferay.change.tracking.service.persistence.CTAutoResolutionInfoPersistence;
+import com.liferay.change.tracking.service.persistence.CTAutoResolutionInfoUtil;
 import com.liferay.change.tracking.service.persistence.impl.constants.CTPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
@@ -50,6 +51,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.Date;
@@ -2148,10 +2150,14 @@ public class CTAutoResolutionInfoPersistenceImpl
 				"ctCollectionId", "modelClassNameId", "sourceModelClassPK"
 			},
 			false);
+
+		_setCTAutoResolutionInfoUtilPersistence(this);
 	}
 
 	@Deactivate
 	public void deactivate() {
+		_setCTAutoResolutionInfoUtilPersistence(null);
+
 		entityCache.removeCache(CTAutoResolutionInfoImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -2160,6 +2166,22 @@ public class CTAutoResolutionInfoPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setCTAutoResolutionInfoUtilPersistence(
+		CTAutoResolutionInfoPersistence ctAutoResolutionInfoPersistence) {
+
+		try {
+			Field field = CTAutoResolutionInfoUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, ctAutoResolutionInfoPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

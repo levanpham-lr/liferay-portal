@@ -18,6 +18,7 @@ import com.liferay.announcements.kernel.exception.NoSuchDeliveryException;
 import com.liferay.announcements.kernel.model.AnnouncementsDelivery;
 import com.liferay.announcements.kernel.model.AnnouncementsDeliveryTable;
 import com.liferay.announcements.kernel.service.persistence.AnnouncementsDeliveryPersistence;
+import com.liferay.announcements.kernel.service.persistence.AnnouncementsDeliveryUtil;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -48,6 +49,7 @@ import com.liferay.registry.ServiceRegistration;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.HashMap;
@@ -1983,9 +1985,13 @@ public class AnnouncementsDeliveryPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByU_T",
 			new String[] {Long.class.getName(), String.class.getName()},
 			new String[] {"userId", "type_"}, false);
+
+		_setAnnouncementsDeliveryUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setAnnouncementsDeliveryUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(AnnouncementsDeliveryImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -1994,6 +2000,22 @@ public class AnnouncementsDeliveryPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setAnnouncementsDeliveryUtilPersistence(
+		AnnouncementsDeliveryPersistence announcementsDeliveryPersistence) {
+
+		try {
+			Field field = AnnouncementsDeliveryUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, announcementsDeliveryPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 

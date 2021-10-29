@@ -47,9 +47,11 @@ import com.liferay.social.kernel.exception.NoSuchActivitySettingException;
 import com.liferay.social.kernel.model.SocialActivitySetting;
 import com.liferay.social.kernel.model.SocialActivitySettingTable;
 import com.liferay.social.kernel.service.persistence.SocialActivitySettingPersistence;
+import com.liferay.social.kernel.service.persistence.SocialActivitySettingUtil;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.util.ArrayList;
@@ -3582,9 +3584,13 @@ public class SocialActivitySettingPersistenceImpl
 			},
 			new String[] {"groupId", "classNameId", "activityType", "name"},
 			false);
+
+		_setSocialActivitySettingUtilPersistence(this);
 	}
 
 	public void destroy() {
+		_setSocialActivitySettingUtilPersistence(null);
+
 		EntityCacheUtil.removeCache(SocialActivitySettingImpl.class.getName());
 
 		_argumentsResolverServiceRegistration.unregister();
@@ -3593,6 +3599,22 @@ public class SocialActivitySettingPersistenceImpl
 				_serviceRegistrations) {
 
 			serviceRegistration.unregister();
+		}
+	}
+
+	private void _setSocialActivitySettingUtilPersistence(
+		SocialActivitySettingPersistence socialActivitySettingPersistence) {
+
+		try {
+			Field field = SocialActivitySettingUtil.class.getDeclaredField(
+				"_persistence");
+
+			field.setAccessible(true);
+
+			field.set(null, socialActivitySettingPersistence);
+		}
+		catch (ReflectiveOperationException reflectiveOperationException) {
+			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
 
