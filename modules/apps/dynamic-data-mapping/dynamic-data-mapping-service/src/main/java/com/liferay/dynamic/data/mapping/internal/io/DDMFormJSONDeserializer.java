@@ -160,15 +160,17 @@ public class DDMFormJSONDeserializer implements DDMFormDeserializer {
 		else if (Objects.equals(
 					ddmFormFieldTypeSetting.getType(), "validation")) {
 
+			DDMForm ddmForm = ddmFormFieldTypeSetting.getDDMForm();
+
 			return deserializeDDMFormFieldValidation(
-				serializedDDMFormFieldProperty);
+				serializedDDMFormFieldProperty, ddmForm.getAvailableLocales());
 		}
 
 		return serializedDDMFormFieldProperty;
 	}
 
 	protected static DDMFormFieldValidation deserializeDDMFormFieldValidation(
-			String serializedDDMFormFieldProperty)
+			String serializedDDMFormFieldProperty, Set<Locale> availableLocales)
 		throws PortalException {
 
 		DDMFormFieldValidation ddmFormFieldValidation =
@@ -181,8 +183,25 @@ public class DDMFormJSONDeserializer implements DDMFormDeserializer {
 		JSONObject jsonObject = _jsonFactory.createJSONObject(
 			serializedDDMFormFieldProperty);
 
-		ddmFormFieldValidation.setErrorMessageLocalizedValue(
-			deserializeLocalizedValue(jsonObject.getString("errorMessage")));
+		JSONObject errorMessageJSONObject = jsonObject.getJSONObject(
+			"errorMessage");
+
+		if (errorMessageJSONObject == null) {
+			LocalizedValue errorMessageLocalizedValue = new LocalizedValue();
+
+			for (Locale locale : availableLocales) {
+				errorMessageLocalizedValue.addString(
+					locale, jsonObject.getString("errorMessage"));
+			}
+
+			ddmFormFieldValidation.setErrorMessageLocalizedValue(
+				errorMessageLocalizedValue);
+		}
+		else {
+			ddmFormFieldValidation.setErrorMessageLocalizedValue(
+				deserializeLocalizedValue(
+					jsonObject.getString("errorMessage")));
+		}
 
 		JSONObject expressionJSONObject = jsonObject.getJSONObject(
 			"expression");
