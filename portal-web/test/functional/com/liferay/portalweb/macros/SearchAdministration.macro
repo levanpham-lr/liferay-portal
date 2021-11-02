@@ -26,7 +26,8 @@ definition {
 		if (contains("${searchEngineVendor}", "Elasticsearch")) {
 			var port = Elasticsearch.getServerPort();
 
-			var curl = "http://localhost:${port}/_tasks";
+			var curl = "http://${portalHostname}:9200/_tasks";
+			var elasticsearchTasks = JSONCurlUtil.get("${curl}");
 		}
 
 		var reindexElapsedTime = "0";
