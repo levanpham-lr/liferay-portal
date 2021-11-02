@@ -4327,6 +4327,21 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				}
 			}
 
+			List<Organization> organizations =
+				_userPersistence.getOrganizations(userId);
+
+			for (Organization organization : organizations) {
+				for (Group group : groups) {
+					long classPK = group.getClassPK();
+
+					String treePath = organization.getTreePath();
+
+					if (treePath.contains(String.valueOf(classPK))) {
+						joinedGroups.add(group);
+					}
+				}
+			}
+
 			// Join by Groups_Orgs and Users_Orgs
 
 			for (long organizationId : organizationIds) {
