@@ -684,6 +684,7 @@ public abstract class BaseDataDefinitionResourceTestCase {
 		DataDefinition dataDefinition =
 			testPutDataDefinitionPermission_addDataDefinition();
 
+		@SuppressWarnings("PMD.UnusedLocalVariable")
 		com.liferay.portal.kernel.model.Role role = RoleTestUtil.addRole(
 			RoleConstants.TYPE_REGULAR);
 
