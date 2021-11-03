@@ -94,7 +94,7 @@ DLPortletInstanceSettingsHelper dlPortletInstanceSettingsHelper = new DLPortletI
 					title += " - " + fileEntry.getDescription();
 				}
 
-				row.setCssClass("lfr-asset-item");
+				row.setCssClass("card-page-item card-page-item-asset");
 				%>
 
 				<liferay-ui:search-container-column-text>
