@@ -28,9 +28,11 @@ const ImagePicker = ({
 	inputValue,
 	itemSelectorURL,
 	name,
+	onBlur,
 	onClearClick,
 	onDescriptionChange,
 	onFieldChanged,
+	onFocus,
 	portletNamespace,
 	readOnly,
 }) => {
@@ -124,7 +126,9 @@ const ImagePicker = ({
 						<ClayButton
 							disabled={readOnly}
 							displayType="secondary"
+							onBlur={onBlur}
 							onClick={handleItemSelectorTriggerClick}
+							onFocus={onFocus}
 							type="button"
 						>
 							{Liferay.Language.get('select')}
@@ -228,7 +232,9 @@ const Main = ({
 	inputValue,
 	itemSelectorURL,
 	name,
+	onBlur,
 	onChange,
+	onFocus,
 	portletNamespace,
 	readOnly,
 	valid,
@@ -283,11 +289,13 @@ const Main = ({
 				}
 				itemSelectorURL={itemSelectorURL}
 				name={name}
+				onBlur={onBlur}
 				onClearClick={({event, ...data}) => onChange(event, data)}
 				onDescriptionChange={({event, ...data}) =>
 					onChange(event, data)
 				}
 				onFieldChanged={({event, ...data}) => onChange(event, data)}
+				onFocus={onFocus}
 				portletNamespace={portletNamespace}
 				readOnly={isSignedIn ? readOnly : true}
 			/>

@@ -69,7 +69,9 @@ const DocumentLibrary = ({
 	fileEntryURL = '',
 	id,
 	name,
+	onBlur,
 	onClearButtonClicked,
+	onFocus,
 	onSelectButtonClicked,
 	placeholder,
 	readOnly,
@@ -109,7 +111,9 @@ const DocumentLibrary = ({
 							className="select-button"
 							disabled={readOnly}
 							displayType="secondary"
+							onBlur={onBlur}
 							onClick={onSelectButtonClicked}
+							onFocus={onFocus}
 						>
 							<span className="lfr-btn-label">
 								{Liferay.Language.get('select')}
@@ -149,7 +153,9 @@ const GuestUploadFile = ({
 	fileEntryURL = '',
 	id,
 	name,
+	onBlur,
 	onClearButtonClicked,
+	onFocus,
 	onUploadSelectButtonClicked,
 	placeholder,
 	progress,
@@ -193,7 +199,9 @@ const GuestUploadFile = ({
 						className="input-file"
 						disabled={readOnly}
 						id={`${name}inputFileGuestUpload`}
+						onBlur={onBlur}
 						onChange={onUploadSelectButtonClicked}
+						onFocus={onFocus}
 						type="file"
 					/>
 				</ClayInput.GroupItem>
@@ -446,6 +454,7 @@ const Main = ({
 					fileEntryURL={fileEntryURL}
 					id={id}
 					name={name}
+					onBlur={onBlur}
 					onClearButtonClicked={(event) => {
 						setCurrentValue(null);
 
@@ -459,6 +468,7 @@ const Main = ({
 							guestUploadInput.value = '';
 						}
 					}}
+					onFocus={onFocus}
 					onUploadSelectButtonClicked={(event) =>
 						handleUploadSelectButtonClicked(event)
 					}
@@ -473,11 +483,13 @@ const Main = ({
 					fileEntryURL={fileEntryURL}
 					id={id}
 					name={name}
+					onBlur={onBlur}
 					onClearButtonClicked={(event) => {
 						setCurrentValue(null);
 
 						onChange(event, '{}');
 					}}
+					onFocus={onFocus}
 					onSelectButtonClicked={() =>
 						handleSelectButtonClicked({
 							itemSelectorURL,

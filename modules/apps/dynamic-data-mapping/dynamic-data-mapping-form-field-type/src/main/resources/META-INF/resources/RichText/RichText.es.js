@@ -22,7 +22,9 @@ const RichText = ({
 	editorConfig,
 	id,
 	name,
+	onBlur,
 	onChange,
+	onFocus,
 	predefinedValue,
 	readOnly,
 	value,
@@ -47,6 +49,7 @@ const RichText = ({
 				data={currentValue}
 				editorConfig={editorConfig}
 				name={name}
+				onBlur={onBlur}
 				onChange={(data) => {
 					if (currentValue !== data) {
 						setCurrentValue(data);
@@ -54,6 +57,7 @@ const RichText = ({
 						onChange({}, data);
 					}
 				}}
+				onFocus={onFocus}
 				readOnly={readOnly}
 			/>
 
