@@ -318,6 +318,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SELECT_FIELD_INDEX</td>
+	<td>xpath=(//label[contains(text(),'${key_fieldName}') or contains(@for,'${key_fieldName}')]/following-sibling::div[contains(@class,'ddm-select-dropdown') or contains(@class,'input-group-container')] | //div[contains(@data-field-name,'${key_fieldName}') or contains(@for,'${key_fieldName}')]//following-sibling::div[contains(@class,'ddm-select-dropdown') or contains(@class,'input-group-container')])[${key_index}]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SELECT_FIELD_OPTIONS_LIST</td>
 	<td>//div[contains(@class, 'dropdown-menu') and contains(@class, 'show')]//li[contains(.,'${key_selectOption}')]</td>
 	<td></td>
