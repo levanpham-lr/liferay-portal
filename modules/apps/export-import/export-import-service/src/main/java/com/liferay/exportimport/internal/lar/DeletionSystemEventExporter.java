@@ -42,8 +42,8 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
@@ -67,7 +67,7 @@ public class DeletionSystemEventExporter {
 		Set<StagedModelType> deletionSystemEventStagedModelTypes =
 			portletDataContext.getDeletionSystemEventStagedModelTypes();
 
-		Collection<Long> exportedSystemEventIds = null;
+		List<Long> exportedSystemEventIds = null;
 
 		if (!deletionSystemEventStagedModelTypes.isEmpty() &&
 			MapUtil.getBoolean(
@@ -184,13 +184,13 @@ public class DeletionSystemEventExporter {
 		}
 	}
 
-	protected Collection<Long> doExportDeletionSystemEvents(
+	protected List<Long> doExportDeletionSystemEvents(
 			final PortletDataContext portletDataContext,
 			final Element rootElement,
 			final Set<StagedModelType> deletionSystemEventStagedModelTypes)
 		throws PortalException {
 
-		Collection<Long> systemEventIds = new LinkedList<>();
+		List<Long> systemEventIds = new ArrayList<>();
 
 		ActionableDynamicQuery actionableDynamicQuery =
 			SystemEventLocalServiceUtil.getActionableDynamicQuery();
@@ -211,7 +211,7 @@ public class DeletionSystemEventExporter {
 
 	protected void exportDeletionSystemEvent(
 		PortletDataContext portletDataContext, SystemEvent systemEvent,
-		Element deletionSystemEventsElement, Collection<Long> systemEventIds) {
+		Element deletionSystemEventsElement, List<Long> systemEventIds) {
 
 		Element deletionSystemEventElement =
 			deletionSystemEventsElement.addElement("deletion-system-event");
@@ -255,7 +255,7 @@ public class DeletionSystemEventExporter {
 
 	private class DeleteSystemEventsCallable implements Callable<Void> {
 
-		public DeleteSystemEventsCallable(Collection<Long> systemEventIds) {
+		public DeleteSystemEventsCallable(List<Long> systemEventIds) {
 			_systemEventIds = systemEventIds;
 		}
 
@@ -284,7 +284,7 @@ public class DeletionSystemEventExporter {
 			}
 		}
 
-		private final Collection<Long> _systemEventIds;
+		private final List<Long> _systemEventIds;
 
 	}
 
