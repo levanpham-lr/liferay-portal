@@ -241,7 +241,7 @@ public class DataRecordCollectionResourceImpl
 	}
 
 	@Override
-	public Page<Permission> putDataRecordCollectionPermission(
+	public Page<Permission> putDataRecordCollectionPermissionsPage(
 			Long dataRecordCollectionId, Permission[] permissions)
 		throws Exception {
 

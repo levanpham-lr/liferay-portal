@@ -175,7 +175,7 @@ public class DataDefinitionResourceImpl
 
 		DataLayoutResource dataLayoutResource = _getDataLayoutResource(false);
 
-		dataLayoutResource.deleteDataLayoutsDataDefinition(dataDefinitionId);
+		dataLayoutResource.deleteDataDefinitionDataLayout(dataDefinitionId);
 
 		DataListViewResource.Builder dataListViewResourceBuilder =
 			_dataListViewResourceFactory.create();
@@ -187,8 +187,7 @@ public class DataDefinitionResourceImpl
 				contextUser
 			).build();
 
-		dataListViewResource.deleteDataListViewsDataDefinition(
-			dataDefinitionId);
+		dataListViewResource.deleteDataDefinitionDataListView(dataDefinitionId);
 
 		_ddlRecordSetLocalService.deleteDDMStructureRecordSets(
 			dataDefinitionId);
@@ -710,7 +709,7 @@ public class DataDefinitionResourceImpl
 	}
 
 	@Override
-	public Page<Permission> putDataDefinitionPermission(
+	public Page<Permission> putDataDefinitionPermissionsPage(
 			Long dataDefinitionId, Permission[] permissions)
 		throws Exception {
 

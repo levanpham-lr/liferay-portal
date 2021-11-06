@@ -57,7 +57,7 @@ public class DataDefinitionFieldLinkResourceImpl
 
 	@Override
 	public Page<DataDefinitionFieldLink>
-			getDataDefinitionDataDefinitionFieldLinkPage(
+			getDataDefinitionDataDefinitionFieldLinksPage(
 				Long dataDefinitionId, String fieldName)
 		throws Exception {
 
