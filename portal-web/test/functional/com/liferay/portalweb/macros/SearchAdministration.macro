@@ -28,7 +28,7 @@ definition {
 
 			var portalHostname = PropsUtil.get("portal.hostname");
 
-			var curl = "http://${portalHostname}:9200/_tasks";
+			var curl = "http://${portalHostname}:${port}/_tasks";
 		}
 
 		var reindexElapsedTime = "0";
