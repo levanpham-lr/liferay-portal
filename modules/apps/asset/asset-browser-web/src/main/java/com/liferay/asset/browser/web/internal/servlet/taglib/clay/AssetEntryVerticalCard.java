@@ -131,6 +131,11 @@ public class AssetEntryVerticalCard implements VerticalCard {
 	}
 
 	@Override
+	public String getInputValue() {
+		return String.valueOf(_assetEntry.getEntryId());
+	}
+
+	@Override
 	public List<LabelItem> getLabels() {
 		if (!_assetBrowserDisplayContext.isShowAssetEntryStatus()) {
 			return Collections.emptyList();
