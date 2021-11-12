@@ -632,9 +632,7 @@ definition {
 		if (isSet(slaDefinitionCalendar)) {
 			Click(locator1 = "WorkflowMetricsSLA#SLA_DEFINITION_CALENDAR_SELECT");
 
-			AssertClick(
-				locator1 = "WorkflowMetricsSLA#SLA_DROPDOWN_CALENDAR_OPTION",
-				value1 = "${key_slaDefinitionCalendar}");
+			Click.clickNoMouseOver(locator1 = "WorkflowMetricsSLA#SLA_DROPDOWN_CALENDAR_OPTION");
 		}
 	}
 

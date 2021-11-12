@@ -134,7 +134,7 @@ definition {
 	macro select {
 		if (isSet(listboxNameList)) {
 			for (var listboxNameList : list "${listboxNameList}") {
-				Click(
+				Click.clickNoMouseOver(
 					key_opt = "${listboxNameList}",
 					locator1 = "JSFShowcase#GENERAL_SELECT");
 			}

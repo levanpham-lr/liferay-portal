@@ -647,7 +647,7 @@ definition {
 
 		Navigator.openWithAppendToBaseURL(urlAppend = "web/guest/jsf-showcase/-/jsf-tag/h/outputlink/conversion");
 
-		Click(
+		Click.clickNoMouseOver(
 			key_opt = "United States",
 			locator1 = "JSFShowcase#OUTPUTLINK_SELECT");
 

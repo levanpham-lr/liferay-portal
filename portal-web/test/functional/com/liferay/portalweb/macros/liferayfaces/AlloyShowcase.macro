@@ -201,7 +201,7 @@ definition {
 	}
 
 	macro selectRowsPerPage {
-		Click(
+		Click.clickNoMouseOver(
 			key_opt = "100",
 			locator1 = "AlloyShowcase#PAGINATOR_DROP_DOWN_LIST");
 
