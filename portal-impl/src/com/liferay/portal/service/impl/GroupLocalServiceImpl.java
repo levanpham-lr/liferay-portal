@@ -4316,8 +4316,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			// Join by Users_Orgs
 
-			List<Organization> organizations =
-				_userPersistence.getOrganizations(userId);
+			List<Organization> organizations = userPersistence.getOrganizations(
+				userId);
 
 			for (Organization organization : organizations) {
 				for (Group group : groups) {
@@ -4338,7 +4338,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				// Join by Groups_Orgs and Users_Orgs
 
 				joinedGroups.addAll(
-					_organizationPersistence.getGroups(
+					organizationPersistence.getGroups(
 						organization.getOrganizationId()));
 			}
 
