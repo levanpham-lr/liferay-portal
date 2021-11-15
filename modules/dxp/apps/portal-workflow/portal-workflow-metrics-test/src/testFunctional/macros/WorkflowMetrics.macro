@@ -874,6 +874,8 @@ definition {
 		}
 
 		Button.click(button = "Reassign");
+
+		Alert.viewSuccessMessage();
 	}
 
 	macro selectNewAssigneeBulkTask {
