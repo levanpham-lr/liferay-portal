@@ -725,6 +725,112 @@ definition {
 		PortalSettings.configureCurrentLanguagesCP(defaultPortalLanguage = "English (United States)");
 	}
 
+	@description = "This is a use case for LPS-75457, LPS-75410, LPS-80246 and LPS-75393. Automate Numeric field with Decimal configurations."
+	@ignore = "true"
+	@priority = "4"
+	test AutomateNumericFieldWithDecimalConfigurations {
+		property test.name.skip.portal.instance = "Forms#AutomateNumericFieldWithDecimalConfigurations";
+
+		Navigator.openURL();
+
+		ProductMenu.gotoPortlet(
+			category = "Content &amp; Data",
+			portlet = "Forms");
+
+		FormsAdminNavigator.gotoAddForm();
+
+		Form.editName(formName = "Form 1");
+
+		Form.gotoAddField(
+			fieldPositionNumber = "1",
+			fieldType = "Numeric");
+
+		FormFields.selectRadioOption(
+			fieldName = "",
+			radioOption = "Integer");
+
+		var fieldNumericField = FormFields.getFieldName();
+
+		Form.publishForm();
+
+		FormsAdminNavigator.gotoPublishedForm();
+
+		FormPortlet.waitFormRenderer(text = "Submit");
+
+		FormFields.editText(
+			fieldName = "${fieldNumericField}",
+			fieldValue = "123.123");
+
+		FormFields.viewTextValue(
+			fieldName = "${fieldNumericField}",
+			fieldValue = "123123");
+
+		FormFields.editText(
+			fieldName = "${fieldNumericField}",
+			fieldValue = "111111111111111111111");
+
+		FormFields.viewTextValue(
+			fieldName = "${fieldNumericField}",
+			fieldValue = "111111111111111111111");
+
+		Navigator.openURL();
+
+		ProductMenu.gotoPortlet(
+			category = "Content &amp; Data",
+			portlet = "Forms");
+
+		FormsAdminNavigator.gotoEditFormByName(formName = "Form 1");
+
+		FormViewBuilder.clickFieldLabel(fieldLabel = "Numeric");
+
+		FormFields.selectRadioOption(
+			fieldName = "",
+			radioOption = "Decimal");
+
+		Form.addTranslation(localizedLanguage = "Portuguese (Brazil)");
+
+		Form.save();
+
+		FormsAdminNavigator.gotoPublishedForm();
+
+		FormFields.editText(
+			fieldName = "${fieldNumericField}",
+			fieldValue = "123.123");
+
+		FormFields.viewTextValue(
+			fieldName = "${fieldNumericField}",
+			fieldValue = "123.123");
+
+		FormPortlet.changeLocale(locale = "português-Brasil");
+
+		FormFields.editText(
+			fieldName = "${fieldNumericField}",
+			fieldValue = "1,1");
+
+		FormPortlet.submitLocalizedSuccessfully(buttonName = "Submeter");
+
+		Navigator.openURL();
+
+		ProductMenu.gotoPortlet(
+			category = "Content &amp; Data",
+			panel = "Site Administration",
+			portlet = "Forms");
+
+		FormsAdminNavigator.gotoEditFormByName(formName = "Form 1");
+
+		FormsAdminNavigator.gotoPublishedForm();
+
+		FormFields.editText(
+			fieldName = "${fieldNumericField}",
+			fieldValue = "1.1");
+
+		FormFields.viewTextValue(
+			fieldName = "${fieldNumericField}",
+			fieldValue = "1.1");
+
+		FormPortlet.submitSuccessfully();
+	}
+
 	@description = "LPS-72048 - Verify that Belongs To rule can be paired with Guest role"
 	@priority = "4"
 	test BelongsToRuleCanPairWithGuestUser {
