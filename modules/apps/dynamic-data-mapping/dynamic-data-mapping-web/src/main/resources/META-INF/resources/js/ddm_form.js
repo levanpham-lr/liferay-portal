@@ -3285,6 +3285,11 @@ AUI.add(
 
 					instance._validateField(layoutNameNode);
 
+					instance.set(
+						'selectedLayout',
+						instance.getParsedValue(value)
+					);
+
 					var clearButtonNode = container.one(
 						'#' + inputName + 'ClearButton'
 					);
