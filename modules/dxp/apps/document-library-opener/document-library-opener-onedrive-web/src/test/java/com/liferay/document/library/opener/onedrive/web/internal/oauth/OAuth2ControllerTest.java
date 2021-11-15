@@ -199,7 +199,9 @@ public class OAuth2ControllerTest {
 		Assert.assertNull(
 			mockHttpServletRequest.getAttribute(WebKeys.REDIRECT));
 		Assert.assertEquals(
-			String.valueOf(JSONUtil.put("redirectURL", "authorizationURL")),
+			JSONUtil.put(
+				"redirectURL", "authorizationURL"
+			).toString(),
 			mockHttpServletResponse.getContentAsString());
 	}
 
