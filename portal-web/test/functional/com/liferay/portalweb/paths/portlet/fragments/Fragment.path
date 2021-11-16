@@ -31,6 +31,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>CONTRIBUTED_FRAGMENT_TEXT</td>
+	<td>xpath=(//div[contains(@id,'fragment-')][.//*[contains(@class,'${fragmentName}')]])[${index}]//*[contains(@data-lfr-editable-id,'${id}')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>DOCUMENT_4_PNG</td>
 	<td>portal/screenshots/fragments/Document_4.png</td>
 	<td></td>
