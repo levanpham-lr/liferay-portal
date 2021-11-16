@@ -83,7 +83,7 @@ portletURL.setWindowState(WindowState.NORMAL);
 		</clay:row>
 	</c:when>
 	<c:otherwise>
-		<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+		<aui:form action="<%= portletURL %>" method="post" name="fm">
 			<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
 			<aui:input name="redirect" type="hidden" value="" />
 			<aui:input name="userIds" type="hidden" value="" />

@@ -120,7 +120,7 @@ renderResponse.setTitle(LanguageUtil.get(request, "specifications"));
 		</c:if>
 
 		<div class="sidenav-content">
-			<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+			<aui:form action="<%= portletURL %>" method="post" name="fm">
 				<aui:input name="<%= Constants.CMD %>" type="hidden" />
 				<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 				<aui:input name="deleteCPSpecificationOptionIds" type="hidden" />

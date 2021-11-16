@@ -58,7 +58,7 @@ portletURL.setParameter("mvcRenderCommandName", "/portal_search_admin/view");
 	<portlet:param name="tabs1" value="index-actions" />
 </portlet:renderURL>
 
-<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+<aui:form action="<%= portletURL %>" method="post" name="fm">
 	<aui:input name="redirect" type="hidden" value="<%= redirectURL %>" />
 
 	<%
