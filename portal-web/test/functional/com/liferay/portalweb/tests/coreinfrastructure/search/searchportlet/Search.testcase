@@ -1664,7 +1664,9 @@ definition {
 
 		var portalHostname = PropsUtil.get("portal.hostname");
 
-		var curl = "http://${portalHostname}:9201/_search?q=entryClassName:com.liferay.journal.model.JournalArticle";
+		var port = Elasticsearch.getServerPort();
+
+		var curl = "http://${portalHostname}:${port}/_search?q=entryClassName:com.liferay.journal.model.JournalArticle";
 
 		var journalArticleDocumentType = JSONCurlUtil.get("${curl}");
 
