@@ -467,6 +467,8 @@ definition {
 			fieldName = "${fieldNameCountries}",
 			selectOption = "Option");
 
+		Refresh();
+
 		FormFields.editText(
 			fieldName = "${fieldNameTextField}",
 			fieldValue = "country");
