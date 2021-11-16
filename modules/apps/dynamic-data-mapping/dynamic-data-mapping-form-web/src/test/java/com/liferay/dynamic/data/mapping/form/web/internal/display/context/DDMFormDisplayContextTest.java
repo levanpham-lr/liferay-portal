@@ -23,6 +23,7 @@ import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstance;
 import com.liferay.dynamic.data.mapping.model.DDMFormInstanceSettings;
 import com.liferay.dynamic.data.mapping.model.DDMFormSuccessPageSettings;
+import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceRecordLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMFormInstanceRecordVersionLocalService;
@@ -54,6 +55,7 @@ import com.liferay.portal.util.PropsImpl;
 import com.liferay.portletmvc4spring.test.mock.web.portlet.MockRenderRequest;
 import com.liferay.portletmvc4spring.test.mock.web.portlet.MockRenderResponse;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -476,6 +478,33 @@ public class DDMFormDisplayContextTest extends PowerMockito {
 		return formInstance;
 	}
 
+	protected void mockDDMFormInstance(
+			DDMFormInstanceSettings ddmFormInstanceSettings)
+		throws Exception {
+
+		DDMFormInstance ddmFormInstance = mock(DDMFormInstance.class);
+
+		when(
+			ddmFormInstance.getSettingsModel()
+		).thenReturn(
+			ddmFormInstanceSettings
+		);
+
+		DDMStructure ddmStructure = _mockDDMStructure();
+
+		when(
+			ddmFormInstance.getStructure()
+		).thenReturn(
+			ddmStructure
+		);
+
+		when(
+			_ddmFormInstanceService.fetchFormInstance(Matchers.anyLong())
+		).thenReturn(
+			ddmFormInstance
+		);
+	}
+
 	protected DDMFormInstanceSettings
 			mockDDMFormInstanceSettingsAutosaveWithNondefaultUser()
 		throws Exception {
@@ -619,6 +648,44 @@ public class DDMFormDisplayContextTest extends PowerMockito {
 			_mockHttpServletRequest
 		);
 	}
+
+	private DDMForm _createDDMForm(
+		Set<Locale> availableLocales, Locale locale) {
+
+		DDMForm ddmForm = new DDMForm();
+
+		ddmForm.setAvailableLocales(availableLocales);
+
+		DDMFormSuccessPageSettings ddmFormSuccessPageSettings =
+			new DDMFormSuccessPageSettings();
+
+		ddmFormSuccessPageSettings.setEnabled(true);
+
+		ddmForm.setDDMFormSuccessPageSettings(ddmFormSuccessPageSettings);
+
+		ddmForm.setDefaultLocale(locale);
+
+		return ddmForm;
+	}
+
+	private DDMStructure _mockDDMStructure() throws Exception {
+		DDMStructure ddmStructure = mock(DDMStructure.class);
+
+		Locale defaultLocale = LocaleUtil.fromLanguageId(_DEFAULT_LANGUAGE_ID);
+
+		DDMForm ddmForm = _createDDMForm(
+			new HashSet<>(Arrays.asList(defaultLocale)), defaultLocale);
+
+		when(
+			ddmStructure.getDDMForm()
+		).thenReturn(
+			ddmForm
+		);
+
+		return ddmStructure;
+	}
+
+	private static final String _DEFAULT_LANGUAGE_ID = "es_ES";
 
 	@Mock
 	private DDMFormInstanceLocalService _ddmFormInstanceLocalService;
