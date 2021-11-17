@@ -2443,21 +2443,21 @@ definition {
 
 		if (isSet(webContentTextBox)) {
 			if (isSet(fieldName)) {
-				var actual = selenium.getHtmlNodeText("//div[contains(@data-fieldname,'${fieldName}')]//textarea");
+				var actual = TestUtils.getElementTextContent(element = "//div[contains(@data-fieldname,'${fieldName}')]//textarea");
 
 				TestUtils.assertEquals(
 					actual = "${actual}",
 					expected = "${webContentTextBox}");
 			}
 			else if (isSet(webContentTextBoxFieldName)) {
-				var actual = selenium.getHtmlNodeText("//div[contains(@data-fieldname,'${webContentTextBoxFieldName}')]//textarea");
+				var actual = TestUtils.getElementTextContent(element = "//div[contains(@data-fieldname,'${webContentTextBoxFieldName}')]//textarea");
 
 				TestUtils.assertEquals(
 					actual = "${actual}",
 					expected = "${webContentTextBox}");
 			}
 			else {
-				var actual = selenium.getHtmlNodeText("//div[contains(@data-fieldname,'TextBox')]//textarea");
+				var actual = TestUtils.getElementTextContent(element = "//div[contains(@data-fieldname,'TextBox')]//textarea");
 
 				TestUtils.assertEquals(
 					actual = "${actual}",
@@ -2466,7 +2466,7 @@ definition {
 		}
 
 		if (isSet(webContentTextBox2)) {
-			var actual = selenium.getHtmlNodeText("//div[contains(@data-fieldname,'${fieldName2}')]//textarea");
+			var actual = TestUtils.getElementTextContent(element = "//div[contains(@data-fieldname,'${fieldName2}')]//textarea");
 
 			TestUtils.assertEquals(
 				actual = "${actual}",
@@ -2477,7 +2477,7 @@ definition {
 			var count = "1";
 
 			for (var webContentTextBox : list "${webContentTextBoxList}") {
-				var actual = selenium.getHtmlNodeText("//div[contains(@data-fieldname,'heading${count}')]//textarea");
+				var actual = TestUtils.getElementTextContent(element = "//div[contains(@data-fieldname,'heading${count}')]//textarea");
 
 				TestUtils.assertEquals(
 					actual = "${actual}",
