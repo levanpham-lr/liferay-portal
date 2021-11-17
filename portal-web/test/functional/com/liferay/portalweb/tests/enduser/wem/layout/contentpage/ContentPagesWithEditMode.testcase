@@ -96,6 +96,10 @@ definition {
 		}
 
 		task ("Add a comment for Heading") {
+			ContentPagesNavigator.openEditContentPage(
+				pageName = "Test Page Name",
+				siteName = "Test Site Name");
+
 			PageEditor.addComment(
 				content = "New editable fragment text",
 				fragmentClass = "content",
