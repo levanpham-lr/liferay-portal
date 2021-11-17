@@ -627,10 +627,10 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 	}
 
 	@Test
-	public void testPutDataRecordCollectionPermission() throws Exception {
+	public void testPutDataRecordCollectionPermissionsPage() throws Exception {
 		@SuppressWarnings("PMD.UnusedLocalVariable")
 		DataRecordCollection dataRecordCollection =
-			testPutDataRecordCollectionPermission_addDataRecordCollection();
+			testPutDataRecordCollectionPermissionsPage_addDataRecordCollection();
 
 		@SuppressWarnings("PMD.UnusedLocalVariable")
 		com.liferay.portal.kernel.model.Role role = RoleTestUtil.addRole(
@@ -639,17 +639,34 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 		assertHttpResponseStatusCode(
 			200,
 			dataRecordCollectionResource.
-				putDataRecordCollectionPermissionHttpResponse(
-					dataRecordCollection.getId()));
+				putDataRecordCollectionPermissionsPageHttpResponse(
+					dataRecordCollection.getId(),
+					new Permission[] {
+						new Permission() {
+							{
+								setActionIds(new String[] {"VIEW"});
+								setRoleName(role.getName());
+							}
+						}
+					}));
 
 		assertHttpResponseStatusCode(
 			404,
 			dataRecordCollectionResource.
-				putDataRecordCollectionPermissionHttpResponse(0L));
+				putDataRecordCollectionPermissionsPageHttpResponse(
+					0L,
+					new Permission[] {
+						new Permission() {
+							{
+								setActionIds(new String[] {"-"});
+								setRoleName("-");
+							}
+						}
+					}));
 	}
 
 	protected DataRecordCollection
-			testPutDataRecordCollectionPermission_addDataRecordCollection()
+			testPutDataRecordCollectionPermissionsPage_addDataRecordCollection()
 		throws Exception {
 
 		throw new UnsupportedOperationException(

@@ -473,7 +473,7 @@ paths:
             tags: ["DataDefinition"]
     "/data-definitions/{dataDefinitionId}/data-definition-field-links":
         get:
-            operationId: getDataDefinitionDataDefinitionFieldLinkPage
+            operationId: getDataDefinitionDataDefinitionFieldLinksPage
             parameters:
                 - in: path
                   name: dataDefinitionId
@@ -501,7 +501,7 @@ paths:
             tags: ["DataDefinitionFieldLink"]
     "/data-definitions/{dataDefinitionId}/data-layouts":
         delete:
-            operationId: deleteDataLayoutsDataDefinition
+            operationId: deleteDataDefinitionDataLayout
             parameters:
                 - in: path
                   name: dataDefinitionId
@@ -584,7 +584,7 @@ paths:
             tags: ["DataLayout"]
     "/data-definitions/{dataDefinitionId}/data-list-views":
         delete:
-            operationId: deleteDataListViewsDataDefinition
+            operationId: deleteDataDefinitionDataListView
             parameters:
                 - in: path
                   name: dataDefinitionId
@@ -843,7 +843,7 @@ paths:
                         application/xml: {}
             tags: ["DataDefinition"]
         put:
-            operationId: putDataDefinitionPermission
+            operationId: putDataDefinitionPermissionsPage
             parameters:
                 - in: path
                   name: dataDefinitionId
@@ -1198,7 +1198,7 @@ paths:
                         application/xml: {}
             tags: ["DataRecordCollection"]
         put:
-            operationId: putDataRecordCollectionPermission
+            operationId: putDataRecordCollectionPermissionsPage
             parameters:
                 - in: path
                   name: dataRecordCollectionId

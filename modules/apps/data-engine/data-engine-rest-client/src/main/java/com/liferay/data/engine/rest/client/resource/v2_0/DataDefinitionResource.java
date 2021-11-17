@@ -27,6 +27,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.annotation.Generated;
 
@@ -111,11 +113,13 @@ public interface DataDefinitionResource {
 				Long dataDefinitionId, String roleNames)
 		throws Exception;
 
-	public Page<Permission> putDataDefinitionPermission(Long dataDefinitionId)
+	public Page<Permission> putDataDefinitionPermissionsPage(
+			Long dataDefinitionId, Permission[] permissions)
 		throws Exception;
 
-	public HttpInvoker.HttpResponse putDataDefinitionPermissionHttpResponse(
-			Long dataDefinitionId)
+	public HttpInvoker.HttpResponse
+			putDataDefinitionPermissionsPageHttpResponse(
+				Long dataDefinitionId, Permission[] permissions)
 		throws Exception;
 
 	public Page<DataDefinition>
@@ -971,12 +975,13 @@ public interface DataDefinitionResource {
 			return httpInvoker.invoke();
 		}
 
-		public Page<Permission> putDataDefinitionPermission(
-				Long dataDefinitionId)
+		public Page<Permission> putDataDefinitionPermissionsPage(
+				Long dataDefinitionId, Permission[] permissions)
 			throws Exception {
 
 			HttpInvoker.HttpResponse httpResponse =
-				putDataDefinitionPermissionHttpResponse(dataDefinitionId);
+				putDataDefinitionPermissionsPageHttpResponse(
+					dataDefinitionId, permissions);
 
 			String content = httpResponse.getContent();
 
@@ -1015,11 +1020,22 @@ public interface DataDefinitionResource {
 			}
 		}
 
-		public HttpInvoker.HttpResponse putDataDefinitionPermissionHttpResponse(
-				Long dataDefinitionId)
+		public HttpInvoker.HttpResponse
+				putDataDefinitionPermissionsPageHttpResponse(
+					Long dataDefinitionId, Permission[] permissions)
 			throws Exception {
 
 			HttpInvoker httpInvoker = HttpInvoker.newHttpInvoker();
+
+			httpInvoker.body(
+				Stream.of(
+					permissions
+				).map(
+					value -> String.valueOf(value)
+				).collect(
+					Collectors.toList()
+				).toString(),
+				"application/json");
 
 			if (_builder._locale != null) {
 				httpInvoker.header(

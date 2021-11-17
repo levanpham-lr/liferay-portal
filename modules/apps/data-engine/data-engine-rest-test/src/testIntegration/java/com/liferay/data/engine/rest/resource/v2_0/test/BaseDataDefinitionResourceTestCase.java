@@ -679,10 +679,10 @@ public abstract class BaseDataDefinitionResourceTestCase {
 	}
 
 	@Test
-	public void testPutDataDefinitionPermission() throws Exception {
+	public void testPutDataDefinitionPermissionsPage() throws Exception {
 		@SuppressWarnings("PMD.UnusedLocalVariable")
 		DataDefinition dataDefinition =
-			testPutDataDefinitionPermission_addDataDefinition();
+			testPutDataDefinitionPermissionsPage_addDataDefinition();
 
 		@SuppressWarnings("PMD.UnusedLocalVariable")
 		com.liferay.portal.kernel.model.Role role = RoleTestUtil.addRole(
@@ -690,15 +690,33 @@ public abstract class BaseDataDefinitionResourceTestCase {
 
 		assertHttpResponseStatusCode(
 			200,
-			dataDefinitionResource.putDataDefinitionPermissionHttpResponse(
-				dataDefinition.getId()));
+			dataDefinitionResource.putDataDefinitionPermissionsPageHttpResponse(
+				dataDefinition.getId(),
+				new Permission[] {
+					new Permission() {
+						{
+							setActionIds(new String[] {"VIEW"});
+							setRoleName(role.getName());
+						}
+					}
+				}));
 
 		assertHttpResponseStatusCode(
 			404,
-			dataDefinitionResource.putDataDefinitionPermissionHttpResponse(0L));
+			dataDefinitionResource.putDataDefinitionPermissionsPageHttpResponse(
+				0L,
+				new Permission[] {
+					new Permission() {
+						{
+							setActionIds(new String[] {"-"});
+							setRoleName("-");
+						}
+					}
+				}));
 	}
 
-	protected DataDefinition testPutDataDefinitionPermission_addDataDefinition()
+	protected DataDefinition
+			testPutDataDefinitionPermissionsPage_addDataDefinition()
 		throws Exception {
 
 		throw new UnsupportedOperationException(

@@ -91,7 +91,9 @@ public interface DataDefinitionResource {
 		throws Exception;
 
 	public Page<com.liferay.portal.vulcan.permission.Permission>
-			putDataDefinitionPermission(Long dataDefinitionId)
+			putDataDefinitionPermissionsPage(
+				Long dataDefinitionId,
+				com.liferay.portal.vulcan.permission.Permission[] permissions)
 		throws Exception;
 
 	public Page<DataDefinition>

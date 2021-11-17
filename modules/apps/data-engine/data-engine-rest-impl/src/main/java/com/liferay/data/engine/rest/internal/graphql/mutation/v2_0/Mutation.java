@@ -167,8 +167,11 @@ public class Mutation {
 
 	@GraphQLField
 	public java.util.Collection<com.liferay.portal.vulcan.permission.Permission>
-			updateDataDefinitionPermission(
-				@GraphQLName("dataDefinitionId") Long dataDefinitionId)
+			updateDataDefinitionPermissionsPage(
+				@GraphQLName("dataDefinitionId") Long dataDefinitionId,
+				@GraphQLName("permissions")
+					com.liferay.portal.vulcan.permission.Permission[]
+						permissions)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -176,8 +179,8 @@ public class Mutation {
 			this::_populateResourceContext,
 			dataDefinitionResource -> {
 				Page paginationPage =
-					dataDefinitionResource.putDataDefinitionPermission(
-						dataDefinitionId);
+					dataDefinitionResource.putDataDefinitionPermissionsPage(
+						dataDefinitionId, permissions);
 
 				return paginationPage.getItems();
 			});
@@ -199,7 +202,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public boolean deleteDataLayoutsDataDefinition(
+	public boolean deleteDataDefinitionDataLayout(
 			@GraphQLName("dataDefinitionId") Long dataDefinitionId)
 		throws Exception {
 
@@ -207,7 +210,7 @@ public class Mutation {
 			_dataLayoutResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			dataLayoutResource ->
-				dataLayoutResource.deleteDataLayoutsDataDefinition(
+				dataLayoutResource.deleteDataDefinitionDataLayout(
 					dataDefinitionId));
 
 		return true;
@@ -310,7 +313,7 @@ public class Mutation {
 	}
 
 	@GraphQLField
-	public boolean deleteDataListViewsDataDefinition(
+	public boolean deleteDataDefinitionDataListView(
 			@GraphQLName("dataDefinitionId") Long dataDefinitionId)
 		throws Exception {
 
@@ -318,7 +321,7 @@ public class Mutation {
 			_dataListViewResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			dataListViewResource ->
-				dataListViewResource.deleteDataListViewsDataDefinition(
+				dataListViewResource.deleteDataDefinitionDataListView(
 					dataDefinitionId));
 
 		return true;
@@ -623,9 +626,12 @@ public class Mutation {
 
 	@GraphQLField
 	public java.util.Collection<com.liferay.portal.vulcan.permission.Permission>
-			updateDataRecordCollectionPermission(
+			updateDataRecordCollectionPermissionsPage(
 				@GraphQLName("dataRecordCollectionId") Long
-					dataRecordCollectionId)
+					dataRecordCollectionId,
+				@GraphQLName("permissions")
+					com.liferay.portal.vulcan.permission.Permission[]
+						permissions)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -634,8 +640,8 @@ public class Mutation {
 			dataRecordCollectionResource -> {
 				Page paginationPage =
 					dataRecordCollectionResource.
-						putDataRecordCollectionPermission(
-							dataRecordCollectionId);
+						putDataRecordCollectionPermissionsPage(
+							dataRecordCollectionId, permissions);
 
 				return paginationPage.getItems();
 			});
