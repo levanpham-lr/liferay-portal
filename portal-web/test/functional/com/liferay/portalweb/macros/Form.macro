@@ -365,13 +365,13 @@ definition {
 		}
 
 		if (isSet(local)) {
-			DragAndDrop.dragAndDropPortletToObject(
+			DragAndDrop.dragAndDropToObject(
 				locator1 = "Form#ADD_FIELD_TYPE",
 				locator2 = "Form#ADD_FIELD_POSITION_1",
 				value1 = "${fieldType}");
 		}
 		else {
-			DragAndDrop.dragAndDropPortletToObject(
+			DragAndDrop.dragAndDropToObject(
 				locator1 = "Form#ADD_FIELD_TYPE",
 				locator2 = "Form#ADD_FIELD_POSITION",
 				value1 = "${fieldType}");
