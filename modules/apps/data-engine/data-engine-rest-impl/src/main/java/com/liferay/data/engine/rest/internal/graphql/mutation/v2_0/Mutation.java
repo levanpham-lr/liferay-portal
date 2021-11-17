@@ -168,10 +168,7 @@ public class Mutation {
 	@GraphQLField
 	public java.util.Collection<com.liferay.portal.vulcan.permission.Permission>
 			updateDataDefinitionPermission(
-				@GraphQLName("dataDefinitionId") Long dataDefinitionId,
-				@GraphQLName("permissions")
-					com.liferay.portal.vulcan.permission.Permission[]
-						permissions)
+				@GraphQLName("dataDefinitionId") Long dataDefinitionId)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -180,7 +177,7 @@ public class Mutation {
 			dataDefinitionResource -> {
 				Page paginationPage =
 					dataDefinitionResource.putDataDefinitionPermission(
-						dataDefinitionId, permissions);
+						dataDefinitionId);
 
 				return paginationPage.getItems();
 			});
@@ -628,10 +625,7 @@ public class Mutation {
 	public java.util.Collection<com.liferay.portal.vulcan.permission.Permission>
 			updateDataRecordCollectionPermission(
 				@GraphQLName("dataRecordCollectionId") Long
-					dataRecordCollectionId,
-				@GraphQLName("permissions")
-					com.liferay.portal.vulcan.permission.Permission[]
-						permissions)
+					dataRecordCollectionId)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -641,7 +635,7 @@ public class Mutation {
 				Page paginationPage =
 					dataRecordCollectionResource.
 						putDataRecordCollectionPermission(
-							dataRecordCollectionId, permissions);
+							dataRecordCollectionId);
 
 				return paginationPage.getItems();
 			});

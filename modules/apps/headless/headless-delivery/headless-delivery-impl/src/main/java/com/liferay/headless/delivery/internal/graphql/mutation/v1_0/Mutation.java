@@ -2356,10 +2356,7 @@ public class Mutation {
 	@GraphQLField
 	public java.util.Collection<com.liferay.portal.vulcan.permission.Permission>
 			updateSiteStructuredContentPermission(
-				@GraphQLName("siteKey") @NotEmpty String siteKey,
-				@GraphQLName("permissions")
-					com.liferay.portal.vulcan.permission.Permission[]
-						permissions)
+				@GraphQLName("siteKey") @NotEmpty String siteKey)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -2369,7 +2366,7 @@ public class Mutation {
 				Page paginationPage =
 					structuredContentResource.
 						putSiteStructuredContentPermission(
-							Long.valueOf(siteKey), permissions);
+							Long.valueOf(siteKey));
 
 				return paginationPage.getItems();
 			});
@@ -2540,10 +2537,7 @@ public class Mutation {
 	@GraphQLField
 	public java.util.Collection<com.liferay.portal.vulcan.permission.Permission>
 			updateStructuredContentPermission(
-				@GraphQLName("structuredContentId") Long structuredContentId,
-				@GraphQLName("permissions")
-					com.liferay.portal.vulcan.permission.Permission[]
-						permissions)
+				@GraphQLName("structuredContentId") Long structuredContentId)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -2552,7 +2546,7 @@ public class Mutation {
 			structuredContentResource -> {
 				Page paginationPage =
 					structuredContentResource.putStructuredContentPermission(
-						structuredContentId, permissions);
+						structuredContentId);
 
 				return paginationPage.getItems();
 			});

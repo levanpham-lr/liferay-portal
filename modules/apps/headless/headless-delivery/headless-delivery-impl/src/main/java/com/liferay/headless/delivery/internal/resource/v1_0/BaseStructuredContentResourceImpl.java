@@ -45,7 +45,6 @@ import com.liferay.portal.vulcan.batch.engine.VulcanBatchEngineTaskItemDelegate;
 import com.liferay.portal.vulcan.batch.engine.resource.VulcanBatchEngineImportTaskResource;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
-import com.liferay.portal.vulcan.permission.ModelPermissionsUtil;
 import com.liferay.portal.vulcan.permission.PermissionUtil;
 import com.liferay.portal.vulcan.resource.EntityModelResource;
 import com.liferay.portal.vulcan.util.ActionUtil;
@@ -599,7 +598,8 @@ public abstract class BaseStructuredContentResourceImpl
 				"replace",
 				addAction(
 					ActionKeys.PERMISSIONS,
-					"putSiteStructuredContentPermission", portletName, siteId)
+					"putSiteStructuredContentPermissionsPage", portletName,
+					siteId)
 			).build(),
 			siteId, portletName, roleNames);
 	}
@@ -631,38 +631,10 @@ public abstract class BaseStructuredContentResourceImpl
 				@io.swagger.v3.oas.annotations.Parameter(hidden = true)
 				@javax.validation.constraints.NotNull
 				@javax.ws.rs.PathParam("siteId")
-				Long siteId,
-				com.liferay.portal.vulcan.permission.Permission[] permissions)
+				Long siteId)
 		throws Exception {
 
-		String portletName = getPermissionCheckerPortletName(siteId);
-
-		PermissionUtil.checkPermission(
-			ActionKeys.PERMISSIONS, groupLocalService, portletName, siteId,
-			siteId);
-
-		resourcePermissionLocalService.updateResourcePermissions(
-			contextCompany.getCompanyId(), siteId, portletName,
-			String.valueOf(siteId),
-			ModelPermissionsUtil.toModelPermissions(
-				contextCompany.getCompanyId(), permissions, siteId, portletName,
-				resourceActionLocalService, resourcePermissionLocalService,
-				roleLocalService));
-
-		return toPermissionPage(
-			HashMapBuilder.put(
-				"get",
-				addAction(
-					ActionKeys.PERMISSIONS,
-					"getSiteStructuredContentPermissionsPage", portletName,
-					siteId)
-			).put(
-				"replace",
-				addAction(
-					ActionKeys.PERMISSIONS,
-					"putSiteStructuredContentPermission", portletName, siteId)
-			).build(),
-			siteId, portletName, null);
+		return Page.of(Collections.emptyList());
 	}
 
 	/**
@@ -1372,8 +1344,9 @@ public abstract class BaseStructuredContentResourceImpl
 			).put(
 				"replace",
 				addAction(
-					ActionKeys.PERMISSIONS, "putStructuredContentPermission",
-					resourceName, resourceId)
+					ActionKeys.PERMISSIONS,
+					"putStructuredContentPermissionsPage", resourceName,
+					resourceId)
 			).build(),
 			resourceId, resourceName, roleNames);
 	}
@@ -1405,41 +1378,10 @@ public abstract class BaseStructuredContentResourceImpl
 				@io.swagger.v3.oas.annotations.Parameter(hidden = true)
 				@javax.validation.constraints.NotNull
 				@javax.ws.rs.PathParam("structuredContentId")
-				Long structuredContentId,
-				com.liferay.portal.vulcan.permission.Permission[] permissions)
+				Long structuredContentId)
 		throws Exception {
 
-		String resourceName = getPermissionCheckerResourceName(
-			structuredContentId);
-		Long resourceId = getPermissionCheckerResourceId(structuredContentId);
-
-		PermissionUtil.checkPermission(
-			ActionKeys.PERMISSIONS, groupLocalService, resourceName, resourceId,
-			getPermissionCheckerGroupId(structuredContentId));
-
-		resourcePermissionLocalService.updateResourcePermissions(
-			contextCompany.getCompanyId(),
-			getPermissionCheckerGroupId(structuredContentId), resourceName,
-			String.valueOf(resourceId),
-			ModelPermissionsUtil.toModelPermissions(
-				contextCompany.getCompanyId(), permissions, resourceId,
-				resourceName, resourceActionLocalService,
-				resourcePermissionLocalService, roleLocalService));
-
-		return toPermissionPage(
-			HashMapBuilder.put(
-				"get",
-				addAction(
-					ActionKeys.PERMISSIONS,
-					"getStructuredContentPermissionsPage", resourceName,
-					resourceId)
-			).put(
-				"replace",
-				addAction(
-					ActionKeys.PERMISSIONS, "putStructuredContentPermission",
-					resourceName, resourceId)
-			).build(),
-			resourceId, resourceName, null);
+		return Page.of(Collections.emptyList());
 	}
 
 	/**

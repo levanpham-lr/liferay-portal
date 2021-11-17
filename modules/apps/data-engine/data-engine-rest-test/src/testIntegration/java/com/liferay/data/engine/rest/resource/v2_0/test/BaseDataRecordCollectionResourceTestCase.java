@@ -640,29 +640,12 @@ public abstract class BaseDataRecordCollectionResourceTestCase {
 			200,
 			dataRecordCollectionResource.
 				putDataRecordCollectionPermissionHttpResponse(
-					dataRecordCollection.getId(),
-					new Permission[] {
-						new Permission() {
-							{
-								setActionIds(new String[] {"VIEW"});
-								setRoleName(role.getName());
-							}
-						}
-					}));
+					dataRecordCollection.getId()));
 
 		assertHttpResponseStatusCode(
 			404,
 			dataRecordCollectionResource.
-				putDataRecordCollectionPermissionHttpResponse(
-					0L,
-					new Permission[] {
-						new Permission() {
-							{
-								setActionIds(new String[] {"-"});
-								setRoleName("-");
-							}
-						}
-					}));
+				putDataRecordCollectionPermissionHttpResponse(0L));
 	}
 
 	protected DataRecordCollection

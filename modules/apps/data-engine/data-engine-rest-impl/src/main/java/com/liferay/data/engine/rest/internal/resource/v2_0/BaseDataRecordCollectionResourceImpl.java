@@ -44,7 +44,6 @@ import com.liferay.portal.vulcan.batch.engine.VulcanBatchEngineTaskItemDelegate;
 import com.liferay.portal.vulcan.batch.engine.resource.VulcanBatchEngineImportTaskResource;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
-import com.liferay.portal.vulcan.permission.ModelPermissionsUtil;
 import com.liferay.portal.vulcan.permission.PermissionUtil;
 import com.liferay.portal.vulcan.resource.EntityModelResource;
 import com.liferay.portal.vulcan.util.ActionUtil;
@@ -520,8 +519,9 @@ public abstract class BaseDataRecordCollectionResourceImpl
 			).put(
 				"replace",
 				addAction(
-					ActionKeys.PERMISSIONS, "putDataRecordCollectionPermission",
-					resourceName, resourceId)
+					ActionKeys.PERMISSIONS,
+					"putDataRecordCollectionPermissionsPage", resourceName,
+					resourceId)
 			).build(),
 			resourceId, resourceName, roleNames);
 	}
@@ -557,42 +557,10 @@ public abstract class BaseDataRecordCollectionResourceImpl
 				@io.swagger.v3.oas.annotations.Parameter(hidden = true)
 				@javax.validation.constraints.NotNull
 				@javax.ws.rs.PathParam("dataRecordCollectionId")
-				Long dataRecordCollectionId,
-				com.liferay.portal.vulcan.permission.Permission[] permissions)
+				Long dataRecordCollectionId)
 		throws Exception {
 
-		String resourceName = getPermissionCheckerResourceName(
-			dataRecordCollectionId);
-		Long resourceId = getPermissionCheckerResourceId(
-			dataRecordCollectionId);
-
-		PermissionUtil.checkPermission(
-			ActionKeys.PERMISSIONS, groupLocalService, resourceName, resourceId,
-			getPermissionCheckerGroupId(dataRecordCollectionId));
-
-		resourcePermissionLocalService.updateResourcePermissions(
-			contextCompany.getCompanyId(),
-			getPermissionCheckerGroupId(dataRecordCollectionId), resourceName,
-			String.valueOf(resourceId),
-			ModelPermissionsUtil.toModelPermissions(
-				contextCompany.getCompanyId(), permissions, resourceId,
-				resourceName, resourceActionLocalService,
-				resourcePermissionLocalService, roleLocalService));
-
-		return toPermissionPage(
-			HashMapBuilder.put(
-				"get",
-				addAction(
-					ActionKeys.PERMISSIONS,
-					"getDataRecordCollectionPermissionsPage", resourceName,
-					resourceId)
-			).put(
-				"replace",
-				addAction(
-					ActionKeys.PERMISSIONS, "putDataRecordCollectionPermission",
-					resourceName, resourceId)
-			).build(),
-			resourceId, resourceName, null);
+		return Page.of(Collections.emptyList());
 	}
 
 	/**

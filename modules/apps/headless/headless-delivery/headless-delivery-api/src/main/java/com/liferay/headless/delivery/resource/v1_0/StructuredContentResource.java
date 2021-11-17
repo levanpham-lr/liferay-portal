@@ -107,9 +107,7 @@ public interface StructuredContentResource {
 		throws Exception;
 
 	public Page<com.liferay.portal.vulcan.permission.Permission>
-			putSiteStructuredContentPermission(
-				Long siteId,
-				com.liferay.portal.vulcan.permission.Permission[] permissions)
+			putSiteStructuredContentPermission(Long siteId)
 		throws Exception;
 
 	public Page<StructuredContent>
@@ -168,9 +166,7 @@ public interface StructuredContentResource {
 		throws Exception;
 
 	public Page<com.liferay.portal.vulcan.permission.Permission>
-			putStructuredContentPermission(
-				Long structuredContentId,
-				com.liferay.portal.vulcan.permission.Permission[] permissions)
+			putStructuredContentPermission(Long structuredContentId)
 		throws Exception;
 
 	public String getStructuredContentRenderedContentTemplate(

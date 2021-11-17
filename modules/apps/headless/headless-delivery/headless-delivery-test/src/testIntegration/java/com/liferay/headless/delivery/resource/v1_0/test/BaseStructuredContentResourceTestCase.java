@@ -1517,29 +1517,13 @@ public abstract class BaseStructuredContentResourceTestCase {
 			200,
 			structuredContentResource.
 				putSiteStructuredContentPermissionHttpResponse(
-					structuredContent.getSiteId(),
-					new Permission[] {
-						new Permission() {
-							{
-								setActionIds(new String[] {"PERMISSIONS"});
-								setRoleName(role.getName());
-							}
-						}
-					}));
+					structuredContent.getSiteId()));
 
 		assertHttpResponseStatusCode(
 			404,
 			structuredContentResource.
 				putSiteStructuredContentPermissionHttpResponse(
-					structuredContent.getSiteId(),
-					new Permission[] {
-						new Permission() {
-							{
-								setActionIds(new String[] {"-"});
-								setRoleName("-");
-							}
-						}
-					}));
+					structuredContent.getSiteId()));
 	}
 
 	protected StructuredContent
@@ -2190,29 +2174,12 @@ public abstract class BaseStructuredContentResourceTestCase {
 			200,
 			structuredContentResource.
 				putStructuredContentPermissionHttpResponse(
-					structuredContent.getId(),
-					new Permission[] {
-						new Permission() {
-							{
-								setActionIds(new String[] {"VIEW"});
-								setRoleName(role.getName());
-							}
-						}
-					}));
+					structuredContent.getId()));
 
 		assertHttpResponseStatusCode(
 			404,
 			structuredContentResource.
-				putStructuredContentPermissionHttpResponse(
-					0L,
-					new Permission[] {
-						new Permission() {
-							{
-								setActionIds(new String[] {"-"});
-								setRoleName("-");
-							}
-						}
-					}));
+				putStructuredContentPermissionHttpResponse(0L));
 	}
 
 	protected StructuredContent

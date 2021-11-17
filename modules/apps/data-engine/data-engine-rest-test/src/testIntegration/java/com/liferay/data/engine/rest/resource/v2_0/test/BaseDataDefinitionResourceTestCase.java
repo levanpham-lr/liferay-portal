@@ -691,28 +691,11 @@ public abstract class BaseDataDefinitionResourceTestCase {
 		assertHttpResponseStatusCode(
 			200,
 			dataDefinitionResource.putDataDefinitionPermissionHttpResponse(
-				dataDefinition.getId(),
-				new Permission[] {
-					new Permission() {
-						{
-							setActionIds(new String[] {"VIEW"});
-							setRoleName(role.getName());
-						}
-					}
-				}));
+				dataDefinition.getId()));
 
 		assertHttpResponseStatusCode(
 			404,
-			dataDefinitionResource.putDataDefinitionPermissionHttpResponse(
-				0L,
-				new Permission[] {
-					new Permission() {
-						{
-							setActionIds(new String[] {"-"});
-							setRoleName("-");
-						}
-					}
-				}));
+			dataDefinitionResource.putDataDefinitionPermissionHttpResponse(0L));
 	}
 
 	protected DataDefinition testPutDataDefinitionPermission_addDataDefinition()

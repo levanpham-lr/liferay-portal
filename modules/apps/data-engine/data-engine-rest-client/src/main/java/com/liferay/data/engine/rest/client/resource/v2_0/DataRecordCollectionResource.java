@@ -27,8 +27,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.annotation.Generated;
 
@@ -131,12 +129,12 @@ public interface DataRecordCollectionResource {
 		throws Exception;
 
 	public Page<Permission> putDataRecordCollectionPermission(
-			Long dataRecordCollectionId, Permission[] permissions)
+			Long dataRecordCollectionId)
 		throws Exception;
 
 	public HttpInvoker.HttpResponse
 			putDataRecordCollectionPermissionHttpResponse(
-				Long dataRecordCollectionId, Permission[] permissions)
+				Long dataRecordCollectionId)
 		throws Exception;
 
 	public String getDataRecordCollectionPermissionByCurrentUser(
@@ -1076,12 +1074,12 @@ public interface DataRecordCollectionResource {
 		}
 
 		public Page<Permission> putDataRecordCollectionPermission(
-				Long dataRecordCollectionId, Permission[] permissions)
+				Long dataRecordCollectionId)
 			throws Exception {
 
 			HttpInvoker.HttpResponse httpResponse =
 				putDataRecordCollectionPermissionHttpResponse(
-					dataRecordCollectionId, permissions);
+					dataRecordCollectionId);
 
 			String content = httpResponse.getContent();
 
@@ -1122,20 +1120,10 @@ public interface DataRecordCollectionResource {
 
 		public HttpInvoker.HttpResponse
 				putDataRecordCollectionPermissionHttpResponse(
-					Long dataRecordCollectionId, Permission[] permissions)
+					Long dataRecordCollectionId)
 			throws Exception {
 
 			HttpInvoker httpInvoker = HttpInvoker.newHttpInvoker();
-
-			httpInvoker.body(
-				Stream.of(
-					permissions
-				).map(
-					value -> String.valueOf(value)
-				).collect(
-					Collectors.toList()
-				).toString(),
-				"application/json");
 
 			if (_builder._locale != null) {
 				httpInvoker.header(
