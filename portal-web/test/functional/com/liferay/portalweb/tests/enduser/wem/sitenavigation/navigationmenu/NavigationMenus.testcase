@@ -383,6 +383,83 @@ definition {
 		}
 	}
 
+	@description = "This is a test for LPS-76658. A user can rename the page items in a navigation menu."
+	@priority = "5"
+	test RenamePageTypeNavigationMenuItem {
+		task ("Add two pages") {
+			for (var n : list "1,2") {
+				JSONLayout.addPublicLayout(
+					groupName = "Test Site Name",
+					layoutName = "Test Page Name ${n}");
+			}
+		}
+
+		task ("Add a navigation menu") {
+			JSONSitenavigation.addSiteNavigationMenu(
+				groupName = "Test Site Name",
+				siteNavigationMenuName = "Navigation Menu Name");
+
+			NavigationMenusAdmin.openNavigationMenusAdmin(siteURLKey = "test-site-name");
+
+			LexiconEntry.gotoEntry(rowEntry = "Navigation Menu Name");
+		}
+
+		task ("Add the first page and second page to the navigation menu") {
+			NavigationMenusAdmin.addItem(
+				item = "Page",
+				pageNames = "Test Page Name 1,Test Page Name 2");
+		}
+
+		task ("Navigate to the Navigation Menus admin") {
+			NavigationMenusAdmin.openNavigationMenusAdmin(siteURLKey = "test-site-name");
+		}
+
+		task ("Mark the navigation menu as Primary Navigation") {
+			NavigationMenusAdmin.configureMenuType(
+				menuType = "Primary Navigation",
+				navigationMenu = "Navigation Menu Name");
+		}
+
+		task ("Rename the second page item in navigation menu") {
+			LexiconEntry.gotoEntry(rowEntry = "Navigation Menu Name");
+
+			NavigationMenusAdmin.editItem(
+				item = "Page",
+				itemName = "Test Page Name 2",
+				name = "Test Page Name 3");
+		}
+
+		task ("View the name of the second page item was successfully changed") {
+			NavigationMenusAdmin.viewItem(itemName = "Test Page Name 3");
+		}
+
+		task ("Select the Primary Navigation in the Navigation Menu widget") {
+			Navigator.gotoSitePage(
+				pageName = "Test Page Name 1",
+				siteName = "Test Site Name");
+
+			NavigationMenusWidget.gotoNavigationMenuWidgetConfig();
+
+			NavigationMenusWidget.selectNavigation(menuType = "Primary Navigation");
+
+			AssertSelectedLabel(
+				locator1 = "NavigationMenusWidget#SELECT_NAVIGATION",
+				value1 = "Primary Navigation");
+
+			Portlet.saveAndCloseConfig();
+		}
+
+		task ("Navigate to the second page via Navigation Menu widget") {
+			Navigator.gotoSitePage(
+				pageName = "Test Page Name 3",
+				siteName = "Test Site Name");
+
+			var portalURL = PropsUtil.get("portal.url");
+
+			AssertLocation(value1 = "${portalURL}/web/test-site-name/test-page-name-2");
+		}
+	}
+
 	@description = "This is a test for LPS-87134. We assert that the option to automatically add new pages to a navigation menu works as expected."
 	@priority = "5"
 	test ToggleAutomaticallyAddNewPagesToNavigationMenu {
