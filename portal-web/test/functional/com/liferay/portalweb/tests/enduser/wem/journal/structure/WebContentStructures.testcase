@@ -54,7 +54,7 @@ definition {
 			structureDescription = "WC Structure Description",
 			structureName = "WC Structure Name 2");
 
-		for (var structureFieldName : list "HTML,Image,Integer,Link to Page") {
+		for (var structureFieldName : list "HTML,Image,Integer,Link to Page,Number") {
 			DynamicDataMapping.addField(
 				field = "${structureFieldName}",
 				fieldFieldLabel = "${structureFieldName}",
@@ -71,7 +71,7 @@ definition {
 			structureDescription = "WC Structure Description",
 			structureName = "WC Structure Name 3");
 
-		for (var structureFieldName : list "Number,Radio,Select,Separator,Text,Text Box") {
+		for (var structureFieldName : list "Radio,Select,Separator,Text,Text Box") {
 			DynamicDataMapping.addField(
 				field = "${structureFieldName}",
 				fieldFieldLabel = "${structureFieldName}",
@@ -106,7 +106,7 @@ definition {
 
 		LexiconEntry.gotoEntry(rowEntry = "WC Structure Name 2");
 
-		for (var structureFieldName : list "HTML,Image,Integer,Link to Page") {
+		for (var structureFieldName : list "HTML,Image,Integer,Link to Page,Number") {
 			DynamicDataMapping.viewField(
 				fieldFieldLabel = "${structureFieldName}",
 				fieldName = StringUtil.replace("${structureFieldName}", " ", ""));
@@ -122,7 +122,7 @@ definition {
 
 		LexiconEntry.gotoEntry(rowEntry = "WC Structure Name 3");
 
-		for (var structureFieldName : list "Number,Radio,Select,Separator,Text,Text Box") {
+		for (var structureFieldName : list "Radio,Select,Separator,Text,Text Box") {
 			DynamicDataMapping.viewField(
 				fieldFieldLabel = "${structureFieldName}",
 				fieldName = StringUtil.replace("${structureFieldName}", " ", ""));
