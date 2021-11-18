@@ -339,13 +339,13 @@
 			</library>
 			<library>
 				<file-name>com.liferay.comment.sanitizer.jar!owasp-java-html-sanitizer.jar</file-name>
-				<version>r239</version>
+				<version>20211018.2</version>
 				<project-name>OWASP Java HTML Sanitizer</project-name>
-				<project-url>http://code.google.com/p/owasp-java-html-sanitizer</project-url>
+				<project-url>https://owasp.org</project-url>
 				<licenses>
 					<license>
-						<license-name>New BSD License</license-name>
-						<license-url>http://www.opensource.org/licenses/bsd-license.php</license-url>
+						<license-name>Apache License, Version 2.0</license-name>
+						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
 					</license>
 				</licenses>
 			</library>
@@ -1349,6 +1349,18 @@
 				</licenses>
 			</library>
 			<library>
+				<file-name>com.liferay.dynamic.data.mapping.data.provider.impl.jar!commons-io.jar</file-name>
+				<version>2.8.0</version>
+				<project-name>Apache Commons IO</project-name>
+				<project-url>https://commons.apache.org/proper/commons-io/</project-url>
+				<licenses>
+					<license>
+						<license-name>Apache License, Version 2.0</license-name>
+						<license-url>https://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
+					</license>
+				</licenses>
+			</library>
+			<library>
 				<file-name>com.liferay.dynamic.data.mapping.data.provider.impl.jar!hystrix-core.jar</file-name>
 				<version>1.5.11</version>
 				<project-name>hystrix-core</project-name>
@@ -1357,30 +1369,6 @@
 					<license>
 						<license-name>The Apache Software License, Version 2.0</license-name>
 						<license-url>http://www.apache.org/licenses/LICENSE-2.0.txt</license-url>
-					</license>
-				</licenses>
-			</library>
-			<library>
-				<file-name>com.liferay.dynamic.data.mapping.data.provider.impl.jar!jodd-core.jar</file-name>
-				<version>3.8.6</version>
-				<project-name>Jodd Core</project-name>
-				<project-url>http://jodd.org</project-url>
-				<licenses>
-					<license>
-						<license-name>The BSD 2-Clause License</license-name>
-						<license-url>http://jodd.org/license.html</license-url>
-					</license>
-				</licenses>
-			</library>
-			<library>
-				<file-name>com.liferay.dynamic.data.mapping.data.provider.impl.jar!jodd-http.jar</file-name>
-				<version>3.8.6</version>
-				<project-name>Jodd HTTP client</project-name>
-				<project-url>http://jodd.org</project-url>
-				<licenses>
-					<license>
-						<license-name>The BSD 2-Clause License</license-name>
-						<license-url>http://jodd.org/license.html</license-url>
 					</license>
 				</licenses>
 			</library>
