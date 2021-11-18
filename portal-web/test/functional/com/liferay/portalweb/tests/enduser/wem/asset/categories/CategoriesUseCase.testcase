@@ -1118,7 +1118,7 @@ definition {
 	}
 
 	@description = "This is for LPS-101409. Validate selecting multiple categories when creating page with blank template."
-	@priority ="4"
+	@priority = "4"
 	test SelectMultipleRequiredCategoriesWithBlankPageTemplate {
 		property testray.component.names = "Categories";
 
@@ -1155,7 +1155,7 @@ definition {
 	}
 
 	@description = "This is for LPS-101409. Validate if select a required category when entering the page name not based on a page template."
-	@priority ="5"
+	@priority = "5"
 	test SelectRequiredCategoryWhenEnterPageNameWithBlankPageTemplate {
 		property portal.acceptance = "true";
 		property testray.component.names = "Categories";
@@ -1205,7 +1205,7 @@ definition {
 	}
 
 	@description = "This is for LPS-101409. Validate if select a required category when entering the page name based on a page template. Also add a step to check adding page with category successfully via json."
-	@priority ="5"
+	@priority = "5"
 	test SelectRequiredCategoryWhenEnterPageNameWithWidgetPageTemplate {
 		property portal.acceptance = "true";
 		property portal.upstream = "true";
