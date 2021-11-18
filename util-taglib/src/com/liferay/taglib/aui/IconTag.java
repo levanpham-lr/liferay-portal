@@ -90,6 +90,7 @@ public class IconTag extends BaseIconTag {
 		else {
 			ATag aTag = new ATag();
 
+			aTag.setAriaLabel(getAriaLabel());
 			aTag.setCssClass(getCssClass());
 			aTag.setData(getData());
 			aTag.setHref(getUrl());
