@@ -340,6 +340,7 @@ public class JournalManagementToolbarDisplayContext
 					currentURLObj, liferayPortletResponse);
 
 				removeLabelURL.setParameter("navigation", (String)null);
+				removeLabelURL.setParameter("ddmStructureKey", (String)null);
 
 				labelItem.putData("removeLabelURL", removeLabelURL.toString());
 
