@@ -67,9 +67,11 @@ public class AddDefaultLayoutPortalInstanceLifecycleListener
 		Group group = _groupLocalService.getGroup(
 			company.getCompanyId(), GroupConstants.GUEST);
 
-		Layout defaultLayout = _layoutLocalService.fetchFirstLayout(
-			group.getGroupId(), false, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
-			false);
+		String friendlyURL = FriendlyURLNormalizerUtil.normalizeWithEncoding(
+			PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_FRIENDLY_URL);
+
+		Layout defaultLayout = _layoutLocalService.fetchLayoutByFriendlyURL(
+			group.getGroupId(), false, friendlyURL);
 
 		if (defaultLayout == null) {
 			addDefaultGuestPublicLayoutByProperties(group);
