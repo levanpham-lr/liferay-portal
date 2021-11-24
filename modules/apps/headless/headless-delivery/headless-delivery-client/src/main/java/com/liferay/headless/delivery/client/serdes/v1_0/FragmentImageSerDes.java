@@ -62,11 +62,14 @@ public class FragmentImageSerDes {
 
 			sb.append("\"description\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(fragmentImage.getDescription()));
-
-			sb.append("\"");
+			if (fragmentImage.getDescription() instanceof String) {
+				sb.append("\"");
+				sb.append((String)fragmentImage.getDescription());
+				sb.append("\"");
+			}
+			else {
+				sb.append(fragmentImage.getDescription());
+			}
 		}
 
 		if (fragmentImage.getTitle() != null) {
@@ -76,11 +79,14 @@ public class FragmentImageSerDes {
 
 			sb.append("\"title\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(fragmentImage.getTitle()));
-
-			sb.append("\"");
+			if (fragmentImage.getTitle() instanceof String) {
+				sb.append("\"");
+				sb.append((String)fragmentImage.getTitle());
+				sb.append("\"");
+			}
+			else {
+				sb.append(fragmentImage.getTitle());
+			}
 		}
 
 		if (fragmentImage.getUrl() != null) {
@@ -90,11 +96,14 @@ public class FragmentImageSerDes {
 
 			sb.append("\"url\": ");
 
-			sb.append("\"");
-
-			sb.append(_escape(fragmentImage.getUrl()));
-
-			sb.append("\"");
+			if (fragmentImage.getUrl() instanceof String) {
+				sb.append("\"");
+				sb.append((String)fragmentImage.getUrl());
+				sb.append("\"");
+			}
+			else {
+				sb.append(fragmentImage.getUrl());
+			}
 		}
 
 		sb.append("}");
