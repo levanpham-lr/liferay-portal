@@ -769,7 +769,7 @@ currentURLObj.setParameter("historyKey", liferayPortletResponse.getNamespace() +
 				);
 
 				if (groupName) {
-						rowColumns.push(Liferay.Util.escapeHTML(groupName));
+					rowColumns.push(Liferay.Util.escapeHTML(groupName));
 				}
 
 				if (groupId) {
