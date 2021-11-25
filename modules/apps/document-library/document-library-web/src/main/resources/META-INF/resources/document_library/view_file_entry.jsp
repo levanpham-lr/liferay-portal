@@ -16,6 +16,12 @@
 
 <%@ include file="/document_library/init.jsp" %>
 
+<liferay-util:html-top
+	outputKey="view_entry_file_document_library_preview"
+>
+	<link href="<%= PortalUtil.getStaticResourceURL(request, application.getContextPath() + "/document_library/css/document_library_preview.css") %>" rel="stylesheet" />
+</liferay-util:html-top>
+
 <liferay-util:dynamic-include key="com.liferay.document.library.web#/document_library/view_file_entry.jsp#pre" />
 
 <%
