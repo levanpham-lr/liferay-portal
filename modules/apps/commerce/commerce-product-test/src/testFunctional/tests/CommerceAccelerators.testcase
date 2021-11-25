@@ -124,6 +124,8 @@ definition {
 	@description = "This is for COMMERCE-2658. Can be Drag and Drop fragments on a Minium site page."
 	@priority = "4"
 	test FragmentsCanBeDragAndDroppedToMiniumSitePage {
+		property test.name.skip.portal.instance = "CommerceAccelerators#FragmentsCanBeDragAndDroppedToMiniumSitePage";
+
 		CommerceAccelerators.initializeNewSiteViaAccelerator(siteName = "Minium");
 
 		ApplicationsMenu.gotoSite(site = "Minium");
