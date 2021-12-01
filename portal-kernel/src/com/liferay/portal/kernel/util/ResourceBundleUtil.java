@@ -95,6 +95,21 @@ public class ResourceBundleUtil {
 			registry.getSymbolicName(classLoader));
 	}
 
+	public static Map<Locale, String> getLocalizationMap(
+		ResourceBundleLoader resourceBundleLoader, String key) {
+
+		Map<Locale, String> map = new HashMap<>();
+
+		for (Locale locale : LanguageUtil.getAvailableLocales()) {
+			ResourceBundle resourceBundle =
+				resourceBundleLoader.loadResourceBundle(locale);
+
+			map.put(locale, getString(resourceBundle, key));
+		}
+
+		return map;
+	}
+
 	/**
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
 	 *             #getLocalizationMap(ResourceBundleLoader, String)}
@@ -115,21 +130,6 @@ public class ResourceBundleUtil {
 
 			},
 			key);
-	}
-
-	public static Map<Locale, String> getLocalizationMap(
-		ResourceBundleLoader resourceBundleLoader, String key) {
-
-		Map<Locale, String> map = new HashMap<>();
-
-		for (Locale locale : LanguageUtil.getAvailableLocales()) {
-			ResourceBundle resourceBundle =
-				resourceBundleLoader.loadResourceBundle(locale);
-
-			map.put(locale, getString(resourceBundle, key));
-		}
-
-		return map;
 	}
 
 	public static ResourceBundle getModuleAndPortalResourceBundle(
