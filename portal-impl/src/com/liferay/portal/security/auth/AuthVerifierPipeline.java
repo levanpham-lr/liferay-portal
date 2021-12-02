@@ -119,6 +119,10 @@ public class AuthVerifierPipeline {
 
 		String contextPath = httpServletRequest.getContextPath();
 
+		if (contextPath.startsWith(pathContext)) {
+			contextPath = contextPath.substring(pathContext.length());
+		}
+
 		if (requestURI.equals(contextPath)) {
 			requestURI += "/";
 		}
