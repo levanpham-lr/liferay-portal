@@ -77,7 +77,6 @@ definition {
 				-d groupId=${groupId} \
 				-d "urlTitle=${urlTitle}"
 		''';
-
 		var articleId = JSONCurlUtil.post("${curl}", "$.[?(@['urlTitle'] == '${urlTitle}')]['articleId']");
 		var articleId = StringUtil.replace("${articleId}", "[&quot;", "");
 		var articleId = StringUtil.replace("${articleId}", "&quot;]", "");
@@ -96,7 +95,6 @@ definition {
 				-u test@liferay.com:test \
 				-d groupId=${groupId}
 		''';
-
 		var folderId = JSONCurlUtil.post("${curl}", "$.[?(@['name'] == '${folderName}')]['folderId']");
 		var folderId = StringUtil.replace("${folderId}", "[&quot;", "");
 		var folderId = StringUtil.replace("${folderId}", "&quot;]", "");
@@ -122,7 +120,6 @@ definition {
 				-d groupId=${groupId} \
 				-d urlTitle=${urlTitle}
 		''';
-
 		var resourcePrimKey = JSONCurlUtil.post("${curl}", "$.[?(@['urlTitle'] == '${urlTitle}')]['resourcePrimKey']");
 		var resourcePrimKey = StringUtil.replace("${resourcePrimKey}", "[&quot;", "");
 		var resourcePrimKey = StringUtil.replace("${resourcePrimKey}", "&quot;]", "");

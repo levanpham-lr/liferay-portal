@@ -38,6 +38,7 @@ definition {
 		}
 
 		AppBuilderWorkflow.addWorkflowAppName(workflowAppName = "${workflowAppName}");
+
 		AppBuilderWorkflow.selectStartStepDataAndViews(
 			formViewName = "${formViewName}",
 			objectName = "${objectName}",
@@ -63,6 +64,7 @@ definition {
 		}
 
 		AppBuilderWorkflow.addWorkflowAppName(workflowAppName = "${workflowAppName}");
+
 		AppBuilderWorkflow.selectStartStepDataAndViews(
 			formViewName = "${formViewName}",
 			objectName = "${objectName}",
@@ -216,6 +218,7 @@ definition {
 	macro waitForItemPresentOnTable {
 		while (IsElementNotPresent(locator1 = "AppBuilder#ITEM_ON_THE_TABLE", value1 = "${itemName}")) {
 			Pause(locator1 = "3000");
+
 			Refresh();
 		}
 	}

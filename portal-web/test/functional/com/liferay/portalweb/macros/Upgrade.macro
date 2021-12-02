@@ -188,7 +188,7 @@ definition {
 
 	macro addDataDefinitionWithDB2 {
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Dynamic Data Lists",
 			site = "${site}");
 
@@ -207,7 +207,7 @@ definition {
 		AssertConsoleTextNotPresent(value1 = "SQLCODE=-727");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Dynamic Data Lists");
 
 		DDLDataDefinition.addCP(ddlDataDefinitionName = "Data Definition");
@@ -222,7 +222,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Dynamic Data Lists");
 
 		DDLDataDefinition.viewCP(
@@ -238,7 +238,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms",
 			site = "${site}");
 
@@ -261,7 +261,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdmin.viewForm(
@@ -512,7 +512,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		Navigator.gotoNavItem(navItem = "Structures");
@@ -533,7 +533,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		Navigator.gotoNavItem(navItem = "Templates");
@@ -547,7 +547,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContentNavigator.gotoAddWithStructureCP(structureName = "WC Structure Name");
@@ -570,7 +570,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		Workflow.viewWebContentWithWorkflowCP(
@@ -608,7 +608,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		Workflow.viewWebContentWithWorkflowCP(
@@ -627,7 +627,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContentNavigator.gotoEditCP(webContentTitle = "WC Workflow Title");
@@ -649,7 +649,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsEntry.viewWithWorkflowCP(
@@ -659,7 +659,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsEntry.viewWithWorkflowCP(
@@ -697,7 +697,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsEntry.viewWithWorkflowCP(
@@ -716,7 +716,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsEntry.viewEntryTable(entryTitle = "Blogs Workflow Title");
@@ -916,7 +916,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContentNavigator.gotoViewStatus(
@@ -1012,7 +1012,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		Blogs.addWithWorkflow(
@@ -1023,7 +1023,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsEntry.viewWithWorkflowCP(
@@ -1042,7 +1042,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsEntry.viewWithWorkflowCP(
@@ -1061,7 +1061,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsEntry.viewEntryTable(entryTitle = "New Blog After Upgrade");
@@ -1151,7 +1151,7 @@ definition {
 			fieldValue = "Paragraph body text.");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -1211,7 +1211,7 @@ definition {
 			fieldValue = "SingleLineText2");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -1400,6 +1400,7 @@ definition {
 
 	macro viewAndEditOpenGraph {
 		var portalURL = PropsUtil.get("portal.url");
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		SitePages.openPagesAdmin(siteURLKey = "test-site-name");
@@ -1462,6 +1463,7 @@ definition {
 
 	macro viewAndEditSERPPreview {
 		var portalURL = PropsUtil.get("portal.url");
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		Navigator.gotoPage(pageName = "Test Page");
@@ -1904,17 +1906,15 @@ definition {
 		}
 
 		task ("Assert styles of Container in view mode") {
-			var screenWidth	= selenium.getElementWidth("//body");
-
-			var containerWidth	= selenium.getElementWidth("//div[contains(@class,'container')][contains(@class,'pb-3 pt-3')]");
+			var screenWidth = selenium.getElementWidth("//body");
+			var containerWidth = selenium.getElementWidth("//div[contains(@class,'container')][contains(@class,'pb-3 pt-3')]");
 
 			TestUtils.assertNotEquals(
 				actual = "${containerWidth}",
 				expected = "${screenWidth}");
 
-			var screenWidth	= selenium.getElementWidth("//body");
-
-			var containerWidth	= selenium.getElementWidth("//div[contains(@class,'container')][contains(@class,'pb-3 pt-3')]");
+			var screenWidth = selenium.getElementWidth("//body");
+			var containerWidth = selenium.getElementWidth("//div[contains(@class,'container')][contains(@class,'pb-3 pt-3')]");
 
 			TestUtils.assertNotEquals(
 				actual = "${containerWidth}",
@@ -3238,7 +3238,7 @@ definition {
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content",
 			site = "${siteName}");
 
@@ -3350,7 +3350,7 @@ definition {
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content",
 			site = "${siteName}");
 

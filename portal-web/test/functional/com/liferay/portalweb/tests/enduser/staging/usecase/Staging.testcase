@@ -178,6 +178,7 @@ definition {
 		FragmentsAdmin.addFragment(fragmentName = "Fragment Name");
 
 		var fragmentHTML = '''<lfr-widget-web-content>''';
+
 		var htmlSnippet = '''<lfr-''';
 
 		FragmentsEditor.autocompleteFragmentHTML(
@@ -538,7 +539,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		Staging.viewNotStagedAssetMessageOnStaging();
@@ -548,7 +549,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		Staging.viewAddButtonExists();
@@ -758,7 +759,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -790,7 +791,7 @@ definition {
 			siteName = "Remote Site");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentCP(dmDocumentTitle = "DM Document Title");
@@ -858,7 +859,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentCP(dmDocumentTitle = "DM Document Title");
@@ -891,7 +892,7 @@ definition {
 			siteName = "Remote Site");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentCP(dmDocumentTitle = "DM Document Title");
@@ -1563,7 +1564,7 @@ definition {
 			key_webContentTitle = "WC Folder Name 1",
 			locator1 = "WC#ENTRY_LIST_TITLE");
 
-		key_webContentTitle = "Web Content Title 2";
+		var key_webContentTitle = "Web Content Title 2";
 
 		AssertTextEquals.assertPartialText(
 			locator1 = "WC#ENTRY_LIST_TITLE_ON_LIVE",
@@ -1895,7 +1896,7 @@ definition {
 		Staging.activateStagingCP(siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -1904,7 +1905,7 @@ definition {
 			dmDocumentTitle = "Document_2.jpg");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.deleteCP(dmDocumentTitle = "Document_2.jpg");
@@ -1983,7 +1984,7 @@ definition {
 		Portlet.addPG(portletName = "Blogs");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsNavigator.gotoAddEntry();
@@ -2413,7 +2414,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -2424,7 +2425,7 @@ definition {
 			dmDocumentTypeName = "DM Document Type Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -2466,7 +2467,7 @@ definition {
 			siteName = "Remote Site");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentCP(dmDocumentTitle = "DM Document Type Title");
@@ -2935,7 +2936,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		Blogs.addEntry(
@@ -3464,7 +3465,7 @@ definition {
 		ProductMenu.gotoStagingSite(site = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -3490,7 +3491,7 @@ definition {
 		ProductMenu.gotoLiveSite(site = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentCP(dmDocumentTitle = "DM Document Title");
@@ -3512,7 +3513,7 @@ definition {
 		WebContent.viewTitle(webContentTitle = "Web Content Title");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentCP(dmDocumentTitle = "DM Document Title");
@@ -3528,7 +3529,7 @@ definition {
 		ProductMenu.gotoStagingSite(site = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Bookmarks");
 
 		Bookmark.addCP(
@@ -3559,7 +3560,7 @@ definition {
 		ProductMenu.gotoLiveSite(site = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Bookmarks");
 
 		Bookmark.viewBookmark(
@@ -3761,7 +3762,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -3790,7 +3791,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -3823,7 +3824,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -4194,6 +4195,7 @@ definition {
 		SearchPortlets.searchWidget(searchTerm = "test");
 
 		var currentURL = Navigator.getCurrentURL();
+
 		var keywordsParameterName = StringUtil.extractLast("${currentURL}", "?");
 		var keywordsParameter = StringUtil.extractFirst("${keywordsParameterName}", "=");
 
@@ -4210,7 +4212,7 @@ definition {
 		PageTemplatesAdmin.openPageTemplatesAdmin(siteURLKey = "global");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -4234,7 +4236,7 @@ definition {
 		PageTemplatesAdmin.openPageTemplatesAdmin(siteURLKey = "global");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.deleteCP(dmDocumentTitle = "Document_2.jpg");
@@ -4272,7 +4274,7 @@ definition {
 		WebContent.viewTitle(webContentTitle = "Web Content Title");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Bookmarks");
 
 		Bookmark.addCP(
@@ -4285,7 +4287,7 @@ definition {
 		ProductMenu.gotoStagingSite(site = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -4300,7 +4302,7 @@ definition {
 			entry = "Web Content Title");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Bookmarks");
 
 		Staging.publishViaSAP(
@@ -4308,7 +4310,7 @@ definition {
 			entry = "Test Bookmark");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		Staging.publishViaSAP(
@@ -4322,7 +4324,7 @@ definition {
 			webContentTitle = "Web Content Title");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Bookmarks");
 
 		Bookmark.viewBookmark(
@@ -4332,7 +4334,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentCP(dmDocumentTitle = "DM Document Title");

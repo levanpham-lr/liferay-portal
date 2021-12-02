@@ -57,6 +57,7 @@ definition {
 		Portlet.addPG(portletName = "Asset Publisher");
 
 		var companyId = JSONCompany.getCompanyId();
+
 		var port = Elasticsearch.getServerPort();
 
 		var curl = '''
@@ -133,6 +134,7 @@ definition {
 			portlet = "Search");
 
 		var clientVersion = Elasticsearch.getClientVersion();
+
 		var serverVersion = Elasticsearch.getServerVersion();
 
 		SearchAdministration.assertEngineVendorAndVersions(
@@ -152,6 +154,7 @@ definition {
 			value1 = "liferay-0");
 
 		var companyId = JSONCompany.getCompanyId();
+
 		var liferayIndexName = "liferay-${companyId}";
 
 		Click(
@@ -368,7 +371,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Message Boards");
 
 		MessageboardsThread.addCP(
@@ -378,7 +381,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -605,9 +608,7 @@ definition {
 		// LRCI-2401
 
 		//var portalHostname = PropsUtil.get("portal.hostname");
-
 		//Navigator.openSpecificURL(url = "http://${portalHostname}:9201");
-
 		//AssertTextNotPresent(value1 = "cluster_name");
 
 		Navigator.openURL();
@@ -618,6 +619,7 @@ definition {
 			portlet = "Search");
 
 		var clientVersion = Elasticsearch.getClientVersion();
+
 		var serverVersion = Elasticsearch.getServerVersion();
 
 		SearchAdministration.assertEngineVendorAndVersions(

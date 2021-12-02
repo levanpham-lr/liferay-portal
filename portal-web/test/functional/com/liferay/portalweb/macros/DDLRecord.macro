@@ -115,9 +115,11 @@ definition {
 
 	macro editParagraphBody {
 		SelectFrame.selectFrameNoLoading(locator1 = "CKEditor#BODY_FIELD_IFRAME");
+
 		Type.clickAtType(
 			locator1 = "CKEditor#BODY",
 			value1 = "${content}");
+
 		SelectFrame(value1 = "relative=top");
 	}
 
@@ -546,7 +548,6 @@ definition {
 				locator1 = "DDLRecord#FIELD_1",
 				value1 = "${fieldFieldLabel} ${ddlRecordFieldData_1}");
 		}
-
 		else {
 			DDLRecord.viewPopulatedField(
 				ddlRecordFieldData = "${ddlRecordFieldData}",
@@ -755,7 +756,6 @@ definition {
 					value1 = "${ddlRecordFieldData}");
 			}
 		}
-
 		else {
 			if ("${field}" == "Date") {
 				AssertTextEquals(

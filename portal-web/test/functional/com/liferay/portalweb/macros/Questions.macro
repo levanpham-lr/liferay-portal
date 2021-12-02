@@ -12,7 +12,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Message Boards");
 
 		MessageboardsCategory.gotoPG(categoryName = "${categoryName}");
@@ -34,7 +34,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Message Boards");
 
@@ -57,7 +57,7 @@ definition {
 	}
 
 	macro addRootTopic {
-		if (IsElementPresent(locator1 = "Button#ANY", key_text = "New Topic")) {
+		if (IsElementPresent(key_text = "New Topic", locator1 = "Button#ANY")) {
 			Click(
 				key_text = "New Topic",
 				locator1 = "Button#ANY");

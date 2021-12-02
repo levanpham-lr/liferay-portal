@@ -32,6 +32,7 @@ definition {
 		}
 		else {
 			JSONGroup.deleteGroupByName(groupName = "Site Name");
+
 			JSONGroup.deleteGroupByName(groupName = "Remote Site");
 		}
 	}
@@ -175,7 +176,7 @@ definition {
 		DMDocument.enableActionsMenuOnPortlet();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -190,7 +191,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContentNavigator.gotoAddCP();
@@ -213,7 +214,7 @@ definition {
 			webcontentField = "WC WebContent Title");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContent.moveToRecycleBinCP(

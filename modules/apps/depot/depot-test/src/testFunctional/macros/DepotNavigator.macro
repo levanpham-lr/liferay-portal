@@ -20,7 +20,6 @@ definition {
 				locator1 = "LexiconList#LIST_ENTRY_TITLE_LINK",
 				value1 = "${depotName}");
 		}
-
 		else if (isSet(tableView)) {
 			var key_tableEntry = "${depotName}";
 
@@ -28,7 +27,6 @@ definition {
 				locator1 = "LexiconTable#TABLE_ENTRY_TITLE_LINK",
 				value1 = "${depotName}");
 		}
-
 		else {
 			var key_card = "${depotName}";
 
@@ -64,7 +62,6 @@ definition {
 				locator1 = "LexiconList#LIST_ENTRY_TITLE_LINK",
 				value1 = "${depotName}");
 		}
-
 		else if (isSet(tableView)) {
 			var key_tableEntry = "${depotName}";
 
@@ -72,7 +69,6 @@ definition {
 				locator1 = "LexiconTable#TABLE_ENTRY_TITLE_LINK",
 				value1 = "${depotName}");
 		}
-
 		else {
 			var key_card = "${depotName}";
 
@@ -114,7 +110,7 @@ definition {
 				portlet = "${portlet}");
 		}
 
-		if ("${portlet}" == "Export" || "${portlet}" == "Import" ) {
+		if (("${portlet}" == "Export") || ("${portlet}" == "Import")) {
 			Pause(locator1 = "2000");
 		}
 
@@ -158,7 +154,7 @@ definition {
 			key_card = "${portlet}",
 			locator1 = "Card#CARD");
 
-		if ("${portlet}" == "Settings" || "${portlet}" == "Asset Library Settings") {
+		if (("${portlet}" == "Settings") || ("${portlet}" == "Asset Library Settings")) {
 			AssertTextEquals(
 				locator1 = "ControlMenu#HEADING",
 				value1 = "${depotName}");

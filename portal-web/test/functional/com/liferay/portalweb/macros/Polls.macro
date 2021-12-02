@@ -206,7 +206,7 @@ definition {
 
 	macro DeletePollCP {
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Polls",
 			site = "${site}");
 
@@ -267,7 +267,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Polls");
 
 		while (IsElementPresent(locator1 = "Polls#POLLS_TABLE_ACTIONS_GENERIC")) {

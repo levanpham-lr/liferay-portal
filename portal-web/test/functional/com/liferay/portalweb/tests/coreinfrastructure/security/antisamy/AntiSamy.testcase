@@ -66,7 +66,7 @@ definition {
 		AssertConsoleTextPresent(value1 = "STARTED com.liferay.portal.security.antisamy");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Knowledge Base");
 
 		KBArticle.addCP(
@@ -81,7 +81,7 @@ definition {
 			kbArticleTitle = "Test AntiSamy");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Knowledge Base");
 
 		Click(

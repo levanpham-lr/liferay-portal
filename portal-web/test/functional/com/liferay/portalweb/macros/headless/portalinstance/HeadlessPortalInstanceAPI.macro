@@ -9,7 +9,6 @@ definition {
 			-u test@liferay.com:test \
 			-H Content-Type: application/json
 		''';
-
 		var JSON = JSONCurlUtil.get("${curl}");
 
 		return "${JSON}";
@@ -24,17 +23,17 @@ definition {
 		var parameters = JSONUtil2._addJSONObject(
 			JSON = "{}",
 			key = "domain",
-			value = ""${domain}"");
+			value = "&quot;${domain}&quot;");
 
 		var parameters = JSONUtil2._addJSONObject(
 			JSON = "${parameters}",
 			key = "virtualHost",
-			value = ""${virtualHost}"");
+			value = "&quot;${virtualHost}&quot;");
 
 		var parameters = JSONUtil2._addJSONObject(
 			JSON = "${parameters}",
 			key = "portalInstanceId",
-			value = ""${portalInstanceId}"");
+			value = "&quot;${portalInstanceId}&quot;");
 
 		var curl = '''
 			${portalURL}/o/headless-portal-instances/v1.0/portal-instances \
@@ -50,11 +49,11 @@ definition {
 	macro cleanAllPortalInstances {
 		var portalInstanceJSON = HeadlessPortalInstanceAPI._getPortalInstances();
 
-		var portalInstanceIds = JSONUtil.getWithJSONPath("${portalInstanceJSON}","$.items..portalInstanceId");
+		var portalInstanceIds = JSONUtil.getWithJSONPath("${portalInstanceJSON}", "$.items..portalInstanceId");
 
 		// Format JSON Array into a Poshi List
 
-		var portalInstanceIds = StringUtil.regexReplaceAll("${portalInstanceIds}","[\[\]&quot;]","");
+		var portalInstanceIds = StringUtil.regexReplaceAll("${portalInstanceIds}", "[\[\]"]", "");
 
 		for (var portalInstanceId : list "${portalInstanceIds}") {
 			if ("${portalInstanceId}" != "liferay.com") {

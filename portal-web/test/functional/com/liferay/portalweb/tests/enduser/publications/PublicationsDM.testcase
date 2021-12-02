@@ -43,7 +43,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -62,7 +62,7 @@ definition {
 			revision = "Major");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		AssertElementNotPresent(
@@ -80,7 +80,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.checkDocumentCheckboxCP(dmDocumentTitle = "DM Document Title");
@@ -234,7 +234,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -253,7 +253,7 @@ definition {
 			dmDocumentTitleEdit = "DM Document Title Edit");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMFolder.addCP(
@@ -261,7 +261,7 @@ definition {
 			dmFolderName = "DM Folder Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.moveToFolderCP(
@@ -305,7 +305,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMFolder.viewCP(dmFolderName = "DM Folder Name");
@@ -322,7 +322,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -335,7 +335,7 @@ definition {
 		DMDocumentType.viewCP(dmDocumentTypeName = "DM Document Type Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -377,7 +377,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentCP(dmDocumentTitle = "DM Document Title");
@@ -385,7 +385,7 @@ definition {
 		DMDocument.viewCP(dmDocumentTitle = "DM Document Title");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();

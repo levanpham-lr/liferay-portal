@@ -360,6 +360,7 @@ definition {
 			templateName = "WC Template Name");
 
 		var templateWebConetntScript = selenium.getAttribute("//span[contains(@class,'palette-item') and contains(.,'Web Content')]@data-content");
+
 		var templateScript = '''${templateWebConetntScript} <a>${webContentData.title}</a>''';
 
 		WebContentTemplates.inputScript(templateScript = "${templateScript}");

@@ -429,7 +429,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContentNavigator.gotoViewStatus(
@@ -472,7 +472,7 @@ definition {
 			siteNameScope = "${siteName}");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content",
 			site = "${siteName}");
 

@@ -42,7 +42,7 @@ definition {
 	@priority = "5"
 	test PublishDraftViaSAP {
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		Blogs.addDraft(
@@ -55,7 +55,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		Blogs.assertNoPublishOption(entryTitle = "Blogs Entry Title");
@@ -83,7 +83,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		Blogs.addEntry(
@@ -128,7 +128,7 @@ definition {
 		Portlet.addPG(portletName = "Blogs");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsNavigator.gotoAddEntry();
@@ -166,7 +166,7 @@ definition {
 		ProductMenu.gotoLiveSite(site = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		LexiconEntry.changeDisplayStyle(displayStyle = "cards");
@@ -178,7 +178,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsNavigator.gotoEditCP(entryTitle = "Blogs Entry Title");
@@ -202,7 +202,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsNavigator.gotoEditCP(entryTitle = "Blogs Entry Title");
@@ -218,7 +218,7 @@ definition {
 		ProductMenu.gotoLiveSite(site = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		LexiconEntry.changeDisplayStyle(displayStyle = "cards");
@@ -255,7 +255,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		Blogs.addEntry(
@@ -267,7 +267,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		LexiconEntry.changeDisplayStyle(displayStyle = "list");
@@ -291,7 +291,7 @@ definition {
 		ProductMenu.gotoLiveSite();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsNavigator.gotoShare(entryTitle = "Blogs Entry Title");
@@ -336,7 +336,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		Blogs.addEntry(

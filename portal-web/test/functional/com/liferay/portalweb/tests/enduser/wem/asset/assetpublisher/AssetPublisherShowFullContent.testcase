@@ -160,7 +160,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Test Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Dynamic Data Lists");
 
 		DDLDataDefinition.addCP(ddlDataDefinitionName = "Data Definition");
@@ -175,7 +175,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Test Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Dynamic Data Lists");
 
 		DDLList.addCP(ddlListName = "List Name");
@@ -808,7 +808,7 @@ definition {
 
 		for (var i : list "1,5,3") {
 			ProductMenu.gotoPortlet(
-				category = "Content &amp; Data",
+				category = "Content & Data",
 				portlet = "Web Content");
 
 			WebContentNavigator.gotoAddCP();

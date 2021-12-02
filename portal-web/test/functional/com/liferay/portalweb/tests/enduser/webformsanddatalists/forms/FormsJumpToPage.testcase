@@ -22,7 +22,7 @@ definition {
 			Navigator.openURL();
 
 			ProductMenu.gotoPortlet(
-				category = "Content &amp; Data",
+				category = "Content & Data",
 				portlet = "Forms");
 
 			FormsAdmin.teardownForms();
@@ -40,7 +40,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -136,7 +136,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -169,7 +169,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -273,7 +273,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -310,6 +310,7 @@ definition {
 					fieldLabel = "Destiny ${option}",
 					fieldName = "${fieldNameDestiny3}");
 			}
+
 			FormPortlet.previousPage();
 		}
 
@@ -344,7 +345,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -442,7 +443,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -456,7 +457,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -481,7 +482,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -579,7 +580,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -595,7 +596,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -620,7 +621,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -716,7 +717,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -728,7 +729,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();

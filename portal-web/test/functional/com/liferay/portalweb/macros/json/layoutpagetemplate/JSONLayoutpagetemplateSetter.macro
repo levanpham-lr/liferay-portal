@@ -50,7 +50,11 @@ definition {
 			var site = "true";
 		}
 
-		var groupId = JSONGroupAPI._getGroupIdByGroupKey(groupKey = "${groupKey}", parentGroupName = "${parentGroupName}", grandParentGroupName = "${grandParentGroupName}", site = "${site}");
+		var groupId = JSONGroupAPI._getGroupIdByGroupKey(
+			grandParentGroupName = "${grandParentGroupName}",
+			groupKey = "${groupKey}",
+			parentGroupName = "${parentGroupName}",
+			site = "${site}");
 
 		return "${groupId}";
 	}

@@ -65,7 +65,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Wiki");
 
 		WikiPortlet.viewNoPermissionCP();
@@ -110,7 +110,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Wiki");
 
 		WikiPortlet.viewNoPermissionCP();

@@ -135,7 +135,7 @@ definition {
 		Alert.viewSuccessMessageText(successMessage = "Changes saved.");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		LexiconEntry.gotoEntryMenuItem(
@@ -368,7 +368,7 @@ definition {
 			dmFolderName = "DM Folder Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentPermissionsCP(dmDocumentTitle = "DM Folder Name");
@@ -638,7 +638,7 @@ definition {
 
 		for (var dmDocumentTitle : list "Document_1.docx,Document_1.jpeg,Document_1.jpg,Document_1.mp4,Document_1.pdf,Document_1.png,Document_1.ppt,Document_1.pptx,Document_1.txt,Document_1.xls,Document_1.xlsx") {
 			ProductMenu.gotoPortlet(
-				category = "Content &amp; Data",
+				category = "Content & Data",
 				portlet = "Documents and Media");
 
 			DMDocument.addCP(
@@ -1114,7 +1114,7 @@ definition {
 			userEmailAddress = "test@liferay.com");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		LAR.importPortlet(
@@ -1229,7 +1229,7 @@ definition {
 		}
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -1240,7 +1240,7 @@ definition {
 			dmDocumentTypeName = "DM Document Type Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -1313,7 +1313,7 @@ definition {
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -1467,7 +1467,7 @@ definition {
 			userEmailAddress = "userea@liferay.com");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		AssertVisible(
@@ -1491,7 +1491,7 @@ definition {
 		DMDocument.viewCannotAddRepository();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocumentType.viewNoAvailableActionsViaDocumentTypesPG();
@@ -1580,7 +1580,7 @@ definition {
 		PageTemplatesAdmin.openPageTemplatesAdmin(siteURLKey = "global");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMFolder.addCP(
@@ -1596,7 +1596,7 @@ definition {
 		PageTemplatesAdmin.openPageTemplatesAdmin(siteURLKey = "global");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMFolder.viewCP(dmFolderName = "DM Folder Name");
@@ -1885,7 +1885,7 @@ definition {
 			dmFolderName = "DM Folder Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoFolderPermissions(dmFolderName = "DM Folder Name");
@@ -1921,7 +1921,7 @@ definition {
 			siteName = "Organization Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoFolderPermissions(dmFolderName = "DM Folder Name");

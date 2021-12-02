@@ -78,7 +78,7 @@ definition {
 			portlet = "Adaptive Media");
 
 		AdaptiveMedia.addImageResolution(
-			description = "1234567890!@#$%^&amp;*()~`",
+			description = "1234567890!@#$%^&*()~`",
 			imageName = "abcdefghijklmnopqrstuvwxyz",
 			maxHeight = "25",
 			maxWidth = "25");
@@ -88,17 +88,17 @@ definition {
 			imageNameEdit = "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
 		AdaptiveMedia.addImageResolution(
-			imageName = "1234567890!@#$%^&amp;*()~`",
+			imageName = "1234567890!@#$%^&*()~`",
 			maxHeight = "75",
 			maxWidth = "75");
 
 		AdaptiveMedia.editImageResolution(
-			imageName = "1234567890!@#$%^&amp;*()~`",
-			imageNameEdit = "[]\{}|:&quot;;&apos;,./&gt;&lt;?");
+			imageName = "1234567890!@#$%^&*()~`",
+			imageNameEdit = "[]\{}|:&quot;;',./><?");
 
 		AdaptiveMedia.gotoImageVariantEntry(imageName = "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
-		AdaptiveMedia.viewImageVariantDescription(description = "1234567890!@#$%^&amp;*()~`");
+		AdaptiveMedia.viewImageVariantDescription(description = "1234567890!@#$%^&*()~`");
 	}
 
 	@priority = "5"
@@ -250,7 +250,7 @@ definition {
 	@priority = "5"
 	test AssertAdaptedImageInBlogsEntry {
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		JSONDocument.addFileWithUploadedFile(
@@ -263,7 +263,7 @@ definition {
 		Pause(locator1 = "3000");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsNavigator.gotoAddEntry();
@@ -295,7 +295,7 @@ definition {
 			sourceFileName = "high_resolution_photo.jpg");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContentNavigator.gotoAddCP();
@@ -337,7 +337,7 @@ definition {
 		Pause(locator1 = "3000");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsNavigator.gotoAddEntry();

@@ -27,7 +27,7 @@ definition {
 			Navigator.openURL();
 
 			ProductMenu.gotoPortlet(
-				category = "Content &amp; Data",
+				category = "Content & Data",
 				panel = "Site Administration",
 				portlet = "Forms");
 
@@ -45,7 +45,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Forms");
 
@@ -70,7 +70,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Forms");
 
@@ -91,7 +91,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Forms");
 
@@ -132,7 +132,7 @@ definition {
 			workflowTask = "Review");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Forms");
 
@@ -152,7 +152,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Forms");
 
@@ -175,7 +175,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Forms");
 
@@ -264,7 +264,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Forms");
 
@@ -464,7 +464,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Forms");
 

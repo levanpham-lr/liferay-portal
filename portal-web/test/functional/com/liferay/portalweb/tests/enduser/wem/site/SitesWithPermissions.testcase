@@ -89,7 +89,7 @@ definition {
 
 		task ("Add a poll via Polls admin") {
 			ProductMenu.gotoPortlet(
-				category = "Content &amp; Data",
+				category = "Content & Data",
 				portlet = "Polls");
 
 			Polls.addPollCP(

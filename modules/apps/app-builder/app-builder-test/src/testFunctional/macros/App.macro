@@ -30,6 +30,7 @@ definition {
 
 	macro clickDeploy {
 		Button.click(button = "Deploy");
+
 		App.waitForDeployButtonNotVisible();
 	}
 

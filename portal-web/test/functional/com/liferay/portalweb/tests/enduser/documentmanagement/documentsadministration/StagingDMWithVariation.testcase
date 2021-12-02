@@ -76,7 +76,7 @@ definition {
 			dmFolderName = "DM Folder Name Empty");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoMetadataSets();
@@ -92,7 +92,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();

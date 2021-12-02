@@ -12,7 +12,9 @@ definition {
 		User.firstLoginPG();
 
 		JSONGroup.addGroup(groupName = "App Builder Site Name");
+
 		JSONGroup.addGroup(groupName = "App Builder Site 1");
+
 		JSONGroup.addGroup(groupName = "App Builder Site 2");
 
 		Navigator.openURL();
@@ -32,14 +34,16 @@ definition {
 
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
 
-		if (("${testPortalInstance}" == "true") && (!(IsTestName(locator1 = "", value1 = "${testNameSkipPortalInstance}")))) {
+		if (("${testPortalInstance}" == "true") && !(IsTestName(locator1 = "", value1 = "${testNameSkipPortalInstance}"))) {
 			PortalInstances.tearDownCP();
 		}
 		else {
 			Page.tearDownCP();
 
 			JSONGroup.deleteGroupByName(groupName = "App Builder Site Name");
+
 			JSONGroup.deleteGroupByName(groupName = "App Builder Site 1");
+
 			JSONGroup.deleteGroupByName(groupName = "App Builder Site 2");
 
 			JSONUser.tearDownNonAdminUsers();
@@ -84,11 +88,15 @@ definition {
 		AppBuilderAdmin.validatePermissionsFromRolesAreNotChecked(roleList = "Analytics Administrator,Portal Content Reviewer,Power User,User");
 
 		AppBuilderAdmin.addAllPermissionsFromRoles(roleList = "Portal Content Reviewer,User");
+
 		LexiconEntry.gotoVerticalEllipsisMenuItemNoError(menuItem = "App Permissions");
+
 		AppBuilderAdmin.validatePermissionsFromRolesAreChecked(roleList = "Portal Content Reviewer,User");
 
 		AppBuilderAdmin.removeAllPermissionsFromRoles(roleList = "Portal Content Reviewer,User");
+
 		LexiconEntry.gotoVerticalEllipsisMenuItemNoError(menuItem = "App Permissions");
+
 		AppBuilderAdmin.validatePermissionsFromRolesAreNotChecked(roleList = "Portal Content Reviewer,User");
 	}
 
@@ -141,11 +149,15 @@ definition {
 				formViewName = "My Form View with ${field} 2");
 
 			FormViewBuilder.openFormView(formViewName = "My Form View with ${field} 1");
+
 			FormViewBuilder.validateFieldLabel(fieldLabel = "${field}");
+
 			AppBuilderAdmin.gotoBack();
 
 			FormViewBuilder.openFormView(formViewName = "My Form View with ${field} 2");
+
 			FormViewBuilder.validateFieldLabel(fieldLabel = "${field}");
+
 			AppBuilderAdmin.gotoBack();
 		}
 
@@ -404,28 +416,36 @@ definition {
 			customObjectName = "",
 			isCreatingFormView = "false",
 			isCreatingViaPlusIcon = "true");
+
 		AppBuilderAdmin.validateRequiredValidNameMessage();
+
 		AppBuilderAdmin.cancel();
 
 		AppBuilderAdmin.addCustomObject(
 			customObjectName = "",
 			isCreatingFormView = "true",
 			isCreatingViaPlusIcon = "true");
+
 		AppBuilderAdmin.validateRequiredValidNameMessage();
+
 		AppBuilderAdmin.cancel();
 
 		AppBuilderAdmin.addCustomObject(
 			customObjectName = "",
 			isCreatingFormView = "true",
 			isCreatingViaPlusIcon = "false");
+
 		AppBuilderAdmin.validateRequiredValidNameMessage();
+
 		AppBuilderAdmin.cancel();
 
 		AppBuilderAdmin.addCustomObject(
 			customObjectName = "",
 			isCreatingFormView = "false",
 			isCreatingViaPlusIcon = "false");
+
 		AppBuilderAdmin.validateRequiredValidNameMessage();
+
 		AppBuilderAdmin.cancel();
 	}
 
@@ -748,6 +768,7 @@ definition {
 		AppBuilderAdmin.add();
 
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Text");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Numeric");
 
 		TableViewBuilder.setName(tableViewName = "Table One");
@@ -1279,12 +1300,17 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Full name");
+
 		FormViewBuilder.setFieldRequired();
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Nickname");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.setName(formViewName = "${myFormViewName}");
@@ -1298,6 +1324,7 @@ definition {
 		AppBuilderAdmin.add();
 
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Full name");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Nickname");
 
 		TableViewBuilder.setName(tableViewName = "${myTableViewName}");
@@ -1357,18 +1384,27 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.switchToAdvancedTab();
+
 		FormViewBuilder.setFieldPredefinedText(fieldValue = "Predefined Text");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
+
 		FormViewBuilder.switchToAdvancedTab();
+
 		FormViewBuilder.setFieldPredefinedText(fieldValue = "12345");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Date");
+
 		FormViewBuilder.switchToAdvancedTab();
+
 		FormViewBuilder.setFieldPredefinedDate(fieldValue = "03/02/2019");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Select from List");
@@ -1379,8 +1415,11 @@ definition {
 				optionValue = "Select ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.switchToAdvancedTab();
+
 		FormViewBuilder.selectSelectOptionPredefined(selectOption = "Select 2");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Multiple Selection");
@@ -1391,10 +1430,13 @@ definition {
 				optionValue = "Multiple ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.switchToAdvancedTab();
+
 		FormViewBuilder.selectSelectWithMultipleOptionsPredefined(
 			fieldName = "Multiple Selection",
 			selectOptionsList = "Multiple 1,Multiple 2,Multiple 3");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Single Selection");
@@ -1405,8 +1447,11 @@ definition {
 				optionValue = "Task ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.switchToAdvancedTab();
+
 		FormViewBuilder.selectSelectOptionPredefined(selectOption = "Task 3");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.setName(formViewName = "My Form View");
@@ -1505,12 +1550,15 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.setName(formViewName = "My Form View");
+
 		FormViewBuilder.save();
 
 		TableViewBuilder.addBasicTableView(
@@ -1559,13 +1607,17 @@ definition {
 			portletName = "Widget App (Table View)");
 
 		Portlet.viewSpecificPG(portletName = "Widget App (Table View)");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Content of form deployed as widget");
+
 		AppBuilderAdmin.validateNewButtonIsNotPresent(buttonValue = "New Entry");
+
 		AppBuilderAdmin.validateNewButtonIconIsNotPresent();
 
 		AppBuilderAdmin.openItem(itemName = "Content of form deployed as widget");
 
 		DetailsView.validateEntry(entry = "Content of form deployed as widget");
+
 		DetailsView.validateEntry(entry = "1987");
 	}
 
@@ -1763,13 +1815,10 @@ definition {
 
 		var myFormViewName_1 = "My Form View 1";
 		var myFormViewName_2 = "My Form View 2";
-
 		var myTextFieldName_1 = "Text1";
 		var myTextFieldName_2 = "Text2";
-
 		var myTableViewName_1 = "My Table View 1";
 		var myTableViewName_2 = "My Table View 2";
-
 		var myAppName_1 = "Product Menu App 1";
 		var myAppName_2 = "Product Menu App 2";
 		var myAppName_3 = "Product Menu App 3";
@@ -1780,16 +1829,25 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "${myTextFieldName_1}");
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.setName(formViewName = "${myFormViewName_1}");
+
 		FormViewBuilder.save();
 
 		AppBuilderAdmin.add();
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "${myTextFieldName_2}");
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.setName(formViewName = "${myFormViewName_2}");
+
 		FormViewBuilder.save();
 
 		TableViewBuilder.addBasicTableView(
@@ -1801,27 +1859,43 @@ definition {
 			tableViewName = "${myTableViewName_2}");
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "${myTableViewName_1}");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "${myTableViewName_2}");
 
 		AppBuilderAdmin.switchTab(tabName = "Apps");
+
 		AppBuilderAdmin.add();
+
 		AppBuilderAdmin.setName(title = "${myAppName_1}");
+
 		App.selectFormView(formViewName = "${myFormViewName_1}");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "${myTableViewName_1}");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "${myTableViewName_2}");
+
 		App.selectTableView(tableViewName = "${myTableViewName_1}");
+
 		App.toggleDeploy(deployOption = "Product Menu");
+
 		App.openProductMenuPlaceItDropdown();
+
 		App.validateProductMenuPlaceItDropdownList(menuOption = "Applications");
+
 		App.validateProductMenuPlaceItDropdownList(menuOption = "Site Menu");
+
 		App.validateProductMenuPlaceItDropdownList(menuOption = "Applications and Site Menu");
 
 		App.selectProductMenuPlaceItDropdownOption(menuOption = "Site Menu");
+
 		App.validateProductMenuSiteDropdownPresent();
+
 		App.selectProductMenuPlaceItDropdownOption(menuOption = "Applications and Site Menu");
+
 		App.validateProductMenuSiteDropdownPresent();
 
 		App.selectProductMenuPlaceItDropdownOption(menuOption = "Applications");
+
 		App.clickDeploy();
 
 		App.add(
@@ -1876,13 +1950,10 @@ definition {
 
 		var myFormViewName_1 = "My Form View 1";
 		var myFormViewName_2 = "My Form View 2";
-
 		var myTextFieldName_1 = "Text1";
 		var myTextFieldName_2 = "Text2";
-
 		var myTableViewName_1 = "My Table View 1";
 		var myTableViewName_2 = "My Table View 2";
-
 		var myAppName_1 = "Standalone App 1";
 		var myAppName_2 = "Standalone App 2";
 		var myAppName_3 = "Standalone App 3";
@@ -1893,16 +1964,25 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "${myTextFieldName_1}");
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.setName(formViewName = "${myFormViewName_1}");
+
 		FormViewBuilder.save();
 
 		AppBuilderAdmin.add();
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "${myTextFieldName_2}");
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.setName(formViewName = "${myFormViewName_2}");
+
 		FormViewBuilder.save();
 
 		TableViewBuilder.addBasicTableView(
@@ -1914,14 +1994,23 @@ definition {
 			tableViewName = "${myTableViewName_2}");
 
 		AppBuilderAdmin.switchTab(tabName = "Apps");
+
 		App.clickNewAppButton();
+
 		AppBuilderAdmin.setName(title = "${myAppName_1}");
+
 		App.selectFormView(formViewName = "${myFormViewName_1}");
+
 		App.selectTableView(tableViewName = "${myTableViewName_1}");
+
 		App.toggleDeploy(deployOption = "Widget");
+
 		App.toggleDeploy(deployOption = "Standalone");
+
 		App.toggleDeploy(deployOption = "Product Menu");
+
 		App.clickDeploy();
+
 		VerifyElementPresent(locator1 = "Message#SUCCESS_DISMISSIBLE");
 
 		App.add(
@@ -1937,33 +2026,49 @@ definition {
 			tableViewName = "${myTableViewName_2}");
 
 		AppBuilderAdmin.openStandAloneApp(itemName = "${myAppName_1}");
+
 		SelectWindow.selectPopUp(locator1 = "null");
+
 		AppBuilderAdmin.addEntry();
+
 		FormViewBuilder.editText(
 			fieldName = "${myTextFieldName_1}",
 			fieldValue = "Content from Form 1");
+
 		AppBuilderAdmin.save();
+
 		Alert.viewSuccessMessage();
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Content from Form 1");
 
 		Navigator.closeWindow();
 
 		AppBuilderAdmin.openStandAloneApp(itemName = "${myAppName_2}");
+
 		SelectWindow.selectPopUp(locator1 = "null");
+
 		AppBuilderAdmin.addEntry();
+
 		FormViewBuilder.editText(
 			fieldName = "${myTextFieldName_2}",
 			fieldValue = "Content from Form 2");
+
 		AppBuilderAdmin.save();
+
 		Alert.viewSuccessMessage();
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Content from Form 2");
 
 		Navigator.closeWindow();
 
 		AppBuilderAdmin.openStandAloneApp(itemName = "${myAppName_3}");
+
 		SelectWindow.selectPopUp(locator1 = "null");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Content from Form 2");
+
 		AppBuilderAdmin.addEntry();
+
 		FormViewBuilder.validateFieldLabel(fieldLabel = "${myTextFieldName_1}");
 
 		Navigator.closeWindow();
@@ -2319,25 +2424,37 @@ definition {
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Admin object");
 
 		LexiconEntry.gotoVerticalEllipsisMenuItemNoError(menuItem = "App Permissions");
+
 		AppBuilderAdmin.addAllPermissionsFromRoles(roleList = "User");
+
 		LexiconEntry.gotoVerticalEllipsisMenuItemNoError(menuItem = "App Permissions");
+
 		AppBuilderAdmin.validatePermissionsFromRolesAreChecked(roleList = "User");
+
 		Button.clickSave();
 
 		LexiconEntry.gotoVerticalEllipsisMenuItemNoError(menuItem = "Form Views");
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Form View Admin");
+
 		AppBuilderAdmin.editItem(itemName = "Form View Admin");
+
 		FormViewBuilder.setName(formViewName = "Form View UserA");
+
 		FormViewBuilder.save();
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Form View UserA");
 
 		AppBuilderAdmin.switchTab(tabName = "Table Views");
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Table View Admin");
+
 		AppBuilderAdmin.editItem(itemName = "Table View Admin");
+
 		TableViewBuilder.setName(tableViewName = "Table View UserA");
+
 		TableViewBuilder.save();
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Table View UserA");
 
 		AppBuilderAdmin.switchTab(tabName = "Apps");
@@ -2347,7 +2464,9 @@ definition {
 		AppBuilderAdmin.gotoBack();
 
 		LexiconEntry.gotoVerticalEllipsisMenuItemNoError(menuItem = "Delete");
+
 		AssertConfirm(value1 = "Are you sure you want to delete this? It will be deleted immediately.");
+
 		AppBuilderAdmin.assertNewButtonIsVisible(buttonValue = "New Custom Object");
 
 		AppBuilderAdmin.performCustomObjectCRUD();
@@ -2420,9 +2539,11 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.setName(formViewName = "My Form View");
@@ -2519,6 +2640,7 @@ definition {
 			AppBuilderAdmin.viewItem(itemName = "Testing permission.");
 
 			DetailsView.validateEntry(entry = "Testing permission.");
+
 			DetailsView.validateEntry(entry = "1914");
 
 			DetailsView.editEntry();
@@ -3172,12 +3294,17 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Full name");
+
 		FormViewBuilder.setFieldRequired();
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Nickname");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.setName(formViewName = "${myFormViewName}");
@@ -3191,6 +3318,7 @@ definition {
 		AppBuilderAdmin.add();
 
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Full name");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Nickname");
 
 		TableViewBuilder.setName(tableViewName = "${myTableViewName}");
@@ -3220,6 +3348,7 @@ definition {
 		AppBuilderAdmin.save();
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Test");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Tester");
 
 		AppBuilderAdmin.addEntry();
@@ -3237,6 +3366,7 @@ definition {
 		AppBuilderAdmin.viewItem(itemName = "Test");
 
 		DetailsView.validateEntry(entry = "Test");
+
 		DetailsView.validateEntry(entry = "Tester");
 
 		DetailsView.nextEntry();
@@ -3252,6 +3382,7 @@ definition {
 		AppBuilderAdmin.save();
 
 		DetailsView.validateEntry(entry = "Changed");
+
 		DetailsView.validateEntry(entry = "Bester");
 
 		DetailsView.deleteEntry(itemName = "Changed");
@@ -3347,17 +3478,29 @@ definition {
 				optionValue = "Option ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Upload");
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Select from List");
 
 		for (var number : list "1,2,3") {
@@ -3366,9 +3509,13 @@ definition {
 				optionValue = "Select ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Single Selection");
 
 		for (var number : list "1,2,3") {
@@ -3548,13 +3695,21 @@ definition {
 		AppBuilderAdmin.add();
 
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Multiple Selection");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Numeric");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Upload");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Select from List");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Text");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Single Selection");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Quantity");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Value");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Total");
 
 		TableViewBuilder.setName(tableViewName = "My Table View");

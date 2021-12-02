@@ -383,7 +383,7 @@ definition {
 				locator1 = "MessageBoardsEditMessage#ATTACHMENTS_SELECTED_FILE",
 				value1 = "${mbThreadAttachment}");
 
-			if (IsElementPresent(locator1 = "Header#H4_TITLE", key_title = "Uploading")) {
+			if (IsElementPresent(key_title = "Uploading", locator1 = "Header#H4_TITLE")) {
 				Click(
 					key_fileName = "${mbThreadAttachment}",
 					locator1 = "Icon#DELETE_ATTACHMENT");

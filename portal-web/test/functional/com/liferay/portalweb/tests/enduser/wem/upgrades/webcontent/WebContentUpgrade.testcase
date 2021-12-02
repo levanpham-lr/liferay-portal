@@ -157,7 +157,7 @@ definition {
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content",
 			site = "${siteName}");
 
@@ -180,7 +180,7 @@ definition {
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content",
 			site = "${siteName}");
 

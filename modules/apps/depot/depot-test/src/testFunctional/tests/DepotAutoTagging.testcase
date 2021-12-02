@@ -329,6 +329,7 @@ definition {
 		DMDocument.viewCP(dmDocumentTitle = "DM Document Title");
 
 		AutoTagging.assertAutoTagPresent(tagName = "adventures");
+
 		AutoTagging.assertAutoTagPresent(tagName = "alice");
 
 		DepotNavigator.openDepotDocumentsAndMediaAdmin(depotName = "Test Depot Name");
@@ -344,6 +345,7 @@ definition {
 		DMDocument.viewCP(dmDocumentTitle = "DM Document Title");
 
 		AutoTagging.assertAutoTagPresent(tagName = "adventures");
+
 		AutoTagging.assertAutoTagPresent(tagName = "newtag");
 	}
 

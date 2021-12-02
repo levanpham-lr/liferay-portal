@@ -99,7 +99,7 @@ definition {
 
 		Panel.expandPanel(panel = "Open Graph");
 
-		if (IsChecked(locator1 = "Checkbox#ANY_CHECKBOX", checkboxName = "Enable Open Graph")) {
+		if (IsChecked(checkboxName = "Enable Open Graph", locator1 = "Checkbox#ANY_CHECKBOX")) {
 			Click(
 				checkboxName = "Enable Open Graph",
 				locator1 = "Checkbox#ANY_CHECKBOX");
@@ -179,7 +179,6 @@ definition {
 				key_mappedField = "${mappedField}",
 				locator1 = "PageEditor#EDITABLE_FIELD_TOOLBAR_UNMAPPED_BUTTON");
 		}
-
 		else {
 			AssertElementPresent(
 				key_mappedField = "${mappedField}",
@@ -188,13 +187,13 @@ definition {
 	}
 
 	macro viewNoOpenGraphProperties {
-		for (var ogProperty : list "${ogPropertyList}" ) {
+		for (var ogProperty : list "${ogPropertyList}") {
 			AssertHTMLSourceTextNotPresent(value1 = "${ogProperty}");
 		}
 	}
 
 	macro viewOpenGraphProperties {
-		for (var ogProperty : list "${ogPropertyList}" ) {
+		for (var ogProperty : list "${ogPropertyList}") {
 			AssertHTMLSourceTextPresent(value1 = "${ogProperty}");
 		}
 	}

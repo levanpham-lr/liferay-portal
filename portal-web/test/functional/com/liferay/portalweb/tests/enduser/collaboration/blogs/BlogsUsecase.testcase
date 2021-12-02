@@ -938,7 +938,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoScopedPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs",
 			scope = "Blogs Page2");
 

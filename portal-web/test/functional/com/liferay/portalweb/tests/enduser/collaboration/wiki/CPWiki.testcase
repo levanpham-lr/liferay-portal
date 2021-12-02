@@ -333,7 +333,7 @@ definition {
 		SitePages.addPublicPage(pageName = "Wiki");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Wiki");
 
 		LAR.importPortlet(
@@ -479,7 +479,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Wiki");
 
 		WikiNavigator.gotoNode(wikiNodeName = "Main");
@@ -491,7 +491,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Wiki");
 
 		WikiNavigator.gotoNode(wikiNodeName = "Main");

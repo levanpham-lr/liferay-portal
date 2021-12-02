@@ -23,7 +23,7 @@ definition {
 	macro mapEditableFieldToAsset {
 		Click(locator1 = "PageEditor#EDITABLE_FIELD_TOOLBAR_MAP_ASSET_SELECT_POPUP_BUTTON");
 
-		if (IsElementPresent(key_menuItem = "Select Content",locator1 = "MenuItem#ANY_MENU_ITEM")) {
+		if (IsElementPresent(key_menuItem = "Select Content", locator1 = "MenuItem#ANY_MENU_ITEM")) {
 			if (isSet(contentItem)) {
 				DropdownMenuItem.click(menuItem = "${contentItem}");
 			}

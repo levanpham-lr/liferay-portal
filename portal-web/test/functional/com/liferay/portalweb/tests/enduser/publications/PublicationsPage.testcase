@@ -276,6 +276,7 @@ definition {
 		FragmentsAdmin.addFragment(fragmentName = "Fragment Name");
 
 		var fragmentHTML = '''<lfr-widget-asset-list>''';
+
 		var htmlSnippet = '''<lfr-''';
 
 		FragmentsEditor.autocompleteFragmentHTML(
@@ -288,7 +289,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContentNavigator.gotoAddCP();

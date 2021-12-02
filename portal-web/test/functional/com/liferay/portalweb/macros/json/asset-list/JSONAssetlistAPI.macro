@@ -46,9 +46,7 @@ com.liferay.wiki.model.WikiPage
 
 		var newLine = '''
 ''';
-
 		var values = StringUtil.regexReplaceAll("${values}", "${newLine}", "");
-
 		var classNameIds = "";
 
 		for (var value : list "${values}") {
@@ -58,10 +56,8 @@ com.liferay.wiki.model.WikiPage
 		}
 
 		var length = StringUtil.length("${classNameIds}");
-
 		var endIndex = ${length} - 1;
-
-		var classNameIds = StringUtil.substring("${classNameIds}", "0","${endIndex}");
+		var classNameIds = StringUtil.substring("${classNameIds}", "0", "${endIndex}");
 
 		var googleDriveShortcutClassTypeId = JSONDLfileentrytype._getFileEntryTypeId(
 			fileEntryTypeName = "Google Drive Shortcut",
@@ -108,7 +104,6 @@ queryName0=assetTags
 subtypeFieldsFilterEnabledDLFileEntryAssetRendererFactory=false
 subtypeFieldsFilterEnabledJournalArticleAssetRendererFactory=false
 ''';
-
 		var typeSettings = StringUtil.regexReplaceAll("${typeSettings}", "${newLine}", "%0A");
 
 		var curl = '''

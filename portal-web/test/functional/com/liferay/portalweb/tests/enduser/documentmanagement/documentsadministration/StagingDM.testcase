@@ -29,7 +29,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 	}
 
@@ -155,7 +155,7 @@ definition {
 		ProductMenu.gotoLiveSite();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Documents and Media");
 
@@ -168,7 +168,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Documents and Media");
 
@@ -189,7 +189,7 @@ definition {
 		ProductMenu.gotoLiveSite();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Documents and Media");
 
@@ -209,7 +209,7 @@ definition {
 			dmDocumentTypeName = "DM Document Type Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		Refresh();
@@ -225,7 +225,7 @@ definition {
 			workflowRestriction = "Specific Restrictions");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoFolder(dmFolderName = "DM Folder Name");
@@ -236,7 +236,7 @@ definition {
 			dmDocumentTypeName = "DM Document Type Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -275,7 +275,7 @@ definition {
 		ProductMenu.gotoLiveSite(site = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoMetadataSets();
@@ -314,7 +314,7 @@ definition {
 			value1 = "Pending");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		Staging.publishViaSAP(
@@ -324,7 +324,7 @@ definition {
 		ProductMenu.gotoLiveSite(site = "Guest");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		LexiconEntry.changeDisplayStyle(displayStyle = "list");
@@ -358,7 +358,7 @@ definition {
 			dmDocumentTitle = "DM Document in Folder 1");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMFolder.viewCP(
@@ -377,7 +377,7 @@ definition {
 			dmDocumentTitle = "DM Document in Folder 2");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMFolder.viewCP(dmFolderName = "DM Folder 1");
@@ -398,7 +398,7 @@ definition {
 			dmDocumentTitle = "DM Document in Folder 3");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		Staging.publishViaSAP(
@@ -408,7 +408,7 @@ definition {
 		ProductMenu.gotoLiveSite(site = "Guest");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		for (var folderCount : list "1,2,3") {

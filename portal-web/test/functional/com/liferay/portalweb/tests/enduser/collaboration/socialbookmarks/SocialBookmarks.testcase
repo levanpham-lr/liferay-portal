@@ -49,7 +49,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Knowledge Base");
 
 		KBArticle.addCP(
@@ -148,7 +148,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Knowledge Base");
 
 		KBArticle.addCP(

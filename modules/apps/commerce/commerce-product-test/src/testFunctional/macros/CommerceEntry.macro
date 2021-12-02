@@ -506,10 +506,8 @@ definition {
 
 	macro deleteCommerceEntry {
 		var paginationResults = selenium.getText("CommerceEntry#PAGINATION_RESULTS");
-
 		var numberOfEntries = StringUtil.extractLast("${paginationResults}", " ");
-
-		var numberOfEntriesAfterDeletion = MathUtil.difference("${numberOfEntries}", "1");
+		var numberOfEntriesAfterDeletion = ${numberOfEntries} - 1;
 
 		ClickNoError(
 			key_value = "",
@@ -518,7 +516,7 @@ definition {
 		CommerceEntry.clickNoError(menuItem = "Delete");
 
 		if ("${numberOfEntriesAfterDeletion}" != "0") {
-			paginationResults = StringUtil.replace("${paginationResults}", "${numberOfEntries}", "${numberOfEntriesAfterDeletion}");
+			var paginationResults = StringUtil.replace("${paginationResults}", "${numberOfEntries}", "${numberOfEntriesAfterDeletion}");
 
 			AssertTextEquals(
 				locator1 = "CommerceEntry#PAGINATION_RESULTS",
@@ -682,14 +680,14 @@ definition {
 				locator1 = "CommerceEntry#OPTIONS_SELECT_LIST");
 		}
 
-		if (IsElementPresent(locator1 = "CommerceEntry#OPTION_VALUE", key_optionType = "checkbox_multiple", key_optionValue = "${optionValue}")) {
+		if (IsElementPresent(key_optionType = "checkbox_multiple", key_optionValue = "${optionValue}", locator1 = "CommerceEntry#OPTION_VALUE")) {
 			Click(
 				key_optionType = "checkbox_multiple",
 				key_optionValue = "${optionValue}",
 				locator1 = "CommerceEntry#OPTION_VALUE");
 		}
 
-		if (IsElementPresent(locator1 = "CommerceEntry#OPTION_VALUE", key_optionType = "radio", key_optionValue = "${optionValue}")) {
+		if (IsElementPresent(key_optionType = "radio", key_optionValue = "${optionValue}", locator1 = "CommerceEntry#OPTION_VALUE")) {
 			Click(
 				key_optionType = "radio",
 				key_optionValue = "${optionValue}",

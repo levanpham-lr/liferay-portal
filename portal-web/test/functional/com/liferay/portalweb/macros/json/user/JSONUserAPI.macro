@@ -103,7 +103,6 @@ definition {
 				-d "end=-1" \
 				-d -orderByComparator=
 		''';
-
 		var passwordPolicyId = JSONCurlUtil.post("${curl}", "$.[?(@['name'] == 'Default Password Policy')]['passwordPolicyId']");
 		var passwordPolicyId = StringUtil.replace("${passwordPolicyId}", "[&quot;", "");
 		var passwordPolicyId = StringUtil.replace("${passwordPolicyId}", "&quot;]", "");
@@ -153,7 +152,6 @@ definition {
 			${portalURL}/api/jsonws/user/get-user-by-email-address/company-id/${companyId}/email-address/${userEmailAddress} \
 				-u test@liferay.com:test
 		''';
-
 		var userId = JSONCurlUtil.get("${curl}", "$['userId']");
 
 		return "${userId}";
@@ -171,7 +169,6 @@ definition {
 			-d <CURL_DATA[start=-1]CURL_DATA> \
 			-d <CURL_DATA[end=-1]CURL_DATA>
 		''';
-
 		var userIds = JSONCurlUtil.post("${curl}", "$..['userId']");
 		var userIds = StringUtil.replace("${userIds}", "[", "");
 		var userIds = StringUtil.replace("${userIds}", "]", "");

@@ -492,7 +492,7 @@ definition {
 		ProductMenu.gotoLiveSite(site = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentCP(dmDocumentTitle = "Document_1.jpg");
@@ -801,7 +801,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsNavigator.gotoAddEntry();
@@ -850,7 +850,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsNavigator.gotoAddEntry();

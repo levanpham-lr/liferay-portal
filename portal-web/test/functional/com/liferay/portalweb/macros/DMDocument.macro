@@ -1146,7 +1146,6 @@ definition {
 					radioOption = "Replace");
 			}
 		}
-
 		else {
 			AssertTextEquals.assertPartialText(
 				locator1 = "Modal#BODY",
@@ -1196,7 +1195,7 @@ definition {
 
 	macro getDMLatestVersionURL {
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media",
 			site = "${site}");
 
@@ -1283,7 +1282,6 @@ definition {
 				locator1 = "Button#ANY",
 				value1 = "Select This Folder");
 		}
-
 		else {
 			if (IsElementPresent(locator1 = "//div[contains(@class,'portlet-body')]//form//ol[contains(@class,'breadcrumb')]//a[contains(.,'Home')]")) {
 				AssertClick(
@@ -1584,7 +1582,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		if (IsElementNotPresent(locator1 = "Message#EMPTY_INFO")) {
@@ -1746,7 +1744,7 @@ definition {
 
 		DMDocument.expandInfo();
 
-		if ((isSet(dmDocumentSize)) && (!(contains("${dmDocumentSize}", "{dmDocumentSize}")))) {
+		if (isSet(dmDocumentSize) && !(contains("${dmDocumentSize}", "{dmDocumentSize}"))) {
 			var key_dmDocumentSize = "${dmDocumentSize}";
 
 			AssertVisible(locator1 = "DocumentsAndMediaDocument#DOCUMENT_DETAILS_SIZE");

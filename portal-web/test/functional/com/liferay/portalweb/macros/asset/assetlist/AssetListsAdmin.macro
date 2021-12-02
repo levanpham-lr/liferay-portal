@@ -10,7 +10,6 @@ definition {
 				key_menuItem = "Dynamic Collection",
 				locator1 = "MenuItem#DROPDOWN_MENU_ITEM");
 		}
-
 		else {
 			LexiconEntry.gotoAddMenuItem(menuItem = "Dynamic Collection");
 		}
@@ -68,7 +67,6 @@ definition {
 				key_menuItem = "Manual Collection",
 				locator1 = "MenuItem#DROPDOWN_MENU_ITEM");
 		}
-
 		else {
 			LexiconEntry.gotoAddMenuItem(menuItem = "Manual Collection");
 		}

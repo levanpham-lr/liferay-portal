@@ -456,7 +456,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		Blogs.addWithWorkflow(
@@ -1381,7 +1381,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Kaleo Forms Admin");
 
 		KaleoFormsAdmin.addFieldSet(

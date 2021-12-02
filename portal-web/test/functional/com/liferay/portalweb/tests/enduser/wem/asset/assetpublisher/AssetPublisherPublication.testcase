@@ -66,7 +66,7 @@ definition {
 		Staging.publishToLive();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContentFolder.moveToRecycleBinCP(

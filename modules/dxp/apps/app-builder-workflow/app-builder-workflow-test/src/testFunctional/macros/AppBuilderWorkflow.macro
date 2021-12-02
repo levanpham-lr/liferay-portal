@@ -55,6 +55,7 @@ definition {
 	macro assertEntryInfoOnTableView {
 		var key_entryName = "${entryName}";
 		var key_info = "${info}";
+
 		AssertElementPresent(locator1 = "AppBuilderWorkflow#ENTRY_INFO_ON_TABLE_VIEW");
 	}
 
@@ -83,7 +84,9 @@ definition {
 
 		while (IsElementNotPresent(key_menuItem = "Assign to", locator1 = "MenuItem#ANY_MENU_ITEM")) {
 			Refresh();
+
 			Pause(locator1 = "3000");
+
 			Click(
 				key_itemName = "${itemName}",
 				locator1 = "AppBuilder#VERTICAL_ELLIPSIS_BUTTON");
@@ -113,7 +116,9 @@ definition {
 
 		while (IsElementNotPresent(key_menuItem = "Assign to", locator1 = "MenuItem#ANY_MENU_ITEM")) {
 			Refresh();
+
 			Pause(locator1 = "3000");
+
 			Click(
 				key_itemName = "${itemName}",
 				locator1 = "AppBuilder#VERTICAL_ELLIPSIS_BUTTON");
@@ -204,7 +209,9 @@ definition {
 
 	macro saveNewVersionedApp {
 		AppBuilderWorkflow.clickSaveButton();
+
 		AppBuilderWorkflow.clickSaveButtonFromSaveAppModal();
+
 		AppBuilderWorkflow.waitForButtonNotPresent(buttonName = "Save");
 	}
 
@@ -234,12 +241,15 @@ definition {
 		AppBuilderWorkflow.selectDataAndViewsCard();
 
 		AppBuilderWorkflow.clickOnSelectObject();
+
 		AppBuilderWorkflow.selectObject(objectName = "${objectName}");
 
 		AppBuilderWorkflow.clickOnSelectFormView(positionNumber = "1");
+
 		AppBuilderWorkflow.selectFormView(formViewName = "${formViewName}");
 
 		AppBuilderWorkflow.clickOnSelectTableView();
+
 		AppBuilderWorkflow.selectTableView(tableViewName = "${tableViewName}");
 	}
 
@@ -266,6 +276,7 @@ definition {
 
 		if (!(IsTextEqual.isPartialText(locator1 = "AppBuilderWorkflow#SELECT_FORM_VIEW_BUTTON_TEXT", value1 = "${formViewName}"))) {
 			AppBuilderWorkflow.clickOnSelectFormView(positionNumber = "1");
+
 			AppBuilderWorkflow.selectFormView(formViewName = "${formViewName}");
 		}
 
@@ -284,6 +295,7 @@ definition {
 		while (IsElementNotPresent(key_text = "Submit", locator1 = "Button#ANY")) {
 			Pause(locator1 = "3000");
 		}
+
 		Button.click(button = "Submit");
 
 		AppBuilderWorkflow.waitForButtonNotPresent(buttonName = "Submit");
@@ -334,7 +346,9 @@ definition {
 
 		while (IsElementNotPresent(key_menuItem = "Assign to", locator1 = "MenuItem#ANY_MENU_ITEM")) {
 			Refresh();
+
 			Pause(locator1 = "3000");
+
 			Click(
 				key_itemName = "${itemName}",
 				locator1 = "AppBuilder#VERTICAL_ELLIPSIS_BUTTON");

@@ -27,13 +27,12 @@ definition {
 			var port = Elasticsearch.getServerPort();
 
 			var portalHostname = PropsUtil.get("portal.hostname");
-
 			var curl = "http://${portalHostname}:${port}/_tasks";
 		}
 
 		var reindexElapsedTime = "0";
 
-		while ("${reindexElapsedTime}" == "0" || "${reindexElapsedTime}" == "10" || "${reindexElapsedTime}" == "480" && (maxIterations = "2")) {
+		while (("${reindexElapsedTime}" == "0") || ("${reindexElapsedTime}" == "10") || ("${reindexElapsedTime}" == "480") && (maxIterations = "2")) {
 			Navigator.gotoNavItem(navItem = "Index Actions");
 
 			Click(
@@ -48,14 +47,14 @@ definition {
 
 				var elasticsearchTasks = JSONCurlUtil.get("${curl}");
 
-				while ((!(contains("${elasticsearchTasks}", "indices:data/write/bulk"))) && ("${reindexStartTime}" != "60")) {
+				while (!(contains("${elasticsearchTasks}", "indices:data/write/bulk")) && ("${reindexStartTime}" != "60")) {
 					Pause.pauseNoSPARefresh(locator1 = "5000");
 
 					var reindexStartTime = ${reindexStartTime} + 5;
 
 					echo("Current Elasticsearch Tasks:");
 
-					elasticsearchTasks = JSONCurlUtil.get("${curl}");
+					var elasticsearchTasks = JSONCurlUtil.get("${curl}");
 				}
 
 				if ("${reindexStartTime}" == "60") {
@@ -65,14 +64,14 @@ definition {
 					echo("Started reindexing ${reindexStartTime} second(s) after clicking 'Execute'.");
 				}
 
-				while (((contains("${elasticsearchTasks}", "indices:data/write/bulk")) || IsElementPresent.pauseIsElementPresent(locator1 = "ControlMenu#RELOAD_TOOLTIP")) && ("${reindexElapsedTime}" != "480") && (maxIterations = "48")) {
+				while ((contains("${elasticsearchTasks}", "indices:data/write/bulk") || (IsElementPresent.pauseIsElementPresent(locator1 = "ControlMenu#RELOAD_TOOLTIP"))) && ("${reindexElapsedTime}" != "480") && (maxIterations = "48")) {
 					Pause.pauseNoSPARefresh(locator1 = "10000");
 
 					var reindexElapsedTime = ${reindexElapsedTime} + 10;
 
 					echo("Current Elasticsearch Tasks:");
 
-					elasticsearchTasks = JSONCurlUtil.get("${curl}");
+					var elasticsearchTasks = JSONCurlUtil.get("${curl}");
 				}
 			}
 			else if (contains("${searchEngineVendor}", "Solr") && contains("${actionsDescription}", "spell check")) {

@@ -68,7 +68,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Message Boards");
 
 		MessageboardsPortlet.viewNoPermissionCP();
@@ -114,7 +114,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Message Boards");
 
 		MessageboardsPortlet.viewNoPermissionCP();

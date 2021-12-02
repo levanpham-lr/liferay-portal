@@ -73,6 +73,7 @@ definition {
 				userEmailAddress = "test@liferay.com");
 
 			Alert.viewErrorMessage(errorMessage = "licensed for this cluster has been exceeded");
+
 			Alert.viewErrorMessage(errorMessage = "grace period");
 		}
 
@@ -148,6 +149,7 @@ definition {
 				userEmailAddress = "test@liferay.com");
 
 			Alert.viewErrorMessage(errorMessage = "licensed for this cluster has been exceeded");
+
 			Alert.viewErrorMessage(errorMessage = "grace period");
 		}
 
@@ -234,7 +236,9 @@ definition {
 			userEmailAddress = "test@liferay.com");
 
 		Alert.viewErrorMessage(errorMessage = "licensed for this cluster has been exceeded");
+
 		Alert.viewErrorMessage(errorMessage = "grace period");
+
 		Alert.viewErrorMessage(errorMessage = "will be automatically deactivated");
 
 		Clustering.waitForNodeShutdown(nodePort = "9080");
@@ -277,6 +281,7 @@ definition {
 		Page.assertNodePortPG(nodePort = "8080");
 
 		Alert.viewErrorMessage(errorMessage = "licensed for this cluster has been exceeded");
+
 		Alert.viewErrorMessage(errorMessage = "grace period");
 
 		Alert.closeMessage(messageType = "ERROR");
@@ -298,6 +303,7 @@ definition {
 			Page.assertNodePortPG(nodePort = "${nodeNumber}080");
 
 			Alert.viewErrorMessage(errorMessage = "licensed for this cluster has been exceeded");
+
 			Alert.viewErrorMessage(errorMessage = "grace period");
 		}
 
@@ -354,6 +360,7 @@ definition {
 			Page.assertNodePortPG(nodePort = "${nodeNumber}080");
 
 			Alert.viewErrorMessage(errorMessage = "licensed for this cluster has been exceeded");
+
 			Alert.viewErrorMessage(errorMessage = "grace period");
 		}
 

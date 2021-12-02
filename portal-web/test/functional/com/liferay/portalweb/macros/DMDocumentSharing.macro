@@ -105,7 +105,6 @@ definition {
 		if ("${contentSharingPermission}" == "View") {
 			AssertElementNotPresent(locator1 = "Comments#COMMENT_FIELD");
 		}
-
 		else {
 			AssertElementPresent(locator1 = "Comments#COMMENT_FIELD");
 		}
@@ -121,7 +120,6 @@ definition {
 		if (isSet(detailsView)) {
 			AssertVisible(locator1 = "DocumentsAndMedia#ICON_DOCUMENT_SHARED");
 		}
-
 		else {
 			AssertElementNotPresent(locator1 = "DocumentsAndMedia#ICON_DOCUMENT_SHARED");
 		}

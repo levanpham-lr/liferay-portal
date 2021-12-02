@@ -615,7 +615,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		if (IsVisible(locator1 = "Message#EMPTY_INFO", value1 = "No entries were found.")) {
@@ -679,7 +679,6 @@ definition {
 	macro viewAutoTag {
 		var key_entryTitle = "${entryTitle}";
 		var tagName = StringUtil.lowerCase("${tagName}");
-
 		var key_tagName = "${tagName}";
 
 		AssertTextEquals(
@@ -1119,11 +1118,9 @@ definition {
 		if ("${contentSharingPermission}" == "View") {
 			AssertElementNotPresent(locator1 = "Button#EDIT");
 		}
-
 		else if ("${contentSharingPermission}" == "Comment") {
 			AssertElementNotPresent(locator1 = "Button#EDIT");
 		}
-
 		else {
 			AssertElementPresent(locator1 = "Comments#COMMENT_FIELD");
 		}

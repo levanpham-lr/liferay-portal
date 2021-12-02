@@ -27,7 +27,6 @@ definition {
 
 			Click.clickNoMouseOver(locator1 = "Mentions#MENTIONS_USER_DISPLAY_OPTION");
 		}
-
 		else {
 			Type(
 				locator1 = "PageEditor#FRAGMENT_SIDEBAR_COMMENTS",
@@ -627,12 +626,11 @@ definition {
 
 	macro clickManagementBar {
 		var elementHeight = selenium.getElementHeight("PageEditor#MANAGEMENT_BAR");
-		var offSetY = MathUtil.product("50","${elementHeight}");
-		var offSetY = MathUtil.quotient("${offSetY}","100");
-
+		var offSetY = 50 * ${elementHeight};
+		var offSetY = ${offSetY} / 100;
 		var elementWidth = selenium.getElementWidth("PageEditor#MANAGEMENT_BAR");
-		var offSetX = MathUtil.product("25","${elementWidth}");
-		var offSetX = MathUtil.quotient("${offSetX}","100");
+		var offSetX = 25 * ${elementWidth};
+		var offSetX = ${offSetX} / 100;
 
 		Click.clickAt(
 			locator1 = "PageEditor#MANAGEMENT_BAR",
@@ -1124,7 +1122,6 @@ definition {
 
 					Click(locator1 = "ItemSelector#SELECT_FILE_WEB_CONTENT");
 				}
-
 				else {
 					LexiconEntry.changeDisplayStyle(displayStyle = "cards");
 
@@ -1359,7 +1356,6 @@ definition {
 							imageFileName = "${imageFileName}",
 							navTab = "Documents and Media");
 					}
-
 					else {
 						if (isSet(uploadFileName)) {
 							ItemSelector.uploadFile(
@@ -1718,7 +1714,7 @@ definition {
 			key_collectionName = "${collectionName}",
 			locator1 = "PageEditor#FRAGMENT_SIDEBAR_COLLECTION_PANEL");
 
-		if (IsElementPresent(locator1 = "PageEditor#FRAGMENT_SIDEBAR_COLLECTION_PANEL_COLLAPSED", key_collectionName = "${collectionName}")) {
+		if (IsElementPresent(key_collectionName = "${collectionName}", locator1 = "PageEditor#FRAGMENT_SIDEBAR_COLLECTION_PANEL_COLLAPSED")) {
 			AssertClick(
 				key_collectionName = "${collectionName}",
 				locator1 = "PageEditor#FRAGMENT_SIDEBAR_COLLECTION_PANEL_COLLAPSED",
@@ -1810,8 +1806,8 @@ definition {
 	}
 
 	macro gotoEditableFieldEdit {
-		id = "${id}";
-		key_fragmentName = "${fragmentName}";
+		var id = "${id}";
+		var key_fragmentName = "${fragmentName}";
 
 		PageEditor.clickEditableField(
 			contributed = "${contributed}",
@@ -1827,7 +1823,7 @@ definition {
 	}
 
 	macro gotoSaveAsFragment {
-		key_fragmentName = "${fragmentName}";
+		var key_fragmentName = "${fragmentName}";
 
 		PageEditor.clickConfigurableField(fragmentName = "${fragmentName}");
 
@@ -2071,7 +2067,6 @@ definition {
 					locator1 = "PageEditor#FRAGMENT_SIDEBAR_COMMENT_ENTRY_HIGHLIGHTED",
 					value1 = "${fragmentComment}");
 			}
-
 			else if (isSet(mentionsUserScreenName)) {
 				AssertTextEquals(
 					key_fragmentComment = "${fragmentComment}",
@@ -2082,7 +2077,6 @@ definition {
 					mentionsUserFullName = "${mentionsUserFullName}",
 					mentionsUserScreenName = "${mentionsUserScreenName}");
 			}
-
 			else {
 				AssertTextEquals(
 					key_fragmentComment = "${fragmentComment}",
@@ -2090,7 +2084,6 @@ definition {
 					value1 = "${fragmentComment}");
 			}
 		}
-
 		else {
 			AssertTextEquals(
 				locator1 = "PageEditor#FRAGMENT_SIDEBAR_SECTION_TITLE",
@@ -2137,7 +2130,6 @@ definition {
 				locator1 = "PageEditor#FRAGMENT_SIDEBAR_REPLY_COMMENTS_ENTRY_HIGHLIGHTED",
 				value1 = "${commentReply}");
 		}
-
 		else {
 			AssertTextEquals(
 				key_commentReply = "${commentReply}",

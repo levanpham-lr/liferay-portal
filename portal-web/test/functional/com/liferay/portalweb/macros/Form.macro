@@ -332,7 +332,6 @@ definition {
 		Form.gotoElementSetsTab();
 
 		var key_fieldLocation = "${fieldPositionNumber}";
-
 		var key_fieldType = "${elementSetTitle}";
 
 		ScrollBy(value1 = "0, 320");
@@ -379,6 +378,7 @@ definition {
 
 		if (isSet(localeBasic)) {
 			var key_localeBasic = "${localeBasic}";
+
 			AssertElementPresent(locator1 = "Form#SIDEBAR_BASIC_TAB_LOCALE");
 		}
 		else {
@@ -397,6 +397,7 @@ definition {
 				locator1 = "Form#SIDEBAR_ADVANCED_TAB",
 				value1 = "Advanced");
 		}
+
 		Pause(locator1 = "1000");
 	}
 
@@ -465,6 +466,7 @@ definition {
 				locator1 = "Form#SIDEBAR_PROPERTIES_TAB",
 				value1 = "Properties");
 		}
+
 		Pause(locator1 = "1000");
 	}
 

@@ -309,7 +309,7 @@ definition {
 		DMDocument.enableActionsMenuOnPortlet();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentPermissionsCP(dmDocumentTitle = "DM Folder Name");
@@ -430,7 +430,7 @@ definition {
 			userLoginFullName = "Test Test");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentPermissionsCP(dmDocumentTitle = "DM Folder Name");

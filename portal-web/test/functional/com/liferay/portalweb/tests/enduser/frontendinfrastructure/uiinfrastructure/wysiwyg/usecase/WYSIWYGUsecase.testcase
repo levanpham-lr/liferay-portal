@@ -180,7 +180,6 @@ definition {
 				locator1 = "//body",
 				value1 = "\COMMAND");
 		}
-
 		else {
 			SelectFieldText(locator1 = "//body");
 
@@ -219,7 +218,6 @@ definition {
 				locator1 = "AlloyEditor#EDITOR",
 				value1 = "\COMMAND");
 		}
-
 		else {
 			RobotType.robotTypeShortcut(locator1 = "Ctrl + v");
 		}

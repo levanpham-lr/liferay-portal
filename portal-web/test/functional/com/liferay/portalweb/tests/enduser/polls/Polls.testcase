@@ -21,7 +21,7 @@ definition {
 			Navigator.openURL();
 
 			ProductMenu.gotoPortlet(
-				category = "Content &amp; Data",
+				category = "Content & Data",
 				portlet = "Polls");
 
 			Polls.tearDownCP();
@@ -37,7 +37,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Polls");
 
 		Polls.addPollCPWithExpirationDate(
@@ -85,7 +85,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Polls");
 
 		Polls.addPollCP(
@@ -140,7 +140,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Polls");
 
 		Polls.addPollCP(
@@ -211,7 +211,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Polls");
 
 		Polls.addPollCP(
@@ -254,7 +254,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Polls");
 
 		Polls.viewPollChartArea(pollsQuestionTitle = "Color");
@@ -267,7 +267,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Polls");
 
 		Polls.addPollCP(
@@ -327,7 +327,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Polls");
 
 		PermissionsInline.gotoPollPermissionsCP(pollsQuestionTitle = "Favorite Liferay Portlet");

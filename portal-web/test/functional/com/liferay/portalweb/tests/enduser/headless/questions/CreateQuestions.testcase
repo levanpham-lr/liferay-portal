@@ -21,7 +21,7 @@ definition {
 		}
 		else {
 			ProductMenu.gotoPortlet(
-				category = "Content &amp; Data",
+				category = "Content & Data",
 				portlet = "Message Boards");
 
 			if (IsElementPresent(locator1 = "Questions#QUESTIONS_LIST")) {
@@ -36,7 +36,7 @@ definition {
 		property portal.acceptance = "true";
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Message Boards");
 
 		Questions.createSomethingInMessageBoards(

@@ -1184,7 +1184,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoScopedPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs",
 			scope = "Staging Test Page");
 
@@ -1498,7 +1498,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(
@@ -1552,7 +1552,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.deleteCP(dmDocumentTitle = "DM Document Title");
@@ -1589,7 +1589,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.viewPG(dmDocumentTitle = "DM Document Title");

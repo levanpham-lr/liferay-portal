@@ -41,7 +41,7 @@ definition {
 	macro gotoAddWithStructureCP {
 		LexiconEntry.gotoAdd();
 
-		if (IsElementPresent(locator1 = "MenuItem#ANY_MENU_ITEM", key_menuItem = "${structureName}")) {
+		if (IsElementPresent(key_menuItem = "${structureName}", locator1 = "MenuItem#ANY_MENU_ITEM")) {
 			MenuItem.click(menuItem = "${structureName}");
 		}
 		else {
@@ -104,7 +104,7 @@ definition {
 	macro gotoMoreStructuresViaPlusButton {
 		LexiconEntry.gotoAdd();
 
-		if (IsElementPresent(locator1 = "Button#ANY", key_text = "More")) {
+		if (IsElementPresent(key_text = "More", locator1 = "Button#ANY")) {
 			AssertElementPresent(
 				key_caption = "Showing ${pageMod} Elements",
 				locator1 = "Dropdown#CAPTION");
@@ -136,7 +136,6 @@ definition {
 				locator1 = "WC#ENTRY_LIST_WORKFLOW_TRANSLATIONE_STATUS",
 				value1 = "${webContentStatus}");
 		}
-
 		else {
 			AssertTextEquals(
 				locator1 = "WC#ENTRY_LIST_WORKFLOW_STATUS",

@@ -102,17 +102,17 @@ definition {
 
 		Depot.addDepot(
 			depotDescription = "This is the description of a depot",
-			depotName = "&amp;");
+			depotName = "&");
 
 		DepotNavigator.openDepotAdmin();
 
 		Depot.addDepot(
 			depot = "Duplicate",
-			depotName = "&amp;");
+			depotName = "&");
 
 		DepotNavigator.openDepotAdmin();
 
-		Depot.deleteCP(depotName = "&amp;");
+		Depot.deleteCP(depotName = "&");
 
 		Depot.viewDefaultCP();
 	}

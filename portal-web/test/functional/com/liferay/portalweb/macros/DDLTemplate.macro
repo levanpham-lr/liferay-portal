@@ -174,7 +174,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Dynamic Data Lists");
 
 		DDLNavigator.gotoManageDataDefinitions();
@@ -312,7 +312,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Dynamic Data Lists");
 
 		DDLNavigator.gotoManageDataDefinitions();

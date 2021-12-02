@@ -96,8 +96,7 @@ definition {
 
 		var newGeneratedClientSecret = OAuth2.editApplication(
 			applicationName = "OAuth Application Edited",
-			generateNewSecret = "true"
-		);
+			generateNewSecret = "true");
 
 		Navigator.gotoBack();
 
@@ -153,7 +152,6 @@ definition {
 		var portalVersionCurl = '''
 			-H 'Authorization: Bearer ${accessToken}' ${portalURL}/api/jsonws/portal/get-version
 		''';
-
 		var portalVersionOutput = JSONCurlUtil.post("${portalVersionCurl}");
 
 		if (!(contains("${portalVersionOutput}", "7.3"))) {
@@ -229,7 +227,6 @@ definition {
 		var buildNumberCurl = '''
 			-H 'Authorization: Bearer ${accessToken}' ${portalURL}/api/jsonws/portal/get-build-number
 		''';
-
 		var buildNumberOutput = JSONCurlUtil.post("${buildNumberCurl}");
 
 		if (!(contains("${buildNumberOutput}", "73"))) {
@@ -312,7 +309,6 @@ definition {
 			http://localhost:9080/o/oauth2/token \
 				 --data client_id=abc123&client_secret=abc123&grant_type=authorization_code&code=${authorizationCode}
 		''';
-
 		var reponse = JSONCurlUtil.post("${curl}");
 
 		if (contains("${reponse}", "access_token")) {
@@ -388,7 +384,9 @@ definition {
 			groupName = "Guest",
 			title = "WC Title");
 
-		var liferaySiteId = JSONGroupAPI._getGroupIdByName(groupName = "Guest", site = "true");
+		var liferaySiteId = JSONGroupAPI._getGroupIdByName(
+			groupName = "Guest",
+			site = "true");
 
 		var deleteCurl = '''
 			-H 'Authorization: Bearer ${accessToken}' ${portalURL}/api/jsonws/journal.journalarticle/delete-article \
@@ -396,7 +394,6 @@ definition {
 				-d articleId=${articleId} \
 				-d articleURL='wc-title'
 		''';
-
 		var deleteOutput1 = JSONCurlUtil.post("${deleteCurl}");
 
 		if (!(contains("${deleteOutput1}", "must have DELETE permission for com.liferay.journal.model.JournalArticle"))) {
@@ -415,7 +412,7 @@ definition {
 		}
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content",
 			site = "${siteName}");
 

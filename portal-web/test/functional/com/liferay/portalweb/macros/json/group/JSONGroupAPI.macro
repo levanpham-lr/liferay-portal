@@ -116,7 +116,6 @@ definition {
 			${portalURL}/api/jsonws/group/get-groups/company-id/${companyId}/parent-group-id/0/site/false \
 				-u test@liferay.com:test
 		''';
-
 		var depotId = JSONCurlUtil.get("${curl}", "$.[?(@['nameCurrentValue'] == '${depotName}')]['classPK']");
 		var depotId = StringUtil.replace("${depotId}", "[&quot;", "");
 		var depotId = StringUtil.replace("${depotId}", "&quot;]", "");
@@ -134,7 +133,9 @@ definition {
 
 		var companyId = JSONCompany.getCompanyId();
 
-		var parentGroupId = JSONGroupSetter.setParentGroupId(parentGroupName = "${parentGroupName}", grandParentGroupName = "${grandParentGroupName}");
+		var parentGroupId = JSONGroupSetter.setParentGroupId(
+			grandParentGroupName = "${grandParentGroupName}",
+			parentGroupName = "${parentGroupName}");
 
 		var portalURL = JSONCompany.getPortalURL();
 
@@ -142,7 +143,6 @@ definition {
 			${portalURL}/api/jsonws/group/get-groups/company-id/${companyId}/parent-group-id/${parentGroupId}/site/${site} \
 				-u test@liferay.com:test
 		''';
-
 		var groupId = JSONCurlUtil.get("${curl}", "$.[?(@['groupKey'] == '${groupKey}')]['groupId']");
 		var groupId = StringUtil.replace("${groupId}", "[&quot;", "");
 		var groupId = StringUtil.replace("${groupId}", "&quot;]", "");
@@ -166,7 +166,6 @@ definition {
 			${portalURL}/api/jsonws/group/get-groups/company-id/${companyId}/parent-group-id/0/site/${site} \
 				-u test@liferay.com:test
 		''';
-
 		var groupId = JSONCurlUtil.get("${curl}", "$.[?(@['nameCurrentValue'] == '${groupName}')]['groupId']");
 		var groupId = StringUtil.replace("${groupId}", "[&quot;", "");
 		var groupId = StringUtil.replace("${groupId}", "&quot;]", "");
@@ -190,7 +189,6 @@ definition {
 			${portalURL}/api/jsonws/group/get-group/group-id/${groupId} \
 				-u test@liferay.com:test
 		''';
-
 		var groupName = JSONCurlUtil.get("${curl}", "$['nameCurrentValue']");
 
 		return "${groupNam}";
@@ -210,7 +208,6 @@ definition {
 			${portalURL}/api/jsonws/group/get-groups/company-id/${companyId}/parent-group-id/${grandParentGroupId}/site/true \
 				-u test@liferay.com:test
 		''';
-
 		var groupId = JSONCurlUtil.get("${curl}", "$.[?(@['nameCurrentValue'] == '${groupName}')]['groupId']");
 		var groupId = StringUtil.replace("${groupId}", "[&quot;", "");
 		var groupId = StringUtil.replace("${groupId}", "&quot;]", "");
@@ -236,7 +233,6 @@ definition {
 				-d companyId=${companyId} \
 				-d groupKey=${groupName}
 		''';
-
 		var groupId = JSONCurlUtil.post("${curl}", "$.[?(@['groupKey'] == '${groupName}')]['groupId']");
 		var groupId = StringUtil.replace("${groupId}", "[&quot;", "");
 		var groupId = StringUtil.replace("${groupId}", "&quot;]", "");

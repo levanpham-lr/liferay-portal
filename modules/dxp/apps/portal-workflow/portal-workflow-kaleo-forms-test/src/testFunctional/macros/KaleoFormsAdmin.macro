@@ -45,7 +45,7 @@ definition {
 
 	macro addProcess {
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Kaleo Forms Admin");
 
 		AssertTextEquals(
@@ -587,7 +587,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Kaleo Forms Admin");
 
 		while (IsElementPresent(locator1 = "Icon#BODY_VERTICAL_ELLIPSIS")) {

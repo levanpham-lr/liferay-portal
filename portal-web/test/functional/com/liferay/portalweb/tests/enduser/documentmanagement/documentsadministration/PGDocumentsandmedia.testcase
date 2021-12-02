@@ -192,7 +192,7 @@ definition {
 	@priority = "4"
 	test AddDocumentTypes {
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -203,13 +203,13 @@ definition {
 			dmDocumentTypeName = "DM Document Type 1 Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocumentType.viewMenulistOption(dmDocumentTypeName = "DM Document Type 1 Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -220,13 +220,13 @@ definition {
 			dmDocumentTypeName = "DM Document Type 2 Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocumentType.viewMenulistOption(dmDocumentTypeName = "DM Document Type 2 Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -237,7 +237,7 @@ definition {
 			dmDocumentTypeName = "DM Document Type 3 Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocumentType.viewMenulistOption(dmDocumentTypeName = "DM Document Type 3 Name");
@@ -670,7 +670,7 @@ definition {
 	@priority = "4"
 	test DeleteDocumentType {
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -681,13 +681,13 @@ definition {
 			dmDocumentTypeName = "DM Document Type Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocumentType.viewMenulistOption(dmDocumentTypeName = "DM Document Type Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -873,7 +873,7 @@ definition {
 		property testray.component.names = "Training";
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -884,13 +884,13 @@ definition {
 			dmDocumentTypeName = "DM Document Type Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocumentType.viewMenulistOption(dmDocumentTypeName = "DM Document Type Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentType();
@@ -901,7 +901,7 @@ definition {
 			dmDocumentTypeNameEdit = "DM Document Type Name Edit");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocumentType.viewMenulistOption(dmDocumentTypeName = "DM Document Type Name Edit");
@@ -1457,7 +1457,7 @@ definition {
 			dmFolderName = "DM Folder Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentPermissionsCP(dmDocumentTitle = "DM Folder Name");
@@ -1543,7 +1543,7 @@ definition {
 			dmFolderName = "DM Folder Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentPermissionsCP(dmDocumentTitle = "DM Folder Name");
@@ -1865,7 +1865,7 @@ definition {
 			dmFolderName = "DM SubFolder Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoDocumentPermissionsCP(dmDocumentTitle = "DM Folder Name");
@@ -1877,7 +1877,7 @@ definition {
 		IFrame.closeFrame();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoFolder(dmFolderName = "DM Folder Name");
@@ -1904,7 +1904,7 @@ definition {
 			dmDocumentTitle = "DM Document Title");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMNavigator.gotoFolder(dmFolderName = "DM Folder Name");

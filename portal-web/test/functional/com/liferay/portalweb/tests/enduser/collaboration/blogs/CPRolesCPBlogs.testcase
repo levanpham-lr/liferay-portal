@@ -71,7 +71,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsNavigator.gotoBlogsEntryPermissionsCP(entryTitle = "Blogs Entry Title");
@@ -87,7 +87,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsEntry.viewDefaultCP(entryTitle = "Blogs Entry Title");
@@ -111,7 +111,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		LexiconEntry.changeDisplayStyle(displayStyle = "cards");
@@ -151,7 +151,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsConfiguration.viewNoPermissionCP();
@@ -191,7 +191,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsConfiguration.viewNoPermissionCP();

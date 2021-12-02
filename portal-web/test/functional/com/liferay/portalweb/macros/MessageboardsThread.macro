@@ -911,7 +911,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Message Boards");
 
 		if (IsElementPresent.isVisible(locator1 = "MessageBoards#THREAD_TABLE_ALL_CHECKBOX")) {

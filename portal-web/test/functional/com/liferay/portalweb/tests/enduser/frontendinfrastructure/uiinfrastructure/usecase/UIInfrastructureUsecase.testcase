@@ -114,7 +114,7 @@ definition {
 		property portal.acceptance = "true";
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		Refresh();
@@ -164,7 +164,7 @@ definition {
 			textIcon = "english-United States");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContentNavigator.gotoAddCP();

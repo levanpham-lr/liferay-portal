@@ -111,11 +111,9 @@ definition {
 		if ("${workflow}" == "true") {
 			PortletEntry.submitForPublication();
 		}
-
 		else if ("${workflowResubmit}" == "true") {
 			PortletEntry.save();
 		}
-
 		else {
 			PortletEntry.publish();
 		}
@@ -361,14 +359,14 @@ definition {
 			key_currentLocale = StringUtil.lowerCase("${currentTargetLocale}"),
 			locator1 = "Button#TRANSLATIONS_LOCALIZATION");
 
-		for (var targetLocale : list "${targetLocale}" ) {
+		for (var targetLocale : list "${targetLocale}") {
 			AssertElementPresent(
 				key_locale = "${targetLocale}",
 				locator1 = "Translation#DROPDOWN_MENU_ITEM");
 		}
 
 		if (isSet(noTargetLocale)) {
-			for (var noTargetLocale : list "${noTargetLocale}" ) {
+			for (var noTargetLocale : list "${noTargetLocale}") {
 				AssertElementNotPresent(
 					key_locale = "${noTargetLocale}",
 					locator1 = "Translation#DROPDOWN_MENU_ITEM");

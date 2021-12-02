@@ -203,9 +203,8 @@ definition {
 
 			ControlMenu.viewHeaderTitle(headerTitle = "Policies");
 
-			var screenWidth	= selenium.getElementWidth("//body");
-
-			var containerWidth	= selenium.getElementWidth("//div[contains(@class,'container')][contains(@class,'pr-3 pl-3')]/div[contains(@class,'mb-lg-0')]");
+			var screenWidth = selenium.getElementWidth("//body");
+			var containerWidth = selenium.getElementWidth("//div[contains(@class,'container')][contains(@class,'pr-3 pl-3')]/div[contains(@class,'mb-lg-0')]");
 
 			TestUtils.assertNotEquals(
 				actual = "${containerWidth}",
@@ -248,10 +247,10 @@ definition {
 
 			ControlMenu.viewHeaderTitle(headerTitle = "Claims");
 
-			var screenWidth	= selenium.getElementWidth("//body");
+			var screenWidth = selenium.getElementWidth("//body");
 
 			for (var collectionTitle : list "Open Claims,Closed Claims") {
-				var containerWidth	= selenium.getElementWidth("//div[contains(@class,'container')]/div[contains(.,'${collectionTitle}')]/following-sibling::div[contains(@class,'mb-lg-0')]");
+				var containerWidth = selenium.getElementWidth("//div[contains(@class,'container')]/div[contains(.,'${collectionTitle}')]/following-sibling::div[contains(@class,'mb-lg-0')]");
 
 				TestUtils.assertNotEquals(
 					actual = "${containerWidth}",

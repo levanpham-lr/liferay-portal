@@ -42,7 +42,6 @@ definition {
 
 	macro AddCategoryWithSaveAndAddButton {
 		var key_categoryName = "${categoryName}";
-
 		var key_vocabularyName = "${vocabularyName}";
 
 		Navigator.gotoNavNested(navNested = "${key_vocabularyName}");
@@ -63,7 +62,6 @@ definition {
 	@summary = "Add a category named '${categoryName}' to the vocabulary named '${vocabularyName}'"
 	macro addCP {
 		var key_categoryName = "${categoryName}";
-
 		var key_vocabularyName = "${vocabularyName}";
 
 		Navigator.gotoNavNested(navNested = "${key_vocabularyName}");

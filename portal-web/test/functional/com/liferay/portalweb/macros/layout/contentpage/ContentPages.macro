@@ -78,7 +78,7 @@ definition {
 				portlet = "Pages");
 		}
 
-		var key_breadcrumbName="Pages";
+		var key_breadcrumbName = "Pages";
 
 		Pause(locator1 = "3000");
 
@@ -129,7 +129,7 @@ definition {
 				portlet = "Pages");
 		}
 
-		var key_breadcrumbName="Pages";
+		var key_breadcrumbName = "Pages";
 
 		Pause(locator1 = "3000");
 

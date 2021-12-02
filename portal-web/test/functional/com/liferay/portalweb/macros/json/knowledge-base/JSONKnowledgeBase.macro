@@ -6,7 +6,9 @@ definition {
 			var site = "true";
 		}
 
-		var groupId = JSONGroupAPI._getGroupIdByName(groupName = "${groupName}", site = "${site}");
+		var groupId = JSONGroupAPI._getGroupIdByName(
+			groupName = "${groupName}",
+			site = "${site}");
 
 		var portalURL = JSONCompany.getPortalURL();
 
@@ -32,7 +34,6 @@ definition {
 				-d "end=-1" \
 				-d -orderByComparator=
 		''';
-
 		var resourcePrimKey = JSONCurlUtil.post("${curl}", "$.[?(@['title'] == '${kbChildArticleTitle}')]['resourcePrimKey']");
 		var resourcePrimKey = StringUtil.replace("${resourcePrimKey}", "[&quot;", "");
 		var resourcePrimKey = StringUtil.replace("${resourcePrimKey}", "&quot;]", "");
@@ -60,7 +61,9 @@ definition {
 			var folderId = "0";
 		}
 
-		var groupId = JSONGroupAPI._getGroupIdByName(groupName = "${groupName}", site = "${site}");
+		var groupId = JSONGroupAPI._getGroupIdByName(
+			groupName = "${groupName}",
+			site = "${site}");
 
 		var portalURL = JSONCompany.getPortalURL();
 
@@ -74,7 +77,6 @@ definition {
 				-d "end=-1" \
 				-d -orderByComparator=
 		''';
-
 		var resourcePrimKey = JSONCurlUtil.post("${curl}", "$.[?(@['title'] == '${kbArticleTitle}')]['resourcePrimKey']");
 		var resourcePrimKey = StringUtil.replace("${resourcePrimKey}", "[&quot;", "");
 		var resourcePrimKey = StringUtil.replace("${resourcePrimKey}", "&quot;]", "");
@@ -193,7 +195,9 @@ definition {
 			var description = "";
 		}
 
-		var groupId = JSONGroupAPI._getGroupIdByName(groupName = "${groupName}", site = "${site}");
+		var groupId = JSONGroupAPI._getGroupIdByName(
+			groupName = "${groupName}",
+			site = "${site}");
 
 		var parentResourceClassNameId = JSONClassname._getClassNameId(value = "com.liferay.knowledge.base.model.KBFolder");
 
@@ -287,7 +291,9 @@ definition {
 			var site = "true";
 		}
 
-		var groupId = JSONGroupAPI._getGroupIdByName(groupName = "${groupName}", site = "${site}");
+		var groupId = JSONGroupAPI._getGroupIdByName(
+			groupName = "${groupName}",
+			site = "${site}");
 
 		var portalURL = JSONCompany.getPortalURL();
 
@@ -299,7 +305,6 @@ definition {
 				-d "start=-1" \
 				-d "end=-1"
 		''';
-
 		var kbFolderId = JSONCurlUtil.post("${curl}", "$.[?(@['name'] == '${folderName}')]['kbFolderId']");
 		var kbFolderId = StringUtil.replace("${kbFolderId}", "[&quot;", "");
 		var kbFolderId = StringUtil.replace("${kbFolderId}", "&quot;]", "");

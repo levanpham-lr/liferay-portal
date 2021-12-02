@@ -72,7 +72,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Wiki");
 
 		WikiPortlet.subscribeToNodeCP(wikiNodeName = "Main");
@@ -132,7 +132,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Wiki");
 
 		WikiPortlet.subscribeToNodeCP(wikiNodeName = "Main");

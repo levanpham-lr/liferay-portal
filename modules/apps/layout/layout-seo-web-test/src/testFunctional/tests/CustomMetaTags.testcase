@@ -37,8 +37,8 @@ definition {
 		Navigator.gotoNavTab(navTab = "Custom Meta Tags");
 
 		CustomMetaTags.addTag(
-			customContent = "&amp; content",
-			customProperty = "&amp; property");
+			customContent = "& content",
+			customProperty = "& property");
 
 		User.logoutPG();
 

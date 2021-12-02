@@ -130,7 +130,6 @@ definition {
 				locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_STEP_AVG_COMPLETION_TIME_VALUE",
 				value1 = "0min");
 		}
-
 		else {
 			AssertTextEquals(
 				locator1 = "WorkflowMetrics#METRICS_PERFORMANCE_BY_STEP_AVG_COMPLETION_TIME_VALUE",
@@ -141,6 +140,7 @@ definition {
 	macro assertCheckboxChecked {
 		for (var itemName : list "${taskList}") {
 			var key_itemName = "${itemName}";
+
 			AssertElementPresent(locator1 = "WorkflowReassignModal#ITEM_CHECKBOX_CHECKED");
 		}
 	}
@@ -148,6 +148,7 @@ definition {
 	macro assertCheckboxUnchecked {
 		for (var itemName : list "${taskListUnchecked}") {
 			var key_itemName = "${itemName}";
+
 			AssertElementNotPresent(locator1 = "WorkflowReassignModal#ITEM_CHECKBOX_CHECKED");
 		}
 	}
@@ -273,6 +274,7 @@ definition {
 
 	macro assertTransitionTaskPresent {
 		var key_taskName = "${taskName}";
+
 		AssertElementPresent(locator1 = "WorkflowTransitionModal#TASK_PANEL");
 	}
 
@@ -317,10 +319,12 @@ definition {
 			workflowAssetTitle = "Blogs Entry Title 1",
 			workflowAssetType = "Blogs Entry",
 			workflowTask = "Review");
+
 		Workflow.assignToMeTaskByActions(
 			workflowAssetTitle = "Blogs Entry Title 2",
 			workflowAssetType = "Blogs Entry",
 			workflowTask = "Review");
+
 		Workflow.assignToMeTaskByActions(
 			workflowAssetTitle = "Blogs Entry Title 3",
 			workflowAssetType = "Blogs Entry",
@@ -403,33 +407,33 @@ definition {
 
 	macro createAlternativeBlogInstances {
 		var iterator = "1";
-		var numberOfBlogInstances = MathUtil.sum("${numberOfBlogInstances}", "1");
+		var numberOfBlogInstances = ${numberOfBlogInstances} + 1;
 
 		while ("${iterator}" != "${numberOfBlogInstances}") {
 			JSONBlog.addEntry(
 				entryContent = "Blogs Alternative Entry ${iterator} Content",
 				entryTitle = "Blogs Alternative Title ${iterator}");
 
-			var iterator = MathUtil.sum("${iterator}", "1");
+			var iterator = ${iterator} + 1;
 		}
 	}
 
 	macro createBlogInstances {
 		var iterator = "1";
-		var numberOfBlogInstances = MathUtil.sum("${numberOfBlogInstances}", "1");
+		var numberOfBlogInstances = ${numberOfBlogInstances} + 1;
 
 		while ("${iterator}" != "${numberOfBlogInstances}") {
 			JSONBlog.addEntry(
 				entryContent = "Blogs Entry ${iterator} Content",
 				entryTitle = "Blogs Entry Title ${iterator}");
 
-			var iterator = MathUtil.sum("${iterator}", "1");
+			var iterator = ${iterator} + 1;
 		}
 	}
 
 	macro createUsersAndAssignInstances {
 		var iterator = "1";
-		var numberOfBlogInstances = MathUtil.sum("${numberOfBlogInstances}", "1");
+		var numberOfBlogInstances = ${numberOfBlogInstances} + 1;
 
 		WorkflowMetrics.createUsersGroovy(numberOfUsers = "${numberOfUsers}");
 
@@ -447,7 +451,7 @@ definition {
 				entryContent = "Blogs Entry ${iterator} Content",
 				entryTitle = "Blogs Entry Title ${iterator}");
 
-			var iterator = MathUtil.sum("${iterator}", "1");
+			var iterator = ${iterator} + 1;
 		}
 
 		Workflow.assignBlogEntriesToUsers(
@@ -457,7 +461,7 @@ definition {
 
 	macro createUsersAndAssignInstancesWithGroovy {
 		var iterator = "1";
-		var numberOfBlogInstances = MathUtil.sum("${numberOfBlogInstances}", "1");
+		var numberOfBlogInstances = ${numberOfBlogInstances} + 1;
 
 		WorkflowMetrics.createUsersGroovy(numberOfUsers = "${numberOfUsers}");
 
@@ -475,7 +479,7 @@ definition {
 				entryContent = "Blogs Entry ${iterator} Content",
 				entryTitle = "Blogs Entry Title ${iterator}");
 
-			var iterator = MathUtil.sum("${iterator}", "1");
+			var iterator = ${iterator} + 1;
 		}
 
 		WorkflowMetrics.executeWorkflowScript(scriptName = "assignOpenTasksToUsers.groovy");
@@ -483,7 +487,7 @@ definition {
 
 	macro createUsersAndInstancesWithGroovy {
 		var iterator = "1";
-		var numberOfBlogInstances = MathUtil.sum("${numberOfBlogInstances}", "1");
+		var numberOfBlogInstances = ${numberOfBlogInstances} + 1;
 
 		WorkflowMetrics.createUsersGroovy(numberOfUsers = "${numberOfUsers}");
 
@@ -501,7 +505,7 @@ definition {
 				entryContent = "Blogs Entry ${iterator} Content",
 				entryTitle = "Blogs Entry Title ${iterator}");
 
-			var iterator = MathUtil.sum("${iterator}", "1");
+			var iterator = ${iterator} + 1;
 		}
 	}
 
@@ -513,7 +517,7 @@ definition {
 
 		var scriptContent = TestCase.getFileContent(fileName = "addUsersWithRoles.groovy");
 
-		var scriptContent = StringUtil.regexReplaceFirst("${scriptContent}","numberOfUsers = 0","numberOfUsers = ${numberOfUsers}");
+		var scriptContent = StringUtil.regexReplaceFirst("${scriptContent}", "numberOfUsers = 0", "numberOfUsers = ${numberOfUsers}");
 
 		ServerAdministration.executeScript(
 			language = "Groovy",
@@ -623,6 +627,7 @@ definition {
 				locator1 = "WorkflowMetricsSLA#SLA_DROPDOWN_STOP_OPTION",
 				value1 = "${key_slaDefinitionEnd}");
 		}
+
 		Type(
 			locator1 = "WorkflowMetricsSLA#SLA_DEFINITION_DAYS",
 			value1 = "${key_slaDefinitionDays}");
@@ -640,24 +645,31 @@ definition {
 
 	macro goToBulkReassignSelectNewAssignee {
 		Check.checkNotVisible(locator1 = "WorkflowReassignModal#SELECT_ALL");
+
 		Click(locator1 = "WorkflowReassignModal#NEXT_BUTTON");
 	}
 
 	macro goToBulkReassignSelectTasks {
 		WaitForElementPresent(locator1 = "WorkflowAllItems#WORKFLOW_ALL_ITEMS_SELECT_ALL");
+
 		PortletEntry.selectAll();
+
 		Click(
 			locator1 = "WorkflowAllItems#KEBAB_DROPDOWN",
 			task = "1");
+
 		Click(locator1 = "WorkflowAllItems#REASSIGN_TASK_DROPDOWN");
 	}
 
 	macro goToBulkTransitionSelectTasks {
 		WaitForElementPresent(locator1 = "WorkflowAllItems#WORKFLOW_ALL_ITEMS_SELECT_ALL");
+
 		PortletEntry.selectAll();
+
 		Click(
 			locator1 = "WorkflowAllItems#KEBAB_DROPDOWN",
 			task = "1");
+
 		Click(locator1 = "WorkflowAllItems#TRANSITION_DROPDOWN");
 	}
 
@@ -719,10 +731,13 @@ definition {
 
 	macro goToUpdateDueDateTasks {
 		Pause(locator1 = "2000");
+
 		PortletEntry.selectAll();
+
 		Click(
 			locator1 = "WorkflowAllItems#KEBAB_DROPDOWN",
 			task = "1");
+
 		MenuItem.clickNoError(menuItem = "Update Tasks Due Dates");
 	}
 
@@ -783,18 +798,27 @@ definition {
 	macro selectAllReassignTasks {
 		var key_taskList = "${taskList}";
 		var key_taskListUnchecked = "${taskListUnchecked}";
+
 		Check.checkNotVisible(locator1 = "WorkflowAllItems#WORKFLOW_ALL_ITEMS_SELECT_ALL_MODAL");
+
 		Click(locator1 = "WorkflowReassignModal#NEXT_PAGINATION_BUTTON");
+
 		WorkflowMetrics.assertCheckboxUnchecked(taskListUnchecked = "${taskListUnchecked}");
+
 		Click(locator1 = "WorkflowReassignModal#PREVIOUS_PAGINATION_BUTTON");
+
 		WorkflowMetrics.assertCheckboxChecked(taskList = "${taskList}");
+
 		AssertElementPresent(locator1 = "WorkflowReassignModal#SELECT_ALL_REASSIGN");
+
 		Click(locator1 = "WorkflowReassignModal#SELECT_ALL_REASSIGN");
+
 		Click(locator1 = "WorkflowReassignModal#NEXT_BUTTON");
 	}
 
 	macro selectAllTransitionTasks {
 		Check.checkNotVisible(locator1 = "WorkflowAllItems#WORKFLOW_ALL_ITEMS_SELECT_ALL_MODAL");
+
 		Click(locator1 = "WorkflowReassignModal#NEXT_BUTTON");
 	}
 
@@ -904,11 +928,13 @@ definition {
 				key_nameOfAssignee = "Test Test",
 				locator1 = "WorkflowReassignModal#REASSIGN_TASK_NEW_ASSIGNEE_DROPDOWN");
 		}
+
 		AssertTextEquals(
 			locator1 = "WorkflowReassignModal#SEARCH_NEW_ASSIGNEE_SPECIFIC",
 			value1 = "Test Test");
 
 		Click(locator1 = "WorkflowReassignModal#PREVIOUS_PAGINATION_BUTTON");
+
 		var key_itemName = "Blogs Entry: Blogs Entry Title 1";
 
 		AssertTextEquals(
@@ -1085,8 +1111,7 @@ definition {
 				value1 = "${key_createdBy}");
 
 			if (!(IsTextEqual.isPartialText(locator1 = "WorkflowAllItems#DETAIL_PAGE_CREATION_DATE", value1 = "${key_currentDate}"))) {
-				var key_currentDateDay = MathUtil.sum("${key_currentDateDay}", "1");
-
+				var key_currentDateDay = ${key_currentDateDay} + 1;
 				var isLessThan10 = MathUtil.isLessThan("${key_currentDateDay}", "10");
 
 				if ("${isLessThan10}" == "true") {
@@ -1124,8 +1149,7 @@ definition {
 				value1 = "Completed");
 
 			if (!(IsTextEqual.isPartialText(locator1 = "WorkflowAllItems#DETAIL_PAGE_END_DATE", value1 = "${key_currentDate}"))) {
-				var key_currentDateDay = MathUtil.sum("${key_currentDateDay}", "1");
-
+				var key_currentDateDay = ${key_currentDateDay} + 1;
 				var isLessThan10 = MathUtil.isLessThan("${key_currentDateDay}", "10");
 
 				if ("${isLessThan10}" == "true") {
@@ -1267,7 +1291,6 @@ definition {
 				allItemsFilterName = "${key_allItemsFilterName}",
 				assigneeName = "${filterValueName}");
 		}
-
 		else {
 			WorkflowMetrics.allItemPageFilterCheck(
 				allItemsFilterName = "${key_allItemsFilterName}",
@@ -1285,7 +1308,6 @@ definition {
 				allItemsFilterName = "${key_allItemsFilterName}",
 				assigneeName = "${filterValueName}");
 		}
-
 		else {
 			WorkflowMetrics.allItemPageFilterCheck(
 				allItemsFilterName = "${key_allItemsFilterName}",
@@ -1431,7 +1453,7 @@ definition {
 	macro waitForSLAPendingNotChange {
 		var count = "1";
 
-		while (IsTextEqual(locator1 = "WorkflowMetrics#DASHBOARD_TOTAL_${key_status}_ITEMS_VALUE", value1 = "${key_expectedValue}") && ("${count}" != "${key_pauseTime}") && (maxIterations = "48")) {
+		while ((IsTextEqual(locator1 = "WorkflowMetrics#DASHBOARD_TOTAL_${key_status}_ITEMS_VALUE", value1 = "${key_expectedValue}")) && ("${count}" != "${key_pauseTime}") && (maxIterations = "48")) {
 			var count = ${count} + 1;
 
 			echo("Waiting 5 seconds to recheck");

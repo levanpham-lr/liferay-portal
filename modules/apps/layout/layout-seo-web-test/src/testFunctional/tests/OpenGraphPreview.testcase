@@ -32,6 +32,7 @@ definition {
 	@priority = "5"
 	test PreviewAfterReplacingImage {
 		var portalURL = PropsUtil.get("portal.url");
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -96,6 +97,7 @@ definition {
 	@priority = "5"
 	test PreviewInheritedSEO {
 		var portalURL = PropsUtil.get("portal.url");
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -166,6 +168,7 @@ definition {
 		property portal.acceptance = "true";
 
 		var portalURL = PropsUtil.get("portal.url");
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -215,6 +218,7 @@ definition {
 	@priority = "3"
 	test ValidateEscapeCharacters {
 		var portalURL = PropsUtil.get("portal.url");
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -257,6 +261,7 @@ definition {
 	@priority = "5"
 	test ValidateLongInputs {
 		var portalURL = PropsUtil.get("portal.url");
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -304,6 +309,7 @@ definition {
 	@priority = "5"
 	test ValidateReturnToDefault {
 		var portalURL = PropsUtil.get("portal.url");
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -347,6 +353,7 @@ definition {
 	@priority = "4"
 	test ViewArabicTranslation {
 		var portalURL = PropsUtil.get("portal.url");
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -383,6 +390,7 @@ definition {
 	@priority = "4"
 	test ViewSpecialImages {
 		var portalURL = PropsUtil.get("portal.url");
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -416,6 +424,7 @@ definition {
 	@priority = "5"
 	test ViewTranslatedLanguages {
 		var portalURL = PropsUtil.get("portal.url");
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(
@@ -533,6 +542,7 @@ definition {
 	@priority = "5"
 	test ViewUntranslatedLanguage {
 		var portalURL = PropsUtil.get("portal.url");
+
 		var siteName = TestCase.getSiteName(siteName = "${siteName}");
 
 		JSONLayout.addPublicLayout(

@@ -543,7 +543,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		if (IsElementPresent.isVisible(locator1 = "Blogs#ENTRY_TABLE_ALL_CHECKBOX")) {

@@ -95,12 +95,10 @@ definition {
 		if ("${editActivateStaging}" == "true") {
 			Button.clickSave();
 		}
-
 		else if ("${remoteStaging}" == "true") {
 			if ("${browserType}" == "safari") {
 				Button.click(button = "Save");
 			}
-
 			else {
 				AssertClickNoError(
 					locator1 = "Button#SAVE",
@@ -117,12 +115,10 @@ definition {
 				Click(locator1 = "Button#CLOSE_MESSAGE");
 			}
 		}
-
 		else {
 			if ("${browserType}" == "safari") {
 				Button.click(button = "Save");
 			}
-
 			else {
 				AssertClickNoError(
 					locator1 = "Button#SAVE",
@@ -663,7 +659,7 @@ definition {
 			AssertElementPresent(locator1 = "Staging#STAGING_PUBLISH_TO_LIVE_BUTTON");
 		}
 
-		if ((IsElementPresent(locator1 = "Staging#STAGING_MENU_READY_FOR_PUBLICATION")) && (!(isSet(pleaseDoNotMarkAsReady)))) {
+		if ((IsElementPresent(locator1 = "Staging#STAGING_MENU_READY_FOR_PUBLICATION")) && !(isSet(pleaseDoNotMarkAsReady))) {
 			Check.toggleSwitch(locator1 = "Staging#STAGING_MENU_READY_FOR_PUBLICATION");
 		}
 
@@ -949,7 +945,7 @@ definition {
 	}
 
 	macro publishViaSAP {
-		if (IsElementPresent(locator1 = "Icon#ROW_VERTICAL_ELLIPSIS", key_rowEntry = "${entry}")) {
+		if (IsElementPresent(key_rowEntry = "${entry}", locator1 = "Icon#ROW_VERTICAL_ELLIPSIS")) {
 			Click(
 				key_rowEntry = "${entry}",
 				locator1 = "Icon#ROW_VERTICAL_ELLIPSIS");

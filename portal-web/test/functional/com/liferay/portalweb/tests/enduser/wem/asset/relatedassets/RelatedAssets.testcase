@@ -286,7 +286,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContentNavigator.gotoEditCP(webContentTitle = "Web Content Title");

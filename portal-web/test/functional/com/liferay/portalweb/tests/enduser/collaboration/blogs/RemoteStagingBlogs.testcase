@@ -29,6 +29,7 @@ definition {
 		}
 		else {
 			JSONGroup.deleteGroupByName(groupName = "Site Name");
+
 			JSONGroup.deleteGroupByName(groupName = "Remote Site");
 		}
 	}
@@ -133,7 +134,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Blogs");
 
 		BlogsEntry.viewWithWorkflowCP(
@@ -209,7 +210,7 @@ definition {
 		Portlet.addPG(portletName = "Blogs");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Documents and Media");
 
 		DMDocument.addCP(

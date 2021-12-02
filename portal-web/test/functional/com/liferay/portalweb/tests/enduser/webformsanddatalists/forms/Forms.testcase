@@ -22,7 +22,7 @@ definition {
 			Navigator.openURL();
 
 			ProductMenu.gotoPortlet(
-				category = "Content &amp; Data",
+				category = "Content & Data",
 				portlet = "Forms");
 
 			FormsAdmin.teardownForms();
@@ -43,7 +43,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		for (var number : list "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20") {
@@ -62,7 +62,7 @@ definition {
 			Form.addTextField(fieldPositionNumber = "1");
 
 			Form.editFieldLabelMetal(
-				category = "Content &amp; Data",
+				category = "Content & Data",
 				fieldValue = "Label",
 				portlet = "Forms");
 		}
@@ -76,7 +76,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -107,7 +107,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		Navigator.gotoNavItem(navItem = "Element Sets");
@@ -150,7 +150,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		Navigator.gotoNavItem(navItem = "Element Sets");
@@ -178,7 +178,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -316,7 +316,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		Navigator.gotoNavItem(navItem = "Element Sets");
@@ -387,7 +387,7 @@ definition {
 		PageTemplatesAdmin.openPageTemplatesAdmin(siteURLKey = "global");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -415,7 +415,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdmin.viewForm(
@@ -557,7 +557,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Form Site");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -575,7 +575,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdmin.viewForm();
@@ -592,7 +592,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -645,7 +645,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -699,7 +699,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -734,7 +734,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -776,7 +776,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName(formName = "Form 1");
@@ -812,7 +812,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Forms");
 
@@ -840,7 +840,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Forms");
 
@@ -875,9 +875,7 @@ definition {
 
 		FormsAdminNavigator.gotoPublishCopyURLLink();
 
-		var publishedFormPublicURL = Form.getPublishedFormPublicURL(
-			publishedFormPublicURL = "${publishedFormPublicURL}"
-		);
+		var publishedFormPublicURL = Form.getPublishedFormPublicURL(publishedFormPublicURL = "${publishedFormPublicURL}");
 
 		Navigator.openSpecificURL(url = "${publishedFormPublicURL}");
 
@@ -900,7 +898,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Forms");
 
@@ -965,7 +963,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -1000,7 +998,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -1189,7 +1187,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -1225,7 +1223,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -1249,7 +1247,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -1278,7 +1276,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -1327,7 +1325,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -1372,7 +1370,7 @@ definition {
 		property test.name.skip.portal.instance = "Forms#SubmitFormWithRequiredImageField";
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -1427,7 +1425,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -1500,7 +1498,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -1514,7 +1512,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdmin.viewForm(
@@ -1531,7 +1529,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -1603,7 +1601,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		LexiconEntry.gotoEntryMenuItem(
@@ -1621,7 +1619,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		LexiconEntry.changeDisplayStyle(displayStyle = "list");
@@ -1641,7 +1639,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -1698,7 +1696,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -1725,7 +1723,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName(formName = "Delete Select Option Test");
@@ -1745,7 +1743,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -1758,7 +1756,7 @@ definition {
 			selectOption = "Select 2");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		LexiconEntry.gotoEntryMenuItem(
@@ -1778,7 +1776,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -1799,7 +1797,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -1860,7 +1858,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -2164,7 +2162,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		LexiconEntry.viewActiveDisplayStyle(displayStyle = "table");
@@ -2192,7 +2190,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		LexiconEntry.viewActiveDisplayStyle(displayStyle = "list");
@@ -2212,7 +2210,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		LexiconEntry.viewActiveDisplayStyle(displayStyle = "table");
@@ -2227,7 +2225,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -2286,7 +2284,7 @@ definition {
 			displaySettings = "Display Settings");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName(formName = "User Locale Edit Form Name");
@@ -2307,7 +2305,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -2358,7 +2356,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -2372,7 +2370,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -2402,7 +2400,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -2448,7 +2446,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -2480,16 +2478,14 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
 
 		FormsAdminNavigator.gotoPublishCopyURLLink();
 
-		var publishedFormPublicURL = Form.getPublishedFormPublicURL(
-			publishedFormPublicURL = "${publishedFormPublicURL}"
-		);
+		var publishedFormPublicURL = Form.getPublishedFormPublicURL(publishedFormPublicURL = "${publishedFormPublicURL}");
 
 		Navigator.openSpecificURL(url = "${publishedFormPublicURL}");
 
@@ -2509,7 +2505,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -2525,7 +2521,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName(formName = "Text");
@@ -2556,7 +2552,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName(formName = "Checkbox");
@@ -2572,7 +2568,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName(formName = "Checkbox");
@@ -2582,7 +2578,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName(formName = "Text");
@@ -2600,7 +2596,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -2622,7 +2618,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName(formName = "Test Preview and Publish Form");
@@ -2642,7 +2638,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName(formName = "Test Preview and Publish Form");
@@ -2664,7 +2660,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -2676,7 +2672,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName(formName = "Test Preview and Publish Form");
@@ -2693,7 +2689,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -2735,7 +2731,7 @@ definition {
 			rowNumberEnd = "2",
 			rowNumberStart = "3");
 
-		if (IsTextNotEqual(locator1 = "FormFields#OPTIONS_OPTION_VALUE_FIELD", value1 = "Checkbox 4", key_rowNumber = "2")) {
+		if (IsTextNotEqual(key_rowNumber = "2", locator1 = "FormFields#OPTIONS_OPTION_VALUE_FIELD", value1 = "Checkbox 4")) {
 			FormFields.moveOptionsRow(
 				rowNumberEnd = "2",
 				rowNumberStart = "3");
@@ -2765,7 +2761,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -2823,7 +2819,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdmin.viewForm(
@@ -2866,7 +2862,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -2925,7 +2921,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -2944,7 +2940,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -3104,7 +3100,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -3203,7 +3199,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -3240,7 +3236,7 @@ definition {
 			fieldValue = "Checkbox 1");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		LAR.exportPortlet(larFileName = "FormsExport.lar");
@@ -3263,7 +3259,7 @@ definition {
 		SitePages.addPublicPage(pageName = "Site Page Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		LAR.importPortlet(
@@ -3273,7 +3269,7 @@ definition {
 		Navigator.openSiteURL(siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -3323,7 +3319,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -3411,7 +3407,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -3435,7 +3431,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -3444,9 +3440,7 @@ definition {
 
 		FormsAdminNavigator.gotoPublishCopyURLLink();
 
-		var publishedFormPublicURL = Form.getPublishedFormPublicURL(
-			publishedFormPublicURL = "${publishedFormPublicURL}"
-		);
+		var publishedFormPublicURL = Form.getPublishedFormPublicURL(publishedFormPublicURL = "${publishedFormPublicURL}");
 
 		Form.save();
 
@@ -3508,7 +3502,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -3771,7 +3765,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -3846,7 +3840,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -3867,7 +3861,7 @@ definition {
 
 		FormFields.editValidation(
 			validationArgument = "Does not contain",
-			validationErrorMessage = "Text must contain &apos;&apos;Test&apos;&apos;",
+			validationErrorMessage = "Text must contain ''Test''",
 			validationInput = "Test");
 
 		Form.closeSidebar();
@@ -3904,20 +3898,20 @@ definition {
 			fieldName = "${fieldTextField}",
 			fieldValue = "Text Field Value");
 
-		FormPortlet.submitWithValidationError(validationErrorMessage = "Text must contain &apos;&apos;Test&apos;&apos;");
+		FormPortlet.submitWithValidationError(validationErrorMessage = "Text must contain ''Test''");
 
 		FormFields.editText(
 			fieldName = "${fieldTextField}",
 			fieldValue = "test");
 
-		FormPortlet.waitForValidationErrorNotPresent(validationErrorMessage = "Text must contain &apos;&apos;Test&apos;&apos;");
+		FormPortlet.waitForValidationErrorNotPresent(validationErrorMessage = "Text must contain ''Test''");
 
 		FormPortlet.submitSuccessfully();
 
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdmin.viewForm();
@@ -3937,7 +3931,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -4068,7 +4062,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		LexiconEntry.changeDisplayStyle(displayStyle = "list");
@@ -4122,7 +4116,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -4191,7 +4185,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -4208,7 +4202,7 @@ definition {
 		property test.name.skip.portal.instance = "Forms#SubmitFormWithRequiredImageField";
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -4288,7 +4282,7 @@ definition {
 		FormPortlet.clickSubmit();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries(formName = "Form");
@@ -4304,7 +4298,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -4370,7 +4364,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -4387,7 +4381,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -4460,7 +4454,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -4479,7 +4473,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -4540,7 +4534,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -4560,7 +4554,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -4622,7 +4616,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -4641,7 +4635,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -4711,7 +4705,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -4735,7 +4729,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -4757,7 +4751,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -4787,7 +4781,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -4809,7 +4803,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -4832,9 +4826,7 @@ definition {
 
 		FormsAdminNavigator.gotoPublishCopyURLLink();
 
-		var publishedFormPublicURL = Form.getPublishedFormPublicURL(
-			publishedFormPublicURL = "${publishedFormPublicURL}"
-		);
+		var publishedFormPublicURL = Form.getPublishedFormPublicURL(publishedFormPublicURL = "${publishedFormPublicURL}");
 
 		User.logoutPG();
 
@@ -4874,7 +4866,7 @@ definition {
 			userEmailAddress = "test@liferay.com");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -4896,7 +4888,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -4915,9 +4907,7 @@ definition {
 
 		FormsAdminNavigator.gotoPublishCopyURLLink();
 
-		var publishedFormPublicURL = Form.getPublishedFormPublicURL(
-			publishedFormPublicURL = "${publishedFormPublicURL}"
-		);
+		var publishedFormPublicURL = Form.getPublishedFormPublicURL(publishedFormPublicURL = "${publishedFormPublicURL}");
 
 		Navigator.openURL();
 
@@ -4995,7 +4985,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -5019,7 +5009,7 @@ definition {
 		Form.save();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoEditFormByName();
@@ -5061,7 +5051,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoViewEntries();
@@ -5084,7 +5074,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -5131,7 +5121,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -5193,7 +5183,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -5214,9 +5204,7 @@ definition {
 
 		FormsAdminNavigator.gotoPublishCopyURLLink();
 
-		var publishedFormPublicURL = Form.getPublishedFormPublicURL(
-			publishedFormPublicURL = "${publishedFormPublicURL}"
-		);
+		var publishedFormPublicURL = Form.getPublishedFormPublicURL(publishedFormPublicURL = "${publishedFormPublicURL}");
 
 		ApplicationsMenu.gotoPortlet(
 			category = "Configuration",
@@ -5306,7 +5294,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -5343,7 +5331,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -5380,7 +5368,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -5443,7 +5431,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -5530,7 +5518,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -5607,7 +5595,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -5670,7 +5658,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();
@@ -5702,7 +5690,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			panel = "Site Administration",
 			portlet = "Forms");
 
@@ -5752,7 +5740,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Forms");
 
 		FormsAdminNavigator.gotoAddForm();

@@ -189,7 +189,7 @@ definition {
 			siteName = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Wiki");
 
 		WikiNavigator.gotoNode(wikiNodeName = "Main");
@@ -199,7 +199,7 @@ definition {
 			wikiPageTitle = "Wiki Page 1");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Wiki");
 
 		WikiNavigator.gotoNode(wikiNodeName = "Main");
@@ -217,7 +217,7 @@ definition {
 		PortletEntry.publish();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Wiki");
 
 		WikiNavigator.gotoNode(wikiNodeName = "Main");
@@ -239,7 +239,7 @@ definition {
 		Staging.publishToLive();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Wiki");
 
 		WikiNavigator.gotoNode(wikiNodeName = "Main");
@@ -263,7 +263,7 @@ definition {
 		ProductMenu.gotoLiveSite(site = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Wiki");
 
 		WikiNavigator.gotoNode(wikiNodeName = "Main");

@@ -215,16 +215,14 @@ definition {
 
 	macro commerceCatalogsTearDown {
 		var catalogsList = "";
-
 		var count = "1";
 
 		while (IsElementPresent(key_rowNumber = "${count}", locator1 = "CommerceNavigation#ENTRY_NAME_N")) {
 			var key_rowNumber = "${count}";
-
 			var entryName = selenium.getText("CommerceNavigation#ENTRY_NAME_N");
 
 			if ("${entryName}" != "Master") {
-				catalogsList = StringUtil.add("${catalogsList}", "${entryName}");
+				var catalogsList = StringUtil.add("${catalogsList}", "${entryName}");
 			}
 
 			var count = ${count} + 1;
@@ -268,7 +266,7 @@ definition {
 			portlet = "Health Check");
 
 		for (var buttonRowNumber : list "1,2,3,4,5") {
-			if (!(IsElementPresent(locator1 = "CommerceEntry#FIX_ISSUE_BUTTON_N", key_buttonStatus = "disabled"))) {
+			if (!(IsElementPresent(key_buttonStatus = "disabled", locator1 = "CommerceEntry#FIX_ISSUE_BUTTON_N"))) {
 				Click(
 					key_buttonRowNumber = "${buttonRowNumber}",
 					key_buttonStatus = "",

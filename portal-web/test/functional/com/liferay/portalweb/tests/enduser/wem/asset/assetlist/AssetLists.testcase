@@ -303,7 +303,6 @@ definition {
 					}
 				}
 			}
-
 			else if ("${rule}" == "Contains Any") {
 				var queryAndOperator = "Any";
 				var queryContains = "Contains";
@@ -362,7 +361,6 @@ definition {
 					}
 				}
 			}
-
 			else if ("${rule}" == "Does Not Contain All") {
 				var queryAndOperator = "All";
 				var queryContains = "Does Not Contain";
@@ -421,7 +419,6 @@ definition {
 					}
 				}
 			}
-
 			else if ("${rule}" == "Does Not Contain Any") {
 				var queryAndOperator = "Any";
 				var queryContains = "Does Not Contain";
@@ -570,7 +567,6 @@ definition {
 					}
 				}
 			}
-
 			else if ("${rule}" == "Contains Any") {
 				var queryAndOperator = "Any";
 				var queryContains = "Contains";
@@ -629,7 +625,6 @@ definition {
 					}
 				}
 			}
-
 			else if ("${rule}" == "Does Not Contain All") {
 				var queryAndOperator = "All";
 				var queryContains = "Does Not Contain";
@@ -688,7 +683,6 @@ definition {
 					}
 				}
 			}
-
 			else if ("${rule}" == "Does Not Contain Any") {
 				var queryAndOperator = "Any";
 				var queryContains = "Does Not Contain";

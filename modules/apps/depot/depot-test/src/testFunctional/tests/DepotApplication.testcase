@@ -241,7 +241,7 @@ definition {
 			portlet = "Settings");
 
 		AssertElementNotPresent(
-			key_category = "Content &amp; Data",
+			key_category = "Content & Data",
 			locator1 = "ProductMenu#CATEGORY_COLLAPSED");
 
 		AssertElementNotPresent(

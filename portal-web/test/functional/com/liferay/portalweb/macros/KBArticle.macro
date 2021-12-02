@@ -985,7 +985,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Knowledge Base");
 
 		if (IsElementPresent(locator1 = "KnowledgeBase#ARTICLE_DESCRIPTIVE_ARTICLE_TITLE_GENERIC")) {

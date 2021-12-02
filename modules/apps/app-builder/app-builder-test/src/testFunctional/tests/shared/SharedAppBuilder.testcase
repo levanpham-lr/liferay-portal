@@ -12,7 +12,9 @@ definition {
 		User.firstLoginPG();
 
 		JSONGroup.addGroup(groupName = "App Builder Site Name");
+
 		JSONGroup.addGroup(groupName = "App Builder Site 1");
+
 		JSONGroup.addGroup(groupName = "App Builder Site 2");
 
 		Navigator.openURL();
@@ -32,14 +34,16 @@ definition {
 
 		var testPortalInstance = PropsUtil.get("test.portal.instance");
 
-		if (("${testPortalInstance}" == "true") && (!(IsTestName(locator1 = "", value1 = "${testNameSkipPortalInstance}")))) {
+		if (("${testPortalInstance}" == "true") && !(IsTestName(locator1 = "", value1 = "${testNameSkipPortalInstance}"))) {
 			PortalInstances.tearDownCP();
 		}
 		else {
 			Page.tearDownCP();
 
 			JSONGroup.deleteGroupByName(groupName = "App Builder Site Name");
+
 			JSONGroup.deleteGroupByName(groupName = "App Builder Site 1");
+
 			JSONGroup.deleteGroupByName(groupName = "App Builder Site 2");
 
 			JSONUser.tearDownNonAdminUsers();
@@ -79,19 +83,27 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Full name");
+
 		FormViewBuilder.setFieldRequired();
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Nickname");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Number of children");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Select from List");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Occupation");
 
 		for (var number : list "1,2,3") {
@@ -100,14 +112,19 @@ definition {
 				optionValue = "Select ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Date");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Date of birth");
+
 		FormViewBuilder.setFieldRequired();
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Multiple Selection");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Hobbies");
 
 		for (var number : list "1,2,3") {
@@ -116,6 +133,7 @@ definition {
 				optionValue = "Multiple ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.setName(formViewName = "${myFormViewName}");
@@ -129,10 +147,15 @@ definition {
 		AppBuilderAdmin.add();
 
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Full name");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Nickname");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Number of children");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Occupation");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Date of birth");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Hobbies");
 
 		TableViewBuilder.setName(tableViewName = "${myTableViewName}");
@@ -178,10 +201,15 @@ definition {
 		AppBuilderAdmin.save();
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Alex");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Mister");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "4");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Select 2");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "05/02/2016");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Multiple 1, Multiple 2");
 
 		AppBuilderAdmin.addEntry();
@@ -213,29 +241,45 @@ definition {
 		AppBuilderAdmin.save();
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Ferguson");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Mister Ferguson");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "7");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Select 3");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "05/02/2000");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Multiple 3");
 
 		AppBuilderAdmin.viewItem(itemName = "Ferguson");
 
 		DetailsView.validateEntry(entry = "Ferguson");
+
 		DetailsView.validateEntry(entry = "Mister Ferguson");
+
 		DetailsView.validateEntry(entry = "7");
+
 		DetailsView.validateEntry(entry = "Select 3");
+
 		DetailsView.validateEntry(entry = "05/02/2000");
+
 		DetailsView.validateEntry(entry = "Multiple 3");
 
 		DetailsView.previousEntry();
 
 		DetailsView.validateEntry(entry = "Alex");
+
 		DetailsView.validateEntry(entry = "Mister");
+
 		DetailsView.validateEntry(entry = "4");
+
 		DetailsView.validateEntry(entry = "Select 2");
+
 		DetailsView.validateEntry(entry = "05/02/2016");
+
 		DetailsView.validateEntry(entry = "Multiple 1");
+
 		DetailsView.validateEntry(entry = "Multiple 2");
 
 		DetailsView.deleteEntry(itemName = "Alex");
@@ -301,19 +345,29 @@ definition {
 		AppBuilderAdmin.cancel();
 
 		DetailsView.validateEntry(entry = "Pepe");
+
 		DetailsView.validateEntry(entry = "Mister Guardi");
+
 		DetailsView.validateEntry(entry = "6");
+
 		DetailsView.validateEntry(entry = "Select 1");
+
 		DetailsView.validateEntry(entry = "05/02/1999");
+
 		DetailsView.validateEntry(entry = "Multiple 1");
 
 		DetailsView.backButton();
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Pepe");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Mister Guardi");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "6");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Select 1");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "05/02/1999");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Multiple 1");
 	}
 
@@ -333,19 +387,27 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Full name");
+
 		FormViewBuilder.setFieldRequired();
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Nickname");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Number of children");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Select from List");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Occupation");
 
 		for (var number : list "1,2,3") {
@@ -354,14 +416,19 @@ definition {
 				optionValue = "Select ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Date");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Date of birth");
+
 		FormViewBuilder.setFieldRequired();
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Multiple Selection");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Hobbies");
 
 		for (var number : list "1,2,3") {
@@ -370,6 +437,7 @@ definition {
 				optionValue = "Multiple ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.setName(formViewName = "${myFormViewName}");
@@ -383,10 +451,15 @@ definition {
 		AppBuilderAdmin.add();
 
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Full name");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Nickname");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Number of children");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Occupation");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Date of birth");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Hobbies");
 
 		TableViewBuilder.setName(tableViewName = "${myTableViewName}");
@@ -434,10 +507,15 @@ definition {
 		AppBuilderAdmin.save();
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Alex");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Mister");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "4");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Select 2");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "05/02/2016");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Multiple 1, Multiple 2");
 
 		AppBuilderAdmin.addEntry();
@@ -469,29 +547,45 @@ definition {
 		AppBuilderAdmin.save();
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Ferguson");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Mister Ferguson");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "7");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Select 3");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "05/02/2000");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Multiple 3");
 
 		AppBuilderAdmin.viewItem(itemName = "Ferguson");
 
 		DetailsView.validateEntry(entry = "Ferguson");
+
 		DetailsView.validateEntry(entry = "Mister Ferguson");
+
 		DetailsView.validateEntry(entry = "7");
+
 		DetailsView.validateEntry(entry = "Select 3");
+
 		DetailsView.validateEntry(entry = "05/02/2000");
+
 		DetailsView.validateEntry(entry = "Multiple 3");
 
 		DetailsView.previousEntry();
 
 		DetailsView.validateEntry(entry = "Alex");
+
 		DetailsView.validateEntry(entry = "Mister");
+
 		DetailsView.validateEntry(entry = "4");
+
 		DetailsView.validateEntry(entry = "Select 2");
+
 		DetailsView.validateEntry(entry = "05/02/2016");
+
 		DetailsView.validateEntry(entry = "Multiple 1");
+
 		DetailsView.validateEntry(entry = "Multiple 2");
 
 		DetailsView.deleteEntry(itemName = "Alex");
@@ -557,19 +651,29 @@ definition {
 		AppBuilderAdmin.cancel();
 
 		DetailsView.validateEntry(entry = "Pepe");
+
 		DetailsView.validateEntry(entry = "Mister Guardi");
+
 		DetailsView.validateEntry(entry = "6");
+
 		DetailsView.validateEntry(entry = "Select 1");
+
 		DetailsView.validateEntry(entry = "05/02/1999");
+
 		DetailsView.validateEntry(entry = "Multiple 1");
 
 		DetailsView.backToTableView();
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Pepe");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Mister Guardi");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "6");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Select 1");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "05/02/1999");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Multiple 1");
 	}
 
@@ -589,19 +693,27 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Full name");
+
 		FormViewBuilder.setFieldRequired();
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Nickname");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Number of children");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Select from List");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Occupation");
 
 		for (var number : list "1,2,3") {
@@ -610,14 +722,19 @@ definition {
 				optionValue = "Select ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Date");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Date of birth");
+
 		FormViewBuilder.setFieldRequired();
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Multiple Selection");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Hobbies");
 
 		for (var number : list "1,2,3") {
@@ -626,6 +743,7 @@ definition {
 				optionValue = "Multiple ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.setName(formViewName = "${myFormViewName}");
@@ -639,10 +757,15 @@ definition {
 		AppBuilderAdmin.add();
 
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Full name");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Nickname");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Number of children");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Occupation");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Date of birth");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Hobbies");
 
 		TableViewBuilder.setName(tableViewName = "${myTableViewName}");
@@ -707,10 +830,15 @@ definition {
 			siteName = "App Builder Site Name");
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Alex");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Mister");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "2");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Select 2");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "05/02/2016");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Multiple 1, Multiple 2, Multiple 3");
 
 		AppBuilderAdmin.editItem(itemName = "Alex");
@@ -742,13 +870,19 @@ definition {
 		AppBuilderAdmin.save();
 
 		AppBuilderAdmin.validateItemNameOnTableNotPresent(itemName = "Alex");
+
 		AppBuilderAdmin.validateItemNameOnTableNotPresent(itemName = "Mister");
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Pepe");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Guardi");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "1");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Select 1");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "05/02/2014");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "Multiple 1, Multiple 3");
 
 		AppBuilderAdmin.deleteEntry(itemName = "Pepe");
@@ -766,68 +900,95 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "ID");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Select from List");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Color");
+
 		FormViewBuilder.editOptionsRow(
 			optionName = "Red",
 			optionValue = "Red",
 			rowNumber = "1");
+
 		FormViewBuilder.editOptionsRow(
 			optionName = "Blue",
 			optionValue = "Blue",
 			rowNumber = "2");
+
 		FormViewBuilder.editOptionsRow(
 			optionName = "Green",
 			optionValue = "Green",
 			rowNumber = "3");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Single Selection");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Animal");
+
 		FormViewBuilder.editOptionsRow(
 			optionName = "Dog",
 			optionValue = "Dog",
 			rowNumber = "1");
+
 		FormViewBuilder.editOptionsRow(
 			optionName = "Cat",
 			optionValue = "Cat",
 			rowNumber = "2");
+
 		FormViewBuilder.editOptionsRow(
 			optionName = "Fish",
 			optionValue = "Fish",
 			rowNumber = "3");
 
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.setName(formViewName = "My Form View");
+
 		FormViewBuilder.save();
 
 		AppBuilderAdmin.switchTab(tabName = "Table Views");
 
 		AppBuilderAdmin.add();
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "ID");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Color");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Animal");
+
 		TableViewBuilder.setName(tableViewName = "Table Full");
+
 		TableViewBuilder.save();
 
 		AppBuilderAdmin.add();
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "ID");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Color");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Animal");
+
 		TableViewBuilder.selectTab(tabName = "Filters");
+
 		TableViewBuilder.selectFilterDropdownItem(
 			columnLabel = "Color",
 			dropdownItemList = "Red");
+
 		TableViewBuilder.selectFilterDropdownItem(
 			columnLabel = "Animal",
 			dropdownItemList = "Dog");
+
 		TableViewBuilder.setName(tableViewName = "Table Filtered");
+
 		TableViewBuilder.save();
 
 		AppBuilderAdmin.openItem(itemName = "Table Filtered");
+
 		TableViewBuilder.selectTab(tabName = "Filters");
 
 		TableViewBuilder.validateFilterDropdownList(
@@ -841,103 +1002,147 @@ definition {
 		TableViewBuilder.save();
 
 		AppBuilderAdmin.switchTab(tabName = "Apps");
+
 		AppBuilderAdmin.add();
+
 		AppBuilderAdmin.setName(title = "App Full");
+
 		App.selectFormView(formViewName = "My Form View");
+
 		App.selectTableView(tableViewName = "Table Full");
+
 		App.toggleDeploy(deployOption = "Product Menu");
+
 		App.clickDeploy();
 
 		AppBuilderAdmin.add();
+
 		AppBuilderAdmin.setName(title = "App Filtered");
+
 		App.selectFormView(formViewName = "My Form View");
+
 		App.selectTableView(tableViewName = "Table Filtered");
+
 		App.toggleDeploy(deployOption = "Product Menu");
+
 		App.clickDeploy();
 
 		AppBuilderAdmin.gotoCustomAppApplicationsMenuApplications(portlet = "App Filtered");
 
 		AppBuilderAdmin.addEntry();
+
 		FormViewBuilder.editText(
 			fieldName = "ID",
 			fieldValue = "1");
+
 		FormViewBuilder.selectSelectOption(
 			fieldName = "Color",
 			selectOption = "Red");
+
 		FormViewBuilder.selectRadioOption(
 			fieldName = "Animal",
 			radioOption = "Dog");
+
 		AppBuilderAdmin.save();
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "1");
 
 		AppBuilderAdmin.addEntry();
+
 		FormViewBuilder.editText(
 			fieldName = "ID",
 			fieldValue = "2");
+
 		FormViewBuilder.selectSelectOption(
 			fieldName = "Color",
 			selectOption = "Red");
+
 		FormViewBuilder.selectRadioOption(
 			fieldName = "Animal",
 			radioOption = "Cat");
+
 		AppBuilderAdmin.save();
+
 		AppBuilderAdmin.addEntry();
+
 		FormViewBuilder.editText(
 			fieldName = "ID",
 			fieldValue = "3");
+
 		FormViewBuilder.selectSelectOption(
 			fieldName = "Color",
 			selectOption = "Green");
+
 		FormViewBuilder.selectRadioOption(
 			fieldName = "Animal",
 			radioOption = "Dog");
+
 		AppBuilderAdmin.save();
+
 		AppBuilderAdmin.addEntry();
+
 		FormViewBuilder.editText(
 			fieldName = "ID",
 			fieldValue = "4");
+
 		FormViewBuilder.selectSelectOption(
 			fieldName = "Color",
 			selectOption = "Blue");
+
 		FormViewBuilder.selectRadioOption(
 			fieldName = "Animal",
 			radioOption = "Fish");
+
 		AppBuilderAdmin.save();
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "1");
+
 		AppBuilderAdmin.validateItemNameOnTableNotPresent(itemName = "2");
+
 		AppBuilderAdmin.validateItemNameOnTableNotPresent(itemName = "3");
+
 		AppBuilderAdmin.validateItemNameOnTableNotPresent(itemName = "4");
 
 		AppBuilderAdmin.gotoCustomAppApplicationsMenuApplications(portlet = "App Full");
 
 		AppBuilderAdmin.viewItem(itemName = "1");
+
 		DetailsView.editEntry();
+
 		FormViewBuilder.selectSelectOption(
 			fieldName = "Color",
 			selectOption = "Blue");
+
 		FormViewBuilder.selectRadioOption(
 			fieldName = "Animal",
 			radioOption = "Fish");
+
 		AppBuilderAdmin.save();
 
 		AppBuilderAdmin.gotoBack();
 
 		AppBuilderAdmin.viewItem(itemName = "2");
+
 		DetailsView.editEntry();
+
 		FormViewBuilder.selectSelectOption(
 			fieldName = "Color",
 			selectOption = "Red");
+
 		FormViewBuilder.selectRadioOption(
 			fieldName = "Animal",
 			radioOption = "Dog");
+
 		AppBuilderAdmin.save();
 
 		AppBuilderAdmin.gotoCustomAppApplicationsMenuApplications(portlet = "App Filtered");
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "2");
+
 		AppBuilderAdmin.validateItemNameOnTableNotPresent(itemName = "1");
+
 		AppBuilderAdmin.validateItemNameOnTableNotPresent(itemName = "3");
+
 		AppBuilderAdmin.validateItemNameOnTableNotPresent(itemName = "4");
 
 		ApplicationsMenu.gotoPortlet(
@@ -946,13 +1151,19 @@ definition {
 			portlet = "Objects");
 
 		LexiconEntry.gotoVerticalEllipsisMenuItemNoError(menuItem = "Table Views");
+
 		AppBuilderAdmin.openItem(itemName = "Table Filtered");
+
 		TableViewBuilder.selectTab(tabName = "Filters");
+
 		TableViewBuilder.clickOnSelectAllFilters(columnLabel = "Color");
+
 		TableViewBuilder.clickOnSelectAllFilters(columnLabel = "Animal");
+
 		TableViewBuilder.save();
 
 		AppBuilderAdmin.openItem(itemName = "Table Filtered");
+
 		TableViewBuilder.selectTab(tabName = "Filters");
 
 		TableViewBuilder.validateFilterDropdownList(
@@ -968,8 +1179,11 @@ definition {
 		AppBuilderAdmin.gotoCustomAppApplicationsMenuApplications(portlet = "App Filtered");
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "1");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "2");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "3");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "4");
 
 		ApplicationsMenu.gotoPortlet(
@@ -978,13 +1192,19 @@ definition {
 			portlet = "Objects");
 
 		LexiconEntry.gotoVerticalEllipsisMenuItemNoError(menuItem = "Table Views");
+
 		AppBuilderAdmin.openItem(itemName = "Table Filtered");
+
 		TableViewBuilder.selectTab(tabName = "Filters");
+
 		TableViewBuilder.clickOnClearFilters(columnLabel = "Color");
+
 		TableViewBuilder.clickOnClearFilters(columnLabel = "Animal");
+
 		TableViewBuilder.selectFilterDropdownItem(
 			columnLabel = "Color",
 			dropdownItemList = "Blue,Green");
+
 		TableViewBuilder.selectFilterDropdownItem(
 			columnLabel = "Animal",
 			dropdownItemList = "Cat,Fish");
@@ -994,21 +1214,29 @@ definition {
 		AppBuilderAdmin.gotoCustomAppApplicationsMenuApplications(portlet = "App Filtered");
 
 		AppBuilderAdmin.addEntry();
+
 		FormViewBuilder.editText(
 			fieldName = "ID",
 			fieldValue = "5");
+
 		FormViewBuilder.selectSelectOption(
 			fieldName = "Color",
 			selectOption = "Green");
+
 		FormViewBuilder.selectRadioOption(
 			fieldName = "Animal",
 			radioOption = "Cat");
+
 		AppBuilderAdmin.save();
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "1");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "4");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "5");
+
 		AppBuilderAdmin.validateItemNameOnTableNotPresent(itemName = "2");
+
 		AppBuilderAdmin.validateItemNameOnTableNotPresent(itemName = "3");
 
 		ApplicationsMenu.gotoPortlet(
@@ -1017,13 +1245,19 @@ definition {
 			portlet = "Objects");
 
 		LexiconEntry.gotoVerticalEllipsisMenuItemNoError(menuItem = "Table Views");
+
 		AppBuilderAdmin.openItem(itemName = "Table Filtered");
+
 		TableViewBuilder.selectTab(tabName = "Filters");
+
 		TableViewBuilder.clickOnClearFilters(columnLabel = "Color");
+
 		TableViewBuilder.clickOnClearFilters(columnLabel = "Animal");
+
 		TableViewBuilder.save();
 
 		AppBuilderAdmin.openItem(itemName = "Table Filtered");
+
 		TableViewBuilder.selectTab(tabName = "Filters");
 
 		TableViewBuilder.validateFilterDropdownList(
@@ -1039,9 +1273,13 @@ definition {
 		AppBuilderAdmin.gotoCustomAppApplicationsMenuApplications(portlet = "App Filtered");
 
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "1");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "2");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "3");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "4");
+
 		AppBuilderAdmin.validateItemNameOnTable(itemName = "5");
 	}
 
@@ -1057,9 +1295,13 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.setName(formViewName = "My Form View 1");
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Select from List");
+
 		FormViewBuilder.save();
 
 		AppBuilderAdmin.switchTab(tabName = "Table Views");
@@ -1067,18 +1309,25 @@ definition {
 		AppBuilderAdmin.add();
 
 		TableViewBuilder.setName(tableViewName = "My Table View");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Text");
+
 		TableViewBuilder.addColumnByDoubleClick(fieldType = "Select from List");
 
 		TableViewBuilder.save();
 
 		FormViewBuilder.switchToFormViewTab();
+
 		AppBuilderAdmin.add();
 
 		FormViewBuilder.setName(formViewName = "My Form View 2");
+
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Date");
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.addFieldByDoubleClickFromObjectSidebar(fieldLabel = "Text");
+
 		FormViewBuilder.save();
 
 		FormViewBuilder.switchToFormViewTab();
@@ -1088,24 +1337,31 @@ definition {
 		FormViewBuilder.fieldEllipsisDelete(fieldLabel = "Text");
 
 		FormViewBuilder.validateDeleteUsedObjectMessage();
+
 		FormViewBuilder.validateUsedFormView(formViewName = "My Form View 1");
+
 		FormViewBuilder.validateUsedFormView(formViewName = "My Form View 2");
+
 		FormViewBuilder.validateUsedTableView(tableViewName = "My Table View");
 
 		FormViewBuilder.deleteButtonInDeleteFromObject();
 
 		FormViewBuilder.validateNoFieldLabel(fieldLabel = "Text");
+
 		FormViewBuilder.validateNoObjectFieldName(fieldName = "Text");
 
 		FormViewBuilder.deleteFromObjectViaX(fieldName = "Select from List");
 
 		FormViewBuilder.validateDeleteUsedObjectMessage();
+
 		FormViewBuilder.validateUsedFormView(formViewName = "My Form View 1");
+
 		FormViewBuilder.validateUsedTableView(tableViewName = "My Table View");
 
 		FormViewBuilder.deleteButtonInDeleteFromObject();
 
 		FormViewBuilder.validateNoFieldLabel(fieldLabel = "Select from List");
+
 		FormViewBuilder.validateNoObjectFieldName(fieldName = "Select from List");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
@@ -1117,6 +1373,7 @@ definition {
 		FormViewBuilder.deleteButtonInDeleteFromObject();
 
 		FormViewBuilder.validateNoFieldLabel(fieldLabel = "Numeric");
+
 		FormViewBuilder.validateNoObjectFieldName(fieldName = "Numeric");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Multiple Selection");
@@ -1128,6 +1385,7 @@ definition {
 		FormViewBuilder.cancelButtonInDeleteFromObject();
 
 		FormViewBuilder.validateFieldLabel(fieldLabel = "Multiple Selection");
+
 		FormViewBuilder.validateObjectFieldName(fieldName = "Multiple Selection");
 
 		FormViewBuilder.deleteFromObjectViaX(fieldName = "Multiple Selection");
@@ -1137,6 +1395,7 @@ definition {
 		FormViewBuilder.deleteButtonInDeleteFromObject();
 
 		FormViewBuilder.validateNoFieldLabel(fieldLabel = "Multiple Selection");
+
 		FormViewBuilder.validateNoObjectFieldName(fieldName = "Multiple Selection");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Single Selection");
@@ -1146,8 +1405,11 @@ definition {
 		AppBuilderAdmin.openItem(itemName = "My Form View 2");
 
 		FormViewBuilder.validateNoObjectFieldName(fieldName = "Text");
+
 		FormViewBuilder.validateNoObjectFieldName(fieldName = "Select from List");
+
 		FormViewBuilder.validateNoObjectFieldName(fieldName = "Numeric");
+
 		FormViewBuilder.validateNoObjectFieldName(fieldName = "Multiple Selection");
 
 		FormViewBuilder.validateFieldLabel(fieldLabel = "Date");
@@ -1159,9 +1421,11 @@ definition {
 		AppBuilderAdmin.openItem(itemName = "My Table View");
 
 		TableViewBuilder.validateNoColumnLabel(columnLabel = "Text");
+
 		TableViewBuilder.validateNoColumnLabelAtSidebar(columnLabel = "Text");
 
 		TableViewBuilder.validateNoColumnLabel(columnLabel = "Select from List");
+
 		TableViewBuilder.validateNoColumnLabelAtSidebar(columnLabel = "Select from List");
 
 		TableViewBuilder.validateColumnLabelAtSidebar(columnLabel = "Single Selection");
@@ -1222,23 +1486,35 @@ definition {
 			isCreatingViaPlusIcon = "true");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Full name");
+
 		FormViewBuilder.setFieldRequired();
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Full name");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Text");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Nickname");
+
 		FormViewBuilder.closeSidebar();
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Numeric");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Number of children");
+
 		FormViewBuilder.setFieldRequired();
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Number of children");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Select from List");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Occupation");
+
 		FormViewBuilder.setFieldRequired();
 
 		for (var number : list "1,2,3") {
@@ -1247,11 +1523,15 @@ definition {
 				optionValue = "Occupation ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Occupation");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Single Selection");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Marital Status");
+
 		FormViewBuilder.setFieldRequired();
 
 		for (var number : list "1,2,3") {
@@ -1260,16 +1540,23 @@ definition {
 				optionValue = "Marital Status ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Marital Status");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Date");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Date of birth");
+
 		FormViewBuilder.setFieldRequired();
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Date of birth");
 
 		FormViewBuilder.addFieldByDoubleClick(fieldType = "Multiple Selection");
+
 		FormViewBuilder.setFieldLabel(fieldLabel = "Hobbies");
 
 		for (var number : list "1,2,3") {
@@ -1278,8 +1565,11 @@ definition {
 				optionValue = "Hobby ${number}",
 				rowNumber = "${number}");
 		}
+
 		FormViewBuilder.setFieldRequired();
+
 		FormViewBuilder.closeSidebar();
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Hobbies");
 
 		FormViewBuilder.setName(formViewName = "Registration Form");
@@ -1303,15 +1593,19 @@ definition {
 			fieldName = "Hobbies edited");
 
 		FormViewBuilder.addFieldByDoubleClickFromObjectSidebar(fieldLabel = "Marital Status");
+
 		FormViewBuilder.validateFormMultipleSelectionField(
 			fieldLabel = "Marital Status 3",
 			fieldName = "Marital Status");
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Marital Status");
 
 		FormViewBuilder.addFieldByDoubleClickFromObjectSidebar(fieldLabel = "Occupation");
+
 		FormViewBuilder.validateSelectFromListField(
 			optionValue = "Occupation 2",
 			rowNumber = "2");
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Occupation");
 
 		FormViewBuilder.editFieldInObject(
@@ -1319,9 +1613,11 @@ definition {
 			fieldName = "Nickname");
 
 		FormViewBuilder.addFieldByDoubleClickFromObjectSidebar(fieldLabel = "Full name");
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Full name");
 
 		FormViewBuilder.addFieldByDoubleClickFromObjectSidebar(fieldLabel = "Number of children");
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Number of children");
 
 		FormViewBuilder.addFieldToObject(fieldName = "Text");
@@ -1329,8 +1625,11 @@ definition {
 		FormViewBuilder.addFieldToObject(fieldName = "Select from List");
 
 		FormViewBuilder.searchObjectField(fieldValue = "Date of birth");
+
 		FormViewBuilder.validateSearchResult(fieldLabel = "Date of birth");
+
 		FormViewBuilder.addFieldByDoubleClickFromObjectSidebar(fieldLabel = "Date of birth");
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Date of birth");
 
 		FormViewBuilder.save();
@@ -1340,18 +1639,23 @@ definition {
 		FormViewBuilder.validateFieldLabel(fieldLabel = "Text");
 
 		FormViewBuilder.validateFieldLabel(fieldLabel = "Occupation");
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Occupation");
 
 		FormViewBuilder.validateFieldLabel(fieldLabel = "Marital Status");
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Marital Status");
 
 		FormViewBuilder.validateFieldLabel(fieldLabel = "Full name");
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Full name");
 
 		FormViewBuilder.validateFieldLabel(fieldLabel = "Number of children");
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Number of children");
 
 		FormViewBuilder.validateFieldLabel(fieldLabel = "Date of birth");
+
 		FormViewBuilder.validateFieldLabelRequired(fieldLabel = "Date of birth");
 	}
 

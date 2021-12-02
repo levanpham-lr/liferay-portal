@@ -178,7 +178,7 @@ definition {
 		ProductMenu.gotoLiveSite(site = "Site Name");
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContent.subscribeToCurrentFolderCP();
@@ -194,7 +194,7 @@ definition {
 		Navigator.gotoStagedView();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContentNavigator.gotoAddCP();
@@ -212,7 +212,7 @@ definition {
 		Navigator.gotoStagedView();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Web Content");
 
 		WebContentNavigator.gotoEditCP(webContentTitle = "WC WebContent Title");

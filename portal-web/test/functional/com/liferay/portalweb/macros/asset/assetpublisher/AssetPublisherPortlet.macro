@@ -139,7 +139,7 @@ definition {
 
 		var key_sortOrder = "${sortOrder}";
 
-		if ((isSet(sortOrder)) && (IsVisible(locator1 = "APConfiguration#ORDERING_AND_GROUPING_ORDER_DIRECTIONAL_ICON"))) {
+		if (isSet(sortOrder) && (IsVisible(locator1 = "APConfiguration#ORDERING_AND_GROUPING_ORDER_DIRECTIONAL_ICON"))) {
 			Click(locator1 = "APConfiguration#ORDERING_AND_GROUPING_ORDER_DIRECTIONAL_ICON");
 		}
 
@@ -397,7 +397,6 @@ definition {
 					locator1 = "Message#EMPTY_INFO",
 					value1 = "No asset libraries were found.");
 			}
-
 			else {
 				SiteSelector.selectSite(site = "${depotName}");
 

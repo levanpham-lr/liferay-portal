@@ -445,7 +445,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Bookmarks");
 
 		var key_assetName = "${bookmarkName}";
@@ -459,7 +459,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Bookmarks");
 
 		var key_assetName = "${bookmarkName}";
@@ -505,7 +505,7 @@ definition {
 		Navigator.openURL();
 
 		ProductMenu.gotoPortlet(
-			category = "Content &amp; Data",
+			category = "Content & Data",
 			portlet = "Bookmarks");
 
 		if (IsElementNotPresent(locator1 = "Message#EMPTY_INFO")) {
