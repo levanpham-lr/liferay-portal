@@ -44,8 +44,8 @@ definition {
 				-d name=${userGroupName}
 		''';
 		var userGroupId = JSONCurlUtil.post("${curl}", "$.userGroupId");
-		var userGroupId = StringUtil.replace("${userGroupId}", "[&quot;", "");
-		var userGroupId = StringUtil.replace("${userGroupId}", "&quot;]", "");
+		var userGroupId = StringUtil.replace("${userGroupId}", "[\"", "");
+		var userGroupId = StringUtil.replace("${userGroupId}", "\"]", "");
 
 		if ("${groupId}" == "") {
 			fail("FAIL. Cannot find user group.");

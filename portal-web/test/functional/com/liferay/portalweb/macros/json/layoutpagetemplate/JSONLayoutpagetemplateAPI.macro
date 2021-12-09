@@ -126,8 +126,8 @@ definition {
 				-d groupId=${groupId}
 		''';
 		var layoutPageTemplateCollectionId = JSONCurlUtil.post("${curl}", "$.[?(@['name'] == '${layoutPageTemplateCollectionName}')]['layoutPageTemplateCollectionId']");
-		var layoutPageTemplateCollectionId = StringUtil.replace("${layoutPageTemplateCollectionId}", "[&quot;", "");
-		var layoutPageTemplateCollectionId = StringUtil.replace("${layoutPageTemplateCollectionId}", "&quot;]", "");
+		var layoutPageTemplateCollectionId = StringUtil.replace("${layoutPageTemplateCollectionId}", "[\"", "");
+		var layoutPageTemplateCollectionId = StringUtil.replace("${layoutPageTemplateCollectionId}", "\"]", "");
 
 		if ("${layoutPageTemplateCollectionId}" == "") {
 			fail("FAIL. Cannot find layoutPageTemplateCollection.");
@@ -152,8 +152,8 @@ definition {
 			  -d -orderByComparator=
 		''';
 		var layoutPageTemplateEntryId = JSONCurlUtil.post("${curl}", "$.[?(@['name'] == '${layoutPageTemplateEntryName}')]['layoutPageTemplateEntryId']");
-		var layoutPageTemplateEntryId = StringUtil.replace("${layoutPageTemplateEntryId}", "[&quot;", "");
-		var layoutPageTemplateEntryId = StringUtil.replace("${layoutPageTemplateEntryId}", "&quot;]", "");
+		var layoutPageTemplateEntryId = StringUtil.replace("${layoutPageTemplateEntryId}", "[\"", "");
+		var layoutPageTemplateEntryId = StringUtil.replace("${layoutPageTemplateEntryId}", "\"]", "");
 
 		if ("${layoutPageTemplateEntryId}" == "") {
 			fail("FAIL. Cannot find layoutPageTemplateEntry.");
@@ -178,8 +178,8 @@ definition {
 			  -d -orderByComparator=
 		''';
 		var masterLayoutPlid = JSONCurlUtil.post("${curl}", "$.[?(@['name'] == '${masterLayoutEntryName}')]['plid']");
-		var masterLayoutPlid = StringUtil.replace("${masterLayoutPlid}", "[&quot;", "");
-		var masterLayoutPlid = StringUtil.replace("${masterLayoutPlid}", "&quot;]", "");
+		var masterLayoutPlid = StringUtil.replace("${masterLayoutPlid}", "[\"", "");
+		var masterLayoutPlid = StringUtil.replace("${masterLayoutPlid}", "\"]", "");
 
 		if ("${masterLayoutPlid}" == "") {
 			fail("FAIL. Cannot find masterLayoutEntry.");

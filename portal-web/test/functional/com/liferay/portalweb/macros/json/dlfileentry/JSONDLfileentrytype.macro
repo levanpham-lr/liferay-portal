@@ -12,8 +12,8 @@ definition {
 			  -d groupIds=[${groupId}]
 		''';
 		var fileEntryTypeId = JSONCurlUtil.post("${curl}", "$.[?(@['nameCurrentValue'] == '${fileEntryTypeName}')]['fileEntryTypeId']");
-		var fileEntryTypeId = StringUtil.replace("${fileEntryTypeId}", "[&quot;", "");
-		var fileEntryTypeId = StringUtil.replace("${fileEntryTypeId}", "&quot;]", "");
+		var fileEntryTypeId = StringUtil.replace("${fileEntryTypeId}", "[\"", "");
+		var fileEntryTypeId = StringUtil.replace("${fileEntryTypeId}", "\"]", "");
 
 		if ("${fileEntryTypeId}" == "") {
 			fail("FAIL. Cannot find fileEntryTypeId.");
