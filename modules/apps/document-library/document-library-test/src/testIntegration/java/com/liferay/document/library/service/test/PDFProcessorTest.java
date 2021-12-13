@@ -59,6 +59,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -172,6 +173,7 @@ public class PDFProcessorTest {
 		Assert.assertTrue(cleanUp.get());
 	}
 
+	@Ignore
 	@Test
 	public void testShouldCleanUpProcessorsOnUpdateAndCheckIn()
 		throws Exception {
@@ -363,6 +365,7 @@ public class PDFProcessorTest {
 		Assert.assertEquals(2, count.get());
 	}
 
+	@Ignore
 	@Test
 	public void testShouldCreateNewPreviewOnUpdateAndCheckInWithContent()
 		throws Exception {
