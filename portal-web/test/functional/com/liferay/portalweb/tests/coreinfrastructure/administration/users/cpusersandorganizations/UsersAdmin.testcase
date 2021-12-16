@@ -1662,7 +1662,7 @@ definition {
 			password = "test",
 			userEmailAddress = "userea@liferay.com");
 
-		Navigator.openSpecificURL(url = "${portalURL}/c/portal/logout");
+		Navigator.logOutPortalURL(url = "${portalURL}/c/portal/logout");
 
 		User.viewLoggedOutPG();
 	}
