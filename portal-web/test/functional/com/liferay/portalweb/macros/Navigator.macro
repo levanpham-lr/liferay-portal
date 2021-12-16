@@ -186,6 +186,12 @@ definition {
 		WaitForLiferayEvent.initializeLiferayEventLog();
 	}
 
+	macro logOutPortalURL {
+		Open.openNoError(locator1 = "${url}");
+
+		Alert.confirmSecurity();
+	}
+
 	macro openNodePort {
 		Open(locator1 = "http://localhost:${nodePort}");
 	}
