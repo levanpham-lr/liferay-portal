@@ -478,6 +478,8 @@ definition {
 
 		SystemSettings.addDefaultPortalCORS();
 
+		Alert.viewSuccessMessage();
+
 		ApplicationsMenu.gotoPortlet(
 			category = "Security",
 			panel = "Control Panel",
@@ -728,6 +730,8 @@ definition {
 			configurationScope = "Virtual Instance Scope");
 
 		SystemSettings.addDefaultPortalCORS();
+
+		Alert.viewSuccessMessage();
 
 		ApplicationsMenu.gotoPortlet(
 			category = "Security",
