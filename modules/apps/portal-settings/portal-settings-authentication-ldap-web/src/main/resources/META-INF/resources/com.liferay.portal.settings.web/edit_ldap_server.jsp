@@ -621,7 +621,7 @@ renderResponse.setTitle((ldapServerId == 0) ? LanguageUtil.get(resourceBundle, "
 				body: Liferay.Util.objectToURLSearchParams(data),
 				method: 'POST',
 			})
-				.then((response) => {
+				.then(function (response) {
 					return response.text();
 				})
 				.then(function (text) {
