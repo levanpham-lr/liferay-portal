@@ -714,6 +714,8 @@ definition {
 			templateDescription = "Test WC Template Description",
 			templateName = "Test WC Template");
 
+		Click(locator1 = "ContentDashboard#REVERSE_SORT_DIRECTION_BUTTON");
+
 		WebContentTemplates.viewTableEntryCP(
 			templateDescription = "",
 			templateName = "Basic Web Content");
