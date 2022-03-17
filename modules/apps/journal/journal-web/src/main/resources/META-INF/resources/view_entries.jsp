@@ -21,7 +21,7 @@ String referringPortletResource = ParamUtil.getString(request, "referringPortlet
 %>
 
 <liferay-ui:search-container
-	emptyResultsMessage="no-web-content-was-found"
+	emptyResultsMessage="no-web-content-was-foundd"
 	id="articles"
 	searchContainer="<%= journalDisplayContext.getSearchContainer() %>"
 >
