@@ -222,14 +222,37 @@ import com.liferay.sites.kernel.util.Sites;
 import com.liferay.sites.kernel.util.SitesUtil;
 import com.liferay.social.kernel.model.SocialRelationConstants;
 import com.liferay.util.JS;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletException;
+import javax.portlet.PortletMode;
+import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.portlet.PortletURL;
+import javax.portlet.PreferencesValidator;
+import javax.portlet.RenderRequest;
+import javax.portlet.StateAwareResponse;
+import javax.portlet.ValidatorException;
+import javax.portlet.WindowState;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.image.RenderedImage;
-
 import java.io.IOException;
 import java.io.Serializable;
-
 import java.lang.reflect.Method;
-
 import java.net.IDN;
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -238,11 +261,9 @@ import java.net.NetworkInterface;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -269,35 +290,6 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletException;
-import javax.portlet.PortletMode;
-import javax.portlet.PortletPreferences;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
-import javax.portlet.PortletURL;
-import javax.portlet.PreferencesValidator;
-import javax.portlet.RenderRequest;
-import javax.portlet.StateAwareResponse;
-import javax.portlet.ValidatorException;
-import javax.portlet.WindowState;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
-import org.osgi.util.tracker.ServiceTracker;
-import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 /**
  * @author Brian Wing Shun Chan
@@ -5608,6 +5600,19 @@ public class PortalImpl implements Portal {
 
 		String doAsUserIdString = ParamUtil.getString(
 			httpServletRequest, "doAsUserId", null);
+		String test = (String) httpServletRequest.getAttribute(WebKeys.CURRENT_COMPLETE_URL);
+		String test2 = null;
+		String test3 = null;
+		if(test.contains("dogs")){
+			test2 = (String)httpServletRequest.getAttribute(WebKeys.CURRENT_URL);
+			test3 = HttpComponentsUtil.decodeURL(HttpComponentsUtil.getParameter(test2, "doAsUserId", false));
+		}
+		if(test3 != null && doAsUserIdString == null){
+			doAsUserIdString=test3;
+			HttpComponentsUtil.addParameter(test2, "doAsUserId", doAsUserIdString);
+			HttpComponentsUtil.setParameter(test2, "doAsUserId", doAsUserIdString);
+		}
+
 
 		if (doAsUserIdString != null) {
 			String actionName = getPortletParam(
