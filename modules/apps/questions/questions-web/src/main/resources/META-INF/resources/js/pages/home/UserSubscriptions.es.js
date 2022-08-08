@@ -141,12 +141,10 @@ export default withRouter(({history, location}) => {
 		return actions;
 	};
 
-	const questions = [];
-
 	if (threads && threads.myUserAccountSubscriptions.items) {
-		threads.myUserAccountSubscriptions.items.forEach((element) => {
-			if (element.graphQLNode.showAsQuestion) {
-				questions.push(element);
+		threads.myUserAccountSubscriptions.items.forEach((element,index,arr) => {
+			if (!element.graphQLNode.showAsQuestion) {
+				arr.splice(index,1);
 			}
 		});
 	}
@@ -266,37 +264,42 @@ export default withRouter(({history, location}) => {
 					</h2>
 
 					<div>
-						{questions && !questions.length && (
-							<ClayEmptyState
-								title={Liferay.Language.get(
-									'there-are-no-results'
-								)}
-							/>
-						)}
+						{threads &&
+							 threads.myUserAccountSubscriptions.items &&
+							 !threads.myUserAccountSubscriptions.items
+								 .length && (
+								 <ClayEmptyState
+									 title={Liferay.Language.get(
+										 'there-are-no-results'
+									 )}
+								 />
+						 )}
 
-						{questions &&
-							questions.map((data) => (
-								<div key={data.id}>
-									<QuestionRow
-										currentSection={
-											context.useTopicNamesInURL
-												? data.graphQLNode
-														.messageBoardSection &&
-												  data.graphQLNode
-														.messageBoardSection
-														.title
-												: (data.graphQLNode
-														.messageBoardSection &&
-														data.graphQLNode
+						{threads &&
+							 threads.myUserAccountSubscriptions.items &&
+							 threads.myUserAccountSubscriptions.items.map(
+								 (data) => (
+									<div key={data.id}>
+										<QuestionRow
+											currentSection={
+												context.useTopicNamesInURL
+													? data.graphQLNode
+															.messageBoardSection &&
+													  data.graphQLNode
 															.messageBoardSection
-															.id) ||
-												  context.rootTopicId
-										}
-										items={actions(data)}
-										question={data.graphQLNode}
-										showSectionLabel={true}
-									/>
-								</div>
+															.title
+													: (data.graphQLNode
+															.messageBoardSection &&
+															data.graphQLNode
+																.messageBoardSection
+																.id) ||
+													  context.rootTopicId
+											}
+											items={actions(data)}
+											question={data.graphQLNode}
+											showSectionLabel={true}
+										/>
+									</div>
 							))}
 
 						<DeleteQuestion
