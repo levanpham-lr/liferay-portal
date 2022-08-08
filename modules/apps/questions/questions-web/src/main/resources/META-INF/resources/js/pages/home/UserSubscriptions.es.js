@@ -142,11 +142,13 @@ export default withRouter(({history, location}) => {
 	};
 
 	if (threads && threads.myUserAccountSubscriptions.items) {
-		threads.myUserAccountSubscriptions.items.forEach((element,index,arr) => {
-			if (!element.graphQLNode.showAsQuestion) {
-				arr.splice(index,1);
+		threads.myUserAccountSubscriptions.items.forEach(
+			(element, index, array) => {
+				if (!element.graphQLNode.showAsQuestion) {
+					array.splice(index, 1);
+				}
 			}
-		});
+		);
 	}
 
 	return (
@@ -265,20 +267,20 @@ export default withRouter(({history, location}) => {
 
 					<div>
 						{threads &&
-							 threads.myUserAccountSubscriptions.items &&
-							 !threads.myUserAccountSubscriptions.items
-								 .length && (
-								 <ClayEmptyState
-									 title={Liferay.Language.get(
-										 'there-are-no-results'
-									 )}
-								 />
-						 )}
+							threads.myUserAccountSubscriptions.items &&
+							!threads.myUserAccountSubscriptions.items
+								.length && (
+								<ClayEmptyState
+									title={Liferay.Language.get(
+										'there-are-no-results'
+									)}
+								/>
+							)}
 
 						{threads &&
-							 threads.myUserAccountSubscriptions.items &&
-							 threads.myUserAccountSubscriptions.items.map(
-								 (data) => (
+							threads.myUserAccountSubscriptions.items &&
+							threads.myUserAccountSubscriptions.items.map(
+								(data) => (
 									<div key={data.id}>
 										<QuestionRow
 											currentSection={
@@ -300,7 +302,8 @@ export default withRouter(({history, location}) => {
 											showSectionLabel={true}
 										/>
 									</div>
-							))}
+								)
+							)}
 
 						<DeleteQuestion
 							deleteModalVisibility={showDeleteModalPanel}
