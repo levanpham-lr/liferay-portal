@@ -60,6 +60,12 @@ export default withRouter(({history, location}) => {
 		}
 	);
 
+	if (threads && threads.myUserAccountSubscriptions.items) {
+		threads.myUserAccountSubscriptions.items = threads.myUserAccountSubscriptions.items.filter(
+			(thread) => thread.graphQLNode.showAsQuestion
+		);
+	}
+
 	const {data: topics, refetch: refetchTopics} = useQuery(
 		getSubscriptionsQuery,
 		{
@@ -140,16 +146,6 @@ export default withRouter(({history, location}) => {
 
 		return actions;
 	};
-
-	if (threads && threads.myUserAccountSubscriptions.items) {
-		threads.myUserAccountSubscriptions.items.forEach(
-			(element, index, array) => {
-				if (!element.graphQLNode.showAsQuestion) {
-					array.splice(index, 1);
-				}
-			}
-		);
-	}
 
 	return (
 		<section className="questions-section questions-section-list">
